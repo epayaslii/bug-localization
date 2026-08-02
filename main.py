@@ -18,7 +18,7 @@ def main():
                        default='openrouter', help='Localization method to use')
     parser.add_argument('--dataset', choices=['swebench', 'beetlebox'], 
                        default='beetlebox', help='Dataset to use')
-    parser.add_argument('--model', default='qwen-coder', 
+    parser.add_argument('--model', default='gpt-oss-20b',
                        help='Model to use (for HuggingFace: gpt-oss, gpt-oss-120b, etc.)')
     parser.add_argument('--device', choices=['cuda', 'cpu', 'auto'], 
                        default='auto', help='Device for local inference (HuggingFace only)')

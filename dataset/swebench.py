@@ -4,7 +4,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from dataset.base import BugLocalizationDataset
 import logging
 import re
-from datasets import load_dataset
+from datasets import load_dataset, load_from_disk
 from dataset.models import BugInstance
 from dataset.utils import get_code_files, calculate_dataset_token_stats, is_code_file, filter_code_paths
 from dotenv import load_dotenv
@@ -29,6 +29,13 @@ class SWEBench(BugLocalizationDataset):
     
 
     def load_data(self):
+        local_path = os.environ.get("SWEBENCH_LOCAL_PATH")
+        if local_path:
+            logger.info(f"Loading SWE-bench Verified dataset from local disk: {local_path}")
+            self.data = load_from_disk(local_path)
+            logger.info(f"SWE-bench Verified dataset loaded successfully. Total instances: {len(self.data)}")
+            return
+
         logger.info("Loading SWE-bench Verified dataset from SWE-bench/SWE-bench_Verified...")
         try:
             self.data = load_dataset('SWE-bench/SWE-bench_Verified', split='test')

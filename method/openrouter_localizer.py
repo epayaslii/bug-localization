@@ -10,8 +10,14 @@ from openai import OpenAI
 from method.base import BugLocalizationMethod
 from method.models import OpenAILocalizerResponse
 from method.prompt import PromptGenerator
-from method.rag_localizer import RAGLocalizer
 from dataset.utils import get_logger
+
+try:
+    from method.rag_localizer import RAGLocalizer
+    RAG_IMPORT_ERROR = None
+except Exception as e:
+    RAGLocalizer = None
+    RAG_IMPORT_ERROR = e
 from pydantic import BaseModel
 from dataset.utils import get_token_count
 from method.utils import generate_json_schema, create_empty_localization_response, fetch_file_contents_from_github
@@ -20,16 +26,17 @@ from method.utils import generate_json_schema, create_empty_localization_respons
 logger = get_logger(__name__)
 
 class OpenRouterLocalizer(BugLocalizationMethod):
-    def __init__(self, model="qwen-coder-32b", max_tokens=4096, temperature=0.7):
+    def __init__(self, model="gpt-oss-20b", max_tokens=4096, temperature=0.7):
         super().__init__()
         load_dotenv()
-        
+
         self.model_mapping = {
             "gpt-oss-20b": "openai/gpt-oss-20b:free",
-            "qwen-coder": "qwen/qwen3-coder:free",
+            # qwen3-coder's free OpenRouter tier was retired; this now routes to the paid slug.
+            "qwen-coder": "qwen/qwen3-coder",
         }
-        
-        self.default_model = "qwen/qwen3-coder:free"
+
+        self.default_model = "openai/gpt-oss-20b:free"
         
         self.model = self._validate_and_set_model(model)
         self.max_tokens = max_tokens
@@ -182,6 +189,9 @@ class OpenRouterLocalizer(BugLocalizationMethod):
     
     def _get_rag_files(self, bug, code_files, file_contents):
         logger.info(f"Starting RAG file selection with {len(code_files)} files")
+
+        if RAGLocalizer is None:
+            raise RuntimeError(f"RAG requested but rag_localizer failed to import: {RAG_IMPORT_ERROR}")
 
         if self._rag_localizer is None:
             self._rag_localizer = RAGLocalizer()
