@@ -61,7 +61,9 @@ class PromptGenerator:
         - Consider the confidence and reasoning from each chunk
         - Merge and rank all suggested files into a single prioritized list
         - Remove duplicates and consolidate similar recommendations
-        - Provide a final ranking with confidence scores
+        - Return each entry as the bare file path only (e.g. "src/foo/bar.py") in
+          rank order, most likely first. Do NOT include numbering, prefixes,
+          confidence scores, or any other text alongside the path.
 
         Original Bug Report:
         Repo: {bug.repo}
