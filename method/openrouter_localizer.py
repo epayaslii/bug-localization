@@ -45,7 +45,7 @@ class OpenRouterLocalizer(BugLocalizationMethod):
         )
         
         self.prompt_generator = PromptGenerator()
-        self.rag_localizer = RAGLocalizer()
+        self._rag_localizer = None
         
         self._api_call_count = 0
         self._total_tokens_used = 0
@@ -182,9 +182,12 @@ class OpenRouterLocalizer(BugLocalizationMethod):
     
     def _get_rag_files(self, bug, code_files, file_contents):
         logger.info(f"Starting RAG file selection with {len(code_files)} files")
-        
-        self.rag_localizer.create_collection(code_files, file_contents)
-        selected_files = self.rag_localizer.search_relevant_files(bug.bug_report, top_k=100)
+
+        if self._rag_localizer is None:
+            self._rag_localizer = RAGLocalizer()
+
+        self._rag_localizer.create_collection(code_files, file_contents)
+        selected_files = self._rag_localizer.search_relevant_files(bug.bug_report, top_k=100)
         
         logger.info(f"RAG selection completed, selected {len(selected_files)} files")
         return selected_files

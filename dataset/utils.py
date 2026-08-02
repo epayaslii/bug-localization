@@ -36,6 +36,14 @@ def get_logger(name):
 import requests
 
 def get_code_files(repo, commit_hash, extensions, token=None):
+    from dataset.repo_cache import is_repo_cached, get_code_files_local
+
+    if is_repo_cached(repo):
+        try:
+            return get_code_files_local(repo, commit_hash, extensions)
+        except Exception as e:
+            logging.warning(f"Local cache read failed for {repo}@{commit_hash}, falling back to GitHub API: {e}")
+
     url = f"https://api.github.com/repos/{repo}/git/trees/{commit_hash}?recursive=1"
     headers = {}
     if token:

@@ -16,7 +16,8 @@ logger = get_logger(__name__)
 class LLMClientGenerator:
     def __init__(self, api_key: str = None, use_openrouter: bool = False, openrouter_api_key: str = None):
         self.use_openrouter = use_openrouter
-        
+        self.model_mapping = {}
+
         if self.use_openrouter:
             self.api_key = os.getenv("OPENROUTER_API_KEY", None)
             

@@ -65,30 +65,42 @@ def create_empty_localization_response(text_format):
             return text_format(candidate_files=[])
 
 def fetch_file_contents_from_github(bug):
-    
+    from dataset.repo_cache import is_repo_cached, get_file_content_local
+
     file_contents = {}
     successful_fetches = 0
     total_fetches = 0
-    
+
     github_token = os.getenv("GITHUB_TOKEN")
-    
-    for file_path in bug.code_files:  
+    use_local_cache = is_repo_cached(bug.repo)
+
+    for file_path in bug.code_files:
         if ".git" in file_path or file_path.endswith(('.png', '.jpg', '.jpeg', '.gif', '.ico', '.pdf')):
             continue
-            
+
+        total_fetches += 1
+
+        if use_local_cache:
+            try:
+                content = get_file_content_local(bug.repo, bug.base_commit, file_path)
+                file_contents[file_path] = content
+                successful_fetches += 1
+                continue
+            except Exception as e:
+                logger.warning(f"Local cache read failed for {file_path}@{bug.base_commit}, falling back to GitHub API: {e}")
+
         try:
             url = f"https://api.github.com/repos/{bug.repo}/contents/{file_path}?ref={bug.base_commit}"
             headers = {"Accept": "application/vnd.github.v3+json"}
             if github_token:
                 headers["Authorization"] = f"token {github_token}"
-            total_fetches += 1
             response = requests.get(url, headers=headers)
             response.raise_for_status()
-            
+
             content = base64.b64decode(response.json()["content"]).decode('utf-8')
             file_contents[file_path] = content
             successful_fetches += 1
-            
+
             if successful_fetches % 10 == 0:
                 logger.info(f"Fetched {successful_fetches} files from GitHub...")
                 logger.info(f"Total fetches: {total_fetches}")
@@ -96,7 +108,7 @@ def fetch_file_contents_from_github(bug):
             logger.warning(f"Failed to fetch {file_path} from GitHub: {e}")
             logger.info(f"Total fetches: {total_fetches}")
             continue
-    
+
     logger.info(f"Total fetches: {total_fetches}")
     logger.info(f"Successful fetches: {successful_fetches}")
     return file_contents
