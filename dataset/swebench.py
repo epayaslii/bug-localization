@@ -21,7 +21,7 @@ class SWEBench(BugLocalizationDataset):
             logger.warning("GITHUB_TOKEN not found in environment. You may hit rate limits.")
 
         logger.info("Initializing SWEBench dataset")
-        self.dataset_name = "SWEBench"
+        self.dataset_name = "SWE-bench_Verified"
         self._bug_instances = []
         self.data = None
         self.load_data()
@@ -29,12 +29,12 @@ class SWEBench(BugLocalizationDataset):
     
 
     def load_data(self):
-        logger.info("Loading SWEBench dataset from princeton-nlp/SWE-bench...")
+        logger.info("Loading SWE-bench Verified dataset from SWE-bench/SWE-bench_Verified...")
         try:
-            self.data = load_dataset('princeton-nlp/SWE-bench', split='test')
-            logger.info(f"SWEBench dataset loaded successfully. Total instances: {len(self.data)}")
+            self.data = load_dataset('SWE-bench/SWE-bench_Verified', split='test')
+            logger.info(f"SWE-bench Verified dataset loaded successfully. Total instances: {len(self.data)}")
         except Exception as e:
-            logger.error(f"Failed to load SWEBench dataset: {e}")
+            logger.error(f"Failed to load SWE-bench Verified dataset: {e}")
             raise
 
     def get_bug_instances(self, sample_size=None, random_sample=False, random_seed=None):
@@ -85,8 +85,8 @@ class SWEBench(BugLocalizationDataset):
             if i % 100 == 0: 
                 logger.debug(f"Processed {i}/{len(bug_instances)} bug instances")
                 
-            temp_id = str(i)
-            
+            temp_id = str(bug.get('instance_id', i))
+
             patch = bug.get('patch', '') # patch contains the code fix on the bug
             modified_files = []
             for line in patch.split('\n'):
