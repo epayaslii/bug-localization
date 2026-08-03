@@ -4,6 +4,10 @@ Scope: papers on using LLMs (with or without retrieval) to predict which source 
 
 **Baselines named in the original handover doc:** BLAZE, BugCerberus, FlexFL, MarsCode. Status: BLAZE, BugCerberus, and FlexFL have been located below. **MarsCode has not yet been found** in either research pass — needs a targeted follow-up search.
 
+**Also named in the project's own roadmap notes (technique → paper mapping), not yet reviewed:** **AgentFL** (multi-agent/tool-calling category) — needs a full pass via the per-paper template below.
+
+**Benchmark note:** OpenAI has stopped evaluating on SWE-bench Verified and now recommends SWE-bench Pro, citing tests that reject correct solutions and possible train/test contamination. This project continues to target Verified for continuity with prior results (see README caveat), but new work should weigh SWE-bench Pro or a time-separated benchmark.
+
 ## Priority tiers
 
 ### Tier 1 — core (must include)

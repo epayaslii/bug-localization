@@ -2,6 +2,8 @@
 
 Given a bug report and a snapshot of a repository's code, predict which source files need to change to fix the bug. This repo implements an LLM-based bug localizer and evaluates it against public bug-localization benchmarks (SWE-bench Verified, BeetleBox).
 
+> **Benchmark caveat:** OpenAI has [stopped evaluating on SWE-bench Verified](https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified/) and now recommends SWE-bench Pro instead, citing tests that reject functionally correct solutions and possible train/test contamination. This project still targets Verified for continuity with prior results — treat any accuracy numbers here with that caveat in mind, and consider SWE-bench Pro or a time-separated benchmark for future work.
+
 Forked from [ekaramustafa/bug-localization](https://github.com/ekaramustafa/bug-localization) — see [ORIGIN.md](ORIGIN.md) for what's changed since.
 
 See [docs/literature_review.md](docs/literature_review.md) for the survey of recent LLM-based bug localization/retrieval papers informing this project's direction.
