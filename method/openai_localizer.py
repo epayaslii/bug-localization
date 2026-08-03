@@ -13,16 +13,17 @@ from dataset.utils import get_token_count, chunk_code_files, estimate_prompt_tok
 logger = get_logger(__name__)
 
 class OpenAILocalizer(BugLocalizationMethod):
-    def __init__(self):
+    def __init__(self, model="gpt-5-nano"):
         super().__init__()
         load_dotenv()
+        self.model = model
         self.api_key = os.getenv("OPENAI_API_KEY")
         self.llm = LLMClientGenerator(api_key=self.api_key)
         self.prompt_generator = PromptGenerator()
 
     def localize(self, bug, max_prompt_tokens=100000, max_chunk_tokens=50000):
-        model = "gpt-5-nano"
-        
+        model = self.model
+
         # Count tokens in the bug report using the utility function
         token_count = get_token_count(bug.to_string(), model=model)
 

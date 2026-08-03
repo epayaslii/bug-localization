@@ -31,9 +31,14 @@ class OpenRouterLocalizer(BugLocalizationMethod):
         load_dotenv()
 
         self.model_mapping = {
+            # free
             "gpt-oss-20b": "openai/gpt-oss-20b:free",
             # qwen3-coder's free OpenRouter tier was retired; this now routes to the paid slug.
             "qwen-coder": "qwen/qwen3-coder",
+            # paid -- small/cheap
+            "gpt-4o-mini": "openai/gpt-4o-mini",
+            "gemini-flash": "google/gemini-flash-1.5",
+            "haiku": "anthropic/claude-haiku-3-5",
         }
 
         self.default_model = "openai/gpt-oss-20b:free"

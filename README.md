@@ -40,8 +40,9 @@ python main.py --method openrouter --dataset swebench --model gpt-oss-20b --samp
 Arguments (`main.py`):
 - `--method`: `openai`, `openai-free`, `openrouter` (default), or `unsloth` (currently disabled, see [Notes](#notes))
 - `--dataset`: `swebench` or `beetlebox` (default)
-- `--model`: model name, e.g. `gpt-oss-20b` (default), `qwen-coder`
+- `--model`: model name, see [Models](#models) below (default `gpt-oss-20b`)
 - `--sample-size`: number of bug instances to sample
+- `--max-files`: cap the number of code files sent to the model per bug (cheap smoke-testing only — may truncate away the actual ground-truth file, so don't use it for real evaluation runs)
 - `--device`: `cuda`/`cpu`/`auto` (local inference only)
 
 Results are printed as an overall metrics table (accuracy/precision/recall/F1) plus per-bug breakdowns.
@@ -54,7 +55,10 @@ Models available per `--method`, and their evaluation status. Numbers are intent
 |---|---|---|---|---|
 | `openrouter` | `gpt-oss-20b` (default) | `openai/gpt-oss-20b:free` | free | ... |
 | `openrouter` | `qwen-coder` | `qwen/qwen3-coder` | paid | ... |
-| `openai` | (hardcoded) `gpt-5-nano` | OpenAI direct | paid | ... |
+| `openrouter` | `gpt-4o-mini` | `openai/gpt-4o-mini` | paid (cheap) | ... |
+| `openrouter` | `gemini-flash` | `google/gemini-flash-1.5` | paid (cheap) | ... |
+| `openrouter` | `haiku` | `anthropic/claude-haiku-3-5` | paid (cheap) | ... |
+| `openai` | `gpt-5-nano` (default) or any `--model` | OpenAI direct | paid | ... |
 | `openai-free` | configurable | OpenAI direct | paid | ... |
 
 ## Offline repo access (`repo_cache`)
@@ -94,6 +98,7 @@ Because clusters like MN5 have no outbound internet access, the LLM API call its
 dataset/          Dataset loaders (SWEBench, BeetleBox), repo cache, token/utility helpers
 method/           Localizer implementations (OpenAI, OpenAI-free, OpenRouter), prompt generation, evaluation
 scripts/          Standalone utilities (mirror_repos.py for offline repo caching)
+tests/            Standalone .env key sanity checks (not pytest) -- run directly to confirm API keys work
 main.py           CLI entry point
 requirements.txt  Full dependency set (includes unused local-inference/RAG deps, kept for compatibility)
 requirements-mn5.txt   Trimmed dependency set for offline HPC transfer

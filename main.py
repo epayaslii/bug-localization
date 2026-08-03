@@ -24,7 +24,9 @@ def main():
                        default='auto', help='Device for local inference (HuggingFace only)')
     parser.add_argument('--sample-size', type=int, default=1,
                        help='Number of bug instances to process')
-    
+    parser.add_argument('--max-files', type=int, default=None,
+                       help='Max number of code files to send to the model (for cheap smoke-testing)')
+
     args = parser.parse_args()
     
     logger.info("Starting...")
@@ -37,7 +39,12 @@ def main():
             instance = BeetleBox()
         
         if args.method == 'openai':
-            localizer = OpenAILocalizer()
+            # only override the default (gpt-5-nano) if the user explicitly picked
+            # a non-default --model; the flag's own default is tailored to openrouter
+            if args.model and args.model != parser.get_default('model'):
+                localizer = OpenAILocalizer(model=args.model)
+            else:
+                localizer = OpenAILocalizer()
         elif args.method == 'openai-free':
             localizer = OpenAIFreeLocalizer(model=args.model)
         elif args.method == 'unsloth':
@@ -60,7 +67,10 @@ def main():
 
         logger.info(f"Total repo: {len(instance.repos)}")
         responses = {}
-        for i, bug in enumerate(bug_instances): 
+        for i, bug in enumerate(bug_instances):
+            if args.max_files is not None:
+                bug.code_files = bug.code_files[:args.max_files]
+                logger.info(f"Truncated code files to {len(bug.code_files)} (--max-files={args.max_files})")
             response = localizer.localize(bug)
             responses[bug.instance_id] = {'bug': bug, 'response': response}
             logger.info(f"Response: {response}")
