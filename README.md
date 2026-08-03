@@ -2,6 +2,8 @@
 
 Given a bug report and a snapshot of a repository's code, predict which source files need to change to fix the bug. This repo implements an LLM-based bug localizer and evaluates it against public bug-localization benchmarks (SWE-bench Verified, BeetleBox).
 
+Forked from [ekaramustafa/bug-localization](https://github.com/ekaramustafa/bug-localization) — see [ORIGIN.md](ORIGIN.md) for what's changed since.
+
 ## How it works
 
 1. **Dataset** (`dataset/`) loads bug instances (bug report + target repo + base commit + ground-truth changed files) from SWE-bench Verified or BeetleBox.
@@ -32,7 +34,7 @@ OPENAI_API_KEY=...
 ## Usage
 
 ```bash
-python main.py --method openrouter --dataset swebench --model gpt-oss-20b --sample-size 15
+python main.py --method openrouter --dataset swebench --model gpt-oss-20b --sample-size N
 ```
 
 Arguments (`main.py`):
@@ -44,12 +46,23 @@ Arguments (`main.py`):
 
 Results are printed as an overall metrics table (accuracy/precision/recall/F1) plus per-bug breakdowns.
 
+## Models
+
+Models available per `--method`, and their evaluation status. Numbers are intentionally left blank — sample size and model set are both still changing, so any fixed number here would go stale immediately. See the most recent run logs/commits for current results.
+
+| Method | `--model` | Backend | Cost | Top-1 Accuracy |
+|---|---|---|---|---|
+| `openrouter` | `gpt-oss-20b` (default) | `openai/gpt-oss-20b:free` | free | ... |
+| `openrouter` | `qwen-coder` | `qwen/qwen3-coder` | paid | ... |
+| `openai` | (hardcoded) `gpt-5-nano` | OpenAI direct | paid | ... |
+| `openai-free` | configurable | OpenAI direct | paid | ... |
+
 ## Offline repo access (`repo_cache`)
 
 The GitHub API path (`dataset/utils.get_code_files`) times out on networks without outbound internet access (e.g. HPC clusters like MN5). To avoid this, repos can be mirrored locally as bare git clones and read from disk instead:
 
 ```bash
-python scripts/mirror_repos.py --dataset swebench --sample-size 15
+python scripts/mirror_repos.py --dataset swebench --sample-size N
 ```
 
 This clones every repo referenced by the sampled bug instances into `repo_cache/<owner>__<repo>.git` (bare clones, gitignored). `dataset/utils.get_code_files` automatically prefers the local cache when a repo is already mirrored there, falling back to the GitHub API otherwise. `dataset/repo_cache.py` also fetches a specific commit directly by SHA if it isn't reachable from any already-fetched ref.
