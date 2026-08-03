@@ -26,6 +26,10 @@ def main():
                        help='Number of bug instances to process')
     parser.add_argument('--max-files', type=int, default=None,
                        help='Max number of code files to send to the model (for cheap smoke-testing)')
+    parser.add_argument('--bm25-top-k', type=int, default=None,
+                       help='Narrow code files to the top-K most relevant to the bug report via BM25 before prompting (disabled by default)')
+    parser.add_argument('--bm25-skeleton', action='store_true',
+                       help='Score BM25 using each file\'s content skeleton (docstring + class/function names) instead of just its path (requires the repo to be in the local repo_cache)')
 
     args = parser.parse_args()
     
@@ -68,6 +72,15 @@ def main():
         logger.info(f"Total repo: {len(instance.repos)}")
         responses = {}
         for i, bug in enumerate(bug_instances):
+            if args.bm25_top_k is not None:
+                original_count = len(bug.code_files)
+                if args.bm25_skeleton:
+                    from method.bm25_retriever import rank_files_bm25_with_skeleton
+                    bug.code_files = rank_files_bm25_with_skeleton(bug, top_k=args.bm25_top_k)
+                else:
+                    from method.bm25_retriever import rank_files_bm25
+                    bug.code_files = rank_files_bm25(bug.bug_report, bug.code_files, top_k=args.bm25_top_k)
+                logger.info(f"BM25-filtered code files from {original_count} to {len(bug.code_files)} (--bm25-top-k={args.bm25_top_k}, skeleton={args.bm25_skeleton})")
             if args.max_files is not None:
                 bug.code_files = bug.code_files[:args.max_files]
                 logger.info(f"Truncated code files to {len(bug.code_files)} (--max-files={args.max_files})")

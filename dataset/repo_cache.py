@@ -76,3 +76,46 @@ def get_file_content_local(repo, commit_hash, path_in_repo, cache_dir=None):
             f"{path_in_repo}@{commit_hash} not found in local cache for {repo}: {result.stderr.strip()}"
         )
     return result.stdout
+
+
+def get_file_contents_batch(repo, commit_hash, paths, cache_dir=None):
+    """Fetch content for many files at one commit using a single `git cat-file --batch`
+    subprocess, instead of one `git show` subprocess per file (much faster for large lists).
+
+    Returns {path: content} for files that were readable as UTF-8 text; missing, binary,
+    or undecodable files are simply omitted rather than raising.
+    """
+    path = _bare_repo_path(repo, cache_dir)
+    _ensure_commit(repo, commit_hash, cache_dir)
+
+    if not paths:
+        return {}
+
+    input_data = "".join(f"{commit_hash}:{p}\n" for p in paths).encode()
+    result = subprocess.run(
+        ["git", "--git-dir", path, "cat-file", "--batch"],
+        input=input_data, capture_output=True
+    )
+
+    data = result.stdout
+    contents = {}
+    pos = 0
+    for p in paths:
+        newline_idx = data.index(b"\n", pos)
+        header = data[pos:newline_idx].decode(errors="replace")
+        pos = newline_idx + 1
+
+        parts = header.split()
+        if len(parts) == 2 and parts[1] == "missing":
+            continue
+
+        size = int(parts[2])
+        content_bytes = data[pos:pos + size]
+        pos += size + 1  # skip content plus the trailing newline git cat-file adds
+
+        try:
+            contents[p] = content_bytes.decode("utf-8")
+        except UnicodeDecodeError:
+            continue
+
+    return contents
