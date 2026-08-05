@@ -367,6 +367,55 @@
   </section>
 
   <section>
+    <h2>Full metrics</h2>
+    <p class="section-note">Macro-averaged across the manifest. Hit@k is fraction of instances with a localizable GT within the top-k; MRR/MAP as usual.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Config</th>
+            <th>Hit@1</th>
+            <th>Hit@5</th>
+            <th>Hit@10</th>
+            <th>Hit@100</th>
+            <th>MRR</th>
+            <th>MAP</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="instance-name">bm25 (symbols)</td>
+            <td class="rank">0.0%</td>
+            <td class="rank">33.3%</td>
+            <td class="rank">33.3%</td>
+            <td class="rank">83.3%</td>
+            <td class="rank">0.178</td>
+            <td class="rank">0.178</td>
+          </tr>
+          <tr>
+            <td class="instance-name">chunked_embedding</td>
+            <td class="rank">0.0%</td>
+            <td class="rank">33.3%</td>
+            <td class="rank">50.0%</td>
+            <td class="rank">66.7%</td>
+            <td class="rank">0.150</td>
+            <td class="rank">0.139</td>
+          </tr>
+          <tr>
+            <td class="instance-name"><strong>hybrid_rrf</strong></td>
+            <td class="rank"><strong>16.7%</strong></td>
+            <td class="rank">33.3%</td>
+            <td class="rank">50.0%</td>
+            <td class="rank">66.7%</td>
+            <td class="rank"><strong>0.282</strong></td>
+            <td class="rank"><strong>0.264</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
     <h2>Per-instance best ground-truth rank</h2>
     <p class="section-note">Lower is better. Chip shows the hybrid's rank relative to the better of its two inputs.</p>
     <div class="table-wrap">

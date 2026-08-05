@@ -6,7 +6,7 @@ Given a bug report and a snapshot of a repository's code, predict which source f
 
 Forked from [ekaramustafa/bug-localization](https://github.com/ekaramustafa/bug-localization) — see [ORIGIN.md](ORIGIN.md) for what's changed since.
 
-See [docs/literature_review.md](docs/literature_review.md) for the survey of recent LLM-based bug localization/retrieval papers informing this project's direction.
+See [docs/literature_review.md](docs/literature_review.md) for the survey of recent LLM-based bug localization/retrieval papers informing this project's direction, or [docs/PROGRESS_REPORT.md](docs/PROGRESS_REPORT.md) for a chronological status report with real results (what's done, current findings/limitations, what we can and can't claim yet).
 
 ## How it works
 

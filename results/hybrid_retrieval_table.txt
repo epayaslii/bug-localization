@@ -1,0 +1,15 @@
+Hybrid retrieval: BM25 vs chunked embedding vs BM25+embedding hybrid (RRF fusion)
+SWE-bench Verified, manifest swebench-multi-n6-s42-3242dd678429, n=5 (localizable GT)
+
+┌───────────────────┬───────┬───────┬────────┬─────────┬───────┬───────┐
+│      Config       │ Hit@1 │ Hit@5 │ Hit@10 │ Hit@100 │  MRR  │  MAP  │
+├───────────────────┼───────┼───────┼────────┼─────────┼───────┼───────┤
+│ bm25 (symbols)    │ 0.0%  │ 33.3% │ 33.3%  │ 83.3%   │ 0.178 │ 0.178 │
+├───────────────────┼───────┼───────┼────────┼─────────┼───────┼───────┤
+│ chunked_embedding │ 0.0%  │ 33.3% │ 50.0%  │ 66.7%   │ 0.150 │ 0.139 │
+├───────────────────┼───────┼───────┼────────┼─────────┼───────┼───────┤
+│ hybrid_rrf        │ 16.7% │ 33.3% │ 50.0%  │ 66.7%   │ 0.282 │ 0.264 │
+└───────────────────┴───────┴───────┴────────┴─────────┴───────┴───────┘
+
+n=5 is directional, not conclusive. Full writeup: results/README.md section 4.
+Code: experiment/hybrid-retrieval branch (not merged to main).
