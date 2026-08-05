@@ -53,7 +53,8 @@ tests/
 docs/
   project_structure.md   # This file
 
-main.py                          # CLI entry point
+main.py                          # CLI entry point; --bm25-top-k/--bm25-skeleton/--bm25-symbols[-imports] wire up the pre-filter, --output writes a full JSON report (config + per-bug + overall)
+results/                         # Saved run outputs (tracked in git -- see results/README.md); manifests/ holds evaluation/manifest.py outputs
 pytest.ini                       # testpaths = tests
 conftest.py                      # Adds repo root to sys.path so `pytest` works regardless of invocation directory
 requirements.txt                 # Full dependency set (includes unused local-inference/RAG deps)

@@ -56,8 +56,11 @@ Arguments (`main.py`):
 - `--sample-size`: number of bug instances to sample
 - `--max-files`: cap the number of code files sent to the model per bug (cheap smoke-testing only — may truncate away the actual ground-truth file, so don't use it for real evaluation runs)
 - `--device`: `cuda`/`cpu`/`auto` (local inference only)
+- `--bm25-top-k`: narrow code files to the top-K most relevant via BM25 before prompting (disabled by default)
+- `--bm25-skeleton` / `--bm25-symbols` [`--bm25-symbols-imports`]: BM25 document representation when `--bm25-top-k` is set (see [Symbol-aware BM25 document representations](#symbol-aware-bm25-document-representations)); `--bm25-symbols` takes precedence if both are passed, plain path-only BM25 if neither is
+- `--output`: optional path to write the run config + full evaluation results (including per-bug candidate files and ground truths) as JSON
 
-Results are printed as an overall metrics table (accuracy/precision/recall/F1) plus per-bug breakdowns.
+Results are printed as an overall metrics table (accuracy/precision/recall/F1) plus per-bug breakdowns; see `results/README.md` for saved runs.
 
 ## Models
 
@@ -132,7 +135,7 @@ By default this only does the free, offline split (reusing the BM25 screening ra
 | `symbols_with_imports` (`rank_files_bm25_with_symbols`, default) | Path tokens + class/function/method names + imported module/name tokens |
 | `symbols_no_imports` (`rank_files_bm25_with_symbols(include_imports=False)`) | Path tokens + class/function/method names only |
 
-All are Python-AST-based (SWE-bench Verified's only language today) and fall back to path-only tokens for any file whose content can't be read or parsed -- never a live network call, only the offline `repo_cache`. Compare all four on the same manifest:
+All are Python-AST-based (SWE-bench Verified's only language today) and fall back to path-only tokens for any file whose content can't be read or parsed -- never a live network call, only the offline `repo_cache`. `main.py` wires up `path_only` (default), `skeleton` (`--bm25-skeleton`), and `symbols_with_imports`/`symbols_no_imports` (`--bm25-symbols`, `--bm25-symbols-imports` to include imports) for end-to-end runs. Compare all four on the same manifest without spending anything on an LLM:
 
 ```bash
 python scripts/compare_bm25_representations.py --manifest results/manifests/<manifest_id>.json --output results/bm25_representation_comparison.json
