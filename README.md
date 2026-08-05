@@ -113,6 +113,25 @@ python scripts/run_failure_attribution.py --manifest results/manifests/<manifest
 
 By default this only does the free, offline split (reusing the BM25 screening ranks -- no LLM calls). Add `--run-oracle` to additionally run the **oracle diagnostic**: force-inject every localizable ground-truth file into the candidate set (so retrieval recall is artificially 100% for that call) and measure how well the LLM reranker places them, isolating pure reranking ability from retrieval quality. `--run-oracle` calls the LLM once per manifest instance and therefore costs real API usage -- it prints an estimated prompt-token count before making any calls, and defaults to the free `gpt-oss-20b` OpenRouter model (override with `--model`).
 
+## Symbol-aware BM25 document representations
+
+`method/bm25_retriever.py` supports four document representations for the BM25 candidate pre-filter, moving beyond bare file paths:
+
+| Representation | What each file's BM25 document contains |
+|---|---|
+| `path_only` (`rank_files_bm25`) | Path tokens only |
+| `skeleton` (`rank_files_bm25_with_skeleton`) | Path tokens + module docstring + class/function names |
+| `symbols_with_imports` (`rank_files_bm25_with_symbols`, default) | Path tokens + class/function/method names + imported module/name tokens |
+| `symbols_no_imports` (`rank_files_bm25_with_symbols(include_imports=False)`) | Path tokens + class/function/method names only |
+
+All are Python-AST-based (SWE-bench Verified's only language today) and fall back to path-only tokens for any file whose content can't be read or parsed -- never a live network call, only the offline `repo_cache`. Compare all four on the same manifest:
+
+```bash
+python scripts/compare_bm25_representations.py --manifest results/manifests/<manifest_id>.json --output results/bm25_representation_comparison.json
+```
+
+Prints macro Hit@1/5/10 and MRR per representation, plus each one's difficulty-band distribution -- free and offline, no LLM calls. Retrieval still operates at file granularity (ground truth in this dataset is file-level); symbols/imports are used to build a richer document per file, not to retrieve individual symbols.
+
 ## Loading datasets from local disk
 
 Both dataset loaders normally pull from Hugging Face (`SWE-bench/SWE-bench_Verified`, `bug-localization/BeetleBox`). For offline environments, a pre-downloaded copy (via `datasets.save_to_disk`) can be loaded instead by setting:

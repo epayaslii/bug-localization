@@ -17,6 +17,7 @@ method/
   openai_free_localizer.py   # Alternate direct-OpenAI localizer
   opensource_localizer.py    # Local/unsloth inference (currently disabled, not imported by main.py)
   rag_localizer.py           # RAG pre-filter (Qdrant + embeddings) -- dead code, lazy-imported, never invoked by default
+  bm25_retriever.py          # BM25 candidate pre-filter (--bm25-top-k in main.py): path-only, skeleton (docstring+symbol names), and symbols/symbols+imports document representations
   prompt.py                  # Prompt templates (localization, chunk aggregation, report summarization)
   evaluate.py                # Top-k accuracy / precision / recall / F1 evaluation
   llm.py                     # Low-level LLM client wrapper
@@ -34,6 +35,7 @@ scripts/
   generate_evaluation_manifest.py    # Build and save a manifest (evaluation/manifest.py) from a seeded dataset sample
   run_bm25_screening.py              # Run BM25 screening (evaluation/screening.py) over a saved manifest; prints difficulty distribution, optional JSON report
   run_failure_attribution.py         # Free offline retrieval-vs-reranking split by default; --run-oracle actually calls the LLM reranker on oracle candidate sets (costs API calls)
+  compare_bm25_representations.py    # Compare path-only / skeleton / symbols+imports / symbols-no-imports BM25 document representations on the same manifest -- free, offline
 
 tests/
   openrouter_key_test.py   # Standalone check that OPENROUTER_API_KEY is valid (not pytest)

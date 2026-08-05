@@ -34,8 +34,19 @@ def _difficulty_band(best_rank):
     return "outside_top200"
 
 
-def screen_bug_instance(bug, token=None, cache=None):
-    """Run path-only BM25 over the full corpus for one bug instance."""
+def _default_rank_fn(bug):
+    return rank_files_bm25(bug.bug_report, bug.code_files, top_k=None)
+
+
+def screen_bug_instance(bug, token=None, cache=None, rank_fn=None):
+    """Run BM25 over the full corpus for one bug instance and rank it.
+
+    `rank_fn(bug) -> list[str]` controls how files are scored/ranked -- defaults to
+    path-only BM25 (rank_files_bm25). Pass e.g. `lambda b: rank_files_bm25_with_symbols(b,
+    top_k=None)` to screen a different document representation on the same instances,
+    for direct comparison (see scripts/compare_bm25_representations.py).
+    """
+    rank_fn = rank_fn or _default_rank_fn
     classifications = classify_bug_instance(bug, token=token, cache=cache)
     localizable_gts = [p for p, c in classifications.items() if c in LOCALIZABLE_CLASSES]
 
@@ -51,7 +62,7 @@ def screen_bug_instance(bug, token=None, cache=None):
             "difficulty": "no_localizable_gt",
         }
 
-    ranked = rank_files_bm25(bug.bug_report, bug.code_files, top_k=None)
+    ranked = rank_fn(bug)
     rank_of = {path: i + 1 for i, path in enumerate(ranked)}
 
     gt_rank_map = {p: rank_of[p] for p in localizable_gts if p in rank_of}
@@ -70,11 +81,11 @@ def screen_bug_instance(bug, token=None, cache=None):
     }
 
 
-def screen_manifest(bugs, token=None, cache=None):
+def screen_manifest(bugs, token=None, cache=None, rank_fn=None):
     """Screen every bug instance in `bugs` and aggregate the difficulty distribution."""
     results = []
     for i, bug in enumerate(bugs):
-        results.append(screen_bug_instance(bug, token=token, cache=cache))
+        results.append(screen_bug_instance(bug, token=token, cache=cache, rank_fn=rank_fn))
         if (i + 1) % 10 == 0:
             logger.info(f"Screened {i + 1}/{len(bugs)} instances")
 
@@ -83,4 +94,25 @@ def screen_manifest(bugs, token=None, cache=None):
         "per_instance": results,
         "difficulty_distribution": dict(difficulty_counts),
         "total": len(results),
+    }
+
+
+def summarize_screening(screening_report):
+    """Macro-averaged Hit@k and MRR over a screen_manifest() report, for comparing BM25
+    document representations against each other (e.g. path-only vs symbols vs
+    symbols+imports) on the same manifest. Instances with no localizable ground truth
+    contribute 0 to every metric, consistent with their all-zero hit_at/recall_at.
+    """
+    results = screening_report["per_instance"]
+    n = len(results) or 1
+
+    macro_hit_at = {k: sum(r["hit_at"].get(k, 0) for r in results) / n for k in HIT_KS}
+    macro_recall_at = {k: sum(r["recall_at"].get(k, 0.0) for r in results) / n for k in RECALL_KS}
+    mrr = sum((1.0 / r["best_rank"]) if r["best_rank"] else 0.0 for r in results) / n
+
+    return {
+        "n": len(results),
+        "macro_hit_at": macro_hit_at,
+        "macro_recall_at": macro_recall_at,
+        "mrr": mrr,
     }
