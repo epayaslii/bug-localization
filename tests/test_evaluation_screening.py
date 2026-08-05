@@ -1,7 +1,7 @@
 import pytest
 
 from dataset.models import BugInstance
-from evaluation.screening import screen_bug_instance, screen_manifest, summarize_screening
+from evaluation.screening import screen_bug_instance, screen_manifest, summarize_screening, _average_precision
 
 
 def make_bug(ground_truths, code_files, patch="", bug_report="fix bar", **overrides):
@@ -42,6 +42,7 @@ def test_screen_bug_instance_no_localizable_gt_band():
     assert result["gt_ranks"] == {}
     assert all(v == 0 for v in result["hit_at"].values())
     assert all(v == 0.0 for v in result["recall_at"].values())
+    assert result["average_precision"] == 0.0
 
 
 def test_screen_bug_instance_difficulty_bands_by_rank():
@@ -91,6 +92,8 @@ def test_summarize_screening_macro_metrics():
     assert summary["macro_hit_at"][1] == pytest.approx(0.5)
     assert summary["macro_hit_at"][5] == pytest.approx(1.0)
     assert summary["mrr"] == pytest.approx((1 / 1 + 1 / 2) / 2)
+    # single-GT AP per instance equals 1/rank, so this matches MRR here
+    assert summary["map"] == pytest.approx((1 / 1 + 1 / 2) / 2)
 
 
 def test_summarize_screening_handles_empty_report():
@@ -98,3 +101,25 @@ def test_summarize_screening_handles_empty_report():
     summary = summarize_screening(report)
     assert summary["n"] == 0
     assert summary["mrr"] == 0.0
+    assert summary["map"] == 0.0
+
+
+def test_average_precision_all_gts_found():
+    # GT at ranks 2 and 5, both found: AP = ((1/2) + (2/5)) / 2
+    ap = _average_precision({"a.py": 2, "b.py": 5}, num_localizable_gts=2)
+    assert ap == pytest.approx((1 / 2 + 2 / 5) / 2)
+
+
+def test_average_precision_penalizes_gts_not_found():
+    # Only 1 of 2 localizable GTs appears in gt_ranks (e.g. rank_fn returned a truncated
+    # list) -- the missing one still counts in the denominator, dragging AP down.
+    ap = _average_precision({"a.py": 2}, num_localizable_gts=2)
+    assert ap == pytest.approx((1 / 2) / 2)
+
+
+def test_average_precision_perfect_top_rank():
+    assert _average_precision({"a.py": 1}, num_localizable_gts=1) == pytest.approx(1.0)
+
+
+def test_average_precision_zero_localizable_gts():
+    assert _average_precision({}, num_localizable_gts=0) == 0.0

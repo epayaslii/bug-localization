@@ -141,7 +141,7 @@ All are Python-AST-based (SWE-bench Verified's only language today) and fall bac
 python scripts/compare_bm25_representations.py --manifest results/manifests/<manifest_id>.json --output results/bm25_representation_comparison.json
 ```
 
-Prints macro Hit@1/5/10 and MRR per representation, plus each one's difficulty-band distribution -- free and offline, no LLM calls. Retrieval still operates at file granularity (ground truth in this dataset is file-level); symbols/imports are used to build a richer document per file, not to retrieve individual symbols.
+Prints macro Hit@1/5/10, MRR, and MAP per representation, plus each one's difficulty-band distribution -- free and offline, no LLM calls. Retrieval still operates at file granularity (ground truth in this dataset is file-level); symbols/imports are used to build a richer document per file, not to retrieve individual symbols.
 
 ## Loading datasets from local disk
 

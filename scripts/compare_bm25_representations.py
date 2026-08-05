@@ -66,19 +66,19 @@ def main():
         results[name] = {"screening_report": report, "summary": summary}
         logger.info(
             f"  Hit@1={summary['macro_hit_at'][1]:.3f} Hit@5={summary['macro_hit_at'][5]:.3f} "
-            f"Hit@10={summary['macro_hit_at'][10]:.3f} MRR={summary['mrr']:.4f}"
+            f"Hit@10={summary['macro_hit_at'][10]:.3f} MRR={summary['mrr']:.4f} MAP={summary['map']:.4f}"
         )
         logger.info(f"  Difficulty: {report['difficulty_distribution']}")
 
     save_cache(cache)
 
     logger.info("=== Summary (macro, across all representations) ===")
-    logger.info(f"{'representation':<22} {'Hit@1':>7} {'Hit@5':>7} {'Hit@10':>7} {'MRR':>8}")
+    logger.info(f"{'representation':<22} {'Hit@1':>7} {'Hit@5':>7} {'Hit@10':>7} {'MRR':>8} {'MAP':>8}")
     for name in names:
         s = results[name]["summary"]
         logger.info(
             f"{name:<22} {s['macro_hit_at'][1]:>7.3f} {s['macro_hit_at'][5]:>7.3f} "
-            f"{s['macro_hit_at'][10]:>7.3f} {s['mrr']:>8.4f}"
+            f"{s['macro_hit_at'][10]:>7.3f} {s['mrr']:>8.4f} {s['map']:>8.4f}"
         )
 
     if args.output:

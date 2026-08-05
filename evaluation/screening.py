@@ -38,6 +38,21 @@ def _default_rank_fn(bug):
     return rank_files_bm25(bug.bug_report, bug.code_files, top_k=None)
 
 
+def _average_precision(gt_ranks: dict, num_localizable_gts: int) -> float:
+    """Average Precision for one instance: for each localizable GT found in the ranking
+    (in increasing rank order), precision-at-that-rank = (how many GTs found so far,
+    including this one) / rank. AP is the mean of those precisions over ALL localizable
+    GTs for the instance -- GTs never found in the ranking contribute 0 to the sum but
+    still count in the denominator, so missing ground truth is penalized even though it
+    never appears in gt_ranks.
+    """
+    if num_localizable_gts == 0:
+        return 0.0
+    sorted_ranks = sorted(gt_ranks.values())
+    precision_sum = sum((i + 1) / rank for i, rank in enumerate(sorted_ranks))
+    return precision_sum / num_localizable_gts
+
+
 def screen_bug_instance(bug, token=None, cache=None, rank_fn=None):
     """Run BM25 over the full corpus for one bug instance and rank it.
 
@@ -59,6 +74,7 @@ def screen_bug_instance(bug, token=None, cache=None, rank_fn=None):
             "best_rank": None,
             "hit_at": {k: 0 for k in HIT_KS},
             "recall_at": {k: 0.0 for k in RECALL_KS},
+            "average_precision": 0.0,
             "difficulty": "no_localizable_gt",
         }
 
@@ -77,6 +93,7 @@ def screen_bug_instance(bug, token=None, cache=None, rank_fn=None):
         "best_rank": best_rank,
         "hit_at": {k: int(any(r <= k for r in gt_ranks)) for k in HIT_KS},
         "recall_at": {k: (sum(1 for r in gt_ranks if r <= k) / len(localizable_gts)) for k in RECALL_KS},
+        "average_precision": _average_precision(gt_rank_map, len(localizable_gts)),
         "difficulty": _difficulty_band(best_rank),
     }
 
@@ -98,8 +115,8 @@ def screen_manifest(bugs, token=None, cache=None, rank_fn=None):
 
 
 def summarize_screening(screening_report):
-    """Macro-averaged Hit@k and MRR over a screen_manifest() report, for comparing BM25
-    document representations against each other (e.g. path-only vs symbols vs
+    """Macro-averaged Hit@k, MRR, and MAP over a screen_manifest() report, for comparing
+    BM25 document representations against each other (e.g. path-only vs symbols vs
     symbols+imports) on the same manifest. Instances with no localizable ground truth
     contribute 0 to every metric, consistent with their all-zero hit_at/recall_at.
     """
@@ -109,10 +126,12 @@ def summarize_screening(screening_report):
     macro_hit_at = {k: sum(r["hit_at"].get(k, 0) for r in results) / n for k in HIT_KS}
     macro_recall_at = {k: sum(r["recall_at"].get(k, 0.0) for r in results) / n for k in RECALL_KS}
     mrr = sum((1.0 / r["best_rank"]) if r["best_rank"] else 0.0 for r in results) / n
+    map_score = sum(r.get("average_precision", 0.0) for r in results) / n
 
     return {
         "n": len(results),
         "macro_hit_at": macro_hit_at,
         "macro_recall_at": macro_recall_at,
         "mrr": mrr,
+        "map": map_score,
     }

@@ -26,7 +26,7 @@ method/
 
 evaluation/
   manifest.py             # Deterministic, diversity-constrained (max-N-per-repo) evaluation manifests -- a stable seeded sample so retrieval/reranking comparisons are apples-to-apples across runs
-  screening.py            # Path-only BM25 screening over a manifest: best localizable-GT rank, Hit@k, recall@100/200, difficulty band per instance
+  screening.py            # Path-only BM25 screening over a manifest: best localizable-GT rank, Hit@k, recall@100/200, MAP, difficulty band per instance
   failure_attribution.py  # Splits misses into retrieval failures (GT never reached the candidate set) vs reranking failures (GT was reachable); oracle diagnostic force-injects GT to isolate pure reranking ability (costs LLM calls -- opt-in)
 
 scripts/
