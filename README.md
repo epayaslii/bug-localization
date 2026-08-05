@@ -140,6 +140,16 @@ python scripts/compare_bm25_representations.py --manifest results/manifests/<man
 
 Prints macro Hit@1/5/10 and MRR per representation, plus each one's difficulty-band distribution -- free and offline, no LLM calls. Retrieval still operates at file granularity (ground truth in this dataset is file-level); symbols/imports are used to build a richer document per file, not to retrieve individual symbols.
 
+## Embedding retrieval-recall ceiling test
+
+`method/embedding_retriever.py` ranks candidate files by cosine similarity of UniXCoder embeddings (mean-pooled, path + content-skeleton text -- the same text basis as the BM25 skeleton variant, for a fair comparison) instead of BM25 lexical scoring. It runs the model locally (CPU/MPS/CUDA, whichever is available) -- no API cost, but embedding every candidate file per instance is slower than BM25.
+
+```bash
+python scripts/run_embedding_ceiling_test.py --manifest results/manifests/<manifest_id>.json --output results/embedding_ceiling_test.json
+```
+
+Measures the same Hit@k/MRR ceiling as `compare_bm25_representations.py`, but for embeddings vs. BM25 path-only, on the same manifest -- i.e. does embedding-based retrieval get more ground-truth files into the candidate set than BM25, before any LLM reranking is involved. Worth noting going in: both this project's original team (see `ORIGIN.md`) and the co-intern's team found RAG/embedding approaches disappointing or explicitly deprioritized them here, so a result that doesn't clearly beat BM25 should be treated as expected rather than a bug.
+
 ## Loading datasets from local disk
 
 Both dataset loaders normally pull from Hugging Face (`SWE-bench/SWE-bench_Verified`, `bug-localization/BeetleBox`). For offline environments, a pre-downloaded copy (via `datasets.save_to_disk`) can be loaded instead by setting:
