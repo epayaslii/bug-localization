@@ -63,6 +63,20 @@ Two improve, two degrade, net zero change. At n=30 this reads as noise rather th
 
 Embeddings lose badly at the ranks that matter for a downstream reranker (Hit@1/5/10, MRR), despite broader-but-imprecise Hit@100. Consistent with both the original project team and the co-intern's team deprioritizing embeddings here, and with a specific literature finding (`docs/literature_review.md`) that whole-file embedding is a documented weak strategy vs. chunked embedding. The code for this lives on the `experiment/embedding-ceiling` branch (not merged to `main`, since the result doesn't justify adopting it); only this result JSON is included here on `main` for a complete record.
 
+## 4. Hybrid retrieval: BM25 + chunked embedding (positive, directional)
+
+`hybrid_retrieval_swebench_6.json` / [`hybrid_retrieval_report.html`](hybrid_retrieval_report.html) — produced by `scripts/run_hybrid_retrieval_test.py` on the same 6-instance manifest as §3, testing whether *chunked* (not whole-file) embedding changes the §3 result, per the literature's own explanation for why whole-file embedding underperforms. Chunking is AST-based (one chunk per top-level function/class, plus a header chunk for imports/docstring); BM25 (symbols representation) narrows the full corpus to a 200-file candidate pool first, which only that pool gets chunk-embedded and reranked, fused with BM25's own ranking via Reciprocal Rank Fusion (k=60):
+
+| Config | Hit@1 | Hit@5 | Hit@10 | Hit@100 | MRR | MAP |
+|---|---|---|---|---|---|---|
+| bm25 (symbols) | 0.0% | 33.3% | 33.3% | 83.3% | 0.178 | 0.178 |
+| chunked_embedding | 0.0% | 33.3% | 50.0% | 66.7% | 0.150 | 0.139 |
+| **hybrid_rrf** | **16.7%** | 33.3% | 50.0% | 66.7% | **0.282** | **0.264** |
+
+Unlike §3, this is a **positive result**: hybrid RRF fusion beats BM25 alone on MRR (+0.104) and MAP, and lands an actual Hit@1 (`astropy__astropy-14508`: rank 1) that neither BM25 alone (rank 2) nor chunked-embedding alone (rank 7) achieved on its own — evidence of genuine complementary signal, not just noise, since fusion outperforming both of its own inputs isn't explainable by chance alone on n=5. The cost: Hit@100 drops to 66.7% for both embedding-involving configs vs. BM25's 83.3%, an inherent tradeoff of the candidate-pool cascade (RRF can push a file BM25 ranked well within its own top-100 further down if the chunk embedder scores it poorly).
+
+n=5 (localizable ground truth) is small — directional, not conclusive, and the opposite finding from §3's whole-file test. The code lives on the `experiment/hybrid-retrieval` branch (not merged to `main`, matching this session's branching policy: main only holds validated work, and n=5 isn't validated yet even though the direction is promising); only the result artifacts are included here for a complete record.
+
 ## Reproducing
 
 ```bash
@@ -72,4 +86,4 @@ python main.py --method openrouter --dataset swebench --model gpt-4o-mini --samp
 python main.py --method openrouter --dataset swebench --model gpt-4o-mini --sample-size 30 --bm25-top-k 100 --bm25-symbols --output results/end_to_end_swebench_30_symbols.json
 ```
 
-The two `main.py` runs cost real OpenRouter API usage (`gpt-4o-mini`, paid).
+The two `main.py` runs cost real OpenRouter API usage (`gpt-4o-mini`, paid). §3 and §4 (`run_embedding_ceiling_test.py`, `run_hybrid_retrieval_test.py`) require checking out the `experiment/embedding-ceiling` and `experiment/hybrid-retrieval` branches respectively — those scripts aren't on `main`.
