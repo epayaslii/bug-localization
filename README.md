@@ -103,6 +103,16 @@ python scripts/run_bm25_screening.py --manifest results/manifests/swebench-multi
 
 The screening script re-derives the same seeded pool the manifest was built from (rather than reprocessing the whole dataset) to stay cheap, and warns on any instance-ID/repo mismatch.
 
+## Retrieval-vs-reranking failure attribution
+
+A low score can mean two different things: the correct file never made it into the candidate set BM25 hands to the LLM (a **retrieval failure**, which reranking can never fix), or it was in the candidate set but the LLM didn't surface it (a **reranking failure**). Conflating the two makes it easy to blame the wrong stage.
+
+```bash
+python scripts/run_failure_attribution.py --manifest results/manifests/<manifest_id>.json --candidate-size 100
+```
+
+By default this only does the free, offline split (reusing the BM25 screening ranks -- no LLM calls). Add `--run-oracle` to additionally run the **oracle diagnostic**: force-inject every localizable ground-truth file into the candidate set (so retrieval recall is artificially 100% for that call) and measure how well the LLM reranker places them, isolating pure reranking ability from retrieval quality. `--run-oracle` calls the LLM once per manifest instance and therefore costs real API usage -- it prints an estimated prompt-token count before making any calls, and defaults to the free `gpt-oss-20b` OpenRouter model (override with `--model`).
+
 ## Loading datasets from local disk
 
 Both dataset loaders normally pull from Hugging Face (`SWE-bench/SWE-bench_Verified`, `bug-localization/BeetleBox`). For offline environments, a pre-downloaded copy (via `datasets.save_to_disk`) can be loaded instead by setting:

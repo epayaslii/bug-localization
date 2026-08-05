@@ -24,14 +24,16 @@ method/
   models.py                  # Response dataclasses
 
 evaluation/
-  manifest.py    # Deterministic, diversity-constrained (max-N-per-repo) evaluation manifests -- a stable seeded sample so retrieval/reranking comparisons are apples-to-apples across runs
-  screening.py   # Path-only BM25 screening over a manifest: best localizable-GT rank, Hit@k, recall@100/200, difficulty band per instance
+  manifest.py             # Deterministic, diversity-constrained (max-N-per-repo) evaluation manifests -- a stable seeded sample so retrieval/reranking comparisons are apples-to-apples across runs
+  screening.py            # Path-only BM25 screening over a manifest: best localizable-GT rank, Hit@k, recall@100/200, difficulty band per instance
+  failure_attribution.py  # Splits misses into retrieval failures (GT never reached the candidate set) vs reranking failures (GT was reachable); oracle diagnostic force-injects GT to isolate pure reranking ability (costs LLM calls -- opt-in)
 
 scripts/
   mirror_repos.py                    # Bare-clone every repo referenced by a dataset sample into repo_cache/
   localizability_report.py           # Run ground-truth localizability diagnostics over a dataset sample; prints classification counts + coverage, optional JSON report
   generate_evaluation_manifest.py    # Build and save a manifest (evaluation/manifest.py) from a seeded dataset sample
   run_bm25_screening.py              # Run BM25 screening (evaluation/screening.py) over a saved manifest; prints difficulty distribution, optional JSON report
+  run_failure_attribution.py         # Free offline retrieval-vs-reranking split by default; --run-oracle actually calls the LLM reranker on oracle candidate sets (costs API calls)
 
 tests/
   openrouter_key_test.py   # Standalone check that OPENROUTER_API_KEY is valid (not pytest)

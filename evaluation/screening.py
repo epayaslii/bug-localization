@@ -44,6 +44,7 @@ def screen_bug_instance(bug, token=None, cache=None):
             "instance_id": bug.instance_id,
             "repo": bug.repo,
             "classifications": classifications,
+            "gt_ranks": {},
             "best_rank": None,
             "hit_at": {k: 0 for k in HIT_KS},
             "recall_at": {k: 0.0 for k in RECALL_KS},
@@ -53,13 +54,15 @@ def screen_bug_instance(bug, token=None, cache=None):
     ranked = rank_files_bm25(bug.bug_report, bug.code_files, top_k=None)
     rank_of = {path: i + 1 for i, path in enumerate(ranked)}
 
-    gt_ranks = [rank_of[p] for p in localizable_gts if p in rank_of]
+    gt_rank_map = {p: rank_of[p] for p in localizable_gts if p in rank_of}
+    gt_ranks = list(gt_rank_map.values())
     best_rank = min(gt_ranks) if gt_ranks else None
 
     return {
         "instance_id": bug.instance_id,
         "repo": bug.repo,
         "classifications": classifications,
+        "gt_ranks": gt_rank_map,
         "best_rank": best_rank,
         "hit_at": {k: int(any(r <= k for r in gt_ranks)) for k in HIT_KS},
         "recall_at": {k: (sum(1 for r in gt_ranks if r <= k) / len(localizable_gts)) for k in RECALL_KS},
