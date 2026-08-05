@@ -3,7 +3,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from dataset.base import BugLocalizationDataset
 import logging
-from datasets import load_dataset
+from datasets import load_dataset, load_from_disk
 from dataset.models import BugInstance
 from dataset.utils import get_code_files, calculate_dataset_token_stats, is_code_file, filter_code_paths
 from dotenv import load_dotenv
@@ -84,18 +84,29 @@ class BeetleBox(BugLocalizationDataset):
             return tuple(all_extensions)
 
     def load_data(self):
-        """Load BeetleBox dataset from Hugging Face."""
+        """Load BeetleBox dataset from Hugging Face, or from local disk if BEETLEBOX_LOCAL_PATH is set."""
+        local_path = os.environ.get("BEETLEBOX_LOCAL_PATH")
+        if local_path:
+            logger.info(f"Loading BeetleBox dataset from local disk: {local_path}")
+            self.data = load_from_disk(local_path)
+            logger.info(f"BeetleBox dataset loaded successfully. Total instances: {len(self.data)}")
+
+            if self.data and len(self.data) > 0:
+                sample = self.data[0]
+                logger.info(f"Dataset fields: {list(sample.keys())}")
+            return
+
         logger.info(f"Loading BeetleBox dataset from bug-localization/BeetleBox (split: {self.split})...")
         try:
             # Load the dataset from Hugging Face
             self.data = load_dataset('bug-localization/BeetleBox', split=self.split)
             logger.info(f"BeetleBox dataset loaded successfully. Total instances: {len(self.data)}")
-            
+
             # Log dataset fields for inspection
             if self.data and len(self.data) > 0:
                 sample = self.data[0]
                 logger.info(f"Dataset fields: {list(sample.keys())}")
-                
+
         except Exception as e:
             logger.error(f"Failed to load BeetleBox dataset: {e}")
             raise

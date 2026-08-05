@@ -48,6 +48,7 @@ tests/
   test_evaluate.py             # method/evaluate.py: accuracy/precision/recall/F1
   test_dataset_utils.py        # dataset/utils.py: extension filtering, token counting, chunking
   test_dataset_models.py       # dataset/models.py: BugInstance token counting
+  test_dataset_beetlebox.py    # dataset/beetlebox.py: BEETLEBOX_LOCAL_PATH offline loading
   test_repo_cache.py           # dataset/repo_cache.py: offline git-cache reads (integration tests against a locally mirrored repo, skipped if none is mirrored)
 
 docs/
