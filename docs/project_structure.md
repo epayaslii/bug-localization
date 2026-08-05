@@ -52,6 +52,7 @@ tests/
 
 docs/
   project_structure.md   # This file
+  architecture.md         # Package-dependency and runtime data-flow diagrams (Mermaid)
 
 main.py                          # CLI entry point; --bm25-top-k/--bm25-skeleton/--bm25-symbols[-imports] wire up the pre-filter, --output writes a full JSON report (config + per-bug + overall)
 results/                         # Saved run outputs (tracked in git -- see results/README.md); manifests/ holds evaluation/manifest.py outputs

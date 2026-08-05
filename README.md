@@ -164,7 +164,7 @@ Because clusters like MN5 have no outbound internet access, the LLM API call its
 
 ## Repo layout
 
-See [docs/project_structure.md](docs/project_structure.md) for a full file-by-file breakdown.
+See [docs/project_structure.md](docs/project_structure.md) for a full file-by-file breakdown, or [docs/architecture.md](docs/architecture.md) for package-dependency and runtime data-flow diagrams.
 
 ```
 dataset/          Dataset loaders (SWEBench, BeetleBox), repo cache, token/utility helpers
