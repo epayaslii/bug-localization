@@ -35,6 +35,14 @@ OPENAI_API_KEY=...
 - `OPENROUTER_API_KEY` is required for the default `openrouter` method.
 - `OPENAI_API_KEY` is only needed for the `openai`/`openai-free` methods.
 
+## Running the test suite
+
+```bash
+python -m pytest
+```
+
+Covers `dataset/localizability.py`, `method/bm25_retriever.py`, `evaluation/` (manifest, screening, failure attribution), `method/evaluate.py`, and the `dataset/` helper/model/repo-cache modules -- unit tests plus a few integration tests against a locally mirrored repo (see [Offline repo access](#offline-repo-access-repo_cache)), which skip gracefully if none is mirrored yet. No network access or API keys required. `tests/openrouter_key_test.py` and `tests/github_token_test.py` are separate standalone scripts (not pytest) for checking your own API keys are valid -- run them directly, not via `pytest`.
+
 ## Usage
 
 ```bash

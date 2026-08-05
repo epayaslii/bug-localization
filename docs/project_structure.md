@@ -38,13 +38,24 @@ scripts/
   compare_bm25_representations.py    # Compare path-only / skeleton / symbols+imports / symbols-no-imports BM25 document representations on the same manifest -- free, offline
 
 tests/
-  openrouter_key_test.py   # Standalone check that OPENROUTER_API_KEY is valid (not pytest)
-  github_token_test.py     # Standalone check that GITHUB_TOKEN is valid (not pytest)
+  openrouter_key_test.py       # Standalone check that OPENROUTER_API_KEY is valid (not pytest)
+  github_token_test.py         # Standalone check that GITHUB_TOKEN is valid (not pytest)
+  test_localizability.py       # dataset/localizability.py: classification, coverage, caching
+  test_bm25_retriever.py       # method/bm25_retriever.py: tokenization, skeleton/symbol extraction, ranking
+  test_evaluation_manifest.py  # evaluation/manifest.py: diversity selection, determinism, save/load
+  test_evaluation_screening.py # evaluation/screening.py: difficulty bands, hit/recall, pluggable rank_fn
+  test_failure_attribution.py  # evaluation/failure_attribution.py: retrieval-reach split, oracle candidate-set prep
+  test_evaluate.py             # method/evaluate.py: accuracy/precision/recall/F1
+  test_dataset_utils.py        # dataset/utils.py: extension filtering, token counting, chunking
+  test_dataset_models.py       # dataset/models.py: BugInstance token counting
+  test_repo_cache.py           # dataset/repo_cache.py: offline git-cache reads (integration tests against a locally mirrored repo, skipped if none is mirrored)
 
 docs/
   project_structure.md   # This file
 
 main.py                          # CLI entry point
+pytest.ini                       # testpaths = tests
+conftest.py                      # Adds repo root to sys.path so `pytest` works regardless of invocation directory
 requirements.txt                 # Full dependency set (includes unused local-inference/RAG deps)
 requirements-mn5.txt              # Trimmed, pinned dependency set for offline MN5 wheelhouse transfer
 requirements-mn5-unpinned.txt     # Same as above, without exact version pins (used when pins go stale)
