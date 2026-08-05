@@ -14,6 +14,7 @@ class BugInstance(BaseModel):
     ground_truths: list[str]
     bug_report: str
     code_files: list[str]
+    after_commit: str | None = None
 
     def to_string(self) -> str:
         return (

@@ -8,6 +8,7 @@ dataset/
   models.py          # BugInstance dataclass
   repo_cache.py      # Bare-clone git cache for offline repo file access (used on networks with no GitHub API access)
   utils.py           # Token counting, GitHub file fetching, chunking helpers
+  localizability.py  # Ground-truth localizability diagnostics: classifies each GT file as exists-before-fix / deleted-by-fix / added-by-fix / unresolved / api-error, with disk caching
 
 method/
   base.py                    # BugLocalizationMethod abstract base
@@ -23,7 +24,8 @@ method/
   models.py                  # Response dataclasses
 
 scripts/
-  mirror_repos.py    # Bare-clone every repo referenced by a dataset sample into repo_cache/
+  mirror_repos.py            # Bare-clone every repo referenced by a dataset sample into repo_cache/
+  localizability_report.py   # Run ground-truth localizability diagnostics over a dataset sample; prints classification counts + coverage, optional JSON report
 
 tests/
   openrouter_key_test.py   # Standalone check that OPENROUTER_API_KEY is valid (not pytest)

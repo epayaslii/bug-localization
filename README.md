@@ -77,6 +77,16 @@ This clones every repo referenced by the sampled bug instances into `repo_cache/
 
 Cache location can be overridden with the `REPO_CACHE_DIR` environment variable.
 
+## Ground-truth localizability diagnostics
+
+Not every ground-truth file in a bug instance can actually be retrieved: some are introduced by the fixing commit itself and therefore don't exist in the before-fix corpus that retrieval searches. Scoring those as "retrieval failures" understates real performance. `dataset/localizability.py` classifies each ground-truth path as `exists_before_fix`, `deleted_by_fix` (present before, removed by the fix -- still a valid retrieval target), `added_by_fix` (not localizable), `missing_unresolved`, or `api_error` (never cached, so it's retried next run instead of remembered as final):
+
+```bash
+python scripts/localizability_report.py --dataset swebench --sample-size 30 --output results/localizability_swebench_30.json
+```
+
+Prints classification counts and three coverage metrics (raw / available-corpus / localizable coverage, averaged across sampled instances), and caches classification results in `repo_cache/localizability_cache.json`.
+
 ## Loading datasets from local disk
 
 Both dataset loaders normally pull from Hugging Face (`SWE-bench/SWE-bench_Verified`, `bug-localization/BeetleBox`). For offline environments, a pre-downloaded copy (via `datasets.save_to_disk`) can be loaded instead by setting:

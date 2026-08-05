@@ -199,11 +199,12 @@ class BeetleBox(BugLocalizationDataset):
                     instance_id=str(bug.get('issue_id', i)),
                     repo=repo_name,
                     base_commit=before_commit,
-                    patch=f"Before: {before_commit}\nAfter: {after_commit}", 
+                    patch=f"Before: {before_commit}\nAfter: {after_commit}",
                     hints_text=f"Status: {bug.get('status', '')}\nLanguage: {bug.get('language', '')}\nIssue URL: {bug.get('issue_url', '')}\nPR URL: {bug.get('pull_url', '')}",
                     ground_truths=updated_files,
                     bug_report=bug_report,
                     code_files=code_files,
+                    after_commit=after_commit or None,
                 )
                 
                 self._bug_instances.append(bug_instance)
