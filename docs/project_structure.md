@@ -18,6 +18,8 @@ method/
   opensource_localizer.py    # Local/unsloth inference (currently disabled, not imported by main.py)
   rag_localizer.py           # RAG pre-filter (Qdrant + embeddings) -- dead code, lazy-imported, never invoked by default
   bm25_retriever.py          # BM25 candidate pre-filter (--bm25-top-k in main.py): path-only, skeleton (docstring+symbol names), and symbols/symbols+imports document representations
+  embedding_retriever.py     # UniXCoder embedding retrieval: whole-file (rank_files_embedding) and AST-chunked (rank_files_embedding_chunked) variants. Local model, no API cost. (experiment/hybrid-retrieval branch only)
+  hybrid_retriever.py        # BM25 candidate pool -> chunked-embedding rerank -> Reciprocal Rank Fusion (reciprocal_rank_fusion, rank_files_hybrid). (experiment/hybrid-retrieval branch only)
   prompt.py                  # Prompt templates (localization, chunk aggregation, report summarization)
   evaluate.py                # Top-k accuracy / precision / recall / F1 evaluation
   llm.py                     # Low-level LLM client wrapper
@@ -36,12 +38,15 @@ scripts/
   run_bm25_screening.py              # Run BM25 screening (evaluation/screening.py) over a saved manifest; prints difficulty distribution, optional JSON report
   run_failure_attribution.py         # Free offline retrieval-vs-reranking split by default; --run-oracle actually calls the LLM reranker on oracle candidate sets (costs API calls)
   compare_bm25_representations.py    # Compare path-only / skeleton / symbols+imports / symbols-no-imports BM25 document representations on the same manifest -- free, offline
+  run_hybrid_retrieval_test.py       # Compare BM25 vs chunked-embedding-reranked vs BM25+embedding hybrid (RRF fusion) on the same manifest. Local model, slower than pure BM25. (experiment/hybrid-retrieval branch only)
 
 tests/
   openrouter_key_test.py       # Standalone check that OPENROUTER_API_KEY is valid (not pytest)
   github_token_test.py         # Standalone check that GITHUB_TOKEN is valid (not pytest)
   test_localizability.py       # dataset/localizability.py: classification, coverage, caching
   test_bm25_retriever.py       # method/bm25_retriever.py: tokenization, skeleton/symbol extraction, ranking
+  test_embedding_retriever_chunking.py  # method/embedding_retriever.py: AST-based chunking + fallback (experiment/hybrid-retrieval branch only)
+  test_hybrid_retriever.py     # method/hybrid_retriever.py: Reciprocal Rank Fusion (experiment/hybrid-retrieval branch only)
   test_evaluation_manifest.py  # evaluation/manifest.py: diversity selection, determinism, save/load
   test_evaluation_screening.py # evaluation/screening.py: difficulty bands, hit/recall, pluggable rank_fn
   test_failure_attribution.py  # evaluation/failure_attribution.py: retrieval-reach split, oracle candidate-set prep
