@@ -40,14 +40,16 @@ def _extract_skeleton_tokens(content: str) -> list[str]:
     return tokens
 
 
-def rank_files_bm25(query_text: str, file_paths: list[str], top_k: int = 100) -> list[str]:
-    """Narrow file_paths to the top_k most relevant to query_text using BM25 over tokenized paths.
+def rank_files_bm25(query_text: str, file_paths: list[str], top_k: int | None = 100) -> list[str]:
+    """Rank file_paths by relevance to query_text using BM25 over tokenized paths, returning
+    the top_k most relevant. Pass top_k=None to get the full ranking (e.g. for screening/
+    diagnostics that need every ground-truth file's rank, not just a truncated candidate set).
 
     Operates on file paths only (no file content), matching how code_files are already
     used elsewhere in this pipeline. Returns file_paths unchanged if there are already
-    top_k or fewer.
+    top_k or fewer (top_k=None always ranks).
     """
-    if not file_paths or len(file_paths) <= top_k:
+    if not file_paths or (top_k is not None and len(file_paths) <= top_k):
         return file_paths
 
     tokenized_corpus = [_tokenize_path(p) for p in file_paths]

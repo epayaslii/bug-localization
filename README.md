@@ -87,6 +87,22 @@ python scripts/localizability_report.py --dataset swebench --sample-size 30 --ou
 
 Prints classification counts and three coverage metrics (raw / available-corpus / localizable coverage, averaged across sampled instances), and caches classification results in `repo_cache/localizability_cache.json`.
 
+## Evaluation manifests and BM25 screening
+
+Comparing retrieval/reranking approaches against different ad-hoc samples makes results non-comparable. `evaluation/manifest.py` builds a deterministic, seeded sample capped at `--max-per-repo` instances per repository (so no single repo dominates), saved with a stable content-derived ID:
+
+```bash
+python scripts/generate_evaluation_manifest.py --dataset swebench --size 24 --pool-size 100 --seed 42 --max-per-repo 2
+```
+
+`evaluation/screening.py` then runs path-only BM25 over every instance in a saved manifest, reporting the best rank among each instance's *localizable* ground-truth files (via the localizability diagnostics above), Hit@1/5/10/100/200, recall@100/200, and a difficulty band (`easy` / `medium` / `hard` / `outside_top200` / `no_localizable_gt`):
+
+```bash
+python scripts/run_bm25_screening.py --manifest results/manifests/swebench-multi-n24-s42-<hash>.json --output results/screening_swebench_24.json
+```
+
+The screening script re-derives the same seeded pool the manifest was built from (rather than reprocessing the whole dataset) to stay cheap, and warns on any instance-ID/repo mismatch.
+
 ## Loading datasets from local disk
 
 Both dataset loaders normally pull from Hugging Face (`SWE-bench/SWE-bench_Verified`, `bug-localization/BeetleBox`). For offline environments, a pre-downloaded copy (via `datasets.save_to_disk`) can be loaded instead by setting:
