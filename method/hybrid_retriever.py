@@ -21,16 +21,21 @@ from method.embedding_retriever import rank_files_embedding_chunked
 logger = get_logger(__name__)
 
 
-def reciprocal_rank_fusion(rankings: list[list[str]], k: int = 60) -> list[str]:
-    """Combine multiple ranked file-path lists into one fused ranking via Reciprocal Rank
-    Fusion: each file's fused score is the sum of 1/(k + rank) across every input ranking
-    it appears in (files absent from a ranking contribute 0 for that one, not a penalty).
-    k=60 is the standard RRF constant, also used by the BLAZE paper's BM25+dense fusion.
+def reciprocal_rank_fusion(rankings: list[list[str]], k: int = 60, weights: list[float] | None = None) -> list[str]:
+    """Combine multiple ranked file-path lists into one fused ranking via (optionally
+    weighted) Reciprocal Rank Fusion: each file's fused score is the sum of
+    weight_i / (k + rank) across every input ranking it appears in (files absent from a
+    ranking contribute 0 for that one, not a penalty). k=60 is the standard RRF constant,
+    also used by the BLAZE paper's BM25+dense fusion. `weights` defaults to equal weight
+    (1.0) per ranking, i.e. standard unweighted RRF -- pass e.g. [1.0, 2.0] to favor the
+    second ranking (see method/embedding_retriever.py's chunked embedding beating
+    unweighted RRF at n=30 in results/README.md §4, motivating this parameter).
     """
+    weights = weights if weights is not None else [1.0] * len(rankings)
     scores: dict[str, float] = {}
-    for ranking in rankings:
+    for weight, ranking in zip(weights, rankings):
         for rank, path in enumerate(ranking, start=1):
-            scores[path] = scores.get(path, 0.0) + 1.0 / (k + rank)
+            scores[path] = scores.get(path, 0.0) + weight / (k + rank)
     return sorted(scores, key=lambda p: scores[p], reverse=True)
 
 
