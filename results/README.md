@@ -83,7 +83,23 @@ At n=5 this looked like a clean positive result: hybrid RRF fusion beat BM25 alo
 | **chunked_embedding** | **16.7%** | 26.7% | 30.0% | 90.0% | **0.233** | **0.233** |
 | hybrid_rrf | 10.0% | 33.3% | 33.3% | 90.0% | 0.206 | 0.206 |
 
-The headline direction **holds and strengthens**: hybrid still more than doubles BM25's MRR (0.087 → 0.206, +0.119). But the n=5 "fusion beats both of its own inputs" story does **not** replicate — at n=30, **chunked_embedding alone now beats the hybrid** on Hit@1 and MRR. Per-instance inspection shows why: in several cases (`django__django-14672`, `scikit-learn__scikit-learn-14629`, `sphinx-doc__sphinx-8459`) chunked embedding alone lands rank 1, but RRF-fusing it with BM25's much weaker ranking drags the fused rank down to 11, 4, and 2 respectively. Only one instance (`scikit-learn__scikit-learn-14710`: bm25=7, embedding=13 → hybrid=1) shows fusion beating both parts, versus this being the *typical* pattern at n=5. Reading: RRF's benefit at n=5 was likely partly a small-sample artifact; at n=30, unweighted RRF against a much-weaker first-stage signal (BM25) net-drags down an already-strong embedding ranking more often than it rescues a weak one. Chunked embedding alone — not the hybrid — looks like the stronger reranking candidate at this scale, worth investigating further (e.g. weighted RRF, or dropping BM25 from the fusion entirely) before treating the hybrid as the answer.
+The headline direction **holds and strengthens**: hybrid still more than doubles BM25's MRR (0.087 → 0.206, +0.119). But the n=5 "fusion beats both of its own inputs" story does **not** replicate — at n=30, **chunked_embedding alone now beats the hybrid** on Hit@1 and MRR. Per-instance inspection shows why: in several cases (`django__django-14672`, `scikit-learn__scikit-learn-14629`, `sphinx-doc__sphinx-8459`) chunked embedding alone lands rank 1, but RRF-fusing it with BM25's much weaker ranking drags the fused rank down to 11, 4, and 2 respectively. Only one instance (`scikit-learn__scikit-learn-14710`: bm25=7, embedding=13 → hybrid=1) shows fusion beating both parts, versus this being the *typical* pattern at n=5. Reading: unweighted RRF against a much-weaker first-stage signal (BM25) net-drags down an already-strong embedding ranking more often than it rescues a weak one, at this scale.
+
+**Follow-up: weighted RRF** (`hybrid_rrf_weighting_swebench_30.json`, `scripts/run_hybrid_rrf_weighting_test.py`, same n=30 manifest) — rather than treating BM25 and embedding equally in the fusion (weight 1:1), `reciprocal_rank_fusion()` now takes an optional `weights` argument; this sweeps embedding-favored ratios, reusing the same BM25+embedding rankings already computed so the sweep costs no more than a single run:
+
+| Config (bm25:embedding weight) | Hit@1 | Hit@5 | Hit@10 | Hit@100 | MRR | MAP |
+|---|---|---|---|---|---|---|
+| bm25 | 3.3% | 3.3% | 30.0% | 86.7% | 0.087 | 0.088 |
+| chunked_embedding | 16.7% | 26.7% | 30.0% | 90.0% | 0.233 | 0.233 |
+| hybrid_rrf (1:1) | 10.0% | 33.3% | 33.3% | 90.0% | 0.206 | 0.206 |
+| 1:2 | 13.3% | 30.0% | 40.0% | 90.0% | 0.237 | 0.237 |
+| 1:3 | 16.7% | 33.3% | 40.0% | 90.0% | 0.251 | 0.251 |
+| 1:5 | 16.7% | 26.7% | 40.0% | 93.3% | 0.246 | 0.247 |
+| **1:10** | **23.3%** | 26.7% | 40.0% | 93.3% | **0.281** | **0.281** |
+
+MRR climbs monotonically as the embedding side is up-weighted, from 1:1's 0.206 past chunked_embedding-alone's 0.233 to 0.281 at 1:10 — recovering, then beating, embedding-alone. Hit@1 also improves to 23.3% (7/30), the best of any config tested. **The trend hadn't plateaued at the highest ratio tested (1:10)** — the true optimum (or whether it eventually reverses toward pure embedding-only) is not yet known; this is published as-is rather than chasing the exact peak, to avoid overfitting a weight ratio to one n=30 manifest.
+
+**Reading, updated**: the hybrid *design* (BM25 candidate pool → chunked embedding rerank → RRF fusion) is sound and beats both of its inputs — the n=5 result's direction was right — but unweighted 1:1 RRF was the wrong fusion weighting once embedding is much stronger than BM25 within the pre-filtered pool. Chunked embedding alone is a reasonable fallback, but weighted RRF (≥1:3) is now the best-performing config found in this project.
 
 n=30 is still one manifest/one run — directional, not the final word — but larger and more diverse (11 repos vs 5) than the original n=5 test. The code lives on the `experiment/hybrid-retrieval` branch (not merged to `main`, matching this session's branching policy: main only holds validated work); only the result artifacts are included here for a complete record.
 
@@ -98,6 +114,9 @@ python main.py --method openrouter --dataset swebench --model gpt-4o-mini --samp
 # §4 n=30 hybrid retrieval (checkout experiment/hybrid-retrieval first)
 python scripts/generate_evaluation_manifest.py --dataset swebench --size 30 --pool-size 500 --seed 42 --max-per-repo 3
 python scripts/run_hybrid_retrieval_test.py --manifest results/manifests/swebench-multi-n30-s42-1fb8f4b8d82f.json --candidate-pool-size 200 --output results/hybrid_retrieval_swebench_30.json
+
+# §4 weighted RRF follow-up (same manifest, same branch)
+python scripts/run_hybrid_rrf_weighting_test.py --manifest results/manifests/swebench-multi-n30-s42-1fb8f4b8d82f.json --candidate-pool-size 200 --output results/hybrid_rrf_weighting_swebench_30.json
 ```
 
 The two `main.py` runs cost real OpenRouter API usage (`gpt-4o-mini`, paid). §3 and §4 (`run_embedding_ceiling_test.py`, `run_hybrid_retrieval_test.py`) require checking out the `experiment/embedding-ceiling` and `experiment/hybrid-retrieval` branches respectively — those scripts aren't on `main`. The §4 n=30 run is local-compute-only (UniXCoder embeddings, no API cost) but takes ~40 minutes on CPU.

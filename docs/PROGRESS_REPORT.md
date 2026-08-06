@@ -20,7 +20,7 @@ All numeric results below are taken from committed JSON/Markdown under [`results
 | Test suite | Complete | 81 passing tests on `main` (90 on `experiment/hybrid-retrieval`) |
 | Architecture diagrams | Complete | `docs/architecture.md`, verified against actual imports |
 | Embedding retrieval (whole-file) | Diagnostic complete | **Negative result** — branch `experiment/embedding-ceiling`, not merged |
-| Hybrid retrieval (BM25 + chunked embedding) | Diagnostic complete | **Positive vs. BM25 confirmed at n=30**, but embedding-alone now beats the hybrid — branch `experiment/hybrid-retrieval`, not merged |
+| Hybrid retrieval (BM25 + chunked embedding) | Diagnostic complete | **Weighted RRF (1:10 embedding-favored) is the best config found so far** (MRR 0.281 at n=30) — branch `experiment/hybrid-retrieval`, not merged |
 | MareNostrum 5 (MN5) preparation | Partial | Offline dataset/repo_cache/wheelhouse validated (5-sample dry run); a real MN5 run guide read and saved, but targets a different fork and hasn't been adapted/executed here; no SSH access from current machine |
 | BeetleBox transition | Not started | Next dataset per confirmed plan sequencing |
 | BugsInPy integration | Not started | Lowest priority |
@@ -126,7 +126,7 @@ Embeddings lose badly at the ranks that matter (Hit@1/5/10, MRR), despite broade
 
 ---
 
-## 8. Hybrid retrieval — BM25 + chunked embedding (positive vs. BM25, but n=30 revises the n=5 story)
+## 8. Hybrid retrieval — BM25 + chunked embedding, weighted RRF (best config found so far)
 
 **Objective:** Does *chunked* (not whole-file) embedding change §7's conclusion, per the literature's own explanation for the gap?
 
@@ -150,7 +150,21 @@ At n=6 this read as a clean win: hybrid RRF fusion beat BM25 alone on MRR (+0.10
 | **chunked_embedding** | **16.7%** | 30.0% | 90.0% | **0.233** | **0.233** |
 | hybrid_rrf | 10.0% | 33.3% | 90.0% | 0.206 | 0.206 |
 
-**The headline holds and strengthens**: hybrid still more than doubles BM25's MRR (+0.119). **But the n=6 "fusion beats both inputs" pattern does not replicate** — at n=30, chunked_embedding *alone* beats the hybrid on Hit@1 and MRR. Per-instance inspection shows why: chunked embedding alone lands rank 1 on several instances (`django__django-14672`, `scikit-learn__scikit-learn-14629`, `sphinx-doc__sphinx-8459`), but RRF-fusing with BM25's much weaker ranking drags those down to rank 11, 4, and 2 respectively. Only one instance shows fusion beating both parts outright (the *typical* pattern at n=6, but rare at n=30). Reading: the n=6 synergy signal was likely partly a small-sample artifact; unweighted RRF against a much weaker first-stage BM25 signal net-drags down an already-strong embedding ranking more often than it rescues a weak one, at this scale. **Chunked embedding alone — not the hybrid — now looks like the stronger reranking candidate**, worth investigating further (weighted RRF, or dropping BM25 from the fusion) before adopting the hybrid as the answer.
+**The headline holds and strengthens**: hybrid still more than doubles BM25's MRR (+0.119). **But the n=6 "fusion beats both inputs" pattern does not replicate at 1:1** — at n=30, chunked_embedding *alone* beats the unweighted hybrid on Hit@1 and MRR. Per-instance inspection shows why: chunked embedding alone lands rank 1 on several instances (`django__django-14672`, `scikit-learn__scikit-learn-14629`, `sphinx-doc__sphinx-8459`), but RRF-fusing with BM25's much weaker ranking drags those down to rank 11, 4, and 2 respectively. Only one instance shows fusion beating both parts outright (the *typical* pattern at n=6, but rare at n=30 with equal weighting).
+
+**Follow-up — weighted RRF** (same n=30 manifest, `scripts/run_hybrid_rrf_weighting_test.py`, `results/hybrid_rrf_weighting_swebench_30.json`): `reciprocal_rank_fusion()` gained an optional `weights` parameter (default equal weight, backward compatible). Rather than treating BM25 and embedding equally, this sweeps embedding-favored ratios, reusing the same BM25+embedding rankings so the sweep costs no more than the original single run:
+
+| Config (bm25:embedding) | Hit@1 | Hit@10 | Hit@100 | MRR | MAP |
+|---|---:|---:|---:|---:|---:|
+| hybrid_rrf (1:1) | 10.0% | 33.3% | 90.0% | 0.206 | 0.206 |
+| chunked_embedding alone | 16.7% | 30.0% | 90.0% | 0.233 | 0.233 |
+| 1:3 | 16.7% | 40.0% | 90.0% | 0.251 | 0.251 |
+| 1:5 | 16.7% | 40.0% | 93.3% | 0.246 | 0.247 |
+| **1:10** | **23.3%** | 40.0% | 93.3% | **0.281** | **0.281** |
+
+MRR climbs monotonically as the embedding side is up-weighted — recovering, then clearly beating, embedding-alone. **The trend hadn't plateaued at the highest ratio tested (1:10)**; the true optimum is unknown, and this is reported as-is rather than chased further, to avoid overfitting a weight to one manifest.
+
+**Revised reading**: the hybrid *design* was right (the n=6 result's direction held up) — it was specifically the unweighted 1:1 fusion that was wrong once embedding is much stronger than BM25 within the pre-filtered candidate pool. Weighted RRF (≥1:3) is now the best-performing retrieval config found in this project, not embedding-alone.
 
 **n=30 is still one manifest/one run — directional, not the final word — but larger and more diverse than the n=6 test.**
 
@@ -204,14 +218,14 @@ At n=6 this read as a clean win: hybrid RRF fusion beat BM25 alone on MRR (+0.10
 2. BM25 pre-filtering measurably improves real end-to-end LLM localization accuracy (43.3% → 50.0%, real n=30, paid).
 3. Which BM25 representation wins end-to-end is inconclusive at n=30 despite a clear retrieval-ceiling gap between them — a bigger sample is needed.
 4. Whole-file embedding is a genuine dead end here (n=6, but a large, unambiguous gap vs. BM25).
-5. Chunked embedding fused with BM25 via RRF beats BM25 alone, confirmed at n=30 (MRR 0.087 → 0.206, +0.119) — the opposite of whole-file's result, consistent with the literature's specific explanation for the difference. But at n=30, chunked embedding *alone* now beats the hybrid (MRR 0.233 vs. 0.206) — the n=6 finding that fusion beats both of its own inputs was likely a small-sample artifact; unweighted RRF against a much weaker BM25 signal net-drags down strong embedding ranks more often than it rescues weak ones at this scale.
+5. Chunked embedding fused with BM25 via RRF beats BM25 alone, confirmed at n=30 (MRR 0.087 → 0.206 unweighted, up to 0.281 with weighted 1:10 fusion) — the opposite of whole-file's result, consistent with the literature's specific explanation for the difference. Unweighted (1:1) RRF loses to chunked_embedding-alone at n=30, but weighting the fusion toward embedding (≥1:3) recovers and clearly beats embedding-alone — the hybrid *design* was right, the equal-weighting assumption was not. This is now the best-performing config found in the project (n=30, weight optimum not yet found — trend hadn't plateaued at 1:10).
 6. Localizability diagnostics and failure attribution infrastructure are built and validated but not yet combined into one large-scale end-to-end pass.
 
 ---
 
 ## 15. Current limitations
 
-- §7 (whole-file embedding) is n=6 — directional only. §8 (hybrid) is now n=30 for the BM25-vs-hybrid comparison, but the embedding-alone-beats-hybrid finding is new and itself only n=30 — not yet cross-checked against a second manifest or an alternative RRF weighting.
+- §7 (whole-file embedding) is n=6 — directional only. §8 (hybrid, weighted RRF) is n=30, but only one manifest — the 1:10 weight ratio hasn't been cross-checked on a second manifest, and the MRR-vs-weight curve hadn't plateaued at the highest ratio tested, so the true optimum weight is unknown.
 - Only SWE-bench Verified (Python) has been evaluated at real scale; BeetleBox (multi-language) is untouched despite being next in the confirmed dataset sequence.
 - Symbol/chunk extraction is AST-based and Python-only; would silently degrade to path-only/character-window fallback on BeetleBox's non-Python instances.
 - The oracle reranking diagnostic is built but has never been run live (costs real API money).
@@ -223,7 +237,7 @@ At n=6 this read as a clean win: hybrid RRF fusion beat BM25 alone on MRR (+0.10
 
 ## 16. Next planned work
 
-1. ~~Scale the hybrid retrieval test (§8) to a larger manifest (n≈24–30) to confirm or disconfirm the positive n=6 signal.~~ **Done (n=30)** — hybrid-vs-BM25 confirmed, but revealed embedding-alone beats the hybrid; follow-up worth considering: weighted RRF or embedding-only reranking as the new candidate.
+1. ~~Scale the hybrid retrieval test (§8) to a larger manifest (n≈24–30) to confirm or disconfirm the positive n=6 signal.~~ **Done (n=30)**, plus a follow-up weighted-RRF sweep — weighted fusion (1:10 embedding-favored) is now the best config found (MRR 0.281). Remaining open thread: push the weight sweep further (1:20+) to find the true optimum, and cross-check on a second manifest before treating 1:10 as settled.
 2. Re-run the skeleton-vs-symbols end-to-end comparison (§6) at larger n to settle the current tie.
 3. Write the MN5 execution handbook and adapt the read guide's command sequence to this repo.
 4. BeetleBox transition (next dataset per confirmed sequencing) — note the Python-only AST caveat above.
@@ -240,7 +254,7 @@ At n=6 this read as a clean win: hybrid RRF fusion beat BM25 alone on MRR (+0.10
 - [x] Null-rank semantics documented (no imputation)
 - [x] Result artifacts committed under `results/` (JSON, Markdown, one HTML visual, one plain-text table)
 - [x] 81 passing tests on `main` (90 on `experiment/hybrid-retrieval`)
-- [x] Larger-n confirmation of the hybrid retrieval result (n=30 — confirms hybrid beats BM25, but revises the n=6 story: embedding-alone beats the hybrid)
+- [x] Larger-n confirmation of the hybrid retrieval result (n=30 — confirms hybrid beats BM25; weighted RRF follow-up shows 1:10 embedding-favored fusion beats both BM25 and embedding-alone, best config found so far)
 - [ ] MN5 execution for this repo specifically
 - [ ] Non-Python AST support for symbol/chunk extraction
 
@@ -252,13 +266,13 @@ At n=6 this read as a clean win: hybrid RRF fusion beat BM25 alone on MRR (+0.10
 
 - The pipeline is operational end-to-end (BM25 pre-filter → LLM rerank → evaluate), validated with real paid runs.
 - BM25 pre-filtering measurably improves real end-to-end accuracy over a documented no-retrieval baseline.
-- Whole-file embedding does not help here; a chunked-embedding + BM25 hybrid beats BM25 alone, confirmed at n=30 (MRR +0.119). At that same n=30, chunked embedding alone beats the hybrid — the fusion still beats BM25, but isn't yet shown to beat its own better input.
+- Whole-file embedding does not help here; a chunked-embedding + BM25 hybrid beats BM25 alone, confirmed at n=30. With weighted RRF (favoring embedding, tested up to 1:10), the hybrid also beats chunked_embedding alone (MRR 0.281 vs. 0.233) — the best config found in the project so far, though the optimal weight isn't pinned down yet.
 - The evaluation infrastructure (manifests, screening, failure attribution) is reusable and already dataset-agnostic in its CLI flags, pending non-Python AST support for full BeetleBox benefit.
 
 **Unsafe (explicitly avoid)**
 
 - State-of-the-art claims
 - General BeetleBox or multi-language results (untested)
-- That RRF fusion is the best embedding-based reranking approach — at n=30, embedding-alone beats it; this needs a second manifest / weighted-RRF check before treating either as settled
+- 1:10 as a settled optimal RRF weight — the MRR-vs-weight curve hadn't plateaued at the highest ratio tested; needs a wider sweep and a second manifest before the weighting is treated as tuned rather than directional
 - A definitive answer on which BM25 representation is best end-to-end (n=30 tie)
 - MN5 production-readiness for this specific repo
