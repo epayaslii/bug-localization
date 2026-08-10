@@ -2,10 +2,10 @@
 
 Practical reference for running this repo's offline retrieval pipeline on MareNostrum 5
 (MN5, BSC). Consolidates everything established across real access sessions to date —
-account details, environment setup, the two open blockers and how to diagnose them further,
-and what's already confirmed working. This is a **final deliverable named explicitly** in
-the official study plan; it did not exist as a document before this pass, only as scattered
-session notes.
+account details, environment setup, four blockers found and diagnosed so far (three
+resolved, one open), and what's already confirmed working. This is a **final deliverable
+named explicitly** in the official study plan; it did not exist as a document before this
+pass, only as scattered session notes.
 
 ## What this handbook is for, and what it isn't
 
@@ -133,27 +133,87 @@ scp wheelhouse_mn5/huggingface_hub-0.34.3-py3-none-any.whl \
 # -> 0.34.3, confirmed
 ```
 
-## Open blocker 2 — system PyTorch shadows the venv
+## Blocker 2 — torch missing from the venv — RESOLVED 2026-08-10
 
-`import torch` resolves to an NVIDIA-container-style GPU build baked into the ACC module
-tree (`/gpfs/apps/MN5/ACC/PYTORCH/2.4.0`, version `2.4.0a0+gite3b9b71`) and fails with
-`ImportError: libcudnn.so.9: cannot open shared object file` — **even after the same
-`unset PYTHONHOME`/`unset PYTHONPATH` fix that resolved the pyarrow shadowing above.** Not
-yet diagnosed why the same fix didn't work here.
+The original hypothesis (system PyTorch shadowing the venv via a `.pth` file or
+`PYTHONPATH` injection) was wrong. The real cause was simpler: **torch was never installed
+in `.venv_mn5` at all.** Confirmed by checking `sys.path` and `.venv_mn5/site-packages`
+directly rather than reasoning about env vars.
 
-**Next step, not yet tried**: check `sys.path` directly inside the venv's Python (not just
-the env vars) —
+**Fix**: install `torch==2.6.0+cpu` from the wheelhouse —
 
 ```bash
-python -c "import sys; print('\n'.join(sys.path))"
+.venv_mn5/bin/pip install --no-index --find-links=wheelhouse_mn5 torch==2.6.0+cpu
+.venv_mn5/bin/python -c "import torch; print(torch.__file__, torch.__version__)"
+# -> points into .venv_mn5/, 2.6.0+cpu, confirmed
 ```
 
-— to see whether something *beyond* `PYTHONPATH` is injecting the ACC module's torch path:
-a `.pth` file inside the venv's `site-packages` (some HPC module systems auto-install one
-on activation), or a separately auto-loaded module dependency the `python` module itself
-pulls in regardless of `PYTHONPATH`. If a `.pth` file is the cause, removing or editing it
-inside `.venv_mn5` should be a one-time fix (not needing to be repeated every login, unlike
-the `unset` workaround above).
+`transformers`/`tokenizers` needed a matching pass too — the wheelhouse only had
+`tokenizers==0.23.1`, but `transformers` (bumped to 4.51.0 locally, see blocker 1) pins
+`tokenizers<0.21,>=0.20`. Fixed by downloading a platform-specific wheel locally
+(`pip download tokenizers==0.20.3 --platform manylinux2014_x86_64 --python-version 311
+--implementation cp --abi cp311 --only-binary=:all:`) and transferring it the same way as
+the other wheels.
+
+## Blocker 3 — this project's own code was never fully transferred to MN5
+
+Discovered 2026-08-11, live, while trying to actually run embedding inference (not just
+`import torch`). `mn5_smoke_test.py` had already passed, which only proved the **dataset/
+BM25 side** of the pipeline worked — it doesn't touch `method/embedding_retriever.py` at
+all. The MN5 checkout of this repo turned out to be transferred from `main` at a point in
+time that **predates the hybrid-retrieval/embedding work entirely** — `main` never had
+`embedding_retriever.py`, `hybrid_retriever.py`, `repository_index.py`, or
+`fusion_signals.py` (those only exist on `research/embedding-model-bakeoff` and its
+descendant branches), and even the pre-existing `method/bm25_retriever.py` and the
+`get_file_contents_batch` function in `dataset/repo_cache.py` turned out to be missing —
+an even older snapshot than `main`'s current HEAD.
+
+**Fix, confirmed working**: pulled each missing file from the correct branch with `git
+show <branch>:<path> > /tmp/<file>` on a machine with both the repo and MN5 SSH access, then
+`scp`'d it directly into place on MN5 (not a heredoc paste — pasting a 300-line Python file
+into an interactive SSH session corrupts it, since large multi-line pastes without
+bracketed-paste support get interpreted line-by-line by bash instead of being buffered).
+Files transferred this way: `method/embedding_retriever.py` (from
+`research/embedding-model-bakeoff`, the most complete version — including Voyage AI and
+last-token-pooling support that later branches split off before), `method/bm25_retriever.py`
+and `dataset/repo_cache.py` (from `main`, both safe supersets of what was already there —
+verified via `git diff` before transferring, no removed/changed functions, only additions).
+
+**Open thread, not yet resolved**: MN5's checkout is still not a git clone at all — it's a
+directory transferred by file copy, with no `.git` (confirmed via `fatal: not a git
+repository`). This means there is no way to `git pull` a full sync; every gap has to be
+discovered one `ModuleNotFoundError` at a time and patched file-by-file. **Before the next
+MN5 session, consider transferring a full fresh tarball of whichever branch has the complete
+current state** (as of 2026-08-11, `feature/incremental-indexing` has the most integrated
+method/ set, though it's missing the later Voyage/last-token-pooling additions that only
+landed on `research/embedding-model-bakeoff` — no single branch has everything merged) rather
+than continuing to patch individual files as they're discovered missing.
+
+## Blocker 4 — no outbound internet blocks HuggingFace model downloads — CONFIRMED, OPEN
+
+Once blocker 3's files were all in place, running real embedding inference (`embed_texts`
+with `microsoft/unixcoder-base`) failed as expected given MN5's no-internet constraint
+(stated at the top of this handbook, but untested against this specific code path until
+now):
+
+```
+requests.exceptions.ConnectTimeout: ... Connection to huggingface.co timed out. (connect timeout=10)
+...
+OSError: We couldn't connect to 'https://huggingface.co' to load this file, couldn't find it
+in the cached files ...
+```
+
+`AutoTokenizer.from_pretrained` / `AutoModel.from_pretrained` always try to hit the Hub first
+unless the model is already in the local HF cache — there is no offline fallback by default.
+
+**Next step, not yet tried**: pre-download the model weights locally (e.g. via
+`huggingface_hub.snapshot_download("microsoft/unixcoder-base")` or
+`git clone https://huggingface.co/microsoft/unixcoder-base`), transfer the resulting cache
+directory to MN5 the same way as the wheels/code files, and either point
+`HF_HOME`/`TRANSFORMERS_CACHE` at the transferred location or set `HF_HUB_OFFLINE=1` so
+`from_pretrained` reads the local cache instead of attempting a network call. This is the
+same pattern as every other MN5 blocker so far — download once with internet access, ship
+the artifact over, run offline.
 
 ## Reproducing the smoke test once both blockers are cleared
 
@@ -170,8 +230,9 @@ cd /gpfs/projects/ehpc680/comm842299/repos/bug-localization/
 .venv_mn5/bin/python mn5_pipeline_run.py
 ```
 
-Once torch/transformers actually import cleanly, the next real milestone is adapting
+Once blocker 4 (model weights) is cleared, the next real milestone is adapting
 `scripts/compare_embedding_models.py` / `scripts/run_hybrid_rrf_weighting_test.py` (both
 already dataset/manifest-driven, no code changes needed beyond pointing them at MN5's
-paths) to run at an `n` far beyond what's practical locally — that's the actual payoff this
-handbook is building toward, not just getting `import torch` to succeed.
+paths and making sure their imports are fully present per blocker 3) to run at an `n` far
+beyond what's practical locally — that's the actual payoff this handbook is building
+toward, not just getting `import torch` to succeed.
