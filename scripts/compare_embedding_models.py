@@ -122,6 +122,16 @@ def main():
         results[name] = {"model_name": model_name, "elapsed_s": model_elapsed, "screening_report": report, "summary": summary}
         save_cache(cache)  # incremental -- don't lose localizability cache progress if a later model is slow/fails
 
+        # Write output after EVERY model, not just at the end -- a later model crashing
+        # (e.g. an uncaught API error) must not lose already-completed models' results.
+        # This crashed a real run on its last model, uncaught, after ~55 minutes of
+        # otherwise-successful work (2026-08-10).
+        if args.output:
+            os.makedirs(os.path.dirname(args.output) or ".", exist_ok=True)
+            with open(args.output, "w") as f:
+                json.dump({"manifest_id": manifest["manifest_id"], "candidate_pool_size": args.candidate_pool_size, "configs": results}, f, indent=2)
+            logger.info(f"Wrote partial report ({len(results)}/{len(model_configs)} models) to {args.output}")
+
     logger.info(f"=== Summary (macro, candidate_pool_size={args.candidate_pool_size}) ===")
     logger.info(f"{'model':<16} {'Hit@1':>7} {'Hit@5':>7} {'Hit@10':>7} {'Hit@100':>8} {'MRR':>8} {'MAP':>8} {'elapsed':>9}")
     for name, _ in model_configs:
@@ -131,12 +141,7 @@ def main():
             f"{s['macro_hit_at'][10]:>7.3f} {s['macro_hit_at'][100]:>8.3f} {s['mrr']:>8.4f} {s['map']:>8.4f} "
             f"{results[name]['elapsed_s']:>8.1f}s"
         )
-
-    if args.output:
-        os.makedirs(os.path.dirname(args.output) or ".", exist_ok=True)
-        with open(args.output, "w") as f:
-            json.dump({"manifest_id": manifest["manifest_id"], "candidate_pool_size": args.candidate_pool_size, "configs": results}, f, indent=2)
-        logger.info(f"Wrote full report to {args.output}")
+    # (already written incrementally after each model above, including the final one)
 
 
 if __name__ == "__main__":

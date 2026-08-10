@@ -97,12 +97,19 @@ def _embed_texts_openai(texts: list[str], model_name: str, batch_size: int = 100
     return torch.tensor(all_embeddings)
 
 
-def _embed_texts_voyage(texts: list[str], model_name: str, is_query: bool, batch_size: int = 100) -> torch.Tensor:
+def _embed_texts_voyage(texts: list[str], model_name: str, is_query: bool, batch_size: int = 100,
+                         max_retries: int = 8) -> torch.Tensor:
     """Embed via the Voyage AI embeddings API (paid, generous free tier). Plain REST call
     (matches how this codebase already talks to GitHub -- requests, not a vendor SDK) since
     the API is a single simple endpoint. input_type distinguishes query vs. document text
     natively (the API prepends its own retrieval-appropriate instruction), so unlike the
-    BGE-Code/Qwen3 path this needs no hand-written instruction template."""
+    BGE-Code/Qwen3 path this needs no hand-written instruction template.
+
+    Manual retry/backoff on 429 -- unlike the OpenAI path (whose SDK client retries
+    internally), a plain requests.post() has none by default, and this crashed a real
+    6-instance run uncaught on its very last model (2026-08-10) after ~55 minutes of
+    otherwise-successful work on the model before it -- exactly what backoff exists to
+    prevent."""
     api_key = os.getenv("VOYAGE_AI_API_KEY")
     if not api_key:
         raise ValueError("VOYAGE_AI_API_KEY not set in the environment")
@@ -110,12 +117,18 @@ def _embed_texts_voyage(texts: list[str], model_name: str, is_query: bool, batch
     all_embeddings = []
     for i in range(0, len(texts), batch_size):
         batch = [t if t.strip() else " " for t in texts[i:i + batch_size]]
-        response = requests.post(
-            "https://api.voyageai.com/v1/embeddings",
-            headers={"Authorization": f"Bearer {api_key}"},
-            json={"input": batch, "model": model_name, "input_type": "query" if is_query else "document"},
-        )
-        response.raise_for_status()
+        for attempt in range(max_retries + 1):
+            response = requests.post(
+                "https://api.voyageai.com/v1/embeddings",
+                headers={"Authorization": f"Bearer {api_key}"},
+                json={"input": batch, "model": model_name, "input_type": "query" if is_query else "document"},
+            )
+            if response.status_code != 429 or attempt == max_retries:
+                response.raise_for_status()
+                break
+            retry_after = float(response.headers.get("Retry-After", 2 ** attempt))
+            logger.warning(f"Voyage 429, retrying in {retry_after:.1f}s (attempt {attempt + 1}/{max_retries})")
+            time.sleep(retry_after)
         data = sorted(response.json()["data"], key=lambda item: item["index"])
         all_embeddings.extend(item["embedding"] for item in data)
         if i + batch_size < len(texts):
