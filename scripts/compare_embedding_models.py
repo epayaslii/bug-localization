@@ -43,7 +43,12 @@ MODEL_CONFIGS = [
     ("unixcoder", "microsoft/unixcoder-base"),
     ("codebert", "microsoft/codebert-base"),
     ("openai-3-small", "text-embedding-3-small"),
-    ("bge-code-v1", "BAAI/bge-code-v1"),
+    # bge-code-v1 (BAAI/bge-code-v1) deliberately excluded from the full n=6 run: 2B params,
+    # ~16x UniXCoder's size, was still mid-instance after ~18 minutes on one model while
+    # competing for CPU with other background jobs -- user chose to skip it (2026-08-10) to
+    # get a complete result faster. Backend confirmed working via a standalone smoke test
+    # (embed_texts(..., model_name="BAAI/bge-code-v1") -> correct 1536-dim last-token-pooled
+    # output) -- the model works, it's just excluded from THIS run's timing budget.
     ("qwen3-embedding-0.6b", "Qwen/Qwen3-Embedding-0.6B"),
     ("voyage-code-3", "voyage-code-3"),
 ]
@@ -57,7 +62,17 @@ def main():
     parser.add_argument('--candidate-pool-size', type=int, default=200,
                         help='Files considered per instance (chunked embedding over the full corpus is too slow/wrong per prior hybrid-retrieval work; this caps it the same way)')
     parser.add_argument('--output', default=None)
+    parser.add_argument('--models', nargs='+', default=None,
+                        help='Subset of MODEL_CONFIGS names to run (default: all). '
+                             'Useful to avoid redundantly recomputing models a previous run already covered.')
     args = parser.parse_args()
+
+    model_configs = MODEL_CONFIGS if args.models is None else [
+        (name, model_name) for name, model_name in MODEL_CONFIGS if name in args.models
+    ]
+    unknown = set(args.models or []) - {name for name, _ in MODEL_CONFIGS}
+    if unknown:
+        raise SystemExit(f"Unknown model name(s) in --models: {sorted(unknown)} (known: {[n for n, _ in MODEL_CONFIGS]})")
 
     manifest = load_manifest(args.manifest)
     dataset_name = args.dataset or manifest['dataset']
@@ -87,7 +102,7 @@ def main():
     cache = load_cache()
 
     results = {}
-    for name, model_name in MODEL_CONFIGS:
+    for name, model_name in model_configs:
         logger.info(f"--- {name} ({model_name}) ---")
         rankings = {}
         t_start = time.time()
@@ -109,7 +124,7 @@ def main():
 
     logger.info(f"=== Summary (macro, candidate_pool_size={args.candidate_pool_size}) ===")
     logger.info(f"{'model':<16} {'Hit@1':>7} {'Hit@5':>7} {'Hit@10':>7} {'Hit@100':>8} {'MRR':>8} {'MAP':>8} {'elapsed':>9}")
-    for name, _ in MODEL_CONFIGS:
+    for name, _ in model_configs:
         s = results[name]["summary"]
         logger.info(
             f"{name:<16} {s['macro_hit_at'][1]:>7.3f} {s['macro_hit_at'][5]:>7.3f} "
