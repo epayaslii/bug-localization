@@ -1,6 +1,6 @@
 # Project Progress Report
 
-Chronological status for the scalable bug-localization pipeline. Companion docs: [README.md](../README.md) (setup, usage, commands), [project_structure.md](project_structure.md) (file-by-file breakdown), [architecture.md](architecture.md) (dependency + data-flow diagrams), [literature_review.md](literature_review.md) (24+ papers surveyed).
+Chronological status for the scalable bug-localization pipeline. Companion docs: [README.md](../README.md) (setup, usage, commands), [project_structure.md](project_structure.md) (file-by-file breakdown), [architecture.md](architecture.md) (dependency + data-flow diagrams), [literature_review.md](literature_review.md) (24+ papers surveyed), [failure_case_analysis.md](failure_case_analysis.md) (retrieval-vs-reranking failure split, real n=30 data).
 
 All numeric results below are taken from committed JSON/Markdown under [`results/`](../results/). Diagnostic subsets (n<30) are labeled explicitly.
 
@@ -14,7 +14,7 @@ All numeric results below are taken from committed JSON/Markdown under [`results
 | Ground-truth localizability diagnostics | Complete | Before/after classification (5 classes) + disk caching |
 | BM25 baseline + representations | Complete | path-only / skeleton / symbols(+imports) — real n=30 comparison |
 | Seeded evaluation manifests + screening | Complete | Deterministic, diversity-capped, stable content-hash IDs |
-| Retrieval-vs-reranking failure attribution | Complete | Free offline split; oracle diagnostic built, not yet run live (costs API) |
+| Retrieval-vs-reranking failure attribution | Complete | Free offline split applied to real n=30 data: reranking (not retrieval) is the bottleneck (9/15 misses per config); oracle diagnostic built, not yet run live (costs API) |
 | End-to-end evaluation (real, paid) | Complete | 50.0% accuracy vs. 43.3% no-retrieval baseline, n=30 |
 | MAP metric | Complete | Added to `evaluation/screening.py` |
 | Test suite | Complete | 81 passing tests on `main` (90 on `experiment/hybrid-retrieval`) |
@@ -86,7 +86,7 @@ Build a **file-level** bug localization system that, for a bug instance (bug rep
 
 **Objective:** Separate "the LLM never saw the right file" from "the LLM saw it and didn't pick it."
 
-**Implementation:** `evaluation/failure_attribution.py`'s `classify_retrieval_reach`/`summarize_retrieval_reach` split misses into retrieval-failure vs. reached-candidate-set, free and offline (reuses screening's per-GT ranks). `run_oracle_diagnostic` force-injects every localizable ground truth into the candidate set (retrieval recall forced to 100%) and measures pure reranking placement — this calls the LLM, so it's gated behind an explicit `--run-oracle` flag with a token-cost estimate printed first. **Not run live this session** (would cost real API usage).
+**Implementation:** `evaluation/failure_attribution.py`'s `classify_retrieval_reach`/`summarize_retrieval_reach` split misses into retrieval-failure vs. reached-candidate-set, free and offline (reuses screening's per-GT ranks). `run_oracle_diagnostic` force-injects every localizable ground truth into the candidate set (retrieval recall forced to 100%) and measures pure reranking placement — this calls the LLM, so it's gated behind an explicit `--run-oracle` flag with a token-cost estimate printed first. **The oracle diagnostic itself is still not run live** (would cost real API usage) — but the free offline split *was* applied to the real n=30 end-to-end data ([`failure_case_analysis.md`](failure_case_analysis.md)): both skeleton and symbols land on an identical 6 retrieval-failure / 9 reranking-failure split, meaning **reranking, not retrieval, is the current bottleneck at n=30** — 60% of misses per config are cases where the correct file was in the candidate set and the LLM still didn't pick it.
 
 **Main files:** `evaluation/failure_attribution.py`, `scripts/run_failure_attribution.py`.
 
