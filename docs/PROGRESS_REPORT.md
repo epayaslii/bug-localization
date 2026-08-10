@@ -1,6 +1,6 @@
 # Project Progress Report
 
-Chronological status for the scalable bug-localization pipeline. Companion docs: [README.md](../README.md) (setup, usage, commands), [project_structure.md](project_structure.md) (file-by-file breakdown), [architecture.md](architecture.md) (dependency + data-flow diagrams), [literature_review.md](literature_review.md) (24+ papers surveyed).
+Chronological status for the scalable bug-localization pipeline. Companion docs: [README.md](../README.md) (setup, usage, commands), [project_structure.md](project_structure.md) (file-by-file breakdown), [architecture.md](architecture.md) (dependency + data-flow diagrams), [literature_review.md](literature_review.md) (24+ papers surveyed), [mn5_execution_handbook.md](mn5_execution_handbook.md) (MareNostrum 5 access, setup, and the two open blockers).
 
 All numeric results below are taken from committed JSON/Markdown under [`results/`](../results/). Diagnostic subsets (n<30) are labeled explicitly.
 
@@ -21,7 +21,7 @@ All numeric results below are taken from committed JSON/Markdown under [`results
 | Architecture diagrams | Complete | `docs/architecture.md`, verified against actual imports |
 | Embedding retrieval (whole-file) | Diagnostic complete | **Negative result** — branch `experiment/embedding-ceiling`, not merged |
 | Hybrid retrieval (BM25 + chunked embedding) | Diagnostic complete | **Weighted RRF (1:10 embedding-favored) is the best config found so far** (MRR 0.281 at n=30) — branch `experiment/hybrid-retrieval`, not merged |
-| MareNostrum 5 (MN5) preparation | Partial | Offline dataset/repo_cache/wheelhouse validated (5-sample dry run); a real MN5 run guide read and saved, but targets a different fork and hasn't been adapted/executed here; no SSH access from current machine |
+| MareNostrum 5 (MN5) preparation | Partial | Real account access confirmed, smoke test + 5-instance pipeline verified end-to-end. **Execution handbook now written** ([`mn5_execution_handbook.md`](mn5_execution_handbook.md)). Two open blockers (huggingface-hub version conflict, torch shadowing) documented with concrete next diagnostic steps; no SSH access from current machine |
 | BeetleBox transition | Not started | Next dataset per confirmed plan sequencing |
 | BugsInPy integration | Not started | Lowest priority |
 | Literature review | Complete | 24+ papers; one named gap ("Toggle") |
@@ -276,7 +276,7 @@ MRR climbs monotonically as the embedding side is up-weighted — recovering, th
 
 1. ~~Scale the hybrid retrieval test (§8) to a larger manifest (n≈24–30) to confirm or disconfirm the positive n=6 signal.~~ **Done (n=30)**, plus a follow-up weighted-RRF sweep — weighted fusion (1:10 embedding-favored) is now the best config found (MRR 0.281). ~~Push the weight sweep further (1:20+) to find the true optimum.~~ **Done** — extended to 1:50, confirms 1:10 is a real peak (MRR reverses past it, converging back toward embedding-alone). Remaining open thread: cross-check 1:10 on a second manifest before treating it as settled beyond this one.
 2. ~~Re-run the skeleton-vs-symbols end-to-end comparison (§6) at larger n to settle the current tie.~~ **Done (n=60)** — symbols wins by +5.0pp (51.7% vs 46.7%), settling the n=30 tie.
-3. Write the MN5 execution handbook and adapt the read guide's command sequence to this repo.
+3. ~~Write the MN5 execution handbook~~ **Done** ([`mn5_execution_handbook.md`](mn5_execution_handbook.md)) — account/access, environment setup, both open blockers with concrete next diagnostic steps. Adapting the actual command sequence still waits on both blockers clearing.
 4. BeetleBox transition (next dataset per confirmed sequencing) — note the Python-only AST caveat above.
 5. BugsInPy integration (lower priority).
 
