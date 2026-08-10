@@ -67,19 +67,31 @@ print the venv's version (`25.0.0` as of the last check), not the module's bundl
 - `rank_bm25==0.2.2` (a real pinned dependency of `method/bm25_retriever.py`) was missing
   from the wheelhouse entirely — downloaded locally (pure-Python, 8.6KB) and added.
 
-## Open blocker 1 — huggingface-hub version conflict
+## Open blocker 1 — huggingface-hub version conflict (wheel ready, not yet transferred)
 
-`transformers` needs `huggingface-hub<1.0,>=0.23.2`, but the wheelhouse only has
+`transformers` needs `huggingface-hub<1.0,>=0.23.2`, but the wheelhouse had
 `huggingface_hub==1.26.0` (installed earlier for an unrelated `datasets`/`pyarrow` fix).
-With `--no-index` there's no PyPI fallback, so `pip install` hard-fails on this. **This
+With `--no-index` there's no PyPI fallback, so `pip install` hard-failed on this. **This
 project's own local `transformers` pin was bumped from 4.46.0 to 4.51.0 this session (for
 Qwen3-Embedding support) — the constraint range is identical (`<1.0,>=0.23.2`), so the
-transformers-version bump does NOT resolve this blocker.** The fix has to happen on the
+transformers-version bump does NOT resolve this blocker.** The fix had to happen on the
 `huggingface-hub` side, not by picking a different transformers version.
 
-**Next step**: download a `huggingface_hub` wheel in the `<1.0,>=0.23.2` range locally
-(matching how `rank_bm25` was added to the wheelhouse above) and transfer it over, then
-`pip install --no-index --find-links=wheelhouse_mn5 huggingface-hub==<chosen version>`.
+**Done locally, 2026-08-10**: downloaded `huggingface_hub==0.34.3` (pure-Python wheel,
+`py3-none-any` — no platform-specific build needed) into `wheelhouse_mn5/`, matching the
+version already pinned in `requirements-mn5.txt`. Removed the stale `1.26.0` wheel from the
+wheelhouse so it can't get picked up by accident. **This wheel is local-only** (`wheelhouse_mn5/`
+is gitignored, by design — it's a transfer staging area, not something to commit) — it still
+needs to actually be `scp`/`rsync`'d to MN5 and installed there before this blocker is
+cleared:
+
+```bash
+# from a machine with real MN5 access:
+scp wheelhouse_mn5/huggingface_hub-0.34.3-py3-none-any.whl \
+  comm842299@alogin1.bsc.es:/gpfs/projects/ehpc680/comm842299/repos/bug-localization/wheelhouse_mn5/
+# then, on MN5, after the module-load unset fix above:
+pip install --no-index --find-links=wheelhouse_mn5 huggingface-hub==0.34.3
+```
 
 ## Open blocker 2 — system PyTorch shadows the venv
 
