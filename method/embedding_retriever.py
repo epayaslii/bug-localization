@@ -41,24 +41,31 @@ def _get_openai_client():
     global _OPENAI_CLIENT
     if _OPENAI_CLIENT is None:
         from openai import OpenAI
-        _OPENAI_CLIENT = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+        # Default max_retries=2 wasn't enough to ride out a sustained 429 burst on a
+        # chunk-heavy instance (thousands of chunks -> dozens of requests in quick
+        # succession) -- raised well above default, SDK backoff is exponential already.
+        _OPENAI_CLIENT = OpenAI(api_key=os.getenv("OPENAI_API_KEY"), max_retries=8)
     return _OPENAI_CLIENT
 
 
 _OPENAI_MAX_INPUT_CHARS = 20000  # conservative vs. the API's 8192-token cap (~4 chars/token for code)
 
 
-def _embed_texts_openai(texts: list[str], model_name: str, batch_size: int = 256) -> torch.Tensor:
+def _embed_texts_openai(texts: list[str], model_name: str, batch_size: int = 100) -> torch.Tensor:
     """Embed via the OpenAI embeddings API (paid). Unlike the local HF path (which silently
     truncates at the tokenizer's max_length), the API hard-rejects oversized input -- the AST
     chunker doesn't cap chunk size for large classes/headers, so this truncates defensively
-    rather than crashing mid-run on one pathological chunk."""
+    rather than crashing mid-run on one pathological chunk. Smaller batches + a short pacing
+    delay between requests avoid bursting the rate limit on chunk-heavy instances (thousands
+    of chunks -> dozens of back-to-back requests), on top of the client's own retry/backoff."""
     client = _get_openai_client()
     all_embeddings = []
     for i in range(0, len(texts), batch_size):
         batch = [(t if t.strip() else " ")[:_OPENAI_MAX_INPUT_CHARS] for t in texts[i:i + batch_size]]
         response = client.embeddings.create(model=model_name, input=batch)
         all_embeddings.extend(item.embedding for item in response.data)
+        if i + batch_size < len(texts):
+            time.sleep(0.2)
     return torch.tensor(all_embeddings)
 
 
