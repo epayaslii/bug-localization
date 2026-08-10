@@ -1,6 +1,6 @@
 # Project Progress Report
 
-Chronological status for the scalable bug-localization pipeline. Companion docs: [README.md](../README.md) (setup, usage, commands), [project_structure.md](project_structure.md) (file-by-file breakdown), [architecture.md](architecture.md) (dependency + data-flow diagrams), [literature_review.md](literature_review.md) (24+ papers surveyed).
+Chronological status for the scalable bug-localization pipeline. Companion docs: [README.md](../README.md) (setup, usage, commands), [project_structure.md](project_structure.md) (file-by-file breakdown), [architecture.md](architecture.md) (dependency + data-flow diagrams), [literature_review.md](literature_review.md) (24+ papers surveyed), [sota_comparison.md](sota_comparison.md) (this project's numbers vs. SOTA baselines).
 
 All numeric results below are taken from committed JSON/Markdown under [`results/`](../results/). Diagnostic subsets (n<30) are labeled explicitly.
 
@@ -268,7 +268,7 @@ MRR climbs monotonically as the embedding side is up-weighted — recovering, th
 - The oracle reranking diagnostic is built but has never been run live (costs real API money).
 - No run so far has specifically oversampled hard-difficulty instances.
 - MN5 execution for this specific repo hasn't happened — only the offline dry run and infrastructure prep.
-- No comparison against literature SOTA baselines (BugCerberus, CoRNStack, LocAgent, etc.) on equivalent setups.
+- Comparison against literature SOTA baselines (BugCerberus, CoRNStack, LocAgent, etc.) exists ([`sota_comparison.md`](sota_comparison.md)) but is not on equivalent setups — SOTA numbers are taken as-reported (SWE-bench Lite, full split), not re-run against this project's own pipeline or SWE-bench Verified n=30/60 samples. Directionally: this project's end-to-end accuracy (51.7%) sits well below every SOTA baseline listed (65–88%).
 
 ---
 
