@@ -22,12 +22,30 @@ Scope decisions (2026-08-10, via AskUserQuestion):
 - Python-only, same caching caveat as the rest of this project's AST-based chunking/symbol
   extraction (method/embedding_retriever.py, method/bm25_retriever.py) -- non-Python files
   fall back to a path-token pseudo-chunk, no symbols/imports extracted.
+
+Phase 4.2 addition: content-addressed chunk-embedding cache (one JSON dict per model,
+{sha256(chunk_text): embedding}), a single mechanism that covers four of 4.2's asks at
+once rather than four separate ones:
+- Incremental indexing: re-indexing a new commit of an already-indexed repo reuses the
+  embedding for every chunk whose text is unchanged (same hash) -- only genuinely new/
+  changed chunks get embedded.
+- Duplicate detection: identical chunk text anywhere (same file re-touched, boilerplate
+  repeated across files, even across different repos) shares one cache entry.
+- Chunk regeneration: a chunk is "regenerated" exactly when its content hash is new to the
+  cache -- no separate staleness-tracking logic needed, the hash IS the staleness check.
+- Embedding versioning: the cache is keyed per model_name, so switching models can never
+  silently serve an embedding computed by a different model.
+Throughput (cache hit/miss counts, embed time) and storage (index/cache file sizes) are
+returned from build_repository_index() rather than just logged, so they're actually
+measurable, not just eyeballed from log lines.
 """
 
 import ast
+import hashlib
 import json
 import os
 import tempfile
+import time
 
 import faiss
 import numpy as np
@@ -85,6 +103,23 @@ def _index_paths(repo: str, commit: str, model_name: str, index_root: str | None
     return base + ".faiss", base + ".meta.json"
 
 
+def _chunk_cache_path(model_name: str, index_root: str | None = None) -> str:
+    root = index_root or DEFAULT_INDEX_ROOT
+    return os.path.join(root, "_chunk_cache", model_name.replace("/", "__") + ".json")
+
+
+def _chunk_hash(text: str) -> str:
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+def _load_chunk_cache(model_name: str, index_root: str | None = None) -> dict[str, list[float]]:
+    path = _chunk_cache_path(model_name, index_root)
+    if not os.path.isfile(path):
+        return {}
+    with open(path) as f:
+        return json.load(f)
+
+
 def _atomic_write_bytes(path: str, write_fn) -> None:
     """write_fn(tmp_path) writes the file; this handles the temp-sibling + os.replace
     dance so a killed/crashed build never leaves a half-written index/metadata file that a
@@ -108,21 +143,30 @@ def is_indexed(repo: str, commit: str, model_name: str = DEFAULT_EMBEDDING_MODEL
 
 def build_repository_index(repo: str, commit: str, file_paths: list[str] | None = None,
                             model_name: str = DEFAULT_EMBEDDING_MODEL,
-                            index_root: str | None = None, max_chunk_chars: int = 1500) -> str | None:
+                            index_root: str | None = None, max_chunk_chars: int = 1500,
+                            force_recompute: bool = False) -> dict | None:
     """Chunk every Python file in repo@commit, embed each chunk, and persist to a FAISS
-    index + metadata sidecar. Idempotent: always rebuilds from scratch (no incremental
-    append) -- call is_indexed() first if you want to skip an already-built index.
-    Returns the index path, or None if there was nothing to index.
+    index + metadata sidecar. Reuses cached embeddings for any chunk whose content hash was
+    already embedded with this model_name (see module docstring) -- re-indexing a repo
+    after a small commit typically only pays for the handful of genuinely changed chunks,
+    not the whole repo again. Pass force_recompute=True to bypass the cache and recompute
+    every chunk (e.g. after a chunking-algorithm change you don't trust the old cache for).
+
+    Returns a stats dict (index_path, num_files, num_chunks, cache_hits, cache_misses,
+    embed_elapsed_s, total_elapsed_s, index_bytes, cache_bytes), or None if there was
+    nothing to index.
     """
     if not is_repo_cached(repo):
         raise ValueError(f"{repo} is not in the local repo_cache -- mirror it first (scripts/mirror_repos.py)")
 
+    t_start = time.time()
     if file_paths is None:
         file_paths = get_code_files_local(repo, commit, (".py",))
 
     contents = get_file_contents_batch(repo, commit, file_paths)
 
     chunk_texts: list[str] = []
+    chunk_hashes: list[str] = []
     chunk_meta: list[dict] = []
     for path in file_paths:
         content = contents.get(path)
@@ -131,6 +175,7 @@ def build_repository_index(repo: str, commit: str, file_paths: list[str] | None 
         symbols, imports = extract_symbols_and_imports(content)
         for chunk in _chunk_file_content(content, max_chunk_chars=max_chunk_chars):
             chunk_texts.append(chunk)
+            chunk_hashes.append(_chunk_hash(chunk))
             chunk_meta.append({
                 "path": path, "language": _language_for_path(path),
                 "symbols": symbols, "imports": imports,
@@ -140,7 +185,29 @@ def build_repository_index(repo: str, commit: str, file_paths: list[str] | None 
         logger.warning(f"No indexable Python chunks for {repo}@{commit}")
         return None
 
-    embeddings = embed_texts(chunk_texts, model_name=model_name).numpy().astype("float32")
+    chunk_cache = {} if force_recompute else _load_chunk_cache(model_name, index_root)
+    # Dedup against BOTH the on-disk cache and duplicate hashes within this same batch
+    # (e.g. identical boilerplate repeated across files) -- checking only the on-disk cache
+    # would double-embed a hash that appears twice in one build, since neither occurrence
+    # is in the cache yet at check time.
+    seen: set[str] = set()
+    miss_hashes: list[str] = []
+    for h in chunk_hashes:
+        if h not in chunk_cache and h not in seen:
+            miss_hashes.append(h)
+            seen.add(h)
+    hash_to_text = dict(zip(chunk_hashes, chunk_texts))  # last occurrence wins, but identical hash -> identical text
+    cache_misses = len(miss_hashes)
+    cache_hits = len(chunk_texts) - cache_misses
+
+    t_embed = time.time()
+    if miss_hashes:
+        new_embeddings = embed_texts([hash_to_text[h] for h in miss_hashes], model_name=model_name)
+        for h, emb in zip(miss_hashes, new_embeddings.tolist()):
+            chunk_cache[h] = emb
+    embed_elapsed = time.time() - t_embed
+
+    embeddings = np.array([chunk_cache[h] for h in chunk_hashes], dtype="float32")
     faiss.normalize_L2(embeddings)  # cosine similarity via inner product on normalized vectors
     index = faiss.IndexFlatIP(embeddings.shape[1])
     index.add(embeddings)
@@ -153,8 +220,27 @@ def build_repository_index(repo: str, commit: str, file_paths: list[str] | None 
     _atomic_write_bytes(index_path, lambda tmp: faiss.write_index(index, tmp))
     _atomic_write_bytes(meta_path, _write_meta)
 
-    logger.info(f"Indexed {repo}@{commit}: {len(file_paths)} files, {len(chunk_texts)} chunks -> {index_path}")
-    return index_path
+    def _write_chunk_cache(tmp_path):
+        with open(tmp_path, "w") as f:
+            json.dump(chunk_cache, f)
+
+    cache_path = _chunk_cache_path(model_name, index_root)
+    if miss_hashes:
+        _atomic_write_bytes(cache_path, _write_chunk_cache)
+
+    stats = {
+        "index_path": index_path,
+        "num_files": len(file_paths), "num_chunks": len(chunk_texts),
+        "cache_hits": cache_hits, "cache_misses": cache_misses,
+        "embed_elapsed_s": embed_elapsed, "total_elapsed_s": time.time() - t_start,
+        "index_bytes": os.path.getsize(index_path),
+        "cache_bytes": os.path.getsize(cache_path) if os.path.isfile(cache_path) else 0,
+    }
+    logger.info(
+        f"Indexed {repo}@{commit}: {stats['num_files']} files, {stats['num_chunks']} chunks "
+        f"({cache_hits} cache hits, {cache_misses} misses) in {stats['total_elapsed_s']:.1f}s -> {index_path}"
+    )
+    return stats
 
 
 def load_repository_index(repo: str, commit: str, model_name: str = DEFAULT_EMBEDDING_MODEL,

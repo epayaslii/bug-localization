@@ -100,9 +100,9 @@ def mocked_repo(monkeypatch):
 
 
 def test_build_repository_index_creates_index_and_metadata(tmp_path, mocked_repo):
-    path = build_repository_index("org/repo", "abc123", index_root=str(tmp_path))
-    assert path is not None
-    assert os.path.isfile(path)
+    stats = build_repository_index("org/repo", "abc123", index_root=str(tmp_path))
+    assert stats is not None
+    assert os.path.isfile(stats["index_path"])
     assert is_indexed("org/repo", "abc123", index_root=str(tmp_path)) is True
 
     _, meta_path = _index_paths("org/repo", "abc123", repository_index.DEFAULT_EMBEDDING_MODEL, str(tmp_path))
@@ -112,6 +112,52 @@ def test_build_repository_index_creates_index_and_metadata(tmp_path, mocked_repo
     assert meta["commit"] == "abc123"
     assert len(meta["chunks"]) == 2
     assert {c["path"] for c in meta["chunks"]} == {"pkg/a.py", "pkg/b.py"}
+
+
+def test_build_repository_index_returns_throughput_and_storage_stats(tmp_path, mocked_repo):
+    stats = build_repository_index("org/repo", "abc123", index_root=str(tmp_path))
+    assert stats["num_files"] == 2
+    assert stats["num_chunks"] == 2
+    assert stats["cache_hits"] == 0
+    assert stats["cache_misses"] == 2
+    assert stats["embed_elapsed_s"] >= 0
+    assert stats["total_elapsed_s"] >= 0
+    assert stats["index_bytes"] > 0
+    assert stats["cache_bytes"] > 0
+
+
+def test_build_repository_index_reindexing_same_content_is_all_cache_hits(tmp_path, mocked_repo):
+    build_repository_index("org/repo", "abc123", index_root=str(tmp_path))
+    # Same repo, same file content, different commit SHA -- the chunk cache is keyed by
+    # content hash, not by commit, so this should hit the cache entirely (the actual point
+    # of incremental indexing: unchanged content never gets re-embedded).
+    stats = build_repository_index("org/repo", "def456", index_root=str(tmp_path))
+    assert stats["cache_hits"] == 2
+    assert stats["cache_misses"] == 0
+
+
+def test_build_repository_index_force_recompute_bypasses_cache(tmp_path, mocked_repo):
+    build_repository_index("org/repo", "abc123", index_root=str(tmp_path))
+    stats = build_repository_index("org/repo", "def456", index_root=str(tmp_path), force_recompute=True)
+    assert stats["cache_hits"] == 0
+    assert stats["cache_misses"] == 2
+
+
+def test_build_repository_index_duplicate_chunk_across_files_shares_one_cache_entry(tmp_path, monkeypatch):
+    # Two different files with byte-identical content -- content-hash-keyed caching means
+    # the second file's chunk is a cache hit even within the SAME build, not just across
+    # separate builds/commits.
+    identical_content = "x = 1\n"
+    contents = {"pkg/a.py": identical_content, "pkg/b.py": identical_content}
+    monkeypatch.setattr(repository_index, "is_repo_cached", lambda repo: True)
+    monkeypatch.setattr(repository_index, "get_code_files_local", lambda repo, commit, ext: list(contents))
+    monkeypatch.setattr(repository_index, "get_file_contents_batch", lambda repo, commit, paths: contents)
+    monkeypatch.setattr(repository_index, "embed_texts", _fake_embed_texts)
+
+    stats = build_repository_index("org/repo", "abc123", index_root=str(tmp_path))
+    assert stats["num_chunks"] == 2
+    assert stats["cache_misses"] == 1  # only one distinct chunk text across both files
+    assert stats["cache_hits"] == 1
 
 
 def test_build_repository_index_no_tmp_files_left_behind(tmp_path, mocked_repo):
