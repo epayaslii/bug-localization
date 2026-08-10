@@ -118,9 +118,21 @@ The headline direction **holds and strengthens**: hybrid still more than doubles
 | 1:5 | 16.7% | 26.7% | 40.0% | 93.3% | 0.246 | 0.247 |
 | **1:10** | **23.3%** | 26.7% | 40.0% | 93.3% | **0.281** | **0.281** |
 
-MRR climbs monotonically as the embedding side is up-weighted, from 1:1's 0.206 past chunked_embedding-alone's 0.233 to 0.281 at 1:10 — recovering, then beating, embedding-alone. Hit@1 also improves to 23.3% (7/30), the best of any config tested. **The trend hadn't plateaued at the highest ratio tested (1:10)** — the true optimum (or whether it eventually reverses toward pure embedding-only) is not yet known; this is published as-is rather than chasing the exact peak, to avoid overfitting a weight ratio to one n=30 manifest.
+MRR climbs monotonically as the embedding side is up-weighted, from 1:1's 0.206 past chunked_embedding-alone's 0.233 to 0.281 at 1:10 — recovering, then beating, embedding-alone. Hit@1 also improves to 23.3% (7/30), the best of any config tested.
 
-**Reading, updated**: the hybrid *design* (BM25 candidate pool → chunked embedding rerank → RRF fusion) is sound and beats both of its inputs — the n=5 result's direction was right — but unweighted 1:1 RRF was the wrong fusion weighting once embedding is much stronger than BM25 within the pre-filtered pool. Chunked embedding alone is a reasonable fallback, but weighted RRF (≥1:3) is now the best-performing config found in this project.
+**Follow-up: pushing past 1:10** (`hybrid_rrf_weighting_swebench_30_extended.json`, same script/manifest, weights extended to 1:15/1:20/1:30/1:50):
+
+| Config (bm25:embedding weight) | Hit@1 | Hit@5 | Hit@10 | Hit@100 | MRR | MAP |
+|---|---|---|---|---|---|---|
+| **1:10** | **23.3%** | 26.7% | 40.0% | 93.3% | **0.281** | **0.281** |
+| 1:15 | 20.0% | 26.7% | 36.7% | 93.3% | 0.263 | 0.263 |
+| 1:20 | 16.7% | 26.7% | 33.3% | 93.3% | 0.245 | 0.246 |
+| 1:30 | 16.7% | 26.7% | 30.0% | 90.0% | 0.239 | 0.240 |
+| 1:50 | 16.7% | 26.7% | 30.0% | 90.0% | 0.233 | 0.233 |
+
+**1:10 is a real peak, not the edge of the tested range**: MRR reverses past it and converges back toward chunked_embedding-alone's 0.233 as the weight grows further — at very high ratios BM25's contribution becomes negligible, so the fused ranking approaches pure embedding order. This settles the open question from the original sweep.
+
+**Reading, updated**: the hybrid *design* (BM25 candidate pool → chunked embedding rerank → RRF fusion) is sound and beats both of its inputs — the n=5 result's direction was right — but unweighted 1:1 RRF was the wrong fusion weighting once embedding is much stronger than BM25 within the pre-filtered pool. Weighted RRF at **1:10** is the best-performing config found in this project, and is now a confirmed local (and likely global, on this manifest) optimum rather than a directional guess.
 
 n=30 is still one manifest/one run — directional, not the final word — but larger and more diverse (11 repos vs 5) than the original n=5 test. The code lives on the `experiment/hybrid-retrieval` branch (not merged to `main`, matching this session's branching policy: main only holds validated work); only the result artifacts are included here for a complete record.
 
@@ -140,8 +152,8 @@ python main.py --method openrouter --dataset swebench --model gpt-4o-mini --samp
 python scripts/generate_evaluation_manifest.py --dataset swebench --size 30 --pool-size 500 --seed 42 --max-per-repo 3
 python scripts/run_hybrid_retrieval_test.py --manifest results/manifests/swebench-multi-n30-s42-1fb8f4b8d82f.json --candidate-pool-size 200 --output results/hybrid_retrieval_swebench_30.json
 
-# §4 weighted RRF follow-up (same manifest, same branch)
-python scripts/run_hybrid_rrf_weighting_test.py --manifest results/manifests/swebench-multi-n30-s42-1fb8f4b8d82f.json --candidate-pool-size 200 --output results/hybrid_rrf_weighting_swebench_30.json
+# §4 weighted RRF follow-up (same manifest, same branch) -- WEIGHT_CONFIGS now includes 1:15/1:20/1:30/1:50
+python scripts/run_hybrid_rrf_weighting_test.py --manifest results/manifests/swebench-multi-n30-s42-1fb8f4b8d82f.json --candidate-pool-size 200 --output results/hybrid_rrf_weighting_swebench_30_extended.json
 ```
 
 The two `main.py` runs cost real OpenRouter API usage (`gpt-4o-mini`, paid). §3 and §4 (`run_embedding_ceiling_test.py`, `run_hybrid_retrieval_test.py`) require checking out the `experiment/embedding-ceiling` and `experiment/hybrid-retrieval` branches respectively — those scripts aren't on `main`. The §4 n=30 run is local-compute-only (UniXCoder embeddings, no API cost) but takes ~40 minutes on CPU.
