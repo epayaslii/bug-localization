@@ -57,7 +57,7 @@ def _language_for_path(path: str) -> str:
     return _LANGUAGE_BY_EXTENSION.get(os.path.splitext(path)[1], "unknown")
 
 
-def _extract_symbols_and_imports(content: str) -> tuple[list[str], list[str]]:
+def extract_symbols_and_imports(content: str) -> tuple[list[str], list[str]]:
     """Real (not BM25-tokenized) class/function/method names and imported module names,
     for index metadata rather than retrieval scoring. Python-only; returns ([], []) for
     unparseable content (including all non-Python source, same fallback as elsewhere)."""
@@ -128,7 +128,7 @@ def build_repository_index(repo: str, commit: str, file_paths: list[str] | None 
         content = contents.get(path)
         if content is None:
             continue
-        symbols, imports = _extract_symbols_and_imports(content)
+        symbols, imports = extract_symbols_and_imports(content)
         for chunk in _chunk_file_content(content, max_chunk_chars=max_chunk_chars):
             chunk_texts.append(chunk)
             chunk_meta.append({

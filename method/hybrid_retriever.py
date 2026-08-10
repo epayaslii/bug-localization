@@ -17,6 +17,7 @@ import time
 from dataset.utils import get_logger
 from method.bm25_retriever import rank_files_bm25_with_symbols
 from method.embedding_retriever import rank_files_embedding_chunked
+from method.fusion_signals import rank_files_ast_similarity, rank_files_commit_recency, rank_files_dependency_graph
 
 logger = get_logger(__name__)
 
@@ -71,4 +72,61 @@ def rank_files_hybrid(
     ranked = fused[:top_k] if top_k is not None else fused
 
     timing = {"bm25_s": t_bm25, **embed_timing}
+    return ranked, timing
+
+
+def rank_files_hybrid_extended(
+    bug,
+    top_k: int | None = 100,
+    candidate_pool_size: int = 200,
+    embedding_model: str = "microsoft/unixcoder-base",
+    rrf_k: int = 60,
+    weights: list[float] | None = None,
+) -> tuple[list[str], dict]:
+    """Like rank_files_hybrid, but also fuses the three Phase 4.1 signals (AST-similarity,
+    dependency-graph, commit-recency -- see method/fusion_signals.py) alongside BM25 and
+    chunked embedding. All five signals are computed over the SAME BM25 candidate pool, not
+    the full corpus, for cost and comparability with rank_files_hybrid.
+
+    `weights` order is [bm25, embedding, ast_similarity, dependency_graph, commit_recency];
+    defaults to equal weight. This is deliberately the naive unweighted baseline to ablate
+    from -- rank_files_hybrid's own history (results/README.md §4) shows equal weighting is
+    often NOT the best fusion weight, so an equal-weight result here should be read the same
+    way: a starting point, not a tuned config. rank_files_hybrid itself is left untouched
+    (this is a new function, not a modification) so the already-confirmed 2-signal result
+    (weighted RRF 1:10, MRR 0.281) stays comparable and isn't put at risk.
+    """
+    bm25_candidates = rank_files_bm25_with_symbols(bug, top_k=candidate_pool_size)
+    if not bm25_candidates:
+        return bm25_candidates, {}
+
+    candidate_bug = bug.model_copy(update={"code_files": bm25_candidates})
+
+    t0 = time.time()
+    embedding_ranking, embed_timing = rank_files_embedding_chunked(
+        candidate_bug, top_k=None, model_name=embedding_model
+    )
+    t_embed = time.time() - t0
+
+    t0 = time.time()
+    ast_ranking = rank_files_ast_similarity(candidate_bug, top_k=None)
+    t_ast = time.time() - t0
+
+    t0 = time.time()
+    dependency_ranking = rank_files_dependency_graph(candidate_bug, bm25_candidates, top_k=None)
+    t_dependency = time.time() - t0
+
+    t0 = time.time()
+    recency_ranking = rank_files_commit_recency(candidate_bug, top_k=None)
+    t_recency = time.time() - t0
+
+    rankings = [bm25_candidates, embedding_ranking, ast_ranking, dependency_ranking, recency_ranking]
+    fused = reciprocal_rank_fusion(rankings, k=rrf_k, weights=weights)
+    ranked = fused[:top_k] if top_k is not None else fused
+
+    timing = {
+        "embed_s": t_embed, "ast_similarity_s": t_ast,
+        "dependency_graph_s": t_dependency, "commit_recency_s": t_recency,
+        **{k: v for k, v in embed_timing.items() if k != "embed_s"},
+    }
     return ranked, timing

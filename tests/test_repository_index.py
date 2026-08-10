@@ -7,7 +7,7 @@ import pytest
 from dataset.models import BugInstance
 import method.repository_index as repository_index
 from method.repository_index import (
-    _extract_symbols_and_imports,
+    extract_symbols_and_imports,
     _language_for_path,
     _index_paths,
     is_indexed,
@@ -42,13 +42,13 @@ def make_bug(repo, base_commit, code_files, bug_report="fix the bug", **override
 def test_extract_symbols_and_imports_real_source():
     # ast.walk() is breadth-first: top-level siblings (ShapeUtil, cartesian_transform)
     # come before descending into ShapeUtil's body (compute_area).
-    symbols, imports = _extract_symbols_and_imports(SAMPLE_SOURCE)
+    symbols, imports = extract_symbols_and_imports(SAMPLE_SOURCE)
     assert symbols == ["ShapeUtil", "cartesian_transform", "compute_area"]
     assert imports == ["os", "collections"]
 
 
 def test_extract_symbols_and_imports_syntax_error_returns_empty():
-    assert _extract_symbols_and_imports("def broken(:\n") == ([], [])
+    assert extract_symbols_and_imports("def broken(:\n") == ([], [])
 
 
 def test_language_for_path():
