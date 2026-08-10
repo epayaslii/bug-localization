@@ -34,16 +34,46 @@ of the rest of this document is directly executable there and then.
 
 ## Environment setup — the module-load footgun
 
-Loading the Python module on MN5 (`python/3.11.5-gcc` or similar) sets `PYTHONHOME` /
-`PYTHONPATH` pointing at the module's own bundled system site-packages, which **silently
-shadow the project's own venv (`.venv_mn5`)** — even `pip show` inside the venv reports the
-wrong package versions. This was diagnosed once already (a stale bundled `pyarrow 16.1.0`
-was masking the venv's real `pyarrow 25.0.0`).
+### The `python/3.11.5-gcc` module has a 4-deep undeclared prerequisite chain
+
+Just running `module load python/3.11.5-gcc` fails outright — Lmod reports each missing
+prerequisite **one at a time**, not all at once, so naively following the errors means
+several rounds of trial and error. **The full chain, discovered 2026-08-10, load in this
+order:**
+
+```bash
+module load intel
+module load mkl
+module load impi
+module load hdf5
+module load python/3.11.5-gcc
+```
+
+Verify all 6 (including `bsc/1.0`, loaded automatically) show up with `module list` before
+proceeding — if any single one of these is missing, the next one in the chain fails with an
+Lmod "Cannot load module ... without these module(s) loaded: X" error naming exactly what's
+missing. Follow that error's own naming if this exact chain ever changes (BSC updates its
+module tree periodically) — but this chain worked as of the date above. **`module spider
+python/3.11.5-gcc` is worth trying first on a future session** — Lmod's `spider` subcommand
+is designed to show a module's complete dependency tree in one shot, which would have saved
+several of the round trips that were needed to discover this chain manually.
+
+### PYTHONHOME/PYTHONPATH shadowing, on top of the chain above
+
+Once `python/3.11.5-gcc` actually loads, it sets `PYTHONHOME` / `PYTHONPATH` pointing at the
+module's own bundled system site-packages, which **silently shadow the project's own venv
+(`.venv_mn5`)** — even `pip show` inside the venv reports the wrong package versions. This
+was diagnosed once already (a stale bundled `pyarrow 16.1.0` was masking the venv's real
+`pyarrow 25.0.0`).
 
 **Fix — must be repeated on every fresh login**, since the module load resets these every time:
 
 ```bash
-module load python/3.11.5-gcc   # or whatever the current module name is
+module load intel
+module load mkl
+module load impi
+module load hdf5
+module load python/3.11.5-gcc
 unset PYTHONHOME
 unset PYTHONPATH
 source /gpfs/projects/ehpc680/comm842299/repos/bug-localization/.venv_mn5/bin/activate
@@ -53,6 +83,13 @@ source /gpfs/projects/ehpc680/comm842299/repos/bug-localization/.venv_mn5/bin/ac
 
 Verify the fix worked: `python -c "import pyarrow; print(pyarrow.__version__)"` should
 print the venv's version (`25.0.0` as of the last check), not the module's bundled one.
+
+Note: skipping the module-load chain entirely (going straight to `.venv_mn5/bin/pip` or
+`.venv_mn5/bin/python`) fails a different way — `error while loading shared libraries:
+libpython3.11.so.1.0: cannot open shared object file` — because the venv's own Python binary
+dynamically links against the module's `libpython3.11.so.1.0` (`/apps/ACC/PYTHON/3.11.5/GCC/lib`,
+per the module's own `LD_LIBRARY_PATH` entry). The venv literally cannot run at all without
+the full chain above loaded first, not just for package resolution.
 
 ## Confirmed working today
 
@@ -67,30 +104,33 @@ print the venv's version (`25.0.0` as of the last check), not the module's bundl
 - `rank_bm25==0.2.2` (a real pinned dependency of `method/bm25_retriever.py`) was missing
   from the wheelhouse entirely — downloaded locally (pure-Python, 8.6KB) and added.
 
-## Open blocker 1 — huggingface-hub version conflict (wheel ready, not yet transferred)
+## Blocker 1 — huggingface-hub version conflict — RESOLVED 2026-08-10
 
 `transformers` needs `huggingface-hub<1.0,>=0.23.2`, but the wheelhouse had
 `huggingface_hub==1.26.0` (installed earlier for an unrelated `datasets`/`pyarrow` fix).
 With `--no-index` there's no PyPI fallback, so `pip install` hard-failed on this. **This
 project's own local `transformers` pin was bumped from 4.46.0 to 4.51.0 this session (for
 Qwen3-Embedding support) — the constraint range is identical (`<1.0,>=0.23.2`), so the
-transformers-version bump does NOT resolve this blocker.** The fix had to happen on the
+transformers-version bump did NOT resolve this blocker.** The fix had to happen on the
 `huggingface-hub` side, not by picking a different transformers version.
 
-**Done locally, 2026-08-10**: downloaded `huggingface_hub==0.34.3` (pure-Python wheel,
-`py3-none-any` — no platform-specific build needed) into `wheelhouse_mn5/`, matching the
-version already pinned in `requirements-mn5.txt`. Removed the stale `1.26.0` wheel from the
-wheelhouse so it can't get picked up by accident. **This wheel is local-only** (`wheelhouse_mn5/`
-is gitignored, by design — it's a transfer staging area, not something to commit) — it still
-needs to actually be `scp`/`rsync`'d to MN5 and installed there before this blocker is
-cleared:
+**Fix, confirmed working on the real cluster**: downloaded `huggingface_hub==0.34.3`
+(pure-Python wheel, `py3-none-any` — no platform-specific build needed) locally into
+`wheelhouse_mn5/`, matching the version already pinned in `requirements-mn5.txt`, removed
+the stale `1.26.0` wheel, transferred it over, and installed it — after working through the
+full module-load chain above (this is what actually took the many round trips, not the
+huggingface-hub install itself, which worked on the first real attempt once the modules
+were actually loaded):
 
 ```bash
-# from a machine with real MN5 access:
+# from a machine with real MN5 access, this repo's own directory:
 scp wheelhouse_mn5/huggingface_hub-0.34.3-py3-none-any.whl \
   comm842299@alogin1.bsc.es:/gpfs/projects/ehpc680/comm842299/repos/bug-localization/wheelhouse_mn5/
-# then, on MN5, after the module-load unset fix above:
-pip install --no-index --find-links=wheelhouse_mn5 huggingface-hub==0.34.3
+
+# on MN5, after the full module-load chain + unset fix above:
+.venv_mn5/bin/pip install --no-index --find-links=wheelhouse_mn5 huggingface-hub==0.34.3
+.venv_mn5/bin/python -c "import huggingface_hub; print(huggingface_hub.__version__)"
+# -> 0.34.3, confirmed
 ```
 
 ## Open blocker 2 — system PyTorch shadows the venv
@@ -118,6 +158,10 @@ the `unset` workaround above).
 ## Reproducing the smoke test once both blockers are cleared
 
 ```bash
+module load intel
+module load mkl
+module load impi
+module load hdf5
 module load python/3.11.5-gcc
 unset PYTHONHOME
 unset PYTHONPATH
