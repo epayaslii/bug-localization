@@ -1,7 +1,39 @@
 import logging
+import re
 import sys
 from datetime import datetime
-import tiktoken 
+import tiktoken
+
+
+def get_diff_hunk(patch: str, path: str) -> str | None:
+    """Return the raw diff hunk for `path` from a unified diff, or None if `patch`
+    has no real `diff --git` header for it (e.g. BeetleBox's synthetic patch text,
+    which is just "Before: <sha>\\nAfter: <sha>").
+    """
+    escaped = re.escape(path)
+    match = re.search(
+        rf"diff --git a/{escaped} b/{escaped}\n(.*?)(?=\ndiff --git |\Z)",
+        patch, re.DOTALL,
+    )
+    return match.group(1) if match else None
+
+
+_HUNK_HEADER_RE = re.compile(r"^@@ -(\d+)(?:,(\d+))? \+(\d+)(?:,(\d+))? @@", re.MULTILINE)
+
+
+def parse_line_ranges(hunk: str) -> list:
+    """Parse a unified-diff hunk's `@@ -a,b +c,d @@` headers into LineRange objects.
+    A missing count (bare `-a` / `+c`) means a 1-line range, per unified diff convention."""
+    from dataset.models import LineRange
+
+    ranges = []
+    for old_start, old_lines, new_start, new_lines in _HUNK_HEADER_RE.findall(hunk):
+        ranges.append(LineRange(
+            old_start=int(old_start), old_lines=int(old_lines) if old_lines else 1,
+            new_start=int(new_start), new_lines=int(new_lines) if new_lines else 1,
+        ))
+    return ranges
+
 
 def setup_logging(level=logging.INFO, log_file=None):
     formatter = logging.Formatter(

@@ -5,6 +5,17 @@ from datetime import datetime
 from dataset.utils import get_token_count
 
 
+class LineRange(BaseModel):
+    """One unified-diff hunk's line ranges: old_start/old_lines describe the range in the
+    before-fix file (the searchable corpus); new_start/new_lines describe the same range in
+    the after-fix file. old_lines/new_lines is 0 for pure insertions/deletions respectively,
+    matching unified diff's own `@@ -a,b +c,d @@` convention when a count is omitted (implied 1)."""
+    old_start: int
+    old_lines: int
+    new_start: int
+    new_lines: int
+
+
 class BugInstance(BaseModel):
     repo: str
     instance_id: str
@@ -15,6 +26,10 @@ class BugInstance(BaseModel):
     bug_report: str
     code_files: list[str]
     after_commit: str | None = None
+    line_mappings: dict[str, list[LineRange]] = {}
+    """Changed line ranges per ground-truth file path, parsed from `patch`'s diff hunks.
+    File-level only when empty (e.g. BeetleBox's patch field is a synthetic placeholder,
+    not a real diff -- see dataset/beetlebox.py). Currently populated for SWE-Bench only."""
 
     def to_string(self) -> str:
         return (

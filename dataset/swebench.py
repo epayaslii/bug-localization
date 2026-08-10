@@ -6,7 +6,7 @@ import logging
 import re
 from datasets import load_dataset, load_from_disk
 from dataset.models import BugInstance
-from dataset.utils import get_code_files, calculate_dataset_token_stats, is_code_file, filter_code_paths
+from dataset.utils import get_code_files, calculate_dataset_token_stats, is_code_file, filter_code_paths, get_diff_hunk, parse_line_ranges
 from dotenv import load_dotenv
 
 logger = logging.getLogger(__name__)
@@ -107,12 +107,20 @@ class SWEBench(BugLocalizationDataset):
                 continue
             
             bug['ground_truths'] = modified_files
-            
+
+            line_mappings = {}
+            for path in modified_files:
+                hunk = get_diff_hunk(patch, path)
+                if hunk:
+                    ranges = parse_line_ranges(hunk)
+                    if ranges:
+                        line_mappings[path] = ranges
+
             bug['bug_report'] = bug.get('problem_statement', '')
             code_files = get_code_files(bug['repo'], bug['base_commit'], self.extensions, self.token)
             if 'problem_statement' in bug:
                 del bug['problem_statement']
-            
+
             bug_instance = BugInstance(
                 instance_id=temp_id,
                 repo=bug['repo'],
@@ -122,6 +130,7 @@ class SWEBench(BugLocalizationDataset):
                 ground_truths=bug['ground_truths'],
                 bug_report=bug['bug_report'],
                 code_files=code_files,
+                line_mappings=line_mappings,
             )
             self._bug_instances.append(bug_instance)
         
