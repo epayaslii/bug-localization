@@ -52,6 +52,27 @@ Two improve, two degrade, net zero change. At n=30 this reads as noise rather th
 
 (`end_to_end_swebench_30_skeleton.json` was reconstructed from that run's captured log rather than re-run with `--output`, since the flag didn't exist yet at the time — it has full per-bug accuracy/precision/recall/F1 but not the raw candidate-file lists that `end_to_end_swebench_30_symbols.json` includes.)
 
+**Scaled to n=60** (`end_to_end_swebench_60_skeleton.json` / `end_to_end_swebench_60_symbols.json`, same sampling method — `main.py --sample-size 60`, seed 42 — so this is a superset draw, not an independent resample):
+
+| Config | Command | Accuracy | Precision | Recall | F1 | TP/FP/FN |
+|---|---|---|---|---|---|---|
+| Skeleton | `--bm25-skeleton` | 46.7% | 46.7% | 36.8% | 41.2% | 28/32/48 |
+| Symbols (no imports) | `--bm25-symbols` | **51.7%** | 51.7% | 40.8% | 45.6% | 31/29/45 |
+
+**The n=30 tie breaks**: symbols now wins by +5.0pp, consistent with its better retrieval ceiling. 7 of 60 instances flip:
+
+| Instance | Skeleton | Symbols |
+|---|---|---|
+| django__django-12125 | miss | **hit** |
+| django__django-12325 | miss | **hit** |
+| django__django-13551 | miss | **hit** |
+| django__django-15022 | miss | **hit** |
+| django__django-16100 | hit | **miss** |
+| pytest-dev__pytest-10356 | miss | **hit** |
+| scikit-learn__scikit-learn-26323 | hit | **miss** |
+
+5 improve, 2 degrade — net +3 instances (+5.0pp), no longer a wash. **`symbols_no_imports`' retrieval-ceiling advantage over skeleton now converts into a real end-to-end accuracy edge at n=60**, settling the question the n=30 tie left open.
+
 ## 3. Embedding retrieval-recall ceiling (negative result)
 
 `embedding_ceiling_test_swebench_6.json` — produced by `scripts/run_embedding_ceiling_test.py` on a smaller 6-instance manifest. UniXCoder embeddings (whole-file, path+skeleton text, mean-pooled, cosine similarity) vs. BM25 path-only:
@@ -110,6 +131,10 @@ python scripts/generate_evaluation_manifest.py --dataset swebench --size 30 --po
 python scripts/compare_bm25_representations.py --manifest results/manifests/swebench-multi-n30-s42-6757c7d8bb76.json --output results/bm25_comparison_swebench_30.json
 python main.py --method openrouter --dataset swebench --model gpt-4o-mini --sample-size 30 --bm25-top-k 100 --bm25-skeleton --output results/end_to_end_swebench_30_skeleton.json
 python main.py --method openrouter --dataset swebench --model gpt-4o-mini --sample-size 30 --bm25-top-k 100 --bm25-symbols --output results/end_to_end_swebench_30_symbols.json
+
+# §2 n=60 follow-up (settles the n=30 tie)
+python main.py --method openrouter --dataset swebench --model gpt-4o-mini --sample-size 60 --bm25-top-k 100 --bm25-skeleton --output results/end_to_end_swebench_60_skeleton.json
+python main.py --method openrouter --dataset swebench --model gpt-4o-mini --sample-size 60 --bm25-top-k 100 --bm25-symbols --output results/end_to_end_swebench_60_symbols.json
 
 # §4 n=30 hybrid retrieval (checkout experiment/hybrid-retrieval first)
 python scripts/generate_evaluation_manifest.py --dataset swebench --size 30 --pool-size 500 --seed 42 --max-per-repo 3

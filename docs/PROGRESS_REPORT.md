@@ -105,7 +105,16 @@ Build a **file-level** bug localization system that, for a bug instance (bug rep
 
 Both beat the baseline by **+6.7pp** — confirms BM25 pre-filtering genuinely helps end-to-end, not just its retrieval-only ceiling. The two representations **tie exactly** at the aggregate level despite symbols' clear retrieval-ceiling advantage (§4): exactly 4/30 instances flip (2 improve, 2 degrade), netting zero. At n=30 this reads as noise, not evidence either representation is truly better end-to-end.
 
-**Main files:** `main.py` (`--bm25-skeleton` / `--bm25-symbols` / `--bm25-symbols-imports` / `--output`), `results/end_to_end_swebench_30_skeleton.json`, `results/end_to_end_swebench_30_symbols.json`.
+**Scaled to n=60** (`results/end_to_end_swebench_60_skeleton.json`, `results/end_to_end_swebench_60_symbols.json`, same seeded sampling as a superset draw, not an independent resample):
+
+| Config | Accuracy | Precision | Recall | F1 |
+|---|---:|---:|---:|---:|
+| skeleton-BM25 | 46.7% | 46.7% | 36.8% | 41.2% |
+| symbols-BM25 | **51.7%** | 51.7% | 40.8% | 45.6% |
+
+**The n=30 tie breaks**: symbols now wins by +5.0pp (7/60 instances flip: 5 improve, 2 degrade, net +3). `symbols_no_imports`' better retrieval ceiling (§4) now converts into a real end-to-end accuracy edge — settled, not noise.
+
+**Main files:** `main.py` (`--bm25-skeleton` / `--bm25-symbols` / `--bm25-symbols-imports` / `--output`), `results/end_to_end_swebench_30_skeleton.json`, `results/end_to_end_swebench_30_symbols.json`, `results/end_to_end_swebench_60_skeleton.json`, `results/end_to_end_swebench_60_symbols.json`.
 
 ---
 
@@ -232,7 +241,7 @@ MRR climbs monotonically as the embedding side is up-weighted — recovering, th
 
 1. Symbol-enriched BM25 (`symbols_no_imports`) has the best pure retrieval ceiling of any file-level representation tested (86.7% Hit@100, real n=30).
 2. BM25 pre-filtering measurably improves real end-to-end LLM localization accuracy (43.3% → 50.0%, real n=30, paid).
-3. Which BM25 representation wins end-to-end is inconclusive at n=30 despite a clear retrieval-ceiling gap between them — a bigger sample is needed.
+3. Which BM25 representation wins end-to-end was inconclusive at n=30 (exact tie) but resolves at n=60: `symbols_no_imports` wins by +5.0pp (51.7% vs 46.7%), matching its retrieval-ceiling advantage.
 4. Whole-file embedding is a genuine dead end here (n=6, but a large, unambiguous gap vs. BM25).
 5. Chunked embedding fused with BM25 via RRF beats BM25 alone, confirmed at n=30 (MRR 0.087 → 0.206 unweighted, up to 0.281 with weighted 1:10 fusion) — the opposite of whole-file's result, consistent with the literature's specific explanation for the difference. Unweighted (1:1) RRF loses to chunked_embedding-alone at n=30, but weighting the fusion toward embedding (≥1:3) recovers and clearly beats embedding-alone — the hybrid *design* was right, the equal-weighting assumption was not. This is now the best-performing config found in the project (n=30, weight optimum not yet found — trend hadn't plateaued at 1:10).
 6. Localizability diagnostics and failure attribution infrastructure are built and validated but not yet combined into one large-scale end-to-end pass.
@@ -254,7 +263,7 @@ MRR climbs monotonically as the embedding side is up-weighted — recovering, th
 ## 16. Next planned work
 
 1. ~~Scale the hybrid retrieval test (§8) to a larger manifest (n≈24–30) to confirm or disconfirm the positive n=6 signal.~~ **Done (n=30)**, plus a follow-up weighted-RRF sweep — weighted fusion (1:10 embedding-favored) is now the best config found (MRR 0.281). Remaining open thread: push the weight sweep further (1:20+) to find the true optimum, and cross-check on a second manifest before treating 1:10 as settled.
-2. Re-run the skeleton-vs-symbols end-to-end comparison (§6) at larger n to settle the current tie.
+2. ~~Re-run the skeleton-vs-symbols end-to-end comparison (§6) at larger n to settle the current tie.~~ **Done (n=60)** — symbols wins by +5.0pp (51.7% vs 46.7%), settling the n=30 tie.
 3. Write the MN5 execution handbook and adapt the read guide's command sequence to this repo.
 4. BeetleBox transition (next dataset per confirmed sequencing) — note the Python-only AST caveat above.
 5. BugsInPy integration (lower priority).
@@ -290,5 +299,5 @@ MRR climbs monotonically as the embedding side is up-weighted — recovering, th
 - State-of-the-art claims
 - General BeetleBox or multi-language results (untested)
 - 1:10 as a settled optimal RRF weight — the MRR-vs-weight curve hadn't plateaued at the highest ratio tested; needs a wider sweep and a second manifest before the weighting is treated as tuned rather than directional
-- A definitive answer on which BM25 representation is best end-to-end (n=30 tie)
+- ~~A definitive answer on which BM25 representation is best end-to-end (n=30 tie)~~ — resolved at n=60: symbols wins by +5.0pp
 - MN5 production-readiness for this specific repo
