@@ -4,12 +4,15 @@ scripts/run_hybrid_retrieval_test.py, scripts/run_hybrid_rrf_weighting_test.py),
 chunked-embedding ranking method (rank_files_embedding_chunked) so the comparison isolates
 the embedding model itself, not the retrieval method around it.
 
-First pass (2026-08-10, user-scoped via AskUserQuestion): microsoft/codebert-base (same
-mean-pooled HF architecture as the UniXCoder baseline, zero code changes needed) and
-text-embedding-3-small (OpenAI API, paid but cheap -- embed_texts() dispatches to the API
-for this model name). Qwen3-Embedding and BGE-Code-v1 use last-token pooling + an
-instruction-prefixed query, not mean pooling -- deliberately out of scope for this pass;
-Voyage-Code needs a new API key the user hasn't set up yet.
+First pass (2026-08-10): microsoft/codebert-base (same mean-pooled HF architecture as the
+UniXCoder baseline) and text-embedding-3-small (OpenAI API). Extended same day to cover all
+6 models named in the official study plan: BAAI/bge-code-v1 and Qwen/Qwen3-Embedding-0.6B
+needed new last-token-pooling + instruction-prefixed-query support in
+method/embedding_retriever.py (embed_texts()'s is_query param); Qwen3-Embedding also needed
+bumping transformers 4.46.0 -> 4.51.0 (its minimum supported version -- verified UniXCoder/
+CodeBERT still work unchanged after the bump, full test suite still green). voyage-code-3
+needed a new API backend (plain REST via requests, VOYAGE_AI_API_KEY) once the user added
+a Voyage AI key.
 
 Run at a small n first (n=6, matching the original embedding-ceiling test's scale) since
 model loading/compute cost is unknown per candidate before this script has actually run them.
@@ -40,6 +43,9 @@ MODEL_CONFIGS = [
     ("unixcoder", "microsoft/unixcoder-base"),
     ("codebert", "microsoft/codebert-base"),
     ("openai-3-small", "text-embedding-3-small"),
+    ("bge-code-v1", "BAAI/bge-code-v1"),
+    ("qwen3-embedding-0.6b", "Qwen/Qwen3-Embedding-0.6B"),
+    ("voyage-code-3", "voyage-code-3"),
 ]
 
 
