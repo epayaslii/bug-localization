@@ -69,6 +69,89 @@ def test_screen_bug_instance_uses_custom_rank_fn():
     assert result["gt_ranks"]["bar.py"] == 2
 
 
+def test_screen_bug_instance_recall_at_1_5_10_are_fractional_not_binary():
+    # Two localizable GTs, ranked 1 and 8. Hit@10 is binary ("found at least one") = 1
+    # for BOTH GTs found within 10. Recall@10 is fractional ("found what share of all
+    # GTs") = 2/2 = 1.0 here too, but Recall@5 must diverge: only 1 of 2 GTs is within
+    # rank 5, so Recall@5 = 0.5 while Hit@5 stays 1 (at least one GT found).
+    bug = make_bug(
+        ground_truths=["first.py", "eighth.py"],
+        code_files=["first.py", "a.py", "b.py", "c.py", "d.py", "e.py", "f.py", "eighth.py"],
+    )
+    rank_fn = lambda b: b.code_files  # natural order: first.py=rank1, eighth.py=rank8
+    result = screen_bug_instance(bug, rank_fn=rank_fn)
+
+    assert result["hit_at"][5] == 1        # at least one GT within top 5 -> binary hit
+    assert result["recall_at"][5] == 0.5   # but only 1 of 2 GTs within top 5 -> fractional
+    assert result["hit_at"][10] == 1
+    assert result["recall_at"][10] == 1.0  # both GTs within top 10 -> full recall
+
+
+def test_screen_bug_instance_recall_at_1_zero_when_only_second_gt_ranks_first():
+    bug = make_bug(
+        ground_truths=["first.py", "second.py"],
+        code_files=["first.py", "second.py"],
+    )
+    result = screen_bug_instance(bug, rank_fn=lambda b: b.code_files)
+    assert result["recall_at"][1] == 0.5  # only 1 of 2 GTs at rank 1
+
+
+def test_screen_bug_instance_reports_latency_for_a_real_rank_fn_call():
+    import time
+    bug = make_bug(ground_truths=["bar.py"], code_files=["bar.py", "x.py"])
+
+    def slow_rank_fn(b):
+        time.sleep(0.05)
+        return b.code_files
+
+    result = screen_bug_instance(bug, rank_fn=slow_rank_fn)
+    assert result["latency_s"] >= 0.05
+
+
+def test_screen_bug_instance_latency_zero_when_no_localizable_gt_skips_rank_fn():
+    bug = make_bug(ground_truths=["new.py"], code_files=["bar.py"], patch=NEW_FILE_PATCH)
+    calls = []
+    result = screen_bug_instance(bug, rank_fn=lambda b: calls.append(1) or b.code_files)
+    assert result["latency_s"] == 0.0
+    assert calls == []  # rank_fn must never be called -- there's nothing it could find
+
+
+def test_summarize_screening_reports_mean_latency():
+    import time
+    bug = make_bug(ground_truths=["bar.py"], code_files=["bar.py"])
+
+    def slow_rank_fn(b):
+        time.sleep(0.02)
+        return b.code_files
+
+    report = screen_manifest([bug], rank_fn=slow_rank_fn)
+    summary = summarize_screening(report)
+    assert summary["mean_latency_s"] >= 0.02
+
+
+def test_summarize_screening_mean_latency_excludes_no_localizable_gt_instances():
+    # A slow real hit alongside a skipped (no-GT) instance shouldn't have its mean latency
+    # diluted toward zero by an instance where rank_fn was never even called.
+    import time
+    real_bug = make_bug(ground_truths=["bar.py"], code_files=["bar.py"], instance_id="real")
+    skipped_bug = make_bug(ground_truths=["new.py"], code_files=["bar.py"], patch=NEW_FILE_PATCH, instance_id="skipped")
+
+    def slow_rank_fn(b):
+        time.sleep(0.03)
+        return b.code_files
+
+    report = screen_manifest([real_bug, skipped_bug], rank_fn=slow_rank_fn)
+    summary = summarize_screening(report)
+    assert summary["mean_latency_s"] >= 0.03  # not diluted by the skipped instance's 0.0
+
+
+def test_summarize_screening_includes_recall_at_1_5_10():
+    bugs = [make_bug(ground_truths=["bar.py"], code_files=["bar.py", "x.py"])]
+    report = screen_manifest(bugs)
+    summary = summarize_screening(report)
+    assert set(summary["macro_recall_at"].keys()) >= {1, 5, 10}
+
+
 def test_screen_manifest_aggregates_difficulty_distribution():
     bugs = [
         make_bug(ground_truths=["bar.py"], code_files=["bar.py", "x.py"], instance_id="easy"),

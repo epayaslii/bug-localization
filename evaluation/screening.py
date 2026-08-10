@@ -7,6 +7,7 @@ retrieval method could ever find them, and counting them as misses would underst
 real recall.
 """
 
+import time
 from collections import Counter
 
 from method.bm25_retriever import rank_files_bm25
@@ -15,7 +16,7 @@ from dataset.utils import get_logger
 
 logger = get_logger(__name__)
 
-RECALL_KS = (100, 200)
+RECALL_KS = (1, 5, 10, 100, 200)
 HIT_KS = (1, 5, 10, 100, 200)
 
 
@@ -66,6 +67,10 @@ def screen_bug_instance(bug, token=None, cache=None, rank_fn=None):
     localizable_gts = [p for p, c in classifications.items() if c in LOCALIZABLE_CLASSES]
 
     if not localizable_gts:
+        # rank_fn is never called here -- there's nothing it could find, so timing it would
+        # measure wasted work a real system wouldn't need to do for this instance either
+        # (it would still not find anything). latency_s=0.0 reflects that no ranking
+        # computation actually happened, consistent with the all-zero hit_at/recall_at.
         return {
             "instance_id": bug.instance_id,
             "repo": bug.repo,
@@ -76,9 +81,12 @@ def screen_bug_instance(bug, token=None, cache=None, rank_fn=None):
             "recall_at": {k: 0.0 for k in RECALL_KS},
             "average_precision": 0.0,
             "difficulty": "no_localizable_gt",
+            "latency_s": 0.0,
         }
 
+    t0 = time.time()
     ranked = rank_fn(bug)
+    latency_s = time.time() - t0
     rank_of = {path: i + 1 for i, path in enumerate(ranked)}
 
     gt_rank_map = {p: rank_of[p] for p in localizable_gts if p in rank_of}
@@ -95,6 +103,7 @@ def screen_bug_instance(bug, token=None, cache=None, rank_fn=None):
         "recall_at": {k: (sum(1 for r in gt_ranks if r <= k) / len(localizable_gts)) for k in RECALL_KS},
         "average_precision": _average_precision(gt_rank_map, len(localizable_gts)),
         "difficulty": _difficulty_band(best_rank),
+        "latency_s": latency_s,
     }
 
 
@@ -128,10 +137,17 @@ def summarize_screening(screening_report):
     mrr = sum((1.0 / r["best_rank"]) if r["best_rank"] else 0.0 for r in results) / n
     map_score = sum(r.get("average_precision", 0.0) for r in results) / n
 
+    # Mean localization latency over instances that actually called rank_fn (excludes the
+    # no-localizable-gt short-circuit, where latency_s=0.0 reflects skipped work, not real
+    # zero-latency retrieval -- including those would understate true per-call latency).
+    timed = [r["latency_s"] for r in results if r.get("difficulty") != "no_localizable_gt"]
+    mean_latency_s = sum(timed) / len(timed) if timed else 0.0
+
     return {
         "n": len(results),
         "macro_hit_at": macro_hit_at,
         "macro_recall_at": macro_recall_at,
         "mrr": mrr,
         "map": map_score,
+        "mean_latency_s": mean_latency_s,
     }
