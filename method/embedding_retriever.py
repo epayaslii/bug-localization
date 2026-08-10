@@ -1,4 +1,5 @@
 import ast
+import os
 import time
 
 import torch
@@ -13,6 +14,11 @@ logger = get_logger(__name__)
 _DEVICE = "mps" if torch.backends.mps.is_available() else ("cuda" if torch.cuda.is_available() else "cpu")
 
 _MODEL_CACHE = {}
+_OPENAI_CLIENT = None
+
+# Models served by the OpenAI embeddings API instead of a local HF checkpoint --
+# embed_texts() dispatches here instead of loading an AutoModel for these names.
+_OPENAI_EMBEDDING_MODELS = {"text-embedding-3-small", "text-embedding-3-large", "text-embedding-ada-002"}
 
 
 def _load_model(model_name: str):
@@ -31,9 +37,38 @@ def _mean_pool(last_hidden_state, attention_mask):
     return summed / counts
 
 
+def _get_openai_client():
+    global _OPENAI_CLIENT
+    if _OPENAI_CLIENT is None:
+        from openai import OpenAI
+        _OPENAI_CLIENT = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+    return _OPENAI_CLIENT
+
+
+_OPENAI_MAX_INPUT_CHARS = 20000  # conservative vs. the API's 8192-token cap (~4 chars/token for code)
+
+
+def _embed_texts_openai(texts: list[str], model_name: str, batch_size: int = 256) -> torch.Tensor:
+    """Embed via the OpenAI embeddings API (paid). Unlike the local HF path (which silently
+    truncates at the tokenizer's max_length), the API hard-rejects oversized input -- the AST
+    chunker doesn't cap chunk size for large classes/headers, so this truncates defensively
+    rather than crashing mid-run on one pathological chunk."""
+    client = _get_openai_client()
+    all_embeddings = []
+    for i in range(0, len(texts), batch_size):
+        batch = [(t if t.strip() else " ")[:_OPENAI_MAX_INPUT_CHARS] for t in texts[i:i + batch_size]]
+        response = client.embeddings.create(model=model_name, input=batch)
+        all_embeddings.extend(item.embedding for item in response.data)
+    return torch.tensor(all_embeddings)
+
+
 @torch.no_grad()
 def embed_texts(texts: list[str], model_name: str = "microsoft/unixcoder-base", batch_size: int = 32) -> torch.Tensor:
-    """Embed a list of texts, returning an (N, hidden_size) tensor of mean-pooled embeddings."""
+    """Embed a list of texts, returning an (N, hidden_size) tensor. Local HF checkpoints are
+    mean-pooled; models in _OPENAI_EMBEDDING_MODELS are dispatched to the OpenAI API instead."""
+    if model_name in _OPENAI_EMBEDDING_MODELS:
+        return _embed_texts_openai(texts, model_name)
+
     tokenizer, model = _load_model(model_name)
     all_embeddings = []
 
