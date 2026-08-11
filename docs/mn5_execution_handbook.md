@@ -2,10 +2,10 @@
 
 Practical reference for running this repo's offline retrieval pipeline on MareNostrum 5
 (MN5, BSC). Consolidates everything established across real access sessions to date —
-account details, environment setup, four blockers found and diagnosed so far (three
-resolved, one open), and what's already confirmed working. This is a **final deliverable
-named explicitly** in the official study plan; it did not exist as a document before this
-pass, only as scattered session notes.
+account details, environment setup, five blockers found and diagnosed so far (four
+resolved, one open — a real GPU speedup, not a correctness blocker), and what's already
+confirmed working, including a completed real `sbatch` submission. This is a **final
+deliverable named explicitly** in the official study plan.
 
 ## What this handbook is for, and what it isn't
 
@@ -28,9 +28,28 @@ Scope this handbook, and any MN5 work, accordingly.
   - Project dir: `/gpfs/projects/ehpc680/comm842299/repos/bug-localization/`
   - Scratch: `/gpfs/scratch/ehpc680/comm842299/`
 
-No SSH access to any of the above exists from the machine this handbook was written on —
-verify connectivity from whatever machine will actually run these steps before assuming any
-of the rest of this document is directly executable there and then.
+**SSH access — RESOLVED 2026-08-11.** No key existed on the primary working machine as of
+earlier sessions; password auth doesn't work through any terminal relay (Claude Code's `!`
+prefix included — confirmed no real TTY is available for the interactive password prompt).
+Fix: generated a dedicated key (`~/.ssh/mn5_ed25519`, no passphrase — scoped only to MN5
+automation, not a general-purpose key) and copied it to MN5 once via `ssh-copy-id` from a
+real terminal app (not through Claude Code). An `~/.ssh/config` `Host mn5` entry (pointing
+at `alogin1.bsc.es`, this key, `ControlMaster auto` for connection reuse) makes subsequent
+access just `ssh mn5`. Verify with `ssh -o BatchMode=yes mn5 echo ok` — if that fails,
+password auth is still the only path and needs the same real-terminal workaround.
+
+### Slurm account/QoS/partition facts (discovered 2026-08-11, `sbatch` submission)
+
+- `sbatch` needs an explicit account: `--account=ehpc680` (job submission fails with "No
+  account specified" otherwise, even though `sacctmgr show associations` only lists one).
+- QoS wall-clock limits (from `sacctmgr show qos`): `acc_debug` = 2 hours, high priority;
+  `acc_ehpc` = 3 days, lower priority. Pick based on expected runtime, not just habit —
+  CPU-bound embedding jobs (see Blocker 5 below) can easily exceed 2 hours.
+- GPU requests have a fixed CPU ratio: Slurm rejects anything below `--cpus-per-task=20`
+  per `--gres=gpu:1` ("Minimum cpus requested should be (nodes * gpus/node * 20)").
+- `sinfo` is permission-denied for this account (not just unconfigured — a real, different
+  restriction than node listing generally). `scontrol show partition acc` works instead and
+  is enough to confirm the GPU resource name (`gres/gpu`) and node count.
 
 ## Environment setup — the module-load footgun
 
@@ -103,6 +122,9 @@ the full chain above loaded first, not just for package resolution.
   counts and `ground_truths` returned, `cached=True` throughout, no live network calls.
 - `rank_bm25==0.2.2` (a real pinned dependency of `method/bm25_retriever.py`) was missing
   from the wheelhouse entirely — downloaded locally (pure-Python, 8.6KB) and added.
+- Offline Qwen3-Embedding-0.6B loading (tokenizer + model, see Blocker 4).
+- A real `sbatch` submission (see "First real Slurm submission" below) — queued, ran, and
+  produced live progress log output on a GPU-partition node.
 
 ## Blocker 1 — huggingface-hub version conflict — RESOLVED 2026-08-10
 
@@ -189,33 +211,142 @@ method/ set, though it's missing the later Voyage/last-token-pooling additions t
 landed on `research/embedding-model-bakeoff` — no single branch has everything merged) rather
 than continuing to patch individual files as they're discovered missing.
 
-## Blocker 4 — no outbound internet blocks HuggingFace model downloads — CONFIRMED, OPEN
+## Blocker 4 — no outbound internet blocks HuggingFace model downloads — RESOLVED 2026-08-11
 
-Once blocker 3's files were all in place, running real embedding inference (`embed_texts`
-with `microsoft/unixcoder-base`) failed as expected given MN5's no-internet constraint
-(stated at the top of this handbook, but untested against this specific code path until
-now):
+Once blocker 3's files were all in place, running real embedding inference failed exactly
+as expected given MN5's no-internet constraint:
 
 ```
 requests.exceptions.ConnectTimeout: ... Connection to huggingface.co timed out. (connect timeout=10)
-...
-OSError: We couldn't connect to 'https://huggingface.co' to load this file, couldn't find it
-in the cached files ...
 ```
 
-`AutoTokenizer.from_pretrained` / `AutoModel.from_pretrained` always try to hit the Hub first
-unless the model is already in the local HF cache — there is no offline fallback by default.
+This turned out to be the first of **five separate issues** surfaced in sequence while
+getting a real `sbatch` job (Qwen3-Embedding-0.6B through `run_hybrid_rrf_weighting_test.py`)
+to actually run — each fixed with the same pattern (download/resolve locally, ship the
+artifact to MN5, run offline), documented here in the order they were hit:
 
-**Next step, not yet tried**: pre-download the model weights locally (e.g. via
-`huggingface_hub.snapshot_download("microsoft/unixcoder-base")` or
-`git clone https://huggingface.co/microsoft/unixcoder-base`), transfer the resulting cache
-directory to MN5 the same way as the wheels/code files, and either point
-`HF_HOME`/`TRANSFORMERS_CACHE` at the transferred location or set `HF_HUB_OFFLINE=1` so
-`from_pretrained` reads the local cache instead of attempting a network call. This is the
-same pattern as every other MN5 blocker so far — download once with internet access, ship
-the artifact over, run offline.
+**4a. Model weights not present offline.** Fixed: `huggingface_hub.snapshot_download(...)`
+locally, tarred the resulting `hub/` cache dir (`tar -czf ... -C hf_cache_mn5 hub`,
+dereferencing symlinks with `cp -RL` first so the archive is self-contained), `scp`'d it
+over (1.8GB), extracted into `hf_cache_mn5/` on MN5, set `HF_HOME` to that path plus
+`HF_HUB_OFFLINE=1`/`TRANSFORMERS_OFFLINE=1`. Confirmed loading fully offline afterward.
 
-## Reproducing the smoke test once both blockers are cleared
+**4b. `HF_HUB_OFFLINE=1` also silently blocks `datasets.load_dataset()`.** Not just model
+weights — the dataset loader tries to reach `SWE-bench/SWE-bench_Verified` on the Hub too,
+and offline mode blocks that identically (`ConnectionError: ... OfflineModeIsEnabled`). Fix:
+set `SWEBENCH_LOCAL_PATH` to the already-mirrored local copy
+(`hf_datasets/swebench_verified_test`) — the interactive smoke test scripts already did this
+via `os.environ.setdefault(...)`, but a batch script needs it set explicitly, it isn't
+implied by having the weights cached.
+
+**4c. `run_hybrid_rrf_weighting_test.py` needs every repo in the full manifest pool, not
+just the final sampled instances.** The script's `pool_size` (500 for this project's
+manifests — the entire SWE-bench Verified split) determines how many raw instances
+`get_bug_instances()` processes before filtering down to the manifest's actual 30 wanted
+instances — and every one of those 500 triggers a `get_code_files()` call. **All 12 repos
+in the full dataset need to be mirrored, not just the ~11 repos that happen to appear in
+the final 30-instance sample** (checking only the manifest's own `instances` list
+undercounts this). Missing `mwaskom/seaborn` surfaced this — confirmed the full dataset's
+repo set with a local `SWEBench().get_bug_instances(sample_size=500)` + `set(b.repo ...)`,
+mirrored the gap, transferred it (55MB, small).
+
+**4d. `transformers==4.46.0` on MN5 doesn't recognize the `qwen3` architecture** (added in
+4.51.0+, which this project's local venv already had). Fixed by downloading the
+`transformers==4.51.0` wheel (`py3-none-any`, pure Python) and transferring it — but that
+version also needs `tokenizers>=0.21,<0.22`, and the wheelhouse only had 0.20.3/0.23.1
+(neither fits) — needed a fresh platform-specific `tokenizers==0.21.4` wheel too
+(`--platform manylinux2014_x86_64 --python-version 311 --implementation cp --abi cp311`).
+
+**4e. Loading `transformers` then tried to import a broken system-level `tensorflow`.**
+`transformers` eagerly imports TF as an optional backend even when unused; MN5's
+module-provided `tensorflow` has `undefined symbol: ncclMemFree` in its shared library (a
+CUDA/NCCL mismatch on the node, not something to fix at the Python level). Fixed by setting
+`USE_TF=0` / `USE_TORCH=1` before importing — this is a real recurring env var to set on
+every future MN5 job that touches `transformers`, not a one-off.
+
+**4f. `accelerate` (a real pinned dependency, `accelerate==1.2.1` locally) was never
+installed on MN5's venv at all** — surfaced as `NameError: name 'init_empty_weights' is not
+defined` deep in `transformers`' model-loading path. Fixed by downloading + transferring the
+wheel; its own dependency `psutil` was *also* missing (a second, nested gap) and needed a
+separate platform-specific wheel download the same way as `tokenizers`.
+
+**Net fix, all together, confirmed working**: model loads fully offline once `HF_HOME`,
+`HF_HUB_OFFLINE=1`, `TRANSFORMERS_OFFLINE=1`, `USE_TF=0`, `USE_TORCH=1`, and
+`SWEBENCH_LOCAL_PATH` are all set, and `transformers==4.51.0`/`tokenizers==0.21.4`/
+`accelerate==1.2.1`/`psutil` are all installed. See the `sbatch` template below for the full
+working environment block.
+
+## Blocker 5 — GPU allocated but not actually used — CONFIRMED, OPEN (not blocking correctness)
+
+`torch==2.6.0+cpu` is installed on MN5 (a CPU-only build, installed back when first fixing
+Blocker 2, before GPU use was ever the intent) — so `torch.cuda.is_available()` is always
+`False` regardless of `--gres=gpu:1`, and `method/embedding_retriever.py`'s device
+auto-detection silently falls back to CPU. First real symptom: a job requesting a GPU node
+still took ~300-500s/instance for Qwen3-Embedding chunked embedding — the same order of
+magnitude as local CPU timing, not GPU-accelerated. This nearly caused a real job to be
+killed by `acc_debug`'s 2-hour wall-clock limit partway through a 30-instance sweep (~3hr
+actual runtime) — resubmitted under `acc_ehpc` (3-day limit) instead as the immediate fix.
+
+**Real fix, not yet done**: install a CUDA-enabled `torch` build (matching MN5's actual CUDA
+version — not yet checked) instead of the `+cpu` wheel, so GPU allocations are actually
+used. Worth doing before any future MN5 GPU job, since right now `--partition=acc`
+`--gres=gpu:1` reserves and burns GPU-node queue time/priority for zero speed benefit over
+a CPU-only submission.
+
+## First real Slurm submission — 2026-08-11
+
+Everything before this session was interactive (`module load` + direct `python` in a login
+shell). The `qwen3_rrf_sweep.sbatch` template below is the first actual `sbatch` job
+submitted for this project — closes the WP 6.2 gap of never having run a real batch job.
+
+```bash
+#!/bin/bash
+#SBATCH --job-name=qwen3-rrf-sweep
+#SBATCH --account=ehpc680
+#SBATCH --partition=acc
+#SBATCH --qos=acc_ehpc
+#SBATCH --time=06:00:00
+#SBATCH --gres=gpu:1
+#SBATCH --cpus-per-task=20
+#SBATCH --output=logs/qwen3_rrf_sweep_%j.out
+#SBATCH --error=logs/qwen3_rrf_sweep_%j.err
+
+module load intel
+module load mkl
+module load impi
+module load hdf5
+module load python/3.11.5-gcc
+unset PYTHONHOME
+unset PYTHONPATH
+
+cd /gpfs/projects/ehpc680/comm842299/repos/bug-localization/
+
+export HF_HOME=/gpfs/projects/ehpc680/comm842299/repos/bug-localization/hf_cache_mn5
+export HF_HUB_OFFLINE=1
+export TRANSFORMERS_OFFLINE=1
+export SWEBENCH_LOCAL_PATH=/gpfs/projects/ehpc680/comm842299/repos/bug-localization/hf_datasets/swebench_verified_test
+export USE_TF=0
+export USE_TORCH=1
+
+.venv_mn5/bin/python scripts/run_hybrid_rrf_weighting_test.py \
+  --manifest results/manifests/swebench-multi-n30-s42-1fb8f4b8d82f.json \
+  --candidate-pool-size 200 \
+  --model "Qwen/Qwen3-Embedding-0.6B" \
+  --output results/hybrid_rrf_qwen3_swebench_30_mn5.json
+```
+
+Submit with `sbatch qwen3_rrf_sweep.sbatch`, monitor with `squeue -u comm842299` /
+`sacct -j <id> --format=JobID,State,Elapsed,ExitCode`, results land in
+`logs/qwen3_rrf_sweep_<id>.{out,err}` and the `--output` JSON path.
+
+**Job history from getting this right** (useful for the next person hitting the same
+errors): job `44503792` failed on 4b (missing `SWEBENCH_LOCAL_PATH`), `44503928` failed on
+4c (missing `seaborn`), `44503960` failed on 4d (old `transformers`), then 4e/4f were caught
+and fixed *before* the next submission rather than via another failed job. `44504357`
+(first fully-passing submission) was still running when caught by Blocker 5's timeout risk
+and cancelled/resubmitted as `44505385` under a longer QoS.
+
+## Reproducing the smoke test
 
 ```bash
 module load intel
@@ -230,9 +361,15 @@ cd /gpfs/projects/ehpc680/comm842299/repos/bug-localization/
 .venv_mn5/bin/python mn5_pipeline_run.py
 ```
 
-Once blocker 4 (model weights) is cleared, the next real milestone is adapting
-`scripts/compare_embedding_models.py` / `scripts/run_hybrid_rrf_weighting_test.py` (both
-already dataset/manifest-driven, no code changes needed beyond pointing them at MN5's
-paths and making sure their imports are fully present per blocker 3) to run at an `n` far
-beyond what's practical locally — that's the actual payoff this handbook is building
-toward, not just getting `import torch` to succeed.
+## Status as of 2026-08-11 end of session
+
+The real payoff this handbook was building toward — running `run_hybrid_rrf_weighting_test.py`
+at an `n` beyond what's practical locally — is in progress, not yet landed: job `44505385`
+(Qwen3-Embedding-0.6B RRF sweep, n=30) was submitted and running when this session ended,
+projected ~3 hours on CPU (see Blocker 5). Check `squeue -u comm842299` / `sacct -j 44505385`
+next session; if it completed, the result is at
+`results/hybrid_rrf_qwen3_swebench_30_mn5.json` on MN5 and needs pulling back
+(`scp mn5:/gpfs/projects/ehpc680/comm842299/repos/bug-localization/results/hybrid_rrf_qwen3_swebench_30_mn5.json results/`)
+and writing up in `docs/qwen3_rrf_result.md` (currently only has the n=6 local result). If
+it failed or got killed, `sacct` will show why — check the wall-clock QoS limit first before
+assuming a new bug.
