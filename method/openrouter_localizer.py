@@ -8,7 +8,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from dotenv import load_dotenv
 from openai import OpenAI
 from method.base import BugLocalizationMethod
-from method.models import OpenAILocalizerResponse
+from method.models import OpenAILocalizerResponse, ReasoningLocalizerResponse
 from method.prompt import PromptGenerator
 from dataset.utils import get_logger
 
@@ -249,4 +249,19 @@ class OpenRouterLocalizer(BugLocalizationMethod):
         else:
             prompt = self.prompt_generator.generate_openai_prompt(bug)
             return self.invoke_structured(prompt, OpenAILocalizerResponse)
-            
+
+    def localize_with_reasoning(self, bug) -> ReasoningLocalizerResponse:
+        """Like localize(), but asks the model to produce per-file reasoning before its
+        final ranking (see PromptGenerator.generate_reasoning_prompt). Intended to run on
+        an already BM25-narrowed bug.code_files, not the full repo -- reasoning about every
+        candidate costs more output tokens than a direct pick.
+        """
+        logger.info(f"Starting reasoning-augmented localization for instance: {bug.instance_id}")
+        logger.info(f"Candidate files: {len(bug.code_files) if bug.code_files else 0}")
+
+        if not bug.code_files:
+            logger.warning("No code files provided for localization. Check reading the code files.")
+            return ReasoningLocalizerResponse(file_reasoning=[], candidate_files=[])
+
+        prompt = self.prompt_generator.generate_reasoning_prompt(bug)
+        return self.invoke_structured(prompt, ReasoningLocalizerResponse)

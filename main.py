@@ -35,6 +35,8 @@ def main():
                        help='Score BM25 using each file\'s extracted class/function/method names instead of just its path (requires the repo to be in the local repo_cache). Takes precedence over --bm25-skeleton if both are passed.')
     parser.add_argument('--bm25-symbols-imports', action='store_true',
                        help='With --bm25-symbols, also include imported module/name tokens (off by default -- symbols-without-imports scored best in n=30 screening)')
+    parser.add_argument('--reasoning-rerank', action='store_true',
+                       help='Ask the LLM to reason about each BM25-narrowed candidate file before producing its final ranking, instead of picking directly (openrouter method only; requires --bm25-top-k to keep the candidate set small)')
     parser.add_argument('--output', default=None,
                        help='Optional path to write the run config + evaluation results as JSON')
 
@@ -99,7 +101,12 @@ def main():
             if args.max_files is not None:
                 bug.code_files = bug.code_files[:args.max_files]
                 logger.info(f"Truncated code files to {len(bug.code_files)} (--max-files={args.max_files})")
-            response = localizer.localize(bug)
+            if args.reasoning_rerank:
+                if not hasattr(localizer, 'localize_with_reasoning'):
+                    raise ValueError("--reasoning-rerank is only supported by the openrouter method")
+                response = localizer.localize_with_reasoning(bug)
+            else:
+                response = localizer.localize(bug)
             responses[bug.instance_id] = {'bug': bug, 'response': response}
             logger.info(f"Response: {response}")
         
@@ -120,11 +127,17 @@ def main():
                 "bm25_top_k": args.bm25_top_k,
                 "bm25_mode": bm25_mode,
                 "bm25_symbols_imports": args.bm25_symbols_imports if args.bm25_symbols else None,
+                "reasoning_rerank": args.reasoning_rerank,
                 "per_bug": {
                     instance_id: {
                         "repo": data["bug"].repo,
                         "ground_truths": data["bug"].ground_truths,
                         "candidate_files": data["response"].candidate_files if data["response"] else [],
+                        **(
+                            {"file_reasoning": [fr.model_dump() for fr in data["response"].file_reasoning]}
+                            if args.reasoning_rerank and data["response"] and hasattr(data["response"], "file_reasoning")
+                            else {}
+                        ),
                         **results["per_bug"][instance_id],
                     }
                     for instance_id, data in responses.items()

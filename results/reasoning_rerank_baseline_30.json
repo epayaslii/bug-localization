@@ -1,0 +1,782 @@
+{
+  "method": "openrouter",
+  "dataset": "swebench",
+  "model": "gpt-4o-mini",
+  "sample_size": 30,
+  "bm25_top_k": 15,
+  "bm25_mode": "symbols",
+  "bm25_symbols_imports": false,
+  "reasoning_rerank": false,
+  "per_bug": {
+    "pylint-dev__pylint-7080": {
+      "repo": "pylint-dev/pylint",
+      "ground_truths": [
+        "pylint/lint/expand_modules.py"
+      ],
+      "candidate_files": [
+        "src/gen/test.py",
+        "src/gen/about.py",
+        "src/gen/design.py",
+        "src/gen/settings.py",
+        "src/gen/resources_rc.py",
+        "src/gen/update_checker.py",
+        "tests/functional/a/attribute_defined_outside_init.py",
+        "tests/functional/m/mixin_class_rgx.py",
+        "tests/functional/c/consider/consider_using_with_open.py",
+        "tests/functional/o/object_as_class_attribute.py"
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 1
+    },
+    "django__django-11734": {
+      "repo": "django/django",
+      "ground_truths": [
+        "django/db/models/fields/__init__.py",
+        "django/db/models/fields/related_lookups.py",
+        "django/db/models/sql/query.py"
+      ],
+      "candidate_files": [
+        "tests/queries/test_qs_combinators.py",
+        "django/db/models/query.py",
+        "tests/queries/tests.py",
+        "tests/annotations/tests.py",
+        "tests/expressions_case/tests.py",
+        "tests/expressions/tests.py",
+        "tests/model_fields/test_foreignkey.py",
+        "tests/or_lookups/tests.py",
+        "tests/prefetch_related/tests.py",
+        "tests/delete_regress/models.py"
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 3
+    },
+    "astropy__astropy-14508": {
+      "repo": "astropy/astropy",
+      "ground_truths": [
+        "astropy/io/fits/card.py"
+      ],
+      "candidate_files": [
+        "astropy/io/fits/card.py",
+        "astropy/io/fits/tests/test_header.py",
+        "astropy/io/fits/header.py",
+        "astropy/io/fits/fitstime.py",
+        "astropy/io/fits/connect.py",
+        "astropy/io/fits/tests/test_division.py",
+        "astropy/io/fits/tests/test_hdulist.py",
+        "astropy/io/fits/tests/test_core.py",
+        "astropy/io/misc/asdf/tags/fits/fits.py",
+        "astropy/nddata/ccddata.py"
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0
+    },
+    "scikit-learn__scikit-learn-26323": {
+      "repo": "scikit-learn/scikit-learn",
+      "ground_truths": [
+        "sklearn/compose/_column_transformer.py"
+      ],
+      "candidate_files": [
+        "sklearn/compose/tests/test_column_transformer.py",
+        "sklearn/utils/tests/test_utils.py",
+        "sklearn/neural_network/tests/test_base.py",
+        "sklearn/datasets/tests/test_base.py",
+        "sklearn/covariance/tests/test_graphical_lasso.py",
+        "sklearn/decomposition/tests/test_pca.py",
+        "examples/release_highlights/plot_release_highlights_1_2_0.py",
+        "examples/ensemble/plot_adaboost_hastie_10_2.py",
+        "examples/release_highlights/plot_release_highlights_1_1_0.py",
+        "examples/release_highlights/plot_release_highlights_0_24_0.py"
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 1
+    },
+    "django__django-14034": {
+      "repo": "django/django",
+      "ground_truths": [
+        "django/forms/boundfield.py"
+      ],
+      "candidate_files": [
+        "django/forms/forms.py",
+        "django/forms/widgets.py",
+        "tests/forms_tests/field_tests/test_multivaluefield.py",
+        "tests/forms_tests/widget_tests/test_multiwidget.py",
+        "tests/forms_tests/tests/test_forms.py",
+        "tests/forms_tests/field_tests/test_base.py",
+        "tests/forms_tests/widget_tests/test_widget.py",
+        "tests/admin_widgets/test_autocomplete_widget.py",
+        "tests/forms_tests/widget_tests/test_clearablefileinput.py",
+        "tests/model_forms/tests.py"
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 1
+    },
+    "django__django-13741": {
+      "repo": "django/django",
+      "ground_truths": [
+        "django/contrib/auth/forms.py"
+      ],
+      "candidate_files": [
+        "django/contrib/auth/forms.py",
+        "django/forms/models.py",
+        "django/contrib/auth/base_user.py",
+        "tests/auth_tests/test_views.py",
+        "tests/forms_tests/field_tests/test_base.py",
+        "tests/model_formsets_regress/tests.py",
+        "tests/i18n/test_percents.py",
+        "tests/model_package/tests.py",
+        "tests/m2m_signals/tests.py",
+        "tests/m2m_through/tests.py"
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0
+    },
+    "django__django-13417": {
+      "repo": "django/django",
+      "ground_truths": [
+        "django/db/models/query.py"
+      ],
+      "candidate_files": [
+        "django/db/models/query.py",
+        "django/db/models/sql/compiler.py",
+        "tests/queries/tests.py",
+        "tests/ordering/tests.py",
+        "tests/queries/test_qs_combinators.py",
+        "tests/ordering/models.py",
+        "tests/basic/tests.py",
+        "tests/aggregation/tests.py",
+        "tests/m2m_through/tests.py",
+        "tests/admin_changelist/tests.py"
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0
+    },
+    "django__django-12125": {
+      "repo": "django/django",
+      "ground_truths": [
+        "django/db/migrations/serializer.py"
+      ],
+      "candidate_files": [
+        "django/db/migrations/state.py",
+        "django/db/models/base.py",
+        "django/db/models/fields/related.py",
+        "django/db/models/options.py",
+        "tests/model_fields/test_field_flags.py",
+        "tests/migrations/test_operations.py",
+        "tests/model_fields/test_charfield.py",
+        "tests/model_inheritance/tests.py",
+        "tests/select_related_regress/models.py",
+        "tests/template_tests/utils.py"
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 1
+    },
+    "scikit-learn__scikit-learn-25973": {
+      "repo": "scikit-learn/scikit-learn",
+      "ground_truths": [
+        "sklearn/feature_selection/_sequential.py"
+      ],
+      "candidate_files": [
+        "sklearn/model_selection/_search.py",
+        "sklearn/model_selection/_split.py",
+        "sklearn/model_selection/tests/test_search.py",
+        "sklearn/model_selection/tests/test_split.py",
+        "sklearn/feature_selection/_from_model.py",
+        "sklearn/feature_selection/tests/test_rfe.py",
+        "sklearn/tests/test_common.py",
+        "sklearn/datasets/tests/test_common.py",
+        "sklearn/utils/__init__.py",
+        "sklearn/covariance/tests/test_graphical_lasso.py"
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 1
+    },
+    "django__django-11532": {
+      "repo": "django/django",
+      "ground_truths": [
+        "django/core/mail/message.py",
+        "django/core/mail/utils.py",
+        "django/core/validators.py",
+        "django/utils/encoding.py",
+        "django/utils/html.py"
+      ],
+      "candidate_files": [
+        "django/core/mail/message.py",
+        "tests/mail/tests.py",
+        "django/core/mail/utils.py",
+        "django/core/mail/backends/smtp.py",
+        "django/core/mail/backends/console.py",
+        "django/core/mail/__init__.py",
+        "django/core/mail/backends/filebased.py",
+        "django/core/mail/backends/dummy.py",
+        "django/core/mail/backends/locmem.py",
+        "django/core/mail/backends/base.py"
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 0.2,
+      "f1": 0.33333333333333337,
+      "tp": 1,
+      "fp": 0,
+      "fn": 4
+    },
+    "pytest-dev__pytest-7571": {
+      "repo": "pytest-dev/pytest",
+      "ground_truths": [
+        "src/_pytest/logging.py"
+      ],
+      "candidate_files": [
+        "src/_pytest/logging.py",
+        "src/_pytest/fixtures.py",
+        "testing/logging/test_fixture.py",
+        "testing/logging/test_reporting.py",
+        "testing/test_capture.py",
+        "src/_pytest/reports.py",
+        "src/_pytest/pytester.py",
+        "testing/test_conftest.py",
+        "testing/test_debugging.py",
+        "testing/test_mark.py"
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0
+    },
+    "sympy__sympy-16766": {
+      "repo": "sympy/sympy",
+      "ground_truths": [
+        "sympy/printing/pycode.py"
+      ],
+      "candidate_files": [
+        "sympy/printing/codeprinter.py",
+        "sympy/tensor/indexed.py",
+        "sympy/tensor/tests/test_indexed.py",
+        "sympy/printing/tests/test_ccode.py",
+        "sympy/printing/jscode.py",
+        "sympy/printing/llvmjitcode.py",
+        "sympy/printing/fcode.py",
+        "sympy/printing/glsl.py",
+        "sympy/printing/rcode.py",
+        "sympy/polys/densebasic.py"
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 1
+    },
+    "matplotlib__matplotlib-25479": {
+      "repo": "matplotlib/matplotlib",
+      "ground_truths": [
+        "lib/matplotlib/cm.py",
+        "lib/matplotlib/colors.py"
+      ],
+      "candidate_files": [
+        "lib/matplotlib/cm.py",
+        "lib/matplotlib/image.py",
+        "lib/matplotlib/colors.py",
+        "lib/matplotlib/tests/test_colors.py",
+        "lib/matplotlib/tests/test_image.py",
+        "lib/matplotlib/__init__.py",
+        "galleries/examples/color/custom_cmap.py",
+        "lib/matplotlib/artist.py",
+        "lib/matplotlib/cbook.py",
+        "lib/matplotlib/tests/test_style.py"
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 0.5,
+      "f1": 0.6666666666666666,
+      "tp": 1,
+      "fp": 0,
+      "fn": 1
+    },
+    "django__django-11292": {
+      "repo": "django/django",
+      "ground_truths": [
+        "django/core/management/base.py"
+      ],
+      "candidate_files": [
+        "django/core/management/commands/check.py",
+        "django/core/management/commands/migrate.py",
+        "django/core/management/commands/diffsettings.py",
+        "django/core/management/commands/test.py",
+        "django/contrib/auth/management/commands/createsuperuser.py",
+        "django/contrib/gis/management/commands/ogrinspect.py",
+        "django/core/management/__init__.py",
+        "django/core/management/utils.py",
+        "tests/user_commands/management/commands/set_option.py",
+        "tests/user_commands/management/commands/required_option.py"
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 1
+    },
+    "pydata__xarray-3677": {
+      "repo": "pydata/xarray",
+      "ground_truths": [
+        "xarray/core/dataset.py"
+      ],
+      "candidate_files": [
+        "xarray/core/merge.py",
+        "xarray/tests/test_merge.py",
+        "xarray/tests/test_concat.py",
+        "xarray/core/common.py",
+        "xarray/core/dataset.py",
+        "xarray/tests/test_dask.py",
+        "xarray/backends/api.py",
+        "xarray/core/coordinates.py",
+        "xarray/tests/test_options.py",
+        "xarray/tutorial.py"
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 1
+    },
+    "django__django-16100": {
+      "repo": "django/django",
+      "ground_truths": [
+        "django/contrib/admin/options.py"
+      ],
+      "candidate_files": [
+        "tests/admin_changelist/tests.py",
+        "tests/admin_views/tests.py",
+        "tests/transactions/tests.py",
+        "tests/handlers/views.py",
+        "tests/admin_views/test_autocomplete_view.py",
+        "django/db/backends/sqlite3/base.py",
+        "tests/transaction_hooks/tests.py",
+        "tests/select_for_update/tests.py",
+        "tests/handlers/tests.py",
+        "tests/user_commands/tests.py"
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 1
+    },
+    "astropy__astropy-7166": {
+      "repo": "astropy/astropy",
+      "ground_truths": [
+        "astropy/utils/misc.py"
+      ],
+      "candidate_files": [
+        "astropy/modeling/functional_models.py",
+        "astropy/modeling/powerlaws.py",
+        "astropy/modeling/blackbody.py",
+        "astropy/modeling/tests/test_projections.py",
+        "astropy/wcs/_docutil.py",
+        "astropy/time/tests/test_delta.py",
+        "astropy/table/np_utils.py",
+        "astropy/visualization/wcsaxes/tests/test_frame.py",
+        "astropy/visualization/wcsaxes/tests/test_misc.py",
+        "astropy/stats/lombscargle/core.py"
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 1
+    },
+    "astropy__astropy-14995": {
+      "repo": "astropy/astropy",
+      "ground_truths": [
+        "astropy/nddata/mixins/ndarithmetic.py"
+      ],
+      "candidate_files": [
+        "astropy/nddata/nddata.py",
+        "astropy/nddata/tests/test_nddata_base.py",
+        "astropy/nddata/mixins/ndarithmetic.py",
+        "astropy/nddata/tests/test_ccddata.py",
+        "astropy/utils/masked/core.py",
+        "astropy/utils/masked/tests/test_masked.py",
+        "astropy/io/fits/tests/test_connect.py",
+        "astropy/table/tests/test_masked.py",
+        "astropy/table/table.py",
+        "astropy/io/votable/tests/converter_test.py"
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 1
+    },
+    "django__django-11400": {
+      "repo": "django/django",
+      "ground_truths": [
+        "django/contrib/admin/filters.py",
+        "django/db/models/fields/__init__.py",
+        "django/db/models/fields/reverse_related.py"
+      ],
+      "candidate_files": [
+        "django/contrib/admin/views/main.py",
+        "tests/admin_ordering/tests.py",
+        "tests/admin_filters/tests.py",
+        "tests/admin_ordering/models.py",
+        "tests/admin_changelist/tests.py",
+        "tests/ordering/tests.py",
+        "django/contrib/admin/exceptions.py",
+        "tests/model_fields/tests.py",
+        "tests/model_inheritance/tests.py",
+        "tests/order_with_respect_to/base_tests.py"
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 3
+    },
+    "django__django-13401": {
+      "repo": "django/django",
+      "ground_truths": [
+        "django/db/models/fields/__init__.py"
+      ],
+      "candidate_files": [
+        "tests/model_inheritance/tests.py",
+        "tests/model_inheritance/test_abstract_inheritance.py",
+        "django/db/models/options.py",
+        "tests/basic/tests.py",
+        "tests/queries/models.py",
+        "tests/model_fields/test_field_flags.py",
+        "django/contrib/contenttypes/models.py",
+        "tests/update/models.py",
+        "tests/select_related_regress/models.py",
+        "tests/fixtures_regress/models.py"
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 1
+    },
+    "django__django-13551": {
+      "repo": "django/django",
+      "ground_truths": [
+        "django/contrib/auth/tokens.py"
+      ],
+      "candidate_files": [
+        "django/contrib/auth/tokens.py",
+        "django/contrib/auth/views.py",
+        "django/contrib/auth/base_user.py",
+        "tests/auth_tests/test_tokens.py",
+        "tests/auth_tests/test_forms.py",
+        "tests/auth_tests/test_models.py",
+        "tests/auth_tests/models/with_custom_email_field.py",
+        "tests/mail/tests.py",
+        "tests/auth_tests/test_views.py",
+        "django/contrib/auth/migrations/0003_alter_user_email_max_length.py"
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0
+    },
+    "matplotlib__matplotlib-20859": {
+      "repo": "matplotlib/matplotlib",
+      "ground_truths": [
+        "lib/matplotlib/legend.py"
+      ],
+      "candidate_files": [
+        "lib/matplotlib/legend.py",
+        "lib/matplotlib/tests/test_legend.py",
+        "lib/matplotlib/tests/test_matplotlib.py",
+        "lib/matplotlib/tests/test_api.py",
+        "lib/matplotlib/backends/backend_ps.py",
+        "lib/matplotlib/backends/backend_wxagg.py",
+        "lib/matplotlib/__init__.py",
+        "lib/matplotlib/afm.py",
+        "lib/matplotlib/cbook/__init__.py",
+        "lib/matplotlib/sphinxext/plot_directive.py"
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0
+    },
+    "pydata__xarray-4687": {
+      "repo": "pydata/xarray",
+      "ground_truths": [
+        "xarray/core/computation.py"
+      ],
+      "candidate_files": [
+        "xarray/core/computation.py",
+        "xarray/core/duck_array_ops.py",
+        "xarray/core/indexing.py",
+        "xarray/core/groupby.py",
+        "xarray/tests/test_dataarray.py",
+        "xarray/tests/test_groupby.py",
+        "xarray/tests/test_computation.py",
+        "xarray/tests/test_variable.py",
+        "xarray/tests/test_dask.py",
+        "xarray/tests/test_backends.py"
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0
+    },
+    "astropy__astropy-14539": {
+      "repo": "astropy/astropy",
+      "ground_truths": [
+        "astropy/io/fits/diff.py"
+      ],
+      "candidate_files": [
+        "astropy/io/fits/diff.py",
+        "astropy/io/fits/tests/test_diff.py",
+        "astropy/io/fits/tests/test_fitsdiff.py",
+        "astropy/io/fits/tests/test_table.py",
+        "astropy/io/fits/scripts/fitsdiff.py",
+        "astropy/io/fits/tests/test_hdulist.py",
+        "astropy/io/fits/tests/test_connect.py",
+        "astropy/io/fits/tests/test_tiled_compression.py",
+        "astropy/io/fits/tests/test_tilde_path.py",
+        "astropy/table/tests/test_table.py"
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0
+    },
+    "mwaskom__seaborn-3069": {
+      "repo": "mwaskom/seaborn",
+      "ground_truths": [
+        "seaborn/_core/plot.py"
+      ],
+      "candidate_files": [
+        "seaborn/categorical.py",
+        "seaborn/_core/scales.py",
+        "seaborn/axisgrid.py",
+        "seaborn/_core/plot.py",
+        "tests/_core/test_scales.py",
+        "tests/_core/test_plot.py",
+        "seaborn/utils.py",
+        "tests/test_axisgrid.py",
+        "tests/_core/test_data.py",
+        "seaborn/external/docscrape.py"
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 1
+    },
+    "django__django-13158": {
+      "repo": "django/django",
+      "ground_truths": [
+        "django/db/models/sql/query.py"
+      ],
+      "candidate_files": [
+        "django/db/models/query.py",
+        "django/forms/models.py",
+        "tests/model_forms/tests.py",
+        "tests/model_forms/models.py",
+        "tests/many_to_many/models.py",
+        "tests/queryset_pickle/tests.py",
+        "django/contrib/contenttypes/models.py",
+        "django/contrib/contenttypes/fields.py",
+        "tests/basic/tests.py",
+        "tests/model_inheritance/tests.py"
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 1
+    },
+    "scikit-learn__scikit-learn-14141": {
+      "repo": "scikit-learn/scikit-learn",
+      "ground_truths": [
+        "sklearn/utils/_show_versions.py"
+      ],
+      "candidate_files": [
+        "sklearn/utils/_joblib.py",
+        "sklearn/externals/joblib/__init__.py",
+        "sklearn/externals/joblib/numpy_pickle.py",
+        "sklearn/tests/test_site_joblib.py",
+        "sklearn/utils/fixes.py",
+        "sklearn/utils/tests/test_fixes.py",
+        "sklearn/tests/test_base.py",
+        "sklearn/ensemble/gradient_boosting.py",
+        "sklearn/tree/export.py",
+        "sklearn/ensemble/_gb_losses.py"
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 1
+    },
+    "pytest-dev__pytest-10356": {
+      "repo": "pytest-dev/pytest",
+      "ground_truths": [
+        "src/_pytest/mark/structures.py"
+      ],
+      "candidate_files": [
+        "testing/test_mark.py",
+        "testing/test_collection.py",
+        "src/_pytest/nodes.py",
+        "testing/test_assertion.py",
+        "testing/test_doctest.py",
+        "testing/test_conftest.py",
+        "testing/python/metafunc.py",
+        "testing/python/raises.py",
+        "testing/code/test_source.py",
+        "testing/example_scripts/doctest/main_py/__main__.py"
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 1
+    },
+    "scikit-learn__scikit-learn-13142": {
+      "repo": "scikit-learn/scikit-learn",
+      "ground_truths": [
+        "sklearn/mixture/base.py"
+      ],
+      "candidate_files": [
+        "sklearn/gaussian_process/kernels.py",
+        "sklearn/metrics/cluster/tests/test_unsupervised.py",
+        "sklearn/cluster/tests/test_k_means.py",
+        "sklearn/decomposition/tests/test_pca.py",
+        "sklearn/tests/test_base.py",
+        "sklearn/datasets/tests/test_base.py",
+        "sklearn/metrics/tests/test_classification.py",
+        "sklearn/tests/test_dummy.py",
+        "sklearn/tests/test_impute.py",
+        "sklearn/utils/sparsefuncs.py"
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 1
+    },
+    "django__django-16032": {
+      "repo": "django/django",
+      "ground_truths": [
+        "django/db/models/fields/related_lookups.py",
+        "django/db/models/sql/query.py"
+      ],
+      "candidate_files": [
+        "django/db/models/sql/query.py",
+        "tests/annotations/tests.py",
+        "tests/lookup/tests.py",
+        "tests/aggregation_regress/tests.py",
+        "django/contrib/contenttypes/models.py",
+        "django/contrib/contenttypes/fields.py",
+        "tests/model_meta/tests.py",
+        "tests/m2m_through/tests.py",
+        "tests/expressions_case/tests.py",
+        "tests/model_inheritance/tests.py"
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 0.5,
+      "f1": 0.6666666666666666,
+      "tp": 1,
+      "fp": 0,
+      "fn": 1
+    }
+  },
+  "overall": {
+    "accuracy": 0.36666666666666664,
+    "precision": 0.36666666666666664,
+    "recall": 0.275,
+    "f1": 0.3142857142857143,
+    "total_bugs": 30,
+    "total_tp": 11,
+    "total_fp": 19,
+    "total_fn": 29
+  }
+}

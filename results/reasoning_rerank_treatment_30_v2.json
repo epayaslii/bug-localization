@@ -1,0 +1,2712 @@
+{
+  "method": "openrouter",
+  "dataset": "swebench",
+  "model": "gpt-4o-mini",
+  "sample_size": 30,
+  "bm25_top_k": 15,
+  "bm25_mode": "symbols",
+  "bm25_symbols_imports": false,
+  "reasoning_rerank": true,
+  "per_bug": {
+    "pylint-dev__pylint-7080": {
+      "repo": "pylint-dev/pylint",
+      "ground_truths": [
+        "pylint/lint/expand_modules.py"
+      ],
+      "candidate_files": [
+        "doc/data/messages/a/attribute-defined-outside-init/bad.py",
+        "doc/data/messages/a/attribute-defined-outside-init/good.py",
+        "tests/functional/a/attribute_defined_outside_init.py",
+        "tests/functional/m/mixin_class_rgx.py",
+        "tests/functional/s/stop_iteration_inside_generator.py",
+        "tests/functional/a/access/access_attr_before_def_false_positive.py",
+        "tests/functional/o/object_as_class_attribute.py",
+        "tests/functional/c/consider/consider_using_with_open.py",
+        "tests/functional/y/yield_outside_func.py",
+        "tests/functional/r/return_outside_function.py"
+      ],
+      "file_reasoning": [
+        {
+          "file": "doc/data/messages/a/attribute-defined-outside-init/bad.py",
+          "reasoning": "This file likely contains an example of code that demonstrates the 'attribute-defined-outside-init' pylint message, which could relate to the reported bug if the ignore-paths are not properly applied to such cases."
+        },
+        {
+          "file": "doc/data/messages/a/attribute-defined-outside-init/good.py",
+          "reasoning": "Similar to the previous file, this one likely showcases correct usage that avoids the 'attribute-defined-outside-init' issue, and may be indirectly related if the bug involves incorrectly reporting such messages."
+        },
+        {
+          "file": "tests/functional/m/mixin_class_rgx.py",
+          "reasoning": "This test likely deals with functional behavior of mixin classes and could be relevant if the bug relates to class definitions or attribute initialization, but it\u2019s less directly connected to the ignore-path functionality."
+        },
+        {
+          "file": "tests/functional/a/attribute_defined_outside_init.py",
+          "reasoning": "This test specifically checks for the 'attribute-defined-outside-init' message, making it directly relevant to the bug report about ignoring such warnings when paths are configured."
+        },
+        {
+          "file": "tests/functional/s/stop_iteration_inside_generator.py",
+          "reasoning": "This test file focuses on generator behavior and is unlikely to be related to the bug concerning the ignore-paths configuration in pylint."
+        },
+        {
+          "file": "tests/functional/a/access/access_attr_before_def_false_positive.py",
+          "reasoning": "This test may check for false positives in accessing attributes before their definition, which does not relate to the ignore-paths issue and thus is likely not relevant."
+        },
+        {
+          "file": "tests/functional/o/object_as_class_attribute.py",
+          "reasoning": "This file tests object attributes and their definitions, but it does not seem to directly address the ignore-paths issue reported in the bug."
+        },
+        {
+          "file": "tests/functional/c/consider/consider_using_with_open.py",
+          "reasoning": "This test checks for the use of context managers and file operations, which is unrelated to the bug concerning attribute initialization warnings."
+        },
+        {
+          "file": "tests/functional/y/yield_outside_func.py",
+          "reasoning": "This tests the behavior of yielding from outside a function, which does not connect to the bug regarding the ignore-paths not functioning as expected."
+        },
+        {
+          "file": "tests/functional/r/return_outside_function.py",
+          "reasoning": "This test file checks for return statements outside of function definitions, which is unrelated to the issue with pylint's ignore-paths and thus unlikely to contain the bug."
+        },
+        {
+          "file": "tests/functional/y/yield_from_outside_func.py",
+          "reasoning": "This test focuses on yielding from non-iterable contexts and does not relate to the ignore-paths functionality, making it less relevant."
+        },
+        {
+          "file": "tests/functional/d/defined_and_used_on_same_line.py",
+          "reasoning": "This file tests a specific coding style and is not pertinent to the reported issue with ignore-path configurations."
+        },
+        {
+          "file": "tests/functional/w/with_using_generator.py",
+          "reasoning": "This file tests generator usage with context managers, which does not connect with the ignore-paths issue reported in the bug."
+        },
+        {
+          "file": "tests/functional/m/member/member_checks_py37.py",
+          "reasoning": "This test file checks member access patterns in Python 3.7, which is not related to the ignore-paths functionality."
+        },
+        {
+          "file": "tests/functional/n/non_ascii_name_class/non_ascii_name_class_attribute.py",
+          "reasoning": "This file tests behavior related to non-ASCII class names and attributes, which does not relate to the ignore-paths issue and is therefore less relevant."
+        }
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 1
+    },
+    "django__django-11734": {
+      "repo": "django/django",
+      "ground_truths": [
+        "django/db/models/fields/__init__.py",
+        "django/db/models/fields/related_lookups.py",
+        "django/db/models/sql/query.py"
+      ],
+      "candidate_files": [
+        "tests/or_lookups/tests.py",
+        "tests/expressions_case/tests.py",
+        "django/db/models/query.py",
+        "tests/expressions/tests.py",
+        "tests/queries/tests.py",
+        "tests/model_fields/test_foreignkey.py",
+        "tests/prefetch_related/tests.py",
+        "tests/model_inheritance/tests.py",
+        "tests/contenttypes_tests/test_management.py",
+        "django/contrib/admin/templatetags/admin_list.py",
+        "tests/queries/test_qs_combinators.py",
+        "django/contrib/admin/checks.py",
+        "tests/queryset_pickle/tests.py",
+        "tests/annotations/tests.py",
+        "tests/delete_regress/models.py"
+      ],
+      "file_reasoning": [
+        {
+          "file": "tests/or_lookups/tests.py",
+          "reasoning": "This file may contain tests related to query lookups, but since the bug specifically involves the misuse of OuterRef in exclusion operations, it's less likely to be directly related."
+        },
+        {
+          "file": "tests/expressions_case/tests.py",
+          "reasoning": "This file likely tests various query expressions, which might overlap with the functionality of OuterRef, making it a potential candidate for housing related tests."
+        },
+        {
+          "file": "django/db/models/query.py",
+          "reasoning": "As the core file responsible for queryset operations, including those involving OuterRef, this file is likely to contain the implementation logic tied to the bug's symptoms."
+        },
+        {
+          "file": "tests/expressions/tests.py",
+          "reasoning": "This file tests different expression types in Django queries and could have tests that relate to the functionality of OuterRef, making it relevant to the bug."
+        },
+        {
+          "file": "tests/queries/tests.py",
+          "reasoning": "This file is likely focused on query-related tests, which could include the scenarios where OuterRef is used, thus it might contain tests that highlight the bug."
+        },
+        {
+          "file": "tests/model_fields/test_foreignkey.py",
+          "reasoning": "While this file deals with foreign key fields, it is less likely to be relevant because it does not directly relate to query exclusions and OuterRef functionality."
+        },
+        {
+          "file": "tests/prefetch_related/tests.py",
+          "reasoning": "This file tests prefetching behavior in queries, which is somewhat tangential to the bug's focus on OuterRef and exclusion, making it a less likely candidate."
+        },
+        {
+          "file": "tests/model_inheritance/tests.py",
+          "reasoning": "This file focuses on model inheritance tests, which do not relate to the specific query issue with OuterRef, reducing its relevance."
+        },
+        {
+          "file": "tests/contenttypes_tests/test_management.py",
+          "reasoning": "This file pertains to content types management and does not appear to have any direct connection to the query exclusions that are causing the bug."
+        },
+        {
+          "file": "django/contrib/admin/templatetags/admin_list.py",
+          "reasoning": "This file is related to admin template tags and is unlikely to be relevant to the queryset bug involving OuterRef."
+        },
+        {
+          "file": "tests/queries/test_qs_combinators.py",
+          "reasoning": "This file specifically contains tests for combining querysets and includes a direct test that demonstrates the failing behavior related to OuterRef, making it highly relevant."
+        },
+        {
+          "file": "django/contrib/admin/checks.py",
+          "reasoning": "This file handles administrative checks and does not relate to the query issues surrounding OuterRef, making it less likely to contain the bug."
+        },
+        {
+          "file": "tests/queryset_pickle/tests.py",
+          "reasoning": "This file tests the pickling of querysets, which does not correlate with the bug concerning the use of OuterRef in exclusion queries."
+        },
+        {
+          "file": "tests/annotations/tests.py",
+          "reasoning": "This file tests annotations on querysets, which may include relevant tests related to OuterRef, making it a plausible candidate."
+        },
+        {
+          "file": "tests/delete_regress/models.py",
+          "reasoning": "This file is likely focused on testing delete operations and regression scenarios, which are unrelated to the specific bug regarding OuterRef."
+        }
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 3
+    },
+    "astropy__astropy-14508": {
+      "repo": "astropy/astropy",
+      "ground_truths": [
+        "astropy/io/fits/card.py"
+      ],
+      "candidate_files": [
+        "astropy/io/fits/tests/test_header.py",
+        "astropy/io/fits/card.py",
+        "astropy/io/fits/tests/test_division.py",
+        "astropy/io/fits/tests/test_connect.py",
+        "astropy/io/fits/tests/test_fitstime.py",
+        "astropy/io/fits/tests/test_hdulist.py",
+        "astropy/io/fits/tests/test_core.py",
+        "astropy/io/fits/fitstime.py",
+        "astropy/io/fits/header.py",
+        "astropy/modeling/physical_models.py",
+        "astropy/io/misc/asdf/tags/time/tests/test_time.py",
+        "astropy/io/fits/connect.py",
+        "astropy/nddata/tests/test_ccddata.py",
+        "astropy/io/misc/asdf/tags/fits/fits.py",
+        "astropy/nddata/ccddata.py"
+      ],
+      "file_reasoning": [
+        {
+          "file": "astropy/io/fits/tests/test_header.py",
+          "reasoning": "This test file may contain tests for creating and validating FITS headers, but since the bug specifically relates to the internal representation of float values in `io.fits.Card`, it is less likely to be the source of the bug itself."
+        },
+        {
+          "file": "astropy/io/fits/card.py",
+          "reasoning": "This file directly implements the `io.fits.Card` class, including the `_format_float()` method where the bug originates, making it the most likely candidate for containing the bug."
+        },
+        {
+          "file": "astropy/io/fits/tests/test_division.py",
+          "reasoning": "This test file is focused on division operations, which are not relevant to the string representation of float values in `io.fits.Card`, thus it is unlikely to be related to the bug."
+        },
+        {
+          "file": "astropy/io/fits/tests/test_connect.py",
+          "reasoning": "This test file deals with connection functionalities in FITS, which does not pertain to the float representation issue in `io.fits.Card`, making it less relevant."
+        },
+        {
+          "file": "astropy/io/fits/tests/test_fitstime.py",
+          "reasoning": "This test file focuses on time-related functionalities in FITS, which does not directly relate to the float representation issue described in the bug report."
+        },
+        {
+          "file": "astropy/io/fits/tests/test_hdulist.py",
+          "reasoning": "This file tests HDUList functionalities, which are not directly connected to the representation of float values in FITS cards, making it less likely to be involved in the bug."
+        },
+        {
+          "file": "astropy/io/fits/tests/test_core.py",
+          "reasoning": "This test file covers core FITS functionalities but does not focus on card representations or float formatting, thus it is unlikely to contain the bug."
+        },
+        {
+          "file": "astropy/io/fits/fitstime.py",
+          "reasoning": "This file is focused on time-related FITS functionalities, which do not relate to the float representation issue in `io.fits.Card`, thus it is not a likely candidate."
+        },
+        {
+          "file": "astropy/io/fits/header.py",
+          "reasoning": "This file handles FITS header functionalities but does not directly deal with the representation of float values within `io.fits.Card`, making it less relevant."
+        },
+        {
+          "file": "astropy/modeling/physical_models.py",
+          "reasoning": "This file deals with modeling functionalities and does not relate to FITS card representations or float formatting, making it an unlikely candidate."
+        },
+        {
+          "file": "astropy/io/misc/asdf/tags/time/tests/test_time.py",
+          "reasoning": "This test file is focused on ASDF time tags and does not relate to the issues of float representation in FITS cards, thus it is irrelevant."
+        },
+        {
+          "file": "astropy/io/fits/connect.py",
+          "reasoning": "This file manages connections to FITS files and does not pertain to the float representation issue in `io.fits.Card`, making it less relevant."
+        },
+        {
+          "file": "astropy/nddata/tests/test_ccddata.py",
+          "reasoning": "This test file focuses on CCD data functionalities, which do not relate to the float representation issue in `io.fits.Card`, thus it is not a likely candidate."
+        },
+        {
+          "file": "astropy/io/misc/asdf/tags/fits/fits.py",
+          "reasoning": "This file deals with ASDF tags related to FITS and does not address the float representation issue in `io.fits.Card`, making it irrelevant."
+        },
+        {
+          "file": "astropy/nddata/ccddata.py",
+          "reasoning": "This file is related to CCD data handling and does not involve the functionalities of FITS cards, thus it is not relevant to this bug."
+        }
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 1
+    },
+    "scikit-learn__scikit-learn-26323": {
+      "repo": "scikit-learn/scikit-learn",
+      "ground_truths": [
+        "sklearn/compose/_column_transformer.py"
+      ],
+      "candidate_files": [
+        "examples/release_highlights/plot_release_highlights_1_2_0.py",
+        "examples/release_highlights/plot_release_highlights_1_1_0.py",
+        "examples/release_highlights/plot_release_highlights_1_0_0.py",
+        "sklearn/utils/tests/test_utils.py",
+        "sklearn/neural_network/tests/test_base.py",
+        "sklearn/datasets/tests/data/openml/id_1/__init__.py",
+        "examples/ensemble/plot_adaboost_hastie_10_2.py",
+        "sklearn/datasets/tests/test_base.py",
+        "sklearn/compose/tests/test_column_transformer.py",
+        "examples/release_highlights/plot_release_highlights_0_23_0.py",
+        "examples/release_highlights/plot_release_highlights_0_24_0.py",
+        "examples/release_highlights/plot_release_highlights_0_22_0.py",
+        "sklearn/datasets/tests/data/openml/id_3/__init__.py",
+        "sklearn/covariance/tests/test_graphical_lasso.py",
+        "sklearn/decomposition/tests/test_pca.py"
+      ],
+      "file_reasoning": [
+        {
+          "file": "examples/release_highlights/plot_release_highlights_1_2_0.py",
+          "reasoning": "This file likely demonstrates features of the library but does not directly relate to the bug with `ColumnTransformer` as it is focused on release highlights rather than implementation."
+        },
+        {
+          "file": "examples/release_highlights/plot_release_highlights_1_1_0.py",
+          "reasoning": "Similar to the previous file, this is focused on showcasing features from a past release, not related to the current bug with `ColumnTransformer`."
+        },
+        {
+          "file": "examples/release_highlights/plot_release_highlights_1_0_0.py",
+          "reasoning": "This file is another example showcase and does not pertain to the bug reported in the `ColumnTransformer` functionality."
+        },
+        {
+          "file": "sklearn/utils/tests/test_utils.py",
+          "reasoning": "While this test file might contain utility tests, it does not specifically test or relate to the `ColumnTransformer` or its output behavior."
+        },
+        {
+          "file": "sklearn/neural_network/tests/test_base.py",
+          "reasoning": "This file tests components of neural networks and has no direct relevance to the bug related to the `ColumnTransformer`."
+        },
+        {
+          "file": "sklearn/datasets/tests/data/openml/id_1/__init__.py",
+          "reasoning": "This file is part of a dataset testing structure and does not relate to the `ColumnTransformer` bug."
+        },
+        {
+          "file": "examples/ensemble/plot_adaboost_hastie_10_2.py",
+          "reasoning": "This example file demonstrates ensemble methods and does not address or connect with the issue in `ColumnTransformer`."
+        },
+        {
+          "file": "sklearn/datasets/tests/test_base.py",
+          "reasoning": "This file focuses on dataset tests and does not directly relate to the bug affecting the `ColumnTransformer` functionality."
+        },
+        {
+          "file": "sklearn/compose/tests/test_column_transformer.py",
+          "reasoning": "This test file is directly relevant as it likely tests the `ColumnTransformer`, making it a strong candidate for containing tests that highlight the bug with `set_output`."
+        },
+        {
+          "file": "examples/release_highlights/plot_release_highlights_0_23_0.py",
+          "reasoning": "This file, like others focused on release highlights, does not address the internal workings of `ColumnTransformer` and is not relevant."
+        },
+        {
+          "file": "examples/release_highlights/plot_release_highlights_0_24_0.py",
+          "reasoning": "Another release highlight example, this file does not relate to the bug with `ColumnTransformer`."
+        },
+        {
+          "file": "examples/release_highlights/plot_release_highlights_0_22_0.py",
+          "reasoning": "Similar to the other release highlight files, this does not pertain to the bug report."
+        },
+        {
+          "file": "sklearn/datasets/tests/data/openml/id_3/__init__.py",
+          "reasoning": "This file is part of a dataset structure and does not relate to the `ColumnTransformer` issue."
+        },
+        {
+          "file": "sklearn/covariance/tests/test_graphical_lasso.py",
+          "reasoning": "This file tests covariance estimation methods and does not connect to the `ColumnTransformer` bug."
+        },
+        {
+          "file": "sklearn/decomposition/tests/test_pca.py",
+          "reasoning": "This file tests PCA implementations and is unrelated to the bug in the `ColumnTransformer`."
+        }
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 1
+    },
+    "django__django-14034": {
+      "repo": "django/django",
+      "ground_truths": [
+        "django/forms/boundfield.py"
+      ],
+      "candidate_files": [
+        "tests/forms_tests/field_tests/test_multivaluefield.py",
+        "django/forms/forms.py",
+        "django/forms/widgets.py",
+        "tests/forms_tests/widget_tests/test_multiwidget.py",
+        "tests/forms_tests/field_tests/test_base.py",
+        "tests/model_forms/tests.py",
+        "tests/forms_tests/tests/test_forms.py",
+        "tests/postgres_tests/test_array.py",
+        "tests/gis_tests/test_geoforms.py",
+        "tests/admin_widgets/test_autocomplete_widget.py"
+      ],
+      "file_reasoning": [
+        {
+          "file": "tests/forms_tests/field_tests/test_base.py",
+          "reasoning": "This test file likely contains base tests for form fields, but since the bug is specific to MultiValueField behavior and its subfields, it may not directly relate to the issue at hand."
+        },
+        {
+          "file": "tests/forms_tests/field_tests/test_multivaluefield.py",
+          "reasoning": "This test file is directly related as it likely contains tests that check the behavior of MultiValueField, specifically testing scenarios involving required fields, making it a prime candidate for the bug."
+        },
+        {
+          "file": "tests/admin_widgets/test_autocomplete_widget.py",
+          "reasoning": "This file tests autocomplete widgets which are not relevant to the MultiValueField behavior, thus it is unlikely to be connected to the reported bug."
+        },
+        {
+          "file": "django/forms/forms.py",
+          "reasoning": "This file contains the core form classes and related functionality, which may include logic relevant to validating fields, making it a candidate for examining how MultiValueField is handled."
+        },
+        {
+          "file": "tests/forms_tests/widget_tests/test_multiwidget.py",
+          "reasoning": "Since MultiValueField uses a MultiWidget, this test file could potentially address issues related to how widgets behave when combined, possibly shedding light on the bug."
+        },
+        {
+          "file": "tests/model_forms/tests.py",
+          "reasoning": "While this file tests model forms, it may not directly involve MultiValueField or its specific validation logic, making it less relevant to the bug."
+        },
+        {
+          "file": "django/utils/dateformat.py",
+          "reasoning": "This file deals with date formatting utilities and does not pertain to form validation or the behavior of MultiValueField, therefore it is unlikely to be related."
+        },
+        {
+          "file": "tests/forms_tests/widget_tests/test_clearablefileinput.py",
+          "reasoning": "This file focuses on testing clearable file input widgets, which are unrelated to MultiValueField functionality, making it an unlikely candidate."
+        },
+        {
+          "file": "django/forms/formsets.py",
+          "reasoning": "This file deals with formsets, which manage collections of forms, but it does not directly connect to the behavior of MultiValueField, thus it may not be relevant."
+        },
+        {
+          "file": "tests/forms_tests/tests/test_forms.py",
+          "reasoning": "This test file likely encompasses various form tests, but without specific mention of MultiValueField or its validation logic, it may not be directly related."
+        },
+        {
+          "file": "tests/postgres_tests/test_array.py",
+          "reasoning": "This file pertains to PostgreSQL array tests, unrelated to form validation or MultiValueField behavior, making it irrelevant to the bug."
+        },
+        {
+          "file": "tests/forms_tests/widget_tests/test_widget.py",
+          "reasoning": "This file tests general widget behavior rather than specific field validations, making it less relevant to the bug surrounding MultiValueField."
+        },
+        {
+          "file": "tests/gis_tests/test_geoforms.py",
+          "reasoning": "This file focuses on GIS forms, which do not relate to the MultiValueField issue described in the bug report."
+        },
+        {
+          "file": "tests/forms_tests/widget_tests/test_nullbooleanselect.py",
+          "reasoning": "This file tests a specific widget (NullBooleanSelect), which does not relate to the functionality of MultiValueField, thus it is not likely to be connected."
+        },
+        {
+          "file": "django/forms/widgets.py",
+          "reasoning": "This file defines various widgets including those used by MultiValueField, so it may contain relevant logic affecting the required attributes of field widgets."
+        }
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 1
+    },
+    "django__django-13741": {
+      "repo": "django/django",
+      "ground_truths": [
+        "django/contrib/auth/forms.py"
+      ],
+      "candidate_files": [
+        "django/contrib/auth/forms.py",
+        "tests/auth_tests/test_views.py",
+        "django/contrib/auth/base_user.py",
+        "django/forms/models.py",
+        "tests/forms_tests/field_tests/test_base.py",
+        "tests/forms_tests/tests/tests.py",
+        "tests/model_forms/test_modelchoicefield.py",
+        "tests/model_formsets_regress/tests.py",
+        "tests/basic/tests.py",
+        "tests/i18n/test_percents.py"
+      ],
+      "file_reasoning": [
+        {
+          "file": "tests/i18n/test_percents.py",
+          "reasoning": "This file likely tests internationalization features, which do not pertain to the password handling issue described in the bug report."
+        },
+        {
+          "file": "tests/check_framework/test_multi_db.py",
+          "reasoning": "This file focuses on testing multi-database setups and is unrelated to form handling or password management."
+        },
+        {
+          "file": "tests/basic/tests.py",
+          "reasoning": "This general test file is unlikely to cover the specific functionality of the ReadOnlyPasswordHashField or the UserChangeForm."
+        },
+        {
+          "file": "tests/m2m_signals/tests.py",
+          "reasoning": "This file deals with many-to-many signal tests, which are not relevant to the password handling bug in the UserChangeForm."
+        },
+        {
+          "file": "tests/model_package/tests.py",
+          "reasoning": "This file is likely testing model package functionalities and does not connect to form behavior or password management."
+        },
+        {
+          "file": "django/contrib/auth/forms.py",
+          "reasoning": "This file contains the definition of UserChangeForm and is directly related to the handling of password fields within forms, making it a primary candidate for the bug."
+        },
+        {
+          "file": "tests/auth_tests/test_views.py",
+          "reasoning": "While this file tests authentication views, it is less likely to touch on the specifics of form fields or password handling compared to the forms.py file."
+        },
+        {
+          "file": "tests/m2m_through/tests.py",
+          "reasoning": "This file is related to many-to-many relationships and does not address issues with form fields or password management."
+        },
+        {
+          "file": "django/contrib/postgres/forms/array.py",
+          "reasoning": "This file deals with PostgreSQL-specific form fields and is unrelated to the UserChangeForm or password handling."
+        },
+        {
+          "file": "tests/forms_tests/tests/tests.py",
+          "reasoning": "This test suite may cover various forms, but it is too general to specifically relate to the bug about the ReadOnlyPasswordHashField."
+        },
+        {
+          "file": "django/forms/models.py",
+          "reasoning": "This file includes form-related logic but is more general in scope and likely does not directly relate to the specific handling of password fields."
+        },
+        {
+          "file": "tests/forms_tests/field_tests/test_base.py",
+          "reasoning": "This test file may address form fields in general, but it is unlikely to focus specifically on the ReadOnlyPasswordHashField."
+        },
+        {
+          "file": "tests/model_formsets_regress/tests.py",
+          "reasoning": "This regression test file focuses on model formsets and does not relate to the UserChangeForm or password handling."
+        },
+        {
+          "file": "django/contrib/auth/base_user.py",
+          "reasoning": "This file defines the base user model which is relevant to authentication but does not specifically deal with form fields like the ReadOnlyPasswordHashField."
+        },
+        {
+          "file": "tests/model_forms/test_modelchoicefield.py",
+          "reasoning": "This file tests the ModelChoiceField, which is unrelated to password management and the specific forms in question."
+        }
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0
+    },
+    "django__django-13417": {
+      "repo": "django/django",
+      "ground_truths": [
+        "django/db/models/query.py"
+      ],
+      "candidate_files": [
+        "django/db/models/query.py",
+        "django/db/models/sql/compiler.py",
+        "tests/ordering/tests.py",
+        "tests/queries/tests.py",
+        "tests/queries/test_qs_combinators.py",
+        "tests/ordering/models.py",
+        "tests/basic/tests.py",
+        "tests/m2m_through/tests.py",
+        "tests/admin_changelist/tests.py",
+        "tests/aggregation/tests.py"
+      ],
+      "file_reasoning": [
+        {
+          "file": "tests/queries/test_qs_combinators.py",
+          "reasoning": "This test file likely contains tests for combining querysets and might indirectly reveal issues with the ordered property when annotations are used, making it relevant to the bug."
+        },
+        {
+          "file": "django/db/models/sql/compiler.py",
+          "reasoning": "The compiler is responsible for generating the SQL queries from querysets, so if the ordered property is not reflecting the correct SQL output, the issue may lie within this file's logic."
+        },
+        {
+          "file": "django/db/models/query.py",
+          "reasoning": "This file defines the QuerySet class, where the ordered property is implemented; thus, it is central to the reported bug about its incorrect behavior with GROUP BY queries."
+        },
+        {
+          "file": "tests/m2m_through/tests.py",
+          "reasoning": "While this file tests many-to-many relationships, it is unlikely to relate to the ordering behavior of querysets since it focuses on a different aspect of model interactions."
+        },
+        {
+          "file": "tests/basic/tests.py",
+          "reasoning": "This general testing file may cover various basic functionalities, but it is less likely to address the specific issue of the ordered property and GROUP BY queries."
+        },
+        {
+          "file": "tests/ordering/models.py",
+          "reasoning": "This file might define models that focus on ordering behavior, making it somewhat relevant, but it is not directly testing the QuerySet.ordered property."
+        },
+        {
+          "file": "tests/admin_changelist/tests.py",
+          "reasoning": "This file tests the admin changelist functionality and is not likely to cover issues related to the ordered property of querysets, which is more of a core model concern."
+        },
+        {
+          "file": "django/contrib/contenttypes/models.py",
+          "reasoning": "This file defines content type models and is not directly related to the reported bug concerning the ordering of querysets."
+        },
+        {
+          "file": "tests/model_inheritance/tests.py",
+          "reasoning": "This file is focused on testing model inheritance and is unlikely to involve the QuerySet.ordered property or issues with grouping and ordering."
+        },
+        {
+          "file": "tests/ordering/tests.py",
+          "reasoning": "Given its name, this file should contain tests specifically related to ordering behaviors, making it relevant to understanding how the ordered property should behave."
+        },
+        {
+          "file": "tests/queries/tests.py",
+          "reasoning": "This file likely contains tests for various queryset functionalities, including the ordered property, making it pertinent to the bug report."
+        },
+        {
+          "file": "tests/aggregation/tests.py",
+          "reasoning": "This file tests aggregation functions which might involve querying and could indirectly touch on ordering behaviors, but it is less focused on the specific issue at hand."
+        },
+        {
+          "file": "tests/prefetch_related/test_uuid.py",
+          "reasoning": "This test file focuses on prefetching related objects and does not likely address the concerns regarding the QuerySet.ordered property."
+        },
+        {
+          "file": "tests/generic_views/test_list.py",
+          "reasoning": "This file is concerned with generic views and is not likely to test issues related to queryset ordering or the ordered property."
+        },
+        {
+          "file": "tests/admin_changelist/models.py",
+          "reasoning": "This file is focused on models used in the admin changelist view and does not pertain directly to the QuerySet.ordered property."
+        }
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0
+    },
+    "django__django-12125": {
+      "repo": "django/django",
+      "ground_truths": [
+        "django/db/migrations/serializer.py"
+      ],
+      "candidate_files": [
+        "django/db/models/base.py",
+        "django/db/migrations/state.py",
+        "django/db/models/options.py",
+        "django/db/models/fields/related.py",
+        "django/contrib/contenttypes/models.py",
+        "tests/model_inheritance/tests.py",
+        "tests/migrations/test_operations.py",
+        "tests/model_fields/test_field_flags.py",
+        "tests/model_package/tests.py",
+        "tests/select_related_regress/models.py"
+      ],
+      "file_reasoning": [
+        {
+          "file": "django/contrib/contenttypes/models.py",
+          "reasoning": "This file defines models related to Django's content types framework, which may not directly relate to the serialization of inner classes in models, making it unlikely to be the source of the bug."
+        },
+        {
+          "file": "tests/null_queries/models.py",
+          "reasoning": "This test file likely contains models for testing null queries and does not seem related to the bug about serialization of nested classes in migrations."
+        },
+        {
+          "file": "tests/template_tests/utils.py",
+          "reasoning": "As a utility file for template tests, it does not pertain to the model serialization issue described in the bug report."
+        },
+        {
+          "file": "django/db/migrations/state.py",
+          "reasoning": "This file handles the state of migrations and may involve serialization; however, it is not directly related to the handling of inner classes or the incorrect paths reported."
+        },
+        {
+          "file": "django/db/models/options.py",
+          "reasoning": "This file manages model options, which is relevant to Django models but does not specifically address the serialization of inner classes."
+        },
+        {
+          "file": "tests/model_fields/test_field_flags.py",
+          "reasoning": "This test file focuses on field flags in models and does not directly engage with the serialization issue of nested classes."
+        },
+        {
+          "file": "django/db/models/fields/related.py",
+          "reasoning": "This file deals with related fields in models, which is not directly connected to the issue of serialization for inner classes."
+        },
+        {
+          "file": "django/db/models/base.py",
+          "reasoning": "This is a core file for Django models and could plausibly relate to model serialization, but it does not specifically address the nested class serialization issue."
+        },
+        {
+          "file": "tests/migrations/test_operations.py",
+          "reasoning": "This test file likely covers migration operations, making it relevant, but it may not directly deal with the serialization of nested classes."
+        },
+        {
+          "file": "tests/select_related_regress/models.py",
+          "reasoning": "This file appears to involve regression tests for select-related queries, which is not aligned with the reported bug regarding inner class serialization."
+        },
+        {
+          "file": "tests/model_fields/test_charfield.py",
+          "reasoning": "This test file focuses on testing character fields and does not relate to the serialization issue with nested enum classes."
+        },
+        {
+          "file": "tests/model_package/tests.py",
+          "reasoning": "This test suite may cover various aspects of model packaging but does not specifically address the issue of nested class serialization."
+        },
+        {
+          "file": "tests/model_inheritance/tests.py",
+          "reasoning": "Since this file tests model inheritance, it may touch upon how models are structured, making it slightly relevant but not directly related to the serialization bug."
+        },
+        {
+          "file": "tests/sessions_tests/models.py",
+          "reasoning": "This file is focused on session-related models, which does not connect with the nested class serialization issue."
+        },
+        {
+          "file": "tests/decorators/tests.py",
+          "reasoning": "As a test file for decorators, it is unlikely to relate to the serialization of nested classes in Django models."
+        }
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 1
+    },
+    "scikit-learn__scikit-learn-25973": {
+      "repo": "scikit-learn/scikit-learn",
+      "ground_truths": [
+        "sklearn/feature_selection/_sequential.py"
+      ],
+      "candidate_files": [
+        "sklearn/model_selection/tests/test_search.py",
+        "sklearn/_loss/loss.py",
+        "sklearn/model_selection/tests/test_split.py",
+        "sklearn/model_selection/_search.py",
+        "sklearn/feature_selection/tests/test_rfe.py",
+        "sklearn/tests/test_common.py",
+        "sklearn/model_selection/_split.py",
+        "sklearn/covariance/tests/test_graphical_lasso.py",
+        "sklearn/linear_model/tests/test_linear_loss.py",
+        "sklearn/utils/__init__.py",
+        "sklearn/datasets/tests/test_common.py",
+        "sklearn/datasets/_arff_parser.py",
+        "sklearn/cluster/tests/test_optics.py",
+        "examples/model_selection/plot_cv_indices.py",
+        "sklearn/feature_selection/_from_model.py"
+      ],
+      "file_reasoning": [
+        {
+          "file": "sklearn/model_selection/tests/test_search.py",
+          "reasoning": "This test file likely exercises the functionality of cross-validation strategies, including the `cv` parameter, which is directly related to the bug where passing a generator causes an error."
+        },
+        {
+          "file": "sklearn/_loss/loss.py",
+          "reasoning": "This file is focused on loss functions and does not seem to directly relate to the cross-validation or feature selection processes, making it unlikely to contain the bug."
+        },
+        {
+          "file": "sklearn/model_selection/tests/test_split.py",
+          "reasoning": "This test file may check the behavior of splitters in cross-validation, which could involve iterables, but it is not as directly related as implementation files."
+        },
+        {
+          "file": "sklearn/model_selection/_search.py",
+          "reasoning": "This implementation file is responsible for searching over hyperparameters and likely includes logic for handling cross-validation, making it a plausible candidate for the bug."
+        },
+        {
+          "file": "sklearn/feature_selection/tests/test_rfe.py",
+          "reasoning": "While this test file deals with feature selection, it does not specifically address the behavior of the `cv` parameter that is causing the bug, making it a less likely candidate."
+        },
+        {
+          "file": "sklearn/tests/test_common.py",
+          "reasoning": "This test file includes common test utilities, but does not directly relate to the specific functionality of the `SequentialFeatureSelector` or the handling of the `cv` parameter."
+        },
+        {
+          "file": "sklearn/model_selection/_split.py",
+          "reasoning": "This file likely contains the implementation of various cross-validation strategies and is crucial in understanding how the `cv` parameter is processed, making it a strong candidate for the bug."
+        },
+        {
+          "file": "sklearn/covariance/tests/test_graphical_lasso.py",
+          "reasoning": "This test file focuses on testing covariance estimators and is unlikely to be related to the cross-validation bug in `SequentialFeatureSelector`."
+        },
+        {
+          "file": "sklearn/linear_model/tests/test_linear_loss.py",
+          "reasoning": "This test file is centered on linear models and loss calculations, not on feature selection or cross-validation issues, making it unlikely to contain the bug."
+        },
+        {
+          "file": "sklearn/utils/__init__.py",
+          "reasoning": "This file provides utility functions that might be used across the package, but it is not directly related to the specifics of cross-validation or feature selection."
+        },
+        {
+          "file": "sklearn/datasets/tests/test_common.py",
+          "reasoning": "This test file focuses on dataset utilities and is not related to the cross-validation or feature selection functionalities, making it an unlikely candidate."
+        },
+        {
+          "file": "sklearn/datasets/_arff_parser.py",
+          "reasoning": "This file handles data parsing and does not relate to the reported issue with cross-validation, making it an unlikely candidate."
+        },
+        {
+          "file": "sklearn/cluster/tests/test_optics.py",
+          "reasoning": "This test file deals with clustering algorithms and does not address the feature selection or cross-validation functionality, making it unlikely to contain the bug."
+        },
+        {
+          "file": "examples/model_selection/plot_cv_indices.py",
+          "reasoning": "This example script demonstrates cross-validation indices, which might indirectly relate to the bug, but it is not an implementation file, making it less likely to contain the bug."
+        },
+        {
+          "file": "sklearn/feature_selection/_from_model.py",
+          "reasoning": "This implementation file may include feature selection methodologies, but its connection to the specific `cv` issue is less direct than other candidates."
+        }
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 1
+    },
+    "django__django-11532": {
+      "repo": "django/django",
+      "ground_truths": [
+        "django/core/mail/message.py",
+        "django/core/mail/utils.py",
+        "django/core/validators.py",
+        "django/utils/encoding.py",
+        "django/utils/html.py"
+      ],
+      "candidate_files": [
+        "django/core/mail/message.py",
+        "tests/mail/tests.py",
+        "django/core/mail/backends/smtp.py",
+        "django/core/mail/backends/base.py",
+        "django/core/mail/backends/locmem.py",
+        "django/core/mail/backends/filebased.py",
+        "django/core/mail/backends/console.py",
+        "django/core/mail/backends/dummy.py",
+        "django/core/mail/__init__.py",
+        "tests/validators/tests.py"
+      ],
+      "file_reasoning": [
+        {
+          "file": "django/core/mail/message.py",
+          "reasoning": "This file manages the email message construction, including the Message-ID header, which is directly implicated in the bug report when handling non-ASCII domains."
+        },
+        {
+          "file": "django/core/mail/backends/console.py",
+          "reasoning": "While this backend sends emails to the console, it likely does not deal with encoding issues directly related to the email headers, making it less relevant to the bug."
+        },
+        {
+          "file": "django/core/mail/backends/filebased.py",
+          "reasoning": "This backend handles emails saved to files, which may not interact with domain encoding or the Message-ID header, thus it is unlikely to be related to the bug."
+        },
+        {
+          "file": "tests/mail/tests.py",
+          "reasoning": "This test file directly exercises the email functionality and includes a test for unicode DNS issues, but the bug appears to be within the implementation, so it ranks lower."
+        },
+        {
+          "file": "django/core/mail/backends/dummy.py",
+          "reasoning": "The dummy backend is a placeholder and does not perform any actual email sending, making it irrelevant to the encoding bug."
+        },
+        {
+          "file": "django/core/mail/backends/locmem.py",
+          "reasoning": "This backend uses in-memory storage and may not handle encoding in the same way as other backends, so it is less likely to be the source of the bug."
+        },
+        {
+          "file": "django/core/mail/backends/base.py",
+          "reasoning": "As the base class for other email backends, this file may contain shared logic but is less likely to involve specific encoding issues compared to the direct message handling."
+        },
+        {
+          "file": "django/core/mail/backends/smtp.py",
+          "reasoning": "This backend sends emails via SMTP, which may involve encoding, but it primarily relies on the message construction in message.py, making it a secondary candidate."
+        },
+        {
+          "file": "django/core/mail/__init__.py",
+          "reasoning": "This file likely serves as an entry point for mail functionalities but does not directly deal with the specifics of email message encoding."
+        },
+        {
+          "file": "tests/i18n/test_percents.py",
+          "reasoning": "This test file is unrelated to the email functionality and would not address the encoding bug related to non-ASCII domains."
+        },
+        {
+          "file": "tests/validators/tests.py",
+          "reasoning": "This file tests validators, which are not relevant to email message encoding, making it unlikely to relate to the bug."
+        },
+        {
+          "file": "django/core/files/uploadedfile.py",
+          "reasoning": "This file handles uploaded files and does not interact with email functionality, so it is not relevant to the encoding issue."
+        },
+        {
+          "file": "tests/middleware_exceptions/tests.py",
+          "reasoning": "This tests middleware exceptions, which have no bearing on email message encoding and are unrelated to the bug."
+        },
+        {
+          "file": "tests/auth_tests/test_context_processors.py",
+          "reasoning": "This file tests authentication context processors and is unrelated to email message encoding, rendering it irrelevant."
+        },
+        {
+          "file": "tests/view_tests/tests/test_debug.py",
+          "reasoning": "This test file checks view debugging and does not connect to the email encoding problem, making it unrelated."
+        }
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 0.2,
+      "f1": 0.33333333333333337,
+      "tp": 1,
+      "fp": 0,
+      "fn": 4
+    },
+    "pytest-dev__pytest-7571": {
+      "repo": "pytest-dev/pytest",
+      "ground_truths": [
+        "src/_pytest/logging.py"
+      ],
+      "candidate_files": [
+        "testing/logging/test_fixture.py",
+        "src/_pytest/logging.py",
+        "testing/logging/test_reporting.py",
+        "src/_pytest/reports.py",
+        "testing/test_debugging.py",
+        "testing/test_mark.py",
+        "doc/en/example/assertion/failure_demo.py",
+        "testing/test_capture.py",
+        "testing/code/test_source.py",
+        "testing/test_conftest.py",
+        "src/_pytest/pytester.py",
+        "doc/en/example/assertion/test_setup_flow_example.py",
+        "testing/test_parseopt.py",
+        "testing/test_config.py",
+        "src/_pytest/fixtures.py"
+      ],
+      "file_reasoning": [
+        {
+          "file": "testing/logging/test_fixture.py",
+          "reasoning": "This test file likely contains tests for fixtures, including 'caplog', and could help confirm whether the fixture restoration behavior is properly exercised."
+        },
+        {
+          "file": "src/_pytest/logging.py",
+          "reasoning": "This implementation file is responsible for managing logging behavior within pytest, which is directly related to the bug concerning the 'caplog' fixture's log level restoration."
+        },
+        {
+          "file": "testing/logging/test_reporting.py",
+          "reasoning": "This file may contain tests related to logging outputs, which could indirectly relate to the bug if it tests how log levels are reported, but it's less directly connected than other files."
+        },
+        {
+          "file": "src/_pytest/reports.py",
+          "reasoning": "This file likely handles the reporting of test results and may include logging interactions, but it is less likely to be the source of the log level restoration issue."
+        },
+        {
+          "file": "testing/test_debugging.py",
+          "reasoning": "This file likely contains tests for debugging features, which might not directly relate to the logging fixture bug."
+        },
+        {
+          "file": "testing/test_mark.py",
+          "reasoning": "This file is focused on test marking functionalities and does not seem relevant to the logging behavior or fixture restoration."
+        },
+        {
+          "file": "doc/en/example/assertion/failure_demo.py",
+          "reasoning": "This documentation example file does not interact with the 'caplog' functionality and is unlikely to contain relevant code regarding the bug."
+        },
+        {
+          "file": "testing/test_capture.py",
+          "reasoning": "This file may involve capturing output, which is somewhat related to logging but does not directly address the issue of log level restoration."
+        },
+        {
+          "file": "testing/code/test_source.py",
+          "reasoning": "This file likely tests code execution rather than logging or fixtures, making it less relevant to the bug."
+        },
+        {
+          "file": "testing/test_conftest.py",
+          "reasoning": "This file likely contains configurations and fixtures for tests, but it does not specifically pertain to the 'caplog' functionality."
+        },
+        {
+          "file": "src/_pytest/pytester.py",
+          "reasoning": "This file helps with testing pytest itself but does not directly handle the logging or fixture restoration that is central to this bug."
+        },
+        {
+          "file": "doc/en/example/assertion/test_setup_flow_example.py",
+          "reasoning": "This documentation example is unrelated to the logging system and 'caplog' fixture functionality."
+        },
+        {
+          "file": "testing/test_parseopt.py",
+          "reasoning": "This file is focused on parsing options for pytest, which is not related to logging or the 'caplog' fixture issue."
+        },
+        {
+          "file": "testing/test_config.py",
+          "reasoning": "This file likely tests configuration aspects of pytest but does not relate to the bug in 'caplog'."
+        },
+        {
+          "file": "src/_pytest/fixtures.py",
+          "reasoning": "This file contains the definition and behavior of fixtures, including 'caplog', making it a strong candidate for containing the bug's source."
+        }
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 1
+    },
+    "sympy__sympy-16766": {
+      "repo": "sympy/sympy",
+      "ground_truths": [
+        "sympy/printing/pycode.py"
+      ],
+      "candidate_files": [
+        "sympy/tensor/tensor.py",
+        "sympy/printing/llvmjitcode.py",
+        "sympy/printing/fcode.py",
+        "sympy/printing/glsl.py",
+        "sympy/printing/rcode.py",
+        "sympy/codegen/tests/test_ast.py",
+        "sympy/printing/rust.py",
+        "sympy/printing/jscode.py",
+        "sympy/polys/densebasic.py",
+        "sympy/physics/units/dimensions.py",
+        "sympy/tensor/indexed.py",
+        "sympy/printing/julia.py",
+        "sympy/tensor/tests/test_indexed.py",
+        "sympy/printing/codeprinter.py",
+        "sympy/printing/tests/test_ccode.py"
+      ],
+      "file_reasoning": [
+        {
+          "file": "sympy/tensor/tensor.py",
+          "reasoning": "This file likely contains foundational classes and methods for tensor operations, which may involve Indexed objects, making it relevant to the bug regarding handling of Indexed with lambdify."
+        },
+        {
+          "file": "sympy/printing/llvmjitcode.py",
+          "reasoning": "While this file is concerned with generating code for LLVM, it is not directly related to the PythonCodePrinter, which is the focus of the bug report."
+        },
+        {
+          "file": "sympy/printing/fcode.py",
+          "reasoning": "This file handles Fortran code generation, which is not relevant to the PythonCodePrinter or the specific issues with the Indexed operation in Python."
+        },
+        {
+          "file": "sympy/printing/glsl.py",
+          "reasoning": "This file is related to GLSL code generation and does not pertain to the PythonCodePrinter or the Indexed issue, making it irrelevant."
+        },
+        {
+          "file": "sympy/printing/rcode.py",
+          "reasoning": "This file is for R code generation and is not relevant to the PythonCodePrinter or the specific bug regarding Indexed."
+        },
+        {
+          "file": "sympy/codegen/tests/test_ast.py",
+          "reasoning": "This test file likely checks AST generation but does not directly relate to the bug in the PythonCodePrinter concerning Indexed operations."
+        },
+        {
+          "file": "sympy/printing/rust.py",
+          "reasoning": "This file handles Rust code generation, which is not directly related to the PythonCodePrinter or the handling of the Indexed operation."
+        },
+        {
+          "file": "sympy/printing/jscode.py",
+          "reasoning": "This file is related to JavaScript code generation and does not pertain to the PythonCodePrinter or the specific bug with Indexed."
+        },
+        {
+          "file": "sympy/polys/densebasic.py",
+          "reasoning": "This file is focused on polynomial operations and does not relate to the functionality of the PythonCodePrinter or the Indexed issue."
+        },
+        {
+          "file": "sympy/physics/units/dimensions.py",
+          "reasoning": "This file deals with physical dimensions and units, which is not relevant to the bug report concerning the Indexed operation in Python."
+        },
+        {
+          "file": "sympy/tensor/indexed.py",
+          "reasoning": "This file is likely responsible for the implementation of Indexed objects, making it a prime candidate for containing the bug related to the PythonCodePrinter's handling of Indexed."
+        },
+        {
+          "file": "sympy/printing/julia.py",
+          "reasoning": "This file generates Julia code and does not relate to the PythonCodePrinter or the specific issues with Indexed."
+        },
+        {
+          "file": "sympy/tensor/tests/test_indexed.py",
+          "reasoning": "This test file likely contains tests for Indexed functionality, but the bug is more likely in the implementation of Indexed itself rather than the tests."
+        },
+        {
+          "file": "sympy/printing/codeprinter.py",
+          "reasoning": "This file contains the base class for printing code in various formats, and the bug specifically involves the PythonCodePrinter, making it very relevant."
+        },
+        {
+          "file": "sympy/printing/tests/test_ccode.py",
+          "reasoning": "This test file checks C code generation and does not relate to the bug in the PythonCodePrinter regarding Indexed operations."
+        }
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 1
+    },
+    "matplotlib__matplotlib-25479": {
+      "repo": "matplotlib/matplotlib",
+      "ground_truths": [
+        "lib/matplotlib/cm.py",
+        "lib/matplotlib/colors.py"
+      ],
+      "candidate_files": [
+        "lib/matplotlib/cm.py",
+        "lib/matplotlib/image.py",
+        "lib/matplotlib/colors.py",
+        "lib/matplotlib/tests/test_colors.py",
+        "lib/matplotlib/tests/test_image.py",
+        "lib/matplotlib/_afm.py",
+        "lib/matplotlib/tests/test_style.py",
+        "lib/matplotlib/cbook.py",
+        "lib/matplotlib/tests/test_pickle.py",
+        "galleries/users_explain/artists/imshow_extent.py"
+      ],
+      "file_reasoning": [
+        {
+          "file": "lib/matplotlib/image.py",
+          "reasoning": "This file is likely responsible for handling image rendering, including colormap applications, making it a plausible source for the ValueError related to colormap name handling in the imshow function."
+        },
+        {
+          "file": "lib/matplotlib/cm.py",
+          "reasoning": "As the file that manages colormaps, including registration and retrieval, it directly relates to the bug concerning differing registered and actual colormap names."
+        },
+        {
+          "file": "lib/matplotlib/tests/test_colors.py",
+          "reasoning": "While this test file may cover color-related functionalities, it likely does not contain the implementation of colormap registration or name handling, which are critical to the bug."
+        },
+        {
+          "file": "lib/matplotlib/colors.py",
+          "reasoning": "This file likely contains the definitions and behavior of colormaps, which would be relevant to understanding how colormap names are resolved and registered."
+        },
+        {
+          "file": "lib/matplotlib/tests/test_image.py",
+          "reasoning": "Though this file tests image rendering features, it is less likely to contain the core logic of colormap handling compared to the implementation files."
+        },
+        {
+          "file": "lib/matplotlib/_afm.py",
+          "reasoning": "This file is not directly related to colormaps or their registration; it pertains more to font handling, making it less relevant to the current issue."
+        },
+        {
+          "file": "lib/matplotlib/tests/test_style.py",
+          "reasoning": "This test file focuses on styling aspects of plots rather than colormap functionality, making it an unlikely candidate for the bug."
+        },
+        {
+          "file": "lib/matplotlib/cbook.py",
+          "reasoning": "This file contains utility functions and classes that may not directly relate to colormap handling, thus it is not likely to contain the bug."
+        },
+        {
+          "file": "lib/matplotlib/tests/test_pickle.py",
+          "reasoning": "This test file is focused on testing serialization and deserialization of matplotlib objects, which is unrelated to colormap name handling."
+        },
+        {
+          "file": "galleries/users_explain/artists/imshow_extent.py",
+          "reasoning": "This gallery example demonstrates the use of imshow, but it does not implement colormap registration or handling, making it less relevant to the bug."
+        },
+        {
+          "file": "lib/matplotlib/_api/__init__.py",
+          "reasoning": "This file mainly deals with API definitions and may not directly relate to the colormap registration process that is causing the bug."
+        },
+        {
+          "file": "lib/matplotlib/_type1font.py",
+          "reasoning": "This file is focused on font handling and does not pertain to colormap functionality, making it irrelevant to the bug."
+        },
+        {
+          "file": "lib/matplotlib/artist.py",
+          "reasoning": "This file deals with the rendering of artists in matplotlib, but it does not directly manage colormap registrations or their names."
+        },
+        {
+          "file": "lib/matplotlib/__init__.py",
+          "reasoning": "While this file initializes the matplotlib package, it does not contain specific implementations related to colormap handling."
+        },
+        {
+          "file": "galleries/examples/color/custom_cmap.py",
+          "reasoning": "This example demonstrates how to create and register custom colormaps, which is related to the bug, but it doesn\u2019t contain the implementation or handling of existing colormap names."
+        }
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 0.5,
+      "f1": 0.6666666666666666,
+      "tp": 1,
+      "fp": 0,
+      "fn": 1
+    },
+    "django__django-11292": {
+      "repo": "django/django",
+      "ground_truths": [
+        "django/core/management/base.py"
+      ],
+      "candidate_files": [
+        "tests/user_commands/tests.py",
+        "tests/user_commands/management/commands/required_option.py",
+        "tests/user_commands/management/commands/set_option.py",
+        "django/contrib/gis/management/commands/ogrinspect.py",
+        "django/core/management/__init__.py",
+        "django/core/management/utils.py",
+        "django/core/management/commands/diffsettings.py",
+        "django/contrib/auth/management/commands/createsuperuser.py",
+        "django/core/management/commands/check.py",
+        "django/core/management/commands/migrate.py",
+        "tests/admin_scripts/management/commands/base_command.py",
+        "tests/bash_completion/management/commands/test_command.py",
+        "django/core/management/commands/test.py",
+        "tests/user_commands/management/commands/dance.py",
+        "tests/user_commands/management/commands/hal.py"
+      ],
+      "file_reasoning": [
+        {
+          "file": "tests/user_commands/tests.py",
+          "reasoning": "This test file likely tests various user commands but does not directly implement the logic for management commands, making it less likely to contain the bug."
+        },
+        {
+          "file": "tests/user_commands/management/commands/required_option.py",
+          "reasoning": "This file likely tests a management command that requires options, but it does not seem directly related to the proposed addition of the --skip-checks feature."
+        },
+        {
+          "file": "tests/user_commands/management/commands/set_option.py",
+          "reasoning": "This test file may involve setting options for commands, but it does not seem directly related to the functionality of skipping checks."
+        },
+        {
+          "file": "django/contrib/gis/management/commands/ogrinspect.py",
+          "reasoning": "This file implements a specific GIS management command and does not appear to relate to the general management command functionality of skipping checks."
+        },
+        {
+          "file": "django/core/management/__init__.py",
+          "reasoning": "This file initializes the management commands module but is unlikely to contain the specific logic for handling command-line options or checks."
+        },
+        {
+          "file": "django/core/management/utils.py",
+          "reasoning": "This utility file might contain helper functions used by management commands, but it is not specifically tied to the addition of the --skip-checks option."
+        },
+        {
+          "file": "django/core/management/commands/diffsettings.py",
+          "reasoning": "This command likely compares settings but does not seem relevant to the functionality of skipping system checks."
+        },
+        {
+          "file": "django/contrib/auth/management/commands/createsuperuser.py",
+          "reasoning": "This command is related to user creation and does not involve the management of checks, making it unlikely to contain the bug."
+        },
+        {
+          "file": "django/core/management/commands/check.py",
+          "reasoning": "This file implements the check command itself, which is directly related to the proposed feature of skipping checks, making it a strong candidate for the bug."
+        },
+        {
+          "file": "django/core/management/commands/migrate.py",
+          "reasoning": "This command handles database migrations, which typically involve checks but does not seem relevant to the specific addition of a skip option for checks."
+        },
+        {
+          "file": "tests/admin_scripts/management/commands/base_command.py",
+          "reasoning": "This test file is likely focused on testing base command functionality and is not specifically tied to skipping checks in management commands."
+        },
+        {
+          "file": "tests/bash_completion/management/commands/test_command.py",
+          "reasoning": "This test file seems to focus on bash completion for commands rather than the functionality of skipping checks."
+        },
+        {
+          "file": "django/core/management/commands/test.py",
+          "reasoning": "This command is related to running tests and may involve checks, but it does not directly implement the skip feature for management commands."
+        },
+        {
+          "file": "tests/user_commands/management/commands/dance.py",
+          "reasoning": "This file likely tests a specific user command unrelated to the skip-checks functionality."
+        },
+        {
+          "file": "tests/user_commands/management/commands/hal.py",
+          "reasoning": "This test file likely tests a user command that does not relate to the management command checks functionality."
+        }
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 1
+    },
+    "pydata__xarray-3677": {
+      "repo": "pydata/xarray",
+      "ground_truths": [
+        "xarray/core/dataset.py"
+      ],
+      "candidate_files": [
+        "xarray/core/merge.py",
+        "xarray/tests/test_merge.py",
+        "xarray/tests/test_dask.py",
+        "xarray/core/coordinates.py",
+        "xarray/tests/test_options.py",
+        "xarray/plot/plot.py",
+        "xarray/tests/test_plot.py",
+        "xarray/tests/test_backends_file_manager.py",
+        "xarray/plot/facetgrid.py",
+        "xarray/tests/test_backends.py",
+        "xarray/tutorial.py",
+        "xarray/backends/api.py",
+        "xarray/core/npcompat.py",
+        "xarray/backends/memory.py",
+        "xarray/tests/test_concat.py"
+      ],
+      "file_reasoning": [
+        {
+          "file": "xarray/core/merge.py",
+          "reasoning": "This file contains the merge functionality for datasets and is directly involved in the process that fails when attempting to merge a DataArray into a Dataset with the `ds.merge()` method."
+        },
+        {
+          "file": "xarray/tests/test_merge.py",
+          "reasoning": "This test file likely contains tests for the merging functionality, but since the bug is in the implementation, it is less likely to be the source of the bug compared to the implementation file."
+        },
+        {
+          "file": "xarray/tests/test_dask.py",
+          "reasoning": "This test file is related to Dask functionality, which is not directly relevant to the merging issue reported in the bug, making it unlikely to contain the bug."
+        },
+        {
+          "file": "xarray/core/coordinates.py",
+          "reasoning": "This file handles coordinate-related functionalities, which are not directly related to the merging process described in the bug report."
+        },
+        {
+          "file": "xarray/tests/test_options.py",
+          "reasoning": "This test file is focused on options configurations and does not pertain to the merging functionality, thus it is unlikely to contain the bug."
+        },
+        {
+          "file": "xarray/plot/plot.py",
+          "reasoning": "This file handles plotting functionalities and does not relate to the merging of datasets and DataArrays, making it irrelevant to the bug."
+        },
+        {
+          "file": "xarray/tests/test_plot.py",
+          "reasoning": "This test file is related to plotting tests and does not address the merging functionality, so it is not a candidate for the bug's location."
+        },
+        {
+          "file": "xarray/tests/test_backends_file_manager.py",
+          "reasoning": "This test file deals with backend file management and is unrelated to the merging process, making it an unlikely location for the bug."
+        },
+        {
+          "file": "xarray/plot/facetgrid.py",
+          "reasoning": "This file is concerned with facet grid plotting and does not have any connection to the merging functionality outlined in the bug report."
+        },
+        {
+          "file": "xarray/tests/test_backends.py",
+          "reasoning": "This test file focuses on backend tests and is not related to the merging functionality, thus it is not likely to contain the bug."
+        },
+        {
+          "file": "xarray/tutorial.py",
+          "reasoning": "This file contains tutorial content, which typically does not involve the core functionality and is not likely to be related to the bug."
+        },
+        {
+          "file": "xarray/backends/api.py",
+          "reasoning": "This file deals with backend API calls and does not pertain to the merging functionality, making it an unlikely candidate for the bug."
+        },
+        {
+          "file": "xarray/core/npcompat.py",
+          "reasoning": "This file provides compatibility functions for NumPy and does not directly relate to the merging of datasets and DataArrays."
+        },
+        {
+          "file": "xarray/backends/memory.py",
+          "reasoning": "This file handles memory backend operations and is not relevant to the merging functionality, thus unlikely to contain the bug."
+        },
+        {
+          "file": "xarray/tests/test_concat.py",
+          "reasoning": "This test file tests concatenation functionality and does not relate to the merging issue described in the bug report."
+        }
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 1
+    },
+    "django__django-16100": {
+      "repo": "django/django",
+      "ground_truths": [
+        "django/contrib/admin/options.py"
+      ],
+      "candidate_files": [
+        "tests/transaction_hooks/tests.py",
+        "tests/handlers/views.py",
+        "tests/handlers/tests.py",
+        "tests/i18n/test_percents.py",
+        "tests/auth_tests/test_decorators.py",
+        "tests/transactions/tests.py",
+        "tests/admin_views/tests.py",
+        "django/contrib/postgres/operations.py",
+        "django/db/backends/sqlite3/base.py",
+        "tests/urlpatterns_reverse/middleware.py",
+        "tests/admin_views/test_autocomplete_view.py",
+        "tests/user_commands/tests.py",
+        "tests/select_for_update/tests.py",
+        "tests/admin_changelist/tests.py",
+        "tests/order_with_respect_to/base_tests.py"
+      ],
+      "file_reasoning": [
+        {
+          "file": "tests/transaction_hooks/tests.py",
+          "reasoning": "This file likely contains tests related to transaction hooks, which may be directly relevant to ensuring that operations are properly wrapped in transactions, making it plausible that it relates to the missing transaction handling in the changelist."
+        },
+        {
+          "file": "tests/handlers/views.py",
+          "reasoning": "While this file handles views, it does not seem specifically related to transaction handling or the changelist functionality, making it less relevant to the reported issue."
+        },
+        {
+          "file": "tests/handlers/tests.py",
+          "reasoning": "This file likely contains generic tests for handlers, which may not specifically target transaction handling in changelists, thus it is less likely to relate to the bug."
+        },
+        {
+          "file": "tests/i18n/test_percents.py",
+          "reasoning": "This file is focused on internationalization tests and does not pertain to transaction handling or database operations, making it irrelevant to the bug."
+        },
+        {
+          "file": "tests/auth_tests/test_decorators.py",
+          "reasoning": "This file tests authentication decorators, which do not involve transaction handling for changelists, so it is unlikely to be related to the bug."
+        },
+        {
+          "file": "tests/transactions/tests.py",
+          "reasoning": "This file likely contains tests specifically focused on transaction management, making it a strong candidate for containing relevant tests or issues related to transaction handling in the changelist."
+        },
+        {
+          "file": "tests/admin_views/tests.py",
+          "reasoning": "Given that this file tests admin views, it could potentially intersect with changelist functionality, but it is less likely to contain the core bug related to missing transaction handling."
+        },
+        {
+          "file": "django/contrib/postgres/operations.py",
+          "reasoning": "This file deals with database operations specific to PostgreSQL and does not directly relate to the changelist view or transaction handling, making it less relevant."
+        },
+        {
+          "file": "django/db/backends/sqlite3/base.py",
+          "reasoning": "This file manages SQLite database operations but is not directly involved with the changelist or transaction handling, making it less likely to be affected by the bug."
+        },
+        {
+          "file": "tests/urlpatterns_reverse/middleware.py",
+          "reasoning": "This file focuses on middleware related to URL patterns and does not pertain to transaction handling or changelists, thus it is unlikely to relate to the bug."
+        },
+        {
+          "file": "tests/admin_views/test_autocomplete_view.py",
+          "reasoning": "This file tests an autocomplete view in the admin, which does not directly relate to the changelist processing or transaction issues, making it less relevant."
+        },
+        {
+          "file": "tests/user_commands/tests.py",
+          "reasoning": "This file tests user commands and is not related to the admin changelist functionality or transaction handling, so it is unlikely to contain the bug."
+        },
+        {
+          "file": "tests/select_for_update/tests.py",
+          "reasoning": "This file is focused on testing 'select for update' behavior in transactions, which could relate to the overall transaction handling context but does not specifically address changelist operations."
+        },
+        {
+          "file": "tests/admin_changelist/tests.py",
+          "reasoning": "This file is specifically concerned with testing the admin changelist, making it highly relevant to the reported bug regarding transaction handling in changelist processing."
+        },
+        {
+          "file": "tests/order_with_respect_to/base_tests.py",
+          "reasoning": "This file deals with ordering related tests and is not directly tied to transaction handling in changelists, making it less likely to be related to the bug."
+        }
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 1
+    },
+    "astropy__astropy-7166": {
+      "repo": "astropy/astropy",
+      "ground_truths": [
+        "astropy/utils/misc.py"
+      ],
+      "candidate_files": [
+        "astropy/time/tests/test_delta.py",
+        "astropy/extern/bundled/six.py",
+        "astropy/modeling/functional_models.py",
+        "astropy/modeling/powerlaws.py",
+        "astropy/stats/lombscargle/core.py",
+        "astropy/visualization/wcsaxes/tests/test_misc.py",
+        "astropy/visualization/wcsaxes/tests/test_frame.py",
+        "astropy/wcs/_docutil.py",
+        "astropy/modeling/blackbody.py",
+        "astropy/table/np_utils.py",
+        "astropy/nddata/tests/test_nduncertainty.py",
+        "astropy/modeling/tests/test_projections.py",
+        "astropy/extern/ply/cpp.py",
+        "astropy/units/format/ogip.py",
+        "astropy/extern/ply/ctokens.py"
+      ],
+      "file_reasoning": [
+        {
+          "file": "astropy/time/tests/test_delta.py",
+          "reasoning": "This test file likely checks the functionality of time-related features, which seems unrelated to the issue with the InheritDocstrings metaclass and properties."
+        },
+        {
+          "file": "astropy/extern/bundled/six.py",
+          "reasoning": "This file provides compatibility utilities between Python 2 and 3, which doesn't seem to directly relate to the bug concerning docstring inheritance for properties."
+        },
+        {
+          "file": "astropy/modeling/functional_models.py",
+          "reasoning": "This file defines functional models, but it is not directly related to the inheritance of docstrings from properties in the context of the InheritDocstrings metaclass."
+        },
+        {
+          "file": "astropy/modeling/powerlaws.py",
+          "reasoning": "Similar to functional_models.py, this file deals with specific modeling functions and is not relevant to the issue with the InheritDocstrings metaclass and property docstrings."
+        },
+        {
+          "file": "astropy/stats/lombscargle/core.py",
+          "reasoning": "This core file for Lomb-Scargle statistics doesn't seem to involve properties or the InheritDocstrings metaclass, making it unlikely to contain the bug."
+        },
+        {
+          "file": "astropy/visualization/wcsaxes/tests/test_misc.py",
+          "reasoning": "This test file is focused on visualizations and miscellaneous tests, which do not relate to the issue of docstring inheritance for properties."
+        },
+        {
+          "file": "astropy/visualization/wcsaxes/tests/test_frame.py",
+          "reasoning": "Like test_misc.py, this file is centered around visualization tests and does not address the concerns related to the InheritDocstrings metaclass."
+        },
+        {
+          "file": "astropy/wcs/_docutil.py",
+          "reasoning": "As a utility for documentation, this file may have some relevance to the bug regarding docstring management, potentially linking it to the issue with properties."
+        },
+        {
+          "file": "astropy/modeling/blackbody.py",
+          "reasoning": "This file defines a specific model but does not seem to intersect with the InheritDocstrings issues or property docstring inheritance."
+        },
+        {
+          "file": "astropy/table/np_utils.py",
+          "reasoning": "This utility file for table operations is unlikely to be related to the InheritDocstrings metaclass and its handling of properties."
+        },
+        {
+          "file": "astropy/nddata/tests/test_nduncertainty.py",
+          "reasoning": "This test file focuses on uncertainty in ND data, which does not relate to the inheritance of docstrings from properties."
+        },
+        {
+          "file": "astropy/modeling/tests/test_projections.py",
+          "reasoning": "This test file checks projections related to modeling but does not address the InheritDocstrings metaclass and its functionality with properties."
+        },
+        {
+          "file": "astropy/extern/ply/cpp.py",
+          "reasoning": "This file is part of the PLY parser and is unlikely to be related to the specific issue of docstring inheritance for properties."
+        },
+        {
+          "file": "astropy/units/format/ogip.py",
+          "reasoning": "This file deals with OGIP format units, which does not seem relevant to the inheritance of docstrings in the context of properties."
+        },
+        {
+          "file": "astropy/extern/ply/ctokens.py",
+          "reasoning": "As a part of the PLY library, this file is focused on token management rather than the issues surrounding docstring inheritance in properties."
+        }
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 1
+    },
+    "astropy__astropy-14995": {
+      "repo": "astropy/astropy",
+      "ground_truths": [
+        "astropy/nddata/mixins/ndarithmetic.py"
+      ],
+      "candidate_files": [
+        "astropy/nddata/nddata.py",
+        "astropy/nddata/mixins/ndarithmetic.py",
+        "astropy/nddata/tests/test_nddata_base.py",
+        "astropy/nddata/tests/test_ccddata.py",
+        "astropy/utils/masked/tests/test_masked.py",
+        "astropy/utils/masked/core.py",
+        "astropy/io/fits/tests/test_connect.py",
+        "astropy/table/tests/test_masked.py",
+        "astropy/io/votable/tests/vo_test.py",
+        "astropy/table/table.py"
+      ],
+      "file_reasoning": [
+        {
+          "file": "astropy/io/fits/tests/test_connect.py",
+          "reasoning": "This test file is likely unrelated as it deals with FITS file connections and does not pertain to NDData or mask handling."
+        },
+        {
+          "file": "astropy/table/tests/test_masked.py",
+          "reasoning": "While this might involve masking, it is too focused on table structures rather than NDData's masking issues, making it less relevant."
+        },
+        {
+          "file": "astropy/io/votable/tests/vo_test.py",
+          "reasoning": "This file addresses VOTable tests and does not connect to the NDDataRef or its mask propagation functionalities."
+        },
+        {
+          "file": "astropy/io/votable/tests/converter_test.py",
+          "reasoning": "Similar to the previous file, this focuses on VOTable conversions and not on NDData or mask logic."
+        },
+        {
+          "file": "astropy/nddata/tests/test_nddata_base.py",
+          "reasoning": "This file likely tests the base functionalities of NDData which could include the mask handling, making it relevant to the reported bug."
+        },
+        {
+          "file": "astropy/nddata/compat.py",
+          "reasoning": "This compatibility file likely deals with backward compatibility and may not directly relate to the NDData mask propagation issue."
+        },
+        {
+          "file": "astropy/nddata/mixins/ndarithmetic.py",
+          "reasoning": "This file likely contains arithmetic operations for NDData, which are central to the bug's symptoms regarding mask handling during multiplication."
+        },
+        {
+          "file": "astropy/convolution/tests/test_kernel_class.py",
+          "reasoning": "This file tests convolution kernels and is not related to NDData or its mask propagation functionalities."
+        },
+        {
+          "file": "astropy/nddata/nddata.py",
+          "reasoning": "This implementation file is crucial as it contains the NDDataRef class and likely includes the logic for mask handling and propagation, making it the most relevant to the bug."
+        },
+        {
+          "file": "astropy/table/tests/test_groups.py",
+          "reasoning": "This file tests grouping operations on tables and does not relate to NDData or its mask handling."
+        },
+        {
+          "file": "astropy/utils/masked/tests/test_masked.py",
+          "reasoning": "This test file is focused on masked arrays and may have some relevance, but it doesn't specifically target NDData or the bug in question."
+        },
+        {
+          "file": "astropy/time/tests/test_mask.py",
+          "reasoning": "This file is likely unrelated as it focuses on time-related masking and not on NDDataRef or its arithmetic operations."
+        },
+        {
+          "file": "astropy/table/table.py",
+          "reasoning": "While it deals with tables, it doesn't involve NDData or mask logic, making it less relevant."
+        },
+        {
+          "file": "astropy/utils/masked/core.py",
+          "reasoning": "This core utility may have some relevance to masking but is not specific to NDData or the propagation bug."
+        },
+        {
+          "file": "astropy/nddata/tests/test_ccddata.py",
+          "reasoning": "This test file may involve NDData operations and could be relevant, particularly if it includes tests for mask propagation."
+        }
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 1
+    },
+    "django__django-11400": {
+      "repo": "django/django",
+      "ground_truths": [
+        "django/contrib/admin/filters.py",
+        "django/db/models/fields/__init__.py",
+        "django/db/models/fields/reverse_related.py"
+      ],
+      "candidate_files": [
+        "django/contrib/admin/views/main.py",
+        "tests/admin_ordering/tests.py",
+        "tests/admin_filters/tests.py",
+        "tests/ordering/tests.py",
+        "tests/admin_ordering/models.py",
+        "tests/admin_changelist/tests.py",
+        "tests/order_with_respect_to/base_tests.py",
+        "tests/check_framework/test_multi_db.py",
+        "tests/invalid_models_tests/test_models.py",
+        "django/contrib/admin/exceptions.py"
+      ],
+      "file_reasoning": [
+        {
+          "file": "django/contrib/admin/views/main.py",
+          "reasoning": "This file likely handles the main view logic for the Django admin interface, which includes rendering and managing related field filters, making it relevant to the ordering problem reported."
+        },
+        {
+          "file": "tests/admin_ordering/tests.py",
+          "reasoning": "This test file appears to be directly related to testing the ordering behavior in the admin, and it may contain tests that expose the bug regarding the RelatedFieldListFilter's ordering."
+        },
+        {
+          "file": "tests/order_with_respect_to/base_tests.py",
+          "reasoning": "While this file may contain base tests related to ordering, it is less directly related to the specific filters mentioned in the bug report and may not address the specific problem."
+        },
+        {
+          "file": "tests/admin_ordering/models.py",
+          "reasoning": "This file likely defines models used in conjunction with the tests for ordering in the admin, which could help illuminate how the ordering issue manifests."
+        },
+        {
+          "file": "tests/check_framework/test_multi_db.py",
+          "reasoning": "This file is more focused on testing multi-database configurations and is unlikely to be relevant to the specific ordering bug in the admin filters."
+        },
+        {
+          "file": "tests/invalid_models_tests/test_models.py",
+          "reasoning": "This file tests invalid models and is not related to the ordering functionality in the admin interface, making it irrelevant to the bug."
+        },
+        {
+          "file": "tests/admin_changelist/tests.py",
+          "reasoning": "This file tests the admin changelist functionality, which may involve ordering, but it is less specific than others directly dealing with the filters mentioned in the bug."
+        },
+        {
+          "file": "tests/i18n/test_percents.py",
+          "reasoning": "This file focuses on internationalization tests, which do not relate to the ordering bug in the admin filters."
+        },
+        {
+          "file": "tests/model_package/tests.py",
+          "reasoning": "This file is likely related to testing model packages and does not pertain directly to the reported bug about admin filter ordering."
+        },
+        {
+          "file": "tests/ordering/tests.py",
+          "reasoning": "This file likely contains tests for various ordering scenarios and could provide insight into how ordering is handled, making it somewhat relevant."
+        },
+        {
+          "file": "tests/admin_filters/tests.py",
+          "reasoning": "This file likely tests various admin filters, including possibly the RelatedFieldListFilter, making it relevant to the bug report regarding filter ordering."
+        },
+        {
+          "file": "tests/admin_ordering/__init__.py",
+          "reasoning": "As an init file, it does not contain tests or relevant code and is not directly related to the bug at hand."
+        },
+        {
+          "file": "tests/model_fields/tests.py",
+          "reasoning": "This file is focused on testing model fields and is not relevant to the bug concerning ordering in admin filters."
+        },
+        {
+          "file": "django/contrib/admin/exceptions.py",
+          "reasoning": "This file defines exceptions related to the admin framework but does not directly relate to the ordering issue reported."
+        },
+        {
+          "file": "tests/model_inheritance/tests.py",
+          "reasoning": "This file is focused on testing model inheritance scenarios and does not address the specific issues with ordering in admin filters."
+        }
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 3
+    },
+    "django__django-13401": {
+      "repo": "django/django",
+      "ground_truths": [
+        "django/db/models/fields/__init__.py"
+      ],
+      "candidate_files": [
+        "tests/model_inheritance/tests.py",
+        "tests/model_inheritance/test_abstract_inheritance.py",
+        "django/db/models/options.py",
+        "tests/model_fields/test_field_flags.py",
+        "tests/basic/tests.py",
+        "tests/update/models.py",
+        "tests/queries/models.py",
+        "tests/migrations/test_state.py",
+        "django/contrib/contenttypes/models.py",
+        "tests/i18n/test_percents.py"
+      ],
+      "file_reasoning": [
+        {
+          "file": "tests/basic/tests.py",
+          "reasoning": "This file likely tests fundamental Django features, which may include model behavior, but it is too generic to directly relate to the specific issue of abstract model fields comparing equal."
+        },
+        {
+          "file": "tests/model_inheritance/tests.py",
+          "reasoning": "Given that the bug report involves abstract model inheritance, this test file likely contains tests for model inheritance scenarios and could directly relate to the behavior described in the bug."
+        },
+        {
+          "file": "tests/i18n/test_percents.py",
+          "reasoning": "This file focuses on internationalization testing, which does not connect to the model equality issue described in the bug report."
+        },
+        {
+          "file": "django/utils/dateformat.py",
+          "reasoning": "This utility file deals with date formatting and is unrelated to the model field comparisons discussed in the bug report."
+        },
+        {
+          "file": "tests/model_fields/test_field_flags.py",
+          "reasoning": "This file likely includes tests for various field attributes and flags, which may touch on field behavior but does not specifically address the equality issue of abstract model fields."
+        },
+        {
+          "file": "tests/migrations/test_state.py",
+          "reasoning": "This migration test file focuses on database state during migrations, which does not pertain to the equality of model fields."
+        },
+        {
+          "file": "tests/queries/models.py",
+          "reasoning": "This file focuses on query-related tests which are not directly tied to the abstract model field comparison issue presented in the bug report."
+        },
+        {
+          "file": "django/contrib/contenttypes/models.py",
+          "reasoning": "This file defines content type models but is not directly related to the bug regarding field equality in abstract models."
+        },
+        {
+          "file": "tests/update/models.py",
+          "reasoning": "This file likely tests model updates and behaviors, but it does not directly address the specific issue of abstract model field equality."
+        },
+        {
+          "file": "django/db/models/options.py",
+          "reasoning": "This file manages model options and configurations, which likely includes the logic for field comparisons and may be central to the bug regarding equality."
+        },
+        {
+          "file": "tests/select_related_regress/models.py",
+          "reasoning": "This file focuses on regression tests for the select_related feature, which does not connect to the bug of field equality in abstract models."
+        },
+        {
+          "file": "tests/fixtures_regress/models.py",
+          "reasoning": "This file tests fixture loading and does not relate to the model field equality issue mentioned in the bug report."
+        },
+        {
+          "file": "tests/select_for_update/tests.py",
+          "reasoning": "This file tests the select_for_update functionality, which is unrelated to the abstract model equality issue."
+        },
+        {
+          "file": "tests/model_inheritance/test_abstract_inheritance.py",
+          "reasoning": "This test file directly tests behaviors related to abstract models and their fields, making it highly relevant to the bug report."
+        },
+        {
+          "file": "tests/queryset_pickle/tests.py",
+          "reasoning": "This file tests the pickling of querysets, which does not relate to the specific abstract model field comparison issue."
+        }
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 1
+    },
+    "django__django-13551": {
+      "repo": "django/django",
+      "ground_truths": [
+        "django/contrib/auth/tokens.py"
+      ],
+      "candidate_files": [
+        "django/contrib/auth/base_user.py",
+        "django/contrib/auth/tokens.py",
+        "django/contrib/auth/views.py",
+        "tests/auth_tests/test_views.py",
+        "tests/auth_tests/test_forms.py",
+        "tests/auth_tests/test_models.py",
+        "tests/auth_tests/models/with_custom_email_field.py",
+        "tests/auth_tests/test_templates.py",
+        "tests/auth_tests/test_basic.py",
+        "tests/auth_tests/test_tokens.py"
+      ],
+      "file_reasoning": [
+        {
+          "file": "django/contrib/auth/base_user.py",
+          "reasoning": "This file likely contains the implementation of the base user model, which may include logic related to email handling and password resets, making it relevant to the bug regarding email address changes."
+        },
+        {
+          "file": "tests/auth_tests/test_views.py",
+          "reasoning": "While this test file may contain tests for the views related to password resets, it is less likely to contain the bug itself compared to the implementation files, as it primarily focuses on testing the behavior rather than the underlying logic."
+        },
+        {
+          "file": "tests/auth_tests/test_forms.py",
+          "reasoning": "This test file might validate forms related to user accounts and email changes, but since the bug specifically pertains to token generation, its relevance is lower than that of the file containing the actual token generation logic."
+        },
+        {
+          "file": "tests/auth_tests/test_models.py",
+          "reasoning": "This file potentially tests user model behaviors, including those related to email, but it is not directly focused on the token generation process that is central to the bug."
+        },
+        {
+          "file": "tests/auth_tests/models/with_custom_email_field.py",
+          "reasoning": "This file may test custom user models that include email fields, which could be useful in understanding edge cases, but it is unlikely to contain the actual bug as it focuses on testing rather than implementation."
+        },
+        {
+          "file": "tests/auth_tests/test_templates.py",
+          "reasoning": "This file tests templates and is unlikely to contain any logic that relates to the password reset token generation, making it less relevant to the bug."
+        },
+        {
+          "file": "tests/auth_tests/test_basic.py",
+          "reasoning": "This file is likely testing basic authentication functionalities but does not focus on the specific logic of email changes and token generation, reducing its relevance to the bug."
+        },
+        {
+          "file": "django/contrib/auth/tokens.py",
+          "reasoning": "This file is likely responsible for generating tokens for password resets, making it directly relevant to the bug as it is where the token generation logic can be found."
+        },
+        {
+          "file": "tests/auth_tests/test_tokens.py",
+          "reasoning": "Although this test file will test the token generation functionality, the bug itself is more likely in the implementation file that generates the tokens rather than in the tests."
+        },
+        {
+          "file": "tests/auth_tests/client.py",
+          "reasoning": "This file likely tests the client interactions but does not deal with the specifics of password reset token generation, making it less relevant."
+        },
+        {
+          "file": "tests/mail/tests.py",
+          "reasoning": "This file tests mail-related functionalities, but since the bug involves token generation rather than mail sending, it is not directly related."
+        },
+        {
+          "file": "tests/i18n/test_percents.py",
+          "reasoning": "This file is unrelated to user authentication or password reset tokens, so it does not connect to the bug."
+        },
+        {
+          "file": "django/contrib/auth/views.py",
+          "reasoning": "This file likely contains the views for handling password reset requests and may deal with token validation, making it relevant to the bug report."
+        },
+        {
+          "file": "tests/auth_tests/models/with_foreign_key.py",
+          "reasoning": "This file focuses on testing foreign key relationships in models and is unlikely to intersect with the password reset functionality, so it is less relevant."
+        },
+        {
+          "file": "django/contrib/auth/migrations/0003_alter_user_email_max_length.py",
+          "reasoning": "While this migration affects the user model, it is not directly involved in the bug related to token generation and email validation."
+        }
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 1
+    },
+    "matplotlib__matplotlib-20859": {
+      "repo": "matplotlib/matplotlib",
+      "ground_truths": [
+        "lib/matplotlib/legend.py"
+      ],
+      "candidate_files": [
+        "lib/matplotlib/legend.py",
+        "lib/matplotlib/tests/test_legend.py",
+        "lib/matplotlib/__init__.py",
+        "lib/matplotlib/tests/test_api.py",
+        "lib/matplotlib/sphinxext/plot_directive.py",
+        "lib/matplotlib/tests/test_matplotlib.py",
+        "lib/matplotlib/cbook/__init__.py",
+        "lib/matplotlib/afm.py",
+        "lib/matplotlib/tests/test_cbook.py",
+        "lib/matplotlib/backends/backend_ps.py",
+        "tutorials/intermediate/legend_guide.py",
+        "examples/subplots_axes_and_figures/fahrenheit_celsius_scales.py",
+        "lib/matplotlib/backends/backend_wxagg.py",
+        "lib/matplotlib/backends/qt_editor/_formlayout.py",
+        "examples/text_labels_and_annotations/legend.py"
+      ],
+      "file_reasoning": [
+        {
+          "file": "lib/matplotlib/legend.py",
+          "reasoning": "This file contains the core logic for handling legends in Matplotlib, making it crucial to investigate as the bug report specifically mentions issues with adding a legend to a SubFigure."
+        },
+        {
+          "file": "lib/matplotlib/tests/test_legend.py",
+          "reasoning": "While test files are less likely to contain the bug, this file tests the legend functionality and may provide insights into how legends are expected to behave, especially in relation to SubFigures."
+        },
+        {
+          "file": "lib/matplotlib/__init__.py",
+          "reasoning": "As the main initialization file for Matplotlib, this file is less likely to contain the bug but may define top-level functionality related to legends or SubFigures."
+        },
+        {
+          "file": "lib/matplotlib/tests/test_api.py",
+          "reasoning": "This file tests the API of Matplotlib and could indirectly relate to legends, but it is less focused on the specific legend functionality that is at the heart of the reported bug."
+        },
+        {
+          "file": "lib/matplotlib/sphinxext/plot_directive.py",
+          "reasoning": "This file is related to documentation and plotting in Sphinx, which is unrelated to the bug concerning legends and SubFigures."
+        },
+        {
+          "file": "lib/matplotlib/tests/test_matplotlib.py",
+          "reasoning": "This file contains various tests for Matplotlib's functionality but is less focused than test_legend.py, making it a lower priority for the bug report."
+        },
+        {
+          "file": "lib/matplotlib/cbook/__init__.py",
+          "reasoning": "This file contains utility functions and classes that are generally used throughout Matplotlib, but it is unlikely to directly address the legend-related bug."
+        },
+        {
+          "file": "lib/matplotlib/afm.py",
+          "reasoning": "This file deals with font management and is unrelated to the legend functionality or the issues with SubFigures."
+        },
+        {
+          "file": "lib/matplotlib/tests/test_cbook.py",
+          "reasoning": "Similar to other test files, this tests the utility functions; however, it is not focused on legends, making it less relevant to the reported bug."
+        },
+        {
+          "file": "lib/matplotlib/backends/backend_ps.py",
+          "reasoning": "This backend file handles PostScript output and is unrelated to the legend issue in SubFigures."
+        },
+        {
+          "file": "tutorials/intermediate/legend_guide.py",
+          "reasoning": "This tutorial provides guidance on using legends but is not an implementation file, making it less likely to contain the bug."
+        },
+        {
+          "file": "examples/subplots_axes_and_figures/fahrenheit_celsius_scales.py",
+          "reasoning": "This example demonstrates plotting but does not relate specifically to legends or the SubFigure context of the bug."
+        },
+        {
+          "file": "lib/matplotlib/backends/backend_wxagg.py",
+          "reasoning": "This backend file is focused on the wxPython interface and does not pertain to issues with legends or SubFigures."
+        },
+        {
+          "file": "lib/matplotlib/backends/qt_editor/_formlayout.py",
+          "reasoning": "This file is for the Qt editor layout and is not relevant to the legend functionality in Matplotlib."
+        },
+        {
+          "file": "examples/text_labels_and_annotations/legend.py",
+          "reasoning": "While this example illustrates legend usage, it does not contain implementation logic and thus is less likely to hold the bug."
+        }
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0
+    },
+    "pydata__xarray-4687": {
+      "repo": "pydata/xarray",
+      "ground_truths": [
+        "xarray/core/computation.py"
+      ],
+      "candidate_files": [
+        "xarray/tests/test_backends.py",
+        "xarray/core/pdcompat.py",
+        "xarray/core/groupby.py",
+        "xarray/core/indexing.py",
+        "xarray/tests/test_groupby.py",
+        "xarray/tests/test_dask.py",
+        "xarray/tests/test_computation.py",
+        "xarray/coding/times.py",
+        "xarray/core/computation.py",
+        "xarray/tests/test_dataarray.py",
+        "xarray/core/duck_array_ops.py",
+        "xarray/tests/test_dataset.py",
+        "xarray/tests/test_variable.py",
+        "xarray/tests/test_formatting_html.py",
+        "xarray/tests/test_plot.py"
+      ],
+      "file_reasoning": [
+        {
+          "file": "xarray/tests/test_backends.py",
+          "reasoning": "This test file likely contains tests for backend functionalities of xarray, but it is less likely to be directly related to the bug about attribute handling in DataArray, which is more about core functionality."
+        },
+        {
+          "file": "xarray/core/pdcompat.py",
+          "reasoning": "This file likely deals with compatibility with pandas, which is not directly related to the issue of attribute preservation in xarray's DataArray operations."
+        },
+        {
+          "file": "xarray/core/groupby.py",
+          "reasoning": "This file manages groupby operations, which are not directly connected to the core issue with DataArray attributes being lost, making it an unlikely candidate."
+        },
+        {
+          "file": "xarray/core/indexing.py",
+          "reasoning": "Indexing operations are not directly related to the issue of attribute preservation in DataArrays, which makes this file less relevant to the bug."
+        },
+        {
+          "file": "xarray/tests/test_groupby.py",
+          "reasoning": "While this test file is focused on groupby functionality, it does not pertain to the attribute handling issue raised in the bug report."
+        },
+        {
+          "file": "xarray/tests/test_dask.py",
+          "reasoning": "This test file focuses on dask integration and operations, which do not relate to the core issue of attributes in DataArrays."
+        },
+        {
+          "file": "xarray/tests/test_computation.py",
+          "reasoning": "This test file likely covers computational aspects of xarray but does not focus on the specific issue of attribute preservation in DataArrays."
+        },
+        {
+          "file": "xarray/coding/times.py",
+          "reasoning": "This file appears to deal with time-related coding and functionalities, which do not directly relate to the issue of attributes being lost in DataArrays."
+        },
+        {
+          "file": "xarray/core/computation.py",
+          "reasoning": "This file handles computation operations in xarray, but the bug report specifically mentions attribute handling rather than computation, making this file less relevant."
+        },
+        {
+          "file": "xarray/tests/test_dataarray.py",
+          "reasoning": "Given that the bug specifically mentions DataArray behavior, this test file is likely to contain relevant tests that may help in understanding the bug about attribute loss."
+        },
+        {
+          "file": "xarray/core/duck_array_ops.py",
+          "reasoning": "This file likely implements operations on array-like objects but does not directly address the functionality related to preserving attributes in DataArrays."
+        },
+        {
+          "file": "xarray/tests/test_dataset.py",
+          "reasoning": "This test file focuses on Dataset functionality, which is not the main concern of the reported bug regarding DataArray attributes."
+        },
+        {
+          "file": "xarray/tests/test_variable.py",
+          "reasoning": "This test file is likely focused on Variable objects, which are separate from DataArray issues, making it less relevant to the current bug."
+        },
+        {
+          "file": "xarray/tests/test_formatting_html.py",
+          "reasoning": "This file likely involves testing HTML formatting and presentation, which does not pertain to the core issue of losing attributes in DataArrays."
+        },
+        {
+          "file": "xarray/tests/test_plot.py",
+          "reasoning": "This test file likely addresses plotting functionalities, which are unrelated to the core issue of attribute preservation in DataArrays."
+        }
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 1
+    },
+    "astropy__astropy-14539": {
+      "repo": "astropy/astropy",
+      "ground_truths": [
+        "astropy/io/fits/diff.py"
+      ],
+      "candidate_files": [
+        "astropy/io/fits/diff.py",
+        "astropy/io/fits/tests/test_diff.py",
+        "astropy/io/fits/tests/test_fitsdiff.py",
+        "astropy/io/fits/tests/test_table.py",
+        "astropy/io/fits/scripts/fitsdiff.py",
+        "astropy/io/fits/tests/test_connect.py",
+        "astropy/io/fits/_tiled_compression/tests/test_tiled_compression.py",
+        "astropy/io/fits/tests/test_tilde_path.py",
+        "astropy/table/tests/test_table.py",
+        "astropy/nddata/tests/test_ccddata.py"
+      ],
+      "file_reasoning": [
+        {
+          "file": "astropy/io/fits/tests/test_connect.py",
+          "reasoning": "This test file is likely unrelated to the bug since it focuses on connection aspects of the FITS files, rather than the comparison of data which is the core issue in the bug report."
+        },
+        {
+          "file": "astropy/io/fits/tests/test_diff.py",
+          "reasoning": "This test file directly tests the functionality of the FITSDiff class, making it highly relevant as it may contain tests that could replicate the bug or confirm the fix."
+        },
+        {
+          "file": "astropy/io/misc/asdf/tags/time/tests/test_time.py",
+          "reasoning": "This test file deals with ASDF time tags and is unlikely to relate to FITS file comparisons or the handling of VLAs, making it irrelevant to the current bug."
+        },
+        {
+          "file": "astropy/io/fits/diff.py",
+          "reasoning": "This file contains the implementation of the FITSDiff class, which is central to the bug as it handles the comparison logic that is incorrectly reporting differences in identical files."
+        },
+        {
+          "file": "astropy/io/fits/tests/test_table.py",
+          "reasoning": "While this test file is related to table structures in FITS files, it does not directly address the comparison functionality that is at the heart of the reported bug."
+        },
+        {
+          "file": "astropy/io/fits/_tiled_compression/tests/test_tiled_compression.py",
+          "reasoning": "This test file is focused on tiled compression features and is not relevant to the bug regarding the FITSDiff class and handling of VLAs."
+        },
+        {
+          "file": "astropy/io/fits/tests/test_tilde_path.py",
+          "reasoning": "This file tests the handling of tilde paths in FITS files, which does not intersect with the core issue of comparing FITS files for differences."
+        },
+        {
+          "file": "astropy/table/tests/test_table.py",
+          "reasoning": "This test file is related to table operations but is not pertinent to the differences between FITS files as described in the bug report."
+        },
+        {
+          "file": "astropy/io/fits/scripts/fitsdiff.py",
+          "reasoning": "This script is likely related to the overall FITS difference functionality, but it is a higher-level interface and not where the core bug is likely to reside."
+        },
+        {
+          "file": "astropy/nddata/tests/test_ccddata.py",
+          "reasoning": "This test file is focused on CCD data handling and is unrelated to the FITSDiff functionality, thus not relevant to the bug."
+        },
+        {
+          "file": "astropy/io/fits/tests/test_fitsdiff.py",
+          "reasoning": "This test file is closely related to the FITSDiff and would likely contain tests that exercise the specific code paths involved in the reported bug."
+        },
+        {
+          "file": "astropy/io/fits/tests/test_hdulist.py",
+          "reasoning": "This test file is primarily focused on HDU list operations and does not directly relate to the comparison logic of FITSDiff."
+        },
+        {
+          "file": "astropy/io/misc/asdf/tags/transform/polynomial.py",
+          "reasoning": "This file deals with polynomial transformations in the ASDF format and is unrelated to FITS file comparison or the specific bug reported."
+        },
+        {
+          "file": "astropy/io/fits/fitstime.py",
+          "reasoning": "This file handles time-related functionalities in FITS and is not relevant to the comparison issues highlighted in the bug report."
+        },
+        {
+          "file": "astropy/nddata/ccddata.py",
+          "reasoning": "This file pertains to CCD data handling and is not relevant to the FITS file comparison issues described in the bug report."
+        }
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0
+    },
+    "mwaskom__seaborn-3069": {
+      "repo": "mwaskom/seaborn",
+      "ground_truths": [
+        "seaborn/_core/plot.py"
+      ],
+      "candidate_files": [
+        "seaborn/categorical.py",
+        "seaborn/_core/scales.py",
+        "seaborn/_core/plot.py",
+        "tests/_core/test_scales.py",
+        "seaborn/axisgrid.py",
+        "tests/test_plot.py",
+        "tests/test_axisgrid.py",
+        "tests/test_utils.py",
+        "tests/test_data.py",
+        "seaborn/utils.py"
+      ],
+      "file_reasoning": [
+        {
+          "file": "seaborn/external/docscrape.py",
+          "reasoning": "This file is likely unrelated to the bug as it seems to focus on web scraping functionalities rather than plotting or scale management."
+        },
+        {
+          "file": "tests/_core/test_plot.py",
+          "reasoning": "While this test file may contain tests related to plotting, the actual bug is likely in the implementation files that handle scale rendering rather than in the tests themselves."
+        },
+        {
+          "file": "seaborn/matrix.py",
+          "reasoning": "This file may deal with matrix-related plotting, which is somewhat tangential to categorical scales, thus it is less likely to be directly related to the bug regarding nominal scales."
+        },
+        {
+          "file": "tests/test_axisgrid.py",
+          "reasoning": "This test file likely tests functionalities of axis grids, but the bug report specifically addresses scale rendering rather than axis grid behavior."
+        },
+        {
+          "file": "seaborn/axisgrid.py",
+          "reasoning": "As this file manages the axis grid functionalities, it may indirectly relate to the bug, but it is likely not the primary source of the bug regarding nominal scale handling."
+        },
+        {
+          "file": "seaborn/utils.py",
+          "reasoning": "This utility file likely contains helper functions that are not specifically related to the implementation of scales or plotting logic."
+        },
+        {
+          "file": "seaborn/categorical.py",
+          "reasoning": "This file is likely crucial as it deals specifically with categorical scales, making it a strong candidate for containing the bug related to nominal scales."
+        },
+        {
+          "file": "seaborn/external/husl.py",
+          "reasoning": "This file likely focuses on color manipulation rather than plotting scales, making it irrelevant to the categorical scales bug."
+        },
+        {
+          "file": "tests/test_utils.py",
+          "reasoning": "This test file is likely focused on utility functions and is not directly related to the implementation of scales or plotting features."
+        },
+        {
+          "file": "tests/_core/test_scales.py",
+          "reasoning": "This test file likely contains tests for scale functionalities, making it relevant, but it is still less likely to contain the bug compared to the implementation files."
+        },
+        {
+          "file": "seaborn/_core/plot.py",
+          "reasoning": "This file is a strong candidate as it likely contains core plotting functionalities, which may include the handling of scales and their rendering."
+        },
+        {
+          "file": "seaborn/_core/scales.py",
+          "reasoning": "This file is very likely the primary location for scale definitions and logic, making it the most probable file to contain the bug related to nominal scale drawing."
+        },
+        {
+          "file": "tests/_core/test_data.py",
+          "reasoning": "This test file appears to test data handling and is not related to the plotting scales, making it irrelevant to the reported bug."
+        },
+        {
+          "file": "tests/test_distributions.py",
+          "reasoning": "This test file is focused on testing distribution-related functionalities, which likely do not intersect with the nominal scale issue."
+        },
+        {
+          "file": "seaborn/_compat.py",
+          "reasoning": "This file likely contains compatibility functions and does not interact with the scale rendering, making it unrelated to the bug."
+        }
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 1
+    },
+    "django__django-13158": {
+      "repo": "django/django",
+      "ground_truths": [
+        "django/db/models/sql/query.py"
+      ],
+      "candidate_files": [
+        "django/db/models/query.py",
+        "django/forms/models.py",
+        "tests/model_forms/tests.py",
+        "django/contrib/contenttypes/models.py",
+        "tests/many_to_many/models.py",
+        "django/contrib/contenttypes/fields.py",
+        "tests/model_package/models/publication.py",
+        "tests/model_inheritance/tests.py",
+        "tests/model_inheritance_regress/tests.py",
+        "django/db/models/deletion.py"
+      ],
+      "file_reasoning": [
+        {
+          "file": "django/contrib/contenttypes/models.py",
+          "reasoning": "This file defines models related to content types, which could indirectly relate to how the `Publication` model behaves in terms of object retrieval, but it is less likely to be the source of the bug concerning queryset behavior."
+        },
+        {
+          "file": "tests/model_inheritance/tests.py",
+          "reasoning": "This test file likely covers model inheritance and is not directly related to the issue with the `QuerySet.none()` method or the behavior of combined querysets as described in the bug report."
+        },
+        {
+          "file": "django/db/models/query.py",
+          "reasoning": "This file handles the core query functionality of Django's ORM, and since the issue revolves around how combined querysets behave, it is very likely that this file contains the logic that is causing the bug."
+        },
+        {
+          "file": "tests/model_package/models/publication.py",
+          "reasoning": "This file likely contains tests for the `Publication` model, but does not directly address the bug related to combined querysets and `QuerySet.none()`."
+        },
+        {
+          "file": "tests/many_to_many/models.py",
+          "reasoning": "Given that the bug involves ManyToMany relationships in the `Article` model, this file may contain tests related to that functionality, but it is less likely to be the source of the bug."
+        },
+        {
+          "file": "django/utils/dateformat.py",
+          "reasoning": "This utility file is unrelated to the bug report, as it deals with date formatting rather than queryset behavior or model relationships."
+        },
+        {
+          "file": "tests/model_inheritance_regress/tests.py",
+          "reasoning": "This test file is focused on regressions in model inheritance and is not likely to relate to the issue with queryset behavior described in the bug."
+        },
+        {
+          "file": "django/db/models/deletion.py",
+          "reasoning": "This file manages deletion logic for models and is not relevant to the issue with `QuerySet.none()` and combined querysets."
+        },
+        {
+          "file": "tests/queryset_pickle/tests.py",
+          "reasoning": "This test file likely deals with serialization of querysets and does not address the functionality of `QuerySet.none()` or combined querysets."
+        },
+        {
+          "file": "tests/model_forms/tests.py",
+          "reasoning": "This test file is likely to test forms including `ModelMultipleChoiceField`, thus it may contain relevant tests for how the form interacts with the queryset but is less likely to contain the bug itself."
+        },
+        {
+          "file": "django/forms/models.py",
+          "reasoning": "This file defines the `ModelMultipleChoiceField` which is directly involved in the bug report, making it a strong candidate for containing logic that mismanages the queryset when it is empty."
+        },
+        {
+          "file": "tests/basic/tests.py",
+          "reasoning": "This test file likely covers basic functionality and does not specifically relate to the queryset behavior of the `Publication` model."
+        },
+        {
+          "file": "tests/contenttypes_tests/test_management.py",
+          "reasoning": "This testing file is related to content types management and not directly relevant to the issue with queryset behavior in the Article model."
+        },
+        {
+          "file": "django/contrib/contenttypes/fields.py",
+          "reasoning": "This file defines fields related to content types which are not likely to affect the behavior of `QuerySet.none()` on combined querysets."
+        },
+        {
+          "file": "tests/model_forms/models.py",
+          "reasoning": "This file contains models used for testing forms, including potentially the `Article` model, but does not directly contain the bug."
+        }
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 1
+    },
+    "scikit-learn__scikit-learn-14141": {
+      "repo": "scikit-learn/scikit-learn",
+      "ground_truths": [
+        "sklearn/utils/_show_versions.py"
+      ],
+      "candidate_files": [
+        "sklearn/tests/test_base.py",
+        "sklearn/utils/fixes.py",
+        "sklearn/utils/_joblib.py",
+        "sklearn/externals/joblib/__init__.py",
+        "sklearn/externals/joblib/numpy_pickle.py",
+        "sklearn/utils/tests/test_utils.py",
+        "sklearn/tests/test_site_joblib.py",
+        "sklearn/utils/tests/test_fixes.py",
+        "sklearn/cluster/tests/test_optics.py",
+        "sklearn/feature_extraction/image.py",
+        "sklearn/tree/export.py",
+        "sklearn/ensemble/_gb_losses.py",
+        "examples/preprocessing/plot_map_data_to_normal.py",
+        "sklearn/tree/tests/test_export.py",
+        "sklearn/ensemble/gradient_boosting.py"
+      ],
+      "file_reasoning": [
+        {
+          "file": "sklearn/tests/test_base.py",
+          "reasoning": "This test file likely checks the core functionalities of scikit-learn, but since the bug is specifically about adding joblib to the version output, it is less likely to contain the bug itself."
+        },
+        {
+          "file": "sklearn/utils/fixes.py",
+          "reasoning": "This file may contain compatibility fixes and utility functions; however, it is not directly related to the joblib dependency issue described in the bug report."
+        },
+        {
+          "file": "sklearn/utils/_joblib.py",
+          "reasoning": "Given the name, this file likely deals with joblib functionality; thus, it might be directly involved in how joblib is referenced in the show_versions output."
+        },
+        {
+          "file": "sklearn/externals/joblib/__init__.py",
+          "reasoning": "This file is part of the joblib package, which the bug report addresses, making it a plausible candidate for containing the relevant dependency management."
+        },
+        {
+          "file": "sklearn/externals/joblib/numpy_pickle.py",
+          "reasoning": "While this file relates to joblib, it likely focuses on numpy-specific functionality, which may not be relevant to the version output issue."
+        },
+        {
+          "file": "sklearn/utils/tests/test_utils.py",
+          "reasoning": "This test file is less likely to be involved with the joblib dependency reporting but may contain tests for various utility functions instead."
+        },
+        {
+          "file": "sklearn/tests/test_site_joblib.py",
+          "reasoning": "This test file is specifically related to joblib, suggesting it could involve testing the joblib integration; however, the bug pertains to the show_versions output."
+        },
+        {
+          "file": "sklearn/utils/tests/test_fixes.py",
+          "reasoning": "This test file likely covers various fixes, but it is not directly related to the dependencies mentioned in the bug report."
+        },
+        {
+          "file": "sklearn/cluster/tests/test_optics.py",
+          "reasoning": "This test file focuses on clustering algorithms and does not pertain to the joblib dependency issue."
+        },
+        {
+          "file": "sklearn/feature_extraction/image.py",
+          "reasoning": "This file handles image feature extraction and is not relevant to the joblib dependency mentioned in the bug report."
+        },
+        {
+          "file": "sklearn/tree/export.py",
+          "reasoning": "This file deals with exporting decision trees and is unlikely to be connected to the joblib dependency issue."
+        },
+        {
+          "file": "sklearn/ensemble/_gb_losses.py",
+          "reasoning": "This file focuses on boosting loss functions and does not relate to joblib dependencies."
+        },
+        {
+          "file": "examples/preprocessing/plot_map_data_to_normal.py",
+          "reasoning": "This example file showcases data preprocessing and does not relate to the joblib dependency issue."
+        },
+        {
+          "file": "sklearn/tree/tests/test_export.py",
+          "reasoning": "While this test file checks the export functionality of trees, it is not relevant to the joblib dependency issue."
+        },
+        {
+          "file": "sklearn/ensemble/gradient_boosting.py",
+          "reasoning": "This file contains implementation related to gradient boosting and is not connected to the joblib dependency issue."
+        }
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 1
+    },
+    "pytest-dev__pytest-10356": {
+      "repo": "pytest-dev/pytest",
+      "ground_truths": [
+        "src/_pytest/mark/structures.py"
+      ],
+      "candidate_files": [
+        "testing/test_mark.py",
+        "src/_pytest/nodes.py",
+        "testing/test_collection.py",
+        "testing/code/test_source.py",
+        "testing/test_assertion.py",
+        "testing/test_doctest.py",
+        "testing/python/metafunc.py",
+        "testing/python/raises.py",
+        "testing/test_conftest.py",
+        "testing/example_scripts/doctest/main_py/__main__.py"
+      ],
+      "file_reasoning": [
+        {
+          "file": "testing/test_mark.py",
+          "reasoning": "This file likely contains tests related to pytest markers, which is directly connected to the bug involving marker inheritance and MRO."
+        },
+        {
+          "file": "doc/en/example/assertion/failure_demo.py",
+          "reasoning": "This file is more focused on demonstrating assertion failures rather than dealing with pytest markers, making it less relevant to the bug report."
+        },
+        {
+          "file": "testing/code/test_source.py",
+          "reasoning": "This file may involve test sources but is not explicitly related to marker handling or inheritance, so its relevance is low."
+        },
+        {
+          "file": "testing/test_assertion.py",
+          "reasoning": "While this file tests assertions, it does not seem to deal with marker functionality, which is the core issue in the bug report."
+        },
+        {
+          "file": "testing/example_scripts/doctest/main_py/__main__.py",
+          "reasoning": "This file appears to serve as an entry point for a doctest example and does not relate to markers or inheritance issues."
+        },
+        {
+          "file": "testing/test_collection.py",
+          "reasoning": "This may involve the collection of tests and markers, making it somewhat relevant, but it is not as focused on the MRO issue as other files."
+        },
+        {
+          "file": "testing/test_conftest.py",
+          "reasoning": "This file is used for configuration and fixtures, which are not directly related to the bug about marker inheritance."
+        },
+        {
+          "file": "testing/test_doctest.py",
+          "reasoning": "This file is focused on testing doctests rather than marker inheritance, so it is not highly relevant to the issue at hand."
+        },
+        {
+          "file": "testing/test_assertrewrite.py",
+          "reasoning": "This file is related to assertion rewriting, which does not connect directly to the MRO and marker inheritance problem."
+        },
+        {
+          "file": "testing/python/fixtures.py",
+          "reasoning": "This file deals with fixtures, which are not connected to the issue of marker inheritance and MRO."
+        },
+        {
+          "file": "testing/python/metafunc.py",
+          "reasoning": "This file may handle metafunctions, which could be tangentially related, but is not focused on markers or inheritance directly."
+        },
+        {
+          "file": "testing/python/raises.py",
+          "reasoning": "This file deals with exception raising and handling, which is unrelated to the marker inheritance issue in the bug report."
+        },
+        {
+          "file": "src/_pytest/nodes.py",
+          "reasoning": "This file is fundamental to pytest's internal structure and may involve markers, making it a strong candidate for containing the bug."
+        },
+        {
+          "file": "testing/code/test_excinfo.py",
+          "reasoning": "This file is related to exception information and is unlikely to be relevant to the marker inheritance issue."
+        },
+        {
+          "file": "testing/deprecated_test.py",
+          "reasoning": "This file is likely related to deprecated features and may not address the current bug regarding marker inheritance."
+        }
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 1
+    },
+    "scikit-learn__scikit-learn-13142": {
+      "repo": "scikit-learn/scikit-learn",
+      "ground_truths": [
+        "sklearn/mixture/base.py"
+      ],
+      "candidate_files": [
+        "sklearn/datasets/tests/test_base.py",
+        "sklearn/decomposition/tests/test_pca.py",
+        "examples/ensemble/plot_adaboost_hastie_10_2.py",
+        "benchmarks/bench_plot_fastkmeans.py",
+        "sklearn/metrics/cluster/tests/test_unsupervised.py",
+        "sklearn/compose/tests/test_column_transformer.py",
+        "sklearn/utils/sparsefuncs.py",
+        "sklearn/tests/test_impute.py",
+        "sklearn/tests/test_dummy.py",
+        "sklearn/tests/test_base.py",
+        "sklearn/datasets/samples_generator.py",
+        "sklearn/gaussian_process/kernels.py",
+        "sklearn/metrics/tests/test_classification.py",
+        "sklearn/cluster/tests/test_k_means.py",
+        "sklearn/linear_model/tests/test_logistic.py"
+      ],
+      "file_reasoning": [
+        {
+          "file": "sklearn/datasets/tests/test_base.py",
+          "reasoning": "This test file is unlikely related to the bug since it focuses on dataset utilities, which do not involve Gaussian mixture models or the fit_predict/predict functionality."
+        },
+        {
+          "file": "sklearn/decomposition/tests/test_pca.py",
+          "reasoning": "This file tests Principal Component Analysis, which is unrelated to Gaussian mixture models and does not impact the fit_predict or predict methods."
+        },
+        {
+          "file": "examples/ensemble/plot_adaboost_hastie_10_2.py",
+          "reasoning": "This example demonstrates AdaBoost and does not relate to GaussianMixture's fit_predict or predict methods, making it irrelevant to the bug."
+        },
+        {
+          "file": "benchmarks/bench_plot_fastkmeans.py",
+          "reasoning": "This benchmark focuses on KMeans clustering performance, which is unrelated to the GaussianMixture model's functionality and the bug reported."
+        },
+        {
+          "file": "sklearn/metrics/cluster/tests/test_unsupervised.py",
+          "reasoning": "While this test file deals with clustering metrics, it does not specifically test GaussianMixture, making it less relevant to the issue described."
+        },
+        {
+          "file": "sklearn/compose/tests/test_column_transformer.py",
+          "reasoning": "This file tests column transformation utilities, which do not intersect with GaussianMixture's functionality, hence it is not related to the bug."
+        },
+        {
+          "file": "sklearn/utils/sparsefuncs.py",
+          "reasoning": "This utility file deals with functions for sparse matrices, which do not relate to the GaussianMixture's fit_predict or predict methods."
+        },
+        {
+          "file": "sklearn/tests/test_impute.py",
+          "reasoning": "This test file focuses on imputation techniques and does not involve GaussianMixture, making it unlikely to contain the bug."
+        },
+        {
+          "file": "sklearn/tests/test_dummy.py",
+          "reasoning": "This file tests dummy estimators, which are not related to GaussianMixture, and thus it is not relevant to the reported bug."
+        },
+        {
+          "file": "sklearn/tests/test_base.py",
+          "reasoning": "This test file contains base tests for estimators but does not specifically target GaussianMixture, making it less likely to contain the bug."
+        },
+        {
+          "file": "sklearn/datasets/samples_generator.py",
+          "reasoning": "This file is responsible for generating sample datasets and does not involve GaussianMixture's fit_predict or predict methods."
+        },
+        {
+          "file": "sklearn/gaussian_process/kernels.py",
+          "reasoning": "This file contains implementations for Gaussian processes and is unrelated to the GaussianMixture bug regarding fit_predict and predict."
+        },
+        {
+          "file": "sklearn/metrics/tests/test_classification.py",
+          "reasoning": "This test file focuses on classification metrics, which do not pertain to GaussianMixture's functionality and the reported bug."
+        },
+        {
+          "file": "sklearn/cluster/tests/test_k_means.py",
+          "reasoning": "Although this test is related to clustering, it focuses on KMeans and does not involve GaussianMixture, making it irrelevant to the bug."
+        },
+        {
+          "file": "sklearn/linear_model/tests/test_logistic.py",
+          "reasoning": "This test file is dedicated to logistic regression, which does not intersect with GaussianMixture, hence it is not related to the issue."
+        }
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 1
+    },
+    "django__django-16032": {
+      "repo": "django/django",
+      "ground_truths": [
+        "django/db/models/fields/related_lookups.py",
+        "django/db/models/sql/query.py"
+      ],
+      "candidate_files": [
+        "django/db/models/sql/query.py",
+        "tests/annotations/tests.py",
+        "tests/aggregation_regress/tests.py",
+        "tests/lookup/tests.py",
+        "tests/expressions_case/tests.py",
+        "tests/m2m_through/tests.py",
+        "tests/m2m_signals/tests.py",
+        "tests/model_inheritance/tests.py",
+        "tests/get_or_create/models.py",
+        "tests/model_meta/tests.py"
+      ],
+      "file_reasoning": [
+        {
+          "file": "tests/aggregation_regress/tests.py",
+          "reasoning": "This file might not be directly related to the bug about annotations and aliases, as it likely focuses more on aggregations rather than the specific behavior of field selection in queries."
+        },
+        {
+          "file": "django/contrib/contenttypes/models.py",
+          "reasoning": "This file deals with content types in Django and is unlikely to be related to the issue of field selection when using .alias() and .annotate() in queries."
+        },
+        {
+          "file": "tests/m2m_through/tests.py",
+          "reasoning": "This file tests many-to-many relationships and not the query behaviors involving annotations and aliases, making it unlikely to be relevant for this bug."
+        },
+        {
+          "file": "tests/expressions_case/tests.py",
+          "reasoning": "This file may contain tests for various expression-related functionalities, but it does not specifically focus on the interaction between .alias() and .annotate() in queries."
+        },
+        {
+          "file": "tests/lookup/tests.py",
+          "reasoning": "This file is focused on lookup functionalities and does not seem to address the query construction issues arising from the combination of .alias() and .annotate()."
+        },
+        {
+          "file": "django/db/models/sql/query.py",
+          "reasoning": "This file implements the core SQL query logic, including how annotations and aliases are processed, making it a strong candidate for containing the bug."
+        },
+        {
+          "file": "tests/annotations/tests.py",
+          "reasoning": "This file likely contains tests specifically for annotations, and while it could help verify the expected behavior, the bug itself is more likely in the underlying implementation rather than the tests."
+        },
+        {
+          "file": "tests/m2m_signals/tests.py",
+          "reasoning": "This file focuses on signals related to many-to-many fields and is not directly relevant to the issue of query construction involving annotations and aliases."
+        },
+        {
+          "file": "tests/model_inheritance/tests.py",
+          "reasoning": "This file tests model inheritance features and does not relate to the query behavior being reported in the bug."
+        },
+        {
+          "file": "tests/get_or_create/models.py",
+          "reasoning": "This file tests the get_or_create functionality which is unrelated to the issue regarding query field selection when using annotations and aliases."
+        },
+        {
+          "file": "tests/model_meta/tests.py",
+          "reasoning": "This file deals with model metadata and is not relevant to the query building or selection logic that is central to the bug."
+        },
+        {
+          "file": "django/db/models/deletion.py",
+          "reasoning": "This file implements deletion logic and is not pertinent to the query behaviors involving .alias() and .annotate()."
+        },
+        {
+          "file": "django/contrib/contenttypes/fields.py",
+          "reasoning": "This file defines fields related to content types and does not have any connection to the query construction issues outlined in the bug."
+        },
+        {
+          "file": "django/contrib/admin/utils.py",
+          "reasoning": "This file deals with utility functions for the admin interface and is unrelated to the query behaviors involving annotations and aliases."
+        },
+        {
+          "file": "tests/handlers/tests.py",
+          "reasoning": "This file likely tests request/response handling rather than the query construction logic central to the reported bug."
+        }
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 0.5,
+      "f1": 0.6666666666666666,
+      "tp": 1,
+      "fp": 0,
+      "fn": 1
+    }
+  },
+  "overall": {
+    "accuracy": 0.23333333333333334,
+    "precision": 0.23333333333333334,
+    "recall": 0.175,
+    "f1": 0.2,
+    "total_bugs": 30,
+    "total_tp": 7,
+    "total_fp": 23,
+    "total_fn": 33
+  }
+}
