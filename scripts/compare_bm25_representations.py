@@ -9,6 +9,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from dotenv import load_dotenv
 from dataset.swebench import SWEBench
 from dataset.beetlebox import BeetleBox
+from dataset.bench4bl import Bench4BL
 from dataset.localizability import load_cache, save_cache
 from dataset.utils import setup_logging, get_logger
 from evaluation.manifest import load_manifest
@@ -34,7 +35,7 @@ def main():
                     "free and offline, no LLM calls."
     )
     parser.add_argument('--manifest', required=True, help='Path to a manifest JSON')
-    parser.add_argument('--dataset', choices=['swebench', 'beetlebox'], default=None,
+    parser.add_argument('--dataset', choices=['swebench', 'beetlebox', 'bench4bl'], default=None,
                        help='Overrides the dataset recorded in the manifest, if needed')
     parser.add_argument('--representations', nargs='+', choices=list(REPRESENTATIONS), default=None,
                        help=f'Subset to compare (default: all of {list(REPRESENTATIONS)})')
@@ -43,7 +44,7 @@ def main():
 
     manifest = load_manifest(args.manifest)
     dataset_name = args.dataset or manifest['dataset']
-    instance = SWEBench() if dataset_name == 'swebench' else BeetleBox()
+    instance = {'swebench': SWEBench, 'beetlebox': BeetleBox, 'bench4bl': Bench4BL}[dataset_name]()
 
     pool_size = manifest.get('pool_size') or manifest['size']
     pool = instance.get_bug_instances(sample_size=pool_size, random_sample=True, random_seed=manifest['seed'])
