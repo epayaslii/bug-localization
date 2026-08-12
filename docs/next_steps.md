@@ -51,15 +51,34 @@ sub-goals called out explicitly:
 2. Maximize the LLM relevance-feedback step itself — this is the step our current
    architecture doesn't have at all yet.
 
-**Relation to work already done**: `research/reasoning-rerank` (RGFL-style: LLM writes
-reasoning before ranking, single call) was a negative result — see the "Negative Results"
-sheet in the findings workbook and `docs/reasoning_rerank_result.md`. That is NOT the same
-architecture as BRaIn/IQLoc's flow above — RGFL was a *single-call* reasoning+ranking
-combination; relevance feedback -> query reformulation -> reranking is a *multi-step loop*
-with the LLM's judgment actively changing what gets retrieved next, not just how one fixed
-candidate set gets ordered. The reasoning-rerank negative result doesn't invalidate this
-direction; if anything it's evidence *for* separating the reasoning step from the ranking
-step more thoroughly, which a feedback loop does by construction.
+**Relation to work already done — CORRECTED 2026-08-12 after actually reading the RGFL
+paper** (`arxiv.org/html/2601.18044v1`, previously only known secondhand through this
+project's own implementation). The real paper is a **4-stage pipeline with separate LLM
+calls per stage** (file-level reasoning+rerank as one step, element-level reasoning+rerank
+as a distinct later step, line-level unchanged from its Agentless baseline, then patch
+generation) — not a single combined "reason then rank in one generation" call. And its
+real results are strongly **positive**, not negative: SWE-bench Verified file-level Hit@1
+71.4%->85%, MRR 81.8%->88.8%, +12.8% end-to-end repair success over the Agentless baseline.
+
+`research/reasoning-rerank` (this project's own attempt, see `docs/reasoning_rerank_result.md`
+on that branch) was a **single-call** reasoning+ranking combination — a simplified
+approximation of RGFL's idea, not a faithful reproduction of its actual architecture. Its
+negative result (36.7%->30.0%->23.3%) and its own diagnosed cause ("final ranking isn't
+reliably grounded in the reasoning text in this single-call design... RGFL's actual design
+is likely two separate calls") turns out to have correctly predicted exactly this gap,
+now confirmed against the real paper. **Reading revised**: this isn't just "RGFL doesn't
+help here" — the untried lever (separate reasoning-generation and ranking calls, as the
+real paper does) is now confirmed as the likely fix, not a speculative one. Worth
+re-attempting with a truer-to-paper two-call design before writing off reasoning-augmented
+reranking entirely. `docs/reasoning_rerank_result.md` on `research/reasoning-rerank` still
+describes the old (secondhand) understanding and needs this same correction next time that
+branch is touched.
+
+Separately, RGFL is NOT the same architecture as BRaIn/IQLoc's relevance-feedback flow
+above — RGFL reasons and reranks a *fixed* candidate set (even across its multiple stages);
+relevance feedback -> query reformulation -> reranking is a genuine *second retrieval pass*,
+the LLM's judgment changes what gets retrieved next, not just how a fixed set gets ordered.
+Both directions are worth pursuing; they're not competing explanations of the same gap.
 
 **Scoped (2026-08-12)**, full detail in `docs/relevance_feedback_scoping.md` — both papers
 read in full, not just the one-line flow. Key findings: both BRaIn and IQLoc evaluate on

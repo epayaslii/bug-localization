@@ -100,14 +100,17 @@ in one call.
 
 ## Why this differs from the reasoning-rerank negative result
 
-`research/reasoning-rerank` (already tried, rejected — see `docs/reasoning_rerank_result.md`)
-had the LLM write reasoning then immediately produce a final ranking, all in one
-continuous generation, over a *fixed* candidate set. Its diagnosed failure: the final
-ranking wasn't reliably grounded in the reasoning text. This design is structurally
-different: relevance feedback and reformulation happen *before* a second retrieval pass, so
-the candidate set the final step sees is actually different from the first pass, not just
-re-ordered — the "grounding" is enforced by construction (BM25 mechanically re-scores based
-on the new query), not by hoping the LLM's ranking call respects its own earlier reasoning.
+`research/reasoning-rerank` (this project's own single-call approximation of RGFL, see
+`docs/next_steps.md` for the 2026-08-12 correction after actually reading the real RGFL
+paper — it's a 4-stage multi-call pipeline with strongly *positive* published results, not
+what our simplified version tested) had the LLM write reasoning then immediately produce a
+final ranking, all in one continuous generation, over a *fixed* candidate set. Its diagnosed
+failure: the final ranking wasn't reliably grounded in the reasoning text. This
+relevance-feedback design is structurally different again from both: relevance feedback and
+reformulation happen *before* a second retrieval pass, so the candidate set the final step
+sees is actually different from the first pass, not just re-ordered — the "grounding" is
+enforced by construction (BM25 mechanically re-scores based on the new query), not by hoping
+a single LLM call's ranking respects its own earlier reasoning.
 
 ## Open questions before implementation
 
