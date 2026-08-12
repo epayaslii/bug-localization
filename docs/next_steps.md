@@ -61,9 +61,19 @@ candidate set gets ordered. The reasoning-rerank negative result doesn't invalid
 direction; if anything it's evidence *for* separating the reasoning step from the ranking
 step more thoroughly, which a feedback loop does by construction.
 
-**Not yet scoped**: how big a build this is, which paper's exact loop to prototype first,
-whether query reformulation targets BM25 only or also the embedding retriever. Needs its own
-planning pass before implementation starts.
+**Scoped (2026-08-12)**, full detail in `docs/relevance_feedback_scoping.md` — both papers
+read in full, not just the one-line flow. Key findings: both BRaIn and IQLoc evaluate on
+Bench4BL (or a refined version of it), which is almost certainly why the supervisor named it
+specifically — a real comparison point, not just another dataset. BRaIn's design (zero-shot
+LLM, ~150-250 calls/bug at method-segment granularity) is feasible to adapt with this
+project's existing stack; IQLoc needs a supervised fine-tuning pipeline (CodeBERT
+cross-encoder + further-pretrained CodeT5) this project doesn't have, so BRaIn's shape is the
+one to prototype first. Recommended scaled-down adaptation: file-level (not segment-level)
+relevance, batched into one LLM call per bug (matching this project's existing call-volume
+pattern) instead of BRaIn's literal per-segment-per-call design, algorithmic (no extra LLM
+call) query reformulation reusing existing symbol-extraction code, re-run BM25 with the
+reformulated query. Not implemented yet — next step is a small prototype (n=10-15,
+SWE-bench Verified, retrieval-only) per the scoping doc's suggested first pass.
 
 ### New benchmarks to add
 
