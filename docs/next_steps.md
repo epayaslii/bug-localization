@@ -73,13 +73,40 @@ going forward, in addition to what's already used:
 | Benchmark | Status here |
 |---|---|
 | SWE-bench Verified | Already primary benchmark, extensive results |
-| Bench4BL | Not started |
+| Bench4BL | Scoped (2026-08-12), see below — not started |
 | LocBench / MuLocBench | Not started |
 | SWE-Explore | Not started |
 
-None of these have been investigated yet for what they actually contain (format, size,
-ground-truth granularity, whether existing `dataset/` loaders can be adapted or need new
-ones). First step for each is a scoping pass, same as was done for BeetleBox/BugsInPy
+None of the remaining three have been investigated yet for what they actually contain
+(format, size, ground-truth granularity, whether existing `dataset/` loaders can be adapted
+or need new ones). First step for each is a scoping pass, same as was done for BeetleBox/BugsInPy
+
+#### Bench4BL scoping findings (2026-08-12)
+
+Source: `github.com/exatoa/Bench4BL` (ISSTA 2018 reproducibility study). 10,017 bug reports,
+51 Java projects (Apache/Commons/JBoss/Wildfly/Spring + 5 legacy Eclipse projects), JIRA-linked
+(not GitHub issues).
+
+**Target schema maps cleanly onto our existing `BugInstance`**: each bug becomes an XML
+record with a summary/description (-> `bug_report`), a `<fixedFiles>` list (->
+`ground_truths`), and version/fixedVersion fields (-> commit reference). Same shape as the
+SWE-bench/BeetleBox loaders already in `dataset/`.
+
+**The real cost is data preparation, not the schema.** There's no clean HuggingFace dataset
+like SWE-bench/BeetleBox have. Getting to that XML requires: (1) downloading per-project tar
+archives from SourceForge (51 projects, total size unconfirmed — likely multi-GB, several
+are large long-lived projects like Hive/HBase; checking real sizes is the first concrete
+step before committing further); (2) running the repo's own `GitInflator` script to check
+out many git versions per project locally; (3) running `BugRepositoryMaker` (Python 2.7,
+old deps: numpy/scipy/GitPython) to reformat already-scraped bug data into the XML. The good
+news: the JIRA scraping itself was already done once by the original researchers and is
+baked into the downloaded archives — no need to re-scrape JIRA live.
+
+**Recommended approach**: run their legacy Python 2 pipeline once, isolated (throwaway
+conda env or Docker), purely to materialize the XML corpus, then write a pure-Python-3
+`dataset/bench4bl.py` that parses that XML output directly — same pattern as the existing
+loaders, no legacy-toolchain dependency at runtime. Not started — next concrete step is
+checking real archive sizes.
 originally.
 
 ### Papers to read for method ideas
