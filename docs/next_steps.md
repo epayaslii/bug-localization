@@ -73,7 +73,7 @@ going forward, in addition to what's already used:
 | Benchmark | Status here |
 |---|---|
 | SWE-bench Verified | Already primary benchmark, extensive results |
-| Bench4BL | Scoped (2026-08-12), see below — not started |
+| Bench4BL | Loader built + first real result (2026-08-12), see below |
 | LocBench / MuLocBench | Not started |
 | SWE-Explore | Not started |
 
@@ -102,11 +102,19 @@ old deps: numpy/scipy/GitPython) to reformat already-scraped bug data into the X
 news: the JIRA scraping itself was already done once by the original researchers and is
 baked into the downloaded archives — no need to re-scrape JIRA live.
 
-**Recommended approach**: run their legacy Python 2 pipeline once, isolated (throwaway
-conda env or Docker), purely to materialize the XML corpus, then write a pure-Python-3
-`dataset/bench4bl.py` that parses that XML output directly — same pattern as the existing
-loaders, no legacy-toolchain dependency at runtime. Not started — next concrete step is
-checking real archive sizes.
+**Update (2026-08-12, later same day): the legacy pipeline turned out to be unnecessary
+entirely.** Checked real archive sizes first (~5.6GB total across all 51 projects, via
+SourceForge's file listing — far smaller than feared) then inspected one archive directly:
+each one already contains the fully processed `bugrepo/repository.xml` and a real git repo
+with tags, i.e. the legacy Python 2 pipeline's *output*, not just its inputs — confirmed
+against the upstream README's own words ("we already offer the result of this step in
+provided subject's archives", saved at `docs/bench4bl_reference/README.md`). Built
+`dataset/bench4bl.py` (pure Python 3, XML parsing + `git ls-tree`/`git show`, no legacy
+toolchain dependency) and `scripts/mirror_bench4bl.py`, wired into
+`generate_evaluation_manifest.py`/`compare_bm25_representations.py`. First real result:
+n=30, Hit@1=23.3%, MRR=0.3564, on 5 of 51 projects mirrored so far — see
+`docs/bench4bl_result.md`. Next: mirror the remaining 46 projects, add test coverage,
+eventually wire into the end-to-end (LLM rerank) path.
 originally.
 
 ### Papers to read for method ideas
