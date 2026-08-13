@@ -5,6 +5,7 @@ from dataset.utils import get_logger
 logger = get_logger(__name__)
 
 DEFAULT_CACHE_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "repo_cache")
+BENCH4BL_CACHE_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "bench4bl_cache")
 
 
 def _cache_dir(cache_dir=None):
@@ -16,8 +17,23 @@ def _bare_repo_path(repo, cache_dir=None):
     return os.path.join(_cache_dir(cache_dir), safe_name)
 
 
+def _bench4bl_gitrepo_path(repo):
+    """Bench4BL's per-project git repos live in bench4bl_cache/<PROJECT>/gitrepo -- a real,
+    non-bare working-tree clone transferred with each project's SourceForge archive (see
+    dataset/bench4bl.py), keyed by plain project name (e.g. "WEAVER") rather than this
+    module's own bare-clone cache above (keyed by a GitHub "owner/repo" string). Checked
+    as a fallback below so callers (bm25_retriever.py, embedding_retriever.py) don't need
+    to special-case Bench4BL bugs -- without this, is_repo_cached() was always False for
+    every Bench4BL repo and every BM25/embedding representation silently degraded to
+    path-only tokens regardless of content-parsing logic (see docs/bench4bl_result.md)."""
+    base = os.environ.get("BENCH4BL_CACHE_DIR", BENCH4BL_CACHE_DIR)
+    return os.path.join(base, repo, "gitrepo")
+
+
 def is_repo_cached(repo, cache_dir=None):
-    return os.path.isdir(_bare_repo_path(repo, cache_dir))
+    if os.path.isdir(_bare_repo_path(repo, cache_dir)):
+        return True
+    return os.path.isdir(_bench4bl_gitrepo_path(repo))
 
 
 def mirror_repo(repo, cache_dir=None):
@@ -78,22 +94,13 @@ def get_file_content_local(repo, commit_hash, path_in_repo, cache_dir=None):
     return result.stdout
 
 
-def get_file_contents_batch(repo, commit_hash, paths, cache_dir=None):
-    """Fetch content for many files at one commit using a single `git cat-file --batch`
-    subprocess, instead of one `git show` subprocess per file (much faster for large lists).
-
-    Returns {path: content} for files that were readable as UTF-8 text; missing, binary,
-    or undecodable files are simply omitted rather than raising.
-    """
-    path = _bare_repo_path(repo, cache_dir)
-    _ensure_commit(repo, commit_hash, cache_dir)
-
+def _cat_file_batch(git_dir, commit_hash, paths):
     if not paths:
         return {}
 
     input_data = "".join(f"{commit_hash}:{p}\n" for p in paths).encode()
     result = subprocess.run(
-        ["git", "--git-dir", path, "cat-file", "--batch"],
+        ["git", "--git-dir", git_dir, "cat-file", "--batch"],
         input=input_data, capture_output=True
     )
 
@@ -119,3 +126,26 @@ def get_file_contents_batch(repo, commit_hash, paths, cache_dir=None):
             continue
 
     return contents
+
+
+def get_file_contents_batch(repo, commit_hash, paths, cache_dir=None):
+    """Fetch content for many files at one commit using a single `git cat-file --batch`
+    subprocess, instead of one `git show` subprocess per file (much faster for large lists).
+
+    Returns {path: content} for files that were readable as UTF-8 text; missing, binary,
+    or undecodable files are simply omitted rather than raising. Falls back to Bench4BL's
+    own working-tree gitrepo (see _bench4bl_gitrepo_path) when this module's own bare-clone
+    cache doesn't have the repo -- same cat-file mechanism, just a different .git dir, and
+    no _ensure_commit fetch attempt since Bench4BL's local clone is already fully
+    self-contained (never a live network call either way).
+    """
+    bare_path = _bare_repo_path(repo, cache_dir)
+    if os.path.isdir(bare_path):
+        _ensure_commit(repo, commit_hash, cache_dir)
+        return _cat_file_batch(bare_path, commit_hash, paths)
+
+    gitrepo = _bench4bl_gitrepo_path(repo)
+    if os.path.isdir(gitrepo):
+        return _cat_file_batch(os.path.join(gitrepo, ".git"), commit_hash, paths)
+
+    return {}

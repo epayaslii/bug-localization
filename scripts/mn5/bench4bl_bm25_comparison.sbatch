@@ -27,5 +27,6 @@ export USE_TORCH=1
 
 .venv_mn5/bin/python scripts/compare_bm25_representations.py \
   --dataset bench4bl \
-  --manifest results/manifests/bench4bl-multi-n30-s42-9449c3b8a675.json \
-  --output results/bm25_comparison_bench4bl_30_mn5.json
+  --manifest results/manifests/bench4bl-multi-n30-s42-mn5-8proj.json \
+  --pool-size 500 \
+  --output results/bm25_comparison_bench4bl_30_mn5_java_aware.json

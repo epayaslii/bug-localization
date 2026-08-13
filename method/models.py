@@ -11,3 +11,12 @@ class DirectorySelectionResponse(BaseModel):
     selected_files: List[str] = []
 
 
+class FileRelevanceJudgment(BaseModel):
+    file: str
+    relevant: bool
+
+
+class RelevanceFeedbackResponse(BaseModel):
+    judgments: List[FileRelevanceJudgment]
+
+

@@ -20,6 +20,7 @@ import xml.etree.ElementTree as ET
 
 from dataset.base import BugLocalizationDataset
 from dataset.models import BugInstance
+from dataset.utils import calculate_dataset_token_stats
 
 logger = logging.getLogger(__name__)
 
@@ -48,7 +49,15 @@ class Bench4BL(BugLocalizationDataset):
         projects = self._projects()
         for project in projects:
             self._load_project(project)
+        self.repos = list(set(bug.repo for bug in self._bug_instances))
         logger.info(f"Bench4BL: loaded {len(self._bug_instances)} bug instances from {len(projects)} project(s)")
+
+    def get_token_statistics(self, model="gpt-4o", sample_size=1000):
+        """Same shape as SWEBench/BeetleBox's version -- see dataset/swebench.py for the
+        canonical implementation this mirrors."""
+        if not self._bug_instances:
+            self.get_bug_instances()
+        return calculate_dataset_token_stats(self._bug_instances, model, sample_size=sample_size)
 
     def _load_project(self, project):
         proot = os.path.join(self.cache_dir, project)

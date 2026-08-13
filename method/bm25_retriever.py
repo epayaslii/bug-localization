@@ -4,6 +4,7 @@ from rank_bm25 import BM25Okapi
 
 from dataset.repo_cache import get_file_contents_batch, is_repo_cached
 from dataset.utils import get_logger
+from method.java_parsing import extract_java_skeleton_tokens, extract_java_symbol_tokens, is_java_path
 
 logger = get_logger(__name__)
 
@@ -19,9 +20,14 @@ def _tokenize_query(text: str) -> list[str]:
     return re.findall(r'[a-zA-Z0-9_]+', text.lower())
 
 
-def _extract_skeleton_tokens(content: str) -> list[str]:
+def _extract_skeleton_tokens(content: str, path: str = "") -> list[str]:
     """Extract module docstring + class/function names from Python source (SWE-Fixer-style
-    'file skeleton') -- cheap signal beyond the bare path, without sending full file content."""
+    'file skeleton') -- cheap signal beyond the bare path, without sending full file content.
+    Dispatches to the Java lexical scanner (method/java_parsing.py) for .java files, since
+    ast.parse() only understands Python."""
+    if is_java_path(path):
+        return extract_java_skeleton_tokens(content)
+
     try:
         tree = ast.parse(content)
     except (SyntaxError, ValueError):
@@ -61,15 +67,19 @@ def rank_files_bm25(query_text: str, file_paths: list[str], top_k: int | None = 
     return [path for path, _ in ranked[:top_k]]
 
 
-def _extract_symbol_tokens(content: str) -> tuple[list[str], list[str]]:
+def _extract_symbol_tokens(content: str, path: str = "") -> tuple[list[str], list[str]]:
     """Extract (symbol_tokens, import_tokens) from Python source via AST.
 
     symbol_tokens are class/function/method names (identifiers, so split like a path
     rather than a query); import_tokens are imported module and name tokens, kept
     separate so callers can ablate them in or out independently (matching the
     path-symbols vs path-symbols-imports comparison in the literature). Returns
-    ([], []) on a parse error.
+    ([], []) on a parse error. Dispatches to the Java lexical scanner
+    (method/java_parsing.py) for .java files, since ast.parse() only understands Python.
     """
+    if is_java_path(path):
+        return extract_java_symbol_tokens(content)
+
     try:
         tree = ast.parse(content)
     except (SyntaxError, ValueError):
@@ -96,7 +106,7 @@ def _extract_symbol_tokens(content: str) -> tuple[list[str], list[str]]:
 def _rank_files_with_content_tokens(bug, extra_tokens_fn, top_k: int | None) -> list[str]:
     """Shared scaffold for BM25 variants that enrich path tokens with content-derived
     tokens: fetches file content via the offline repo_cache when available, applies
-    extra_tokens_fn(content) -> list[str] per file (falling back to path-only tokens
+    extra_tokens_fn(content, path) -> list[str] per file (falling back to path-only tokens
     on any error or when content isn't available -- including entirely when the repo
     isn't locally mirrored, since this never makes a live network call), then ranks
     by BM25 against the bug report.
@@ -114,7 +124,7 @@ def _rank_files_with_content_tokens(bug, extra_tokens_fn, top_k: int | None) -> 
         content = contents.get(path)
         if content is not None:
             try:
-                tokens = tokens + extra_tokens_fn(content)
+                tokens = tokens + extra_tokens_fn(content, path)
             except Exception as e:
                 logger.debug(f"Content tokenization failed for {path}: {e}")
         tokenized_corpus.append(tokens)
@@ -146,8 +156,32 @@ def rank_files_bm25_with_symbols(bug, top_k: int | None = 100, include_imports: 
     ablate imports out. Falls back to path-only tokens for any file whose content can't
     be read or parsed -- never makes a live network call.
     """
-    def extra_tokens(content: str) -> list[str]:
-        symbol_tokens, import_tokens = _extract_symbol_tokens(content)
+    def extra_tokens(content: str, path: str) -> list[str]:
+        symbol_tokens, import_tokens = _extract_symbol_tokens(content, path)
         return symbol_tokens + (import_tokens if include_imports else [])
 
     return _rank_files_with_content_tokens(bug, extra_tokens, top_k)
+
+
+def extract_query_reformulation_terms(paths: list[str], contents: dict[str, str]) -> list[str]:
+    """Extract identifier-like terms (class/function/method names) from a set of file
+    paths an LLM relevance-feedback step judged relevant, for algorithmic query
+    reformulation (BRaIn/IQLoc-style: append expansion terms to the original bug report
+    instead of issuing a second LLM call -- see docs/relevance_feedback_scoping.md).
+    Reuses the same extraction machinery as rank_files_bm25_with_symbols so the expansion
+    vocabulary matches what BM25 already indexes files by. Skips files with no fetched
+    content or that fail to parse; import tokens are deliberately excluded here since
+    they're module/library names rather than bug-specific vocabulary.
+    """
+    terms: list[str] = []
+    for path in paths:
+        content = contents.get(path)
+        if content is None:
+            continue
+        try:
+            symbol_tokens, _import_tokens = _extract_symbol_tokens(content, path)
+        except Exception as e:
+            logger.debug(f"Query reformulation extraction failed for {path}: {e}")
+            continue
+        terms += symbol_tokens
+    return terms

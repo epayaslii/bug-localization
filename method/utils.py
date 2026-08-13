@@ -8,14 +8,23 @@ logger = get_logger(__name__)
 def generate_json_schema(pydantic_model):
         try:
             model_schema = pydantic_model.model_json_schema()
-            
+
             schema_name = pydantic_model.__name__.lower().replace('response', '_response')
-            
+
             if 'required' not in model_schema:
                 model_schema['required'] = list(model_schema.get('properties', {}).keys())
-            
+
             model_schema['additionalProperties'] = False
-            
+
+            # OpenAI-style strict mode requires every object in the schema -- including
+            # nested $defs from models with object-typed fields (e.g. a list of judgment
+            # objects) -- to set additionalProperties: false and list every property as
+            # required, not just the top-level schema.
+            for def_schema in model_schema.get('$defs', {}).values():
+                if def_schema.get('type') == 'object':
+                    def_schema['additionalProperties'] = False
+                    def_schema['required'] = list(def_schema.get('properties', {}).keys())
+
             return {
                 "type": "json_schema",
                 "json_schema": {

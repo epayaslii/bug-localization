@@ -79,6 +79,41 @@ class PromptGenerator:
         
         return prompt
     
+    def generate_relevance_feedback_prompt(self, bug, candidate_files, contents, snippet_chars=800):
+        """Batched relevance-feedback prompt (BRaIn-style, scoped to file granularity
+        rather than per-code-segment -- see docs/relevance_feedback_scoping.md). One call
+        judges every candidate at once instead of one call per candidate, keeping this
+        close to the project's existing ~1-call-per-bug cost profile.
+        """
+        files_text = "\n\n".join(
+            f"[{i + 1}] {path}\n```\n{(contents.get(path) or '(content unavailable)')[:snippet_chars]}\n```"
+            for i, path in enumerate(candidate_files)
+        )
+
+        prompt = f"""
+        You are a bug localization expert judging code-file relevance.
+
+        Bug Report:
+        Repo: {bug.repo}
+        Instance ID: {bug.instance_id}
+        Hints: {bug.hints_text}
+        Bug Report: {bug.bug_report}
+
+        Below are {len(candidate_files)} candidate files retrieved for this bug report, each
+        with a short content snippet. For EACH file, judge whether it is plausibly relevant
+        to fixing this bug (relevant=true) or not (relevant=false). Judge every file listed
+        -- do not skip any. Base your judgment on the actual code shown, not just the file
+        name.
+
+        Candidate Files:
+        {files_text}
+
+        Return a judgment for every one of the {len(candidate_files)} files listed above,
+        using their exact paths.
+        """
+
+        return prompt
+
     def generate_openai_report_summarizer_prompt(self, bug):
         prompt = f"""
         You are an expert in summarizing bug reports. Given a bug report, your task is to summarize the bug report in a concise manner while preserving all critical information needed for bug localization.

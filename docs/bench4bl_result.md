@@ -5,90 +5,116 @@ study), following up on the scoping notes in `docs/next_steps.md`. New loader
 (`dataset/bench4bl.py`) and mirror script (`scripts/mirror_bench4bl.py`), no legacy Python 2
 tooling required at any point — see "How this works" below.
 
+## Corrected: the original "all four tie" result was never really testing content at all
+
+**The explanation originally written here (Python-only AST parsing) was wrong.** The real
+cause, found while adding Java support (see "Java support" below): `bm25_retriever.py` and
+`embedding_retriever.py` fetch file content through `dataset/repo_cache.py`'s
+`is_repo_cached()`/`get_file_contents_batch()`, which only know how to look in `repo_cache/`
+— the directory SWE-bench/BeetleBox mirror into. Bench4BL's content lives in
+`bench4bl_cache/<PROJECT>/gitrepo` instead, read directly by `dataset/bench4bl.py`'s own git
+calls, which `repo_cache.py` had no idea existed. So `is_repo_cached("WEAVER")` was always
+`False`, content was never fetched for **any** Bench4BL bug, and every representation
+(BM25 skeleton/symbols, embedding chunking) silently fell back to path-only tokens or a
+single path-token pseudo-chunk — not because Java failed to parse, but because no Java (or
+any) content ever reached the parsing step in the first place. Fixed by extending
+`is_repo_cached()`/`get_file_contents_batch()` in `dataset/repo_cache.py` with a Bench4BL
+fallback path (same `git cat-file --batch` mechanism, pointed at
+`bench4bl_cache/<repo>/gitrepo/.git` instead of a bare clone). Verified: content now fetches
+correctly (spot-checked against 3 real bugs, all files readable), and the "Java support"
+section below adds a real Java-aware lexical scanner on top so the now-reachable content
+actually gets parsed into real symbol/skeleton tokens and per-method chunks. The BM25 and
+hybrid results below are the corrected numbers, run after both fixes.
+
 ## Result (n=30, BM25 retrieval-only, free/offline)
 
-`results/manifests/bench4bl-multi-n30-s42-9449c3b8a675.json` (30 instances, 3 distinct
-repos, drawn from a pool of 133 usable instances across 5 mirrored projects: WEAVER,
-CRYPTO, CODEC, IO — WFMP contributed 0, see below), via
-`scripts/compare_bm25_representations.py`:
+`results/manifests/bench4bl-multi-n30-s42-mn5-8proj.json` (30 instances, drawn from the
+current 8-usable-project pool — see "Manifest note" further below), via
+`scripts/compare_bm25_representations.py --pool-size 500`, run both locally and on MN5
+(job `44554116`, matched exactly):
 
 | Representation | Hit@1 | Hit@5 | Hit@10 | MRR | MAP |
 |---|---:|---:|---:|---:|---:|
-| path_only | 23.3% | 50.0% | 60.0% | 0.3564 | 0.3519 |
-| skeleton | 23.3% | 50.0% | 60.0% | 0.3564 | 0.3519 |
-| symbols_with_imports | 23.3% | 50.0% | 60.0% | 0.3564 | 0.3519 |
-| symbols_no_imports | 23.3% | 50.0% | 60.0% | 0.3564 | 0.3519 |
+| path_only | 16.7% | 33.3% | 46.7% | 0.2716 | 0.2398 |
+| **skeleton — best** | 30.0% | 50.0% | 73.3% | **0.4129** | 0.3306 |
+| symbols_with_imports | 23.3% | 56.7% | 83.3% | 0.3658 | 0.3027 |
+| symbols_no_imports | 20.0% | 46.7% | 70.0% | 0.3169 | 0.2759 |
 
-**All four representations are identical** — this is the already-documented Python-only AST
-caveat (symbol/chunk extraction silently degrades to path-only fallback on non-Python code),
-not a bug. Bench4BL is 100% Java; our AST-based skeleton/symbol extraction only parses
-Python. Same pattern already confirmed on BeetleBox's Go/JS instances. Directional at n=30,
+All four representations now genuinely differ, and all three content-aware ones beat
+path_only by a wide margin — real signal, not the old artifact-tie. Directional at n=30,
 same small-sample caveat as every other n=30 result in this project.
 
-## Hybrid result (n=30, BM25 + Qwen3-Embedding-0.6B + weighted RRF, MN5)
+## Hybrid result — VOID original n=30 number, corrected but too-small n=6 replacement, real n=30 rerun still outstanding
 
-Follow-up run through the same weighted-RRF pipeline validated on SWE-bench
-(`results/hybrid_rrf_qwen3_swebench_30_mn5.json`, MRR 0.4216 at 1:5) — first time Bench4BL
-was run through embedding/hybrid retrieval rather than BM25-only. `scripts/run_hybrid_rrf_weighting_test.py`
-gained `--dataset bench4bl` support (mirrors the existing `swebench`/`beetlebox` branches).
-Job `44552836` on MN5 (`acc_debug`, ~64s total for all 30 instances — see "Why so fast"
-below), full sweep (bm25-alone, embedding-alone, RRF 1:1 through 1:50):
+**The original n=30 hybrid number below (0.5424 MRR, "chunked_embedding alone wins") is
+invalid, for the exact same root cause as the BM25 tie above.** `rank_files_embedding_chunked()`
+in `method/embedding_retriever.py` also fetches content through
+`is_repo_cached()`/`get_file_contents_batch()` — the same functions that were always `False`
+for Bench4BL before the `dataset/repo_cache.py` fix. So every "chunk" in that run was actually
+the fallback pseudo-chunk (`" ".join(_tokenize_path(path))` — the tokenized file *path*, zero
+real code content), not a real code embedding at all. The "why the job ran so fast" explanation
+originally written below (short Java files, 1500-char windows) was **also wrong** — it wasn't
+about chunk size, no code was ever read in the first place. This was found while writing up
+this correction, after already publishing the number. **Original (void) numbers, kept only for
+the record**:
 
-| Config | Hit@1 | Hit@5 | Hit@10 | Hit@100 | MRR | MAP |
-|---|---:|---:|---:|---:|---:|---:|
-| bm25 alone | 3.3% | 23.3% | 36.7% | 86.7% | 0.1419 | 0.0920 |
-| **chunked_embedding (Qwen3) alone — best** | 40.0% | 73.3% | 76.7% | 93.3% | **0.5424** | 0.4159 |
-| rrf_1_1 | 33.3% | 70.0% | 70.0% | 90.0% | 0.4547 | 0.2863 |
-| rrf_1_5 | 40.0% | 70.0% | 76.7% | 93.3% | 0.5176 | 0.3977 |
-| rrf_1_15 | 40.0% | 70.0% | 76.7% | 93.3% | 0.5311 | 0.4138 |
-| rrf_1_30 | 40.0% | 73.3% | 76.7% | 93.3% | 0.5351 | 0.4137 |
-| rrf_1_50 | 40.0% | 73.3% | 76.7% | 93.3% | 0.5424 | 0.4159 |
+| Config | MRR (void — path-tokens only, not real content) |
+|---|---:|
+| bm25 alone | 0.1419 |
+| chunked_embedding (Qwen3) alone | 0.5424 |
+| rrf_1_50 | 0.5424 (bit-identical ranking to embedding-alone, see RRF-convergence note further below — that math still holds, only the *input* was wrong) |
 
-**Verdict: no RRF weighting beats embedding-alone on Bench4BL** — the opposite of SWE-bench,
-where weighted RRF (1:5) beat embedding-alone (0.4216 vs. 0.3165). Two real findings, not
-one: Qwen3-Embedding is a strong reranker on both benchmarks (0.5424 MRR here vs. 0.4216 on
-SWE-bench Verified — actually higher), but whether BM25+embedding fusion helps or just adds
-noise is benchmark-dependent, not a universal property of the method. Don't average the two
-verdicts together.
+**Corrected (real content + Java lexical scanner) result exists only at n=6** — small-scale
+sanity check before a real n=30 rerun, run after the content-fetch fix, same manifest as the
+corrected BM25 result (`bench4bl-multi-n30-s42-mn5-8proj.json`'s first 6 instances: 4x IO,
+2x AMQP):
 
-**Why the high-weight configs converge to the same numbers**: RRF's fused score per file is
-`sum(weight_i / (k + rank_i))`, k=60. BM25's contribution is bounded — ranks only run 1 to
-the candidate pool size (200), so its max possible term is `1/61` and its floor is `1/260`, a
+| Config | Hit@1 | Hit@5 | Hit@10 | MRR | MAP |
+|---|---:|---:|---:|---:|---:|
+| bm25 alone | 0% | 16.7% | 66.7% | 0.1641 | 0.1231 |
+| chunked_embedding (Qwen3) alone | 50.0% | 100% | 100% | 0.7500 | 0.6796 |
+| **rrf_1_1 (unweighted) — best** | 66.7% | 100% | 100% | **0.8333** | 0.5468 |
+| rrf_1_5 | 66.7% | 100% | 100% | 0.8333 | 0.6889 |
+
+**This flips the (void) original finding**: now unweighted RRF beats embedding-alone, not the
+other way around. But n=6 is far too small to trust on its own — this project has hit the
+exact same "small n gives a different answer than n=30" pattern twice already (SWE-bench
+n=6→n=30, and this same Bench4BL manifest's earlier n=21/n=30 pool-size mismatch). **Read this
+n=6 run as "the pipeline works correctly end-to-end with real content" (confirmed — real
+per-method Java chunk counts, e.g. 2302-2953 chunks over 200 files, a completely different
+order of magnitude from the void run's 1-chunk-per-file path-token fallback), not as a
+trustworthy MRR number.** A real n=30 hybrid rerun with the fixed content-fetching + Java
+scanner is the honest next step, not yet done as of this writing — see "Next steps" below.
+
+**Why the n=6 job took ~33 minutes on MN5 this time (vs. the void run's ~64s for all 30)**:
+directly confirms the root-cause diagnosis above. Real per-method chunking on real Java content
+means far more actual embedding calls per instance (e.g. `AMQP-468: 2302 chunks over 200
+files`, ~6.5min just for that one instance) — completely different computational profile than
+embedding a single tokenized path string per file. A first attempt at the real n=30 rerun
+(before scaling down to n=6) was cancelled after discovering the first instance alone took 917s
+— at that rate 30 instances would have blown MN5's 3hr job budget and produced zero output
+(this script only writes its output once, at the end).
+
+**RRF-convergence math (this part of the original writeup remains correct, just re-verify
+against real numbers once the n=30 rerun exists)**: RRF's fused score per file is
+`sum(weight_i / (k + rank_i))`, k=60. BM25's contribution is bounded — ranks only run 1 to the
+candidate pool size (200), so its max possible term is `1/61` and its floor is `1/260`, a
 narrow fixed band regardless of weight elsewhere. Once the embedding weight is scaled high
-enough (here, by 1:50) that its own term spread swamps that whole BM25 band, BM25 can no
-longer flip any file's relative order — the fused ranking becomes bit-identical to sorting by
-embedding rank alone. Confirmed exactly, not approximately: rrf_1_50's MRR/MAP (0.5424/0.4159)
-match chunked_embedding-alone to 4 decimal places, meaning the actual rankings are identical,
-not just close in aggregate. rrf_1_30 is close but not there yet (0.5351/0.4137) — a few
-borderline instances still get nudged by BM25 at that weight. Same convergence pattern already
-seen on the SWE-bench sweep (1:50 converging back to embedding-alone there too) — expected
-behavior of weighted RRF, not specific to this benchmark.
+enough that its own term spread swamps that whole BM25 band, BM25 can no longer flip any file's
+relative order — the fused ranking becomes bit-identical to sorting by embedding rank alone.
+This was confirmed exactly (not approximately) in the void run's own numbers — rrf_1_50 matched
+chunked_embedding-alone to 4 decimal places — and is expected behavior of weighted RRF
+regardless of what's being embedded, so the mechanism itself isn't in question, only which
+config wins on real content.
 
-**Why the job ran so fast (~64s for all 30 instances, vs. ~5.5min/instance on SWE-bench)**:
-every per-instance log line shows chunk count exactly equal to file count (e.g. `188 chunks
-over 188 files`, `56 chunks over 56 files`) — a real consequence of the same Python-only AST
-caveat already documented above for BM25 representations, this time hitting the embedding
-chunker instead. `_chunk_file_content()` in `method/embedding_retriever.py` tries `ast.parse()`
-first (splits a file into one chunk per top-level function/class, the fine-grained path);
-Java throws `SyntaxError` on every file, so it falls through to the fixed-1500-character-window
-fallback. Apache Commons utility-class files (IO/Codec/Weaver) are mostly well under 1500
-characters, so that fallback yields exactly one chunk per file — versus SWE-bench's Python
-files, where the AST path can produce 10+ chunks from one file with several methods. Fewer
-files (BM25 top-200 barely narrows repos that only have 41-198 files total) times one coarse
-chunk each, instead of many fine-grained ones, is most of the speed difference. **Caveat this
-puts on the result above**: "chunked embedding" on Bench4BL isn't really getting the
-fine-grained benefit the technique is designed for (the docstring's own cited paper shows
-chunked embedding beating whole-file embedding 33-71% vs. 3-12% Acc@10) — it's closer to
-whole-file embedding in disguise here, since most files never get split at all.
-
-**Manifest note**: the original n=30 manifest (`bench4bl-multi-n30-s42-9449c3b8a675.json`,
-used for the BM25-only result above) was generated when only 5 projects were mirrored. By the
-time this hybrid run happened, 4 more projects had been mirrored (AMQP/ANDROID/BATCH/BATCHADM),
-changing the pool the same seed samples from — a first attempt against the old manifest
-silently matched only 21/30 instances on MN5 (all 9 missing ones were CODEC). Fixed by
-generating a new manifest directly on MN5, against MN5's actual current pool (`--pool-size 250`,
-comfortably above the 213-instance total so `random.sample` isn't triggered by a pool-size
-mismatch again as more projects get mirrored later): `results/manifests/bench4bl-multi-n30-s42-mn5-8proj.json`,
+**Manifest note**: the n=30 manifest used for the BM25-only result above
+(`bench4bl-multi-n30-s42-mn5-8proj.json`) was regenerated mid-session after discovering the
+*original* n=30 manifest (`bench4bl-multi-n30-s42-9449c3b8a675.json`, generated when only 5
+projects were mirrored) silently matched only 21/30 instances once 4 more projects had been
+mirrored (all 9 missing ones were CODEC) — the same seed samples a different subset once the
+underlying pool's size changes. Fixed by generating fresh, directly on MN5, against MN5's
+actual current pool (`--pool-size 250`, comfortably above the 213-instance total so
+`random.sample` isn't triggered by this kind of mismatch again as more projects get mirrored):
 30 instances, 4 distinct repos, drawn from 213 instances across 6 contributing repos.
 
 ## Known coverage gap: WFMP

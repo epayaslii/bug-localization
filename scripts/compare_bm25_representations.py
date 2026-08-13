@@ -39,6 +39,10 @@ def main():
                        help='Overrides the dataset recorded in the manifest, if needed')
     parser.add_argument('--representations', nargs='+', choices=list(REPRESENTATIONS), default=None,
                        help=f'Subset to compare (default: all of {list(REPRESENTATIONS)})')
+    parser.add_argument('--pool-size', type=int, default=None,
+                       help='Override the manifest\'s stored pool_size when re-deriving the pool -- '
+                            'needed if this environment\'s dataset mirror has a different total instance '
+                            'count than the one the manifest was generated against.')
     parser.add_argument('--output', default=None)
     args = parser.parse_args()
 
@@ -46,7 +50,7 @@ def main():
     dataset_name = args.dataset or manifest['dataset']
     instance = {'swebench': SWEBench, 'beetlebox': BeetleBox, 'bench4bl': Bench4BL}[dataset_name]()
 
-    pool_size = manifest.get('pool_size') or manifest['size']
+    pool_size = args.pool_size or manifest.get('pool_size') or manifest['size']
     pool = instance.get_bug_instances(sample_size=pool_size, random_sample=True, random_seed=manifest['seed'])
     wanted = {inst['instance_id'] for inst in manifest['instances']}
     bugs = [b for b in pool if b.instance_id in wanted]

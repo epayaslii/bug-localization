@@ -45,12 +45,17 @@ def rank_files_hybrid(
     candidate_pool_size: int = 200,
     embedding_model: str = "microsoft/unixcoder-base",
     rrf_k: int = 60,
+    weights: list[float] | None = None,
     bm25_rank_fn=None,
 ) -> tuple[list[str], dict]:
     """Rank bug.code_files via BM25 (symbols representation) -> chunked-embedding rerank of
     that candidate pool -> Reciprocal Rank Fusion of the two. Returns (ranked_file_paths,
     timing_info). Pass top_k=None to get the full fused ranking of the candidate pool
-    (size candidate_pool_size, NOT the full original corpus).
+    (size candidate_pool_size, NOT the full original corpus). `weights` is
+    [bm25_weight, embedding_weight] passed through to reciprocal_rank_fusion (default
+    unweighted 1:1) -- e.g. [1.0, 5.0] to favor the embedding ranking, matching whichever
+    ratio scored best for a given dataset/model (see docs/hybrid_rrf_qwen3_result.md-style
+    per-dataset sweep results before picking a value blind).
     """
     bm25_rank_fn = bm25_rank_fn or (lambda b: rank_files_bm25_with_symbols(b, top_k=candidate_pool_size))
 
@@ -67,7 +72,7 @@ def rank_files_hybrid(
         candidate_bug, top_k=None, model_name=embedding_model
     )
 
-    fused = reciprocal_rank_fusion([bm25_candidates, embedding_ranking], k=rrf_k)
+    fused = reciprocal_rank_fusion([bm25_candidates, embedding_ranking], k=rrf_k, weights=weights)
     ranked = fused[:top_k] if top_k is not None else fused
 
     timing = {"bm25_s": t_bm25, **embed_timing}

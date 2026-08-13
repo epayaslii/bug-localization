@@ -9,6 +9,7 @@ from transformers import AutoTokenizer, AutoModel
 from dataset.repo_cache import get_file_contents_batch, is_repo_cached
 from dataset.utils import get_logger
 from method.bm25_retriever import _extract_skeleton_tokens, _tokenize_path
+from method.java_parsing import chunk_java_content, is_java_path
 
 logger = get_logger(__name__)
 
@@ -175,7 +176,7 @@ def _file_text_for_embedding(path: str, content: str | None) -> str:
     tokens = _tokenize_path(path)
     if content is not None:
         try:
-            tokens = tokens + _extract_skeleton_tokens(content)
+            tokens = tokens + _extract_skeleton_tokens(content, path)
         except Exception:
             pass
     return " ".join(tokens)
@@ -217,11 +218,13 @@ def rank_files_embedding(bug, top_k: int | None = 100, model_name: str = "micros
     return ranked_paths, timing
 
 
-def _chunk_file_content(content: str | None, max_chunk_chars: int = 1500, overlap_chars: int = 200) -> list[str]:
+def _chunk_file_content(content: str | None, path: str = "", max_chunk_chars: int = 1500, overlap_chars: int = 200) -> list[str]:
     """Split file content into chunks respecting function/class boundaries where possible
     (AST-based: one chunk per top-level function/class, plus a header chunk for imports and
     module docstring), falling back to fixed-size overlapping character windows for content
-    that doesn't parse or has no top-level definitions.
+    that doesn't parse or has no top-level definitions. Dispatches to the Java lexical
+    scanner (method/java_parsing.py, method-granularity chunks) for .java files, since
+    ast.parse() only understands Python.
 
     This exists because whole-file embedding is a documented weak strategy: one paper in
     docs/literature_review.md reports whole-file embedding scoring only 3-12% Acc@10 vs.
@@ -231,6 +234,9 @@ def _chunk_file_content(content: str | None, max_chunk_chars: int = 1500, overla
     """
     if not content:
         return []
+
+    if is_java_path(path):
+        return chunk_java_content(content, max_chunk_chars=max_chunk_chars, overlap_chars=overlap_chars)
 
     try:
         tree = ast.parse(content)
@@ -276,7 +282,7 @@ def rank_files_embedding_chunked(bug, top_k: int | None = 100, model_name: str =
     chunk_owners = []
     chunk_texts = []
     for path in file_paths:
-        file_chunks = _chunk_file_content(contents.get(path), max_chunk_chars=max_chunk_chars)
+        file_chunks = _chunk_file_content(contents.get(path), path=path, max_chunk_chars=max_chunk_chars)
         if not file_chunks:
             file_chunks = [" ".join(_tokenize_path(path))]
         for chunk in file_chunks:

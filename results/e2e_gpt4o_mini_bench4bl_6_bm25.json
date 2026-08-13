@@ -1,0 +1,183 @@
+{
+  "method": "openrouter",
+  "dataset": "bench4bl",
+  "model": "gpt-4o-mini",
+  "sample_size": 1,
+  "bm25_top_k": 100,
+  "bm25_mode": "path_only",
+  "bm25_symbols_imports": null,
+  "retrieval_top_k": null,
+  "retrieval_mode": null,
+  "rrf_weights": null,
+  "embedding_model": null,
+  "per_bug": {
+    "AMQP-468": {
+      "repo": "AMQP",
+      "ground_truths": [
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/support/PublisherCallbackChannelImpl.java",
+        "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/core/RabbitTemplatePublisherCallbacksIntegrationTests.java",
+        "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/core/RabbitAdminDeclarationTests.java"
+      ],
+      "candidate_files": [
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/support/PublisherCallbackChannelImpl.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/core/RabbitTemplate.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/support/PublisherCallbackChannel.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/core/RabbitOperations.java",
+        "spring-amqp/src/main/java/org/springframework/amqp/core/Message.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/RabbitAccessor.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/AbstractMessageListenerContainer.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/SimpleMessageListenerContainer.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/support/CorrelationData.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/retry/MessageRecoverer.java"
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 0.3333333333333333,
+      "f1": 0.5,
+      "tp": 1,
+      "fp": 0,
+      "fn": 2
+    },
+    "AMQP-657": {
+      "repo": "AMQP",
+      "ground_truths": [
+        "spring-amqp/src/main/java/org/springframework/amqp/support/SimpleAmqpHeaderMapper.java",
+        "spring-amqp/src/test/java/org/springframework/amqp/support/SimpleAmqpHeaderMapperTests.java",
+        "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/annotation/EnableRabbitIntegrationTests.java",
+        "spring-amqp/src/test/java/org/springframework/amqp/support/AmqpMessageHeaderAccessorTests.java"
+      ],
+      "candidate_files": [
+        "spring-amqp/src/main/java/org/springframework/amqp/support/SimpleAmqpHeaderMapper.java",
+        "spring-amqp/src/test/java/org/springframework/amqp/support/SimpleAmqpHeaderMapperTests.java",
+        "spring-amqp/src/main/java/org/springframework/amqp/support/AmqpHeaderMapper.java",
+        "spring-amqp/src/main/java/org/springframework/amqp/support/AmqpMessageHeaderAccessor.java",
+        "spring-amqp/src/test/java/org/springframework/amqp/support/AmqpMessageHeaderAccessorTests.java",
+        "spring-amqp/src/main/java/org/springframework/amqp/support/AmqpHeaders.java",
+        "spring-amqp/src/main/java/org/springframework/amqp/core/Message.java",
+        "spring-amqp/src/main/java/org/springframework/amqp/core/MessageProperties.java",
+        "spring-amqp/src/main/java/org/springframework/amqp/core/MessageBuilder.java",
+        "spring-amqp/src/main/java/org/springframework/amqp/core/MessageBuilderSupport.java"
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 0.25,
+      "f1": 0.4,
+      "tp": 1,
+      "fp": 0,
+      "fn": 3
+    },
+    "IO-74": {
+      "repo": "IO",
+      "ground_truths": [
+        "src/java/org/apache/commons/io/filefilter/FileFilterUtils.java",
+        "src/test/org/apache/commons/io/filefilter/FileFilterTestCase.java"
+      ],
+      "candidate_files": [
+        "src/java/org/apache/commons/io/filefilter/NameFileFilter.java",
+        "src/java/org/apache/commons/io/filefilter/WildcardFileFilter.java",
+        "src/java/org/apache/commons/io/filefilter/FileFilterUtils.java",
+        "src/java/org/apache/commons/io/filefilter/ConditionalFileFilter.java",
+        "src/java/org/apache/commons/io/filefilter/PrefixFileFilter.java",
+        "src/java/org/apache/commons/io/filefilter/SuffixFileFilter.java",
+        "src/java/org/apache/commons/io/filefilter/AbstractFileFilter.java",
+        "src/test/org/apache/commons/io/filefilter/FileFilterTestCase.java",
+        "src/test/org/apache/commons/io/filefilter/AndFileFilterTestCase.java",
+        "src/test/org/apache/commons/io/filefilter/OrFileFilterTestCase.java"
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 2
+    },
+    "IO-166": {
+      "repo": "IO",
+      "ground_truths": [
+        "src/test/org/apache/commons/io/FileUtilsTestCase.java",
+        "src/java/org/apache/commons/io/FileUtils.java"
+      ],
+      "candidate_files": [
+        "src/java/org/apache/commons/io/FileUtils.java",
+        "src/test/org/apache/commons/io/FileUtilsTestCase.java",
+        "src/test/org/apache/commons/io/IOUtilsTestCase.java",
+        "src/java/org/apache/commons/io/IOUtils.java",
+        "src/test/org/apache/commons/io/FileUtilsCleanDirectoryTestCase.java",
+        "src/test/org/apache/commons/io/FileUtilsListFilesTestCase.java",
+        "src/java/org/apache/commons/io/CopyUtils.java",
+        "src/test/org/apache/commons/io/CopyUtilsTest.java",
+        "src/test/org/apache/commons/io/FileUtilsWaitForTestCase.java",
+        "src/test/org/apache/commons/io/FileUtilsFileNewerTestCase.java"
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 0.5,
+      "f1": 0.6666666666666666,
+      "tp": 1,
+      "fp": 0,
+      "fn": 1
+    },
+    "IO-263": {
+      "repo": "IO",
+      "ground_truths": [
+        "src/test/java/org/apache/commons/io/FileSystemUtilsTestCase.java",
+        "src/main/java/org/apache/commons/io/FileSystemUtils.java"
+      ],
+      "candidate_files": [
+        "src/main/java/org/apache/commons/io/FileSystemUtils.java",
+        "src/test/java/org/apache/commons/io/FileSystemUtilsTestCase.java",
+        "src/main/java/org/apache/commons/io/filefilter/HiddenFileFilter.java",
+        "src/main/java/org/apache/commons/io/FileUtils.java",
+        "src/main/java/org/apache/commons/io/filefilter/EmptyFileFilter.java",
+        "src/main/java/org/apache/commons/io/filefilter/DirectoryFileFilter.java",
+        "src/test/java/org/apache/commons/io/FileUtilsTestCase.java",
+        "src/main/java/org/apache/commons/io/filefilter/FileFilterUtils.java",
+        "src/main/java/org/apache/commons/io/filefilter/TrueFileFilter.java",
+        "src/main/java/org/apache/commons/io/filefilter/SizeFileFilter.java"
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 0.5,
+      "f1": 0.6666666666666666,
+      "tp": 1,
+      "fp": 0,
+      "fn": 1
+    },
+    "IO-436": {
+      "repo": "IO",
+      "ground_truths": [
+        "src/main/java/org/apache/commons/io/FilenameUtils.java"
+      ],
+      "candidate_files": [
+        "src/main/java/org/apache/commons/io/FilenameUtils.java",
+        "src/test/java/org/apache/commons/io/FilenameUtilsTestCase.java",
+        "src/test/java/org/apache/commons/io/FilenameUtilsWildcardTestCase.java",
+        "src/main/java/org/apache/commons/io/comparator/ExtensionFileComparator.java",
+        "src/test/java/org/apache/commons/io/comparator/ExtensionFileComparatorTest.java",
+        "src/main/java/org/apache/commons/io/comparator/LastModifiedFileComparator.java",
+        "src/test/java/org/apache/commons/io/comparator/LastModifiedFileComparatorTest.java",
+        "src/main/java/org/apache/commons/io/comparator/PathFileComparator.java",
+        "src/test/java/org/apache/commons/io/comparator/PathFileComparatorTest.java",
+        "src/main/java/org/apache/commons/io/FileUtils.java"
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  "overall": {
+    "accuracy": 0.8333333333333334,
+    "precision": 0.8333333333333334,
+    "recall": 0.35714285714285715,
+    "f1": 0.5,
+    "total_bugs": 6,
+    "total_tp": 5,
+    "total_fp": 1,
+    "total_fn": 9
+  }
+}
