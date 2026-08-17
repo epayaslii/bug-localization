@@ -24,6 +24,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from dotenv import load_dotenv
 from dataset.swebench import SWEBench
 from dataset.beetlebox import BeetleBox
+from dataset.bench4bl import Bench4BL
 from dataset.localizability import load_cache, save_cache
 from dataset.utils import setup_logging, get_logger
 from evaluation.manifest import load_manifest
@@ -93,7 +94,14 @@ def main():
     load_dotenv()
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--manifest', required=True)
-    parser.add_argument('--dataset', choices=['swebench', 'beetlebox'], default=None)
+    parser.add_argument('--dataset', choices=['swebench', 'beetlebox', 'bench4bl'], default=None)
+    parser.add_argument('--pool-size', type=int, default=None,
+                       help='Override the manifest\'s stored pool_size when re-deriving the pool -- '
+                            'needed if this environment\'s dataset mirror has a different total instance '
+                            'count than the one the manifest was generated against (e.g. Bench4BL: more '
+                            'projects mirrored locally than on MN5). Pass a value >= this environment\'s '
+                            'total instance count to disable sampling and guarantee every manifest '
+                            'instance is found.')
     parser.add_argument('--candidate-pool-size', type=int, default=200)
     parser.add_argument('--rrf-k', type=int, default=60)
     parser.add_argument('--model', default='microsoft/unixcoder-base')
@@ -107,9 +115,14 @@ def main():
 
     manifest = load_manifest(args.manifest)
     dataset_name = args.dataset or manifest['dataset']
-    instance = SWEBench() if dataset_name == 'swebench' else BeetleBox()
+    if dataset_name == 'swebench':
+        instance = SWEBench()
+    elif dataset_name == 'bench4bl':
+        instance = Bench4BL()
+    else:
+        instance = BeetleBox()
 
-    pool_size = manifest.get('pool_size') or manifest['size']
+    pool_size = args.pool_size or manifest.get('pool_size') or manifest['size']
     pool = instance.get_bug_instances(sample_size=pool_size, random_sample=True, random_seed=manifest['seed'])
     wanted = {inst['instance_id'] for inst in manifest['instances']}
     all_bugs = [b for b in pool if b.instance_id in wanted]
