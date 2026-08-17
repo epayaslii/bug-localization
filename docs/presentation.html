@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bug Localization — Progress Review</title>
+</head>
+<body>
+<style>
+  :root {
+    --bg: #F5F6F3;
+    --surface: #FCFCFB;
+    --surface-2: #EFF1EC;
+    --ink: #14181B;
+    --ink-soft: #4B555C;
+    --ink-faint: #8A928D;
+    --accent: #2B5D8C;
+    --accent-soft: #DCE7EF;
+    --accent-warm: #C97A3D;
+    --accent-warm-soft: #F2E3D4;
+    --line: #DADDD7;
+    --good: #3F7D4F;
+    --good-soft: #DEEBE1;
+    --warn: #B8863A;
+    --warn-soft: #F1E4CD;
+    --shadow: 0 1px 2px rgba(20,24,27,0.04), 0 8px 24px rgba(20,24,27,0.05);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #14181A;
+      --surface: #1B2023;
+      --surface-2: #20262A;
+      --ink: #ECEFEC;
+      --ink-soft: #A9B2AD;
+      --ink-faint: #6C756F;
+      --accent: #7FB2DE;
+      --accent-soft: #223546;
+      --accent-warm: #E0A868;
+      --accent-warm-soft: #3A2C1D;
+      --line: #2B3134;
+      --good: #6FBE84;
+      --good-soft: #1E3324;
+      --warn: #D7A85C;
+      --warn-soft: #392D18;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #14181A;
+    --surface: #1B2023;
+    --surface-2: #20262A;
+    --ink: #ECEFEC;
+    --ink-soft: #A9B2AD;
+    --ink-faint: #6C756F;
+    --accent: #7FB2DE;
+    --accent-soft: #223546;
+    --accent-warm: #E0A868;
+    --accent-warm-soft: #3A2C1D;
+    --line: #2B3134;
+    --good: #6FBE84;
+    --good-soft: #1E3324;
+    --warn: #D7A85C;
+    --warn-soft: #392D18;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation: none !important; transition: none !important; }
+  }
+
+  .serif { font-family: ui-serif, Georgia, "Iowan Old Style", "Times New Roman", serif; }
+  .mono { font-family: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace; }
+
+  .deck {
+    scroll-snap-type: y proximity;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  section.slide {
+    scroll-snap-align: start;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 6vh 8vw 6vh calc(8vw + 34px);
+    position: relative;
+    border-bottom: 1px solid var(--line);
+  }
+  .slide-inner { max-width: 900px; width: 100%; margin: 0 auto; }
+
+  .phase-mark {
+    position: absolute;
+    top: 6vh;
+    left: 8vw;
+    font-family: ui-serif, Georgia, serif;
+    font-size: 15px;
+    color: var(--ink-faint);
+    letter-spacing: 0.04em;
+  }
+  .phase-mark b { color: var(--accent); font-weight: 600; }
+
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+    margin: 0 0 14px;
+  }
+  h1.title {
+    font-size: clamp(30px, 4vw, 46px);
+    line-height: 1.12;
+    font-weight: 500;
+    margin: 0 0 18px;
+    text-wrap: balance;
+    letter-spacing: -0.01em;
+  }
+  h2.title {
+    font-size: clamp(24px, 3vw, 32px);
+    line-height: 1.2;
+    font-weight: 500;
+    margin: 0 0 14px;
+    text-wrap: balance;
+  }
+  p.lede {
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    max-width: 62ch;
+    margin: 0 0 8px;
+  }
+
+  .stat-row { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 36px; }
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 18px 22px;
+    box-shadow: var(--shadow);
+    flex: 1 1 200px;
+    min-width: 180px;
+  }
+  .stat-num {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 30px;
+    font-weight: 600;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+    display: block;
+  }
+  .stat-num.warm { color: var(--accent-warm); }
+  .stat-label { font-size: 13px; color: var(--ink-soft); margin-top: 4px; line-height: 1.4; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 24px 28px;
+    box-shadow: var(--shadow);
+  }
+
+  table.metrics {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 14px;
+  }
+  table.metrics th {
+    text-align: right;
+    font-family: -apple-system, system-ui, sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-faint);
+    font-weight: 600;
+    padding: 0 0 10px;
+    border-bottom: 1px solid var(--line);
+  }
+  table.metrics th:first-child { text-align: left; }
+  table.metrics td {
+    padding: 9px 0;
+    text-align: right;
+    border-bottom: 1px solid var(--line);
+    font-variant-numeric: tabular-nums;
+    color: var(--ink);
+  }
+  table.metrics td:first-child {
+    text-align: left;
+    font-family: -apple-system, system-ui, sans-serif;
+    color: var(--ink-soft);
+  }
+  table.metrics tr.peak td { color: var(--accent-warm); font-weight: 600; }
+  table.metrics tr.peak td:first-child { color: var(--ink); }
+
+  .bars { display: flex; flex-direction: column; gap: 12px; margin-top: 8px; }
+  .bars.scaled { margin-top: 26px; position: relative; padding-top: 20px; }
+  .bar-ticks {
+    position: absolute;
+    top: 0;
+    left: 150px;
+    right: 70px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    color: var(--ink-faint);
+  }
+  .bar-row { display: grid; grid-template-columns: 150px 1fr 70px; align-items: center; gap: 12px; }
+  .bar-label { font-size: 13px; color: var(--ink-soft); text-align: right; }
+  .bar-track {
+    background: var(--surface-2);
+    background-image: repeating-linear-gradient(to right, var(--line) 0, var(--line) 1px, transparent 1px, transparent 25%);
+    border-radius: 5px;
+    height: 22px;
+    overflow: hidden;
+  }
+  .bar-fill { height: 100%; border-radius: 5px; background: var(--accent); }
+  .bar-fill.warm { background: var(--accent-warm); }
+  .bar-val { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 13px; font-variant-numeric: tabular-nums; }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 20px;
+  }
+  .pill.good { background: var(--good-soft); color: var(--good); }
+  .pill.warn { background: var(--warn-soft); color: var(--warn); }
+  .pill.todo { background: var(--surface-2); color: var(--ink-faint); }
+  .pill-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+  table.audit { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  table.audit th {
+    text-align: left;
+    font-family: -apple-system, system-ui, sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-faint);
+    font-weight: 600;
+    padding: 0 10px 10px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  table.audit td {
+    padding: 10px 10px 10px 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+    line-height: 1.45;
+  }
+  table.audit td.wp { font-family: ui-monospace, "SF Mono", Menlo, monospace; color: var(--ink-soft); white-space: nowrap; }
+  table.audit td.desc { color: var(--ink-soft); }
+  table.audit td.desc b { color: var(--ink); font-weight: 600; }
+  table.audit td.status { white-space: nowrap; }
+
+  .branch-list { display: flex; flex-direction: column; gap: 8px; margin-top: 26px; }
+  .branch-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 16px;
+    box-shadow: var(--shadow);
+  }
+  .branch-name { font-size: 13px; font-weight: 600; color: var(--ink); }
+  .branch-desc { font-size: 12.5px; color: var(--ink-soft); margin-top: 3px; line-height: 1.45; max-width: 66ch; }
+  .branch-row .pill { flex-shrink: 0; margin-top: 1px; }
+
+  .flow {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    margin-top: 32px;
+    flex-wrap: wrap;
+  }
+  .flow-step {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 16px 18px;
+    flex: 1 1 160px;
+    box-shadow: var(--shadow);
+  }
+  .flow-step .k { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-faint); font-weight: 600; }
+  .flow-step .v { font-size: 14px; margin-top: 6px; color: var(--ink); line-height: 1.4; }
+  .flow-arrow { display: flex; align-items: center; justify-content: center; padding: 0 8px; color: var(--ink-faint); font-size: 20px; }
+
+  .note {
+    font-size: 13px;
+    color: var(--ink-faint);
+    margin-top: 18px;
+    line-height: 1.55;
+    max-width: 68ch;
+  }
+  .note b { color: var(--ink-soft); }
+
+  .blocker-list { display: flex; flex-direction: column; gap: 10px; margin-top: 24px; }
+  .blocker {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 18px;
+    box-shadow: var(--shadow);
+  }
+  .blocker-num { font-family: ui-monospace, monospace; font-size: 13px; color: var(--ink-faint); padding-top: 2px; min-width: 20px; }
+  .blocker-body { flex: 1; }
+  .blocker-title { font-size: 14px; font-weight: 600; color: var(--ink); }
+  .blocker-desc { font-size: 13px; color: var(--ink-soft); margin-top: 3px; line-height: 1.5; }
+
+  .steps { display: flex; flex-direction: column; gap: 14px; margin-top: 28px; counter-reset: step; }
+  .step { display: grid; grid-template-columns: 40px 1fr; gap: 16px; align-items: start; }
+  .step-num {
+    counter-increment: step;
+    font-family: ui-serif, Georgia, serif;
+    font-size: 22px;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .step-num::before { content: counter(step); }
+  .step-title { font-size: 15px; font-weight: 600; color: var(--ink); }
+  .step-desc { font-size: 13.5px; color: var(--ink-soft); margin-top: 3px; line-height: 1.5; }
+
+  .rail {
+    position: fixed;
+    right: 22px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 10;
+  }
+  .rail-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--ink-faint);
+    opacity: 0.4;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .rail-dot.active { opacity: 1; background: var(--accent); transform: scale(1.4); }
+
+  .foot {
+    position: absolute;
+    bottom: 5vh;
+    left: calc(8vw + 34px);
+    font-size: 11px;
+    color: var(--ink-faint);
+    letter-spacing: 0.04em;
+  }
+
+  .table-scroll { overflow-x: auto; }
+  table.metrics.wide { font-size: 13px; }
+  table.metrics.wide th, table.metrics.wide td { white-space: nowrap; }
+  table.metrics.wide td.bench { text-align: left; font-family: -apple-system, system-ui, sans-serif; color: var(--ink-faint); font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; padding-top: 16px; border-bottom: none; }
+  table.metrics.wide tr.group-first td { padding-top: 16px; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 28px; }
+  @media (max-width: 720px) {
+    .two-col { grid-template-columns: 1fr; }
+    section.slide { padding-left: 8vw; }
+    .phase-mark { display: none; }
+  }
+</style>
+
+<div class="deck" id="deck">
+
+  <section class="slide" id="s0">
+    <div class="slide-inner">
+      <p class="eyebrow">Bug Localization &mdash; Progress Review</p>
+      <h1 class="title serif">Retrieval-augmented bug localization: where the numbers stand, and what's next</h1>
+      <p class="lede">SWE-bench Verified &middot; BeetleBox &middot; Bench4BL &middot; BM25 + embedding hybrid retrieval + LLM reranking &middot; MareNostrum&nbsp;5 execution track</p>
+      <div class="stat-row">
+        <div class="stat-card">
+          <span class="stat-num">51.7%</span>
+          <div class="stat-label">end-to-end localization accuracy (n=60, symbols-BM25 + gpt-4o-mini, SWE-bench)</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num warm">0.714</span>
+          <div class="stat-label">best retrieval-only MRR found (Qwen3-Embedding + weighted RRF 1:5, n=30, Bench4BL)</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">3</span>
+          <div class="stat-label">benchmarks now validated end to end &mdash; SWE-bench, BeetleBox, Bench4BL</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="s0b">
+    <div class="phase-mark">Overview</div>
+    <div class="slide-inner">
+      <h2 class="title serif">Results across all three benchmarks</h2>
+      <p class="lede">Retrieval-only comparison &mdash; BM25's best representation, the strongest embedding model alone, and the best fused RRF weighting &mdash; on the same candidate pool (top-200) per benchmark.</p>
+      <div class="card table-scroll" style="margin-top:24px;">
+        <table class="metrics wide">
+          <thead><tr><th style="text-align:left;">Benchmark &middot; config</th><th>n</th><th>Hit@1</th><th>Hit@5</th><th>Hit@10</th><th>MRR</th><th>MAP</th></tr></thead>
+          <tbody>
+            <tr><td class="bench" colspan="7">SWE-bench Verified</td></tr>
+            <tr><td>BM25 (symbols) alone</td><td>30</td><td>3.3%</td><td>3.3%</td><td>30.0%</td><td>0.086</td><td>0.087</td></tr>
+            <tr><td>Chunked embedding (Qwen3) alone</td><td>30</td><td>13.3%</td><td>56.7%</td><td>66.7%</td><td>0.316</td><td>0.314</td></tr>
+            <tr class="peak"><td>Hybrid RRF 1:5 (Qwen3) &mdash; best</td><td>30</td><td>30.0%</td><td>53.3%</td><td>63.3%</td><td>0.422</td><td>0.420</td></tr>
+
+            <tr><td class="bench" colspan="7">BeetleBox (multi-language)</td></tr>
+            <tr><td>BM25 path_only</td><td>15</td><td>26.7%</td><td>53.3%</td><td>73.3%</td><td>0.413</td><td>0.324</td></tr>
+            <tr class="peak"><td>BM25 symbols_with_imports &mdash; best</td><td>15</td><td>40.0%</td><td>60.0%</td><td>66.7%</td><td>0.500</td><td>0.372</td></tr>
+
+            <tr><td class="bench" colspan="7">Bench4BL (Java, real content post content-fetch fix)</td></tr>
+            <tr><td>BM25 path_only</td><td>30</td><td>16.7%</td><td>33.3%</td><td>46.7%</td><td>0.272</td><td>0.240</td></tr>
+            <tr class="peak"><td>BM25 skeleton &mdash; best</td><td>30</td><td>30.0%</td><td>50.0%</td><td>73.3%</td><td>0.413</td><td>0.331</td></tr>
+            <tr><td>Chunked embedding (Qwen3) alone</td><td>30</td><td>53.3%</td><td>86.7%</td><td>96.7%</td><td>0.688</td><td>0.567</td></tr>
+            <tr class="peak"><td>Hybrid RRF 1:5 (Qwen3) &mdash; best</td><td>30</td><td>56.7%</td><td>90.0%</td><td>93.3%</td><td>0.714</td><td>0.564</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Rows in <b>warm</b> are each benchmark's best retrieval-only configuration. <b>Bench4BL's hybrid RRF (0.714 MRR) is now the strongest real result in the project</b> &mdash; confirmed at n=30, not the small n=6 sample this table showed earlier today.</p>
+    </div>
+  </section>
+
+  <section class="slide" id="s1">
+    <div class="phase-mark">Phase <b>4</b> &mdash; Pipeline</div>
+    <div class="slide-inner">
+      <h2 class="title serif">The pipeline in one line</h2>
+      <p class="lede">Two stages that run offline (candidates for MN5), one that needs a live LLM call (never can).</p>
+      <div class="flow">
+        <div class="flow-step"><div class="k">Input</div><div class="v">Bug report text</div></div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-step"><div class="k">Stage 1 &middot; offline</div><div class="v">BM25 over symbol-enriched docs &mdash; narrows repo to top&#8209;200 candidates</div></div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-step"><div class="k">Stage 2 &middot; offline</div><div class="v">Chunked embedding rerank, fused with BM25 via weighted RRF</div></div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-step"><div class="k">Stage 3 &middot; needs internet</div><div class="v">gpt&#8209;4o&#8209;mini reranks the shortlist &rarr; Top&#8209;1 file</div></div>
+      </div>
+      <p class="note">This split is why MN5 (no outbound internet by design) can only ever host Stages 1&ndash;2 &mdash; not a limitation to work around, a structural boundary that scopes what MN5 execution means for this project.</p>
+    </div>
+  </section>
+
+  <section class="slide" id="s2">
+    <div class="phase-mark">Phase <b>3</b> &mdash; BM25 representation</div>
+    <div class="slide-inner">
+      <h2 class="title serif">What you put in the BM25 document matters</h2>
+      <p class="lede">Four ways of representing each source file were compared on the same 30-instance manifest. Enriching path-only documents with extracted symbols raises the retrieval ceiling substantially.</p>
+      <div class="card" style="margin-top:28px;">
+        <table class="metrics">
+          <thead><tr><th>Representation</th><th>Hit@100</th><th>Recall@100</th><th>MRR</th></tr></thead>
+          <tbody>
+            <tr><td>path_only</td><td>60.0%</td><td>58.2%</td><td>0.150</td></tr>
+            <tr><td>skeleton</td><td>80.0%</td><td>73.0%</td><td>0.138</td></tr>
+            <tr><td>symbols_with_imports</td><td>83.3%</td><td>77.0%</td><td>0.154</td></tr>
+            <tr class="peak"><td>symbols_no_imports</td><td>86.7%</td><td>81.0%</td><td>0.177</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">n=30, SWE-bench Verified, seeded diversity-capped manifest. <b>symbols_no_imports</b> now the default BM25 representation.</p>
+    </div>
+  </section>
+
+  <section class="slide" id="s3">
+    <div class="phase-mark">Phase <b>4</b> &mdash; Fusion weighting</div>
+    <div class="slide-inner">
+      <h2 class="title serif">Unweighted fusion backfires; weighting it fixes that</h2>
+      <p class="lede">Naive 1:1 RRF fusion of BM25 and chunked embeddings scores <em>worse</em> than embedding alone &mdash; it drags strong embedding ranks down toward BM25's weaker ones. Up-weighting embedding recovers, then exceeds, that ceiling.</p>
+      <div class="two-col">
+        <div class="card">
+          <div class="eyebrow" style="margin-bottom:14px;">n=30 &middot; component comparison</div>
+          <div class="bars">
+            <div class="bar-row"><div class="bar-label">bm25 alone</div><div class="bar-track"><div class="bar-fill" style="width:31%"></div></div><div class="bar-val">0.087</div></div>
+            <div class="bar-row"><div class="bar-label">hybrid 1:1 (unweighted)</div><div class="bar-track"><div class="bar-fill" style="width:73%"></div></div><div class="bar-val">0.206</div></div>
+            <div class="bar-row"><div class="bar-label">chunked embedding alone</div><div class="bar-track"><div class="bar-fill" style="width:83%"></div></div><div class="bar-val">0.233</div></div>
+            <div class="bar-row"><div class="bar-label">hybrid 1:10 (weighted)</div><div class="bar-track"><div class="bar-fill warm" style="width:100%"></div></div><div class="bar-val">0.281</div></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="eyebrow" style="margin-bottom:14px;">Weight sweep, MRR by ratio</div>
+          <div class="bars">
+            <div class="bar-row"><div class="bar-label">1:3</div><div class="bar-track"><div class="bar-fill" style="width:89%"></div></div><div class="bar-val">0.251</div></div>
+            <div class="bar-row"><div class="bar-label">1:5</div><div class="bar-track"><div class="bar-fill" style="width:88%"></div></div><div class="bar-val">0.246</div></div>
+            <div class="bar-row"><div class="bar-label">1:10</div><div class="bar-track"><div class="bar-fill warm" style="width:100%"></div></div><div class="bar-val">0.281</div></div>
+            <div class="bar-row"><div class="bar-label">1:20</div><div class="bar-track"><div class="bar-fill" style="width:87%"></div></div><div class="bar-val">0.245</div></div>
+            <div class="bar-row"><div class="bar-label">1:50</div><div class="bar-track"><div class="bar-fill" style="width:83%"></div></div><div class="bar-val">0.233</div></div>
+          </div>
+        </div>
+      </div>
+      <p class="note"><b>1:10 is a confirmed peak</b>, not just the tested edge &mdash; sweeping past it (1:15&ndash;1:50) reverses back down toward embedding-alone's ceiling as BM25's contribution becomes negligible. Not yet cross-checked on a second manifest.</p>
+    </div>
+  </section>
+
+  <section class="slide" id="s4">
+    <div class="phase-mark">Phase <b>3</b> &mdash; Embedding model</div>
+    <div class="slide-inner">
+      <h2 class="title serif">Model choice swings MRR by 9&times;</h2>
+      <p class="lede">Six candidate embedding models were bench-marked on the same 6-instance sample. The gap between the worst and best is the single largest lever found in this project so far.</p>
+      <div class="card" style="margin-top:28px;">
+        <div class="bars">
+          <div class="bar-row"><div class="bar-label">CodeBERT</div><div class="bar-track"><div class="bar-fill" style="width:11%"></div></div><div class="bar-val">0.065</div></div>
+          <div class="bar-row"><div class="bar-label">OpenAI text-embedding-3-small</div><div class="bar-track"><div class="bar-fill" style="width:60%"></div></div><div class="bar-val">0.362</div></div>
+          <div class="bar-row"><div class="bar-label">UniXCoder (current default)</div><div class="bar-track"><div class="bar-fill" style="width:70%"></div></div><div class="bar-val">0.419</div></div>
+          <div class="bar-row"><div class="bar-label">Qwen3-Embedding-0.6B</div><div class="bar-track"><div class="bar-fill warm" style="width:100%"></div></div><div class="bar-val">0.603</div></div>
+        </div>
+      </div>
+      <p class="note"><b>Qwen3-Embedding-0.6B is the strongest model found to date</b> &mdash; 44% higher MRR than the UniXCoder baseline every hybrid/weighting result on the previous slide was built on. It has not yet been run through the weighted-RRF pipeline itself &mdash; the natural next experiment. n=6, directional only; BGE-Code was excluded as too slow for CPU-only local runs, and Voyage-code-3 never finished a run (API rate-limit crash).</p>
+    </div>
+  </section>
+
+  <section class="slide" id="s5">
+    <div class="phase-mark">Phase <b>5</b> &mdash; End-to-end + failure analysis</div>
+    <div class="slide-inner">
+      <h2 class="title serif">Retrieval pre-filtering measurably helps &mdash; and reranking is now the bottleneck</h2>
+      <div class="two-col">
+        <div class="card">
+          <div class="eyebrow" style="margin-bottom:14px;">End-to-end accuracy, gpt-4o-mini</div>
+          <table class="metrics">
+            <thead><tr><th>Config</th><th>n=30</th><th>n=60</th></tr></thead>
+            <tbody>
+              <tr><td>no-retrieval baseline</td><td>43.3%</td><td>&mdash;</td></tr>
+              <tr><td>skeleton-BM25</td><td>50.0%</td><td>46.7%</td></tr>
+              <tr class="peak"><td>symbols-BM25</td><td>50.0%</td><td>51.7%</td></tr>
+            </tbody>
+          </table>
+          <p class="note" style="margin-top:14px;">At n=30 the two representations tied despite symbols' better retrieval ceiling. The n=60 tie-breaker resolves it: <b>symbols wins by +5.0pp</b>.</p>
+        </div>
+        <div class="card">
+          <div class="eyebrow" style="margin-bottom:14px;">Miss attribution, n=30 (15 misses / config)</div>
+          <div class="bars">
+            <div class="bar-row"><div class="bar-label">retrieval failures</div><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><div class="bar-val">6</div></div>
+            <div class="bar-row"><div class="bar-label">reranking failures</div><div class="bar-track"><div class="bar-fill warm" style="width:60%"></div></div><div class="bar-val">9</div></div>
+          </div>
+          <p class="note" style="margin-top:14px;">60% of misses had the correct file <b>right there</b> in the LLM's candidate list &mdash; it just picked wrong. Free, offline diagnostic (no LLM calls) built on the existing failure-attribution module.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="s6">
+    <div class="phase-mark">Phase <b>6</b> &mdash; SOTA comparison</div>
+    <div class="slide-inner">
+      <h2 class="title serif">Where 51.7% sits against the literature</h2>
+      <p class="lede">Compared against published Top&#8209;1 numbers on the fair basis: post-retrieval, post-rerank accuracy.</p>
+      <div class="card" style="margin-top:28px;">
+        <table class="metrics">
+          <thead><tr><th>System</th><th>Benchmark</th><th>Top-1 / Acc@1</th></tr></thead>
+          <tbody>
+            <tr><td>MarsCode Agent</td><td>SWE-bench Lite</td><td>88.3%</td></tr>
+            <tr><td>LocAgent (Claude 3.5)</td><td>SWE-bench Lite</td><td>77.7%</td></tr>
+            <tr><td>CoRNStack (retriever+reranker)</td><td>SWE-bench Lite</td><td>68.2%</td></tr>
+            <tr><td>BugCerberus (fine-tuned)</td><td>SWE-bench Lite</td><td>65.1%</td></tr>
+            <tr><td><b>This project</b> &mdash; symbols-BM25 + gpt-4o-mini, n=60</td><td>SWE-bench Verified</td><td><b>51.7%</b></td></tr>
+            <tr><td>SWE-Fixer</td><td>SWE-bench Verified</td><td>30.2%*</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Sits below fine-tuned/agentic SOTA (65&ndash;88%) &mdash; expected, since this pipeline is a single BM25&rarr;single-LLM-pass, not a fine-tuned classifier (BugCerberus) or a multi-step agent loop (MarsCode, LocAgent). Different benchmark split too (Verified vs. Lite). *Pass@1, a harder metric, not directly comparable.</p>
+    </div>
+  </section>
+
+  <section class="slide" id="s7">
+    <div class="phase-mark">Phase <b>2</b> &mdash; Generalization</div>
+    <div class="slide-inner">
+      <h2 class="title serif">The symbol-enrichment signal holds beyond Python</h2>
+      <p class="lede">BeetleBox transition: 15 instances across 5 repos, 4 languages (Java, Go, JavaScript, Python) &mdash; the same representation comparison as the SWE-bench run, on genuinely different code.</p>
+      <div class="card" style="margin-top:28px;">
+        <div class="bars">
+          <div class="bar-row"><div class="bar-label">path_only</div><div class="bar-track"><div class="bar-fill" style="width:82%"></div></div><div class="bar-val">0.413</div></div>
+          <div class="bar-row"><div class="bar-label">skeleton</div><div class="bar-track"><div class="bar-fill" style="width:87%"></div></div><div class="bar-val">0.433</div></div>
+          <div class="bar-row"><div class="bar-label">symbols_no_imports</div><div class="bar-track"><div class="bar-fill" style="width:99%"></div></div><div class="bar-val">0.494</div></div>
+          <div class="bar-row"><div class="bar-label">symbols_with_imports</div><div class="bar-track"><div class="bar-fill warm" style="width:100%"></div></div><div class="bar-val">0.500</div></div>
+        </div>
+      </div>
+      <p class="note">Same ordering as SWE-bench: richer representations win. AST-based symbol extraction is Python-only, so Go/Java/JS instances fall back to path-only under the hood &mdash; the aggregate improvement here is a lower bound on what a language-aware extractor would show.</p>
+    </div>
+  </section>
+
+  <section class="slide" id="s7b">
+    <div class="phase-mark">Phase <b>2</b> &mdash; Generalization</div>
+    <div class="slide-inner">
+      <h2 class="title serif">Bench4BL: a real content-fetching bug found and fixed, then a real Java result</h2>
+      <p class="lede">Bench4BL (ISSTA 2018, 100% Java) looked tied across every BM25 representation at first &mdash; not a language-parsing limit as first assumed, but a real bug: BM25/embedding retrieval was never reading Bench4BL's file content at all, silently falling back to path-only tokens for every instance. Fixed, plus a new Java-aware lexical scanner added on top.</p>
+      <div class="two-col">
+        <div class="card">
+          <div class="eyebrow" style="margin-bottom:14px;">BM25 representation, n=30 (corrected)</div>
+          <div class="bars scaled">
+            <div class="bar-ticks"><span>0</span><span>.1</span><span>.2</span><span>.3</span><span>.4+</span></div>
+            <div class="bar-row"><div class="bar-label">path_only</div><div class="bar-track"><div class="bar-fill" style="width:66%"></div></div><div class="bar-val">0.272</div></div>
+            <div class="bar-row"><div class="bar-label">symbols_no_imports</div><div class="bar-track"><div class="bar-fill" style="width:77%"></div></div><div class="bar-val">0.317</div></div>
+            <div class="bar-row"><div class="bar-label">symbols_with_imports</div><div class="bar-track"><div class="bar-fill" style="width:89%"></div></div><div class="bar-val">0.366</div></div>
+            <div class="bar-row"><div class="bar-label">skeleton</div><div class="bar-track"><div class="bar-fill warm" style="width:100%"></div></div><div class="bar-val">0.413</div></div>
+          </div>
+          <p class="note" style="margin-top:14px;">All four representations now genuinely differ (they used to tie exactly) &mdash; real signal, not the old fetch-bug artifact.</p>
+        </div>
+        <div class="card">
+          <div class="eyebrow" style="margin-bottom:14px;">Root cause</div>
+          <p style="font-size:13.5px; color:var(--ink-soft); line-height:1.6; margin:0;">
+            <span class="mono">bm25_retriever.py</span> / <span class="mono">embedding_retriever.py</span> fetch content via
+            <span class="mono">repo_cache.py</span>'s <span class="mono">is_repo_cached()</span>, which only checked
+            <span class="mono">repo_cache/</span> &mdash; SWE-bench/BeetleBox's mirror directory. Bench4BL's content lives in
+            <span class="mono">bench4bl_cache/&lt;PROJECT&gt;/gitrepo</span> instead, so the check was always <span class="mono">False</span>
+            and every representation silently degraded to path tokens.
+          </p>
+          <p class="note" style="margin-top:14px;">Fixed with a Bench4BL fallback path in <span class="mono">repo_cache.py</span> (same <span class="mono">git cat-file --batch</span> mechanism). A prior write-up had blamed this on Python-only AST parsing &mdash; that explanation was wrong, or at least incomplete; this was the real cause. <b>A second, bigger catch</b>: the original n=30 hybrid RRF result (0.5424 MRR) was built on the same broken plumbing and is void too &mdash; see next slide.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="s8">
+    <div class="phase-mark">Phase <b>6</b> &mdash; MN5 execution</div>
+    <div class="slide-inner">
+      <h2 class="title serif">MN5: four blockers resolved, dozens of real Slurm jobs since</h2>
+      <p class="lede">Account <span class="mono">comm842299</span> / project <span class="mono">ehpc680</span>, <span class="mono">acc</span> (GPU) partition. Four blockers found while getting the real retrieval stack running on the cluster &mdash; all four now resolved live.</p>
+      <div class="blocker-list">
+        <div class="blocker">
+          <div class="blocker-num mono">1</div>
+          <div class="blocker-body">
+            <div class="blocker-title">huggingface-hub version conflict <span class="pill good"><span class="pill-dot"></span>resolved</span></div>
+            <div class="blocker-desc">Wheelhouse had an incompatible version with no PyPI fallback (offline cluster) &mdash; fixed by shipping the correct wheel over <span class="mono">scp</span>.</div>
+          </div>
+        </div>
+        <div class="blocker">
+          <div class="blocker-num mono">2</div>
+          <div class="blocker-body">
+            <div class="blocker-title">torch missing from the venv <span class="pill good"><span class="pill-dot"></span>resolved</span></div>
+            <div class="blocker-desc">Never installed on the cluster venv at all &mdash; installed <span class="mono">torch==2.6.0+cpu</span> plus a matching <span class="mono">tokenizers</span> pin from the wheelhouse.</div>
+          </div>
+        </div>
+        <div class="blocker">
+          <div class="blocker-num mono">3</div>
+          <div class="blocker-body">
+            <div class="blocker-title">MN5's checkout predated the embedding/hybrid work <span class="pill good"><span class="pill-dot"></span>resolved</span></div>
+            <div class="blocker-desc">Missing files pulled from the correct branch and transferred via <span class="mono">scp</span> &mdash; not a git clone, so future gaps still surface one <span class="mono">ModuleNotFoundError</span> at a time.</div>
+          </div>
+        </div>
+        <div class="blocker">
+          <div class="blocker-num mono">4</div>
+          <div class="blocker-body">
+            <div class="blocker-title">No outbound internet blocks HuggingFace model downloads <span class="pill good"><span class="pill-dot"></span>resolved</span></div>
+            <div class="blocker-desc">Pre-downloaded Qwen3-Embedding-0.6B weights locally (1.8GB), transferred the HF cache directory via <span class="mono">scp</span>, set <span class="mono">HF_HUB_OFFLINE=1</span> &mdash; confirmed loading fully offline on MN5. A same-shape follow-on bug surfaced immediately after: <span class="mono">HF_HUB_OFFLINE=1</span> also silently blocked <span class="mono">datasets.load_dataset()</span> from fetching SWE-bench Verified itself, not just model weights &mdash; fixed by pointing <span class="mono">SWEBENCH_LOCAL_PATH</span> at the already-mirrored local copy.</div>
+          </div>
+        </div>
+      </div>
+      <p class="note">Also required mirroring 4 repos MN5 didn't have (<span class="mono">flask</span>, <span class="mono">requests</span>, <span class="mono">sphinx</span>, <span class="mono">seaborn</span> &mdash; the full 12-repo SWE-bench Verified set, discovered because the sweep script scans the entire 500-instance pool before filtering to the 30 wanted, not just those 30's own repos) and generating a dedicated SSH key, since no access to MN5 existed from this machine at all going in. <b>Open, not blocking correctness:</b> MN5 has <span class="mono">torch==2.6.0+cpu</span> installed, so <span class="mono">--gres=gpu:1</span> allocations sit unused &mdash; every job so far, including today's, runs at CPU speed. This is why array-job sharding (splitting long runs across parallel Slurm tasks instead of one long serial job) has become the standard pattern for anything slow, rather than fixing the underlying GPU issue directly.</p>
+    </div>
+  </section>
+
+  <section class="slide" id="s9">
+    <div class="phase-mark">Audit</div>
+    <div class="slide-inner">
+      <h2 class="title serif">Plan vs. actual, work package by work package</h2>
+      <p class="lede">Checked against the original 11-item technical execution plan (WP 1.1&ndash;6.2), not just against memory of past sessions.</p>
+      <div class="card" style="margin-top:24px;">
+        <table class="audit">
+          <thead><tr><th>WP</th><th>Ask</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td class="wp">1.1</td><td class="desc">MN5 handbook + <b>sbatch examples</b></td><td class="status"><span class="pill warn"><span class="pill-dot"></span>partial</span></td></tr>
+            <tr><td class="wp">1.2</td><td class="desc">Architecture diagram</td><td class="status"><span class="pill good"><span class="pill-dot"></span>done</span></td></tr>
+            <tr><td class="wp">2.1</td><td class="desc">Literature survey</td><td class="status"><span class="pill good"><span class="pill-dot"></span>done</span></td></tr>
+            <tr><td class="wp">2.2</td><td class="desc">Unified schema &mdash; SWE-Bench, BeetleBox, <b>BugsInPy</b></td><td class="status"><span class="pill warn"><span class="pill-dot"></span>partial</span></td></tr>
+            <tr><td class="wp">3.1</td><td class="desc">Embedding bake-off: quality + latency done; <b>dimensionality/storage</b> untabulated</td><td class="status"><span class="pill warn"><span class="pill-dot"></span>partial</span></td></tr>
+            <tr><td class="wp">3.2</td><td class="desc">FAISS index: no <b>commit hash</b>, dep. graph scoped to per-file imports</td><td class="status"><span class="pill warn"><span class="pill-dot"></span>partial</span></td></tr>
+            <tr><td class="wp">4.1</td><td class="desc">Hybrid retrieval + signal ablation</td><td class="status"><span class="pill good"><span class="pill-dot"></span>done</span></td></tr>
+            <tr><td class="wp">4.2</td><td class="desc">Caching / incremental / dedup / versioning</td><td class="status"><span class="pill good"><span class="pill-dot"></span>done</span></td></tr>
+            <tr><td class="wp">5.1</td><td class="desc">Metrics incl. latency &mdash; done on <span class="mono">feature/evaluation-metrics</span>, unmerged</td><td class="status"><span class="pill good"><span class="pill-dot"></span>done</span></td></tr>
+            <tr><td class="wp">6.1</td><td class="desc">SOTA + failure cases done; <b>figures</b>, full-split runs missing</td><td class="status"><span class="pill warn"><span class="pill-dot"></span>partial</span></td></tr>
+            <tr><td class="wp">6.2</td><td class="desc">MN5 deploy &mdash; env proven, <b>no Slurm job ever submitted</b></td><td class="status"><span class="pill todo">early</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">One correction to a past gap note: the "Toggle" paper flagged as missing from the literature review is actually already reviewed there &mdash; a stale record, not a real gap. Another correction, found while re-checking every branch for this audit: <b>the localization-latency metric flagged above as missing already exists</b>, on <span class="mono">feature/evaluation-metrics</span> &mdash; the table reflects the correction.</p>
+    </div>
+  </section>
+
+  <section class="slide" id="s10">
+    <div class="phase-mark">Audit</div>
+    <div class="slide-inner">
+      <h2 class="title serif">The gap that matters most: almost nothing is merged to <span class="mono">main</span></h2>
+      <p class="lede"><span class="mono">main</span> today holds only dataset loaders, BM25, the LLM reranker, and the core evaluation harness. Every embedding/hybrid/indexing result on the earlier slides lives on one of the 14 branches below, none merged.</p>
+      <div class="branch-list">
+        <div class="branch-row">
+          <div class="branch-meta">
+            <div class="branch-name mono">research/embedding-model-bakeoff</div>
+            <div class="branch-desc">Compares 4 completed embedding models (UniXCoder, CodeBERT, OpenAI, Qwen3-Embedding) on identical chunked-embedding ranking &mdash; Qwen3's win lives here.</div>
+          </div>
+          <span class="pill good"><span class="pill-dot"></span>ready to merge</span>
+        </div>
+        <div class="branch-row">
+          <div class="branch-meta">
+            <div class="branch-name mono">feature/repository-vector-index</div>
+            <div class="branch-desc">Persistent FAISS index + metadata sidecar, model-agnostic &mdash; the offline knowledge-base deliverable itself (WP 3.2).</div>
+          </div>
+          <span class="pill good"><span class="pill-dot"></span>ready to merge</span>
+        </div>
+        <div class="branch-row">
+          <div class="branch-meta">
+            <div class="branch-name mono">research/hybrid-fusion-signals</div>
+            <div class="branch-desc">AST-similarity, dependency-graph, and commit-recency signals fused via RRF &mdash; informative negative result, each signal weak alone and worse combined.</div>
+          </div>
+          <span class="pill good"><span class="pill-dot"></span>ready to merge</span>
+        </div>
+        <div class="branch-row">
+          <div class="branch-meta">
+            <div class="branch-name mono">feature/incremental-indexing</div>
+            <div class="branch-desc">Content-addressed chunk-embedding cache &mdash; incremental reuse, dedup, versioning, and regeneration in one mechanism (WP 4.2).</div>
+          </div>
+          <span class="pill good"><span class="pill-dot"></span>ready to merge</span>
+        </div>
+        <div class="branch-row">
+          <div class="branch-meta">
+            <div class="branch-name mono">research/beetlebox-transition</div>
+            <div class="branch-desc">Multi-language BeetleBox dataset transition &mdash; confirms the symbol-enrichment finding holds outside Python (WP 2.2).</div>
+          </div>
+          <span class="pill good"><span class="pill-dot"></span>ready to merge</span>
+        </div>
+        <div class="branch-row">
+          <div class="branch-meta">
+            <div class="branch-name mono">feature/sota-baseline-comparison</div>
+            <div class="branch-desc">Honest comparison of this project's 51.7% against 5 published SOTA systems, built entirely from existing data, no new runs.</div>
+          </div>
+          <span class="pill good"><span class="pill-dot"></span>ready to merge</span>
+        </div>
+        <div class="branch-row">
+          <div class="branch-meta">
+            <div class="branch-name mono">feature/failure-case-analysis</div>
+            <div class="branch-desc">Splits every end-to-end miss into retrieval vs. reranking failure &mdash; found reranking is now the bottleneck, free and offline.</div>
+          </div>
+          <span class="pill good"><span class="pill-dot"></span>ready to merge</span>
+        </div>
+        <div class="branch-row">
+          <div class="branch-meta">
+            <div class="branch-name mono">experiment/hybrid-retrieval</div>
+            <div class="branch-desc">BM25 + chunked-embedding hybrid via weighted RRF &mdash; the 1:10 peak (MRR 0.281) that everything else builds on lives here.</div>
+          </div>
+          <span class="pill good"><span class="pill-dot"></span>ready to merge</span>
+        </div>
+        <div class="branch-row">
+          <div class="branch-meta">
+            <div class="branch-name mono">feature/line-mappings</div>
+            <div class="branch-desc">Real line-level ground truth for SWE-Bench, parsed from the unified-diff patch (BeetleBox out of scope &mdash; its patch field is synthetic).</div>
+          </div>
+          <span class="pill good"><span class="pill-dot"></span>ready to merge</span>
+        </div>
+        <div class="branch-row">
+          <div class="branch-meta">
+            <div class="branch-name mono">feature/mn5-execution-handbook</div>
+            <div class="branch-desc">The MN5 execution handbook itself &mdash; account details, the module-load fix, all four blockers. Current branch.</div>
+          </div>
+          <span class="pill good"><span class="pill-dot"></span>ready to merge</span>
+        </div>
+        <div class="branch-row">
+          <div class="branch-meta">
+            <div class="branch-name mono">feature/evaluation-metrics</div>
+            <div class="branch-desc">Fractional Recall@1/5/10 plus a real localization-latency metric &mdash; closes the WP 5.1 gap flagged (then corrected) earlier in this deck.</div>
+          </div>
+          <span class="pill good"><span class="pill-dot"></span>ready to merge</span>
+        </div>
+        <div class="branch-row">
+          <div class="branch-meta">
+            <div class="branch-name mono">experiment/embedding-ceiling</div>
+            <div class="branch-desc">Whole-file embedding vs. BM25 &mdash; a clean negative result, correctly kept off <span class="mono">main</span> as a documented dead end rather than merged.</div>
+          </div>
+          <span class="pill todo">kept separate</span>
+        </div>
+        <div class="branch-row">
+          <div class="branch-meta">
+            <div class="branch-name mono">research/qwen3-rrf</div>
+            <div class="branch-desc">Qwen3-Embedding run through the weighted-RRF pipeline for the first time &mdash; the corrected n=30 result (0.422 MRR) on the earlier slide lives here.</div>
+          </div>
+          <span class="pill good"><span class="pill-dot"></span>ready to merge</span>
+        </div>
+        <div class="branch-row">
+          <div class="branch-meta">
+            <div class="branch-name mono">research/bench4bl-hybrid-rrf</div>
+            <div class="branch-desc">Bench4BL added as a 4th benchmark, the content-fetch bug found and fixed, Java-aware parsing added, n=30 hybrid RRF confirmed (0.714 MRR, project best). Current branch, today's work.</div>
+          </div>
+          <span class="pill good"><span class="pill-dot"></span>ready to merge</span>
+        </div>
+      </div>
+      <p class="note">This is exactly what caused MN5 blocker 3: the cluster's checkout, pulled from <span class="mono">main</span>, was missing the entire embedding/hybrid stack. Per the project's own branching rule &mdash; experiment on a branch, merge once validated &mdash; thirteen of these fourteen branches have been validated for weeks and are overdue to land. Deliberately not touched today: with this many branches, several now touch the same core files independently (not just additive), so merging is real conflict-resolution work, not a quick sweep &mdash; scheduled as a dedicated task, not squeezed in alongside a results deadline.</p>
+    </div>
+  </section>
+
+  <section class="slide" id="s12">
+    <div class="phase-mark">New methods</div>
+    <div class="slide-inner">
+      <h2 class="title serif">Two SOTA-inspired methods tried, both closed as diagnosed negatives</h2>
+      <p class="lede">Supervisor-recommended directions from the current agentic-localization literature (RGFL, LocAgent) &mdash; implemented, evaluated, and root-caused rather than just tried and dropped.</p>
+      <div class="two-col">
+        <div class="card">
+          <div class="eyebrow" style="margin-bottom:14px;">Reasoning-augmented rerank (RGFL-style)</div>
+          <div class="bars">
+            <div class="bar-row"><div class="bar-label">baseline</div><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><div class="bar-val">36.7%</div></div>
+            <div class="bar-row"><div class="bar-label">reasoning v1</div><div class="bar-track"><div class="bar-fill" style="width:82%"></div></div><div class="bar-val">30.0%</div></div>
+            <div class="bar-row"><div class="bar-label">reasoning v2</div><div class="bar-track"><div class="bar-fill" style="width:64%"></div></div><div class="bar-val">23.3%</div></div>
+          </div>
+          <p class="note" style="margin-top:14px;">LLM writes reasoning per candidate before ranking &mdash; got <b>worse</b> with a targeted prompt fix, not better. Final ranking isn't reliably grounded in its own reasoning text; a structural gap, not a wording issue.</p>
+        </div>
+        <div class="card">
+          <div class="eyebrow" style="margin-bottom:14px;">Graph traversal (LocAgent-style)</div>
+          <div class="bars">
+            <div class="bar-row"><div class="bar-label">bm25 alone</div><div class="bar-track"><div class="bar-fill" style="width:98%"></div></div><div class="bar-val">0.163</div></div>
+            <div class="bar-row"><div class="bar-label">+ 2-hop traversal</div><div class="bar-track"><div class="bar-fill" style="width:95%"></div></div><div class="bar-val">0.158</div></div>
+          </div>
+          <p class="note" style="margin-top:14px;">MRR roughly flat, but Hit@100 regresses 0.867&rarr;0.733 (7 regressions vs. 2 gains). Import connectivity is a weak relevance proxy here &mdash; confirms an earlier shallow 1-hop attempt's finding rather than overturning it.</p>
+        </div>
+      </div>
+      <p class="note">Both pushed as documented negative results (<span class="mono">research/reasoning-rerank</span>, <span class="mono">research/graph-traversal</span>) &mdash; real findings even without a win, and they narrow where the next actual gain has to come from.</p>
+    </div>
+  </section>
+
+  <section class="slide" id="s13">
+    <div class="phase-mark">New methods</div>
+    <div class="slide-inner">
+      <h2 class="title serif">The n=6 Qwen3 finding didn't survive n=30 &mdash; a corrected, still-strong result</h2>
+      <p class="lede">The earlier n=6 read ("nothing beats embedding alone") was a small-sample artifact, same pattern already seen once with UniXCoder. The real n=30 MN5 run says weighted RRF <em>does</em> help &mdash; it just peaks at a different ratio (1:5, not UniXCoder's 1:10).</p>
+      <div class="two-col">
+        <div class="card">
+          <div class="eyebrow" style="margin-bottom:14px;">SWE-bench Verified, n=30 (corrected)</div>
+          <table class="metrics">
+            <thead><tr><th>Config</th><th>MRR</th><th>Hit@1</th></tr></thead>
+            <tbody>
+              <tr><td>bm25 (symbols) alone</td><td>0.086</td><td>3.3%</td></tr>
+              <tr><td>chunked_embedding alone (Qwen3)</td><td>0.316</td><td>13.3%</td></tr>
+              <tr><td>rrf 1:2</td><td>0.385</td><td>26.7%</td></tr>
+              <tr class="peak"><td>rrf 1:5 &mdash; best</td><td>0.422</td><td>30.0%</td></tr>
+              <tr><td>rrf 1:10</td><td>0.390</td><td>23.3%</td></tr>
+            </tbody>
+          </table>
+          <p class="note" style="margin-top:14px;"><b>New project-wide best: 0.422 MRR</b>, still 50% above UniXCoder's best-ever fused result (0.281) &mdash; the model-choice lead holds, the "fusion adds nothing" part of the n=6 read didn't.</p>
+        </div>
+        <div class="card">
+          <div class="eyebrow" style="margin-bottom:14px;">Bench4BL, same pipeline (post-fix), n=30 confirmed</div>
+          <table class="metrics">
+            <thead><tr><th>Config</th><th>MRR</th><th>Hit@1</th></tr></thead>
+            <tbody>
+              <tr><td>bm25 alone</td><td>0.143</td><td>0%</td></tr>
+              <tr><td>chunked_embedding alone (Qwen3)</td><td>0.688</td><td>53.3%</td></tr>
+              <tr class="peak"><td>rrf 1:5 &mdash; best</td><td>0.714</td><td>56.7%</td></tr>
+            </tbody>
+          </table>
+          <p class="note" style="margin-top:14px;"><b>0.714 MRR &mdash; the strongest real result in the project</b>, confirmed at n=30 (10-shard MN5 array job, since per-instance Java-aware chunking is too slow for one serial job). Flips the void pre-fix result (0.5424 MRR, embedding-alone "won" only because it was scoring tokenized paths, not real code) and holds the same shape as SWE-bench: fusion beats embedding-alone, peaking at 1:5 on both benchmarks.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="s11">
+    <div class="phase-mark">Next</div>
+    <div class="slide-inner">
+      <h2 class="title serif">Next steps, in order</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num serif"></div>
+          <div>
+            <div class="step-title">Merge the validated branches into main</div>
+            <div class="step-desc">Thirteen branches' worth of proven work &mdash; embedding retrieval, hybrid RRF, repository indexing, fusion signals, SOTA comparison, failure analysis, the MN5 handbook, Bench4BL (now including the confirmed n=30 result). Closes the exact gap that broke the MN5 transfer once already. Real conflict-resolution work now (several branches touch the same core files), scoped as its own task rather than squeezed in today.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num serif"></div>
+          <div>
+            <div class="step-title">Switch the pipeline's default embedding model to Qwen3-Embedding-0.6B</div>
+            <div class="step-desc">Confirmed at n=30 on two benchmarks now (0.422 MRR SWE-bench, 0.714 MRR Bench4BL, both beating their embedding-alone baseline via the same 1:5 RRF ratio) &mdash; the single biggest lever found in this project, ready to become the default rather than an experiment.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num serif"></div>
+          <div>
+            <div class="step-title">Add Java-aware chunking/parsing to the other benchmarks' pipelines where relevant</div>
+            <div class="step-desc">Bench4BL's new lexical scanner (<span class="mono">method/java_parsing.py</span>) is Bench4BL-specific so far &mdash; BeetleBox also has non-Python instances that still fall back to path-only.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num serif"></div>
+          <div>
+            <div class="step-title">Run the oracle reranking diagnostic</div>
+            <div class="step-desc">Force-inject ground truth into the candidate set to directly test whether reranking is really the bottleneck the failure analysis suggests. Costs real API spend &mdash; worth a scoping conversation first.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num serif"></div>
+          <div>
+            <div class="step-title">Publication-quality figures</div>
+            <div class="step-desc">Still the one remaining soft gap in WP 6.1, now that the results table above closes the "concrete numbers" gap.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div class="rail" id="rail"></div>
+
+<script>
+  (function() {
+    var slides = Array.prototype.slice.call(document.querySelectorAll('section.slide'));
+    var rail = document.getElementById('rail');
+    var deck = document.getElementById('deck');
+    slides.forEach(function(s, i) {
+      var dot = document.createElement('div');
+      dot.className = 'rail-dot';
+      dot.title = s.id;
+      dot.addEventListener('click', function() {
+        s.scrollIntoView({ behavior: 'smooth' });
+      });
+      rail.appendChild(dot);
+    });
+    var dots = Array.prototype.slice.call(rail.children);
+
+    function updateActive() {
+      var mid = deck.scrollTop + deck.clientHeight / 2;
+      var closest = 0, closestDist = Infinity;
+      slides.forEach(function(s, i) {
+        var d = Math.abs((s.offsetTop + s.offsetHeight / 2) - mid);
+        if (d < closestDist) { closestDist = d; closest = i; }
+      });
+      dots.forEach(function(d, i) { d.classList.toggle('active', i === closest); });
+    }
+    deck.addEventListener('scroll', updateActive, { passive: true });
+    updateActive();
+
+    document.addEventListener('keydown', function(e) {
+      var mid = deck.scrollTop + deck.clientHeight / 2;
+      var idx = 0, closestDist = Infinity;
+      slides.forEach(function(s, i) {
+        var d = Math.abs((s.offsetTop + s.offsetHeight / 2) - mid);
+        if (d < closestDist) { closestDist = d; idx = i; }
+      });
+      if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+        e.preventDefault();
+        slides[Math.min(idx + 1, slides.length - 1)].scrollIntoView({ behavior: 'smooth' });
+      } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+        e.preventDefault();
+        slides[Math.max(idx - 1, 0)].scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>
