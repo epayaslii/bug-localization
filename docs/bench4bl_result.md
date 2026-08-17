@@ -130,6 +130,33 @@ actual current pool (`--pool-size 250`, comfortably above the 213-instance total
 `random.sample` isn't triggered by this kind of mismatch again as more projects get mirrored):
 30 instances, 4 distinct repos, drawn from 213 instances across 6 contributing repos.
 
+## End-to-end result (n=30, BM25 skeleton top-100 + gpt-4o-mini rerank)
+
+`results/e2e_gpt4o_mini_bench4bl_30_skeleton.json`, same manifest as the retrieval-only results
+above (`bench4bl-multi-n30-s42-mn5-8proj.json`). Retrieval narrowing is BM25 with the `skeleton`
+representation (Bench4BL's own best BM25 representation, confirmed above), not the stronger
+hybrid RRF config — chosen so this run stays fast/free-of-embedding-model-load and directly
+comparable to how the SWE-bench 51.7% headline number was produced (BM25 + LLM rerank, not the
+full hybrid stack):
+
+| Metric | Value |
+|---|---:|
+| Accuracy | **70.0%** |
+| Precision | 70.0% |
+| Recall | 28.4% |
+| F1 | 0.404 |
+
+**70.0% is now the project's strongest confirmed end-to-end number on any benchmark** — well
+above SWE-bench Verified's 51.7% (n=60, same BM25+LLM-rerank recipe). The one earlier Bench4BL
+end-to-end run (`results/e2e_gpt4o_mini_bench4bl_6_bm25.json`) was n=6 using `path_only` BM25
+(Bench4BL's weakest representation) — too small and too weak a retrieval config to trust; this
+replaces it as the real number. Recall's the low outlier here (28.4%) — many Bench4BL ground
+truths list several fixed files per bug (`total_fn=53` across 30 bugs), and the LLM only ever
+returns one top candidate per call in this pipeline, so precision/accuracy (which reward getting
+*a* correct file) look much stronger than recall (which needs *all* of them). Not yet run with
+the stronger hybrid-RRF retrieval config (MRR 0.714) feeding the LLM instead of BM25 alone —
+real next step, flagged in "Next steps" below.
+
 ## Known coverage gap: WFMP
 
 The Wildfly WFMP project mirrored cleanly but contributed 0 usable instances — its bug
@@ -224,9 +251,10 @@ differ) and hybrid (n=30, 0.7137 MRR) results above are both downstream of this.
 - Retry BATCH's `gitrepo/` transfer to MN5 (compress first, or try `rsync` instead of `scp`
   for resumability) so local and MN5's pools match again — MN5 still runs on 8/9 locally-mirrored
   projects, 213 vs. local's 467 instances.
-- No test coverage yet for `dataset/bench4bl.py` (`tests/test_dataset_beetlebox.py` is the
-  pattern to follow) — not yet done.
-- Not yet wired into `main.py`'s end-to-end (LLM rerank) path, only the free/offline
-  retrieval-only comparison scripts so far.
-- Merge `research/bench4bl-hybrid-rrf` to `main` — validated, not yet merged (see the
-  project's standing branch-fragmentation issue).
+- Re-run the end-to-end eval with hybrid-RRF retrieval (`--retrieval-top-k` + `--retrieval-mode
+  hybrid-rrf`) feeding the LLM instead of BM25 alone — the retrieval-only ceiling is much higher
+  (MRR 0.714 vs. BM25 skeleton's 0.413), so the 70.0% end-to-end number above may still have
+  headroom. Not yet tried; real per-instance Java-aware chunking makes this slow, likely needs
+  the same array-job pattern used for the retrieval-only n=30 hybrid run.
+- ~~No test coverage yet for `dataset/bench4bl.py`~~ still true as of this writing — real gap.
+- ~~Merge `research/bench4bl-hybrid-rrf` to `main`~~ **Done** (2026-08-17).

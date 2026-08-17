@@ -277,11 +277,42 @@ MRR climbs monotonically as the embedding side is up-weighted — recovering, th
 
 ## 16. Next planned work
 
-1. ~~Scale the hybrid retrieval test (§8) to a larger manifest (n≈24–30) to confirm or disconfirm the positive n=6 signal.~~ **Done (n=30)**, plus a follow-up weighted-RRF sweep — weighted fusion (1:10 embedding-favored) is now the best config found (MRR 0.281). ~~Push the weight sweep further (1:20+) to find the true optimum.~~ **Done** — extended to 1:50, confirms 1:10 is a real peak (MRR reverses past it, converging back toward embedding-alone). Remaining open thread: cross-check 1:10 on a second manifest before treating it as settled beyond this one.
-2. ~~Re-run the skeleton-vs-symbols end-to-end comparison (§6) at larger n to settle the current tie.~~ **Done (n=60)** — symbols wins by +5.0pp (51.7% vs 46.7%), settling the n=30 tie.
-3. ~~Write the MN5 execution handbook~~ **Done** ([`mn5_execution_handbook.md`](mn5_execution_handbook.md)) — account/access, environment setup, both open blockers with concrete next diagnostic steps. Adapting the actual command sequence still waits on both blockers clearing.
-4. BeetleBox transition (next dataset per confirmed sequencing) — note the Python-only AST caveat above.
-5. BugsInPy integration (lower priority).
+Re-scoped 2026-08-17, after merging the validated branches into `main` and making Bench4BL the
+primary dataset. Ranked by how much each one matters right now:
+
+1. **No confirmed end-to-end (LLM rerank) number for Bench4BL yet** — every strong Bench4BL
+   number so far (MRR 0.714) is retrieval-only. The one end-to-end run that exists
+   (`results/e2e_gpt4o_mini_bench4bl_6_bm25.json`) is n=6. **An n=30 run (BM25 skeleton top-100 +
+   gpt-4o-mini) is in progress as of this update** — see `results/e2e_gpt4o_mini_bench4bl_30_skeleton.json`
+   once it lands.
+2. **Language coverage stops at Python + Java.** BeetleBox has Go and JavaScript instances that
+   still silently fall back to path-only BM25 / fixed-window embedding chunks — the same problem
+   Java had until `method/java_parsing.py` fixed it for `.java` files specifically.
+3. **`dataset/bench4bl.py` has zero test coverage** — confirmed, no `tests/test_bench4bl*.py`
+   exists, unlike every other dataset loader.
+4. **BeetleBox has no hybrid RRF run.** Only a BM25 representation comparison (n=15) exists —
+   the weighted-fusion pipeline driving the best numbers elsewhere has never been run on it.
+5. **MN5 GPU still unused.** `torch==2.6.0+cpu` — every job so far, including the Bench4BL array
+   job, runs at CPU speed regardless of `--gres=gpu:1`. Open since first found, never fixed, only
+   worked around via array-job sharding.
+6. **The supervisor's actual target architecture is still just a prototype.**
+   `Bug report -> IR retrieval -> LLM relevance feedback -> query reformulation -> reranking`
+   (BRaIn/IQLoc-style, see `docs/relevance_feedback_scoping.md`) has only a small SWE-bench
+   prototype (n=12, n=6 smoke) — not built for Bench4BL, not evaluated against the current
+   pipeline as a real comparison.
+7. **Deployment constraint not designed around yet.** The supervisor flagged that the eventual
+   production target can't send code to cloud LLM APIs — the whole reranking stage still assumes
+   OpenRouter/OpenAI. No local-LLM reranking path exists.
+8. **Only 9/51 Bench4BL projects mirrored** (8/51 on MN5 — `BATCH`'s `gitrepo/` repeatedly failed
+   transfer, still unresolved). Confirmed results are real, but drawn from a small slice of the
+   actual benchmark (~5.6GB total across all 51 projects, mostly unmirrored).
+9. **BugsInPy integration** — still not started, lowest priority.
+
+Smaller/known items: this document's own narrative sections below (§1–§15) predate the 2026-08-17
+merge and still cite pre-merge numbers (0.281 MRR, 81 tests) in places — treated as historical
+narrative rather than rewritten wholesale, per the note at the top of this document. Thirteen
+branches merged into `main` this session are now fully redundant on GitHub (safe to delete,
+not yet done).
 
 ---
 
@@ -293,10 +324,13 @@ MRR climbs monotonically as the embedding side is up-weighted — recovering, th
 - [x] Localizability classification cached; API errors never cached as final
 - [x] Null-rank semantics documented (no imputation)
 - [x] Result artifacts committed under `results/` (JSON, Markdown, one HTML visual, one plain-text table)
-- [x] 81 passing tests on `main` (90 on `experiment/hybrid-retrieval`)
-- [x] Larger-n confirmation of the hybrid retrieval result (n=30 — confirms hybrid beats BM25; weighted RRF follow-up shows 1:10 embedding-favored fusion beats both BM25 and embedding-alone, best config found so far)
-- [ ] MN5 execution for this repo specifically
-- [ ] Non-Python AST support for symbol/chunk extraction
+- [x] 152 passing tests on `main` (2026-08-17)
+- [x] Larger-n confirmation of the hybrid retrieval result on two benchmarks (SWE-bench n=30,
+      MRR 0.422 at RRF 1:5; Bench4BL n=30, MRR 0.714 at RRF 1:5 — current project best)
+- [x] MN5 execution for this repo specifically — real Slurm jobs run routinely, including array-job
+      sharding for slow Java-aware chunking
+- [x] Non-Python AST support for symbol/chunk extraction — Java covered (`method/java_parsing.py`);
+      Go/JavaScript still not (item 2 above)
 
 ---
 

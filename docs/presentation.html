@@ -391,8 +391,8 @@
       <p class="lede">SWE-bench Verified &middot; BeetleBox &middot; Bench4BL &middot; BM25 + embedding hybrid retrieval + LLM reranking &middot; MareNostrum&nbsp;5 execution track</p>
       <div class="stat-row">
         <div class="stat-card">
-          <span class="stat-num">51.7%</span>
-          <div class="stat-label">end-to-end localization accuracy (n=60, symbols-BM25 + gpt-4o-mini, SWE-bench)</div>
+          <span class="stat-num">70.0%</span>
+          <div class="stat-label">best end-to-end localization accuracy (n=30, BM25 skeleton + gpt-4o-mini, Bench4BL)</div>
         </div>
         <div class="stat-card">
           <span class="stat-num warm">0.714</span>
@@ -857,6 +857,29 @@
           <p class="note" style="margin-top:14px;"><b>0.714 MRR &mdash; the strongest real result in the project</b>, confirmed at n=30 (10-shard MN5 array job, since per-instance Java-aware chunking is too slow for one serial job). Flips the void pre-fix result (0.5424 MRR, embedding-alone "won" only because it was scoring tokenized paths, not real code) and holds the same shape as SWE-bench: fusion beats embedding-alone, peaking at 1:5 on both benchmarks.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="slide" id="s14">
+    <div class="phase-mark">New methods</div>
+    <div class="slide-inner">
+      <h2 class="title serif">End-to-end: Bench4BL now beats SWE-bench as the project's headline number</h2>
+      <p class="lede">Real n=30 run, BM25 skeleton top-100 (Bench4BL's own best BM25 representation) narrowing candidates before gpt-4o-mini reranks &mdash; same recipe shape that produced SWE-bench's 51.7% number, not the stronger hybrid-RRF retrieval config.</p>
+      <div class="stat-row">
+        <div class="stat-card">
+          <span class="stat-num warm">70.0%</span>
+          <div class="stat-label">end-to-end accuracy, Bench4BL, n=30 &mdash; new project best</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">51.7%</span>
+          <div class="stat-label">end-to-end accuracy, SWE-bench Verified, n=60 (prior best)</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">28.4%</span>
+          <div class="stat-label">recall &mdash; the outlier: many Bench4BL bugs list several ground-truth files, the LLM returns one top candidate</div>
+        </div>
+      </div>
+      <p class="note" style="margin-top:28px;">Replaces the only prior Bench4BL end-to-end number (n=6, using <span class="mono">path_only</span> BM25 &mdash; Bench4BL's weakest representation, too small and too weak a config to trust). <b>Not yet tried: feeding the LLM the hybrid-RRF retrieval instead of BM25 alone</b> &mdash; retrieval-only ceiling is much higher (0.714 vs. 0.413 MRR), so this 70.0% number may still have headroom. Real next step, same array-job pattern likely needed given Java-aware chunking's cost.</p>
     </div>
   </section>
 
