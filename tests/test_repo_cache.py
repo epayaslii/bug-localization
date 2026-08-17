@@ -6,6 +6,7 @@ from dataset.repo_cache import (
     get_code_files_local,
     get_file_content_local,
     get_file_contents_batch,
+    get_recent_commit_timestamps,
 )
 
 # django/django is already mirrored in this repo's local repo_cache/ from earlier
@@ -72,3 +73,24 @@ def test_get_file_contents_batch_omits_missing_files_without_raising():
 
 def test_get_file_contents_batch_empty_paths_returns_empty_dict():
     assert get_file_contents_batch(DJANGO_REPO, DJANGO_COMMIT, []) == {}
+
+
+@requires_mirrored_django
+def test_get_recent_commit_timestamps_returns_positive_unix_times():
+    timestamps = get_recent_commit_timestamps(DJANGO_REPO, DJANGO_COMMIT, max_commits=50)
+    assert len(timestamps) > 0
+    assert all(isinstance(ts, int) and ts > 0 for ts in timestamps.values())
+
+
+@requires_mirrored_django
+def test_get_recent_commit_timestamps_respects_max_commits_cap():
+    # A tiny cap should surface far fewer distinct touched paths than a large one.
+    small = get_recent_commit_timestamps(DJANGO_REPO, DJANGO_COMMIT, max_commits=2)
+    large = get_recent_commit_timestamps(DJANGO_REPO, DJANGO_COMMIT, max_commits=500)
+    assert len(small) <= len(large)
+
+
+@requires_mirrored_django
+def test_get_recent_commit_timestamps_missing_repo_paths_absent_not_zero():
+    timestamps = get_recent_commit_timestamps(DJANGO_REPO, DJANGO_COMMIT, max_commits=50)
+    assert "this/path/does/not/exist.py" not in timestamps

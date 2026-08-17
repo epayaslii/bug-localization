@@ -78,6 +78,30 @@ def get_file_content_local(repo, commit_hash, path_in_repo, cache_dir=None):
     return result.stdout
 
 
+def get_recent_commit_timestamps(repo, commit_hash, max_commits=2000, cache_dir=None):
+    """{path: unix_timestamp of its most recent modification reachable from commit_hash}.
+    Walks history backward from commit_hash and records each path's FIRST appearance
+    (i.e. its most recent touch) -- doesn't need the full history, just the newest commit
+    that touched each path, so this stops recording a path once seen once. max_commits is
+    a safety cap for repos with very long histories, not a correctness requirement.
+    """
+    path = _bare_repo_path(repo, cache_dir)
+    _ensure_commit(repo, commit_hash, cache_dir)
+    result = subprocess.run(
+        ["git", "--git-dir", path, "log", f"--max-count={max_commits}",
+         "--name-only", "--pretty=format:__COMMIT__%ct", commit_hash],
+        capture_output=True, text=True
+    )
+    timestamps = {}
+    current_ts = None
+    for line in result.stdout.splitlines():
+        if line.startswith("__COMMIT__"):
+            current_ts = int(line[len("__COMMIT__"):])
+        elif line.strip() and current_ts is not None and line not in timestamps:
+            timestamps[line] = current_ts
+    return timestamps
+
+
 def get_file_contents_batch(repo, commit_hash, paths, cache_dir=None):
     """Fetch content for many files at one commit using a single `git cat-file --batch`
     subprocess, instead of one `git show` subprocess per file (much faster for large lists).
