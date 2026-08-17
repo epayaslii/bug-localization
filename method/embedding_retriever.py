@@ -1,0 +1,183 @@
+import ast
+import time
+
+import torch
+from transformers import AutoTokenizer, AutoModel
+
+from dataset.repo_cache import get_file_contents_batch, is_repo_cached
+from dataset.utils import get_logger
+from method.bm25_retriever import _extract_skeleton_tokens, _tokenize_path
+
+logger = get_logger(__name__)
+
+_DEVICE = "mps" if torch.backends.mps.is_available() else ("cuda" if torch.cuda.is_available() else "cpu")
+
+_MODEL_CACHE = {}
+
+
+def _load_model(model_name: str):
+    if model_name not in _MODEL_CACHE:
+        logger.info(f"Loading embedding model: {model_name}")
+        tokenizer = AutoTokenizer.from_pretrained(model_name)
+        model = AutoModel.from_pretrained(model_name).to(_DEVICE).eval()
+        _MODEL_CACHE[model_name] = (tokenizer, model)
+    return _MODEL_CACHE[model_name]
+
+
+def _mean_pool(last_hidden_state, attention_mask):
+    mask = attention_mask.unsqueeze(-1).expand(last_hidden_state.size()).float()
+    summed = (last_hidden_state * mask).sum(dim=1)
+    counts = mask.sum(dim=1).clamp(min=1e-9)
+    return summed / counts
+
+
+@torch.no_grad()
+def embed_texts(texts: list[str], model_name: str = "microsoft/unixcoder-base", batch_size: int = 32) -> torch.Tensor:
+    """Embed a list of texts, returning an (N, hidden_size) tensor of mean-pooled embeddings."""
+    tokenizer, model = _load_model(model_name)
+    all_embeddings = []
+
+    for i in range(0, len(texts), batch_size):
+        batch = texts[i:i + batch_size]
+        inputs = tokenizer(batch, padding=True, truncation=True, max_length=256, return_tensors="pt").to(_DEVICE)
+        outputs = model(**inputs)
+        pooled = _mean_pool(outputs.last_hidden_state, inputs["attention_mask"])
+        all_embeddings.append(pooled.cpu())
+
+    return torch.cat(all_embeddings, dim=0)
+
+
+def _file_text_for_embedding(path: str, content: str | None) -> str:
+    """Same text basis as the BM25 skeleton retriever (path tokens + docstring/class/function
+    names), so the two retrieval methods are compared on equal footing."""
+    tokens = _tokenize_path(path)
+    if content is not None:
+        try:
+            tokens = tokens + _extract_skeleton_tokens(content)
+        except Exception:
+            pass
+    return " ".join(tokens)
+
+
+def _fetch_contents_with_timing(bug, file_paths: list[str]) -> tuple[dict, float]:
+    """Fetch file contents via the offline repo_cache (never a live network call), returning
+    (contents, elapsed_seconds). Shared by both embedding ranking variants below."""
+    t0 = time.time()
+    repo_available = is_repo_cached(bug.repo)
+    contents = get_file_contents_batch(bug.repo, bug.base_commit, file_paths) if repo_available else {}
+    return contents, time.time() - t0
+
+
+def rank_files_embedding(bug, top_k: int | None = 100, model_name: str = "microsoft/unixcoder-base") -> tuple[list[str], dict]:
+    """Rank bug.code_files by cosine similarity of mean-pooled embeddings (path +
+    content-skeleton text, same basis as the BM25 skeleton variant) to bug.bug_report,
+    returning the top_k most relevant. Pass top_k=None for the full ranking (e.g. for
+    screening/diagnostics that need every ground-truth file's rank). Returns
+    (ranked_file_paths, timing_info)."""
+    file_paths = bug.code_files
+    if not file_paths or (top_k is not None and len(file_paths) <= top_k):
+        return file_paths, {}
+
+    contents, t_fetch = _fetch_contents_with_timing(bug, file_paths)
+
+    texts = [_file_text_for_embedding(p, contents.get(p)) for p in file_paths]
+
+    t1 = time.time()
+    file_embeddings = embed_texts(texts, model_name=model_name)
+    query_embedding = embed_texts([bug.bug_report], model_name=model_name)
+    t_embed = time.time() - t1
+
+    scores = torch.nn.functional.cosine_similarity(query_embedding, file_embeddings)
+    ranked_idx = torch.argsort(scores, descending=True)[:top_k]
+    ranked_paths = [file_paths[i] for i in ranked_idx.tolist()]
+
+    timing = {"fetch_s": t_fetch, "embed_s": t_embed, "num_files": len(file_paths)}
+    return ranked_paths, timing
+
+
+def _chunk_file_content(content: str | None, max_chunk_chars: int = 1500, overlap_chars: int = 200) -> list[str]:
+    """Split file content into chunks respecting function/class boundaries where possible
+    (AST-based: one chunk per top-level function/class, plus a header chunk for imports and
+    module docstring), falling back to fixed-size overlapping character windows for content
+    that doesn't parse or has no top-level definitions.
+
+    This exists because whole-file embedding is a documented weak strategy: one paper in
+    docs/literature_review.md reports whole-file embedding scoring only 3-12% Acc@10 vs.
+    33-71% for chunked (code-segment level) embedding on the same task -- a >400% relative
+    difference from chunking alone. rank_files_embedding() above does whole-file embedding;
+    rank_files_embedding_chunked() below uses this function to test whether that gap holds.
+    """
+    if not content:
+        return []
+
+    try:
+        tree = ast.parse(content)
+        top_level_defs = [
+            n for n in tree.body
+            if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef))
+        ]
+    except (SyntaxError, ValueError):
+        top_level_defs = None
+
+    if top_level_defs:
+        chunks = []
+        lines = content.splitlines(keepends=True)
+        header = "".join(lines[:top_level_defs[0].lineno - 1]).strip()
+        if header:
+            chunks.append(header)
+        for node in top_level_defs:
+            segment = ast.get_source_segment(content, node)
+            if segment:
+                chunks.append(segment)
+        if chunks:
+            return chunks
+
+    # Fallback: fixed-size overlapping character windows (no parseable structure to chunk by).
+    step = max(max_chunk_chars - overlap_chars, 1)
+    return [content[i:i + max_chunk_chars] for i in range(0, len(content), step)]
+
+
+def rank_files_embedding_chunked(bug, top_k: int | None = 100, model_name: str = "microsoft/unixcoder-base",
+                                   max_chunk_chars: int = 1500) -> tuple[list[str], dict]:
+    """Like rank_files_embedding, but embeds each file as multiple content chunks
+    (_chunk_file_content) instead of one whole-file skeleton text, scoring each file by its
+    MAX chunk-to-query cosine similarity (a file is relevant if any one chunk of it is --
+    max, not mean, so one relevant function isn't diluted by many irrelevant ones in a large
+    file). Falls back to a path-token pseudo-chunk for any file with no fetchable content.
+    """
+    file_paths = bug.code_files
+    if not file_paths or (top_k is not None and len(file_paths) <= top_k):
+        return file_paths, {}
+
+    contents, t_fetch = _fetch_contents_with_timing(bug, file_paths)
+
+    chunk_owners = []
+    chunk_texts = []
+    for path in file_paths:
+        file_chunks = _chunk_file_content(contents.get(path), max_chunk_chars=max_chunk_chars)
+        if not file_chunks:
+            file_chunks = [" ".join(_tokenize_path(path))]
+        for chunk in file_chunks:
+            chunk_owners.append(path)
+            chunk_texts.append(chunk)
+
+    t1 = time.time()
+    chunk_embeddings = embed_texts(chunk_texts, model_name=model_name)
+    query_embedding = embed_texts([bug.bug_report], model_name=model_name)
+    t_embed = time.time() - t1
+
+    chunk_scores = torch.nn.functional.cosine_similarity(query_embedding, chunk_embeddings)
+
+    file_best_score = {}
+    for path, score in zip(chunk_owners, chunk_scores.tolist()):
+        if path not in file_best_score or score > file_best_score[path]:
+            file_best_score[path] = score
+
+    ranked = sorted(file_paths, key=lambda p: file_best_score.get(p, float("-inf")), reverse=True)
+    ranked_paths = ranked[:top_k] if top_k is not None else ranked
+
+    timing = {
+        "fetch_s": t_fetch, "embed_s": t_embed,
+        "num_files": len(file_paths), "num_chunks": len(chunk_texts),
+    }
+    return ranked_paths, timing
