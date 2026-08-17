@@ -2,12 +2,14 @@ import ast
 import os
 import time
 
+import requests
 import torch
 from transformers import AutoTokenizer, AutoModel
 
 from dataset.repo_cache import get_file_contents_batch, is_repo_cached
 from dataset.utils import get_logger
 from method.bm25_retriever import _extract_skeleton_tokens, _tokenize_path
+from method.java_parsing import chunk_java_content, is_java_path
 
 logger = get_logger(__name__)
 
@@ -19,6 +21,24 @@ _OPENAI_CLIENT = None
 # Models served by the OpenAI embeddings API instead of a local HF checkpoint --
 # embed_texts() dispatches here instead of loading an AutoModel for these names.
 _OPENAI_EMBEDDING_MODELS = {"text-embedding-3-small", "text-embedding-3-large", "text-embedding-ada-002"}
+
+# Same idea for Voyage AI's embeddings API.
+_VOYAGE_EMBEDDING_MODELS = {"voyage-code-3", "voyage-code-2"}
+
+# Decoder-based embedding models (BGE-Code-v1, Qwen3-Embedding) use last-token pooling,
+# not mean pooling -- the causal attention mask means only the final token's hidden state
+# has seen the whole sequence. Confirmed against each model's own card, not assumed:
+# BAAI/bge-code-v1 (2B, Qwen2-based) and Qwen/Qwen3-Embedding-* both document this.
+_LAST_TOKEN_POOLED_MODELS = {"BAAI/bge-code-v1", "Qwen/Qwen3-Embedding-0.6B", "Qwen/Qwen3-Embedding-4B", "Qwen/Qwen3-Embedding-8B"}
+
+# These same models also expect an instruction-prefixed QUERY (not document/chunk text --
+# documents are embedded raw). Exact templates per each model's own card.
+_QUERY_INSTRUCTION_TEMPLATES = {
+    "BAAI/bge-code-v1": "<instruct>Given a bug report, retrieve source code files relevant to localizing the bug.\n<query>{query}",
+    "Qwen/Qwen3-Embedding-0.6B": "Instruct: Given a bug report, retrieve source code files relevant to localizing the bug.\nQuery:{query}",
+    "Qwen/Qwen3-Embedding-4B": "Instruct: Given a bug report, retrieve source code files relevant to localizing the bug.\nQuery:{query}",
+    "Qwen/Qwen3-Embedding-8B": "Instruct: Given a bug report, retrieve source code files relevant to localizing the bug.\nQuery:{query}",
+}
 
 
 def _load_model(model_name: str):
@@ -35,6 +55,15 @@ def _mean_pool(last_hidden_state, attention_mask):
     summed = (last_hidden_state * mask).sum(dim=1)
     counts = mask.sum(dim=1).clamp(min=1e-9)
     return summed / counts
+
+
+def _last_token_pool(last_hidden_state, attention_mask):
+    """Right-padding-compatible last-token pooling (our tokenizer calls use HF's default
+    right padding, not the left-padding some model cards' example code assumes): the last
+    real (non-pad) token's index is attention_mask.sum(dim=1) - 1 for each sequence."""
+    sequence_lengths = attention_mask.sum(dim=1) - 1
+    batch_indices = torch.arange(last_hidden_state.size(0), device=last_hidden_state.device)
+    return last_hidden_state[batch_indices, sequence_lengths]
 
 
 def _get_openai_client():
@@ -69,21 +98,73 @@ def _embed_texts_openai(texts: list[str], model_name: str, batch_size: int = 100
     return torch.tensor(all_embeddings)
 
 
+def _embed_texts_voyage(texts: list[str], model_name: str, is_query: bool, batch_size: int = 100,
+                         max_retries: int = 8) -> torch.Tensor:
+    """Embed via the Voyage AI embeddings API (paid, generous free tier). Plain REST call
+    (matches how this codebase already talks to GitHub -- requests, not a vendor SDK) since
+    the API is a single simple endpoint. input_type distinguishes query vs. document text
+    natively (the API prepends its own retrieval-appropriate instruction), so unlike the
+    BGE-Code/Qwen3 path this needs no hand-written instruction template.
+
+    Manual retry/backoff on 429 -- unlike the OpenAI path (whose SDK client retries
+    internally), a plain requests.post() has none by default, and this crashed a real
+    6-instance run uncaught on its very last model (2026-08-10) after ~55 minutes of
+    otherwise-successful work on the model before it -- exactly what backoff exists to
+    prevent."""
+    api_key = os.getenv("VOYAGE_AI_API_KEY")
+    if not api_key:
+        raise ValueError("VOYAGE_AI_API_KEY not set in the environment")
+
+    all_embeddings = []
+    for i in range(0, len(texts), batch_size):
+        batch = [t if t.strip() else " " for t in texts[i:i + batch_size]]
+        for attempt in range(max_retries + 1):
+            response = requests.post(
+                "https://api.voyageai.com/v1/embeddings",
+                headers={"Authorization": f"Bearer {api_key}"},
+                json={"input": batch, "model": model_name, "input_type": "query" if is_query else "document"},
+            )
+            if response.status_code != 429 or attempt == max_retries:
+                response.raise_for_status()
+                break
+            retry_after = float(response.headers.get("Retry-After", 2 ** attempt))
+            logger.warning(f"Voyage 429, retrying in {retry_after:.1f}s (attempt {attempt + 1}/{max_retries})")
+            time.sleep(retry_after)
+        data = sorted(response.json()["data"], key=lambda item: item["index"])
+        all_embeddings.extend(item["embedding"] for item in data)
+        if i + batch_size < len(texts):
+            time.sleep(0.2)
+    return torch.tensor(all_embeddings)
+
+
 @torch.no_grad()
-def embed_texts(texts: list[str], model_name: str = "microsoft/unixcoder-base", batch_size: int = 32) -> torch.Tensor:
-    """Embed a list of texts, returning an (N, hidden_size) tensor. Local HF checkpoints are
-    mean-pooled; models in _OPENAI_EMBEDDING_MODELS are dispatched to the OpenAI API instead."""
+def embed_texts(texts: list[str], model_name: str = "microsoft/unixcoder-base", batch_size: int = 32,
+                 is_query: bool = False) -> torch.Tensor:
+    """Embed a list of texts, returning an (N, hidden_size) tensor. Local HF checkpoints use
+    mean pooling by default, or last-token pooling for models in _LAST_TOKEN_POOLED_MODELS
+    (decoder-based embedding models); models in _OPENAI_EMBEDDING_MODELS/_VOYAGE_EMBEDDING_MODELS
+    are dispatched to their respective APIs instead. Pass is_query=True when embedding the bug
+    report/search query (not document/chunk text) -- models with an instruction template (or,
+    for Voyage, the API's own native input_type) wrap it accordingly; models without one are
+    unaffected."""
     if model_name in _OPENAI_EMBEDDING_MODELS:
         return _embed_texts_openai(texts, model_name)
 
+    if model_name in _VOYAGE_EMBEDDING_MODELS:
+        return _embed_texts_voyage(texts, model_name, is_query=is_query)
+
+    if is_query and model_name in _QUERY_INSTRUCTION_TEMPLATES:
+        texts = [_QUERY_INSTRUCTION_TEMPLATES[model_name].format(query=t) for t in texts]
+
     tokenizer, model = _load_model(model_name)
+    use_last_token = model_name in _LAST_TOKEN_POOLED_MODELS
     all_embeddings = []
 
     for i in range(0, len(texts), batch_size):
         batch = texts[i:i + batch_size]
         inputs = tokenizer(batch, padding=True, truncation=True, max_length=256, return_tensors="pt").to(_DEVICE)
         outputs = model(**inputs)
-        pooled = _mean_pool(outputs.last_hidden_state, inputs["attention_mask"])
+        pooled = (_last_token_pool if use_last_token else _mean_pool)(outputs.last_hidden_state, inputs["attention_mask"])
         all_embeddings.append(pooled.cpu())
 
     return torch.cat(all_embeddings, dim=0)
@@ -95,7 +176,7 @@ def _file_text_for_embedding(path: str, content: str | None) -> str:
     tokens = _tokenize_path(path)
     if content is not None:
         try:
-            tokens = tokens + _extract_skeleton_tokens(content)
+            tokens = tokens + _extract_skeleton_tokens(content, path)
         except Exception:
             pass
     return " ".join(tokens)
@@ -126,7 +207,7 @@ def rank_files_embedding(bug, top_k: int | None = 100, model_name: str = "micros
 
     t1 = time.time()
     file_embeddings = embed_texts(texts, model_name=model_name)
-    query_embedding = embed_texts([bug.bug_report], model_name=model_name)
+    query_embedding = embed_texts([bug.bug_report], model_name=model_name, is_query=True)
     t_embed = time.time() - t1
 
     scores = torch.nn.functional.cosine_similarity(query_embedding, file_embeddings)
@@ -137,11 +218,13 @@ def rank_files_embedding(bug, top_k: int | None = 100, model_name: str = "micros
     return ranked_paths, timing
 
 
-def _chunk_file_content(content: str | None, max_chunk_chars: int = 1500, overlap_chars: int = 200) -> list[str]:
+def _chunk_file_content(content: str | None, path: str = "", max_chunk_chars: int = 1500, overlap_chars: int = 200) -> list[str]:
     """Split file content into chunks respecting function/class boundaries where possible
     (AST-based: one chunk per top-level function/class, plus a header chunk for imports and
     module docstring), falling back to fixed-size overlapping character windows for content
-    that doesn't parse or has no top-level definitions.
+    that doesn't parse or has no top-level definitions. Dispatches to the Java lexical
+    scanner (method/java_parsing.py, method-granularity chunks) for .java files, since
+    ast.parse() only understands Python.
 
     This exists because whole-file embedding is a documented weak strategy: one paper in
     docs/literature_review.md reports whole-file embedding scoring only 3-12% Acc@10 vs.
@@ -151,6 +234,9 @@ def _chunk_file_content(content: str | None, max_chunk_chars: int = 1500, overla
     """
     if not content:
         return []
+
+    if is_java_path(path):
+        return chunk_java_content(content, max_chunk_chars=max_chunk_chars, overlap_chars=overlap_chars)
 
     try:
         tree = ast.parse(content)
@@ -196,7 +282,7 @@ def rank_files_embedding_chunked(bug, top_k: int | None = 100, model_name: str =
     chunk_owners = []
     chunk_texts = []
     for path in file_paths:
-        file_chunks = _chunk_file_content(contents.get(path), max_chunk_chars=max_chunk_chars)
+        file_chunks = _chunk_file_content(contents.get(path), path=path, max_chunk_chars=max_chunk_chars)
         if not file_chunks:
             file_chunks = [" ".join(_tokenize_path(path))]
         for chunk in file_chunks:
@@ -205,7 +291,7 @@ def rank_files_embedding_chunked(bug, top_k: int | None = 100, model_name: str =
 
     t1 = time.time()
     chunk_embeddings = embed_texts(chunk_texts, model_name=model_name)
-    query_embedding = embed_texts([bug.bug_report], model_name=model_name)
+    query_embedding = embed_texts([bug.bug_report], model_name=model_name, is_query=True)
     t_embed = time.time() - t1
 
     chunk_scores = torch.nn.functional.cosine_similarity(query_embedding, chunk_embeddings)

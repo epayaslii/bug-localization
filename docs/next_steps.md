@@ -1,0 +1,199 @@
+# Next steps
+
+Living roadmap doc. Split into (A) direction changes from supervisor guidance (2026-08-12)
+and (B) concrete in-flight technical work. Read (A) first — it reframes what "done" means
+for several items in (B) and in `docs/PROGRESS_REPORT.md`.
+
+## A. Supervisor guidance (2026-08-12) — direction changes
+
+### The eventual production constraint: no cloud code transfer
+
+The project this work eventually feeds into **cannot send source code to cloud systems**.
+Everything built so far assumes cloud LLM calls are available (OpenRouter/OpenAI APIs) —
+that assumption may not hold in the target deployment. Not an immediate blocker for current
+experiments (still useful for benchmarking/research), but worth designing around going
+forward: prefer approaches that can plausibly run with a local/on-prem model, don't build
+deeper dependencies on cloud-only APIs without a fallback story.
+
+### Our focus is localization, not repair
+
+SWE-bench's headline metric is end-to-end *fix* success (does the generated patch resolve
+the issue), which folds in code-generation quality on top of localization quality. **This
+project's actual target is correct localization**, not APR (automated program repair). Keep
+evaluating and reporting localization-specific metrics (Hit@k, MRR, MAP, retrieval Recall@k)
+as the primary signal — end-to-end fix-success numbers (if ever computed) are secondary
+context, not the headline.
+
+### Target architecture shift: IR relevance-feedback loop
+
+Two papers the supervisor flagged as close to the right shape for where this project should
+head:
+
+- **BRaIn (2025)** — *Improved IR-based Bug Localization with Intelligent Relevance
+  Feedback*
+- **IQLoc (2026)** — *Semantics-Driven IR-Based Bug Localization*, ACM
+  (`10.1145/3786583.3786882`) — explicitly praised as folding in older IR techniques
+  alongside newer ones, a "best of both eras" approach
+
+The flow they both point toward:
+
+```
+Bug report -> IR retrieval -> LLM relevance feedback -> query reformulation -> reranking
+```
+
+This is a real architecture change from the current pipeline (`BM25/embedding retrieval ->
+RRF fusion -> single-shot LLM rerank`, no feedback loop, no query reformulation). The
+concrete next-lever framing: **after the IR step, use the LLM's relevance judgment to expand
+the query/candidate set and iterate, rather than doing IR once and reranking once.** Two
+sub-goals called out explicitly:
+1. Expand what we have post-retrieval using different methods (not just pass the same
+   top-k straight to a single rerank call).
+2. Maximize the LLM relevance-feedback step itself — this is the step our current
+   architecture doesn't have at all yet.
+
+**Relation to work already done — CORRECTED 2026-08-12 after actually reading the RGFL
+paper** (`arxiv.org/html/2601.18044v1`, previously only known secondhand through this
+project's own implementation). The real paper is a **4-stage pipeline with separate LLM
+calls per stage** (file-level reasoning+rerank as one step, element-level reasoning+rerank
+as a distinct later step, line-level unchanged from its Agentless baseline, then patch
+generation) — not a single combined "reason then rank in one generation" call. And its
+real results are strongly **positive**, not negative: SWE-bench Verified file-level Hit@1
+71.4%->85%, MRR 81.8%->88.8%, +12.8% end-to-end repair success over the Agentless baseline.
+
+`research/reasoning-rerank` (this project's own attempt, see `docs/reasoning_rerank_result.md`
+on that branch) was a **single-call** reasoning+ranking combination — a simplified
+approximation of RGFL's idea, not a faithful reproduction of its actual architecture. Its
+negative result (36.7%->30.0%->23.3%) and its own diagnosed cause ("final ranking isn't
+reliably grounded in the reasoning text in this single-call design... RGFL's actual design
+is likely two separate calls") turns out to have correctly predicted exactly this gap,
+now confirmed against the real paper. **Reading revised**: this isn't just "RGFL doesn't
+help here" — the untried lever (separate reasoning-generation and ranking calls, as the
+real paper does) is now confirmed as the likely fix, not a speculative one. Worth
+re-attempting with a truer-to-paper two-call design before writing off reasoning-augmented
+reranking entirely. `docs/reasoning_rerank_result.md` on `research/reasoning-rerank` still
+describes the old (secondhand) understanding and needs this same correction next time that
+branch is touched.
+
+Separately, RGFL is NOT the same architecture as BRaIn/IQLoc's relevance-feedback flow
+above — RGFL reasons and reranks a *fixed* candidate set (even across its multiple stages);
+relevance feedback -> query reformulation -> reranking is a genuine *second retrieval pass*,
+the LLM's judgment changes what gets retrieved next, not just how a fixed set gets ordered.
+Both directions are worth pursuing; they're not competing explanations of the same gap.
+
+**Scoped (2026-08-12)**, full detail in `docs/relevance_feedback_scoping.md` — both papers
+read in full, not just the one-line flow. Key findings: both BRaIn and IQLoc evaluate on
+Bench4BL (or a refined version of it), which is almost certainly why the supervisor named it
+specifically — a real comparison point, not just another dataset. BRaIn's design (zero-shot
+LLM, ~150-250 calls/bug at method-segment granularity) is feasible to adapt with this
+project's existing stack; IQLoc needs a supervised fine-tuning pipeline (CodeBERT
+cross-encoder + further-pretrained CodeT5) this project doesn't have, so BRaIn's shape is the
+one to prototype first. Recommended scaled-down adaptation: file-level (not segment-level)
+relevance, batched into one LLM call per bug (matching this project's existing call-volume
+pattern) instead of BRaIn's literal per-segment-per-call design, algorithmic (no extra LLM
+call) query reformulation reusing existing symbol-extraction code, re-run BM25 with the
+reformulated query. Not implemented yet — next step is a small prototype (n=10-15,
+SWE-bench Verified, retrieval-only) per the scoping doc's suggested first pass.
+
+### New benchmarks to add
+
+For continuity across past and future work, the supervisor wants these benchmarks covered
+going forward, in addition to what's already used:
+
+| Benchmark | Status here |
+|---|---|
+| SWE-bench Verified | Already primary benchmark, extensive results |
+| Bench4BL | Loader built + first real result (2026-08-12), see below |
+| LocBench / MuLocBench | Not started |
+| SWE-Explore | Not started |
+
+None of the remaining three have been investigated yet for what they actually contain
+(format, size, ground-truth granularity, whether existing `dataset/` loaders can be adapted
+or need new ones). First step for each is a scoping pass, same as was done for BeetleBox/BugsInPy
+
+#### Bench4BL scoping findings (2026-08-12)
+
+Source: `github.com/exatoa/Bench4BL` (ISSTA 2018 reproducibility study). 10,017 bug reports,
+51 Java projects (Apache/Commons/JBoss/Wildfly/Spring + 5 legacy Eclipse projects), JIRA-linked
+(not GitHub issues).
+
+**Target schema maps cleanly onto our existing `BugInstance`**: each bug becomes an XML
+record with a summary/description (-> `bug_report`), a `<fixedFiles>` list (->
+`ground_truths`), and version/fixedVersion fields (-> commit reference). Same shape as the
+SWE-bench/BeetleBox loaders already in `dataset/`.
+
+**The real cost is data preparation, not the schema.** There's no clean HuggingFace dataset
+like SWE-bench/BeetleBox have. Getting to that XML requires: (1) downloading per-project tar
+archives from SourceForge (51 projects, total size unconfirmed — likely multi-GB, several
+are large long-lived projects like Hive/HBase; checking real sizes is the first concrete
+step before committing further); (2) running the repo's own `GitInflator` script to check
+out many git versions per project locally; (3) running `BugRepositoryMaker` (Python 2.7,
+old deps: numpy/scipy/GitPython) to reformat already-scraped bug data into the XML. The good
+news: the JIRA scraping itself was already done once by the original researchers and is
+baked into the downloaded archives — no need to re-scrape JIRA live.
+
+**Update (2026-08-12, later same day): the legacy pipeline turned out to be unnecessary
+entirely.** Checked real archive sizes first (~5.6GB total across all 51 projects, via
+SourceForge's file listing — far smaller than feared) then inspected one archive directly:
+each one already contains the fully processed `bugrepo/repository.xml` and a real git repo
+with tags, i.e. the legacy Python 2 pipeline's *output*, not just its inputs — confirmed
+against the upstream README's own words ("we already offer the result of this step in
+provided subject's archives", saved at `docs/bench4bl_reference/README.md`). Built
+`dataset/bench4bl.py` (pure Python 3, XML parsing + `git ls-tree`/`git show`, no legacy
+toolchain dependency) and `scripts/mirror_bench4bl.py`, wired into
+`generate_evaluation_manifest.py`/`compare_bm25_representations.py`. First real result:
+n=30, Hit@1=23.3%, MRR=0.3564, on 5 of 51 projects mirrored so far — see
+`docs/bench4bl_result.md`. Next: mirror the remaining 46 projects, add test coverage,
+eventually wire into the end-to-end (LLM rerank) path.
+originally.
+
+### Papers to read for method ideas
+
+- **RGFL** (arxiv 2601.18044) — already implemented and evaluated
+  (`research/reasoning-rerank`, negative result, see above)
+- **IQLoc** (ACM `10.1145/3786583.3786882`) — not yet read in detail; supervisor's top pick
+  for architecture direction
+- **BRaIn** (2025) — not yet read in detail; supervisor's other top pick, same reasoning
+
+## B. Concrete technical work — current state
+
+### MN5 / HPC
+
+- **CPU-only torch is still the open blocker** — `--gres=gpu:1` allocations are silently
+  unused (`torch==2.6.0+cpu` installed). Fixing this is the single highest-leverage MN5 item:
+  it's the entire reason to use the cluster over a local machine for the retrieval pipeline.
+- **n=500 SWE-bench Verified run** — in progress as of 2026-08-12. Full manifest generated
+  (`swebench-multi-n500-s42-b7a0108947df`, all 12 repos). Built as a Slurm array job (50
+  shards x 10 instances, `scripts/run_hybrid_rrf_weighting_shard.py` +
+  `scripts/mn5/qwen3_rrf_array_swebench500.sbatch` + `scripts/aggregate_rrf_shards.py`)
+  rather than one ~46hr serial job, modeled on the co-intern's array-job pattern. A 2-task
+  test array (job `44532092`) was run first to validate the mechanics before committing the
+  full 50-shard array.
+- **BeetleBox transferred to MN5** — the same 5 small repos already validated locally
+  (dolphinscheduler, dagger, localstack, axios, act; ~574MB) plus an offline dataset export
+  (`hf_datasets/beetlebox/`, 27MB, since MN5 has no internet for `load_dataset()`) and the
+  existing n=15 manifest. `scripts/compare_bm25_beetlebox_mirrored.py` (new — the original
+  n=15 run used an uncommitted ad hoc script; this is the committed, tested replacement,
+  verified to reproduce the exact same numbers locally) submitted as job `44534587`.
+
+### Branch hygiene
+
+- **Still the single highest-leverage unstarted item outside of MN5/GPU**: almost nothing is
+  merged to `main`. Embedding/hybrid/indexing/SOTA/failure-analysis/MN5-handbook work all
+  sits on 12+ unmerged branches, some validated for weeks. This caused a real MN5 blocker
+  once already (cluster's checkout from `main` was missing the whole embedding stack).
+
+### Findings workbook
+
+- `bug_localization_findings.xlsx` (Desktop) has the full current-state metrics table,
+  dataset stats, MN5 transfer/smoke-test detail, and negative-results summary — the
+  reference point for "where do we stand" without re-deriving numbers from scratch.
+
+## Suggested sequencing
+
+1. Let the in-flight MN5 jobs (n=500 array, BeetleBox) finish and land their results.
+2. Fix the CPU-only torch blocker — unlocks real GPU speed for everything after this.
+3. Merge validated branches to `main` — cheap, unblocks future MN5 transfers from breaking again.
+4. Scope IQLoc and BRaIn in detail (read the papers, extract the concrete architecture),
+   and scope the 3 new benchmarks (what format, what a loader would need) — both as their
+   own planning pass before writing code.
+5. Prototype the relevance-feedback loop (BRaIn/IQLoc-style) as a new branch, once scoped.

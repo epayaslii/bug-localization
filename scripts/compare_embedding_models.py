@@ -4,12 +4,15 @@ scripts/run_hybrid_retrieval_test.py, scripts/run_hybrid_rrf_weighting_test.py),
 chunked-embedding ranking method (rank_files_embedding_chunked) so the comparison isolates
 the embedding model itself, not the retrieval method around it.
 
-First pass (2026-08-10, user-scoped via AskUserQuestion): microsoft/codebert-base (same
-mean-pooled HF architecture as the UniXCoder baseline, zero code changes needed) and
-text-embedding-3-small (OpenAI API, paid but cheap -- embed_texts() dispatches to the API
-for this model name). Qwen3-Embedding and BGE-Code-v1 use last-token pooling + an
-instruction-prefixed query, not mean pooling -- deliberately out of scope for this pass;
-Voyage-Code needs a new API key the user hasn't set up yet.
+First pass (2026-08-10): microsoft/codebert-base (same mean-pooled HF architecture as the
+UniXCoder baseline) and text-embedding-3-small (OpenAI API). Extended same day to cover all
+6 models named in the official study plan: BAAI/bge-code-v1 and Qwen/Qwen3-Embedding-0.6B
+needed new last-token-pooling + instruction-prefixed-query support in
+method/embedding_retriever.py (embed_texts()'s is_query param); Qwen3-Embedding also needed
+bumping transformers 4.46.0 -> 4.51.0 (its minimum supported version -- verified UniXCoder/
+CodeBERT still work unchanged after the bump, full test suite still green). voyage-code-3
+needed a new API backend (plain REST via requests, VOYAGE_AI_API_KEY) once the user added
+a Voyage AI key.
 
 Run at a small n first (n=6, matching the original embedding-ceiling test's scale) since
 model loading/compute cost is unknown per candidate before this script has actually run them.
@@ -40,6 +43,14 @@ MODEL_CONFIGS = [
     ("unixcoder", "microsoft/unixcoder-base"),
     ("codebert", "microsoft/codebert-base"),
     ("openai-3-small", "text-embedding-3-small"),
+    # bge-code-v1 (BAAI/bge-code-v1) deliberately excluded from the full n=6 run: 2B params,
+    # ~16x UniXCoder's size, was still mid-instance after ~18 minutes on one model while
+    # competing for CPU with other background jobs -- user chose to skip it (2026-08-10) to
+    # get a complete result faster. Backend confirmed working via a standalone smoke test
+    # (embed_texts(..., model_name="BAAI/bge-code-v1") -> correct 1536-dim last-token-pooled
+    # output) -- the model works, it's just excluded from THIS run's timing budget.
+    ("qwen3-embedding-0.6b", "Qwen/Qwen3-Embedding-0.6B"),
+    ("voyage-code-3", "voyage-code-3"),
 ]
 
 
@@ -51,7 +62,17 @@ def main():
     parser.add_argument('--candidate-pool-size', type=int, default=200,
                         help='Files considered per instance (chunked embedding over the full corpus is too slow/wrong per prior hybrid-retrieval work; this caps it the same way)')
     parser.add_argument('--output', default=None)
+    parser.add_argument('--models', nargs='+', default=None,
+                        help='Subset of MODEL_CONFIGS names to run (default: all). '
+                             'Useful to avoid redundantly recomputing models a previous run already covered.')
     args = parser.parse_args()
+
+    model_configs = MODEL_CONFIGS if args.models is None else [
+        (name, model_name) for name, model_name in MODEL_CONFIGS if name in args.models
+    ]
+    unknown = set(args.models or []) - {name for name, _ in MODEL_CONFIGS}
+    if unknown:
+        raise SystemExit(f"Unknown model name(s) in --models: {sorted(unknown)} (known: {[n for n, _ in MODEL_CONFIGS]})")
 
     manifest = load_manifest(args.manifest)
     dataset_name = args.dataset or manifest['dataset']
@@ -81,7 +102,7 @@ def main():
     cache = load_cache()
 
     results = {}
-    for name, model_name in MODEL_CONFIGS:
+    for name, model_name in model_configs:
         logger.info(f"--- {name} ({model_name}) ---")
         rankings = {}
         t_start = time.time()
@@ -101,21 +122,26 @@ def main():
         results[name] = {"model_name": model_name, "elapsed_s": model_elapsed, "screening_report": report, "summary": summary}
         save_cache(cache)  # incremental -- don't lose localizability cache progress if a later model is slow/fails
 
+        # Write output after EVERY model, not just at the end -- a later model crashing
+        # (e.g. an uncaught API error) must not lose already-completed models' results.
+        # This crashed a real run on its last model, uncaught, after ~55 minutes of
+        # otherwise-successful work (2026-08-10).
+        if args.output:
+            os.makedirs(os.path.dirname(args.output) or ".", exist_ok=True)
+            with open(args.output, "w") as f:
+                json.dump({"manifest_id": manifest["manifest_id"], "candidate_pool_size": args.candidate_pool_size, "configs": results}, f, indent=2)
+            logger.info(f"Wrote partial report ({len(results)}/{len(model_configs)} models) to {args.output}")
+
     logger.info(f"=== Summary (macro, candidate_pool_size={args.candidate_pool_size}) ===")
     logger.info(f"{'model':<16} {'Hit@1':>7} {'Hit@5':>7} {'Hit@10':>7} {'Hit@100':>8} {'MRR':>8} {'MAP':>8} {'elapsed':>9}")
-    for name, _ in MODEL_CONFIGS:
+    for name, _ in model_configs:
         s = results[name]["summary"]
         logger.info(
             f"{name:<16} {s['macro_hit_at'][1]:>7.3f} {s['macro_hit_at'][5]:>7.3f} "
             f"{s['macro_hit_at'][10]:>7.3f} {s['macro_hit_at'][100]:>8.3f} {s['mrr']:>8.4f} {s['map']:>8.4f} "
             f"{results[name]['elapsed_s']:>8.1f}s"
         )
-
-    if args.output:
-        os.makedirs(os.path.dirname(args.output) or ".", exist_ok=True)
-        with open(args.output, "w") as f:
-            json.dump({"manifest_id": manifest["manifest_id"], "candidate_pool_size": args.candidate_pool_size, "configs": results}, f, indent=2)
-        logger.info(f"Wrote full report to {args.output}")
+    # (already written incrementally after each model above, including the final one)
 
 
 if __name__ == "__main__":

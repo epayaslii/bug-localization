@@ -1,15 +1,27 @@
+"""BM25 representation comparison for a BeetleBox manifest whose repos are only *partially*
+mirrored (e.g. a small-repo-only manifest drawn from the 13-repo BeetleBox pool).
+
+compare_bm25_representations.py samples `pool_size` instances across ALL repos in the
+dataset before filtering down to the manifest's wanted instances -- for a small-repo-only
+manifest that means live-fetching file trees for every unmirrored repo it happens to sample
+along the way (huge repos like odoo/ClickHouse), which is slow/flaky and unnecessary. This
+script instead builds the wanted instances directly, one already-mirrored repo at a time,
+via BeetleBox(repo_filter=repo) -- the repo filter is applied before any file-content fetch
+(dataset/beetlebox.py's per-bug loop `continue`s on a repo mismatch before calling
+get_code_files()), so non-matching repos are never touched at all.
+"""
+
 import os
 import sys
 import argparse
 import json
 import logging
+from collections import defaultdict
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from dotenv import load_dotenv
-from dataset.swebench import SWEBench
 from dataset.beetlebox import BeetleBox
-from dataset.bench4bl import Bench4BL
 from dataset.localizability import load_cache, save_cache
 from dataset.utils import setup_logging, get_logger
 from evaluation.manifest import load_manifest
@@ -27,37 +39,35 @@ REPRESENTATIONS = {
 }
 
 
+def _load_wanted_bugs(manifest):
+    wanted_by_repo = defaultdict(set)
+    for inst in manifest['instances']:
+        wanted_by_repo[inst['repo']].add(inst['instance_id'])
+
+    bugs = []
+    for repo, wanted_ids in wanted_by_repo.items():
+        logger.info(f"Loading repo-filtered instances for {repo} ({len(wanted_ids)} wanted)")
+        repo_dataset = BeetleBox(repo_filter=repo)
+        repo_bugs = repo_dataset.get_bug_instances(sample_size=None)
+        found = [b for b in repo_bugs if b.instance_id in wanted_ids]
+        missing = wanted_ids - {b.instance_id for b in found}
+        if missing:
+            logger.warning(f"{repo}: {len(missing)} wanted instance(s) not found: {sorted(missing)}")
+        bugs.extend(found)
+    return bugs
+
+
 def main():
     load_dotenv()
-    parser = argparse.ArgumentParser(
-        description="Compare BM25 document representations (path-only, skeleton, "
-                    "symbols+imports, symbols-no-imports) on the same evaluation manifest -- "
-                    "free and offline, no LLM calls."
-    )
-    parser.add_argument('--manifest', required=True, help='Path to a manifest JSON')
-    parser.add_argument('--dataset', choices=['swebench', 'beetlebox', 'bench4bl'], default=None,
-                       help='Overrides the dataset recorded in the manifest, if needed')
-    parser.add_argument('--representations', nargs='+', choices=list(REPRESENTATIONS), default=None,
-                       help=f'Subset to compare (default: all of {list(REPRESENTATIONS)})')
-    parser.add_argument('--pool-size', type=int, default=None,
-                       help='Override the manifest\'s stored pool_size when re-deriving the pool -- '
-                            'needed if this environment\'s dataset mirror has a different total instance '
-                            'count than the one the manifest was generated against.')
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--manifest', required=True)
+    parser.add_argument('--representations', nargs='+', choices=list(REPRESENTATIONS), default=None)
     parser.add_argument('--output', default=None)
     args = parser.parse_args()
 
     manifest = load_manifest(args.manifest)
-    dataset_name = args.dataset or manifest['dataset']
-    instance = {'swebench': SWEBench, 'beetlebox': BeetleBox, 'bench4bl': Bench4BL}[dataset_name]()
-
-    pool_size = args.pool_size or manifest.get('pool_size') or manifest['size']
-    pool = instance.get_bug_instances(sample_size=pool_size, random_sample=True, random_seed=manifest['seed'])
-    wanted = {inst['instance_id'] for inst in manifest['instances']}
-    bugs = [b for b in pool if b.instance_id in wanted]
-    missing = wanted - {b.instance_id for b in bugs}
-    if missing:
-        logger.warning(f"{len(missing)} manifest instance(s) not found when re-deriving the pool: {sorted(missing)[:5]}")
-    logger.info(f"Comparing representations over {len(bugs)}/{manifest['size']} manifest instances (manifest {manifest['manifest_id']})")
+    bugs = _load_wanted_bugs(manifest)
+    logger.info(f"Loaded {len(bugs)}/{manifest['size']} manifest instances (manifest {manifest['manifest_id']}), fully offline, mirrored repos only")
 
     names = args.representations or list(REPRESENTATIONS)
     token = os.getenv("GITHUB_TOKEN")
@@ -73,7 +83,6 @@ def main():
             f"  Hit@1={summary['macro_hit_at'][1]:.3f} Hit@5={summary['macro_hit_at'][5]:.3f} "
             f"Hit@10={summary['macro_hit_at'][10]:.3f} MRR={summary['mrr']:.4f} MAP={summary['map']:.4f}"
         )
-        logger.info(f"  Difficulty: {report['difficulty_distribution']}")
 
     save_cache(cache)
 

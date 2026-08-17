@@ -1,12 +1,15 @@
-"""Follow-up to run_hybrid_retrieval_test.py: at n=30, unweighted RRF fusion (bm25 weight=1,
-embedding weight=1) underperformed chunked_embedding alone on Hit@1/MRR (see
-results/README.md §4) -- several instances where embedding alone landed rank 1 got dragged
-down by fusion with BM25's much weaker ranking. This sweeps embedding-favored RRF weights
-to check whether up-weighting the embedding ranking recovers (or beats) embedding-alone
-performance, rather than discarding hybrid fusion outright.
+"""Array-job shard of run_hybrid_rrf_weighting_test.py, for running the full n=500
+SWE-bench Verified manifest on MN5 as a Slurm array job instead of one long serial job.
 
-Computes BM25 + chunked-embedding rankings exactly once per instance (the expensive step)
-and reuses them across every weight variant, so the sweep costs the same as a single run.
+Each shard processes only a slice of the manifest's instances (selected by --num-shards /
+--shard-index) and writes its own JSON to --output-dir, atomically (write to a .tmp path,
+then os.replace) so a task killed mid-write never leaves a corrupt/partial file behind.
+A separate aggregation script (aggregate_rrf_shards.py) merges all shard JSONs afterward.
+
+Same weight-sweep logic and config set as run_hybrid_rrf_weighting_test.py -- this file
+intentionally duplicates that logic rather than importing it, since the two differ only in
+instance selection and output shape (dir-of-shards vs. one file), and array jobs benefit
+from having no runtime dependency on argument-parsing changes in the non-sharded script.
 """
 
 import os
@@ -33,9 +36,6 @@ from method.hybrid_retriever import reciprocal_rank_fusion
 setup_logging(level=logging.INFO)
 logger = get_logger(__name__)
 
-# (config_name, [bm25_weight, embedding_weight]) -- 1:1 reproduces the original unweighted
-# hybrid_rrf result as a sanity check; higher embedding weight tests whether that recovers
-# ground lost to BM25 dragging down otherwise-good embedding ranks.
 WEIGHT_CONFIGS = [
     ("rrf_1_1", [1.0, 1.0]),
     ("rrf_1_2", [1.0, 2.0]),
@@ -49,10 +49,17 @@ WEIGHT_CONFIGS = [
 ]
 
 
+def _shard_slice(items, num_shards, shard_index):
+    """Contiguous, near-equal-size slice -- e.g. 500 instances / 50 shards = 10 each,
+    with any remainder distributed to the first shards one at a time."""
+    n = len(items)
+    base, extra = divmod(n, num_shards)
+    start = shard_index * base + min(shard_index, extra)
+    size = base + (1 if shard_index < extra else 0)
+    return items[start:start + size]
+
+
 def _compute_base_rankings(bugs, candidate_pool_size, model_name):
-    """BM25 + chunked-embedding rankings only -- the expensive shared inputs every RRF
-    weight variant fuses from. Returns {instance_id: {"bm25": [...], "chunked_embedding": [...]}}.
-    """
     rankings = {}
     for i, bug in enumerate(bugs):
         t0 = time.time()
@@ -76,16 +83,17 @@ def _compute_base_rankings(bugs, candidate_pool_size, model_name):
     return rankings
 
 
+def _atomic_write_json(path, obj):
+    tmp = path + ".tmp"
+    with open(tmp, "w") as f:
+        json.dump(obj, f, indent=2)
+    os.replace(tmp, path)
+
+
 def main():
     load_dotenv()
-    parser = argparse.ArgumentParser(
-        description="Sweep RRF weight ratios (bm25 vs. embedding) to test whether "
-                    "up-weighting embedding recovers/beats chunked_embedding-alone "
-                    "performance, following up on unweighted RRF losing to embedding-alone "
-                    "at n=30. Computes BM25 + chunked-embedding once per instance, reuses "
-                    "across every weight config. Local model, no API cost."
-    )
-    parser.add_argument('--manifest', required=True, help='Path to a manifest JSON')
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--manifest', required=True)
     parser.add_argument('--dataset', choices=['swebench', 'beetlebox', 'bench4bl'], default=None)
     parser.add_argument('--pool-size', type=int, default=None,
                        help='Override the manifest\'s stored pool_size when re-deriving the pool -- '
@@ -97,8 +105,13 @@ def main():
     parser.add_argument('--candidate-pool-size', type=int, default=200)
     parser.add_argument('--rrf-k', type=int, default=60)
     parser.add_argument('--model', default='microsoft/unixcoder-base')
-    parser.add_argument('--output', default=None)
+    parser.add_argument('--num-shards', type=int, required=True)
+    parser.add_argument('--shard-index', type=int, required=True, help='0-based')
+    parser.add_argument('--output-dir', required=True)
     args = parser.parse_args()
+
+    if not (0 <= args.shard_index < args.num_shards):
+        raise ValueError(f"shard-index {args.shard_index} out of range for num-shards {args.num_shards}")
 
     manifest = load_manifest(args.manifest)
     dataset_name = args.dataset or manifest['dataset']
@@ -112,13 +125,33 @@ def main():
     pool_size = args.pool_size or manifest.get('pool_size') or manifest['size']
     pool = instance.get_bug_instances(sample_size=pool_size, random_sample=True, random_seed=manifest['seed'])
     wanted = {inst['instance_id'] for inst in manifest['instances']}
-    bugs = [b for b in pool if b.instance_id in wanted]
-    missing = wanted - {b.instance_id for b in bugs}
+    all_bugs = [b for b in pool if b.instance_id in wanted]
+    missing = wanted - {b.instance_id for b in all_bugs}
     if missing:
         logger.warning(f"{len(missing)} manifest instance(s) not found when re-deriving the pool: {sorted(missing)[:5]}")
-    logger.info(f"Sweeping RRF weights over {len(bugs)}/{manifest['size']} manifest instances (manifest {manifest['manifest_id']}), candidate_pool_size={args.candidate_pool_size}")
 
-    logger.info("--- Computing base rankings (bm25 + chunked_embedding, shared across all weight configs) ---")
+    # Sort by instance_id before sharding so the slice is deterministic regardless of the
+    # pool's own (seeded-random) ordering -- every shard index always gets the same instances.
+    all_bugs.sort(key=lambda b: b.instance_id)
+    bugs = _shard_slice(all_bugs, args.num_shards, args.shard_index)
+    logger.info(
+        f"Shard {args.shard_index}/{args.num_shards}: {len(bugs)} instances "
+        f"({bugs[0].instance_id if bugs else 'none'}..{bugs[-1].instance_id if bugs else 'none'}), "
+        f"manifest {manifest['manifest_id']}, candidate_pool_size={args.candidate_pool_size}"
+    )
+
+    os.makedirs(args.output_dir, exist_ok=True)
+    output_path = os.path.join(args.output_dir, f"shard_{args.shard_index:04d}.json")
+
+    if not bugs:
+        _atomic_write_json(output_path, {
+            "manifest_id": manifest["manifest_id"], "shard_index": args.shard_index,
+            "num_shards": args.num_shards, "instance_ids": [], "configs": {},
+        })
+        logger.info(f"Shard {args.shard_index} empty, wrote placeholder to {output_path}")
+        return
+
+    logger.info("--- Computing base rankings (bm25 + chunked_embedding) ---")
     base_rankings = _compute_base_rankings(bugs, args.candidate_pool_size, args.model)
 
     fused_rankings = {}
@@ -133,9 +166,6 @@ def main():
     token = os.getenv("GITHUB_TOKEN")
     cache = load_cache()
 
-    # Include the two reference points (bm25 alone, chunked_embedding alone) alongside the
-    # weight sweep so this run's numbers are directly comparable to results/README.md §4
-    # without cross-referencing a second file.
     config_names = ["bm25", "chunked_embedding"] + [name for name, _ in WEIGHT_CONFIGS]
     results = {}
     for name in config_names:
@@ -151,29 +181,21 @@ def main():
 
     save_cache(cache)
 
-    logger.info(f"=== Summary (macro, candidate_pool_size={args.candidate_pool_size}) ===")
-    logger.info(f"{'config':<20} {'Hit@1':>7} {'Hit@5':>7} {'Hit@10':>7} {'Hit@100':>8} {'MRR':>8} {'MAP':>8}")
+    logger.info(f"=== Shard {args.shard_index} summary (n={len(bugs)}) ===")
     for name in config_names:
         s = results[name]["summary"]
-        logger.info(
-            f"{name:<20} {s['macro_hit_at'][1]:>7.3f} {s['macro_hit_at'][5]:>7.3f} "
-            f"{s['macro_hit_at'][10]:>7.3f} {s['macro_hit_at'][100]:>8.3f} {s['mrr']:>8.4f} {s['map']:>8.4f}"
-        )
+        logger.info(f"{name:<20} MRR={s['mrr']:.4f} MAP={s['map']:.4f} Hit@1={s['macro_hit_at'][1]:.3f}")
 
-    embedding_mrr = results["chunked_embedding"]["summary"]["mrr"]
-    best_name = max(config_names, key=lambda n: results[n]["summary"]["mrr"])
-    best_mrr = results[best_name]["summary"]["mrr"]
-    logger.info(f"Best MRR: {best_name} ({best_mrr:.4f}); chunked_embedding alone: {embedding_mrr:.4f}")
-    if best_mrr > embedding_mrr:
-        logger.info(f"VERDICT: weighted RRF ({best_name}) beats chunked_embedding alone -- fusion recovers an edge with the right weighting.")
-    else:
-        logger.info("VERDICT: no RRF weighting tested beats chunked_embedding alone -- embedding-alone remains the stronger reranker at this scale.")
-
-    if args.output:
-        os.makedirs(os.path.dirname(args.output) or ".", exist_ok=True)
-        with open(args.output, "w") as f:
-            json.dump({"manifest_id": manifest["manifest_id"], "candidate_pool_size": args.candidate_pool_size, "weight_configs": dict(WEIGHT_CONFIGS), "configs": results}, f, indent=2)
-        logger.info(f"Wrote full report to {args.output}")
+    _atomic_write_json(output_path, {
+        "manifest_id": manifest["manifest_id"],
+        "shard_index": args.shard_index,
+        "num_shards": args.num_shards,
+        "candidate_pool_size": args.candidate_pool_size,
+        "weight_configs": dict(WEIGHT_CONFIGS),
+        "instance_ids": [b.instance_id for b in bugs],
+        "configs": results,
+    })
+    logger.info(f"Wrote shard {args.shard_index} report to {output_path}")
 
 
 if __name__ == "__main__":
