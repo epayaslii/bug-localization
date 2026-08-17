@@ -51,15 +51,19 @@ def main():
                             'takes precedence over --bm25-top-k if both are passed.')
     parser.add_argument('--retrieval-mode', choices=['hybrid-rrf', 'embedding'], default='hybrid-rrf',
                        help='With --retrieval-top-k: "hybrid-rrf" fuses BM25 + embedding via weighted Reciprocal '
-                            'Rank Fusion (--rrf-weights); "embedding" uses the embedding ranking alone (no fusion) '
-                            '-- pick based on which won the retrieval-only sweep for this dataset/model (e.g. '
-                            'embedding-alone won on Bench4BL, weighted RRF 1:5 won on SWE-bench, see '
-                            'docs/bench4bl_result.md / docs/qwen3_rrf_result.md).')
-    parser.add_argument('--rrf-weights', default='1,1',
-                       help='With --retrieval-mode hybrid-rrf: "bm25_weight,embedding_weight", e.g. "1,15" to favor '
-                            'the embedding ranking (default "1,1" = unweighted).')
+                            'Rank Fusion (--rrf-weights); "embedding" uses the embedding ranking alone (no fusion). '
+                            'hybrid-rrf at 1:5 is the confirmed n=30 winner on both benchmarks tested so far '
+                            '(SWE-bench MRR 0.422, Bench4BL MRR 0.714 -- see docs/qwen3_rrf_result.md / '
+                            'docs/bench4bl_result.md); "embedding" is offered for comparison, not as the default '
+                            'recommendation.')
+    parser.add_argument('--rrf-weights', default='1,5',
+                       help='With --retrieval-mode hybrid-rrf: "bm25_weight,embedding_weight" (default "1,5", the '
+                            'confirmed n=30 peak on both SWE-bench and Bench4BL).')
     parser.add_argument('--embedding-model', default='microsoft/unixcoder-base',
-                       help='Embedding model for --retrieval-top-k (e.g. "Qwen/Qwen3-Embedding-0.6B").')
+                       help='Embedding model for --retrieval-top-k. Default is UniXCoder (fast, CPU-friendly); '
+                            'the 0.422/0.714 MRR numbers cited above for --retrieval-mode/--rrf-weights were both '
+                            'measured with "Qwen/Qwen3-Embedding-0.6B" specifically, which scores higher but is a '
+                            'slower decoder model -- pass it explicitly to reproduce those numbers.')
     parser.add_argument('--candidate-pool-size', type=int, default=200,
                        help='With --retrieval-top-k: size of the BM25 pre-filter pool reranked by the embedding step.')
     parser.add_argument('--output', default=None,
