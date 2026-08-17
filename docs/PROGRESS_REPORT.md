@@ -17,16 +17,19 @@ All numeric results below are taken from committed JSON/Markdown under [`results
 | Retrieval-vs-reranking failure attribution | Complete | Free offline split applied to real n=30 data: reranking (not retrieval) is the bottleneck (9/15 misses per config); oracle diagnostic built, not yet run live (costs API) |
 | End-to-end evaluation (real, paid) | Complete | 50.0% accuracy vs. 43.3% no-retrieval baseline, n=30 |
 | MAP metric | Complete | Added to `evaluation/screening.py` |
-| Test suite | Complete | 81 passing tests on `main` (90 on `experiment/hybrid-retrieval`) |
+| Test suite | Complete | 140 passing tests on `main` after merging the validated branches (2026-08-17) |
 | Architecture diagrams | Complete | `docs/architecture.md`, verified against actual imports |
-| Embedding retrieval (whole-file) | Diagnostic complete | **Negative result** — branch `experiment/embedding-ceiling`, not merged |
-| Hybrid retrieval (BM25 + chunked embedding) | Diagnostic complete | **Weighted RRF (1:10 embedding-favored) is the best config found so far** (MRR 0.281 at n=30) — branch `experiment/hybrid-retrieval`, not merged |
-| MareNostrum 5 (MN5) preparation | Partial | Real account access confirmed, smoke test + 5-instance pipeline verified end-to-end. **Execution handbook now written** ([`mn5_execution_handbook.md`](mn5_execution_handbook.md)). Two open blockers (huggingface-hub version conflict, torch shadowing) documented with concrete next diagnostic steps; no SSH access from current machine |
-| BeetleBox transition | Not started | Next dataset per confirmed plan sequencing |
+| Embedding retrieval (whole-file) | Diagnostic complete | **Negative result** — branch `experiment/embedding-ceiling`, deliberately kept off `main` as a documented dead end |
+| Hybrid retrieval (BM25 + chunked embedding) | Merged to `main` | Weighted RRF, now confirmed at n=30 with Qwen3-Embedding-0.6B (MRR 0.4216 at 1:5, see `docs/qwen3_rrf_result.md`) — supersedes the earlier UniXCoder-based 0.281 number |
+| MareNostrum 5 (MN5) preparation | Merged to `main` | See `docs/mn5_execution_handbook.md` for the current live account/blocker status, not the snapshot below |
+| BeetleBox transition | Merged to `main` | Multi-language BM25 comparison, n=15 |
+| Bench4BL transition | Merged to `main` | 4th benchmark, real content post content-fetch fix — n=30 hybrid RRF confirmed at MRR 0.7137, the project's current best (see `docs/bench4bl_result.md`) |
 | BugsInPy integration | Not started | Lowest priority |
 | Literature review | Complete | 24+ papers; one named gap ("Toggle") |
 
-**Tests:** `python -m pytest` — **81 passed** on `main` (2026-08-05).
+**Tests:** `python -m pytest` — **140 passed** on `main` (2026-08-17).
+
+**Note on the rest of this document:** several numeric snapshots below (MRR 0.281, 81 tests, "not merged to `main`") predate this merge and the two weeks of work it brings in — treated as historical narrative rather than rewritten wholesale. For current numbers, `docs/qwen3_rrf_result.md`, `docs/bench4bl_result.md`, and `docs/mn5_execution_handbook.md` are the live sources of truth.
 
 ---
 
