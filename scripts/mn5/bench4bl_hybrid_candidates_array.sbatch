@@ -5,6 +5,7 @@
 #SBATCH --qos=acc_ehpc
 #SBATCH --time=02:00:00
 #SBATCH --cpus-per-task=20
+#SBATCH --gres=gpu:1
 #SBATCH --array=0-9
 #SBATCH --output=logs/bench4bl_candidates_array_%A_%a.out
 #SBATCH --error=logs/bench4bl_candidates_array_%A_%a.err
@@ -13,8 +14,12 @@
 # only (BM25 -> chunked embedding -> weighted RRF 1:5, Qwen3-Embedding-0.6B), no LLM call --
 # the LLM call needs live internet, which MN5 doesn't have, so it runs locally afterward
 # (main.py --candidates-file) against this job's aggregated output. Same 10-shard split as
-# the retrieval-only MRR confirmation (bench4bl_qwen3_rrf_array.sbatch), same reason: real
-# per-instance Java-aware chunking is too slow for one serial job (~900s/instance).
+# the retrieval-only MRR confirmation (bench4bl_qwen3_rrf_array.sbatch) -- kept even though
+# MN5 Blocker 5 (GPU-allocated-but-unused) is now fixed and this requests --gres=gpu:1, since
+# the array-job pattern is still valid infra for wall-clock/resilience reasons independent of
+# GPU speed, and this is the first real workload to actually exercise the GPU fix.
+# method/embedding_retriever.py's device selection is automatic (torch.cuda.is_available()
+# at import time) -- no code changes needed to benefit from the GPU allocation.
 
 module load intel
 module load mkl
