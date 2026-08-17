@@ -10,10 +10,9 @@ Counting such a "miss" as a retrieval failure understates real performance.
 """
 
 import os
-import re
 import json
 
-from dataset.utils import get_logger, get_code_files
+from dataset.utils import get_logger, get_code_files, get_diff_hunk
 
 logger = get_logger(__name__)
 
@@ -54,19 +53,6 @@ def _cache_key(repo, base_commit, path):
     return f"{repo}@{base_commit}:{path}"
 
 
-def _diff_hunk(patch: str, path: str) -> str | None:
-    """Return the raw diff hunk for `path` from a unified diff, or None if `patch`
-    has no real `diff --git` header for it (e.g. BeetleBox's synthetic patch text,
-    which is just "Before: <sha>\\nAfter: <sha>").
-    """
-    escaped = re.escape(path)
-    match = re.search(
-        rf"diff --git a/{escaped} b/{escaped}\n(.*?)(?=\ndiff --git |\Z)",
-        patch, re.DOTALL,
-    )
-    return match.group(1) if match else None
-
-
 def classify_ground_truth_path(bug, path, token=None, cache=None):
     """Classify one ground-truth `path` for `bug` against the before-fix corpus.
 
@@ -80,7 +66,7 @@ def classify_ground_truth_path(bug, path, token=None, cache=None):
         return cache[key]
 
     if path in bug.code_files:
-        hunk = _diff_hunk(bug.patch, path)
+        hunk = get_diff_hunk(bug.patch, path)
         classification = DELETED_BY_FIX if hunk and "deleted file mode" in hunk else EXISTS_BEFORE_FIX
         if cache is not None:
             cache[key] = classification
@@ -89,7 +75,7 @@ def classify_ground_truth_path(bug, path, token=None, cache=None):
     # Not in the before-fix corpus. Prefer the patch's own diff header over a network
     # call, when it has a real hunk for this path (SWE-bench patches do; BeetleBox's
     # synthetic "Before/After" patch text does not).
-    hunk = _diff_hunk(bug.patch, path)
+    hunk = get_diff_hunk(bug.patch, path)
     if hunk is not None:
         classification = ADDED_BY_FIX if "new file mode" in hunk else MISSING_UNRESOLVED
         if cache is not None:
