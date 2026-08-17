@@ -247,14 +247,9 @@ differ) and hybrid (n=30, 0.7137 MRR) results above are both downstream of this.
 
 ## Next steps
 
-- Mirror the remaining 46 projects (~5.5GB more) for real dataset-wide coverage.
-- Retry BATCH's `gitrepo/` transfer to MN5 (compress first, or try `rsync` instead of `scp`
-  for resumability) so local and MN5's pools match again — MN5 still runs on 8/9 locally-mirrored
-  projects, 213 vs. local's 467 instances.
-- Re-run the end-to-end eval with hybrid-RRF retrieval (`--retrieval-top-k` + `--retrieval-mode
-  hybrid-rrf`) feeding the LLM instead of BM25 alone — the retrieval-only ceiling is much higher
-  (MRR 0.714 vs. BM25 skeleton's 0.413), so the 70.0% end-to-end number above may still have
-  headroom. Not yet tried; real per-instance Java-aware chunking makes this slow, likely needs
-  the same array-job pattern used for the retrieval-only n=30 hybrid run.
-- ~~No test coverage yet for `dataset/bench4bl.py`~~ still true as of this writing — real gap.
-- ~~Merge `research/bench4bl-hybrid-rrf` to `main`~~ **Done** (2026-08-17).
+Tracked centrally in [`docs/PROGRESS_REPORT.md`](PROGRESS_REPORT.md) §16, not duplicated here —
+that list is kept current across the whole project (Bench4BL and otherwise) so there's one place
+to check rather than several drifting independently. Items from that list specific to Bench4BL
+as of this writing: mirroring the remaining 46 projects, retrying BATCH's stalled MN5 transfer,
+and re-running the end-to-end eval with hybrid-RRF retrieval instead of BM25 alone (a two-phase
+pipeline — MN5 for retrieval, local for the LLM call — started 2026-08-17, not yet landed).

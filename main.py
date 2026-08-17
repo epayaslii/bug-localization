@@ -1,4 +1,5 @@
 import os
+import json
 from dataset.swebench import SWEBench
 from dataset.beetlebox import BeetleBox
 from dataset.bench4bl import Bench4BL
@@ -66,6 +67,13 @@ def main():
                             'slower decoder model -- pass it explicitly to reproduce those numbers.')
     parser.add_argument('--candidate-pool-size', type=int, default=200,
                        help='With --retrieval-top-k: size of the BM25 pre-filter pool reranked by the embedding step.')
+    parser.add_argument('--candidates-file', default=None,
+                       help='Path to a JSON {instance_id: [file_path, ...]} of precomputed retrieval candidates '
+                            '-- skips retrieval entirely and uses these directly, taking precedence over '
+                            '--retrieval-top-k/--bm25-top-k. For two-phase runs where retrieval itself needs to '
+                            'happen somewhere without live internet (e.g. MN5) before the LLM call, which needs it '
+                            '(see scripts/run_hybrid_retrieval_candidates_shard.py). An instance_id missing from '
+                            'the file is skipped with a warning, not silently run unfiltered.')
     parser.add_argument('--output', default=None,
                        help='Optional path to write the run config + evaluation results as JSON')
 
@@ -122,9 +130,24 @@ def main():
         logger.info(f"Token statistics: {token_stats}")
 
         logger.info(f"Total repo: {len(instance.repos)}")
+
+        precomputed_candidates = None
+        if args.candidates_file:
+            with open(args.candidates_file) as f:
+                precomputed_candidates = json.load(f)
+            logger.info(f"Loaded precomputed candidates for {len(precomputed_candidates)} instances from {args.candidates_file}")
+            missing_candidates = {b.instance_id for b in bug_instances} - set(precomputed_candidates)
+            if missing_candidates:
+                logger.warning(f"{len(missing_candidates)} instance(s) missing from --candidates-file, will be skipped: {sorted(missing_candidates)[:5]}")
+                bug_instances = [b for b in bug_instances if b.instance_id in precomputed_candidates]
+
         responses = {}
         for i, bug in enumerate(bug_instances):
-            if args.retrieval_top_k is not None:
+            if precomputed_candidates is not None:
+                original_count = len(bug.code_files)
+                bug.code_files = precomputed_candidates[bug.instance_id]
+                logger.info(f"Precomputed-candidates filtered code files from {original_count} to {len(bug.code_files)} (--candidates-file)")
+            elif args.retrieval_top_k is not None:
                 original_count = len(bug.code_files)
                 if args.retrieval_mode == 'embedding':
                     from method.embedding_retriever import rank_files_embedding_chunked
@@ -175,7 +198,6 @@ def main():
         logger.info(f"Results: {results}")
 
         if args.output:
-            import json
             bm25_mode = None
             if args.bm25_top_k is not None:
                 bm25_mode = "symbols" if args.bm25_symbols else ("skeleton" if args.bm25_skeleton else "path_only")

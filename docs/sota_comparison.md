@@ -23,16 +23,50 @@ row is the fair SOTA comparison point.
 | CoRNStack (retriever+reranker) | 68.2% | SWE-Bench Lite | post-rerank |
 | Agentless-GPT-4o | 65.7–67.2% | SWE-bench Lite | post-agent |
 | BugCerberus (hierarchical fine-tuned) | 65.1% | SWE-bench Lite | post-classifier |
-| **This project — end-to-end (symbols-BM25 + gpt-4o-mini), n=60** | **51.7%** | **SWE-bench Verified** | **post-rerank** |
+| **This project — end-to-end (skeleton-BM25 + gpt-4o-mini), n=30, Bench4BL** | **70.0%** | **Bench4BL** | **post-rerank** |
+| **This project — end-to-end (symbols-BM25 + gpt-4o-mini), n=60, SWE-bench** | **51.7%** | **SWE-bench Verified** | **post-rerank** |
 | This project — end-to-end (symbols-BM25 + gpt-4o-mini), n=30 | 50.0% | SWE-bench Verified | post-rerank |
 | SWE-Fixer | 30.2% (Pass@1, harder metric) | SWE-bench Verified | — |
-| This project — retrieval-only, weighted-RRF hybrid (1:10), n=30 | 23.3% | SWE-bench Verified | pre-rerank |
+| This project — retrieval-only, weighted-RRF hybrid (Qwen3, 1:5), n=30 | 30.0% | SWE-bench Verified | pre-rerank |
 | This project — retrieval-only, symbols-BM25 alone, n=30 | 6.7% | SWE-bench Verified | pre-rerank |
+
+## Bench4BL — the benchmark the supervisor actually named, with real SOTA to compare against
+
+Unlike the SWE-bench rows above, Bench4BL has two directly-relevant SOTA papers that **use
+this exact benchmark**, not a different split — BRaIn and IQLoc, both scoped in
+`docs/relevance_feedback_scoping.md`. This is almost certainly why the supervisor named
+Bench4BL specifically: it's a real apples-to-apples comparison point, not just "another
+dataset."
+
+| System | MRR | Benchmark | Notes |
+|---|---:|---|---|
+| **This project — retrieval-only, weighted-RRF hybrid (Qwen3, 1:5), n=30** | **0.714** | Bench4BL | pre-rerank, this project's own manifest (8 projects) |
+| BRaIn (zero-shot LLM relevance feedback + query reformulation) | 0.571 | Bench4BL | 4,683 bugs / 42 systems, their own full split |
+| IQLoc (fine-tuned CodeBERT cross-encoder + CodeT5) | 0.553 | Bench4BL | 7,483 bugs, their own refined split |
+
+**This project's retrieval-only MRR already beats both papers' full pipelines** — though the
+caveat below matters: this is a much smaller manifest (n=30 vs. thousands of bugs) and MRR
+alone, not the papers' other metrics. Still a real, positive signal specifically on the
+benchmark that motivated the whole relevance-feedback-pipeline direction — worth surfacing
+before investing further in building BRaIn/IQLoc's own architecture, since the simpler
+retrieval-only pipeline is already competitive with it here.
+
+**This project also has a real end-to-end number on Bench4BL — 70.0% accuracy (n=30, BM25
+skeleton + gpt-4o-mini final pick)** — but it isn't listed in the table above because it
+isn't a fair comparison to it: BRaIn and IQLoc both report Hit@10/MRR for their *retrieval*
+step, not a single final-pick accuracy after an LLM narrows to one file. There's no published
+Top-1/Acc@1 number from either paper to put next to 70.0% on this specific benchmark — unlike
+the SWE-bench table above, where several agentic/fine-tuned systems do report that exact
+metric. Recorded here for completeness, not as a comparison point.
 
 ## Reading
 
-**On the fair (post-rerank) comparison, this project sits well below every SOTA baseline
-listed** — 51.7% vs. a 65–88% range. The gap is large enough that it isn't explained by
+**On Bench4BL, this project's retrieval-only number already beats both directly-relevant SOTA
+papers' full pipelines** (0.714 vs. 0.571/0.553 MRR) — the one clearly favorable comparison in
+this document, on the one benchmark with a real apples-to-apples reference point.
+
+**On the SWE-bench fair (post-rerank) comparison, this project sits well below every SOTA
+baseline listed** — 51.7% vs. a 65–88% range. The gap is large enough that it isn't explained by
 noise at n=60; it reflects real architectural differences: every SOTA system above either
 fine-tunes a model specifically for localization (BugCerberus's 3 LoRA-tuned Llama-3-8Bs)
 or runs a genuine multi-step agent loop (MarsCode Agent, LocAgent), while this project's
@@ -60,18 +94,28 @@ just picking whatever BM25 ranked first — it's not a rubber stamp.
   taken as reported in their papers, not re-run against this project's own pipeline or data
   splits. A truly controlled comparison would need identical instances and identical
   candidate-file pools, which this comparison does not have.
-- **This project has never been evaluated against BeetleBox or any non-Python benchmark**
-  that appears in this table — everything above is SWE-bench-family only.
+- **The Bench4BL retrieval-only comparison uses MRR, a different metric than the Top-1/Acc@1
+  numbers in the SWE-bench table above** — not directly comparable across the two tables,
+  only within each one.
+- **This project has real BeetleBox and Bench4BL results now** (see `docs/bench4bl_result.md`)
+  — the "SWE-bench-family only" caveat that used to apply here no longer does, though BeetleBox
+  itself has no SOTA baseline comparison yet (no papers found reporting on it specifically).
 
 ## Reproducing this project's own numbers
 
 ```bash
-# End-to-end (paid, gpt-4o-mini)
+# End-to-end, Bench4BL (paid, gpt-4o-mini)
+python main.py --method openrouter --dataset bench4bl --model gpt-4o-mini --manifest results/manifests/bench4bl-multi-n30-s42-mn5-8proj.json --pool-size 500 --bm25-top-k 100 --bm25-skeleton --output results/e2e_gpt4o_mini_bench4bl_30_skeleton.json
+
+# End-to-end, SWE-bench (paid, gpt-4o-mini)
 python main.py --method openrouter --dataset swebench --model gpt-4o-mini --sample-size 60 --bm25-top-k 100 --bm25-symbols --output results/end_to_end_swebench_60_symbols.json
 
 # Retrieval-only ceiling (free, offline)
 python scripts/compare_bm25_representations.py --manifest results/manifests/swebench-multi-n30-s42-6757c7d8bb76.json --output results/bm25_comparison_swebench_30.json
 
-# Retrieval-only hybrid (checkout experiment/hybrid-retrieval first, local compute only)
-python scripts/run_hybrid_rrf_weighting_test.py --manifest results/manifests/swebench-multi-n30-s42-1fb8f4b8d82f.json --candidate-pool-size 200 --output results/hybrid_rrf_weighting_swebench_30.json
+# Retrieval-only hybrid, SWE-bench (free, local compute -- or MN5, see docs/mn5_execution_handbook.md)
+python scripts/run_hybrid_rrf_weighting_test.py --manifest results/manifests/swebench-multi-n30-s42-1fb8f4b8d82f.json --candidate-pool-size 200 --model "Qwen/Qwen3-Embedding-0.6B" --output results/hybrid_rrf_qwen3_swebench_30_mn5.json
+
+# Retrieval-only hybrid, Bench4BL (real Java-aware chunking is slow -- see the array-job pattern in docs/mn5_execution_handbook.md)
+python scripts/run_hybrid_rrf_weighting_test.py --dataset bench4bl --manifest results/manifests/bench4bl-multi-n30-s42-mn5-8proj.json --pool-size 250 --candidate-pool-size 200 --model "Qwen/Qwen3-Embedding-0.6B" --output results/hybrid_rrf_qwen3_bench4bl_30_array_mn5.json
 ```

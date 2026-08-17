@@ -4,6 +4,10 @@ Chronological status for the scalable bug-localization pipeline. Companion docs:
 
 All numeric results below are taken from committed JSON/Markdown under [`results/`](../results/). Diagnostic subsets (n<30) are labeled explicitly.
 
+**Presentation decks** (linked, not committed as HTML in this repo):
+- [Bug Localization — Progress Review](https://claude.ai/code/artifact/4b93c69d-c238-4025-a442-f2aec44f9749) — current, updated as results land (last: 2026-08-17, Bench4BL n=30 confirmed).
+- [Bench4BL deep-dive](https://claude.ai/code/artifact/1121036e-b173-482a-a4af-b9c7f5f4bf07) — 2026-08-13 session, now superseded by the confirmed n=30 numbers above (still shows the void/n=6 hybrid results as open questions).
+
 ---
 
 ## Current status snapshot
@@ -17,7 +21,7 @@ All numeric results below are taken from committed JSON/Markdown under [`results
 | Retrieval-vs-reranking failure attribution | Complete | Free offline split applied to real n=30 data: reranking (not retrieval) is the bottleneck (9/15 misses per config); oracle diagnostic built, not yet run live (costs API) |
 | End-to-end evaluation (real, paid) | Complete | 50.0% accuracy vs. 43.3% no-retrieval baseline, n=30 |
 | MAP metric | Complete | Added to `evaluation/screening.py` |
-| Test suite | Complete | 140 passing tests on `main` after merging the validated branches (2026-08-17) |
+| Test suite | Complete | 162 passing tests on `main` after merging the validated branches (2026-08-17) |
 | Architecture diagrams | Complete | `docs/architecture.md`, verified against actual imports |
 | Embedding retrieval (whole-file) | Diagnostic complete | **Negative result** — branch `experiment/embedding-ceiling`, deliberately kept off `main` as a documented dead end |
 | Hybrid retrieval (BM25 + chunked embedding) | Merged to `main` | Weighted RRF, now confirmed at n=30 with Qwen3-Embedding-0.6B (MRR 0.4216 at 1:5, see `docs/qwen3_rrf_result.md`) — supersedes the earlier UniXCoder-based 0.281 number |
@@ -27,7 +31,7 @@ All numeric results below are taken from committed JSON/Markdown under [`results
 | BugsInPy integration | Not started | Lowest priority |
 | Literature review | Complete | 24+ papers; one named gap ("Toggle") |
 
-**Tests:** `python -m pytest` — **140 passed** on `main` (2026-08-17).
+**Tests:** `python -m pytest` — **162 passed** on `main` (2026-08-17).
 
 **Note on the rest of this document:** several numeric snapshots below (MRR 0.281, 81 tests, "not merged to `main`") predate this merge and the two weeks of work it brings in — treated as historical narrative rather than rewritten wholesale. For current numbers, `docs/qwen3_rrf_result.md`, `docs/bench4bl_result.md`, and `docs/mn5_execution_handbook.md` are the live sources of truth.
 
@@ -142,7 +146,7 @@ Embeddings lose badly at the ranks that matter (Hit@1/5/10, MRR), despite broade
 
 **Objective:** Does *chunked* (not whole-file) embedding change §7's conclusion, per the literature's own explanation for the gap?
 
-**Implementation:** branch `experiment/hybrid-retrieval`, **not merged to `main`**. `method/embedding_retriever.py` gained AST-based chunking (`_chunk_file_content` — one chunk per top-level function/class plus a header chunk for imports/docstring, falling back to fixed-size overlapping character windows for unparseable content) and `rank_files_embedding_chunked` (scores each file by its **max** chunk-to-query cosine similarity, not mean). `method/hybrid_retriever.py` cascades BM25 (narrow the full corpus to a 200-file candidate pool first — cheap) into chunked-embedding reranking of only that pool, fused via Reciprocal Rank Fusion (k=60, matching the BLAZE paper's constant).
+**Implementation:** originally on branch `experiment/hybrid-retrieval`, **merged to `main` 2026-08-17**. `method/embedding_retriever.py` gained AST-based chunking (`_chunk_file_content` — one chunk per top-level function/class plus a header chunk for imports/docstring, falling back to fixed-size overlapping character windows for unparseable content) and `rank_files_embedding_chunked` (scores each file by its **max** chunk-to-query cosine similarity, not mean). `method/hybrid_retriever.py` cascades BM25 (narrow the full corpus to a 200-file candidate pool first — cheap) into chunked-embedding reranking of only that pool, fused via Reciprocal Rank Fusion (k=60, matching the BLAZE paper's constant).
 
 **Result at n=6** (5 with localizable GT — `results/hybrid_retrieval_swebench_6.json`, [`results/hybrid_retrieval_report.html`](../results/hybrid_retrieval_report.html)):
 

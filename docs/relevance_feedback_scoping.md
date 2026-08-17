@@ -3,7 +3,16 @@
 Scopes the architecture direction from supervisor guidance (`docs/next_steps.md`): `Bug
 report -> IR retrieval -> LLM relevance feedback -> query reformulation -> reranking`.
 Read both source papers in full rather than working off the one-line flow description.
-**Not implemented yet** — this is a design document, next step is prototyping.
+
+**Update — a small prototype has since been run** (`scripts/run_relevance_feedback_test.py`,
+n=6 smoke + n=12 real, SWE-bench, `gpt-4o-mini`, scoped to 1 LLM call/bug instead of BRaIn's
+150-250 calls/bug): relevance filtering alone gave a real lift (MRR 0.023 → 0.192 over plain
+BM25), but the full reformulate-and-rerun-BM25 step **made results worse, not better**
+(MRR 0.066 — still beats plain BM25 but clearly loses to relevance-filtering alone). Too
+small (n=12) to treat as final, but a real, specific, contrary-to-the-papers signal worth
+flagging before investing more here: filtering seems to be doing the useful work, not
+reformulation. Not yet run on Bench4BL (the real apples-to-apples benchmark) or scaled to
+n=30 — both are the honest next steps, not "not started."
 
 ## What BRaIn and IQLoc actually do
 
@@ -141,4 +150,8 @@ a single LLM call's ranking respects its own earlier reasoning.
 - If retrieval-only numbers look promising, extend to the full formula/final-pick step and a
   larger n.
 
-Not started — this document is the scope, not the implementation.
+This suggested-prototype spec is what `scripts/run_relevance_feedback_test.py` actually
+implemented (see the update note at the top) — n=12 rather than n=10-15, otherwise matching:
+SWE-bench, `gpt-4o-mini`, one batched relevance-feedback call per bug, retrieval-only
+comparison. The real result reverses this doc's own expectation that reformulation would
+help on top of filtering — see the update note for the actual numbers.
