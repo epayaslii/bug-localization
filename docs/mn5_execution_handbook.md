@@ -2,10 +2,10 @@
 
 Practical reference for running this repo's offline retrieval pipeline on MareNostrum 5
 (MN5, BSC). Consolidates everything established across real access sessions to date —
-account details, environment setup, five blockers found and diagnosed so far (four
-resolved, one open — a real GPU speedup, not a correctness blocker), and what's already
-confirmed working, including a completed real `sbatch` submission. This is a **final
-deliverable named explicitly** in the official study plan.
+account details, environment setup, five blockers found and diagnosed so far (**all five
+now resolved**, as of 2026-08-17's GPU fix), and what's already confirmed working, including
+a completed real `sbatch` submission. This is a **final deliverable named explicitly** in
+the official study plan.
 
 ## What this handbook is for, and what it isn't
 
@@ -276,22 +276,36 @@ separate platform-specific wheel download the same way as `tokenizers`.
 `accelerate==1.2.1`/`psutil` are all installed. See the `sbatch` template below for the full
 working environment block.
 
-## Blocker 5 — GPU allocated but not actually used — CONFIRMED, OPEN (not blocking correctness)
+## Blocker 5 — GPU allocated but not actually used — RESOLVED 2026-08-17
 
-`torch==2.6.0+cpu` is installed on MN5 (a CPU-only build, installed back when first fixing
-Blocker 2, before GPU use was ever the intent) — so `torch.cuda.is_available()` is always
+`torch==2.6.0+cpu` was installed on MN5 (a CPU-only build, installed back when first fixing
+Blocker 2, before GPU use was ever the intent) — so `torch.cuda.is_available()` was always
 `False` regardless of `--gres=gpu:1`, and `method/embedding_retriever.py`'s device
-auto-detection silently falls back to CPU. First real symptom: a job requesting a GPU node
+auto-detection silently fell back to CPU. First real symptom: a job requesting a GPU node
 still took ~300-500s/instance for Qwen3-Embedding chunked embedding — the same order of
 magnitude as local CPU timing, not GPU-accelerated. This nearly caused a real job to be
 killed by `acc_debug`'s 2-hour wall-clock limit partway through a 30-instance sweep (~3hr
 actual runtime) — resubmitted under `acc_ehpc` (3-day limit) instead as the immediate fix.
 
-**Real fix, not yet done**: install a CUDA-enabled `torch` build (matching MN5's actual CUDA
-version — not yet checked) instead of the `+cpu` wheel, so GPU allocations are actually
-used. Worth doing before any future MN5 GPU job, since right now `--partition=acc`
-`--gres=gpu:1` reserves and burns GPU-node queue time/priority for zero speed benefit over
-a CPU-only submission.
+**Fix**: checked the actual hardware first (`nvidia-smi` on an interactive `salloc` GPU
+session — `NVIDIA H100`, driver `595.71.05`, CUDA `13.2`), then downloaded
+`torch==2.6.0+cu124` (768MB) plus its 13 `nvidia-*-cu12` runtime-library dependencies and
+`triton` (another ~2.1GB total) locally via `pip download --platform ... --python-version
+... --abi ...` (cross-platform download from macOS, no matching local install needed) since
+MN5 has no internet. Two real tag gotchas along the way: the `nvidia-*-cu12` packages are
+hosted on PyPI proper, not the `download.pytorch.org` index torch itself uses, and they're
+tagged `py3-none-manylinux2014_x86_64` (not `cp311`) — different filter flags than torch's
+own `cp311-linux_x86_64` tag. All 15 wheels transferred via `scp` into `wheelhouse_mn5/`
+(verified byte-for-byte both ends), then `pip install --no-index --find-links=wheelhouse_mn5
+torch==2.6.0+cu124` — cleanly uninstalled the old `+cpu` build and installed the CUDA one.
+
+**Verified for real, not just detected**: `srun -A ehpc680 -q acc_debug -p acc --gres=gpu:1
+--cpus-per-task=20` to an actual GPU-allocated node confirms `torch.cuda.is_available() ==
+True`, `torch.cuda.get_device_name(0) == "NVIDIA H100"`, and a real 4096×4096 matmul
+executes on `cuda:0` and returns a correct result — not just device detection, actual GPU
+compute. Every future MN5 GPU job should now get real acceleration; the array-job-sharding
+workaround built for CPU-only jobs is no longer strictly necessary, though still valid
+infrastructure for wall-clock/resilience reasons independent of GPU speed.
 
 ## First real Slurm submission — 2026-08-11
 
