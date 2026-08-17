@@ -23,7 +23,8 @@ row is the fair SOTA comparison point.
 | CoRNStack (retriever+reranker) | 68.2% | SWE-Bench Lite | post-rerank |
 | Agentless-GPT-4o | 65.7–67.2% | SWE-bench Lite | post-agent |
 | BugCerberus (hierarchical fine-tuned) | 65.1% | SWE-bench Lite | post-classifier |
-| **This project — end-to-end (skeleton-BM25 + gpt-4o-mini), n=30, Bench4BL** | **70.0%** | **Bench4BL** | **post-rerank** |
+| **This project — end-to-end (hybrid-RRF + gpt-4o-mini), n=30, Bench4BL** | **76.7%** | **Bench4BL** | **post-rerank** |
+| This project — end-to-end (skeleton-BM25 + gpt-4o-mini), n=30, Bench4BL | 70.0% | Bench4BL | post-rerank |
 | **This project — end-to-end (symbols-BM25 + gpt-4o-mini), n=60, SWE-bench** | **51.7%** | **SWE-bench Verified** | **post-rerank** |
 | This project — end-to-end (symbols-BM25 + gpt-4o-mini), n=30 | 50.0% | SWE-bench Verified | post-rerank |
 | SWE-Fixer | 30.2% (Pass@1, harder metric) | SWE-bench Verified | — |
@@ -51,13 +52,12 @@ benchmark that motivated the whole relevance-feedback-pipeline direction — wor
 before investing further in building BRaIn/IQLoc's own architecture, since the simpler
 retrieval-only pipeline is already competitive with it here.
 
-**This project also has a real end-to-end number on Bench4BL — 70.0% accuracy (n=30, BM25
-skeleton + gpt-4o-mini final pick)** — but it isn't listed in the table above because it
-isn't a fair comparison to it: BRaIn and IQLoc both report Hit@10/MRR for their *retrieval*
-step, not a single final-pick accuracy after an LLM narrows to one file. There's no published
-Top-1/Acc@1 number from either paper to put next to 70.0% on this specific benchmark — unlike
-the SWE-bench table above, where several agentic/fine-tuned systems do report that exact
-metric. Recorded here for completeness, not as a comparison point.
+**This project also has real end-to-end numbers on Bench4BL — 76.7% (hybrid-RRF retrieval) and
+70.0% (BM25-only) accuracy, both n=30** — these are in the SWE-bench-style table above, but
+still not a fair comparison to BRaIn/IQLoc specifically: they both report Hit@10/MRR for their
+*retrieval* step, not a single final-pick accuracy after an LLM narrows to one file. There's no
+published Top-1/Acc@1 number from either paper to put next to 76.7% on this specific benchmark
+— unlike the SWE-bench agentic/fine-tuned systems, which do report that exact metric.
 
 ## Reading
 

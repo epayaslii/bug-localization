@@ -1,0 +1,819 @@
+{
+  "method": "openrouter",
+  "dataset": "bench4bl",
+  "model": "gpt-4o-mini",
+  "sample_size": 1,
+  "bm25_top_k": null,
+  "bm25_mode": null,
+  "bm25_symbols_imports": null,
+  "retrieval_top_k": null,
+  "retrieval_mode": null,
+  "rrf_weights": null,
+  "embedding_model": null,
+  "per_bug": {
+    "AMQP-250": {
+      "repo": "AMQP",
+      "ground_truths": [
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/config/TemplateParser.java",
+        "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/config/TemplateParserTests.java"
+      ],
+      "candidate_files": [
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/core/RabbitTemplate.java",
+        "spring-amqp-core/src/main/java/org/springframework/amqp/core/AnonymousQueue.java",
+        "spring-amqp-core/src/main/java/org/springframework/amqp/core/AmqpTemplate.java",
+        "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/core/RabbitTemplateIntegrationTests.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/MessageListenerAdapter.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/core/RabbitAdmin.java",
+        "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/config/QueueParserTests.java",
+        "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/config/TemplateParserTests.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/SimpleMessageListenerContainer.java",
+        "spring-amqp-core/src/main/java/org/springframework/amqp/core/MessageProperties.java"
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 2
+    },
+    "AMQP-249": {
+      "repo": "AMQP",
+      "ground_truths": [
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/core/RabbitTemplate.java",
+        "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/core/RabbitTemplateTests.java"
+      ],
+      "candidate_files": [
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/core/RabbitTemplate.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/SimpleMessageListenerContainer.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/core/RabbitAdmin.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/core/ChannelCallback.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/BlockingQueueConsumer.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/core/RabbitOperations.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/CachingConnectionFactory.java",
+        "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/core/RabbitTemplateIntegrationTests.java",
+        "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/listener/MessageListenerManualAckIntegrationTests.java",
+        "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/listener/MessageListenerContainerLifecycleIntegrationTests.java"
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 0.5,
+      "f1": 0.6666666666666666,
+      "tp": 1,
+      "fp": 0,
+      "fn": 1
+    },
+    "AMQP-260": {
+      "repo": "AMQP",
+      "ground_truths": [
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/SimpleMessageListenerContainer.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/ConnectionFactoryUtils.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/AbstractMessageListenerContainer.java"
+      ],
+      "candidate_files": [
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/SimpleMessageListenerContainer.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/transaction/RabbitTransactionManager.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/AbstractMessageListenerContainer.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/adapter/MessageListenerAdapter.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/CachingConnectionFactory.java",
+        "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/listener/SimpleMessageListenerContainerTests.java",
+        "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/listener/MessageListenerManualAckIntegrationTests.java",
+        "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/listener/MessageListenerContainerLifecycleIntegrationTests.java",
+        "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/listener/MessageListenerContainerErrorHandlerIntegrationTests.java",
+        "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/transaction/RabbitTransactionManagerIntegrationTests.java"
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 0.3333333333333333,
+      "f1": 0.5,
+      "tp": 1,
+      "fp": 0,
+      "fn": 2
+    },
+    "AMQP-282": {
+      "repo": "AMQP",
+      "ground_truths": [
+        "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/log4j/TestListener.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/log4j/AmqpAppender.java",
+        "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/log4j/AmqpAppenderIntegrationTests.java"
+      ],
+      "candidate_files": [
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/log4j/AmqpAppender.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/core/RabbitTemplate.java",
+        "spring-amqp-core/src/main/java/org/springframework/amqp/core/Message.java",
+        "spring-amqp-core/src/main/java/org/springframework/amqp/core/MessageProperties.java",
+        "spring-amqp-core/src/main/java/org/springframework/amqp/support/converter/MessageConverter.java",
+        "spring-amqp-core/src/main/java/org/springframework/amqp/support/converter/SimpleMessageConverter.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/support/DefaultMessagePropertiesConverter.java",
+        "spring-amqp-core/src/main/java/org/springframework/amqp/core/AmqpTemplate.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/support/MessagePropertiesConverter.java",
+        "spring-amqp-core/src/main/java/org/springframework/amqp/support/converter/AbstractMessageConverter.java"
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 0.3333333333333333,
+      "f1": 0.5,
+      "tp": 1,
+      "fp": 0,
+      "fn": 2
+    },
+    "AMQP-363": {
+      "repo": "AMQP",
+      "ground_truths": [
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/log4j/AmqpAppender.java",
+        "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/log4j/AmqpAppenderIntegrationTests.java"
+      ],
+      "candidate_files": [
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/log4j/AmqpAppender.java",
+        "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/log4j/AmqpAppenderIntegrationTests.java",
+        "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/log4j/AmqpAppenderConfiguration.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/log4j/package-info.java",
+        "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/log4j/TestListener.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/support/RabbitExceptionTranslator.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/AbstractMessageListenerContainer.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/SimpleMessageListenerContainer.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/support/PublisherCallbackChannelImpl.java",
+        "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/core/RabbitTemplateIntegrationTests.java"
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 0.5,
+      "f1": 0.6666666666666666,
+      "tp": 1,
+      "fp": 0,
+      "fn": 1
+    },
+    "AMQP-468": {
+      "repo": "AMQP",
+      "ground_truths": [
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/support/PublisherCallbackChannelImpl.java",
+        "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/core/RabbitTemplatePublisherCallbacksIntegrationTests.java",
+        "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/core/RabbitAdminDeclarationTests.java"
+      ],
+      "candidate_files": [
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/support/PublisherCallbackChannelImpl.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/core/RabbitTemplate.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/support/CorrelationData.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/CachingConnectionFactory.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/core/RabbitOperations.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/SimpleMessageListenerContainer.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/RabbitResourceHolder.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/support/PublisherCallbackChannel.java",
+        "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/core/RabbitTemplatePublisherCallbacksIntegrationTests.java",
+        "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/core/RabbitTemplateIntegrationTests.java"
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 0.3333333333333333,
+      "f1": 0.5,
+      "tp": 1,
+      "fp": 0,
+      "fn": 2
+    },
+    "AMQP-469": {
+      "repo": "AMQP",
+      "ground_truths": [
+        "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/admin/JInterfaceIntegrationTests.java",
+        "spring-erlang/src/main/java/org/springframework/erlang/core/ErlangTemplate.java",
+        "spring-erlang/src/main/java/org/springframework/erlang/connection/Connection.java",
+        "spring-erlang/src/main/java/org/springframework/erlang/connection/DefaultConnection.java"
+      ],
+      "candidate_files": [
+        "spring-erlang/src/main/java/org/springframework/erlang/core/ErlangTemplate.java",
+        "spring-erlang/src/main/java/org/springframework/erlang/connection/SingleConnectionFactory.java",
+        "spring-erlang/src/main/java/org/springframework/erlang/connection/SimpleConnectionFactory.java",
+        "spring-erlang/src/main/java/org/springframework/erlang/connection/Connection.java",
+        "spring-erlang/src/main/java/org/springframework/erlang/connection/DefaultConnection.java",
+        "spring-erlang/src/main/java/org/springframework/erlang/core/ConnectionCallback.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/core/RabbitTemplate.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/AbstractConnectionFactory.java",
+        "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/listener/MessageListenerContainerIntegrationTests.java",
+        "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/listener/MessageListenerContainerErrorHandlerIntegrationTests.java"
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 0.25,
+      "f1": 0.4,
+      "tp": 1,
+      "fp": 0,
+      "fn": 3
+    },
+    "AMQP-540": {
+      "repo": "AMQP",
+      "ground_truths": [
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/annotation/RabbitListenerAnnotationBeanPostProcessor.java",
+        "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/annotation/EnableRabbitIntegrationTests.java"
+      ],
+      "candidate_files": [
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/annotation/RabbitListenerAnnotationBeanPostProcessor.java",
+        "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/annotation/RabbitListenerAnnotationBeanPostProcessorTests.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/MethodRabbitListenerEndpoint.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/AbstractRabbitListenerEndpoint.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/config/AnnotationDrivenParser.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/AbstractMessageListenerContainer.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/RabbitListenerEndpointRegistrar.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/transaction/RabbitTransactionManager.java",
+        "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/listener/MethodRabbitListenerEndpointTests.java",
+        "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/config/ListenerContainerParserTests.java"
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 0.5,
+      "f1": 0.6666666666666666,
+      "tp": 1,
+      "fp": 0,
+      "fn": 1
+    },
+    "AMQP-541": {
+      "repo": "AMQP",
+      "ground_truths": [
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/annotation/RabbitListenerAnnotationBeanPostProcessor.java",
+        "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/annotation/EnableRabbitIntegrationTests.java"
+      ],
+      "candidate_files": [
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/annotation/RabbitListener.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/annotation/RabbitHandler.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/AbstractRabbitListenerEndpoint.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/MethodRabbitListenerEndpoint.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/MultiMethodRabbitListenerEndpoint.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/DelegatingInvocableHandler.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/annotation/RabbitListenerAnnotationBeanPostProcessor.java",
+        "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/annotation/RabbitListenerAnnotationBeanPostProcessorTests.java",
+        "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/listener/adapter/MessageListenerAdapterTests.java",
+        "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/listener/MethodRabbitListenerEndpointTests.java"
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 2
+    },
+    "AMQP-479": {
+      "repo": "AMQP",
+      "ground_truths": [
+        "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/core/RabbitTemplateIntegrationTests.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/ConnectionFactoryUtils.java"
+      ],
+      "candidate_files": [
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/transaction/RabbitTransactionManager.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/RabbitResourceHolder.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/core/RabbitTemplate.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/RabbitUtils.java",
+        "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/transaction/RabbitTransactionManagerIntegrationTests.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/transaction/package-info.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/core/RabbitTemplatePublisherCallbacksIntegrationTests.java",
+        "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/listener/ExternalTxManagerTests.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/ConnectionFactoryUtils.java",
+        "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/core/RabbitTemplateTests.java"
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 2
+    },
+    "AMQP-556": {
+      "repo": "AMQP",
+      "ground_truths": [
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/SimpleMessageListenerContainer.java",
+        "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/listener/SimpleMessageListenerContainerIntegration2Tests.java"
+      ],
+      "candidate_files": [
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/SimpleMessageListenerContainer.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/AbstractMessageListenerContainer.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/MessageListenerContainer.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/RabbitListenerEndpointRegistry.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/ActiveObjectCounter.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/ListenerContainerConsumerFailedEvent.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/core/RabbitTemplate.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/BlockingQueueConsumer.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/ConsumerChannelRegistry.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/config/SimpleRabbitListenerContainerFactory.java"
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 0.5,
+      "f1": 0.6666666666666666,
+      "tp": 1,
+      "fp": 0,
+      "fn": 1
+    },
+    "AMQP-657": {
+      "repo": "AMQP",
+      "ground_truths": [
+        "spring-amqp/src/main/java/org/springframework/amqp/support/SimpleAmqpHeaderMapper.java",
+        "spring-amqp/src/test/java/org/springframework/amqp/support/SimpleAmqpHeaderMapperTests.java",
+        "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/annotation/EnableRabbitIntegrationTests.java",
+        "spring-amqp/src/test/java/org/springframework/amqp/support/AmqpMessageHeaderAccessorTests.java"
+      ],
+      "candidate_files": [
+        "spring-amqp/src/main/java/org/springframework/amqp/support/SimpleAmqpHeaderMapper.java",
+        "spring-amqp/src/test/java/org/springframework/amqp/support/SimpleAmqpHeaderMapperTests.java",
+        "spring-amqp/src/main/java/org/springframework/amqp/support/AmqpMessageHeaderAccessor.java",
+        "spring-amqp/src/main/java/org/springframework/amqp/support/AmqpHeaderMapper.java",
+        "spring-amqp/src/main/java/org/springframework/amqp/core/MessageProperties.java",
+        "spring-amqp/src/main/java/org/springframework/amqp/core/Message.java",
+        "spring-amqp/src/main/java/org/springframework/amqp/core/AmqpTemplate.java",
+        "spring-amqp/src/main/java/org/springframework/amqp/support/converter/AbstractMessageConverter.java",
+        "spring-amqp/src/main/java/org/springframework/amqp/support/converter/JavaTypeMapper.java",
+        "spring-amqp/src/main/java/org/springframework/amqp/support/converter/DefaultJavaTypeMapper.java"
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 0.25,
+      "f1": 0.4,
+      "tp": 1,
+      "fp": 0,
+      "fn": 3
+    },
+    "AMQP-660": {
+      "repo": "AMQP",
+      "ground_truths": [
+        "spring-amqp/src/main/java/org/springframework/amqp/support/converter/SimpleMessageConverter.java",
+        "spring-amqp/src/test/java/org/springframework/amqp/support/converter/SerializerMessageConverterTests.java",
+        "spring-amqp/src/test/java/org/springframework/amqp/support/converter/SimpleMessageConverterTests.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/ConditionalRejectingErrorHandler.java"
+      ],
+      "candidate_files": [
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/ConditionalRejectingErrorHandler.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/AbstractMessageListenerContainer.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/MessageRejectedWhileStoppingException.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/exception/ListenerExecutionFailedException.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/support/DefaultMessagePropertiesConverter.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/support/SerializerMessageConverter.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/SimpleMessageListenerContainer.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/MessageListenerContainer.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/BlockingQueueConsumer.java",
+        "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/retry/RepublishMessageRecoverer.java"
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 0.25,
+      "f1": 0.4,
+      "tp": 1,
+      "fp": 0,
+      "fn": 3
+    },
+    "BATCHADM-129": {
+      "repo": "BATCHADM",
+      "ground_truths": [
+        "spring-batch-admin-manager/src/main/java/org/springframework/batch/admin/service/SimpleJobService.java",
+        "spring-batch-admin-manager/src/test/java/org/springframework/batch/admin/service/SimpleJobServiceTests.java"
+      ],
+      "candidate_files": [
+        "spring-batch-admin-manager/src/main/java/org/springframework/batch/admin/service/JdbcSearchableJobExecutionDao.java",
+        "spring-batch-admin-manager/src/main/java/org/springframework/batch/admin/service/SimpleJobService.java",
+        "spring-batch-admin-manager/src/main/java/org/springframework/batch/admin/web/JobExecutionController.java",
+        "spring-batch-admin-manager/src/test/java/org/springframework/batch/admin/service/JdbcSearchableJobExecutionDaoTests.java",
+        "spring-batch-admin-manager/src/main/java/org/springframework/batch/admin/service/JobService.java",
+        "spring-batch-admin-manager/src/main/java/org/springframework/batch/admin/service/SearchableJobExecutionDao.java",
+        "spring-batch-admin-manager/src/main/java/org/springframework/batch/admin/web/JobExecutionInfo.java",
+        "spring-batch-admin-manager/src/main/java/org/springframework/batch/admin/web/JobInstanceInfo.java",
+        "spring-batch-admin-manager/src/main/java/org/springframework/batch/admin/web/JobController.java",
+        "spring-batch-admin-manager/src/main/java/org/springframework/batch/admin/jmx/JobExecutionMetrics.java"
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 2
+    },
+    "BATCHADM-177": {
+      "repo": "BATCHADM",
+      "ground_truths": [
+        "spring-batch-admin-manager/src/test/java/org/springframework/batch/admin/web/JobExecutionControllerTests.java",
+        "spring-batch-admin-manager/src/main/java/org/springframework/batch/admin/web/JobExecutionController.java"
+      ],
+      "candidate_files": [
+        "spring-batch-admin-manager/src/main/java/org/springframework/batch/admin/web/JobExecutionController.java",
+        "spring-batch-admin-manager/src/main/java/org/springframework/batch/admin/web/StepExecutionController.java",
+        "spring-batch-admin-manager/src/main/java/org/springframework/batch/admin/web/StepExecutionInfo.java",
+        "spring-batch-admin-manager/src/main/java/org/springframework/batch/admin/service/JobService.java",
+        "spring-batch-admin-manager/src/main/java/org/springframework/batch/admin/service/SimpleJobService.java",
+        "spring-batch-admin-manager/src/main/java/org/springframework/batch/admin/service/JdbcSearchableStepExecutionDao.java",
+        "spring-batch-admin-manager/src/main/java/org/springframework/batch/admin/web/StepExecutionProgress.java",
+        "spring-batch-admin-manager/src/main/java/org/springframework/batch/admin/service/SearchableStepExecutionDao.java",
+        "spring-batch-admin-manager/src/main/java/org/springframework/batch/admin/service/JdbcSearchableJobExecutionDao.java",
+        "spring-batch-admin-manager/src/test/java/org/springframework/batch/admin/web/StepExecutionControllerTests.java"
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 0.5,
+      "f1": 0.6666666666666666,
+      "tp": 1,
+      "fp": 0,
+      "fn": 1
+    },
+    "CODEC-98": {
+      "repo": "CODEC",
+      "ground_truths": [
+        "src/test/org/apache/commons/codec/binary/Base64OutputStreamTest.java",
+        "src/test/org/apache/commons/codec/binary/Base64InputStreamTest.java",
+        "src/java/org/apache/commons/codec/binary/Base64.java",
+        "src/test/org/apache/commons/codec/binary/Base64TestData.java"
+      ],
+      "candidate_files": [
+        "src/java/org/apache/commons/codec/binary/Base64InputStream.java",
+        "src/java/org/apache/commons/codec/binary/Base64.java",
+        "src/test/org/apache/commons/codec/binary/Base64InputStreamTest.java",
+        "src/test/org/apache/commons/codec/binary/Base64Test.java",
+        "src/java/org/apache/commons/codec/binary/Base64OutputStream.java",
+        "src/java/org/apache/commons/codec/DecoderException.java",
+        "src/java/org/apache/commons/codec/EncoderException.java",
+        "src/java/org/apache/commons/codec/binary/StringUtils.java",
+        "src/java/org/apache/commons/codec/BinaryDecoder.java",
+        "src/java/org/apache/commons/codec/BinaryEncoder.java"
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 4
+    },
+    "CODEC-130": {
+      "repo": "CODEC",
+      "ground_truths": [
+        "src/java/org/apache/commons/codec/binary/BaseNCodecInputStream.java",
+        "src/test/org/apache/commons/codec/binary/Base32InputStreamTest.java",
+        "src/test/org/apache/commons/codec/binary/Base64InputStreamTest.java"
+      ],
+      "candidate_files": [
+        "src/java/org/apache/commons/codec/binary/Base64InputStream.java",
+        "src/test/org/apache/commons/codec/binary/Base64InputStreamTest.java",
+        "src/java/org/apache/commons/codec/binary/BaseNCodecInputStream.java",
+        "src/java/org/apache/commons/codec/binary/Base64OutputStream.java",
+        "src/java/org/apache/commons/codec/binary/BaseNCodec.java",
+        "src/java/org/apache/commons/codec/binary/Base32InputStream.java",
+        "src/test/org/apache/commons/codec/binary/Base64Test.java",
+        "src/java/org/apache/commons/codec/binary/Base32OutputStream.java",
+        "src/java/org/apache/commons/codec/binary/Base64.java",
+        "src/test/org/apache/commons/codec/binary/Base64TestData.java"
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 3
+    },
+    "CODEC-191": {
+      "repo": "CODEC",
+      "ground_truths": [
+        "src/main/java/org/apache/commons/codec/binary/Base32OutputStream.java",
+        "src/main/java/org/apache/commons/codec/binary/Base64OutputStream.java"
+      ],
+      "candidate_files": [
+        "src/main/java/org/apache/commons/codec/binary/Base64OutputStream.java",
+        "src/test/java/org/apache/commons/codec/binary/Base64OutputStreamTest.java",
+        "src/main/java/org/apache/commons/codec/binary/Base64InputStream.java",
+        "src/test/java/org/apache/commons/codec/binary/Base64InputStreamTest.java",
+        "src/main/java/org/apache/commons/codec/binary/Base64.java",
+        "src/test/java/org/apache/commons/codec/binary/Base64Test.java",
+        "src/test/java/org/apache/commons/codec/binary/Base64TestData.java",
+        "src/main/java/org/apache/commons/codec/binary/BaseNCodecOutputStream.java",
+        "src/main/java/org/apache/commons/codec/binary/BaseNCodec.java",
+        "src/main/java/org/apache/commons/codec/binary/StringUtils.java"
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 0.5,
+      "f1": 0.6666666666666666,
+      "tp": 1,
+      "fp": 0,
+      "fn": 1
+    },
+    "IO-91": {
+      "repo": "IO",
+      "ground_truths": [
+        "src/test/org/apache/commons/io/FileSystemUtilsTestCase.java",
+        "src/java/org/apache/commons/io/FileSystemUtils.java"
+      ],
+      "candidate_files": [
+        "src/java/org/apache/commons/io/FileSystemUtils.java",
+        "src/test/org/apache/commons/io/FileSystemUtilsTestCase.java",
+        "src/test/org/apache/commons/io/FileUtilsTestCase.java",
+        "src/java/org/apache/commons/io/FileUtils.java",
+        "src/test/org/apache/commons/io/IOUtilsTestCase.java",
+        "src/test/org/apache/commons/io/FileCleanerTestCase.java",
+        "src/test/org/apache/commons/io/FileUtilsListFilesTestCase.java",
+        "src/test/org/apache/commons/io/FileUtilsFileNewerTestCase.java",
+        "src/test/org/apache/commons/io/CopyUtilsTest.java",
+        "src/java/org/apache/commons/io/IOUtils.java"
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 0.5,
+      "f1": 0.6666666666666666,
+      "tp": 1,
+      "fp": 0,
+      "fn": 1
+    },
+    "IO-93": {
+      "repo": "IO",
+      "ground_truths": [
+        "src/test/org/apache/commons/io/FileSystemUtilsTestCase.java",
+        "src/java/org/apache/commons/io/FileSystemUtils.java"
+      ],
+      "candidate_files": [
+        "src/java/org/apache/commons/io/FileSystemUtils.java",
+        "src/test/org/apache/commons/io/FileSystemUtilsTestCase.java",
+        "src/java/org/apache/commons/io/FileCleaner.java",
+        "src/java/org/apache/commons/io/FileUtils.java",
+        "src/test/org/apache/commons/io/FileUtilsTestCase.java",
+        "src/java/org/apache/commons/io/input/DemuxInputStream.java",
+        "src/test/org/apache/commons/io/IOUtilsTestCase.java",
+        "src/java/org/apache/commons/io/IOUtils.java",
+        "src/test/org/apache/commons/io/output/DeferredFileOutputStreamTest.java",
+        "src/test/org/apache/commons/io/output/CountingOutputStreamTest.java"
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 0.5,
+      "f1": 0.6666666666666666,
+      "tp": 1,
+      "fp": 0,
+      "fn": 1
+    },
+    "IO-101": {
+      "repo": "IO",
+      "ground_truths": [
+        "src/java/org/apache/commons/io/EndianUtils.java",
+        "src/test/org/apache/commons/io/EndianUtilsTest.java"
+      ],
+      "candidate_files": [
+        "src/java/org/apache/commons/io/EndianUtils.java",
+        "src/test/org/apache/commons/io/EndianUtilsTest.java",
+        "src/java/org/apache/commons/io/input/SwappedDataInputStream.java",
+        "src/test/org/apache/commons/io/input/SwappedDataInputStreamTest.java",
+        "src/test/org/apache/commons/io/IOUtilsWriteTestCase.java",
+        "src/java/org/apache/commons/io/IOUtils.java",
+        "src/java/org/apache/commons/io/output/CountingOutputStream.java",
+        "src/java/org/apache/commons/io/output/ByteArrayOutputStream.java",
+        "src/java/org/apache/commons/io/output/ProxyOutputStream.java",
+        "src/java/org/apache/commons/io/output/NullOutputStream.java"
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 0.5,
+      "f1": 0.6666666666666666,
+      "tp": 1,
+      "fp": 0,
+      "fn": 1
+    },
+    "IO-74": {
+      "repo": "IO",
+      "ground_truths": [
+        "src/java/org/apache/commons/io/filefilter/FileFilterUtils.java",
+        "src/test/org/apache/commons/io/filefilter/FileFilterTestCase.java"
+      ],
+      "candidate_files": [
+        "src/java/org/apache/commons/io/filefilter/RegexFilter.java",
+        "src/java/org/apache/commons/io/filefilter/FileFilterUtils.java",
+        "src/java/org/apache/commons/io/filefilter/WildcardFilter.java",
+        "src/java/org/apache/commons/io/filefilter/NameFileFilter.java",
+        "src/java/org/apache/commons/io/filefilter/IOFileFilter.java",
+        "src/test/org/apache/commons/io/filefilter/FileFilterTestCase.java",
+        "src/java/org/apache/commons/io/filefilter/WildcardFileFilter.java",
+        "src/java/org/apache/commons/io/filefilter/ConditionalFileFilter.java",
+        "src/java/org/apache/commons/io/filefilter/AbstractFileFilter.java",
+        "src/java/org/apache/commons/io/filefilter/DelegateFileFilter.java"
+      ],
+      "accuracy": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 2
+    },
+    "IO-180": {
+      "repo": "IO",
+      "ground_truths": [
+        "src/java/org/apache/commons/io/LineIterator.java"
+      ],
+      "candidate_files": [
+        "src/java/org/apache/commons/io/LineIterator.java",
+        "src/java/org/apache/commons/io/FileUtils.java",
+        "src/test/org/apache/commons/io/LineIteratorTestCase.java",
+        "src/test/org/apache/commons/io/FileUtilsTestCase.java",
+        "src/java/org/apache/commons/io/IOExceptionWithCause.java",
+        "src/java/org/apache/commons/io/IOUtils.java",
+        "src/test/org/apache/commons/io/input/ClosedInputStreamTest.java",
+        "src/test/org/apache/commons/io/input/CountingInputStreamTest.java",
+        "src/test/org/apache/commons/io/IOUtilsTestCase.java",
+        "src/java/org/apache/commons/io/DirectoryWalker.java"
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0
+    },
+    "IO-166": {
+      "repo": "IO",
+      "ground_truths": [
+        "src/test/org/apache/commons/io/FileUtilsTestCase.java",
+        "src/java/org/apache/commons/io/FileUtils.java"
+      ],
+      "candidate_files": [
+        "src/java/org/apache/commons/io/FileUtils.java",
+        "src/test/org/apache/commons/io/FileUtilsTestCase.java",
+        "src/java/org/apache/commons/io/IOUtils.java",
+        "src/java/org/apache/commons/io/FilenameUtils.java",
+        "src/test/org/apache/commons/io/FilenameUtilsTestCase.java",
+        "src/java/org/apache/commons/io/FileCleaner.java",
+        "src/java/org/apache/commons/io/output/FileWriterWithEncoding.java",
+        "src/java/org/apache/commons/io/output/FileWriterWithEncodingTest.java",
+        "src/java/org/apache/commons/io/CopyUtils.java",
+        "src/test/org/apache/commons/io/FileUtilsWaitForTestCase.java"
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 0.5,
+      "f1": 0.6666666666666666,
+      "tp": 1,
+      "fp": 0,
+      "fn": 1
+    },
+    "IO-248": {
+      "repo": "IO",
+      "ground_truths": [
+        "src/test/org/apache/commons/io/FilenameUtilsTestCase.java",
+        "src/java/org/apache/commons/io/FilenameUtils.java"
+      ],
+      "candidate_files": [
+        "src/java/org/apache/commons/io/FilenameUtils.java",
+        "src/test/org/apache/commons/io/FilenameUtilsTestCase.java",
+        "src/test/org/apache/commons/io/FilenameUtilsWildcardTestCase.java",
+        "src/java/org/apache/commons/io/FileUtils.java",
+        "src/java/org/apache/commons/io/filefilter/PrefixFileFilter.java",
+        "src/test/org/apache/commons/io/FileUtilsTestCase.java",
+        "src/test/org/apache/commons/io/FileUtilsListFilesTestCase.java",
+        "src/java/org/apache/commons/io/IOCase.java",
+        "src/test/org/apache/commons/io/FileCleaningTrackerTestCase.java",
+        "src/java/org/apache/commons/io/filefilter/IOFileFilter.java"
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 0.5,
+      "f1": 0.6666666666666666,
+      "tp": 1,
+      "fp": 0,
+      "fn": 1
+    },
+    "IO-258": {
+      "repo": "IO",
+      "ground_truths": [
+        "src/test/java/org/apache/commons/io/input/XmlStreamReaderTest.java",
+        "src/main/java/org/apache/commons/io/input/XmlStreamReader.java"
+      ],
+      "candidate_files": [
+        "src/main/java/org/apache/commons/io/input/XmlStreamReader.java",
+        "src/test/java/org/apache/commons/io/input/XmlStreamReaderTest.java",
+        "src/test/java/org/apache/commons/io/input/ReaderInputStreamTest.java",
+        "src/main/java/org/apache/commons/io/input/ReaderInputStream.java",
+        "src/test/java/org/apache/commons/io/input/BOMInputStreamTest.java",
+        "src/main/java/org/apache/commons/io/input/BOMInputStream.java",
+        "src/test/java/org/apache/commons/io/input/CountingInputStreamTest.java",
+        "src/main/java/org/apache/commons/io/input/CountingInputStream.java",
+        "src/main/java/org/apache/commons/io/input/ProxyInputStream.java",
+        "src/main/java/org/apache/commons/io/input/CloseShieldInputStream.java"
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 0.5,
+      "f1": 0.6666666666666666,
+      "tp": 1,
+      "fp": 0,
+      "fn": 1
+    },
+    "IO-263": {
+      "repo": "IO",
+      "ground_truths": [
+        "src/test/java/org/apache/commons/io/FileSystemUtilsTestCase.java",
+        "src/main/java/org/apache/commons/io/FileSystemUtils.java"
+      ],
+      "candidate_files": [
+        "src/main/java/org/apache/commons/io/FileSystemUtils.java",
+        "src/test/java/org/apache/commons/io/FileSystemUtilsTestCase.java",
+        "src/main/java/org/apache/commons/io/FileUtils.java",
+        "src/main/java/org/apache/commons/io/filefilter/HiddenFileFilter.java",
+        "src/main/java/org/apache/commons/io/filefilter/EmptyFileFilter.java",
+        "src/main/java/org/apache/commons/io/filefilter/IOFileFilter.java",
+        "src/main/java/org/apache/commons/io/filefilter/FileFileFilter.java",
+        "src/test/java/org/apache/commons/io/FileUtilsTestCase.java",
+        "src/test/java/org/apache/commons/io/FileUtilsCleanDirectoryTestCase.java",
+        "src/test/java/org/apache/commons/io/filefilter/FileFilterTestCase.java"
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 0.5,
+      "f1": 0.6666666666666666,
+      "tp": 1,
+      "fp": 0,
+      "fn": 1
+    },
+    "IO-274": {
+      "repo": "IO",
+      "ground_truths": [
+        "src/test/java/org/apache/commons/io/input/TailerTest.java",
+        "src/main/java/org/apache/commons/io/input/Tailer.java"
+      ],
+      "candidate_files": [
+        "src/main/java/org/apache/commons/io/input/Tailer.java",
+        "src/main/java/org/apache/commons/io/input/TailerListener.java",
+        "src/main/java/org/apache/commons/io/input/TailerListenerAdapter.java",
+        "src/test/java/org/apache/commons/io/input/TailerTest.java",
+        "src/main/java/org/apache/commons/io/LineIterator.java",
+        "src/main/java/org/apache/commons/io/input/CountingInputStream.java",
+        "src/main/java/org/apache/commons/io/input/NullInputStream.java",
+        "src/test/java/org/apache/commons/io/input/NullInputStreamTest.java",
+        "src/main/java/org/apache/commons/io/input/AutoCloseInputStream.java",
+        "src/main/java/org/apache/commons/io/input/ReaderInputStream.java"
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 0.5,
+      "f1": 0.6666666666666666,
+      "tp": 1,
+      "fp": 0,
+      "fn": 1
+    },
+    "IO-331": {
+      "repo": "IO",
+      "ground_truths": [
+        "src/test/java/org/apache/commons/io/input/compatibility/XmlStreamReaderUtilitiesCompatibilityTest.java",
+        "src/main/java/org/apache/commons/io/input/BOMInputStream.java",
+        "src/test/java/org/apache/commons/io/input/XmlStreamReaderUtilitiesTest.java",
+        "src/test/java/org/apache/commons/io/input/XmlStreamReaderTest.java",
+        "src/main/java/org/apache/commons/io/input/XmlStreamReader.java",
+        "src/test/java/org/apache/commons/io/input/compatibility/XmlStreamReader.java"
+      ],
+      "candidate_files": [
+        "src/main/java/org/apache/commons/io/input/BOMInputStream.java",
+        "src/test/java/org/apache/commons/io/input/BOMInputStreamTest.java",
+        "src/main/java/org/apache/commons/io/ByteOrderMark.java",
+        "src/main/java/org/apache/commons/io/Charsets.java",
+        "src/main/java/org/apache/commons/io/input/ReaderInputStream.java",
+        "src/main/java/org/apache/commons/io/input/NullInputStream.java",
+        "src/main/java/org/apache/commons/io/input/SwappedDataInputStream.java",
+        "src/main/java/org/apache/commons/io/input/CharSequenceInputStream.java",
+        "src/main/java/org/apache/commons/io/input/CountingInputStream.java",
+        "src/main/java/org/apache/commons/io/input/ReaderInputStream.java"
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 0.16666666666666666,
+      "f1": 0.2857142857142857,
+      "tp": 1,
+      "fp": 0,
+      "fn": 5
+    },
+    "IO-436": {
+      "repo": "IO",
+      "ground_truths": [
+        "src/main/java/org/apache/commons/io/FilenameUtils.java"
+      ],
+      "candidate_files": [
+        "src/main/java/org/apache/commons/io/FilenameUtils.java",
+        "src/test/java/org/apache/commons/io/FilenameUtilsTestCase.java",
+        "src/test/java/org/apache/commons/io/FilenameUtilsWildcardTestCase.java",
+        "src/main/java/org/apache/commons/io/FileUtils.java",
+        "src/test/java/org/apache/commons/io/FileUtilsTestCase.java",
+        "src/main/java/org/apache/commons/io/comparator/ExtensionFileComparator.java",
+        "src/test/java/org/apache/commons/io/comparator/ExtensionFileComparatorTest.java",
+        "src/main/java/org/apache/commons/io/filefilter/FileFilterUtils.java",
+        "src/main/java/org/apache/commons/io/filefilter/RegexFileFilter.java",
+        "src/main/java/org/apache/commons/io/IOExceptionWithCause.java"
+      ],
+      "accuracy": 1,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  "overall": {
+    "accuracy": 0.7666666666666667,
+    "precision": 0.7666666666666667,
+    "recall": 0.3108108108108108,
+    "f1": 0.4423076923076923,
+    "total_bugs": 30,
+    "total_tp": 23,
+    "total_fp": 7,
+    "total_fn": 51
+  }
+}

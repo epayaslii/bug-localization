@@ -284,11 +284,11 @@ MRR climbs monotonically as the embedding side is up-weighted — recovering, th
 Re-scoped 2026-08-17, after merging the validated branches into `main` and making Bench4BL the
 primary dataset. Ranked by how much each one matters right now:
 
-1. **No confirmed end-to-end (LLM rerank) number for Bench4BL yet** — every strong Bench4BL
-   number so far (MRR 0.714) is retrieval-only. The one end-to-end run that exists
-   (`results/e2e_gpt4o_mini_bench4bl_6_bm25.json`) is n=6. **An n=30 run (BM25 skeleton top-100 +
-   gpt-4o-mini) is in progress as of this update** — see `results/e2e_gpt4o_mini_bench4bl_30_skeleton.json`
-   once it lands.
+1. ~~No confirmed end-to-end (LLM rerank) number for Bench4BL~~ **Done (2026-08-17), and
+   confirmed twice.** BM25-only: 70.0% accuracy, n=30. Hybrid-RRF (0.714 MRR retrieval feeding
+   the LLM instead of BM25 alone, via a two-phase MN5+local pipeline, GPU-accelerated): **76.7%
+   accuracy, n=30 — the project's strongest confirmed end-to-end number on any benchmark.** See
+   `docs/bench4bl_result.md`.
 2. **Language coverage stops at Python + Java.** BeetleBox has Go and JavaScript instances that
    still silently fall back to path-only BM25 / fixed-window embedding chunks — the same problem
    Java had until `method/java_parsing.py` fixed it for `.java` files specifically.

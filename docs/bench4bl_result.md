@@ -130,32 +130,39 @@ actual current pool (`--pool-size 250`, comfortably above the 213-instance total
 `random.sample` isn't triggered by this kind of mismatch again as more projects get mirrored):
 30 instances, 4 distinct repos, drawn from 213 instances across 6 contributing repos.
 
-## End-to-end result (n=30, BM25 skeleton top-100 + gpt-4o-mini rerank)
+## End-to-end result (n=30) — two retrieval configs compared
 
-`results/e2e_gpt4o_mini_bench4bl_30_skeleton.json`, same manifest as the retrieval-only results
-above (`bench4bl-multi-n30-s42-mn5-8proj.json`). Retrieval narrowing is BM25 with the `skeleton`
-representation (Bench4BL's own best BM25 representation, confirmed above), not the stronger
-hybrid RRF config — chosen so this run stays fast/free-of-embedding-model-load and directly
-comparable to how the SWE-bench 51.7% headline number was produced (BM25 + LLM rerank, not the
-full hybrid stack):
+Same manifest for both (`bench4bl-multi-n30-s42-mn5-8proj.json`), same model (`gpt-4o-mini`),
+only the retrieval narrowing feeding the LLM differs:
 
-| Metric | Value |
-|---|---:|
-| Accuracy | **70.0%** |
-| Precision | 70.0% |
-| Recall | 28.4% |
-| F1 | 0.404 |
+| Config | Accuracy | Precision | Recall | F1 |
+|---|---:|---:|---:|---:|
+| BM25 skeleton top-100 | 70.0% | 70.0% | 28.4% | 0.404 |
+| **Hybrid RRF (Qwen3, 1:5) top-100 — best** | **76.7%** | **76.7%** | 31.1% | 0.442 |
 
-**70.0% is now the project's strongest confirmed end-to-end number on any benchmark** — well
-above SWE-bench Verified's 51.7% (n=60, same BM25+LLM-rerank recipe). The one earlier Bench4BL
-end-to-end run (`results/e2e_gpt4o_mini_bench4bl_6_bm25.json`) was n=6 using `path_only` BM25
-(Bench4BL's weakest representation) — too small and too weak a retrieval config to trust; this
-replaces it as the real number. Recall's the low outlier here (28.4%) — many Bench4BL ground
-truths list several fixed files per bug (`total_fn=53` across 30 bugs), and the LLM only ever
-returns one top candidate per call in this pipeline, so precision/accuracy (which reward getting
-*a* correct file) look much stronger than recall (which needs *all* of them). Not yet run with
-the stronger hybrid-RRF retrieval config (MRR 0.714) feeding the LLM instead of BM25 alone —
-real next step, flagged in "Next steps" below.
+`results/e2e_gpt4o_mini_bench4bl_30_skeleton.json` and `results/e2e_gpt4o_mini_bench4bl_30_hybrid_rrf.json`.
+**76.7% is now the project's strongest confirmed end-to-end number on any benchmark** — well
+above SWE-bench Verified's 51.7% (n=60), and above this same benchmark's own BM25-only number.
+Confirms the predicted headroom: retrieval MRR (0.714 hybrid vs. 0.413 BM25-only) translated
+into a real +6.7pp end-to-end gain, not just a stronger pre-rerank ranking that gets flattened
+by the LLM's own pick.
+
+Produced via a two-phase pipeline built for this: MN5 has no outbound internet (the LLM call
+can't run there), while real per-instance Java-aware chunking is too slow to run serially
+anywhere (~900s/instance on CPU). Phase 1 (`scripts/run_hybrid_retrieval_candidates_shard.py`,
+a 10-shard MN5 array job, **`--gres=gpu:1`** now that MN5 Blocker 5 is fixed) computes the
+hybrid-RRF candidates and writes them to disk — **with the GPU fix, this took under 90 seconds
+total for all 30 instances** (each instance's embedding step ran in 4-37s, vs. the ~900s/instance
+CPU baseline — a real ~30-40x speedup on the actual production workload, not a synthetic
+benchmark). Phase 2 (`main.py --candidates-file`, new flag added for this) loads the precomputed
+candidates and makes the 30 real LLM calls locally, where there's internet.
+
+The one earlier Bench4BL end-to-end run (`results/e2e_gpt4o_mini_bench4bl_6_bm25.json`) was n=6
+using `path_only` BM25 (Bench4BL's weakest representation) — too small and too weak a retrieval
+config to trust; both rows above replace it as the real numbers. Recall is the low outlier in
+both configs — many Bench4BL ground truths list several fixed files per bug, and the LLM only
+ever returns one top candidate per call in this pipeline, so precision/accuracy (which reward
+getting *a* correct file) look much stronger than recall (which needs *all* of them).
 
 ## Known coverage gap: WFMP
 
@@ -250,6 +257,6 @@ differ) and hybrid (n=30, 0.7137 MRR) results above are both downstream of this.
 Tracked centrally in [`docs/PROGRESS_REPORT.md`](PROGRESS_REPORT.md) §16, not duplicated here —
 that list is kept current across the whole project (Bench4BL and otherwise) so there's one place
 to check rather than several drifting independently. Items from that list specific to Bench4BL
-as of this writing: mirroring the remaining 46 projects, retrying BATCH's stalled MN5 transfer,
-and re-running the end-to-end eval with hybrid-RRF retrieval instead of BM25 alone (a two-phase
-pipeline — MN5 for retrieval, local for the LLM call — started 2026-08-17, not yet landed).
+as of this writing: mirroring the remaining 46 projects, retrying BATCH's stalled MN5 transfer.
+~~Re-running the end-to-end eval with hybrid-RRF retrieval instead of BM25 alone~~ **Done**
+(2026-08-17) — see the corrected "End-to-end result" section above (76.7%, new project best).
