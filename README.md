@@ -1,6 +1,6 @@
 # Bug Localization
 
-Given a bug report and a snapshot of a repository's code, predict which source files need to change to fix the bug. This repo implements an LLM-based bug localizer and evaluates it against public bug-localization benchmarks (SWE-bench Verified, BeetleBox).
+Given a bug report and a snapshot of a repository's code, predict which source files need to change to fix the bug. This repo implements an LLM-based bug localizer and evaluates it against public bug-localization benchmarks — **Bench4BL** (primary), SWE-bench Verified, and BeetleBox (secondary/tertiary).
 
 > **Benchmark caveat:** OpenAI has [stopped evaluating on SWE-bench Verified](https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified/) and now recommends SWE-bench Pro instead, citing tests that reject functionally correct solutions and possible train/test contamination. This project still targets Verified for continuity with prior results — treat any accuracy numbers here with that caveat in mind, and consider SWE-bench Pro or a time-separated benchmark for future work.
 
@@ -10,7 +10,7 @@ See [docs/literature_review.md](docs/literature_review.md) for the survey of rec
 
 ## How it works
 
-1. **Dataset** (`dataset/`) loads bug instances (bug report + target repo + base commit + ground-truth changed files) from SWE-bench Verified or BeetleBox.
+1. **Dataset** (`dataset/`) loads bug instances (bug report + target repo + base commit + ground-truth changed files) from Bench4BL (primary), SWE-bench Verified, or BeetleBox.
 2. **Repo file access**: for each bug instance, the list of candidate code files (and their contents) is pulled either from the GitHub API or from a local git cache (see [Offline repo access](#offline-repo-access-repo_cache) below).
 3. **Method** (`method/`) sends the bug report plus the candidate file list/contents to an LLM and asks it to rank/select the files most likely to need changes.
 4. **Evaluation** (`method/evaluate.py`) compares predicted files against ground truth and reports accuracy (hit@k), precision, recall, and F1.
@@ -46,12 +46,12 @@ Covers `dataset/localizability.py`, `method/bm25_retriever.py`, `evaluation/` (m
 ## Usage
 
 ```bash
-python main.py --method openrouter --dataset swebench --model gpt-oss-20b --sample-size N
+python main.py --method openrouter --dataset bench4bl --model gpt-oss-20b --sample-size N
 ```
 
 Arguments (`main.py`):
 - `--method`: `openai`, `openai-free`, `openrouter` (default), or `unsloth` (currently disabled, see [Notes](#notes))
-- `--dataset`: `swebench` or `beetlebox` (default)
+- `--dataset`: `bench4bl` (default, primary benchmark), `swebench`, or `beetlebox`
 - `--model`: model name, see [Models](#models) below (default `gpt-oss-20b`)
 - `--sample-size`: number of bug instances to sample
 - `--max-files`: cap the number of code files sent to the model per bug (cheap smoke-testing only — may truncate away the actual ground-truth file, so don't use it for real evaluation runs)

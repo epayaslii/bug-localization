@@ -19,7 +19,7 @@ def main():
     parser.add_argument('--method', choices=['openai', 'openai-free', 'unsloth', 'openrouter'], 
                        default='openrouter', help='Localization method to use')
     parser.add_argument('--dataset', choices=['swebench', 'beetlebox', 'bench4bl'],
-                       default='beetlebox', help='Dataset to use')
+                       default='bench4bl', help='Dataset to use')
     parser.add_argument('--model', default='gpt-oss-20b',
                        help='Model to use (for HuggingFace: gpt-oss, gpt-oss-120b, etc.)')
     parser.add_argument('--device', choices=['cuda', 'cpu', 'auto'], 
