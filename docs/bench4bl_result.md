@@ -202,6 +202,38 @@ result doesn't justify its cost on this task.
 Result file: `results/embedding_bakeoff_bench4bl_30_gpu.json` (4 GPU models),
 `results/embedding_bakeoff_bench4bl_30_api.json` (OpenAI only — Voyage failed before writing).
 
+### Update 2026-08-18: re-run on the diverse-sample manifest — Qwen3's lead narrows, no longer a clean win
+
+The table above used the old, AMQP/IO-skewed 4-project manifest. Re-run on the new diverse
+manifest (`bench4bl-multi-n30-s42-8c4f91c33f21.json`, 14 distinct repos — see "Manifest
+diversity" further below):
+
+| Model | MRR | MAP | Hit@1 | Hit@5 | Hit@10 |
+|---|---:|---:|---:|---:|---:|
+| **OpenAI text-embedding-3-small** | **0.449** | 0.342 | **33.3%** | **60.0%** | **70.0%** |
+| Qwen3-Embedding-0.6B | 0.431 | **0.349** | 30.0% | 53.3% | 63.3% |
+| UniXCoder | 0.328 | 0.241 | 23.3% | 43.3% | 50.0% |
+| BGE-Code-v1 | 0.247 | 0.181 | 16.7% | 30.0% | 36.7% |
+| CodeBERT | 0.082 | 0.063 | 3.3% | 10.0% | 13.3% |
+
+**Every model's score dropped substantially from the old-manifest table** — same "diverse
+sample is harder" pattern already seen with the retriever/relevance-feedback numbers below.
+More importantly: **OpenAI edges out Qwen3-Embedding on MRR/Hit@1/Hit@5/Hit@10 here; Qwen3
+only wins on MAP.** On the old manifest Qwen3 won cleanly across every metric (0.688 vs.
+0.656 MRR). At n=30 this gap is within 1-2 bugs' worth of noise, so this isn't a clean
+reversal — but it's no longer the unambiguous "Qwen3 wins outright" story the old-manifest
+table told, and CodeBERT/BGE-Code-v1/UniXCoder's relative order held. The relevance-feedback
+pipeline below used Qwen3-Embedding as its retriever, decided before this diverse-manifest
+bake-off completed — defensible (Qwen3 is still competitive, and the retriever's *fused*
+hybrid-RRF MRR, not the embedding-alone number, is what actually matters there), but worth
+being precise that "Qwen3 confirmed best" is weaker evidence on the representative sample than
+it looked on the skewed one. A real open question for next time an embedding model is chosen:
+would OpenAI's embedding, fused via hybrid-RRF the same way Qwen3's is, beat 0.714 MRR? Not
+yet tested.
+
+Result file: `results/embedding_bakeoff_bench4bl_30_gpu_46proj.json` (4 GPU models),
+`results/embedding_bakeoff_bench4bl_30_46proj_api.json` (OpenAI).
+
 ## Relevance-feedback + query reformulation (chunk-level, hybrid-RRF, local LLM) — n=30
 
 Per the supervisor-confirmed pipeline (`Bug report -> IR retrieval -> LLM relevance feedback

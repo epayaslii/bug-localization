@@ -82,10 +82,19 @@ fusion) via `scripts/compare_embedding_models.py`. Full detail and discussion in
 | CodeBERT | 0.080 | 0.056 | 0% | 10.0% | 23.3% |
 | Voyage-code-3 | — | — | — | — | — (failed: API rate-limiting) |
 
-Confirms Qwen3-Embedding-0.6B as the right choice for the hybrid-RRF pipeline (already in use)
-rather than an untested assumption. CodeBERT's weak showing here is a task-mismatch artifact,
-not a knock against the model generally — IQLoc fine-tunes CodeBERT as a cross-encoder
-classifier, a different mechanism than the off-the-shelf bi-encoder embedding this test uses.
+CodeBERT's weak showing here is a task-mismatch artifact, not a knock against the model
+generally — IQLoc fine-tunes CodeBERT as a cross-encoder classifier, a different mechanism
+than the off-the-shelf bi-encoder embedding this test uses.
+
+**Update 2026-08-18 — re-run on a diverse-sample manifest (14 distinct repos, not the old
+4-project AMQP/IO-skewed one): Qwen3's lead narrows to a near-tie with OpenAI, no longer a
+clean win.** OpenAI text-embedding-3-small edges it out on MRR/Hit@1/Hit@5/Hit@10 (0.449 vs.
+0.431); Qwen3 only wins on MAP (0.349 vs. 0.342). At n=30 this is within a couple of bugs'
+worth of noise, so not a confirmed reversal — but "Qwen3-Embedding-0.6B is the right choice"
+is weaker evidence on the representative sample than the old table suggested. Every model's
+score dropped substantially on the diverse manifest, same pattern as every other Bench4BL
+number re-run on it. Full table and discussion: `docs/bench4bl_result.md`'s embedding
+bake-off section.
 
 **This project also has real end-to-end numbers on Bench4BL — 76.7% (hybrid-RRF retrieval) and
 70.0% (BM25-only) accuracy, both n=30** — these are in the SWE-bench-style table above, but
