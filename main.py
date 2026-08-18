@@ -7,6 +7,7 @@ from method.openai_localizer import OpenAILocalizer
 from method.openai_free_localizer import OpenAIFreeLocalizer
 # from method.opensource_localizer import OpenSourceLocalizer
 from method.openrouter_localizer import OpenRouterLocalizer
+from method.ollama_localizer import OllamaLocalizer
 from dataset.utils import setup_logging, get_logger
 import logging
 from method.evaluate import Evaluator
@@ -17,8 +18,13 @@ logger = get_logger(__name__)
 
 def main():
     parser = argparse.ArgumentParser(description='Bug Localization Tool')
-    parser.add_argument('--method', choices=['openai', 'openai-free', 'unsloth', 'openrouter'], 
-                       default='openrouter', help='Localization method to use')
+    parser.add_argument('--method', choices=['openai', 'openai-free', 'unsloth', 'openrouter', 'ollama'],
+                       default='openrouter', help='Localization method to use. "ollama" talks to a local '
+                            'Ollama server instead of a cloud API -- see docs/ollama_deployment.md; needed for '
+                            'any environment with no outbound internet (e.g. MN5).')
+    parser.add_argument('--ollama-host', default=None,
+                       help='With --method ollama: override the Ollama server host (default: $OLLAMA_HOST or '
+                            'http://localhost:11434).')
     parser.add_argument('--dataset', choices=['swebench', 'beetlebox', 'bench4bl'],
                        default='bench4bl', help='Dataset to use')
     parser.add_argument('--model', default='gpt-oss-20b',
@@ -107,6 +113,9 @@ def main():
             )
         elif args.method == 'openrouter':
             localizer = OpenRouterLocalizer(model=args.model)
+        elif args.method == 'ollama':
+            model = args.model if args.model != parser.get_default('model') else 'qwen2.5-coder'
+            localizer = OllamaLocalizer(model=model, host=args.ollama_host)
         else:
             raise ValueError(f"Unknown method: {args.method}")
         

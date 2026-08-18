@@ -20,3 +20,13 @@ class RelevanceFeedbackResponse(BaseModel):
     judgments: List[FileRelevanceJudgment]
 
 
+class ChunkRelevanceJudgment(BaseModel):
+    file: str
+    chunk_index: int
+    relevant: bool
+
+
+class ChunkRelevanceFeedbackResponse(BaseModel):
+    judgments: List[ChunkRelevanceJudgment]
+
+

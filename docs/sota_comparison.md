@@ -39,18 +39,33 @@ this exact benchmark**, not a different split — BRaIn and IQLoc, both scoped i
 Bench4BL specifically: it's a real apples-to-apples comparison point, not just "another
 dataset."
 
-| System | MRR | Benchmark | Notes |
-|---|---:|---|---|
-| **This project — retrieval-only, weighted-RRF hybrid (Qwen3, 1:5), n=30** | **0.714** | Bench4BL | pre-rerank, this project's own manifest (8 projects) |
-| BRaIn (zero-shot LLM relevance feedback + query reformulation) | 0.571 | Bench4BL | 4,683 bugs / 42 systems, their own full split |
-| IQLoc (fine-tuned CodeBERT cross-encoder + CodeT5) | 0.553 | Bench4BL | 7,483 bugs, their own refined split |
+| System | MRR | MAP | Benchmark | Notes |
+|---|---:|---:|---|---|
+| **This project — retrieval-only, weighted-RRF hybrid (Qwen3, 1:5), n=30** | **0.714** | **0.564** | Bench4BL | pre-rerank, this project's own manifest — 4 projects (AMQP/IO/CODEC/BATCHADM) |
+| BRaIn (zero-shot LLM relevance feedback + query reformulation) | 0.571 | 0.537 | Bench4BL | 4,683 bugs / 42 systems, their own full split |
+| IQLoc (fine-tuned CodeBERT cross-encoder + CodeT5) | 0.553 | 0.520 | Bench4BL | 7,483 bugs, their own refined split |
+| FinerBench4BL best classical baseline (BLIA/BugLocator, file-level) | — | 0.610 | Bench4BL | **same 4 projects as this project's manifest**, all bugs per project (Tsumita et al., arXiv 2302.14293) |
 
-**This project's retrieval-only MRR already beats both papers' full pipelines** — though the
-caveat below matters: this is a much smaller manifest (n=30 vs. thousands of bugs) and MRR
-alone, not the papers' other metrics. Still a real, positive signal specifically on the
-benchmark that motivated the whole relevance-feedback-pipeline direction — worth surfacing
-before investing further in building BRaIn/IQLoc's own architecture, since the simpler
-retrieval-only pipeline is already competitive with it here.
+**This project's retrieval-only MRR already beats both LLM-based papers' full pipelines**
+(0.714 vs. 0.571/0.553) — though the caveat below matters: this is a much smaller manifest
+(n=30 vs. thousands of bugs) and MRR alone, not the papers' other metrics. Still a real,
+positive signal specifically on the benchmark that motivated the whole relevance-feedback-
+pipeline direction.
+
+**FinerBench4BL is the one genuinely apples-to-apples row here** — it reruns 5 classical IR
+techniques (BugLocator, BLUiR, BRTracer, AmaLgam, BLIA) on the literal same 4 projects as this
+project's own n=30 manifest, not a different subset like BRaIn/IQLoc. Its best-technique-per-
+project MAP average (0.610: BLIA on AMQP/BATCHADM/IO, BugLocator on CODEC) is modestly *ahead*
+of this project's 0.564 MAP — so on the one row where the comparison is actually controlled by
+project identity, this project trails a well-tuned classical baseline rather than beating it.
+The MRR-based "beats BRaIn/IQLoc" framing above is a real result, but it's a comparison across
+different (and much larger) project sets; FinerBench4BL is the more honest same-repo check.
+
+Separately, a data-quality note on the benchmark itself: **BLAZE** (2024, arXiv 2407.17631)
+explicitly declined to evaluate on Bench4BL, citing "inaccuracies in their ground truth data."
+That's consistent with a real issue this project hit independently — WFMP's bug reports
+reference pre-release version tags (e.g. `1.1.0.Alpha3`) that don't resolve to any known git
+commit, contributing 0 usable instances.
 
 **This project also has real end-to-end numbers on Bench4BL — 76.7% (hybrid-RRF retrieval) and
 70.0% (BM25-only) accuracy, both n=30** — these are in the SWE-bench-style table above, but

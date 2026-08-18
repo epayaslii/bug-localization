@@ -3,6 +3,7 @@ import os
 import time
 
 import requests
+import tiktoken
 import torch
 from transformers import AutoTokenizer, AutoModel
 
@@ -77,7 +78,23 @@ def _get_openai_client():
     return _OPENAI_CLIENT
 
 
-_OPENAI_MAX_INPUT_CHARS = 20000  # conservative vs. the API's 8192-token cap (~4 chars/token for code)
+_OPENAI_MAX_INPUT_TOKENS = 8000  # API hard cap is 8192; leave headroom rather than cut it exactly
+_OPENAI_TOKEN_ENCODER = None
+
+
+def _truncate_for_openai(text: str) -> str:
+    """Truncate to the API's actual token limit, not a char-count heuristic -- code (dense
+    identifiers/punctuation) tokenizes at a much worse chars/token ratio than prose, so a
+    char-based cap (previously 20000 chars, assuming ~4 chars/token) still let oversized chunks
+    through and crashed a real run mid-batch (2026-08-18: 'input[50]': maximum input length is
+    8192 tokens, on Bench4BL's Java chunks)."""
+    global _OPENAI_TOKEN_ENCODER
+    if _OPENAI_TOKEN_ENCODER is None:
+        _OPENAI_TOKEN_ENCODER = tiktoken.get_encoding("cl100k_base")
+    tokens = _OPENAI_TOKEN_ENCODER.encode(text)
+    if len(tokens) <= _OPENAI_MAX_INPUT_TOKENS:
+        return text
+    return _OPENAI_TOKEN_ENCODER.decode(tokens[:_OPENAI_MAX_INPUT_TOKENS])
 
 
 def _embed_texts_openai(texts: list[str], model_name: str, batch_size: int = 100) -> torch.Tensor:
@@ -90,7 +107,7 @@ def _embed_texts_openai(texts: list[str], model_name: str, batch_size: int = 100
     client = _get_openai_client()
     all_embeddings = []
     for i in range(0, len(texts), batch_size):
-        batch = [(t if t.strip() else " ")[:_OPENAI_MAX_INPUT_CHARS] for t in texts[i:i + batch_size]]
+        batch = [_truncate_for_openai(t if t.strip() else " ") for t in texts[i:i + batch_size]]
         response = client.embeddings.create(model=model_name, input=batch)
         all_embeddings.extend(item.embedding for item in response.data)
         if i + batch_size < len(texts):

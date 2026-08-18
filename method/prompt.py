@@ -114,6 +114,48 @@ class PromptGenerator:
 
         return prompt
 
+    def generate_chunk_relevance_feedback_prompt(self, bug, chunks, snippet_chars=800):
+        """Chunk-granularity counterpart to generate_relevance_feedback_prompt -- judges
+        method/segment-level chunks instead of whole files, matching what BRaIn (JavaParser
+        method segmentation) and IQLoc (per-method cross-encoder scoring) actually validated,
+        rather than this project's original file-level scoping-down (see
+        docs/relevance_feedback_scoping.md's "Open questions" and the file-vs-chunk
+        discussion that followed). `chunks` is a list of (file, chunk_index, chunk_text)
+        tuples, e.g. from method.embedding_retriever._chunk_file_content per candidate file.
+        Still one batched call for every chunk across every candidate, not one call per
+        chunk, to keep this at the project's ~1-call-per-bug cost profile.
+        """
+        chunks_text = "\n\n".join(
+            f"[{i + 1}] {path} (chunk {chunk_index})\n```\n{chunk_text[:snippet_chars]}\n```"
+            for i, (path, chunk_index, chunk_text) in enumerate(chunks)
+        )
+
+        prompt = f"""
+        You are a bug localization expert judging code-segment relevance.
+
+        Bug Report:
+        Repo: {bug.repo}
+        Instance ID: {bug.instance_id}
+        Hints: {bug.hints_text}
+        Bug Report: {bug.bug_report}
+
+        Below are {len(chunks)} code segments (chunks of methods/functions, not whole
+        files) from candidate files retrieved for this bug report. For EACH segment, judge
+        whether it is plausibly relevant to fixing this bug (relevant=true) or not
+        (relevant=false). Judge every segment listed -- do not skip any. A file can have
+        multiple segments; judge each independently based on its own content, not the
+        file's other segments. Return each judgment with the exact file path and chunk
+        index shown.
+
+        Code Segments:
+        {chunks_text}
+
+        Return a judgment for every one of the {len(chunks)} segments listed above, using
+        their exact file paths and chunk indices.
+        """
+
+        return prompt
+
     def generate_openai_report_summarizer_prompt(self, bug):
         prompt = f"""
         You are an expert in summarizing bug reports. Given a bug report, your task is to summarize the bug report in a concise manner while preserving all critical information needed for bug localization.
