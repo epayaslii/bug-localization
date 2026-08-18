@@ -240,15 +240,30 @@ Result file: `results/rf_chunk_hybridrrf_bench4bl_30.json`. Two-phase precursor 
 (n=6, first with `qwen2.5:latest` locally on CPU, then `qwen2.5-coder:7b` on MN5 GPU) confirmed
 pipeline correctness before this run — not included as trustworthy numbers given n=6's noise.
 
-## Known coverage gap: WFMP
+## Known coverage gap: 16 of 46 mirrored projects contribute 0 usable instances
 
-The Wildfly WFMP project mirrored cleanly but contributed 0 usable instances — its bug
-reports reference fine-grained pre-release tags (`1.1.0.Alpha3`, `1.1.0.Alpha5`, ...) that
+**Update 2026-08-18, now that all 46 are mirrored**: confirmed the WFMP gap below isn't an
+isolated case. Of the 46 mirrored projects, **16 produce zero usable instances** once the
+loader's version→commit resolution runs: `ANDROID, DATAGRAPH, DATAREST, ELY, ENTESB, JBMETA,
+MOBILE, ROO, SOCIAL, SOCIALFB, SOCIALLI, SOCIALTW, WFARQ, WFCORE, WFLY, WFMP`. Leaves 30
+projects / 4,418 usable instances as the real working pool.
+
+The pattern is systematic, not scattered: **7 of the 8 JBoss/Wildfly projects** (everything
+except SWARM) hit this — the same version-tag-resolution problem originally found in WFMP
+alone turns out to affect nearly the whole JBoss/Wildfly group. The rest are mostly smaller,
+less-actively-maintained Spring submodules (the four `SOCIAL*` variants, `MOBILE`, `ROO`,
+`ANDROID`, `DATAGRAPH`, `DATAREST`). Worth noting against IQLoc's own 46→42 refinement (see
+`docs/sota_comparison.md`) — they report dropping only 4 projects for data-quality reasons,
+far fewer than the 16 found unusable here, suggesting either a different/more lenient
+version-matching approach in their pipeline, or manual curation beyond what this project's
+loader does automatically.
+
+Original WFMP-specific finding, still accurate as the concrete example: its bug reports
+reference fine-grained pre-release tags (`1.1.0.Alpha3`, `1.1.0.Alpha5`, ...) that
 `versions.txt` doesn't map to any known git tag (`versions.txt` only tracks 4 "final"
 release versions). Real data-coverage limitation in that project's version file, not a
 loader bug — the loader correctly skips bugs it can't map to a real commit rather than
-guessing. Worth checking whether other Bench4BL projects have the same gap once more are
-mirrored.
+guessing.
 
 ## How this works
 

@@ -34,9 +34,9 @@ export USE_TF=0
 export USE_TORCH=1
 
 .venv_mn5/bin/python scripts/compare_embedding_models.py \
-  --manifest results/manifests/bench4bl-multi-n30-s42-mn5-8proj.json \
+  --manifest results/manifests/bench4bl-multi-n30-s42-8c4f91c33f21.json \
   --dataset bench4bl \
-  --pool-size 50000 \
+  --pool-size 100000 \
   --candidate-pool-size 200 \
   --models codebert unixcoder bge-code-v1 qwen3-embedding-0.6b \
-  --output results/embedding_bakeoff_bench4bl_30_gpu.json
+  --output results/embedding_bakeoff_bench4bl_30_gpu_46proj.json
