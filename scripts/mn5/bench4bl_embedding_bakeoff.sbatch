@@ -38,5 +38,5 @@ export USE_TORCH=1
   --dataset bench4bl \
   --pool-size 50000 \
   --candidate-pool-size 200 \
-  --models unixcoder codebert bge-code-v1 qwen3-embedding-0.6b \
+  --models codebert unixcoder bge-code-v1 qwen3-embedding-0.6b \
   --output results/embedding_bakeoff_bench4bl_30_gpu.json

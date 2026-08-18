@@ -281,36 +281,44 @@ MRR climbs monotonically as the embedding side is up-weighted — recovering, th
 
 ## 16. Next planned work
 
-Re-scoped 2026-08-17, after merging the validated branches into `main` and making Bench4BL the
-primary dataset. Ranked by how much each one matters right now:
+Re-scoped 2026-08-18, after the full 46-project mirror, the MN5 GPU fix landing, and Ollama
+local-LLM deployment. Most of the 2026-08-17 list is now done — kept below with strikethrough
+for history, followed by what's actually still open.
 
-1. ~~No confirmed end-to-end (LLM rerank) number for Bench4BL~~ **Done (2026-08-17), and
-   confirmed twice.** BM25-only: 70.0% accuracy, n=30. Hybrid-RRF (0.714 MRR retrieval feeding
-   the LLM instead of BM25 alone, via a two-phase MN5+local pipeline, GPU-accelerated): **76.7%
-   accuracy, n=30 — the project's strongest confirmed end-to-end number on any benchmark.** See
-   `docs/bench4bl_result.md`.
-2. **Language coverage stops at Python + Java.** BeetleBox has Go and JavaScript instances that
-   still silently fall back to path-only BM25 / fixed-window embedding chunks — the same problem
-   Java had until `method/java_parsing.py` fixed it for `.java` files specifically.
-3. **`dataset/bench4bl.py` has zero test coverage** — confirmed, no `tests/test_bench4bl*.py`
-   exists, unlike every other dataset loader.
-4. **BeetleBox has no hybrid RRF run.** Only a BM25 representation comparison (n=15) exists —
-   the weighted-fusion pipeline driving the best numbers elsewhere has never been run on it.
-5. **MN5 GPU still unused.** `torch==2.6.0+cpu` — every job so far, including the Bench4BL array
-   job, runs at CPU speed regardless of `--gres=gpu:1`. Open since first found, never fixed, only
-   worked around via array-job sharding.
-6. **The supervisor's actual target architecture is still just a prototype.**
-   `Bug report -> IR retrieval -> LLM relevance feedback -> query reformulation -> reranking`
-   (BRaIn/IQLoc-style, see `docs/relevance_feedback_scoping.md`) has only a small SWE-bench
-   prototype (n=12, n=6 smoke) — not built for Bench4BL, not evaluated against the current
-   pipeline as a real comparison.
-7. **Deployment constraint not designed around yet.** The supervisor flagged that the eventual
-   production target can't send code to cloud LLM APIs — the whole reranking stage still assumes
-   OpenRouter/OpenAI. No local-LLM reranking path exists.
-8. **Only 9/51 Bench4BL projects mirrored** (8/51 on MN5 — `BATCH`'s `gitrepo/` repeatedly failed
-   transfer, still unresolved). Confirmed results are real, but drawn from a small slice of the
-   actual benchmark (~5.6GB total across all 51 projects, mostly unmirrored).
-9. **BugsInPy integration** — still not started, lowest priority.
+1. ~~No confirmed end-to-end (LLM rerank) number for Bench4BL~~ **Done (2026-08-17), confirmed
+   twice.** BM25-only: 70.0% accuracy. Hybrid-RRF: **76.7% accuracy, n=30** — project's
+   strongest confirmed end-to-end number on any benchmark. See `docs/bench4bl_result.md`.
+2. ~~`dataset/bench4bl.py` has zero test coverage~~ **Done** — `tests/test_dataset_bench4bl.py`.
+3. ~~MN5 GPU still unused~~ **Done (2026-08-17)** — real CUDA torch install, verified with an
+   actual H100 matmul and ~30-40x real-workload speedup. Unrestricted for this project now.
+4. ~~The supervisor's actual target architecture is still just a prototype~~ **Done, and
+   confirmed negative at n=30 on Bench4BL itself** (chunk-level, hybrid-RRF, local Ollama model)
+   — relevance feedback + reformulation still don't beat the plain retriever (0.675 vs. 0.688
+   MRR). See `docs/relevance_feedback_scoping.md` and `docs/bench4bl_result.md`. Now an open
+   *diagnosis* question, not an unbuilt-architecture question — see below.
+5. ~~Deployment constraint not designed around yet~~ **Done** — `method/ollama_localizer.py`,
+   verified fully offline on MN5's GPU (full H100 offload, no internet after a one-time weight
+   transfer). See `docs/ollama_deployment.md`.
+6. ~~Only 9/51 Bench4BL projects mirrored~~ **Done** — all 46 IQLoc-overlap projects (the full
+   unrefined Apache/JBoss/Spring set) mirrored and byte-verified on both local and MN5.
+
+**Still open, ranked:**
+
+1. **Why does relevance feedback/reformulation underperform, specifically?** Confirmed
+   negative twice now (SWE-bench n=12, Bench4BL n=30) — worth diagnosing rather than assuming
+   scale alone will flip it. Candidates: `qwen2.5-coder:7b`'s judgment quality vs. BRaIn's own
+   model choices, the single-batched-call prompt (BRaIn judges one segment per call, not all
+   candidates at once), or raw-identifier-token reformulation vs. BRaIn's PageRank term graph.
+2. **Every Bench4BL n=30 result so far uses the same 4-project manifest** (AMQP/IO/CODEC/
+   BATCHADM, generated before the full 46-project mirror existed) — skewed 25/30 toward
+   AMQP+IO. Regenerating a manifest that samples across all 46 is the next real validation step
+   before any of these numbers are treated as final/representative.
+3. **Language coverage stops at Python + Java.** BeetleBox has Go and JavaScript instances that
+   still silently fall back to path-only BM25 / fixed-window embedding chunks.
+4. **BeetleBox has no hybrid RRF run.** Only a BM25 representation comparison (n=15) exists.
+5. **Voyage-code-3 failed** on persistent API rate-limiting (8 retries exhausted) during
+   today's embedding bake-off — likely a quota issue, not retried yet.
+6. **BugsInPy integration** — still not started, lowest priority.
 
 Smaller/known items: this document's own narrative sections below (§1–§15) predate the 2026-08-17
 merge and still cite pre-merge numbers (0.281 MRR, 81 tests) in places — treated as historical

@@ -164,6 +164,82 @@ both configs — many Bench4BL ground truths list several fixed files per bug, a
 ever returns one top candidate per call in this pipeline, so precision/accuracy (which reward
 getting *a* correct file) look much stronger than recall (which needs *all* of them).
 
+## Embedding model bake-off (n=30, GPU-accelerated, MN5)
+
+Six embedding models compared on the same n=30 manifest (`bench4bl-multi-n30-s42-mn5-8proj.json`),
+via `scripts/compare_embedding_models.py` (chunked-embedding ranking alone, `rank_files_embedding_chunked`,
+no BM25 fusion — isolates the embedding model itself). Four local HF models ran on MN5's H100
+(`scripts/mn5/bench4bl_embedding_bakeoff.sbatch`, job `44769992`); two API models (OpenAI,
+Voyage) ran locally since MN5 has no outbound internet:
+
+| Model | MRR | MAP | Hit@1 | Hit@5 | Hit@10 | Time (30 instances) |
+|---|---:|---:|---:|---:|---:|---:|
+| **Qwen3-Embedding-0.6B — best** | **0.6875** | **0.5666** | 53.3% | 86.7% | 96.7% | 407s (GPU) |
+| OpenAI text-embedding-3-small | 0.6562 | 0.5412 | 46.7% | 90.0% | 93.3% | 500s (API) |
+| UniXCoder | 0.5889 | 0.4262 | 46.7% | 73.3% | 86.7% | 94s (GPU) |
+| BGE-Code-v1 (2B params) | 0.1666 | 0.1179 | 3.3% | 16.7% | 63.3% | 875s (GPU) |
+| CodeBERT | 0.0797 | 0.0557 | 0% | 10.0% | 23.3% | 83s (GPU) |
+| Voyage-code-3 | — | — | — | — | — | failed: persistent HTTP 429 from the first request, 8 retries exhausted — API quota/rate-limit issue, not a code bug |
+
+**Qwen3-Embedding-0.6B wins outright**, confirming its earlier selection as the hybrid-RRF
+embedding model (0.714 MRR fused) was the right call rather than an artifact of only having
+tested one model. UniXCoder is the practical runner-up — nearly as good and ~4x faster, a
+real option when speed matters more than the last few points of accuracy.
+
+**CodeBERT scores worst by a wide margin** — worth being precise about why, since IQLoc/BRaIn
+are both CodeBERT-lineage papers: this test uses CodeBERT exactly like every other model here,
+as an off-the-shelf bi-encoder for embedding-similarity ranking. IQLoc instead **fine-tunes**
+CodeBERT as a **cross-encoder classifier** (bug report + code segment → relevance score) — a
+different mechanism entirely, closer to a supervised classification head than semantic
+similarity search. This result says off-the-shelf CodeBERT embeddings are weak for this task,
+not that CodeBERT itself is a bad choice — the paper's own usage was never tested here.
+
+**BGE-Code-v1's size didn't pay off**: at 2B params (~16x UniXCoder's size) it was both the
+slowest model here (875s, even with full GPU offload) and a weak scorer — CPU alone had made
+it impractical to test before this session's MN5 GPU fix; now that it's practical to run, the
+result doesn't justify its cost on this task.
+
+Result file: `results/embedding_bakeoff_bench4bl_30_gpu.json` (4 GPU models),
+`results/embedding_bakeoff_bench4bl_30_api.json` (OpenAI only — Voyage failed before writing).
+
+## Relevance-feedback + query reformulation (chunk-level, hybrid-RRF, local LLM) — n=30
+
+Per the supervisor-confirmed pipeline (`Bug report -> IR retrieval -> LLM relevance feedback
+-> query reformulation -> reranking`), re-scoped from the original file-level/BM25-only
+prototype (see `docs/relevance_feedback_scoping.md`) to chunk/method-level relevance
+judgments over the **hybrid BM25+embedding RRF retriever** (not BM25 alone), matching what
+BRaIn/IQLoc's own papers actually validated. Query reformulation and reranking stay
+algorithmic (identifier-token extraction from LLM-judged-relevant chunks, then a second
+hybrid-RRF pass with the reformulated query) — 1 LLM call per bug, same cost profile as
+before. The LLM call itself runs against a **local Ollama model** (`qwen2.5-coder:7b`) instead
+of a cloud API — see `docs/ollama_deployment.md` — the first fully-offline-capable run of this
+pipeline. Run via `scripts/run_relevance_feedback_test.py --retriever hybrid-rrf --granularity
+chunk --method ollama`, entirely on MN5's GPU (retrieval + LLM both), manifest
+`bench4bl-multi-n30-s42-mn5-8proj.json`, `candidate-pool-size 30`:
+
+| Config | Hit@1 | Hit@5 | Hit@10 | MRR | MAP |
+|---|---:|---:|---:|---:|---:|
+| **retriever (hybrid-RRF, no LLM) — best** | **53.3%** | 83.3% | 93.3% | **0.6878** | **0.5208** |
+| relevance_filtered | 16.7% | 73.3% | 93.3% | 0.3842 | 0.3178 |
+| reformulated | 53.3% | 80.0% | 93.3% | 0.6749 | 0.4980 |
+
+**Neither relevance filtering nor reformulation beats the plain retriever — relevance
+filtering actively hurts, a 44% relative MRR drop.** All 30/30 LLM calls succeeded cleanly (no
+failures/fallbacks skewing this), so it isn't a data-quality artifact. This is a stronger,
+more confident version of the same negative signal already seen at n=12 on SWE-bench
+(`docs/relevance_feedback_scoping.md`'s update note) — now confirmed on the real target
+benchmark, with the upgraded chunk-level design closer to BRaIn/IQLoc's own methodology, and
+a real open model rather than the earlier `gpt-4o-mini` test. Worth treating as a real finding
+that questions this architecture direction as currently implemented, not conclusive proof the
+whole approach can't work — candidates for what might actually be wrong: `qwen2.5-coder:7b`'s
+judgment quality vs. BRaIn's own model choices, the batched-single-call prompt design (BRaIn
+judges one segment per call, not all candidates at once), or the reformulation term-extraction
+method (raw identifier tokens vs. BRaIn's PageRank-weighted term graph).
+
+Result file: `results/rf_chunk_hybridrrf_bench4bl_30.json`. Two-phase precursor smoke tests
+(n=6, first with `qwen2.5:latest` locally on CPU, then `qwen2.5-coder:7b` on MN5 GPU) confirmed
+pipeline correctness before this run — not included as trustworthy numbers given n=6's noise.
+
 ## Known coverage gap: WFMP
 
 The Wildfly WFMP project mirrored cleanly but contributed 0 usable instances — its bug
@@ -196,15 +272,18 @@ real example (`org.apache.commons.weaver.normalizer.Normalizer.java` ->
 
 ## Mirrored so far
 
-9 of 51 projects locally (AMQP, ANDROID, BATCH, BATCHADM, CODEC, CRYPTO, IO, WEAVER, WFMP),
-182MB. **Local and MN5 have diverged**: MN5 only has 8 of these usable — BATCH's `gitrepo/`
-(124MB, the largest of the 9) repeatedly failed to transfer over SSH (connection drops
-partway through, unresolved), so only its `bugrepo/`+`versions.txt` made it across. The
-loader handles this gracefully (skips BATCH entirely on MN5 with a warning, doesn't crash),
-but it does mean **local's total usable-instance pool (467) and MN5's (213) are different
-sizes** — see the pool-size note under "Reproducing" below, this matters for exact
-reproduction. Total dataset size across all 51 projects is ~5.6GB (confirmed via the
-SourceForge RSS file listing) — small enough to mirror the whole thing, not yet done.
+**Update 2026-08-18: all 46 IQLoc-overlap projects now mirrored, both locally and on MN5**,
+byte-verified both directions via rsync (Apache/Commons 13, JBoss/Wildfly 8, Spring 25 — the
+full unrefined Bench4BL set behind IQLoc's own 42-project refined subset; see
+`docs/sota_comparison.md` for the exact 46-vs-42 breakdown). Supersedes the note below, kept
+for history: originally only 9 of 51 projects were mirrored locally (182MB), with MN5 stuck
+on 8 of those 9 after BATCH's `gitrepo/` repeatedly failed to transfer over plain `scp`
+(connection drops mid-transfer). The BATCH transfer issue turned out to be a general problem
+with large `scp` transfers on this link (also hit transferring model weights this session),
+not specific to BATCH — switching to `rsync --partial` (resumable, doesn't silently drop the
+connection without erroring) fixed it for every subsequent large transfer, and the full
+46-project mirror completed cleanly with it. Local and MN5 no longer diverge — both have the
+same 46 projects, same instance pool.
 
 ## Reproducing
 

@@ -217,6 +217,10 @@ def main():
     parser.add_argument('--model', default=None,
                        help='Defaults to qwen2.5-coder (ollama) or gpt-4o-mini (openrouter) if not passed.')
     parser.add_argument('--ollama-host', default=None)
+    parser.add_argument('--num-ctx', type=int, default=16384,
+                       help='With --method ollama: context window requested via extra_body (Ollama defaults to '
+                            '4096 regardless of the model\'s real max, which chunk-granularity prompts can '
+                            'exceed easily -- see method/ollama_localizer.py).')
     parser.add_argument('--output', default=None)
     args = parser.parse_args()
 
@@ -248,7 +252,7 @@ def main():
     )
 
     if args.method == 'ollama':
-        localizer = OllamaLocalizer(model=model, host=args.ollama_host)
+        localizer = OllamaLocalizer(model=model, host=args.ollama_host, num_ctx=args.num_ctx)
     else:
         localizer = OpenRouterLocalizer(model=model)
     prompt_gen = PromptGenerator()

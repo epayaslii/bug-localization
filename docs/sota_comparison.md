@@ -67,6 +67,26 @@ That's consistent with a real issue this project hit independently — WFMP's bu
 reference pre-release version tags (e.g. `1.1.0.Alpha3`) that don't resolve to any known git
 commit, contributing 0 usable instances.
 
+## Embedding model bake-off (n=30, Bench4BL) — which embedding model is actually best
+
+Six models compared on the same n=30 manifest, chunked-embedding ranking alone (no BM25
+fusion) via `scripts/compare_embedding_models.py`. Full detail and discussion in
+`docs/bench4bl_result.md`; the numbers:
+
+| Model | MRR | MAP | Hit@1 | Hit@5 | Hit@10 |
+|---|---:|---:|---:|---:|---:|
+| **Qwen3-Embedding-0.6B — best** | **0.688** | **0.567** | 53.3% | 86.7% | 96.7% |
+| OpenAI text-embedding-3-small | 0.656 | 0.541 | 46.7% | 90.0% | 93.3% |
+| UniXCoder | 0.589 | 0.426 | 46.7% | 73.3% | 86.7% |
+| BGE-Code-v1 (2B params) | 0.167 | 0.118 | 3.3% | 16.7% | 63.3% |
+| CodeBERT | 0.080 | 0.056 | 0% | 10.0% | 23.3% |
+| Voyage-code-3 | — | — | — | — | — (failed: API rate-limiting) |
+
+Confirms Qwen3-Embedding-0.6B as the right choice for the hybrid-RRF pipeline (already in use)
+rather than an untested assumption. CodeBERT's weak showing here is a task-mismatch artifact,
+not a knock against the model generally — IQLoc fine-tunes CodeBERT as a cross-encoder
+classifier, a different mechanism than the off-the-shelf bi-encoder embedding this test uses.
+
 **This project also has real end-to-end numbers on Bench4BL — 76.7% (hybrid-RRF retrieval) and
 70.0% (BM25-only) accuracy, both n=30** — these are in the SWE-bench-style table above, but
 still not a fair comparison to BRaIn/IQLoc specifically: they both report Hit@10/MRR for their

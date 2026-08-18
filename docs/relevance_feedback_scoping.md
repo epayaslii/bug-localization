@@ -11,8 +11,32 @@ BM25), but the full reformulate-and-rerun-BM25 step **made results worse, not be
 (MRR 0.066 — still beats plain BM25 but clearly loses to relevance-filtering alone). Too
 small (n=12) to treat as final, but a real, specific, contrary-to-the-papers signal worth
 flagging before investing more here: filtering seems to be doing the useful work, not
-reformulation. Not yet run on Bench4BL (the real apples-to-apples benchmark) or scaled to
-n=30 — both are the honest next steps, not "not started."
+reformulation.
+
+**Update 2026-08-18 — confirmed at n=30 on Bench4BL itself, with the design upgraded closer
+to BRaIn/IQLoc's own methodology.** The two gaps flagged above are closed: chunk/method-level
+relevance judgments (not whole-file — see "Open questions" below, this was the recommended
+granularity but the first prototype skipped it), the hybrid BM25+embedding RRF retriever (not
+BM25 alone), a local open model (`qwen2.5-coder:7b` via Ollama, not `gpt-4o-mini`) — and run
+on Bench4BL, the actual target benchmark, at n=30. Result: **the negative finding holds, more
+strongly.**
+
+| Config | MRR | MAP |
+|---|---:|---:|
+| retriever (hybrid-RRF, no LLM) — best | **0.688** | **0.521** |
+| + relevance feedback (filtering only) | 0.384 | 0.318 |
+| + relevance feedback + reformulation + rerank | 0.675 | 0.498 |
+
+Relevance filtering alone now *hurts* badly (−44% relative MRR) rather than helping — the
+opposite of the SWE-bench n=12 result, where filtering was the one part that worked.
+Reformulation partially recovers the loss but still lands under the no-LLM baseline. All
+30/30 LLM calls succeeded cleanly, so this isn't a crash/fallback artifact. Full writeup:
+`docs/bench4bl_result.md`'s "Relevance-feedback + query reformulation" section. This is now a
+real, twice-replicated (different benchmark, different model, different granularity) finding
+against this architecture direction as implemented — not proof the concept can't work, but
+strong enough that the honest next step is diagnosing *why* (model judgment quality? the
+single-batched-call prompt design vs. BRaIn's per-segment calls? the raw-identifier-token
+reformulation vs. BRaIn's PageRank term graph?) rather than assuming a bigger n will flip it.
 
 ## What BRaIn and IQLoc actually do
 
