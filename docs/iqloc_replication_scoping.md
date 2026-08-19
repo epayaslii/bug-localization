@@ -137,29 +137,39 @@ with the IQLoc-comparison track.
 
 ### Phase 2 — Full-population evaluation, not n=30 (adopt the co-intern's practice)
 
-Every number this project has produced on the IQLoc-approximation pipeline so far is n=30 (or
-smaller, for smoke tests) — not remotely comparable in statistical weight to IQLoc's own
-1,497-1,501-instance test split, let alone their full 7,483. The co-intern's full-population
-BM25 run (P=4,621, `bench4bl_bm25_comparison_full_array.sbatch`-equivalent on their side) is
-already running as of this session on MN5 (job 44806072, our own 4,418-instance mirror,
-50-shard array) for the plain BM25 4-representation comparison. Once that lands: re-run the
-frozen skeleton-BM25 baseline (Phase 1) at the same full-population scale, so this project has
-a real large-n reference point, not just n=30, before layering relevance feedback on top of it
--- mirrors the co-intern's own explicit gate ("do not start relevance feedback until the full
-baseline is in hand").
+**Done.** Every number this project had produced on the IQLoc-approximation pipeline before
+this was n=30 (or smaller, for smoke tests) — not remotely comparable in statistical weight to
+IQLoc's own 1,497-1,501-instance test split, let alone their full 7,483. The full-population
+BM25 run (4,418 instances, our own mirror, `run_bm25_comparison_shard.py` + a 50-way MN5 Slurm
+array job 44806072) is now confirmed: skeleton wins again at full scale (MRR 0.2488, down from
+0.310 at n=30 — same ranking, harder true distribution). Committed to `main`
+(`results/bm25_comparison_bench4bl_full4418_summary.json`), matches the co-intern's own
+full-population rigor. Re-running relevance feedback at this same scale is still open — see
+Phase 4.
 
 ### Phase 3 — Fix the keyword-extraction contamination bug found in smoke testing
 
-The 2-instance smoke test of `scripts/run_iqloc_approximation_test.py` surfaced a real data-
-quality issue: code-side EmbedRank/MMR keywords are picking up Apache License header
-boilerplate ("warranties", "licensed", "permissions", "obtain") rather than real code terms,
-because `method/embedding_retriever._chunk_file_content` doesn't strip comment/license text
-before chunking. `method/java_parsing.py` already strips comments for the skeleton/symbols
-BM25 representations -- reuse that stripping (or an equivalent) for the code-side keyword
-candidate text specifically, so EmbedRank/MMR is ranking identifiers and code terms, not
-license boilerplate that happens to repeat identically across every file in the corpus. Fix
-and re-smoke-test before running this at n=30 or beyond; the current keyword/reformulation
-numbers are not trustworthy until this is fixed.
+**Done, and turned out to be a bigger bug than first scoped.** Root cause found in
+`method/java_parsing.py`'s `chunk_java_content`: the header chunk (package/imports/leading
+comment, everything before the first method signature) was built from **raw** `content`
+instead of the already noise-stripped `cleaned` text used everywhere else in that function —
+so a file's leading Javadoc/license comment (the full Apache License boilerplate, for most
+Bench4BL Java files) leaked into the header chunk verbatim. That chunk feeds
+`method/embedding_retriever._chunk_file_content`, used by `rank_files_embedding_chunked`
+**everywhere in this project**, not just the new IQLoc-approximation pipeline where the
+contamination was first noticed. So this had likely been diluting chunk embeddings across
+every confirmed hybrid-RRF result to date, to some degree — not re-running every prior sweep
+to quantify how much, but worth remembering as a caveat on pre-fix numbers. Fixed with a
+one-line change (`cleaned[:first_start]` instead of `content[:first_start]`), a regression
+test added (`tests/test_java_parsing.py::test_chunk_java_content_header_excludes_comment_text`),
+all 163 tests pass. Committed to `main` (`ca46680`) and merged into this branch.
+
+**Re-smoke-tested and confirmed clean.** Same 2 real instances as the original smoke test:
+code-side keywords are now real package/class/identifier terms (`org apache`, `smppclient`,
+`classextension`, `springframework batch`, `listener factory`, `bean extends`) with zero
+license-boilerplate tokens, vs. the pre-fix run's `warranties`, `licensed`, `permissions`,
+`obtain`. Reformulation-term quality is real code vocabulary now, not license text. Safe to
+move to Phase 4 (scale beyond n=2).
 
 ### Phase 4 — Full-population run of the IQLoc-approximation pipeline (real cost, scope first)
 
