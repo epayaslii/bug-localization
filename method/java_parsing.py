@@ -158,7 +158,13 @@ def chunk_java_content(content: str, max_chunk_chars: int = 1500, overlap_chars:
 
     if method_chunks:
         chunks = []
-        header = content[:first_start].strip()
+        # noise-stripped, not raw content -- a raw header slice includes the leading
+        # Javadoc/license comment verbatim (e.g. the full Apache License boilerplate),
+        # which then gets embedded as if it were real code content, indistinguishable
+        # from a method body to anything downstream (chunked-embedding ranking, EmbedRank
+        # keyword extraction -- both saw this leak into results). cleaned[:first_start]
+        # keeps the real signal (package/import declarations) and blanks the comment body.
+        header = cleaned[:first_start].strip()
         if header:
             chunks.append(header)
         chunks += method_chunks

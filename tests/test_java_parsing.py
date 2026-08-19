@@ -107,6 +107,20 @@ def test_chunk_java_content_splits_into_header_and_method_chunks():
     assert "public double computeArea" in chunks[2]
 
 
+def test_chunk_java_content_header_excludes_comment_text():
+    # Regression test: the header chunk previously used raw (non-noise-stripped) content,
+    # so a leading Javadoc/license comment leaked into it verbatim -- indistinguishable
+    # from real code to anything downstream (chunked-embedding ranking, EmbedRank keyword
+    # extraction). The header should keep real declarations (package/import/field) but not
+    # the comment's own words.
+    chunks = chunk_java_content(SAMPLE_SOURCE)
+    header = chunks[0]
+    assert "cartesian shape handling" not in header
+    assert "package com.example.shapes" in header
+    assert "import java.util.List" in header
+    assert "NOTE" in header
+
+
 def test_chunk_java_content_handles_nested_braces_in_method_body():
     chunks = chunk_java_content(SAMPLE_SOURCE)
     compute_area_chunk = next(c for c in chunks if "computeArea" in c)
