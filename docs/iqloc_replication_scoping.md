@@ -173,15 +173,33 @@ move to Phase 4 (scale beyond n=2).
 
 ### Phase 4 — Full-population run of the IQLoc-approximation pipeline (real cost, scope first)
 
-Only after Phase 3 is fixed: run `run_iqloc_approximation_test.py` at a real scale (start at
-n=200-500, a genuine step up from n=30 without the multi-day cost of the full 4,418, similar
-in spirit to IQLoc's own ~1,500-instance test split) before considering a true full-population
-run. Cost is 1 Ollama call/bug (free, local, but ~80-110s/bug observed this session -- a
-few-hundred-instance run is hours, not minutes) plus up to 4 embedding calls/bug for keyword
-extraction (cheap on a local model, real $ if `--keyword-model` is swapped to OpenAI). Needs
-its own MN5 array-sharding treatment (this branch doesn't have one yet) if run beyond a few
-hundred instances, matching the two-phase pattern (MN5 for offline stages, local for
-LLM/API-dependent stages) already used for the project's other large end-to-end runs.
+**Done at n=200, on MN5 GPU.** Since the default keyword-extraction model (`microsoft/
+unixcoder-base`, local) makes the whole pipeline offline-capable end to end -- BM25, Ollama
+relevance judge, keyword extraction -- it runs entirely on MN5, no two-phase split needed
+(unlike the OpenAI-embedding hybrid-RRF pipeline). New infra built: `run_iqloc_approximation_
+shard.py` + `aggregate_iqloc_shards.py` + `scripts/mn5/bench4bl_iqloc_approximation_array.
+sbatch`, a 20-way Slurm array job where **each task starts its own local Ollama server**
+(confirmed necessary -- no shared-server mode across nodes). GPU-verified first with a real
+smoke test (5.4s per chat completion on an H100, vs. up to 460s/instance observed on this
+CPU-only Mac) and a single-instance shard validation (25.6s including model load) before
+committing to the full run.
+
+**Real n=200 result** (`results/iqloc_approximation_bench4bl_200.json`, 24-repo diverse
+manifest, job 44814164, completed in ~6 minutes wall-clock across 20 parallel GPU shards):
+
+| config | Hit@1 | MRR | MAP |
+|---|---:|---:|---:|
+| retriever (skeleton-BM25 alone) | 0.195 | **0.3083** | 0.2191 |
+| + relevance filtering | 0.110 | 0.2358 (&minus;23.5%) | 0.1730 |
+| + EmbedRank/MMR reformulation | 0.150 | 0.2542 (&minus;17.5%) | 0.1754 |
+
+**A fourth confirmed replication of the negative finding, now at real scale (n=200, not n=30)
+and using IQLoc's own actual reformulation mechanism** (EmbedRank/MMR + cosine-similarity
+keyword matching, not this project's simpler raw-identifier-token version) -- not just an
+n=30 quirk, and not specific to the less faithful approximation. 3/200 LLM calls (1.5%) failed
+to parse (JSON truncated mid-string, likely hitting the 4096-token completion limit on a
+large chunk-heavy prompt) -- a real, small, silently-handled failure mode worth fixing before
+this number is fully trusted, but not large enough to explain the negative result on its own.
 
 ### Phase 5 — Adopt MN5 reproducibility discipline project-wide, not just for this branch
 
