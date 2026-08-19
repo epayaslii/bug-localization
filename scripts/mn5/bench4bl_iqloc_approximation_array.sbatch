@@ -64,4 +64,13 @@ done
   --shard-index "${SLURM_ARRAY_TASK_ID}" \
   --output-dir results/hpc_mn5_iqloc_n200/shards
 
+# $? from the python run above is the job's real exit status; the kill on the last line
+# would otherwise become the last command Slurm inspects, and `kill` on an Ollama server
+# that already exited on its own returns nonzero -- Slurm reports that as a job FAILURE
+# even though the pipeline itself completed and wrote a valid shard file (confirmed on
+# job 44814164: 9/20 tasks marked FAILED in sacct despite 20/20 shards aggregating
+# cleanly with real results). Capture the real status, kill best-effort, then exit with
+# the status that actually reflects whether the pipeline succeeded.
+PIPELINE_STATUS=$?
 kill "$OLLAMA_PID" 2>/dev/null
+exit "$PIPELINE_STATUS"
