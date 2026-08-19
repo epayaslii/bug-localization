@@ -39,6 +39,8 @@ import argparse
 import json
 import logging
 
+import numpy as np
+
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from dotenv import load_dotenv
@@ -55,7 +57,7 @@ from method.bm25_retriever import (
     extract_query_reformulation_terms, _extract_symbol_tokens,
 )
 from method.hybrid_retriever import rank_files_hybrid
-from method.embedding_retriever import _chunk_file_content
+from method.embedding_retriever import _chunk_file_content, embed_texts
 from method.keyword_extraction import embedrank_mmr_keywords, reformulate_query_iqloc_style
 from method.openrouter_localizer import OpenRouterLocalizer
 from method.ollama_localizer import OllamaLocalizer
@@ -150,6 +152,73 @@ def _relevance_feedback_chunked(localizer, prompt_gen, bug, candidates, contents
     return relevant_files, judged, terms, relevant_chunk_texts
 
 
+def _relevance_feedback_embedding_cosine(bug, candidates, contents, embedding_model, max_chunks_per_file, keep_fraction):
+    """Relevance filtering via direct embedding cosine similarity instead of an LLM call
+    (2026-08-19, per supervisor guidance relayed mid-session: the LLM relevance-judgment call
+    is the pipeline's real bottleneck -- 90-460s/instance observed on Ollama locally -- add
+    cosine similarity on the embedding model instead). No LLM call for this stage at all: one
+    embedding batch call (query + all chunks), then rank by cosine similarity.
+
+    Recall-oriented by construction: keeps the top `keep_fraction` of *files* by their best-
+    matching chunk (default a generous half) rather than an absolute similarity threshold,
+    which would vary unpredictably in meaning across bug reports of different length/
+    specificity and risks silently dropping everything for a report with no close match.
+
+    Filters at the FILE level (max chunk similarity per file, "max not mean" -- same logic
+    method/embedding_retriever.py's rank_files_embedding_chunked already uses), not by
+    keeping a global top-K of chunks across the whole pool: an early version did the latter
+    and, with a large pool (candidate_pool_size * max_chunks_per_file chunks in play), keeping
+    a top-half slice of chunks meant almost every file had *some* chunk survive -- 99/100
+    files "relevant" on one real test instance, making the filter nearly a no-op and blowing
+    up the reformulation stage's input to nearly the whole candidate pool's text."""
+    chunks = []
+    for path in candidates:
+        file_chunks = _chunk_file_content(contents.get(path), path=path)
+        for idx, chunk_text in enumerate(file_chunks[:max_chunks_per_file]):
+            chunks.append((path, idx, chunk_text))
+
+    if not chunks:
+        return [], {}, [], []
+
+    chunk_texts = [c[2] for c in chunks]
+    query_embedding = embed_texts([bug.bug_report], model_name=embedding_model, is_query=True).numpy()
+    chunk_embeddings = embed_texts(chunk_texts, model_name=embedding_model, is_query=False).numpy()
+
+    q_norm = query_embedding / (np.linalg.norm(query_embedding, axis=1, keepdims=True) + 1e-10)
+    c_norm = chunk_embeddings / (np.linalg.norm(chunk_embeddings, axis=1, keepdims=True) + 1e-10)
+    sims = (c_norm @ q_norm.T).squeeze(-1)
+
+    best_sim_per_file = {}
+    for (path, _idx, _text), sim in zip(chunks, sims):
+        if path not in best_sim_per_file or sim > best_sim_per_file[path]:
+            best_sim_per_file[path] = sim
+
+    n_keep = max(1, int(len(candidates) * keep_fraction))
+    relevant_files = sorted(best_sim_per_file, key=lambda p: -best_sim_per_file[p])[:n_keep]
+    relevant_file_set = set(relevant_files)
+
+    relevant_chunk_texts = []
+    terms = []
+    judged_chunks = {}
+    for (path, idx, chunk_text), sim in zip(chunks, sims):
+        is_relevant = path in relevant_file_set
+        judged_chunks[f"{path}#{idx}"] = bool(is_relevant)
+        if is_relevant:
+            relevant_chunk_texts.append(chunk_text)
+            try:
+                symbol_tokens, _import_tokens = _extract_symbol_tokens(chunk_text, path)
+                terms += symbol_tokens
+            except Exception as e:
+                logger.debug(f"Chunk reformulation extraction failed for {path}#{idx}: {e}")
+
+    judged = {
+        "file_level": {p: (p in relevant_files) for p in candidates},
+        "chunk_level": judged_chunks,
+        "similarity_scores": {f"{c[0]}#{c[1]}": float(s) for c, s in zip(chunks, sims)},
+    }
+    return relevant_files, judged, terms, relevant_chunk_texts
+
+
 def _semantic_reformulation_terms(bug, relevant_chunk_texts, keyword_model, top_n_keywords):
     """Recall-oriented semantic reformulation (2026-08-19, per supervisor guidance relayed
     mid-session: "a semantic layer should be added to query reformulation" and "increase
@@ -181,7 +250,7 @@ def _semantic_reformulation_terms(bug, relevant_chunk_texts, keyword_model, top_
     return union_terms
 
 
-def _run_one(localizer, prompt_gen, bug, candidate_pool_size, retriever, embedding_model, rrf_weights, granularity, max_chunks_per_file, bm25_repr, reformulation_mode, keyword_model, top_n_keywords):
+def _run_one(localizer, prompt_gen, bug, candidate_pool_size, retriever, embedding_model, rrf_weights, granularity, max_chunks_per_file, bm25_repr, reformulation_mode, keyword_model, top_n_keywords, relevance_mode, relevance_embedding_model, keep_fraction):
     candidates = _initial_ranking(bug, retriever, candidate_pool_size, embedding_model, rrf_weights, bm25_repr)
     if not candidates:
         return {
@@ -191,7 +260,11 @@ def _run_one(localizer, prompt_gen, bug, candidate_pool_size, retriever, embeddi
 
     contents = get_file_contents_batch(bug.repo, bug.base_commit, candidates) if is_repo_cached(bug.repo) else {}
 
-    if granularity == "file":
+    if relevance_mode == "embedding-cosine":
+        relevant, judged, terms, relevant_chunk_texts = _relevance_feedback_embedding_cosine(
+            bug, candidates, contents, relevance_embedding_model, max_chunks_per_file, keep_fraction
+        )
+    elif granularity == "file":
         relevant, judged, terms = _relevance_feedback_file(localizer, prompt_gen, bug, candidates, contents)
         relevant_chunk_texts = [contents[c] for c in relevant if contents.get(c)]
     else:
@@ -282,9 +355,24 @@ def main():
     parser.add_argument('--top-n-keywords', type=int, default=15,
                        help='With --reformulation-mode semantic: keywords extracted per side before taking the '
                             'union (IQLoc\'s own N sweep found 15 the knee of the MAP/MRR-vs-N curve).')
+    parser.add_argument('--relevance-mode', choices=['llm', 'embedding-cosine'], default='llm',
+                       help='llm (default, original behavior): one LLM call/bug judges chunk relevance -- the '
+                            'pipeline\'s real bottleneck (90-460s/instance observed locally on Ollama). '
+                            'embedding-cosine (2026-08-19, per supervisor guidance): no LLM call for this stage '
+                            'at all -- rank chunks by cosine similarity to the bug report and keep the top '
+                            '--keep-fraction, one embedding batch call instead. Removes the LLM bottleneck '
+                            'entirely for this stage; --method/--model below only matter with --relevance-mode llm.')
+    parser.add_argument('--relevance-embedding-model', default='microsoft/unixcoder-base',
+                       help='With --relevance-mode embedding-cosine: embedding model for the similarity ranking.')
+    parser.add_argument('--keep-fraction', type=float, default=0.5,
+                       help='With --relevance-mode embedding-cosine: fraction of chunks kept as "relevant" '
+                            '(top-N by cosine similarity), not an absolute similarity threshold -- a fixed '
+                            'threshold would mean different things for different bug reports. Deliberately '
+                            'generous (0.5) to favor recall over precision.')
     parser.add_argument('--method', choices=['openrouter', 'ollama'], default='ollama',
                        help='Backend for the relevance-feedback LLM call. ollama runs fully offline (see '
-                            'docs/ollama_deployment.md) -- default, per project decision 2026-08-18.')
+                            'docs/ollama_deployment.md) -- default, per project decision 2026-08-18. Unused '
+                            'with --relevance-mode embedding-cosine.')
     parser.add_argument('--model', default=None,
                        help='Defaults to qwen2.5-coder (ollama) or gpt-4o-mini (openrouter) if not passed.')
     parser.add_argument('--ollama-host', default=None)
@@ -319,13 +407,17 @@ def main():
         f"Running relevance-feedback prototype over {len(bugs)}/{manifest['size']} manifest "
         f"instances (manifest {manifest['manifest_id']}), dataset={dataset_name}, "
         f"retriever={args.retriever}, granularity={args.granularity}, "
-        f"candidate_pool_size={args.candidate_pool_size}, method={args.method}, model={model}"
+        f"candidate_pool_size={args.candidate_pool_size}, relevance_mode={args.relevance_mode}, "
+        f"method={args.method if args.relevance_mode == 'llm' else 'n/a'}, model={model if args.relevance_mode == 'llm' else 'n/a'}"
     )
 
-    if args.method == 'ollama':
-        localizer = OllamaLocalizer(model=model, host=args.ollama_host, num_ctx=args.num_ctx)
+    if args.relevance_mode == 'llm':
+        if args.method == 'ollama':
+            localizer = OllamaLocalizer(model=model, host=args.ollama_host, num_ctx=args.num_ctx)
+        else:
+            localizer = OpenRouterLocalizer(model=model)
     else:
-        localizer = OpenRouterLocalizer(model=model)
+        localizer = None
     prompt_gen = PromptGenerator()
 
     per_bug = {}
@@ -335,6 +427,7 @@ def main():
             localizer, prompt_gen, bug, args.candidate_pool_size, args.retriever,
             args.embedding_model, rrf_weights, args.granularity, args.max_chunks_per_file,
             args.bm25_repr, args.reformulation_mode, args.keyword_model, args.top_n_keywords,
+            args.relevance_mode, args.relevance_embedding_model, args.keep_fraction,
         )
         per_bug[bug.instance_id] = result
         logger.info(
@@ -382,7 +475,7 @@ def main():
     best_recall = _recall_100(best_recall_name)
     logger.info(f"Best Recall@100: {best_recall_name} ({best_recall:.3f}); plain {args.retriever}: {retriever_recall:.3f}")
 
-    stats = localizer.total_stats()
+    stats = localizer.total_stats() if localizer is not None else {"api_call_count": 0, "note": "relevance-mode=embedding-cosine, no LLM calls made"}
     logger.info(f"LLM call stats: {stats}")
 
     if args.output:
@@ -396,8 +489,11 @@ def main():
                 "candidate_pool_size": args.candidate_pool_size,
                 "reformulation_mode": args.reformulation_mode,
                 "keyword_model": args.keyword_model if args.reformulation_mode == "semantic" else None,
-                "method": args.method,
-                "model": model,
+                "relevance_mode": args.relevance_mode,
+                "relevance_embedding_model": args.relevance_embedding_model if args.relevance_mode == "embedding-cosine" else None,
+                "keep_fraction": args.keep_fraction if args.relevance_mode == "embedding-cosine" else None,
+                "method": args.method if args.relevance_mode == "llm" else None,
+                "model": model if args.relevance_mode == "llm" else None,
                 "llm_call_stats": stats,
                 "per_bug_detail": per_bug,
                 "configs": results,
