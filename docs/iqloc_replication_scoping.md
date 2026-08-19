@@ -203,14 +203,61 @@ this number is fully trusted, but not large enough to explain the negative resul
 
 ### Phase 5 — Adopt MN5 reproducibility discipline project-wide, not just for this branch
 
-Regardless of the IQLoc-specific work above, the co-intern's rigor is worth adopting for this
-project's own confirmed-best config (currently hybrid-RRF, OpenAI + skeleton-BM25, 1:2) too:
-real Slurm accounting/wall-clock capture (not just "job finished, here are the numbers"), an
-explicit local↔MN5 exact-match verification on a small real shard before trusting a full-scale
-MN5 run's output, and a written "frozen configuration" contract stating what later stages are
-and are not allowed to retune. None of this project's hybrid-RRF/embedding-bakeoff results
-have this level of reproducibility bookkeeping yet -- worth doing once a config is confirmed
-best, not on every exploratory sweep.
+**Done, with a real caveat surfaced.** Three pieces:
+
+**1. Real Slurm accounting/wall-clock capture**, retroactively pulled via `sacct` for both
+MN5 jobs run this session:
+
+| Job | Tasks | Wall-clock (first start &rarr; last end) | Mean per-task elapsed |
+|---|---|---|---|
+| BM25 full-population (44806072) | 50 | 28m46s | 9m00s |
+| IQLoc-approximation n=200 (44814164) | 20 | 5m56s | 3m33s |
+
+**A real bug found in the process**: `sacct` showed **9/20 (45%) of the IQLoc job's tasks
+marked FAILED**, despite every single one writing a valid shard file (confirmed: the 20/20
+aggregation used all of them with real data). Root cause: the sbatch script's last command
+was `kill "$OLLAMA_PID"`, and `kill` on an already-exited Ollama server returns nonzero --
+that became the whole job's reported exit status instead of the actual Python pipeline's.
+Fixed by capturing the pipeline's real exit code before the kill and exiting with that
+explicitly (`scripts/mn5/bench4bl_iqloc_approximation_array.sbatch`). This is exactly the
+kind of telemetry-accuracy issue the co-intern's rigor (their smoke-test slide checks
+`ExitCode 0:0` explicitly) is meant to catch -- a false FAILED status could easily cause a
+future run to be needlessly re-submitted, or worse, cast unwarranted doubt on valid results.
+
+**2. Local↔MN5 exact-match verification** (`scripts/check_local_mn5_determinism.py`, on
+`main`). Deliberately **not** run against this project's actual confirmed-best config
+(hybrid-RRF, OpenAI `text-embedding-3-small` + skeleton-BM25) -- MN5 has no outbound
+internet, so an OpenAI-API-dependent pipeline cannot execute there at all, making a same-
+config comparison structurally impossible, not just impractical. Used Qwen3-Embedding-0.6B
+instead (fully local/offline, runs identically on both machines) to validate the actual
+shared code path -- repo content, BM25 skeleton generation, chunking, RRF fusion -- rather
+than the specific embedding provider. **Result: exact sha256 match on both test instances
+(AMQP-242, AMQP-243) between a local run and an MN5 GPU run.** The real scientific claim
+this validates is "the code computes the same thing regardless of machine," which holds;
+"the OpenAI-based confirmed-best config reproduces on MN5" is a different, currently
+unanswerable claim given the internet constraint, and is not conflated with this result.
+
+**3. Frozen-configuration contract** -- see the top of this document's Phase 1 (skeleton-BM25,
+not hybrid, is the frozen retrieval baseline on this branch) plus `docs/qwen3_rrf_result.md`
+for the main track's own "why hybrid, why this weight" contract. Not writing a new document
+here since equivalent contracts already exist per-track; the addition this phase makes is
+tying them to actual verified reproducibility evidence (telemetry + exact-match) rather than
+just a stated intention not to retune.
+
+### Live thread, not part of the original 5 phases: recall-over-precision (supervisor guidance, 2026-08-19)
+
+Relayed mid-session: prioritize **recall over precision** in query reformulation and the
+pre-LLM retrieval stage (precision may drop, that's an accepted tradeoff), and add a
+**semantic layer to query reformulation**. Real diagnostic surfaced while scoping this: the
+main-track relevance-feedback pipeline's `--candidate-pool-size 50` default caps Recall@100
+at 0.576 vs. 0.751 at pool=200 on the same diverse manifest -- a true file beyond the judged
+pool can never be recovered downstream no matter how good the judgment or reformulation is.
+Being worked on branch `experiment/recall-oriented-reformulation`: raised the default pool to
+100, and wired `method/keyword_extraction.py`'s EmbedRank/MMR + cosine-similarity mechanism
+(already built for the IQLoc branch) into the main track's reformulation as a new
+`--reformulation-mode semantic` option, deliberately recall-leaning (unions bug-report and
+code-side keywords rather than only the narrow cosine-matched overlap). Not yet run at scale
+-- see that branch for status.
 
 ### What this roadmap deliberately does NOT include yet
 
