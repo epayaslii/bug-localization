@@ -56,6 +56,7 @@ from method.bm25_retriever import (
 )
 from method.hybrid_retriever import rank_files_hybrid
 from method.embedding_retriever import _chunk_file_content
+from method.keyword_extraction import embedrank_mmr_keywords, reformulate_query_iqloc_style
 from method.openrouter_localizer import OpenRouterLocalizer
 from method.ollama_localizer import OllamaLocalizer
 from method.models import RelevanceFeedbackResponse, ChunkRelevanceFeedbackResponse
@@ -118,7 +119,7 @@ def _relevance_feedback_chunked(localizer, prompt_gen, bug, candidates, contents
             chunks.append((path, idx, chunk_text))
 
     if not chunks:
-        return [], {}, []
+        return [], {}, [], []
 
     prompt = prompt_gen.generate_chunk_relevance_feedback_prompt(bug, chunks)
     response = localizer.invoke_structured(prompt, ChunkRelevanceFeedbackResponse)
@@ -127,6 +128,7 @@ def _relevance_feedback_chunked(localizer, prompt_gen, bug, candidates, contents
     chunk_by_key = {(path, idx): chunk_text for path, idx, chunk_text in chunks}
     relevant_files = []
     terms = []
+    relevant_chunk_texts = []
     for path in candidates:
         file_chunk_indices = [idx for (p, idx, _) in chunks if p == path]
         relevant_indices = [idx for idx in file_chunk_indices if judged_chunks.get((path, idx)) is True]
@@ -134,6 +136,7 @@ def _relevance_feedback_chunked(localizer, prompt_gen, bug, candidates, contents
             relevant_files.append(path)
             for idx in relevant_indices:
                 chunk_text = chunk_by_key[(path, idx)]
+                relevant_chunk_texts.append(chunk_text)
                 try:
                     symbol_tokens, _import_tokens = _extract_symbol_tokens(chunk_text, path)
                 except Exception as e:
@@ -144,10 +147,41 @@ def _relevance_feedback_chunked(localizer, prompt_gen, bug, candidates, contents
     # judged, for the output file, keyed the same shape as the file-level path ("file" ->
     # bool) plus the raw chunk judgments for inspection.
     judged = {"file_level": {p: (p in relevant_files) for p in candidates}, "chunk_level": {f"{f}#{i}": v for (f, i), v in judged_chunks.items()}}
-    return relevant_files, judged, terms
+    return relevant_files, judged, terms, relevant_chunk_texts
 
 
-def _run_one(localizer, prompt_gen, bug, candidate_pool_size, retriever, embedding_model, rrf_weights, granularity, max_chunks_per_file, bm25_repr):
+def _semantic_reformulation_terms(bug, relevant_chunk_texts, keyword_model, top_n_keywords):
+    """Recall-oriented semantic reformulation (2026-08-19, per supervisor guidance relayed
+    mid-session: "a semantic layer should be added to query reformulation" and "increase
+    recall over precision, even if precision decreases" for reformulation and the pre-LLM
+    retrieval stage). Reuses method/keyword_extraction.py's EmbedRank/MMR + cosine-similarity
+    matching (built for the IQLoc-approximation pipeline) instead of literal-token extraction
+    -- ranks candidate terms by embedding similarity to the document, not just presence.
+
+    Deliberately recall-leaning versus reformulate_query_iqloc_style's own default: takes the
+    union of bug-report keywords and code keywords (broadening the query) rather than only the
+    code keywords cosine-matched to the bug-report side (which narrows to overlap and drops
+    code-side terms the bug report doesn't already echo -- exactly the kind of precision-
+    favoring pruning that can cost recall)."""
+    bug_report_keywords = embedrank_mmr_keywords(bug.bug_report, model_name=keyword_model, top_n=top_n_keywords)
+    if not relevant_chunk_texts or not bug_report_keywords:
+        return bug_report_keywords
+
+    code_text = "\n".join(relevant_chunk_texts)
+    code_keywords = embedrank_mmr_keywords(code_text, model_name=keyword_model, top_n=top_n_keywords * 2)
+    matched_code_keywords = reformulate_query_iqloc_style(
+        bug_report_keywords, code_keywords, model_name=keyword_model, top_matches=top_n_keywords
+    )
+    seen = set()
+    union_terms = []
+    for term in bug_report_keywords + code_keywords + matched_code_keywords:
+        if term not in seen:
+            seen.add(term)
+            union_terms.append(term)
+    return union_terms
+
+
+def _run_one(localizer, prompt_gen, bug, candidate_pool_size, retriever, embedding_model, rrf_weights, granularity, max_chunks_per_file, bm25_repr, reformulation_mode, keyword_model, top_n_keywords):
     candidates = _initial_ranking(bug, retriever, candidate_pool_size, embedding_model, rrf_weights, bm25_repr)
     if not candidates:
         return {
@@ -159,8 +193,12 @@ def _run_one(localizer, prompt_gen, bug, candidate_pool_size, retriever, embeddi
 
     if granularity == "file":
         relevant, judged, terms = _relevance_feedback_file(localizer, prompt_gen, bug, candidates, contents)
+        relevant_chunk_texts = [contents[c] for c in relevant if contents.get(c)]
     else:
-        relevant, judged, terms = _relevance_feedback_chunked(localizer, prompt_gen, bug, candidates, contents, max_chunks_per_file)
+        relevant, judged, terms, relevant_chunk_texts = _relevance_feedback_chunked(localizer, prompt_gen, bug, candidates, contents, max_chunks_per_file)
+
+    if reformulation_mode == "semantic":
+        terms = _semantic_reformulation_terms(bug, relevant_chunk_texts, keyword_model, top_n_keywords)
 
     not_relevant = [c for c in candidates if c not in relevant]
     relevance_filtered = relevant + not_relevant
@@ -196,10 +234,14 @@ def main():
                        help='Project decision 2026-08-18: use bench4bl for all new work, not swebench.')
     parser.add_argument('--pool-size', type=int, default=None,
                        help='Override the manifest\'s stored pool_size when re-deriving the pool.')
-    parser.add_argument('--candidate-pool-size', type=int, default=50,
-                       help='Initial retriever top-K candidate pool size the relevance-feedback call judges '
-                            '(smaller than the usual 100/200 to keep the prompt reasonable -- especially at '
-                            '--granularity chunk, where each candidate expands into several chunks).')
+    parser.add_argument('--candidate-pool-size', type=int, default=100,
+                       help='Initial retriever top-K candidate pool size the relevance-feedback call judges. '
+                            'Raised from the original default of 50 (2026-08-19, per supervisor guidance to '
+                            'prioritize recall over precision): at pool=50, Recall@100 on the diverse Bench4BL '
+                            'manifest measured 0.576 vs. 0.751 at pool=200 -- a true file beyond the judged pool '
+                            'can never be recovered by filtering or reformulation, no matter how good the '
+                            'judgment is. 100 is a middle ground; --granularity chunk prompt size scales with '
+                            'this, so larger values cost more per call and risk more JSON-truncation failures.')
     parser.add_argument('--retriever', choices=['bm25', 'hybrid-rrf'], default='hybrid-rrf',
                        help='Which retriever produces the initial candidate pool and gets re-run with the '
                             'reformulated query. hybrid-rrf is this project\'s stronger production signal '
@@ -228,6 +270,18 @@ def main():
     parser.add_argument('--max-chunks-per-file', type=int, default=5,
                        help='With --granularity chunk: cap chunks judged per candidate file, to bound the '
                             'prompt size growth vs. file-level (a file can have many methods).')
+    parser.add_argument('--reformulation-mode', choices=['literal', 'semantic'], default='literal',
+                       help='literal (default, original behavior): raw identifier/symbol tokens extracted from '
+                            'judged-relevant chunks, no ranking. semantic (2026-08-19, per supervisor guidance): '
+                            'EmbedRank/MMR keyword extraction + cosine-similarity matching (method/'
+                            'keyword_extraction.py, built for the IQLoc-approximation pipeline), recall-leaning '
+                            '-- takes the union of bug-report and code-side keywords rather than only the '
+                            'narrow cosine-matched overlap, deliberately favoring recall over precision.')
+    parser.add_argument('--keyword-model', default='microsoft/unixcoder-base',
+                       help='With --reformulation-mode semantic: embedding model for keyword extraction.')
+    parser.add_argument('--top-n-keywords', type=int, default=15,
+                       help='With --reformulation-mode semantic: keywords extracted per side before taking the '
+                            'union (IQLoc\'s own N sweep found 15 the knee of the MAP/MRR-vs-N curve).')
     parser.add_argument('--method', choices=['openrouter', 'ollama'], default='ollama',
                        help='Backend for the relevance-feedback LLM call. ollama runs fully offline (see '
                             'docs/ollama_deployment.md) -- default, per project decision 2026-08-18.')
@@ -280,7 +334,7 @@ def main():
         result = _run_one(
             localizer, prompt_gen, bug, args.candidate_pool_size, args.retriever,
             args.embedding_model, rrf_weights, args.granularity, args.max_chunks_per_file,
-            args.bm25_repr,
+            args.bm25_repr, args.reformulation_mode, args.keyword_model, args.top_n_keywords,
         )
         per_bug[bug.instance_id] = result
         logger.info(
@@ -301,13 +355,14 @@ def main():
 
     save_cache(cache)
 
-    logger.info(f"=== Summary (macro, retriever={args.retriever}, granularity={args.granularity}, candidate_pool_size={args.candidate_pool_size}) ===")
-    logger.info(f"{'config':<20} {'Hit@1':>7} {'Hit@5':>7} {'Hit@10':>7} {'MRR':>8} {'MAP':>8}")
+    logger.info(f"=== Summary (macro, retriever={args.retriever}, granularity={args.granularity}, candidate_pool_size={args.candidate_pool_size}, reformulation_mode={args.reformulation_mode}) ===")
+    logger.info(f"{'config':<20} {'Hit@1':>7} {'Hit@5':>7} {'Hit@10':>7} {'MRR':>8} {'MAP':>8} {'Recall@100':>11}")
     for name in config_names:
         s = results[name]["summary"]
+        recall_100 = s.get('macro_recall_at', {}).get(100, s.get('macro_recall_at', {}).get('100', float('nan')))
         logger.info(
             f"{name:<20} {s['macro_hit_at'][1]:>7.3f} {s['macro_hit_at'][5]:>7.3f} "
-            f"{s['macro_hit_at'][10]:>7.3f} {s['mrr']:>8.4f} {s['map']:>8.4f}"
+            f"{s['macro_hit_at'][10]:>7.3f} {s['mrr']:>8.4f} {s['map']:>8.4f} {recall_100:>11.3f}"
         )
 
     retriever_mrr = results["retriever"]["summary"]["mrr"]
@@ -318,6 +373,14 @@ def main():
         logger.info(f"VERDICT: {best_name} beats plain {args.retriever} -- relevance feedback / reformulation helps at this scale.")
     else:
         logger.info(f"VERDICT: neither relevance filtering nor reformulation beats plain {args.retriever} at this scale.")
+
+    def _recall_100(name):
+        rec = results[name]["summary"].get("macro_recall_at", {})
+        return rec.get(100, rec.get('100', 0.0))
+    retriever_recall = _recall_100("retriever")
+    best_recall_name = max(config_names, key=_recall_100)
+    best_recall = _recall_100(best_recall_name)
+    logger.info(f"Best Recall@100: {best_recall_name} ({best_recall:.3f}); plain {args.retriever}: {retriever_recall:.3f}")
 
     stats = localizer.total_stats()
     logger.info(f"LLM call stats: {stats}")
@@ -331,6 +394,8 @@ def main():
                 "retriever": args.retriever,
                 "granularity": args.granularity,
                 "candidate_pool_size": args.candidate_pool_size,
+                "reformulation_mode": args.reformulation_mode,
+                "keyword_model": args.keyword_model if args.reformulation_mode == "semantic" else None,
                 "method": args.method,
                 "model": model,
                 "llm_call_stats": stats,
