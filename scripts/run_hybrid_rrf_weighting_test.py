@@ -26,7 +26,7 @@ from dataset.localizability import load_cache, save_cache
 from dataset.utils import setup_logging, get_logger
 from evaluation.manifest import load_manifest
 from evaluation.screening import screen_manifest, summarize_screening
-from method.bm25_retriever import rank_files_bm25_with_symbols
+from method.bm25_retriever import rank_files_bm25_with_symbols, rank_files_bm25_with_skeleton
 from method.embedding_retriever import rank_files_embedding_chunked
 from method.hybrid_retriever import reciprocal_rank_fusion
 
@@ -49,14 +49,22 @@ WEIGHT_CONFIGS = [
 ]
 
 
-def _compute_base_rankings(bugs, candidate_pool_size, model_name):
+_BM25_REPR_FNS = {
+    "symbols_with_imports": lambda bug, top_k: rank_files_bm25_with_symbols(bug, top_k=top_k, include_imports=True),
+    "symbols_no_imports": lambda bug, top_k: rank_files_bm25_with_symbols(bug, top_k=top_k, include_imports=False),
+    "skeleton": lambda bug, top_k: rank_files_bm25_with_skeleton(bug, top_k=top_k),
+}
+
+
+def _compute_base_rankings(bugs, candidate_pool_size, model_name, bm25_repr="symbols_with_imports"):
     """BM25 + chunked-embedding rankings only -- the expensive shared inputs every RRF
     weight variant fuses from. Returns {instance_id: {"bm25": [...], "chunked_embedding": [...]}}.
     """
+    bm25_rank_fn = _BM25_REPR_FNS[bm25_repr]
     rankings = {}
     for i, bug in enumerate(bugs):
         t0 = time.time()
-        bm25_candidates = rank_files_bm25_with_symbols(bug, top_k=candidate_pool_size)
+        bm25_candidates = bm25_rank_fn(bug, candidate_pool_size)
         t_bm25 = time.time() - t0
 
         if not bm25_candidates:
@@ -96,6 +104,9 @@ def main():
                             'instance is found.')
     parser.add_argument('--candidate-pool-size', type=int, default=200)
     parser.add_argument('--rrf-k', type=int, default=60)
+    parser.add_argument('--bm25-repr', choices=list(_BM25_REPR_FNS), default='symbols_with_imports',
+                       help='BM25 document representation to use as the fusion\'s BM25 side (default matches '
+                            'every prior hybrid-RRF run for comparability; skeleton scores higher standalone).')
     parser.add_argument('--model', default='microsoft/unixcoder-base')
     parser.add_argument('--output', default=None)
     args = parser.parse_args()
@@ -118,8 +129,8 @@ def main():
         logger.warning(f"{len(missing)} manifest instance(s) not found when re-deriving the pool: {sorted(missing)[:5]}")
     logger.info(f"Sweeping RRF weights over {len(bugs)}/{manifest['size']} manifest instances (manifest {manifest['manifest_id']}), candidate_pool_size={args.candidate_pool_size}")
 
-    logger.info("--- Computing base rankings (bm25 + chunked_embedding, shared across all weight configs) ---")
-    base_rankings = _compute_base_rankings(bugs, args.candidate_pool_size, args.model)
+    logger.info(f"--- Computing base rankings (bm25[{args.bm25_repr}] + chunked_embedding, shared across all weight configs) ---")
+    base_rankings = _compute_base_rankings(bugs, args.candidate_pool_size, args.model, bm25_repr=args.bm25_repr)
 
     fused_rankings = {}
     for bug in bugs:

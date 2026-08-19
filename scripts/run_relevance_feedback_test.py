@@ -51,8 +51,8 @@ from dataset.utils import setup_logging, get_logger
 from evaluation.manifest import load_manifest
 from evaluation.screening import screen_manifest, summarize_screening
 from method.bm25_retriever import (
-    rank_files_bm25, rank_files_bm25_with_symbols, extract_query_reformulation_terms,
-    _extract_symbol_tokens,
+    rank_files_bm25, rank_files_bm25_with_symbols, rank_files_bm25_with_skeleton,
+    extract_query_reformulation_terms, _extract_symbol_tokens,
 )
 from method.hybrid_retriever import rank_files_hybrid
 from method.embedding_retriever import _chunk_file_content
@@ -65,28 +65,38 @@ setup_logging(level=logging.INFO)
 logger = get_logger(__name__)
 
 
-def _initial_ranking(bug, retriever, candidate_pool_size, embedding_model, rrf_weights):
+_BM25_REPR_FNS = {
+    "symbols_with_imports": lambda bug, top_k: rank_files_bm25_with_symbols(bug, top_k=top_k, include_imports=True),
+    "symbols_no_imports": lambda bug, top_k: rank_files_bm25_with_symbols(bug, top_k=top_k, include_imports=False),
+    "skeleton": lambda bug, top_k: rank_files_bm25_with_skeleton(bug, top_k=top_k),
+}
+
+
+def _initial_ranking(bug, retriever, candidate_pool_size, embedding_model, rrf_weights, bm25_repr):
+    bm25_rank_fn = _BM25_REPR_FNS[bm25_repr]
     if retriever == "bm25":
-        return rank_files_bm25_with_symbols(bug, top_k=candidate_pool_size)
+        return bm25_rank_fn(bug, candidate_pool_size)
     ranked, _timing = rank_files_hybrid(
         bug, top_k=candidate_pool_size, candidate_pool_size=candidate_pool_size,
         embedding_model=embedding_model, weights=rrf_weights,
+        bm25_rank_fn=lambda b: bm25_rank_fn(b, candidate_pool_size),
     )
     return ranked
 
 
-def _rerank_with_reformulated_query(bug, candidates, reformulated_query, retriever, embedding_model, rrf_weights):
+def _rerank_with_reformulated_query(bug, candidates, reformulated_query, retriever, embedding_model, rrf_weights, bm25_repr):
     """Re-rank the SAME candidate pool with a reformulated query, using whichever
     retriever produced the original candidates -- a genuine second pass, not just a
     re-ordering, since the query text driving both BM25 and (for hybrid-rrf) the embedding
     step actually changes."""
+    bm25_rank_fn = _BM25_REPR_FNS[bm25_repr]
     candidate_bug = bug.model_copy(update={"bug_report": reformulated_query, "code_files": candidates})
     if retriever == "bm25":
-        return rank_files_bm25_with_symbols(candidate_bug, top_k=None)
+        return bm25_rank_fn(candidate_bug, None)
     ranked, _timing = rank_files_hybrid(
         candidate_bug, top_k=None, candidate_pool_size=len(candidates),
         embedding_model=embedding_model, weights=rrf_weights,
-        bm25_rank_fn=lambda b: rank_files_bm25_with_symbols(b, top_k=None),
+        bm25_rank_fn=lambda b: bm25_rank_fn(b, None),
     )
     return ranked
 
@@ -137,8 +147,8 @@ def _relevance_feedback_chunked(localizer, prompt_gen, bug, candidates, contents
     return relevant_files, judged, terms
 
 
-def _run_one(localizer, prompt_gen, bug, candidate_pool_size, retriever, embedding_model, rrf_weights, granularity, max_chunks_per_file):
-    candidates = _initial_ranking(bug, retriever, candidate_pool_size, embedding_model, rrf_weights)
+def _run_one(localizer, prompt_gen, bug, candidate_pool_size, retriever, embedding_model, rrf_weights, granularity, max_chunks_per_file, bm25_repr):
+    candidates = _initial_ranking(bug, retriever, candidate_pool_size, embedding_model, rrf_weights, bm25_repr)
     if not candidates:
         return {
             "retriever": [], "relevance_filtered": [], "reformulated": [],
@@ -157,7 +167,7 @@ def _run_one(localizer, prompt_gen, bug, candidate_pool_size, retriever, embeddi
 
     if terms:
         reformulated_query = bug.bug_report + "\n" + " ".join(terms)
-        reformulated = _rerank_with_reformulated_query(bug, candidates, reformulated_query, retriever, embedding_model, rrf_weights)
+        reformulated = _rerank_with_reformulated_query(bug, candidates, reformulated_query, retriever, embedding_model, rrf_weights, bm25_repr)
     else:
         # No relevant chunks/files found, or none had extractable identifiers -- nothing to
         # reformulate with, so fall back to the original ranking rather than a query with
@@ -201,6 +211,13 @@ def main():
     parser.add_argument('--rrf-weights', default='1,5',
                        help='With --retriever hybrid-rrf: "bm25_weight,embedding_weight" (default "1,5", '
                             'the confirmed n=30 peak on Bench4BL).')
+    parser.add_argument('--bm25-repr', choices=list(_BM25_REPR_FNS), default='symbols_with_imports',
+                       help='BM25 document representation used both for the initial candidate pool (bm25 '
+                            'retriever, or the bm25 half of hybrid-rrf) and the reformulated-query rerank. '
+                            'Default matches every prior run for comparability; skeleton scores higher '
+                            'standalone and in fusion on the diverse Bench4BL manifest (see '
+                            'results/bm25_comparison_bench4bl_30_diverse.json / '
+                            'results/hybrid_rrf_weighting_openai_skeleton_bench4bl_30_diverse.json).')
     parser.add_argument('--granularity', choices=['file', 'chunk'], default='chunk',
                        help='file: one relevance judgment per whole candidate file (original scoping, gave a '
                             'negative reformulation signal at n=12 on SWE-bench). chunk: one judgment per '
@@ -263,6 +280,7 @@ def main():
         result = _run_one(
             localizer, prompt_gen, bug, args.candidate_pool_size, args.retriever,
             args.embedding_model, rrf_weights, args.granularity, args.max_chunks_per_file,
+            args.bm25_repr,
         )
         per_bug[bug.instance_id] = result
         logger.info(
