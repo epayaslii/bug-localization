@@ -107,3 +107,87 @@ than this project's own relevance-feedback prototype (1 zero-shot LLM call/bug, 
    from-scratch reimplementation of the pipeline, or both.
 
 Not yet decided — surfacing before starting implementation rather than guessing.
+
+## Roadmap: closer to IQLoc, adopting the co-intern's rigor
+
+Scoped 2026-08-19 after comparing this project's two tracks against both IQLoc's actual
+pipeline and the co-intern's frozen-baseline deck (`bug_localization_progress_2026-08-17.pptx`
+on `github.com/adisenaa/Bug-Report-Localization`, branch `iqloc-publication-replication`).
+Neither track matched IQLoc cleanly: the co-intern is closer on the retrieval stage (plain
+BM25, no dense/hybrid — matches IQLoc's Stage 1 exactly) and far ahead on rigor (full
+population P=4,621, real Slurm accounting/telemetry, a verified local↔MN5 exact-match smoke
+test); this project's own hybrid-RRF track is closer on everything downstream of retrieval
+(the only one of the two with a working relevance-feedback/reformulation stage at all, and as
+of today the `method/keyword_extraction.py` EmbedRank/MMR + cosine-similarity mechanism
+genuinely matches IQLoc's Stage 3-4 design, not just BRaIn's simpler raw-token version). This
+roadmap closes both gaps rather than picking one track to abandon.
+
+### Phase 1 — Freeze a genuinely IQLoc-comparable retrieval baseline (this branch)
+
+IQLoc's Stage 1 is plain BM25 top-100, no hybrid. This project's hybrid-RRF result (MRR 0.475
+on the diverse n=30 manifest, see `results/hybrid_rrf_weighting_openai_skeleton_bench4bl_30_diverse.json`)
+is a real, stronger number, but it is not what IQLoc's own architecture uses at this stage, so
+it is not a like-for-like comparison point. Freeze **BM25 (skeleton representation, this
+project's confirmed-best BM25 config) as the IQLoc-comparable retrieval baseline on this
+branch specifically** — do not swap in hybrid retrieval here even though it scores higher,
+the same "don't retune the frozen candidate generator" discipline the co-intern's slide 3
+states explicitly as a research contract. Hybrid-RRF stays the project's own best-performing
+config elsewhere (`docs/sota_comparison.md`, `docs/qwen3_rrf_result.md`), just not conflated
+with the IQLoc-comparison track.
+
+### Phase 2 — Full-population evaluation, not n=30 (adopt the co-intern's practice)
+
+Every number this project has produced on the IQLoc-approximation pipeline so far is n=30 (or
+smaller, for smoke tests) — not remotely comparable in statistical weight to IQLoc's own
+1,497-1,501-instance test split, let alone their full 7,483. The co-intern's full-population
+BM25 run (P=4,621, `bench4bl_bm25_comparison_full_array.sbatch`-equivalent on their side) is
+already running as of this session on MN5 (job 44806072, our own 4,418-instance mirror,
+50-shard array) for the plain BM25 4-representation comparison. Once that lands: re-run the
+frozen skeleton-BM25 baseline (Phase 1) at the same full-population scale, so this project has
+a real large-n reference point, not just n=30, before layering relevance feedback on top of it
+-- mirrors the co-intern's own explicit gate ("do not start relevance feedback until the full
+baseline is in hand").
+
+### Phase 3 — Fix the keyword-extraction contamination bug found in smoke testing
+
+The 2-instance smoke test of `scripts/run_iqloc_approximation_test.py` surfaced a real data-
+quality issue: code-side EmbedRank/MMR keywords are picking up Apache License header
+boilerplate ("warranties", "licensed", "permissions", "obtain") rather than real code terms,
+because `method/embedding_retriever._chunk_file_content` doesn't strip comment/license text
+before chunking. `method/java_parsing.py` already strips comments for the skeleton/symbols
+BM25 representations -- reuse that stripping (or an equivalent) for the code-side keyword
+candidate text specifically, so EmbedRank/MMR is ranking identifiers and code terms, not
+license boilerplate that happens to repeat identically across every file in the corpus. Fix
+and re-smoke-test before running this at n=30 or beyond; the current keyword/reformulation
+numbers are not trustworthy until this is fixed.
+
+### Phase 4 — Full-population run of the IQLoc-approximation pipeline (real cost, scope first)
+
+Only after Phase 3 is fixed: run `run_iqloc_approximation_test.py` at a real scale (start at
+n=200-500, a genuine step up from n=30 without the multi-day cost of the full 4,418, similar
+in spirit to IQLoc's own ~1,500-instance test split) before considering a true full-population
+run. Cost is 1 Ollama call/bug (free, local, but ~80-110s/bug observed this session -- a
+few-hundred-instance run is hours, not minutes) plus up to 4 embedding calls/bug for keyword
+extraction (cheap on a local model, real $ if `--keyword-model` is swapped to OpenAI). Needs
+its own MN5 array-sharding treatment (this branch doesn't have one yet) if run beyond a few
+hundred instances, matching the two-phase pattern (MN5 for offline stages, local for
+LLM/API-dependent stages) already used for the project's other large end-to-end runs.
+
+### Phase 5 — Adopt MN5 reproducibility discipline project-wide, not just for this branch
+
+Regardless of the IQLoc-specific work above, the co-intern's rigor is worth adopting for this
+project's own confirmed-best config (currently hybrid-RRF, OpenAI + skeleton-BM25, 1:2) too:
+real Slurm accounting/wall-clock capture (not just "job finished, here are the numbers"), an
+explicit local↔MN5 exact-match verification on a small real shard before trusting a full-scale
+MN5 run's output, and a written "frozen configuration" contract stating what later stages are
+and are not allowed to retune. None of this project's hybrid-RRF/embedding-bakeoff results
+have this level of reproducibility bookkeeping yet -- worth doing once a config is confirmed
+best, not on every exploratory sweep.
+
+### What this roadmap deliberately does NOT include yet
+
+Real fine-tuning of a CodeBERT cross-encoder or domain-pretraining CodeT5 (the "full retrain"
+option declined earlier this session in favor of "approximate with what we have") stays out of
+scope unless revisited explicitly -- the phases above are about making the *approximation*
+rigorous and comparable at real scale, not closing the remaining architectural gap to IQLoc's
+actual trained components.
