@@ -4,9 +4,7 @@ Chronological status for the scalable bug-localization pipeline. Companion docs:
 
 All numeric results below are taken from committed JSON/Markdown under [`results/`](../results/). Diagnostic subsets (n<30) are labeled explicitly.
 
-**Presentation decks** (linked, not committed as HTML in this repo):
-- [Bug Localization — Progress Review](https://claude.ai/code/artifact/4b93c69d-c238-4025-a442-f2aec44f9749) — current, updated as results land (last: 2026-08-17, Bench4BL n=30 confirmed).
-- [Bench4BL deep-dive](https://claude.ai/code/artifact/1121036e-b173-482a-a4af-b9c7f5f4bf07) — 2026-08-13 session, now superseded by the confirmed n=30 numbers above (still shows the void/n=6 hybrid results as open questions).
+**Presentation decks**: see [docs/presentations/](presentations/README.md).
 
 ---
 
