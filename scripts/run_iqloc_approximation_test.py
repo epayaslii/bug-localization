@@ -161,6 +161,12 @@ def main():
                        help='Defaults to qwen2.5-coder-7b (ollama) or gpt-4o-mini (openrouter).')
     parser.add_argument('--ollama-host', default=None)
     parser.add_argument('--num-ctx', type=int, default=16384)
+    parser.add_argument('--max-tokens', type=int, default=8192,
+                       help='Raised from OllamaLocalizer\'s own 4096 default -- a batched chunk-relevance '
+                            'judgment response (one JSON object per chunk, up to candidate_pool_size * '
+                            'max_chunks_per_file of them) can exceed 4096 tokens and get truncated '
+                            'mid-string. Confirmed on the n=200 run: 3/200 (1.5%) instances failed to '
+                            'parse for exactly this reason before this fix.')
     parser.add_argument('--output', default=None)
     args = parser.parse_args()
 
@@ -190,7 +196,7 @@ def main():
     )
 
     if args.method == 'ollama':
-        localizer = OllamaLocalizer(model=model, host=args.ollama_host, num_ctx=args.num_ctx)
+        localizer = OllamaLocalizer(model=model, host=args.ollama_host, num_ctx=args.num_ctx, max_tokens=args.max_tokens)
     else:
         localizer = OpenRouterLocalizer(model=model)
     prompt_gen = PromptGenerator()

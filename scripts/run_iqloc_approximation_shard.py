@@ -64,6 +64,9 @@ def main():
     parser.add_argument('--model', default='qwen2.5-coder-7b')
     parser.add_argument('--ollama-host', default=None)
     parser.add_argument('--num-ctx', type=int, default=16384)
+    parser.add_argument('--max-tokens', type=int, default=8192,
+                       help='Raised from OllamaLocalizer\'s own 4096 default -- fixes a real JSON-'
+                            'truncation failure mode confirmed on the n=200 run (3/200 instances, 1.5%%).')
     parser.add_argument('--num-shards', type=int, required=True)
     parser.add_argument('--shard-index', type=int, required=True, help='0-based')
     parser.add_argument('--output-dir', required=True)
@@ -103,7 +106,7 @@ def main():
         logger.info(f"Shard {args.shard_index} empty, wrote placeholder to {output_path}")
         return
 
-    localizer = OllamaLocalizer(model=args.model, host=args.ollama_host, num_ctx=args.num_ctx)
+    localizer = OllamaLocalizer(model=args.model, host=args.ollama_host, num_ctx=args.num_ctx, max_tokens=args.max_tokens)
     prompt_gen = PromptGenerator()
 
     per_bug = {}
