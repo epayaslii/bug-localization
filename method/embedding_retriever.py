@@ -32,6 +32,12 @@ _VOYAGE_EMBEDDING_MODELS = {"voyage-code-3", "voyage-code-2"}
 # BAAI/bge-code-v1 (2B, Qwen2-based) and Qwen/Qwen3-Embedding-* both document this.
 _LAST_TOKEN_POOLED_MODELS = {"BAAI/bge-code-v1", "Qwen/Qwen3-Embedding-0.6B", "Qwen/Qwen3-Embedding-4B", "Qwen/Qwen3-Embedding-8B"}
 
+# Jina's embedding models ship custom modeling code (not a stock transformers architecture --
+# a BERT variant with ALiBi-style position handling for long context), so AutoModel needs
+# trust_remote_code=True to load them at all. Standard mean pooling otherwise (encoder-only,
+# not decoder-based like the last-token-pooled models above).
+_TRUST_REMOTE_CODE_MODELS = {"jinaai/jina-embeddings-v2-base-code"}
+
 # These same models also expect an instruction-prefixed QUERY (not document/chunk text --
 # documents are embedded raw). Exact templates per each model's own card.
 _QUERY_INSTRUCTION_TEMPLATES = {
@@ -45,8 +51,9 @@ _QUERY_INSTRUCTION_TEMPLATES = {
 def _load_model(model_name: str):
     if model_name not in _MODEL_CACHE:
         logger.info(f"Loading embedding model: {model_name}")
-        tokenizer = AutoTokenizer.from_pretrained(model_name)
-        model = AutoModel.from_pretrained(model_name).to(_DEVICE).eval()
+        trust_remote_code = model_name in _TRUST_REMOTE_CODE_MODELS
+        tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=trust_remote_code)
+        model = AutoModel.from_pretrained(model_name, trust_remote_code=trust_remote_code).to(_DEVICE).eval()
         _MODEL_CACHE[model_name] = (tokenizer, model)
     return _MODEL_CACHE[model_name]
 

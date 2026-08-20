@@ -53,6 +53,11 @@ MODEL_CONFIGS = [
     ("bge-code-v1", "BAAI/bge-code-v1"),
     ("qwen3-embedding-0.6b", "Qwen/Qwen3-Embedding-0.6B"),
     ("voyage-code-3", "voyage-code-3"),
+    # Added 2026-08-20: the co-intern's own dense-retrieval candidate (his deck describes
+    # runtime-only validation on MN5, no quality numbers yet at the time) -- a real code-
+    # specific model neither track had tested. Needs trust_remote_code=True and `einops`
+    # (see method/embedding_retriever.py's _TRUST_REMOTE_CODE_MODELS).
+    ("jina-embeddings-v2-base-code", "jinaai/jina-embeddings-v2-base-code"),
 ]
 
 
