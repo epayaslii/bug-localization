@@ -2,7 +2,7 @@
 #SBATCH --job-name=bench4bl-dense-probe
 #SBATCH --account=ehpc680
 #SBATCH --partition=acc
-#SBATCH --qos=acc_debug
+#SBATCH --qos=acc_ehpc
 #SBATCH --time=00:30:00
 #SBATCH --cpus-per-task=20
 #SBATCH --gres=gpu:1
