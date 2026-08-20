@@ -387,3 +387,134 @@ next session; if it completed, the result is at
 and writing up in `docs/qwen3_rrf_result.md` (currently only has the n=6 local result). If
 it failed or got killed, `sacct` will show why — check the wall-clock QoS limit first before
 assuming a new bug.
+
+## Update 2026-08-19/20: Ollama+GPU deployment, real array-job patterns, telemetry, a real bug found+fixed, and a reproducibility checklist
+
+Everything below is confirmed working on real jobs this session (BM25 full-population job
+`44806072`, IQLoc-approximation n=200 job `44814164`, both GPU-accelerated). Commands are
+written to be copy-pasted directly — per project decision 2026-08-20, MN5 commands are run by
+the user, not executed by Claude directly.
+
+### Ollama deployment on MN5 — real, GPU-accelerated, offline
+
+Module + model weights are already staged (`ollama_models/` in the project dir, transferred
+from a local `ollama pull` in an earlier session). To verify it's still working:
+
+```bash
+ssh mn5
+cd /gpfs/projects/ehpc680/comm842299/repos/bug-localization/
+module load ollama/0.11.8
+```
+
+Then, inside a real GPU allocation (Ollama needs the GPU node, not the login node):
+
+```bash
+srun -A ehpc680 -q acc_debug -p acc --gres=gpu:1 --cpus-per-task=20 --time=00:10:00 bash -c '
+module load ollama/0.11.8
+export OLLAMA_MODELS=/gpfs/projects/ehpc680/comm842299/repos/bug-localization/ollama_models
+ollama serve > /tmp/ollama_check.log 2>&1 &
+OLLAMA_PID=$!
+sleep 6
+curl -s http://localhost:11434/api/tags
+echo
+time curl -s http://localhost:11434/v1/chat/completions -H "Content-Type: application/json" \
+  -d "{\"model\":\"qwen2.5-coder:7b\",\"messages\":[{\"role\":\"user\",\"content\":\"Say OK\"}]}"
+kill $OLLAMA_PID
+'
+```
+
+Expect a real chat completion in ~5s on the H100 (vs. up to 460s/instance observed running
+the same model on a CPU-only local Mac) — confirms both the model and the GPU path.
+
+### Array-job pattern for any Ollama-dependent job
+
+Ollama has **no shared-server mode across nodes** — every Slurm array task must start its own
+local `ollama serve`, wait for it to actually respond before sending requests (model load onto
+the GPU takes a few seconds), then kill it at the end. Template (see
+`scripts/mn5/bench4bl_iqloc_approximation_array.sbatch` in the repo for the full working
+version):
+
+```bash
+#SBATCH --partition=acc
+#SBATCH --qos=acc_ehpc
+#SBATCH --cpus-per-task=20
+#SBATCH --gres=gpu:1
+#SBATCH --array=0-N
+
+module load intel mkl impi hdf5 python/3.11.5-gcc ollama/0.11.8
+unset PYTHONHOME PYTHONPATH
+export OLLAMA_MODELS=/gpfs/projects/ehpc680/comm842299/repos/bug-localization/ollama_models
+
+ollama serve > "logs/ollama_serve_${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}.log" 2>&1 &
+OLLAMA_PID=$!
+for i in $(seq 1 30); do
+  curl -s -o /dev/null -w "%{http_code}" http://localhost:11434/api/tags | grep -q 200 && break
+  sleep 2
+done
+
+# ... run the actual shard script here ...
+
+# IMPORTANT: capture the real exit code before the kill, or a normally-exited-but-
+# already-dead Ollama server's nonzero kill status silently becomes the job's FAILED status.
+# Confirmed on job 44814164: 9/20 tasks (45%) wrongly marked FAILED in sacct despite writing
+# valid results, before this fix.
+PIPELINE_STATUS=$?
+kill "$OLLAMA_PID" 2>/dev/null
+exit "$PIPELINE_STATUS"
+```
+
+**`--cpus-per-task=20` is required whenever `--gres=gpu:1` is requested** — Slurm rejects
+anything below `nodes * gpus/node * 20` ("Minimum cpus requested should be...").
+
+### Real telemetry — `sacct` after any array job
+
+```bash
+sacct -j <JOBID> --format=JobID,JobName,Partition,Elapsed,State,ExitCode -X
+```
+
+Real numbers from this session: BM25 full-population job (50 tasks) — 28m46s wall-clock
+(first task start → last task end), mean 9m/task. IQLoc n=200 job (20 tasks) — 5m56s
+wall-clock, mean 3m33s/task. **Check `ExitCode` and `State` per task, not just whether the
+job "finished"** — see the false-FAILED bug above; a task can write valid output and still
+show `FAILED` if the job script's own exit-code handling is wrong.
+
+### Local↔MN5 determinism check
+
+```bash
+# On MN5, inside a GPU allocation (same module-load chain as above):
+.venv_mn5/bin/python scripts/check_local_mn5_determinism.py --n 2 --candidate-pool-size 30 --output results/determinism_mn5.json
+```
+
+Run the same command locally (`.venv/bin/python scripts/check_local_mn5_determinism.py ...`)
+and diff the printed `sha256` hashes per instance — they should match exactly. Uses
+Qwen3-Embedding (fully local/offline) rather than this project's actual OpenAI-based
+confirmed-best config, since MN5 has no outbound internet and an OpenAI-dependent pipeline
+cannot run there at all.
+
+### Reproducibility checklist (mirrors the supervisor's expected format)
+
+- [ ] `ssh mn5` succeeds, `pwd` after `cd` lands in `/gpfs/projects/ehpc680/comm842299/repos/bug-localization/`
+- [ ] `module load intel mkl impi hdf5 python/3.11.5-gcc` succeeds with no missing-prerequisite errors
+- [ ] `unset PYTHONHOME PYTHONPATH` run after the module load, every session
+- [ ] `.venv_mn5/bin/python -c "import torch; print(torch.cuda.is_available())"` inside a
+      `--gres=gpu:1` allocation prints `True`
+- [ ] `module load ollama/0.11.8; which ollama` resolves to `/apps/ACC/OLLAMA/0.11.8/bin/ollama`
+- [ ] `curl http://localhost:11434/api/tags` (after `ollama serve` + `OLLAMA_MODELS` export)
+      lists `qwen2.5-coder:7b`
+- [ ] Any new array sbatch script captures the pipeline's real exit code before killing
+      Ollama, not just `kill $OLLAMA_PID` as the last line
+- [ ] `sacct -j <id> -X` checked per-task, not just overall job state
+
+### Minimal rerun commands — full BM25 comparison, full population
+
+```bash
+ssh mn5
+cd /gpfs/projects/ehpc680/comm842299/repos/bug-localization/
+mkdir -p logs results/hpc_mn5_bm25_full/shards
+sbatch scripts/mn5/bench4bl_bm25_comparison_full_array.sbatch
+squeue -u comm842299
+# once all 50 tasks show COMPLETED in: sacct -j <jobid> -X --format=JobID,State
+module load intel mkl impi hdf5 python/3.11.5-gcc
+unset PYTHONHOME PYTHONPATH
+.venv_mn5/bin/python scripts/aggregate_bm25_shards.py --shard-dir results/hpc_mn5_bm25_full/shards --num-shards 50 --output results/bm25_comparison_bench4bl_full4418.json
+```
