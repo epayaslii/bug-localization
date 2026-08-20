@@ -380,6 +380,11 @@ def main():
                        help='With --method ollama: context window requested via extra_body (Ollama defaults to '
                             '4096 regardless of the model\'s real max, which chunk-granularity prompts can '
                             'exceed easily -- see method/ollama_localizer.py).')
+    parser.add_argument('--max-tokens', type=int, default=8192,
+                       help='With --method ollama, --relevance-mode llm: raised from OllamaLocalizer\'s own '
+                            '4096 default -- a batched chunk-relevance response (one JSON judgment per chunk) '
+                            'can exceed 4096 tokens and get truncated mid-string. Confirmed on the IQLoc-branch '
+                            'n=200 run: 3/200 (1.5%%) instances failed to parse for exactly this reason.')
     parser.add_argument('--output', default=None)
     args = parser.parse_args()
 
@@ -413,7 +418,7 @@ def main():
 
     if args.relevance_mode == 'llm':
         if args.method == 'ollama':
-            localizer = OllamaLocalizer(model=model, host=args.ollama_host, num_ctx=args.num_ctx)
+            localizer = OllamaLocalizer(model=model, host=args.ollama_host, num_ctx=args.num_ctx, max_tokens=args.max_tokens)
         else:
             localizer = OpenRouterLocalizer(model=model)
     else:
