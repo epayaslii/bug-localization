@@ -67,6 +67,21 @@ That's consistent with a real issue this project hit independently — WFMP's bu
 reference pre-release version tags (e.g. `1.1.0.Alpha3`) that don't resolve to any known git
 commit, contributing 0 usable instances.
 
+**Ground-truth methodology note (checked 2026-08-20, prompted by comparing against the
+co-intern's independent Bench4BL reconstruction)**: `dataset/bench4bl.py`'s `_parse_bug`
+already derives ground truth from the original Bench4BL `repository.xml`'s `<fixedFiles>`
+entries (dotted Java class names, resolved to real paths via suffix-matching against
+`git ls-tree` at the bug's resolved version tag) — **not** from a git diff of a linked
+bug-fix commit. The co-intern's own from-scratch reconstruction uses the identical source
+(`repository.xml <fixedFiles>`, explicitly treating cross-release git diff as diagnostic-only,
+not scoring GT) — so this project and his are already aligned on GT methodology, contrary to
+an earlier assumption in this project's own notes that the two differed. **The real
+comparability gap is against IQLoc's own paper**, whose stated methodology extracts ground
+truth via AST-parsed diff of the linked bug-fix commit (method-level, not file-level, and not
+Bench4BL's original XML at all) — worth keeping in mind as a caveat on this doc's own
+"0.714 beats IQLoc's 0.553" framing, since the two are working from differently-derived
+ground truth, not just a different sample.
+
 ## Embedding model bake-off (n=30, Bench4BL) — which embedding model is actually best
 
 Six models compared on the same n=30 manifest, chunked-embedding ranking alone (no BM25
