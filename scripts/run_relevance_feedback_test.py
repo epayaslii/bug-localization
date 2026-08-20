@@ -57,6 +57,7 @@ from method.bm25_retriever import (
     extract_query_reformulation_terms, _extract_symbol_tokens,
 )
 from method.hybrid_retriever import rank_files_hybrid
+from method.commit_history_retriever import rank_files_bm25_with_history_union
 from method.embedding_retriever import _chunk_file_content, embed_texts
 from method.keyword_extraction import embedrank_mmr_keywords, reformulate_query_iqloc_style
 from method.openrouter_localizer import OpenRouterLocalizer
@@ -72,6 +73,12 @@ _BM25_REPR_FNS = {
     "symbols_with_imports": lambda bug, top_k: rank_files_bm25_with_symbols(bug, top_k=top_k, include_imports=True),
     "symbols_no_imports": lambda bug, top_k: rank_files_bm25_with_symbols(bug, top_k=top_k, include_imports=False),
     "skeleton": lambda bug, top_k: rank_files_bm25_with_skeleton(bug, top_k=top_k),
+    # 2026-08-20: unions skeleton-BM25 with commit-message-similarity candidates (BugSTAiR-
+    # inspired, method/commit_history_retriever.py) -- confirmed real recall gain standalone
+    # (Recall@200 0.696 -> 0.824, n=30), but only reachable downstream if the WHOLE candidate
+    # pool (not just top_k by BM25 rank) flows into the embedding/reranking stage, which is
+    # exactly what this representation does.
+    "skeleton_plus_history": lambda bug, top_k: rank_files_bm25_with_history_union(bug, top_k=top_k),
 }
 
 

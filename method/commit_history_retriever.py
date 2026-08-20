@@ -102,6 +102,21 @@ def rank_files_commit_history(bug, cache_dir: str | None = None, max_commits: in
     return candidate_files
 
 
+def rank_files_bm25_with_history_union(bug, top_k: int | None = 100, cache_dir: str | None = None,
+                                         max_commits: int = 3000, top_k_commits: int = 20) -> list[str]:
+    """Drop-in BM25-representation-shaped function (bug, top_k) -> ranked paths, matching
+    method/bm25_retriever.py's existing _BM25_REPR_FNS convention -- unions skeleton-BM25
+    candidates with commit-history candidates, so ALL of them (not just the first top_k) flow
+    into whatever downstream embedding/reranking stage consumes this pool. Unlike a plain
+    union evaluated standalone (see compare_commit_history_union.py), the extra recall this
+    adds is actually reachable here: the embedding stage re-scores every candidate by content
+    similarity, not just the first top_k by BM25 rank."""
+    from method.bm25_retriever import rank_files_bm25_with_skeleton
+    content = rank_files_bm25_with_skeleton(bug, top_k=top_k)
+    history = rank_files_commit_history(bug, cache_dir=cache_dir, max_commits=max_commits, top_k_commits=top_k_commits)
+    return union_candidates(content, history)
+
+
 def union_candidates(*candidate_lists: list[str]) -> list[str]:
     """Union multiple candidate lists, preserving first-seen order (first list's ranking
     takes priority, later lists only contribute genuinely new files) -- used to merge a
