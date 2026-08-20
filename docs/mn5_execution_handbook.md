@@ -45,6 +45,11 @@ password auth is still the only path and needs the same real-terminal workaround
 - QoS wall-clock limits (from `sacctmgr show qos`): `acc_debug` = 2 hours, high priority;
   `acc_ehpc` = 3 days, lower priority. Pick based on expected runtime, not just habit —
   CPU-bound embedding jobs (see Blocker 5 below) can easily exceed 2 hours.
+- **`acc_debug` has `MaxSubmitPU=1`** (`sacctmgr show qos format=Name,MaxSubmitPU,MaxSubmitPA -p`)
+  — only one job/task can be submitted at a time under this QoS. **Any array job
+  (`--array=0-N` with N>0) must use `acc_ehpc` instead** — confirmed 2026-08-20, a real
+  8-task array job failed outright with `QOSMaxSubmitJobPerUserLimit` under `acc_debug`.
+  `acc_ehpc`'s limit is 366, comfortably covers any array size used so far.
 - GPU requests have a fixed CPU ratio: Slurm rejects anything below `--cpus-per-task=20`
   per `--gres=gpu:1` ("Minimum cpus requested should be (nodes * gpus/node * 20)").
 - `sinfo` is permission-denied for this account (not just unconfigured — a real, different
