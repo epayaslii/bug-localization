@@ -1,0 +1,44 @@
+{
+  "dev_set_jsonl": "results/relevance_dev_sets/bench4bl-relevance-dev-n30-s43-3d04dce61a1d.jsonl",
+  "dev_bugs_used": 2,
+  "generations": 0,
+  "beam_width": 2,
+  "children_per_survivor": 1,
+  "model": "qwen2.5-coder:7b",
+  "best": {
+    "template": "\n        You are a bug localization expert judging code-segment relevance.\n\n        Bug Report:\n        Repo: {repo}\n        Instance ID: {instance_id}\n        Hints: {hints_text}\n        Bug Report: {bug_report}\n\n        Below are {num_chunks} code segments (chunks of methods/functions, not whole\n        files) from candidate files retrieved for this bug report. For EACH segment, judge\n        whether it is plausibly relevant to fixing this bug (relevant=true) or not\n        (relevant=false). Judge every segment listed -- do not skip any. A file can have\n        multiple segments; judge each independently based on its own content, not the\n        file's other segments. Return each judgment with the exact file path and chunk\n        index shown.\n\n        Code Segments:\n        {chunks_text}\n\n        Return a judgment for every one of the {num_chunks} segments listed above, using\n        their exact file paths and chunk indices.\n        ",
+    "rationale": "generation 0: current production prompt",
+    "metrics": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "tp": 0,
+      "fp": 12,
+      "fn": 10,
+      "tn": 440,
+      "n_calls_failed": 0
+    }
+  },
+  "all_generations": [
+    {
+      "generation": 0,
+      "candidates": [
+        {
+          "template": "\n        You are a bug localization expert judging code-segment relevance.\n\n        Bug Report:\n        Repo: {repo}\n        Instance ID: {instance_id}\n        Hints: {hints_text}\n        Bug Report: {bug_report}\n\n        Below are {num_chunks} code segments (chunks of methods/functions, not whole\n        files) from candidate files retrieved for this bug report. For EACH segment, judge\n        whether it is plausibly relevant to fixing this bug (relevant=true) or not\n        (relevant=false). Judge every segment listed -- do not skip any. A file can have\n        multiple segments; judge each independently based on its own content, not the\n        file's other segments. Return each judgment with the exact file path and chunk\n        index shown.\n\n        Code Segments:\n        {chunks_text}\n\n        Return a judgment for every one of the {num_chunks} segments listed above, using\n        their exact file paths and chunk indices.\n        ",
+          "rationale": "generation 0: current production prompt",
+          "metrics": {
+            "f1": 0.0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "tp": 0,
+            "fp": 12,
+            "fn": 10,
+            "tn": 440,
+            "n_calls_failed": 0
+          }
+        }
+      ]
+    }
+  ],
+  "generated_at": "2026-08-21T11:00:31.741176+00:00"
+}

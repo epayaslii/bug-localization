@@ -120,7 +120,7 @@ def _relevance_feedback_file(localizer, prompt_gen, bug, candidates, contents):
     return relevant, judged, terms
 
 
-def _relevance_feedback_chunked(localizer, prompt_gen, bug, candidates, contents, max_chunks_per_file):
+def _relevance_feedback_chunked(localizer, prompt_gen, bug, candidates, contents, max_chunks_per_file, template_override=None):
     chunks = []  # list of (file, chunk_index, chunk_text)
     for path in candidates:
         file_chunks = _chunk_file_content(contents.get(path), path=path)
@@ -130,7 +130,7 @@ def _relevance_feedback_chunked(localizer, prompt_gen, bug, candidates, contents
     if not chunks:
         return [], {}, [], []
 
-    prompt = prompt_gen.generate_chunk_relevance_feedback_prompt(bug, chunks)
+    prompt = prompt_gen.generate_chunk_relevance_feedback_prompt(bug, chunks, template_override=template_override)
     response = localizer.invoke_structured(prompt, ChunkRelevanceFeedbackResponse)
     judged_chunks = {(j.file, j.chunk_index): j.relevant for j in response.judgments}
 
@@ -257,7 +257,7 @@ def _semantic_reformulation_terms(bug, relevant_chunk_texts, keyword_model, top_
     return union_terms
 
 
-def _run_one(localizer, prompt_gen, bug, candidate_pool_size, retriever, embedding_model, rrf_weights, granularity, max_chunks_per_file, bm25_repr, reformulation_mode, keyword_model, top_n_keywords, relevance_mode, relevance_embedding_model, keep_fraction):
+def _run_one(localizer, prompt_gen, bug, candidate_pool_size, retriever, embedding_model, rrf_weights, granularity, max_chunks_per_file, bm25_repr, reformulation_mode, keyword_model, top_n_keywords, relevance_mode, relevance_embedding_model, keep_fraction, prompt_template_override=None):
     candidates = _initial_ranking(bug, retriever, candidate_pool_size, embedding_model, rrf_weights, bm25_repr)
     if not candidates:
         return {
@@ -275,7 +275,7 @@ def _run_one(localizer, prompt_gen, bug, candidate_pool_size, retriever, embeddi
         relevant, judged, terms = _relevance_feedback_file(localizer, prompt_gen, bug, candidates, contents)
         relevant_chunk_texts = [contents[c] for c in relevant if contents.get(c)]
     else:
-        relevant, judged, terms, relevant_chunk_texts = _relevance_feedback_chunked(localizer, prompt_gen, bug, candidates, contents, max_chunks_per_file)
+        relevant, judged, terms, relevant_chunk_texts = _relevance_feedback_chunked(localizer, prompt_gen, bug, candidates, contents, max_chunks_per_file, template_override=prompt_template_override)
 
     if reformulation_mode == "semantic":
         terms = _semantic_reformulation_terms(bug, relevant_chunk_texts, keyword_model, top_n_keywords)
@@ -392,8 +392,17 @@ def main():
                             '4096 default -- a batched chunk-relevance response (one JSON judgment per chunk) '
                             'can exceed 4096 tokens and get truncated mid-string. Confirmed on the IQLoc-branch '
                             'n=200 run: 3/200 (1.5%%) instances failed to parse for exactly this reason.')
+    parser.add_argument('--prompt-template-path', default=None,
+                       help='With --relevance-mode llm, --granularity chunk: path to a text file containing an '
+                            'alternate chunk-relevance-judgment template (same format() placeholders as '
+                            'method.prompt.DEFAULT_CHUNK_RELEVANCE_TEMPLATE) -- e.g. the winning variant from '
+                            'scripts/optimize_relevance_prompt.py. Omit to use the original production prompt.')
     parser.add_argument('--output', default=None)
     args = parser.parse_args()
+
+    prompt_template_override = None
+    if args.prompt_template_path:
+        prompt_template_override = open(args.prompt_template_path).read()
 
     manifest = load_manifest(args.manifest)
     dataset_name = args.dataset or manifest['dataset']
@@ -440,6 +449,7 @@ def main():
             args.embedding_model, rrf_weights, args.granularity, args.max_chunks_per_file,
             args.bm25_repr, args.reformulation_mode, args.keyword_model, args.top_n_keywords,
             args.relevance_mode, args.relevance_embedding_model, args.keep_fraction,
+            prompt_template_override=prompt_template_override,
         )
         per_bug[bug.instance_id] = result
         logger.info(

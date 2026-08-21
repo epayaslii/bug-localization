@@ -38,6 +38,48 @@ strong enough that the honest next step is diagnosing *why* (model judgment qual
 single-batched-call prompt design vs. BRaIn's per-segment calls? the raw-identifier-token
 reformulation vs. BRaIn's PageRank term graph?) rather than assuming a bigger n will flip it.
 
+**Update 2026-08-21 — answers the "diagnosing why" question above: it's judgment quality,
+not prompt design, and not output-format truncation.** (Context: by this point the project's
+confirmed-best pipeline had already moved to `--relevance-mode embedding-cosine`, which
+makes zero LLM calls and is confirmed positive at n=30/n=200/n=871 — this update is about the
+original zero-shot-LLM path specifically, on branch `experiment/relevance-prompt-optimization`.)
+
+Built a labeled chunk-relevance dev set (n=30 bugs, `scripts/build_relevance_dev_set.py`,
+holdout-safe against every manifest that's ever produced a reported number) to test two
+concrete hypotheses about *why* the LLM path fails, cheaply — classification accuracy
+against derived ground-truth-file-implies-relevant labels, not a full retrieval+rerank cycle:
+
+1. **Prompt wording** (BRaIn/SAMMO-style mutation search, `method/prompt_optimizer.py`) —
+   never actually reached. A mandatory smoke test first (score the *current* production
+   prompt against 2 dev bugs) surfaced a real, more fundamental bug: the model only judged
+   10/211 chunks in one instance, `max_tokens=8192` clearly insufficient for a dense
+   verdict-per-chunk response at this candidate-pool size (~211 chunks). Fixing that (raising
+   `num_ctx` 16384→32768, confirming `max_tokens` matched production's actual default) helped
+   coverage (37/211) but not accuracy.
+2. **Output format** (dense verdict-per-chunk vs. sparse relevant-only list,
+   `method/models.py`'s `SparseChunkRelevanceResponse` +
+   `method/prompt.py`'s `generate_sparse_chunk_relevance_feedback_prompt`) — tested directly
+   against the same 5 dev bugs as a clean before/after. Sparse output is ~3x faster (no
+   wasted tokens restating "not relevant" for the majority) and has no truncation risk at
+   all. **Accuracy was unchanged: F1=0.000, 0/20 true positives, both formats.**
+
+**Reading the actual false positives/negatives by eye (not just aggregate counts) settles
+which of the two original hypotheses was right.** False positives were genuine model
+errors — e.g. flagging a file's raw `import` block and a generic `afterPropertiesSet()`
+boilerplate method as relevant to a job-status-handling bug, with no real connection. False
+negatives were mostly a different, known issue: Bench4BL has no chunk/line-level ground
+truth (`BugInstance.line_mappings` is never populated for this dataset), so every chunk in a
+changed *file* gets labeled "relevant" for scoring purposes, including unrelated setup/
+boilerplate chunks the model was right to skip.
+
+**Conclusion**: the negative finding is a genuine mechanism-quality problem with zero-shot
+LLM chunk-relevance judgment on this benchmark, not an artifact of prompt wording, context
+truncation, or output-format inefficiency — both plausible confounds were tested directly and
+ruled out. Beam-search prompt mutation (the originally planned next step) has low expected
+value given this and was not run. This raises the case for a fundamentally different
+mechanism (a trained classifier, not zero-shot generation) over further LLM-prompt iteration
+— see the fine-tuned-classifier scoping work that follows this update.
+
 ## What BRaIn and IQLoc actually do
 
 Both target papers use **Bench4BL** (or a refined/expanded version of it) as their benchmark
