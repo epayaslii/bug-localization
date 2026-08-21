@@ -207,7 +207,14 @@ api_keys.txt
 # *.npy
 # data/
 # models/
-# checkpoints/
+checkpoints/
+results/classifier_checkpoints/
+
+# Large raw chunk-level data, fully reproducible from the small provenance manifest
+# (results/manifests/<id>.json) + a deterministic seeded script -- not worth bloating repo
+# history with 10-40MB JSONL blobs when regeneration is one command.
+results/classifier_training_data/
+results/relevance_dev_sets/
 
 # Logs and outputs
 logs/

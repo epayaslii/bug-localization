@@ -167,8 +167,10 @@ class Bench4BL(BugLocalizationDataset):
                 return f
         return None
 
-    def get_bug_instances(self, sample_size=None, random_sample=False, random_seed=None):
+    def get_bug_instances(self, sample_size=None, random_sample=False, random_seed=None, exclude_instance_ids=None):
         instances = self._bug_instances
+        if exclude_instance_ids:
+            instances = [b for b in instances if b.instance_id not in exclude_instance_ids]
         if sample_size is not None and sample_size < len(instances):
             if random_sample:
                 if random_seed is not None:
