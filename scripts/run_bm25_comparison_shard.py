@@ -20,6 +20,7 @@ from dotenv import load_dotenv
 from dataset.swebench import SWEBench
 from dataset.beetlebox import BeetleBox
 from dataset.bench4bl import Bench4BL
+from dataset.iqloc import IQLocExtended
 from dataset.localizability import load_cache, save_cache
 from dataset.utils import setup_logging, get_logger
 from evaluation.manifest import load_manifest
@@ -56,7 +57,7 @@ def main():
     load_dotenv()
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--manifest', required=True)
-    parser.add_argument('--dataset', choices=['swebench', 'beetlebox', 'bench4bl'], default=None)
+    parser.add_argument('--dataset', choices=['swebench', 'beetlebox', 'bench4bl', 'iqloc'], default=None)
     parser.add_argument('--pool-size', type=int, default=None)
     parser.add_argument('--representations', nargs='+', choices=list(REPRESENTATIONS), default=None)
     parser.add_argument('--num-shards', type=int, required=True)
@@ -69,7 +70,7 @@ def main():
 
     manifest = load_manifest(args.manifest)
     dataset_name = args.dataset or manifest['dataset']
-    instance = {'swebench': SWEBench, 'beetlebox': BeetleBox, 'bench4bl': Bench4BL}[dataset_name]()
+    instance = {'swebench': SWEBench, 'beetlebox': BeetleBox, 'bench4bl': Bench4BL, 'iqloc': IQLocExtended}[dataset_name]()
 
     pool_size = args.pool_size or manifest.get('pool_size') or manifest['size']
     pool = instance.get_bug_instances(sample_size=pool_size, random_sample=True, random_seed=manifest['seed'])

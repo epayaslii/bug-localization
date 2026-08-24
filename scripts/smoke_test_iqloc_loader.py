@@ -68,7 +68,8 @@ def diagnose(records, cache_dir, loader):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--dataset-json", required=True, help="Path to Bench4BLExtended.json")
+    parser.add_argument("--dataset-json", default=os.path.join(DEFAULT_CACHE_DIR, "Bench4BLExtended.json"),
+                         help="Path to Bench4BLExtended.json")
     parser.add_argument("--cache-dir", default=DEFAULT_CACHE_DIR)
     parser.add_argument("--original-only", action="store_true",
                          help="Only diagnose label==1 (original Bench4BL) records, skip IQLoc's extension bugs")

@@ -1,6 +1,8 @@
 """IQLoc-extended Bench4BL loader (github.com/asifsamir/IQLoc, JSS 2026).
 
-Reads Bench4BLExtended.json directly instead of Bench4BL's repository.xml. Each
+Reads Bench4BLExtended.json directly instead of Bench4BL's repository.xml -- by default
+from bench4bl_cache/Bench4BLExtended.json (gitignored, same as the rest of bench4bl_cache/;
+copy it there manually or via scripts/mirror_bench4bl.py --iqloc). Each
 record's `label` field distinguishes original Bench4BL bugs (label == 1) from the
 ~1,740 newer bug reports IQLoc's authors added to extend the benchmark (label
 absent). Reuses Bench4BL's git tag/file-listing/dotted-path resolution since
@@ -12,15 +14,19 @@ import json
 import logging
 import os
 
-from dataset.bench4bl import Bench4BL
+from dataset.bench4bl import DEFAULT_CACHE_DIR, Bench4BL
 from dataset.models import BugInstance
 
 logger = logging.getLogger(__name__)
 
 
 class IQLocExtended(Bench4BL):
-    def __init__(self, dataset_json_path, cache_dir=None, include_extension=True):
-        self.dataset_json_path = dataset_json_path
+    def __init__(self, dataset_json_path=None, cache_dir=None, include_extension=True):
+        # Resolved independently of super().__init__() (which sets self.cache_dir) because
+        # Bench4BL.__init__ calls self.load_data() itself -- our override needs
+        # dataset_json_path set before that call happens, so the default can't wait for it.
+        resolved_cache_dir = cache_dir or os.environ.get("BENCH4BL_CACHE_DIR", DEFAULT_CACHE_DIR)
+        self.dataset_json_path = dataset_json_path or os.path.join(resolved_cache_dir, "Bench4BLExtended.json")
         self.include_extension = include_extension  # False = original-Bench4BL subset only
         super().__init__(cache_dir=cache_dir)
 
