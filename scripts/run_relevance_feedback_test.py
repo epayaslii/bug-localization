@@ -57,7 +57,7 @@ from method.bm25_retriever import (
     rank_files_bm25, rank_files_bm25_with_symbols, rank_files_bm25_with_skeleton,
     extract_query_reformulation_terms, _extract_symbol_tokens,
 )
-from method.hybrid_retriever import rank_files_hybrid
+from method.hybrid_retriever import rank_files_hybrid, rank_files_hybrid_with_history_rerank
 from method.commit_history_retriever import rank_files_bm25_with_history_union
 from method.embedding_retriever import _chunk_file_content, embed_texts
 from method.keyword_extraction import embedrank_mmr_keywords, reformulate_query_iqloc_style
@@ -83,11 +83,18 @@ _BM25_REPR_FNS = {
 }
 
 
+_HYBRID_FNS = {
+    "hybrid-rrf": rank_files_hybrid,
+    "hybrid-rrf-history": rank_files_hybrid_with_history_rerank,
+}
+
+
 def _initial_ranking(bug, retriever, candidate_pool_size, embedding_model, rrf_weights, bm25_repr):
     bm25_rank_fn = _BM25_REPR_FNS[bm25_repr]
     if retriever == "bm25":
         return bm25_rank_fn(bug, candidate_pool_size)
-    ranked, _timing = rank_files_hybrid(
+    hybrid_fn = _HYBRID_FNS[retriever]
+    ranked, _timing = hybrid_fn(
         bug, top_k=candidate_pool_size, candidate_pool_size=candidate_pool_size,
         embedding_model=embedding_model, weights=rrf_weights,
         bm25_rank_fn=lambda b: bm25_rank_fn(b, candidate_pool_size),
@@ -104,7 +111,8 @@ def _rerank_with_reformulated_query(bug, candidates, reformulated_query, retriev
     candidate_bug = bug.model_copy(update={"bug_report": reformulated_query, "code_files": candidates})
     if retriever == "bm25":
         return bm25_rank_fn(candidate_bug, None)
-    ranked, _timing = rank_files_hybrid(
+    hybrid_fn = _HYBRID_FNS[retriever]
+    ranked, _timing = hybrid_fn(
         candidate_bug, top_k=None, candidate_pool_size=len(candidates),
         embedding_model=embedding_model, weights=rrf_weights,
         bm25_rank_fn=lambda b: bm25_rank_fn(b, None),
@@ -324,9 +332,12 @@ def main():
                             'can never be recovered by filtering or reformulation, no matter how good the '
                             'judgment is. 100 is a middle ground; --granularity chunk prompt size scales with '
                             'this, so larger values cost more per call and risk more JSON-truncation failures.')
-    parser.add_argument('--retriever', choices=['bm25', 'hybrid-rrf'], default='hybrid-rrf',
+    parser.add_argument('--retriever', choices=['bm25', 'hybrid-rrf', 'hybrid-rrf-history'], default='hybrid-rrf',
                        help='Which retriever produces the initial candidate pool and gets re-run with the '
-                            'reformulated query. hybrid-rrf is this project\'s stronger production signal '
+                            'reformulated query. hybrid-rrf-history fuses commit-history as a third RRF signal '
+                            '(method/commit_history_retriever.py\'s rank_files_commit_history_scored) instead of '
+                            'the old pool-union approach that hurt MRR -- confirmed positive standalone at n=30 '
+                            '(2026-08-25) but not yet run through this full pipeline. hybrid-rrf is this project\'s stronger production signal '
                             '(0.714 MRR retrieval-only on Bench4BL) -- bm25 matches what BRaIn/IQLoc '
                             'themselves validated against, kept for comparison.')
     parser.add_argument('--embedding-model', default='Qwen/Qwen3-Embedding-0.6B',
