@@ -55,6 +55,10 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--manifest', required=True)
     parser.add_argument('--dataset', choices=['swebench', 'beetlebox', 'bench4bl', 'iqloc'], default=None)
+    parser.add_argument('--iqloc-strict', action='store_true',
+                       help="With --dataset iqloc: must match whatever the manifest was built "
+                            "with (--iqloc-strict on generate_evaluation_manifest.py), or the "
+                            "re-derived pool won't line up with the manifest's instance IDs.")
     parser.add_argument('--pool-size', type=int, default=None)
     parser.add_argument('--candidate-pool-size', type=int, default=100)
     parser.add_argument('--retriever', choices=['bm25', 'hybrid-rrf'], default='hybrid-rrf')
@@ -79,7 +83,10 @@ def main():
 
     manifest = load_manifest(args.manifest)
     dataset_name = args.dataset or manifest['dataset']
-    instance = {'swebench': SWEBench, 'beetlebox': BeetleBox, 'bench4bl': Bench4BL, 'iqloc': IQLocExtended}[dataset_name]()
+    if dataset_name == 'iqloc':
+        instance = IQLocExtended(include_partial=not args.iqloc_strict)
+    else:
+        instance = {'swebench': SWEBench, 'beetlebox': BeetleBox, 'bench4bl': Bench4BL}[dataset_name]()
 
     rrf_weights = [float(w) for w in args.rrf_weights.split(',')] if args.retriever == 'hybrid-rrf' else None
 

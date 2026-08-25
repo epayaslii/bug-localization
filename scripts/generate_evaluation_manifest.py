@@ -22,6 +22,10 @@ def main():
                     "(a stable seeded sample so retrieval/reranking comparisons are apples-to-apples)."
     )
     parser.add_argument('--dataset', choices=['swebench', 'beetlebox', 'bench4bl', 'iqloc'], default='swebench')
+    parser.add_argument('--iqloc-strict', action='store_true',
+                       help="With --dataset iqloc: restrict to the 7,108-instance cohort where "
+                            "every fixed_files entry resolved (IQLocExtended(include_partial=False)), "
+                            "instead of the looser 7,418 that includes partial-GT instances.")
     parser.add_argument('--size', type=int, default=24)
     parser.add_argument('--pool-size', type=int, default=100,
                        help='How many instances to sample+process before diversity selection (must be >= --size)')
@@ -34,7 +38,10 @@ def main():
     if args.pool_size < args.size:
         parser.error("--pool-size must be >= --size")
 
-    instance = {'swebench': SWEBench, 'beetlebox': BeetleBox, 'bench4bl': Bench4BL, 'iqloc': IQLocExtended}[args.dataset]()
+    if args.dataset == 'iqloc':
+        instance = IQLocExtended(include_partial=not args.iqloc_strict)
+    else:
+        instance = {'swebench': SWEBench, 'beetlebox': BeetleBox, 'bench4bl': Bench4BL}[args.dataset]()
     pool = instance.get_bug_instances(sample_size=args.pool_size, random_sample=True, random_seed=args.seed)
     logger.info(f"Pulled a pool of {len(pool)} instances across {len(set(b.repo for b in pool))} repos")
 
