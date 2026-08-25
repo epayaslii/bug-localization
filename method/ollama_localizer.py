@@ -102,13 +102,13 @@ class OllamaLocalizer(BugLocalizationMethod):
             logger.info(f"Using friendly model name: {model} -> {self.model_mapping[model]}")
             return model
 
-        # Also accept a raw Ollama tag directly (e.g. "qwen2.5-coder:32b-instruct-q4_K_M")
-        # for models not in the friendly-name table above.
-        if ":" in model:
-            return model
-
-        logger.warning(f"Invalid model specification: {model}, using default: {self.default_model}")
-        return self.default_model
+        # Any other non-empty string is accepted as a raw Ollama model reference as-is --
+        # Ollama itself resolves a bare name (no ":tag") to ":latest", so requiring a colon
+        # here was wrong: it silently substituted self.default_model for any legitimate new
+        # model name that just wasn't in the hardcoded friendly-name table above (e.g.
+        # "qwen3.8" got silently replaced with "qwen2.5-coder:14b" -- a model never even
+        # transferred to MN5 -- instead of being used directly, confirmed 2026-08-25).
+        return model
 
     def get_model_id(self) -> str:
         return self.model_mapping.get(self.model, self.model)
