@@ -102,6 +102,56 @@ def rank_files_commit_history(bug, cache_dir: str | None = None, max_commits: in
     return candidate_files
 
 
+def rank_files_commit_history_scored(bug, cache_dir: str | None = None, max_commits: int = 3000,
+                                       top_k_commits: int = 20, java_only: bool = True) -> list[str]:
+    """Like rank_files_commit_history, but returns files ordered by their OWN commit-history
+    relevance score instead of first-seen order from iterating top-K commits. The union
+    approach (rank_files_bm25_with_history_union) buries every history-only file at the tail
+    of the candidate pool regardless of how strong its match was -- a file whose single best
+    matching commit scored highest among all 20 gets appended in exactly the same "last"
+    position as one that barely made the cut. That's very likely why the union hurt MRR
+    (Recall@200 +18.4%, MRR -4% once wired into the full pipeline, 2026-08-20) despite the
+    signal itself being real: genuine matches never got a chance to rank near the top.
+
+    This version scores each file by the MAX BM25 score among the commits (of the top
+    top_k_commits by subject-line match) that touched it -- "max not mean", matching this
+    project's existing convention for per-file aggregation over multiple sub-signals (chunked
+    embeddings, embedding-cosine relevance filtering) -- then sorts by that score. Meant to be
+    fed into reciprocal_rank_fusion as a genuine third ranking signal alongside BM25 and
+    embeddings, not unioned into the pool pre-embedding.
+    """
+    gitrepo = os.path.join(cache_dir or DEFAULT_CACHE_DIR, bug.repo, "gitrepo")
+    if not os.path.isdir(gitrepo):
+        return []
+
+    commits = _get_commit_history(gitrepo, bug.base_commit, max_commits)
+    if not commits:
+        return []
+
+    tokenized_subjects = [_tokenize(subject) for _hash, subject, _files in commits]
+    non_empty = [(i, toks) for i, toks in enumerate(tokenized_subjects) if toks]
+    if not non_empty:
+        return []
+
+    bm25 = BM25Okapi([toks for _i, toks in non_empty])
+    query_tokens = _tokenize(bug.bug_report)
+    scores = bm25.get_scores(query_tokens)
+
+    ranked_idx = sorted(range(len(non_empty)), key=lambda i: -scores[i])[:top_k_commits]
+    best_score_per_file: dict[str, float] = {}
+    for i in ranked_idx:
+        orig_idx, _toks = non_empty[i]
+        _hash, _subject, files = commits[orig_idx]
+        commit_score = scores[i]
+        for f in files:
+            if java_only and not f.endswith(".java"):
+                continue
+            if commit_score > best_score_per_file.get(f, float("-inf")):
+                best_score_per_file[f] = commit_score
+
+    return sorted(best_score_per_file, key=lambda f: -best_score_per_file[f])
+
+
 def rank_files_bm25_with_history_union(bug, top_k: int | None = 100, cache_dir: str | None = None,
                                          max_commits: int = 3000, top_k_commits: int = 20) -> list[str]:
     """Drop-in BM25-representation-shaped function (bug, top_k) -> ranked paths, matching

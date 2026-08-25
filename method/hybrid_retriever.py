@@ -18,6 +18,7 @@ from dataset.utils import get_logger
 from method.bm25_retriever import rank_files_bm25_with_symbols
 from method.embedding_retriever import rank_files_embedding_chunked
 from method.fusion_signals import rank_files_ast_similarity, rank_files_commit_recency, rank_files_dependency_graph
+from method.commit_history_retriever import rank_files_commit_history_scored
 
 logger = get_logger(__name__)
 
@@ -77,6 +78,52 @@ def rank_files_hybrid(
     ranked = fused[:top_k] if top_k is not None else fused
 
     timing = {"bm25_s": t_bm25, **embed_timing}
+    return ranked, timing
+
+
+def rank_files_hybrid_with_history_rerank(
+    bug,
+    top_k: int | None = 100,
+    candidate_pool_size: int = 200,
+    embedding_model: str = "microsoft/unixcoder-base",
+    rrf_k: int = 60,
+    weights: list[float] | None = None,
+    bm25_rank_fn=None,
+) -> tuple[list[str], dict]:
+    """Like rank_files_hybrid, but fuses commit-history as a genuine THIRD RRF ranking signal
+    instead of unioning history-matched files into the candidate pool
+    (rank_files_bm25_with_history_union). The union approach buries every history-only file
+    at the tail of the pool regardless of match strength (confirmed real recall gain,
+    Recall@200 +18.4%, but net MRR -4% once wired into the full pipeline, 2026-08-20) --
+    RRF fusion instead lets a strong commit-history match actually rank near the top, the
+    same way a strong BM25 or embedding match would.
+
+    `weights` order is [bm25, embedding, commit_history]; defaults to equal weight -- an
+    unweighted starting point to ablate from, not a tuned config (this project's own history
+    with rank_files_hybrid shows equal weighting is rarely the best fusion ratio).
+    """
+    bm25_rank_fn = bm25_rank_fn or (lambda b: rank_files_bm25_with_symbols(b, top_k=candidate_pool_size))
+
+    t0 = time.time()
+    bm25_candidates = bm25_rank_fn(bug)
+    t_bm25 = time.time() - t0
+
+    if not bm25_candidates:
+        return bm25_candidates, {"bm25_s": t_bm25}
+
+    candidate_bug = bug.model_copy(update={"code_files": bm25_candidates})
+    embedding_ranking, embed_timing = rank_files_embedding_chunked(
+        candidate_bug, top_k=None, model_name=embedding_model
+    )
+
+    t1 = time.time()
+    history_ranking = rank_files_commit_history_scored(bug)
+    t_history = time.time() - t1
+
+    fused = reciprocal_rank_fusion([bm25_candidates, embedding_ranking, history_ranking], k=rrf_k, weights=weights)
+    ranked = fused[:top_k] if top_k is not None else fused
+
+    timing = {"bm25_s": t_bm25, "history_s": t_history, **embed_timing}
     return ranked, timing
 
 
