@@ -21,13 +21,20 @@ logger = logging.getLogger(__name__)
 
 
 class IQLocExtended(Bench4BL):
-    def __init__(self, dataset_json_path=None, cache_dir=None, include_extension=True):
+    def __init__(self, dataset_json_path=None, cache_dir=None, include_extension=True, include_partial=True):
         # Resolved independently of super().__init__() (which sets self.cache_dir) because
         # Bench4BL.__init__ calls self.load_data() itself -- our override needs
         # dataset_json_path set before that call happens, so the default can't wait for it.
         resolved_cache_dir = cache_dir or os.environ.get("BENCH4BL_CACHE_DIR", DEFAULT_CACHE_DIR)
         self.dataset_json_path = dataset_json_path or os.path.join(resolved_cache_dir, "Bench4BLExtended.json")
         self.include_extension = include_extension  # False = original-Bench4BL subset only
+        # False = only keep instances where EVERY fixed_files entry resolved to a real path
+        # (the "ALL GT localizable" cohort, ~7,108) rather than scoring against a silently
+        # incomplete ground-truth set (~310 "partial" instances where only some resolved) --
+        # matches the stricter standard the co-intern's own author-released pipeline uses,
+        # confirmed as the methodologically honest population for anything reported as this
+        # dataset's primary evaluation cohort.
+        self.include_partial = include_partial
         self._dir_name_by_lower = None  # lazy case-insensitive sub_project -> on-disk dirname map
         super().__init__(cache_dir=cache_dir)
 
@@ -84,13 +91,16 @@ class IQLocExtended(Bench4BL):
         if not code_files:
             return None
 
+        fixed_files = rec.get("fixed_files", [])
         ground_truths = []
-        for dotted in rec.get("fixed_files", []):
+        for dotted in fixed_files:
             resolved = self._resolve_dotted_path(dotted, code_files)
             if resolved:
                 ground_truths.append(resolved)
         if not ground_truths:
             return None
+        if not self.include_partial and len(ground_truths) < len(fixed_files):
+            return None  # some (not all) fixed_files resolved -- excluded from the strict cohort
 
         bug_report = f"Summary: {rec['bug_title']}\n\nDescription:\n{rec['bug_description']}"
         instance_id = f"{sub_project}-{rec['bug_id']}"
