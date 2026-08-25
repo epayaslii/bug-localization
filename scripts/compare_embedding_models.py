@@ -31,6 +31,7 @@ from dotenv import load_dotenv
 from dataset.swebench import SWEBench
 from dataset.beetlebox import BeetleBox
 from dataset.bench4bl import Bench4BL
+from dataset.iqloc import IQLocExtended
 from dataset.localizability import load_cache, save_cache
 from dataset.utils import setup_logging, get_logger
 from evaluation.manifest import load_manifest
@@ -65,7 +66,7 @@ def main():
     load_dotenv()
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--manifest', required=True, help='Path to a manifest JSON')
-    parser.add_argument('--dataset', choices=['swebench', 'beetlebox', 'bench4bl'], default=None)
+    parser.add_argument('--dataset', choices=['swebench', 'beetlebox', 'bench4bl', 'iqloc'], default=None)
     parser.add_argument('--pool-size', type=int, default=None,
                         help='With bench4bl: override the manifest\'s stored pool_size when re-deriving the pool '
                              '-- needed if this environment\'s mirror has a different total instance count than '
@@ -91,6 +92,8 @@ def main():
         instance = SWEBench()
     elif dataset_name == 'bench4bl':
         instance = Bench4BL()
+    elif dataset_name == 'iqloc':
+        instance = IQLocExtended()
     else:
         instance = BeetleBox()
 
