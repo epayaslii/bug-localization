@@ -88,7 +88,7 @@ def main():
     else:
         instance = {'swebench': SWEBench, 'beetlebox': BeetleBox, 'bench4bl': Bench4BL}[dataset_name]()
 
-    rrf_weights = [float(w) for w in args.rrf_weights.split(',')] if args.retriever == 'hybrid-rrf' else None
+    rrf_weights = [float(w) for w in args.rrf_weights.split(',')] if args.retriever in ('hybrid-rrf', 'hybrid-rrf-history') else None
 
     pool_size = args.pool_size or manifest.get('pool_size') or manifest['size']
     pool = instance.get_bug_instances(sample_size=pool_size, random_sample=True, random_seed=manifest['seed'])

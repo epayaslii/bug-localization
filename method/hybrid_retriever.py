@@ -34,6 +34,14 @@ def reciprocal_rank_fusion(rankings: list[list[str]], k: int = 60, weights: list
     unweighted RRF at n=30 in results/README.md §4, motivating this parameter).
     """
     weights = weights if weights is not None else [1.0] * len(rankings)
+    if len(weights) != len(rankings):
+        raise ValueError(
+            f"weights has {len(weights)} entries but rankings has {len(rankings)} -- "
+            f"zip() would otherwise silently drop the extra ranking(s) rather than fusing "
+            f"them (a real bug hit 2026-08-25: the 3-way history retriever always got a "
+            f"2-value --rrf-weights, silently defaulting the whole call to unweighted 1.0 "
+            f"per ranking instead of actually applying the intended weights)."
+        )
     scores: dict[str, float] = {}
     for weight, ranking in zip(weights, rankings):
         for rank, path in enumerate(ranking, start=1):

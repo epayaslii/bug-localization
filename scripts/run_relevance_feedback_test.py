@@ -345,7 +345,11 @@ def main():
                             'n=30 Bench4BL winner.')
     parser.add_argument('--rrf-weights', default='1,5',
                        help='With --retriever hybrid-rrf: "bm25_weight,embedding_weight" (default "1,5", '
-                            'the confirmed n=30 peak on Bench4BL).')
+                            'the confirmed n=30 peak on Bench4BL). With hybrid-rrf-history: needs a THIRD '
+                            'value, "bm25_weight,embedding_weight,history_weight" -- the default "1,5" only '
+                            'has 2 values and will raise an error for this retriever (reciprocal_rank_fusion '
+                            'now checks weights/rankings length match, since a 2025-08-25 bug had this '
+                            'silently default to unweighted 1:1:1 instead of erroring).')
     parser.add_argument('--bm25-repr', choices=list(_BM25_REPR_FNS), default='symbols_with_imports',
                        help='BM25 document representation used both for the initial candidate pool (bm25 '
                             'retriever, or the bm25 half of hybrid-rrf) and the reformulated-query rerank. '
@@ -419,7 +423,7 @@ def main():
     else:
         instance = BeetleBox()
 
-    rrf_weights = [float(w) for w in args.rrf_weights.split(',')] if args.retriever == 'hybrid-rrf' else None
+    rrf_weights = [float(w) for w in args.rrf_weights.split(',')] if args.retriever in ('hybrid-rrf', 'hybrid-rrf-history') else None
 
     pool_size = args.pool_size or manifest.get('pool_size') or manifest['size']
     pool = instance.get_bug_instances(sample_size=pool_size, random_sample=True, random_seed=manifest['seed'])
