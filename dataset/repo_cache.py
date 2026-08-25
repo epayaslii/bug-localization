@@ -137,10 +137,16 @@ def _cat_file_batch(git_dir, commit_hash, paths):
         pos = newline_idx + 1
 
         parts = header.split()
-        if len(parts) == 2 and parts[1] == "missing":
+        # "missing" responses are "<input> missing" -- checking the LAST token (not
+        # requiring exactly 2 parts) matters because a path containing a space splits into
+        # more tokens, which silently defeated the old `len(parts) == 2` check and fell
+        # through to int(parts[2]) crashing on the literal string "missing" (hit for real on
+        # a commit-history-surfaced candidate path missing at the bug's specific commit --
+        # 2026-08-25).
+        if parts and parts[-1] == "missing":
             continue
 
-        size = int(parts[2])
+        size = int(parts[-1])
         content_bytes = data[pos:pos + size]
         pos += size + 1  # skip content plus the trailing newline git cat-file adds
 
