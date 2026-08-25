@@ -23,6 +23,7 @@
 
 RETRIEVER="${1:-hybrid-rrf}"
 MANIFEST="${2:-iqloc-multi-n30-s42-df69b06700bd}"
+RRF_WEIGHTS="${3:-1,5}"
 
 module load intel
 module load mkl
@@ -48,7 +49,7 @@ export USE_TORCH=1
   --candidate-pool-size 100 \
   --retriever "$RETRIEVER" \
   --embedding-model "Qwen/Qwen3-Embedding-0.6B" \
-  --rrf-weights 1,5 \
+  --rrf-weights "$RRF_WEIGHTS" \
   --bm25-repr symbols_with_imports \
   --granularity chunk \
   --reformulation-mode semantic \
@@ -58,4 +59,4 @@ export USE_TORCH=1
   --keep-fraction 0.5 \
   --num-shards 1 \
   --shard-index 0 \
-  --output-dir "results/hpc_mn5_iqloc_recall_reform_n30/shards_${RETRIEVER}"
+  --output-dir "results/hpc_mn5_iqloc_recall_reform_n30/shards_${RETRIEVER}_${RRF_WEIGHTS//,/_}"
