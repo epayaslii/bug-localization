@@ -13,13 +13,16 @@
 # -> embedding-cosine relevance filtering, no LLM call -> semantic EmbedRank/MMR
 # reformulation), pointed at IQLoc's own dataset (dataset/iqloc.py's IQLocExtended) instead of
 # this project's from-scratch Bench4BL reconstruction. n=30 sanity check, not sharded (small
-# enough for a single GPU task) -- the local CPU run of the same config stalled on instance 1
-# for 15+ minutes (Qwen3-Embedding-0.6B doing 2-3 embedding passes/instance with no GPU), so
-# this exists to get the same result in minutes instead of hours.
+# enough for a single GPU task).
 #
-# Needs bench4bl_cache/Bench4BLExtended.json and the 7 new-clone + 18 tag-refreshed
-# sub-project mirrors synced to MN5 first -- these are newer than what MN5's bench4bl_cache
-# had for the original Bench4BL work. See the rsync command given alongside this script.
+# Retriever and manifest parameterized ($1, $2) so this covers both plain hybrid-rrf and
+# hybrid-rrf-history against any manifest, reusing one script -- added 2026-08-25 to test
+# whether commit-history helps under semantic reformulation (the actually-validated mode)
+# rather than only literal (used for the qwen2.5-coder LLM comparison, where it looked
+# noisier/weaker).
+
+RETRIEVER="${1:-hybrid-rrf}"
+MANIFEST="${2:-iqloc-multi-n30-s42-df69b06700bd}"
 
 module load intel
 module load mkl
@@ -39,11 +42,11 @@ export USE_TF=0
 export USE_TORCH=1
 
 .venv_mn5/bin/python scripts/run_relevance_feedback_shard.py \
-  --manifest results/manifests/iqloc-multi-n30-s42-df69b06700bd.json \
+  --manifest "results/manifests/${MANIFEST}.json" \
   --dataset iqloc \
   --pool-size 100 \
   --candidate-pool-size 100 \
-  --retriever hybrid-rrf \
+  --retriever "$RETRIEVER" \
   --embedding-model "Qwen/Qwen3-Embedding-0.6B" \
   --rrf-weights 1,5 \
   --bm25-repr symbols_with_imports \
@@ -55,4 +58,4 @@ export USE_TORCH=1
   --keep-fraction 0.5 \
   --num-shards 1 \
   --shard-index 0 \
-  --output-dir results/hpc_mn5_iqloc_recall_reform_n30/shards
+  --output-dir "results/hpc_mn5_iqloc_recall_reform_n30/shards_${RETRIEVER}"
