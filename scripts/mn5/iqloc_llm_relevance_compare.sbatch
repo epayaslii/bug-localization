@@ -25,7 +25,9 @@
 # 0.5364 reformulated) was the confirmed-positive alternative. Not yet tested whether the
 # LLM-negative finding also holds on IQLoc's dataset specifically.
 
-MODEL="${1:?Usage: sbatch iqloc_llm_relevance_compare.sbatch <ollama-model-name>}"
+MODEL="${1:?Usage: sbatch iqloc_llm_relevance_compare.sbatch <ollama-model-name> <retriever> <manifest-basename>}"
+RETRIEVER="${2:-hybrid-rrf}"
+MANIFEST="${3:-iqloc-multi-n30-s42-df69b06700bd}"
 
 module load intel
 module load mkl
@@ -58,10 +60,10 @@ done
 
 SAFE_MODEL="${MODEL//[:\/]/_}"
 .venv_mn5/bin/python scripts/run_relevance_feedback_test.py \
-  --manifest results/manifests/iqloc-multi-n30-s42-df69b06700bd.json \
+  --manifest "results/manifests/${MANIFEST}.json" \
   --dataset iqloc \
   --pool-size 100 \
-  --retriever hybrid-rrf \
+  --retriever "$RETRIEVER" \
   --embedding-model "Qwen/Qwen3-Embedding-0.6B" \
   --rrf-weights 1,5 \
   --bm25-repr symbols_with_imports \
@@ -71,7 +73,7 @@ SAFE_MODEL="${MODEL//[:\/]/_}"
   --model "$MODEL" \
   --num-ctx 16384 \
   --max-tokens 8192 \
-  --output "results/iqloc_llm_relevance_${SAFE_MODEL}_n30.json"
+  --output "results/iqloc_llm_relevance_${SAFE_MODEL}_${RETRIEVER}_n30.json"
 PIPELINE_EXIT=$?
 
 kill "$OLLAMA_PID" 2>/dev/null

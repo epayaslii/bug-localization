@@ -18,8 +18,10 @@
 # Uses run_relevance_feedback_test.py directly (not the sharded version) to match the LLM
 # job's script family exactly, even though cosine mode doesn't need sharding for n=30.
 
-RETRIEVER="${1:?Usage: sbatch iqloc_cosine_retriever_compare.sbatch <retriever> <output-suffix>}"
-SUFFIX="${2:?Usage: sbatch iqloc_cosine_retriever_compare.sbatch <retriever> <output-suffix>}"
+RETRIEVER="${1:?Usage: sbatch iqloc_cosine_retriever_compare.sbatch <retriever> <output-suffix> [rrf-weights] [manifest-basename]}"
+SUFFIX="${2:?Usage: sbatch iqloc_cosine_retriever_compare.sbatch <retriever> <output-suffix> [rrf-weights] [manifest-basename]}"
+RRF_WEIGHTS="${3:-1,5}"
+MANIFEST="${4:-iqloc-multi-n30-s42-df69b06700bd}"
 
 module load intel
 module load mkl
@@ -39,12 +41,12 @@ export USE_TF=0
 export USE_TORCH=1
 
 .venv_mn5/bin/python scripts/run_relevance_feedback_test.py \
-  --manifest results/manifests/iqloc-multi-n30-s42-df69b06700bd.json \
+  --manifest "results/manifests/${MANIFEST}.json" \
   --dataset iqloc \
   --pool-size 100 \
   --retriever "$RETRIEVER" \
   --embedding-model "Qwen/Qwen3-Embedding-0.6B" \
-  --rrf-weights 1,5 \
+  --rrf-weights "$RRF_WEIGHTS" \
   --bm25-repr symbols_with_imports \
   --granularity chunk \
   --reformulation-mode literal \
