@@ -3,7 +3,7 @@
 #SBATCH --account=ehpc680
 #SBATCH --partition=acc
 #SBATCH --qos=acc_ehpc
-#SBATCH --time=00:20:00
+#SBATCH --time=00:45:00
 #SBATCH --cpus-per-task=20
 #SBATCH --gres=gpu:1
 #SBATCH --output=logs/iqloc_recall_reform_n30_%j.out
