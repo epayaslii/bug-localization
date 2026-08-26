@@ -29,6 +29,15 @@
 # that ceiling): ~20.3 instances/shard, ~14.5 min/shard at the real per-instance mean (42.87s,
 # from the n=23 sanity run's actual timings, which included a 298s outlier) -- --time=00:45:00
 # leaves real buffer for shards that draw more than one large-repo outlier.
+#
+# --rrf-weights 1,1,1 (2026-08-26 fix): the ACTUAL run this file produced (336/350 shards,
+# results/iqloc_recall_reform_full_corrected_final.json) executed BEFORE the 2026-08-25 RRF-
+# weights-gate bugfix, so hybrid-rrf-history silently got weights=None (unweighted 1:1:1)
+# regardless of what was passed here -- confirmed the correct/intended config anyway (unweighted
+# won the n=30 3-way sweep). This file previously still said "1,5" (2 values), which is now
+# stale AND would crash outright post-fix (reciprocal_rank_fusion's length check rejects 2
+# weights for a 3-way fusion) -- corrected to 1,1,1 so this script is actually re-runnable and
+# matches what really executed.
 
 module load intel
 module load mkl
@@ -55,7 +64,7 @@ export USE_TORCH=1
   --candidate-pool-size 100 \
   --retriever hybrid-rrf-history \
   --embedding-model "Qwen/Qwen3-Embedding-0.6B" \
-  --rrf-weights 1,5 \
+  --rrf-weights 1,1,1 \
   --bm25-repr symbols_with_imports \
   --granularity chunk \
   --reformulation-mode semantic \

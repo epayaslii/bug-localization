@@ -71,6 +71,7 @@ logger = get_logger(__name__)
 
 
 _BM25_REPR_FNS = {
+    "path_only": lambda bug, top_k: rank_files_bm25(bug.bug_report, bug.code_files, top_k=top_k),
     "symbols_with_imports": lambda bug, top_k: rank_files_bm25_with_symbols(bug, top_k=top_k, include_imports=True),
     "symbols_no_imports": lambda bug, top_k: rank_files_bm25_with_symbols(bug, top_k=top_k, include_imports=False),
     "skeleton": lambda bug, top_k: rank_files_bm25_with_skeleton(bug, top_k=top_k),
@@ -89,20 +90,20 @@ _HYBRID_FNS = {
 }
 
 
-def _initial_ranking(bug, retriever, candidate_pool_size, embedding_model, rrf_weights, bm25_repr):
+def _initial_ranking(bug, retriever, candidate_pool_size, embedding_model, rrf_weights, bm25_repr, rrf_k=60):
     bm25_rank_fn = _BM25_REPR_FNS[bm25_repr]
     if retriever == "bm25":
         return bm25_rank_fn(bug, candidate_pool_size)
     hybrid_fn = _HYBRID_FNS[retriever]
     ranked, _timing = hybrid_fn(
         bug, top_k=candidate_pool_size, candidate_pool_size=candidate_pool_size,
-        embedding_model=embedding_model, weights=rrf_weights,
+        embedding_model=embedding_model, rrf_k=rrf_k, weights=rrf_weights,
         bm25_rank_fn=lambda b: bm25_rank_fn(b, candidate_pool_size),
     )
     return ranked
 
 
-def _rerank_with_reformulated_query(bug, candidates, reformulated_query, retriever, embedding_model, rrf_weights, bm25_repr):
+def _rerank_with_reformulated_query(bug, candidates, reformulated_query, retriever, embedding_model, rrf_weights, bm25_repr, rrf_k=60):
     """Re-rank the SAME candidate pool with a reformulated query, using whichever
     retriever produced the original candidates -- a genuine second pass, not just a
     re-ordering, since the query text driving both BM25 and (for hybrid-rrf) the embedding
@@ -114,7 +115,7 @@ def _rerank_with_reformulated_query(bug, candidates, reformulated_query, retriev
     hybrid_fn = _HYBRID_FNS[retriever]
     ranked, _timing = hybrid_fn(
         candidate_bug, top_k=None, candidate_pool_size=len(candidates),
-        embedding_model=embedding_model, weights=rrf_weights,
+        embedding_model=embedding_model, rrf_k=rrf_k, weights=rrf_weights,
         bm25_rank_fn=lambda b: bm25_rank_fn(b, None),
     )
     return ranked
@@ -266,8 +267,8 @@ def _semantic_reformulation_terms(bug, relevant_chunk_texts, keyword_model, top_
     return union_terms
 
 
-def _run_one(localizer, prompt_gen, bug, candidate_pool_size, retriever, embedding_model, rrf_weights, granularity, max_chunks_per_file, bm25_repr, reformulation_mode, keyword_model, top_n_keywords, relevance_mode, relevance_embedding_model, keep_fraction):
-    candidates = _initial_ranking(bug, retriever, candidate_pool_size, embedding_model, rrf_weights, bm25_repr)
+def _run_one(localizer, prompt_gen, bug, candidate_pool_size, retriever, embedding_model, rrf_weights, granularity, max_chunks_per_file, bm25_repr, reformulation_mode, keyword_model, top_n_keywords, relevance_mode, relevance_embedding_model, keep_fraction, rrf_k=60):
+    candidates = _initial_ranking(bug, retriever, candidate_pool_size, embedding_model, rrf_weights, bm25_repr, rrf_k=rrf_k)
     if not candidates:
         return {
             "retriever": [], "relevance_filtered": [], "reformulated": [],
@@ -294,7 +295,7 @@ def _run_one(localizer, prompt_gen, bug, candidate_pool_size, retriever, embeddi
 
     if terms:
         reformulated_query = bug.bug_report + "\n" + " ".join(terms)
-        reformulated = _rerank_with_reformulated_query(bug, candidates, reformulated_query, retriever, embedding_model, rrf_weights, bm25_repr)
+        reformulated = _rerank_with_reformulated_query(bug, candidates, reformulated_query, retriever, embedding_model, rrf_weights, bm25_repr, rrf_k=rrf_k)
     else:
         # No relevant chunks/files found, or none had extractable identifiers -- nothing to
         # reformulate with, so fall back to the original ranking rather than a query with
@@ -350,6 +351,13 @@ def main():
                             'has 2 values and will raise an error for this retriever (reciprocal_rank_fusion '
                             'now checks weights/rankings length match, since a 2025-08-25 bug had this '
                             'silently default to unweighted 1:1:1 instead of erroring).')
+    parser.add_argument('--rrf-k', type=int, default=60,
+                       help='With --retriever hybrid-rrf/hybrid-rrf-history: the RRF constant k in '
+                            '1/(k+rank), applied to every fused ranking. Default 60 is the standard RRF '
+                            'constant (also BLAZE\'s BM25+dense fusion) and has never actually been swept '
+                            'on this project\'s own data -- lower k weights rank-1 differences more '
+                            'steeply (score drops off faster with rank), higher k flattens the curve so '
+                            'ranks further down still contribute meaningfully.')
     parser.add_argument('--bm25-repr', choices=list(_BM25_REPR_FNS), default='symbols_with_imports',
                        help='BM25 document representation used both for the initial candidate pool (bm25 '
                             'retriever, or the bm25 half of hybrid-rrf) and the reformulated-query rerank. '
@@ -459,6 +467,7 @@ def main():
             args.embedding_model, rrf_weights, args.granularity, args.max_chunks_per_file,
             args.bm25_repr, args.reformulation_mode, args.keyword_model, args.top_n_keywords,
             args.relevance_mode, args.relevance_embedding_model, args.keep_fraction,
+            rrf_k=args.rrf_k,
         )
         per_bug[bug.instance_id] = result
         logger.info(

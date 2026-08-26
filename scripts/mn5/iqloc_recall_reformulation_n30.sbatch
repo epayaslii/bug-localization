@@ -15,15 +15,19 @@
 # this project's from-scratch Bench4BL reconstruction. n=30 sanity check, not sharded (small
 # enough for a single GPU task).
 #
-# Retriever and manifest parameterized ($1, $2) so this covers both plain hybrid-rrf and
-# hybrid-rrf-history against any manifest, reusing one script -- added 2026-08-25 to test
-# whether commit-history helps under semantic reformulation (the actually-validated mode)
-# rather than only literal (used for the qwen2.5-coder LLM comparison, where it looked
-# noisier/weaker).
+# Retriever, manifest, weights, bm25-repr, candidate-pool-size, and RRF k all parameterized
+# ($1-$6) so one script covers the whole 2026-08-26 sweep (bm25-repr skeleton vs.
+# symbols_with_imports, candidate-pool-size 100 vs. 200, RRF k away from the never-touched
+# default of 60, and weight x k combinations) without editing the file per run. Defaults
+# match the confirmed n=30 winner (2026-08-25): hybrid-rrf-history, unweighted 1:1:1,
+# symbols_with_imports, pool=100, k=60.
 
-RETRIEVER="${1:-hybrid-rrf}"
+RETRIEVER="${1:-hybrid-rrf-history}"
 MANIFEST="${2:-iqloc-multi-n30-s42-df69b06700bd}"
-RRF_WEIGHTS="${3:-1,5}"
+RRF_WEIGHTS="${3:-1,1,1}"
+BM25_REPR="${4:-symbols_with_imports}"
+CANDIDATE_POOL_SIZE="${5:-100}"
+RRF_K="${6:-60}"
 
 module load intel
 module load mkl
@@ -46,11 +50,12 @@ export USE_TORCH=1
   --manifest "results/manifests/${MANIFEST}.json" \
   --dataset iqloc \
   --pool-size 100 \
-  --candidate-pool-size 100 \
+  --candidate-pool-size "$CANDIDATE_POOL_SIZE" \
   --retriever "$RETRIEVER" \
   --embedding-model "Qwen/Qwen3-Embedding-0.6B" \
   --rrf-weights "$RRF_WEIGHTS" \
-  --bm25-repr symbols_with_imports \
+  --rrf-k "$RRF_K" \
+  --bm25-repr "$BM25_REPR" \
   --granularity chunk \
   --reformulation-mode semantic \
   --keyword-model "Qwen/Qwen3-Embedding-0.6B" \
@@ -59,4 +64,4 @@ export USE_TORCH=1
   --keep-fraction 0.5 \
   --num-shards 1 \
   --shard-index 0 \
-  --output-dir "results/hpc_mn5_iqloc_recall_reform_n30/shards_${RETRIEVER}_${RRF_WEIGHTS//,/_}"
+  --output-dir "results/hpc_mn5_iqloc_recall_reform_n30/shards_${RETRIEVER}_${RRF_WEIGHTS//,/_}_${BM25_REPR}_pool${CANDIDATE_POOL_SIZE}_k${RRF_K}"

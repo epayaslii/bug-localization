@@ -22,11 +22,12 @@ from dotenv import load_dotenv
 from dataset.swebench import SWEBench
 from dataset.beetlebox import BeetleBox
 from dataset.bench4bl import Bench4BL
+from dataset.iqloc import IQLocExtended
 from dataset.localizability import load_cache, save_cache
 from dataset.utils import setup_logging, get_logger
 from evaluation.manifest import load_manifest
 from evaluation.screening import screen_manifest, summarize_screening
-from method.bm25_retriever import rank_files_bm25_with_symbols, rank_files_bm25_with_skeleton
+from method.bm25_retriever import rank_files_bm25, rank_files_bm25_with_symbols, rank_files_bm25_with_skeleton
 from method.embedding_retriever import rank_files_embedding_chunked
 from method.hybrid_retriever import reciprocal_rank_fusion
 
@@ -50,6 +51,7 @@ WEIGHT_CONFIGS = [
 
 
 _BM25_REPR_FNS = {
+    "path_only": lambda bug, top_k: rank_files_bm25(bug.bug_report, bug.code_files, top_k=top_k),
     "symbols_with_imports": lambda bug, top_k: rank_files_bm25_with_symbols(bug, top_k=top_k, include_imports=True),
     "symbols_no_imports": lambda bug, top_k: rank_files_bm25_with_symbols(bug, top_k=top_k, include_imports=False),
     "skeleton": lambda bug, top_k: rank_files_bm25_with_skeleton(bug, top_k=top_k),
@@ -94,7 +96,7 @@ def main():
                     "across every weight config. Local model, no API cost."
     )
     parser.add_argument('--manifest', required=True, help='Path to a manifest JSON')
-    parser.add_argument('--dataset', choices=['swebench', 'beetlebox', 'bench4bl'], default=None)
+    parser.add_argument('--dataset', choices=['swebench', 'beetlebox', 'bench4bl', 'iqloc'], default=None)
     parser.add_argument('--pool-size', type=int, default=None,
                        help='Override the manifest\'s stored pool_size when re-deriving the pool -- '
                             'needed if this environment\'s dataset mirror has a different total instance '
@@ -103,7 +105,15 @@ def main():
                             'total instance count to disable sampling and guarantee every manifest '
                             'instance is found.')
     parser.add_argument('--candidate-pool-size', type=int, default=200)
-    parser.add_argument('--rrf-k', type=int, default=60)
+    parser.add_argument('--rrf-k-values', default='60',
+                       help='Comma-separated RRF k constants to sweep (default "60", the '
+                            'standard constant, single-value for backward compatibility). '
+                            'Every value is fused from the SAME base bm25/embedding rankings '
+                            '(pure RRF math, no extra embedding/BM25 compute), so sweeping '
+                            'multiple k\'s alongside every weight in WEIGHT_CONFIGS costs '
+                            'nothing beyond the single shared base-ranking pass -- e.g. '
+                            '"10,30,60,100" to check whether a weight that lost at k=60 wins '
+                            'at a different k.')
     parser.add_argument('--bm25-repr', choices=list(_BM25_REPR_FNS), default='symbols_with_imports',
                        help='BM25 document representation to use as the fusion\'s BM25 side (default matches '
                             'every prior hybrid-RRF run for comparability; skeleton scores higher standalone).')
@@ -117,6 +127,8 @@ def main():
         instance = SWEBench()
     elif dataset_name == 'bench4bl':
         instance = Bench4BL()
+    elif dataset_name == 'iqloc':
+        instance = IQLocExtended()
     else:
         instance = BeetleBox()
 
@@ -129,25 +141,29 @@ def main():
         logger.warning(f"{len(missing)} manifest instance(s) not found when re-deriving the pool: {sorted(missing)[:5]}")
     logger.info(f"Sweeping RRF weights over {len(bugs)}/{manifest['size']} manifest instances (manifest {manifest['manifest_id']}), candidate_pool_size={args.candidate_pool_size}")
 
-    logger.info(f"--- Computing base rankings (bm25[{args.bm25_repr}] + chunked_embedding, shared across all weight configs) ---")
+    k_values = [int(k) for k in args.rrf_k_values.split(',')]
+
+    logger.info(f"--- Computing base rankings (bm25[{args.bm25_repr}] + chunked_embedding, shared across all weight x k configs) ---")
     base_rankings = _compute_base_rankings(bugs, args.candidate_pool_size, args.model, bm25_repr=args.bm25_repr)
 
     fused_rankings = {}
     for bug in bugs:
         base = base_rankings[bug.instance_id]
         fused_rankings[bug.instance_id] = {
-            name: reciprocal_rank_fusion([base["bm25"], base["chunked_embedding"]], k=args.rrf_k, weights=weights)
+            f"{name}_k{k}": reciprocal_rank_fusion([base["bm25"], base["chunked_embedding"]], k=k, weights=weights)
             if base["bm25"] else []
             for name, weights in WEIGHT_CONFIGS
+            for k in k_values
         }
 
     token = os.getenv("GITHUB_TOKEN")
     cache = load_cache()
 
-    # Include the two reference points (bm25 alone, chunked_embedding alone) alongside the
-    # weight sweep so this run's numbers are directly comparable to results/README.md §4
-    # without cross-referencing a second file.
-    config_names = ["bm25", "chunked_embedding"] + [name for name, _ in WEIGHT_CONFIGS]
+    # Include the two reference points (bm25 alone, chunked_embedding alone -- k-independent,
+    # listed once) alongside the weight x k sweep so this run's numbers are directly
+    # comparable to results/README.md §4 without cross-referencing a second file.
+    fused_config_names = [f"{name}_k{k}" for name, _ in WEIGHT_CONFIGS for k in k_values]
+    config_names = ["bm25", "chunked_embedding"] + fused_config_names
     results = {}
     for name in config_names:
         if name == "bm25":
@@ -183,7 +199,10 @@ def main():
     if args.output:
         os.makedirs(os.path.dirname(args.output) or ".", exist_ok=True)
         with open(args.output, "w") as f:
-            json.dump({"manifest_id": manifest["manifest_id"], "candidate_pool_size": args.candidate_pool_size, "weight_configs": dict(WEIGHT_CONFIGS), "configs": results}, f, indent=2)
+            json.dump({
+                "manifest_id": manifest["manifest_id"], "candidate_pool_size": args.candidate_pool_size,
+                "weight_configs": dict(WEIGHT_CONFIGS), "k_values": k_values, "configs": results,
+            }, f, indent=2)
         logger.info(f"Wrote full report to {args.output}")
 
 

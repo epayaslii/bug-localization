@@ -1,13 +1,20 @@
 """Array-job shard of run_relevance_feedback_test.py, for running the recall-oriented
-relevance-feedback pipeline (hybrid-RRF retriever -> embedding-cosine relevance filtering,
-no LLM call -> semantic EmbedRank/MMR reformulation) at real scale on MN5 GPU.
+relevance-feedback pipeline at real scale on MN5 GPU.
 
-Unlike the IQLoc-approximation shard, this needs no Ollama server lifecycle at all --
---relevance-mode embedding-cosine makes zero LLM calls, so localizer is always None. Uses a
-fully-local embedding model (default Qwen3-Embedding-0.6B, not OpenAI) for both the retriever
-and the relevance/reformulation stages, since MN5 has no outbound internet and an
+Originally built cosine-only (embedding-cosine relevance filtering makes zero LLM calls, so
+localizer was always None, no Ollama server lifecycle needed). 2026-08-26: added LLM-relevance
+support (--relevance-mode llm) after Step 2's n=23 comparison found LLM relevance filtering
+beating cosine at the winning retrieval config -- a genuine reversal of every earlier
+LLM-vs-cosine result on this project. When --relevance-mode llm, this now instantiates an
+OllamaLocalizer/OpenRouterLocalizer exactly like run_relevance_feedback_test.py's main() does;
+the calling sbatch script is responsible for the actual Ollama server lifecycle (start/poll/kill
+per array task), same pattern as scripts/mn5/iqloc_llm_relevance_compare.sbatch.
+
+Uses a fully-local embedding model (default Qwen3-Embedding-0.6B, not OpenAI) for both the
+retriever and the relevance/reformulation stages, since MN5 has no outbound internet and an
 OpenAI-dependent pipeline cannot execute there at all -- this is a real config swap from the
-confirmed-best local (OpenAI+skeleton) result, not the identical config re-run on GPU.
+confirmed-best local (OpenAI+symbols_with_imports) result, not the identical config re-run on
+GPU.
 """
 
 import os
@@ -29,7 +36,9 @@ from dataset.utils import setup_logging, get_logger
 from evaluation.manifest import load_manifest
 from evaluation.screening import screen_manifest, summarize_screening
 from method.prompt import PromptGenerator
-from scripts.run_relevance_feedback_test import _run_one
+from method.openrouter_localizer import OpenRouterLocalizer
+from method.ollama_localizer import OllamaLocalizer
+from scripts.run_relevance_feedback_test import _run_one, _BM25_REPR_FNS
 
 setup_logging(level=logging.INFO)
 logger = get_logger(__name__)
@@ -64,7 +73,14 @@ def main():
     parser.add_argument('--retriever', choices=['bm25', 'hybrid-rrf', 'hybrid-rrf-history'], default='hybrid-rrf')
     parser.add_argument('--embedding-model', default='Qwen/Qwen3-Embedding-0.6B')
     parser.add_argument('--rrf-weights', default='1,5')
-    parser.add_argument('--bm25-repr', choices=['symbols_with_imports', 'symbols_no_imports', 'skeleton'], default='skeleton')
+    parser.add_argument('--rrf-k', type=int, default=60,
+                       help='RRF constant k in 1/(k+rank), see run_relevance_feedback_test.py for detail.')
+    parser.add_argument('--bm25-repr', choices=list(_BM25_REPR_FNS), default='skeleton',
+                       help='Kept in sync with run_relevance_feedback_test.py\'s _BM25_REPR_FNS '
+                            '(imported directly, not a separately-hardcoded list) -- a stale copy '
+                            'here previously missed "path_only" and "skeleton_plus_history" '
+                            'entirely, silently rejecting them at the CLI even though _run_one '
+                            'itself supports any key in that dict.')
     parser.add_argument('--granularity', choices=['file', 'chunk'], default='chunk')
     parser.add_argument('--max-chunks-per-file', type=int, default=5)
     parser.add_argument('--reformulation-mode', choices=['literal', 'semantic'], default='semantic')
@@ -73,6 +89,13 @@ def main():
     parser.add_argument('--relevance-mode', choices=['llm', 'embedding-cosine'], default='embedding-cosine')
     parser.add_argument('--relevance-embedding-model', default='Qwen/Qwen3-Embedding-0.6B')
     parser.add_argument('--keep-fraction', type=float, default=0.5)
+    parser.add_argument('--method', choices=['openrouter', 'ollama'], default='ollama',
+                       help='With --relevance-mode llm: backend for the relevance-feedback LLM call.')
+    parser.add_argument('--model', default=None,
+                       help='With --relevance-mode llm: defaults to qwen2.5-coder (ollama) or gpt-4o-mini (openrouter) if not passed.')
+    parser.add_argument('--ollama-host', default=None)
+    parser.add_argument('--num-ctx', type=int, default=16384)
+    parser.add_argument('--max-tokens', type=int, default=8192)
     parser.add_argument('--num-shards', type=int, required=True)
     parser.add_argument('--shard-index', type=int, required=True, help='0-based')
     parser.add_argument('--output-dir', required=True)
@@ -89,6 +112,7 @@ def main():
         instance = {'swebench': SWEBench, 'beetlebox': BeetleBox, 'bench4bl': Bench4BL}[dataset_name]()
 
     rrf_weights = [float(w) for w in args.rrf_weights.split(',')] if args.retriever in ('hybrid-rrf', 'hybrid-rrf-history') else None
+    rrf_k = args.rrf_k
 
     pool_size = args.pool_size or manifest.get('pool_size') or manifest['size']
     pool = instance.get_bug_instances(sample_size=pool_size, random_sample=True, random_seed=manifest['seed'])
@@ -117,16 +141,25 @@ def main():
         logger.info(f"Shard {args.shard_index} empty, wrote placeholder to {output_path}")
         return
 
+    if args.relevance_mode == 'llm':
+        model = args.model or ('qwen2.5-coder:7b' if args.method == 'ollama' else 'gpt-4o-mini')
+        if args.method == 'ollama':
+            localizer = OllamaLocalizer(model=model, host=args.ollama_host, num_ctx=args.num_ctx, max_tokens=args.max_tokens)
+        else:
+            localizer = OpenRouterLocalizer(model=model)
+    else:
+        localizer = None
     prompt_gen = PromptGenerator()
 
     per_bug = {}
     for i, bug in enumerate(bugs):
         t0 = time.time()
         result = _run_one(
-            None, prompt_gen, bug, args.candidate_pool_size, args.retriever,
+            localizer, prompt_gen, bug, args.candidate_pool_size, args.retriever,
             args.embedding_model, rrf_weights, args.granularity, args.max_chunks_per_file,
             args.bm25_repr, args.reformulation_mode, args.keyword_model, args.top_n_keywords,
             args.relevance_mode, args.relevance_embedding_model, args.keep_fraction,
+            rrf_k=rrf_k,
         )
         per_bug[bug.instance_id] = result
         logger.info(
