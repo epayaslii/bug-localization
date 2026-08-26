@@ -81,7 +81,7 @@ done
   --max-tokens 8192 \
   --num-shards 350 \
   --shard-index "${SLURM_ARRAY_TASK_ID}" \
-  --output-dir results/hpc_mn5_iqloc_recall_reform_full_llm/shards
+  --output-dir results/hpc_mn5_iqloc_recall_reform_full_llm_pool200/shards
 PIPELINE_EXIT=$?
 
 kill "$OLLAMA_PID" 2>/dev/null

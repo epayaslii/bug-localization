@@ -1,0 +1,1961 @@
+{
+  "manifest_id": "iqloc-multi-n7091-s42-f8a5d2c401a4",
+  "shard_index": 82,
+  "num_shards": 350,
+  "candidate_pool_size": 200,
+  "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+  "reformulation_mode": "semantic",
+  "relevance_mode": "llm",
+  "keep_fraction": 0.5,
+  "instance_ids": [
+    "CAMEL-969",
+    "CAMEL-970",
+    "CAMEL-9700",
+    "CAMEL-9710",
+    "CAMEL-9713",
+    "CAMEL-9714",
+    "CAMEL-973",
+    "CAMEL-9732",
+    "CAMEL-9738",
+    "CAMEL-9739",
+    "CAMEL-974",
+    "CAMEL-9768",
+    "CAMEL-9774",
+    "CAMEL-9777",
+    "CAMEL-9784",
+    "CAMEL-9805",
+    "CAMEL-9807",
+    "CAMEL-9812",
+    "CAMEL-9820",
+    "CAMEL-9828",
+    "CAMEL-9841"
+  ],
+  "configs": {
+    "retriever": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "CAMEL-969",
+            "repo": "CAMEL",
+            "classifications": {
+              "camel-core/src/main/java/org/apache/camel/CamelContext.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "CAMEL-970",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-spring/src/main/java/org/apache/camel/spring/CamelJMXAgentType.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-spring/src/main/java/org/apache/camel/spring/CamelJMXAgentType.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "CAMEL-9700",
+            "repo": "CAMEL",
+            "classifications": {
+              "camel-core/src/main/java/org/apache/camel/component/seda/SedaProducer.java": "exists_before_fix",
+              "camel-core/src/test/java/org/apache/camel/component/seda/SedaDiscardIfNoConsumerTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "camel-core/src/main/java/org/apache/camel/component/seda/SedaProducer.java": 17,
+              "camel-core/src/test/java/org/apache/camel/component/seda/SedaDiscardIfNoConsumerTest.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5588235294117647,
+            "difficulty": "easy",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "CAMEL-9710",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-dozer/src/main/java/org/apache/camel/component/dozer/CustomMapper.java": "exists_before_fix",
+              "components/camel-dozer/src/test/java/org/apache/camel/component/dozer/CustomMapperParametersTest.java": "exists_before_fix",
+              "components/camel-dozer/src/test/java/org/apache/camel/component/dozer/CustomMapperTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-dozer/src/main/java/org/apache/camel/component/dozer/CustomMapper.java": 2,
+              "components/camel-dozer/src/test/java/org/apache/camel/component/dozer/CustomMapperParametersTest.java": 5,
+              "components/camel-dozer/src/test/java/org/apache/camel/component/dozer/CustomMapperTest.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.8666666666666667,
+            "difficulty": "easy",
+            "latency_s": 1.9073486328125e-06
+          },
+          {
+            "instance_id": "CAMEL-9713",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-jetty-common/src/main/java/org/apache/camel/component/jetty/JettyHttpComponent.java": "exists_before_fix",
+              "components/camel-jetty-common/src/main/java/org/apache/camel/component/jetty/JettyHttpEndpoint.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-jetty-common/src/main/java/org/apache/camel/component/jetty/JettyHttpComponent.java": 50,
+              "components/camel-jetty-common/src/main/java/org/apache/camel/component/jetty/JettyHttpEndpoint.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.52,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-06
+          },
+          {
+            "instance_id": "CAMEL-9714",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-boon/src/test/java/org/apache/camel/component/boon/BoonDataFormatTest.java": "exists_before_fix",
+              "components/camel-boon/src/main/java/org/apache/camel/component/boon/BoonDataFormat.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-boon/src/test/java/org/apache/camel/component/boon/BoonDataFormatTest.java": 10,
+              "components/camel-boon/src/main/java/org/apache/camel/component/boon/BoonDataFormat.java": 17
+            },
+            "best_rank": 10,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.10882352941176471,
+            "difficulty": "easy",
+            "latency_s": 1.6689300537109375e-06
+          },
+          {
+            "instance_id": "CAMEL-973",
+            "repo": "CAMEL",
+            "classifications": {
+              "camel-core/src/main/java/org/apache/camel/converter/stream/StreamCacheConverter.java": "exists_before_fix",
+              "camel-core/src/test/java/org/apache/camel/processor/interceptor/StreamCachingInterceptorTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "camel-core/src/main/java/org/apache/camel/converter/stream/StreamCacheConverter.java": 7,
+              "camel-core/src/test/java/org/apache/camel/processor/interceptor/StreamCachingInterceptorTest.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.39285714285714285,
+            "difficulty": "easy",
+            "latency_s": 1.430511474609375e-06
+          },
+          {
+            "instance_id": "CAMEL-9732",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-swagger-java/src/main/java/org/apache/camel/swagger/RestSwaggerReader.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-swagger-java/src/main/java/org/apache/camel/swagger/RestSwaggerReader.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 1.6689300537109375e-06
+          },
+          {
+            "instance_id": "CAMEL-9738",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-mina2/src/main/java/org/apache/camel/component/mina2/Mina2Consumer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-mina2/src/main/java/org/apache/camel/component/mina2/Mina2Consumer.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 1.9073486328125e-06
+          },
+          {
+            "instance_id": "CAMEL-9739",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-mina2/src/main/java/org/apache/camel/component/mina2/Mina2Consumer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-mina2/src/main/java/org/apache/camel/component/mina2/Mina2Consumer.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 1.430511474609375e-06
+          },
+          {
+            "instance_id": "CAMEL-974",
+            "repo": "CAMEL",
+            "classifications": {
+              "camel-core/src/main/java/org/apache/camel/component/dataset/DataSetConsumer.java": "exists_before_fix",
+              "camel-core/src/main/java/org/apache/camel/component/mock/MockEndpoint.java": "exists_before_fix",
+              "camel-core/src/test/java/org/apache/camel/component/dataset/DataSetSedaTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "camel-core/src/main/java/org/apache/camel/component/dataset/DataSetConsumer.java": 30,
+              "camel-core/src/main/java/org/apache/camel/component/mock/MockEndpoint.java": 44,
+              "camel-core/src/test/java/org/apache/camel/component/dataset/DataSetSedaTest.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.3333333333333333,
+              "10": 0.3333333333333333,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.2116161616161616,
+            "difficulty": "easy",
+            "latency_s": 9.5367431640625e-07
+          },
+          {
+            "instance_id": "CAMEL-9768",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-http4/src/main/java/org/apache/camel/component/http4/HttpProducer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-http4/src/main/java/org/apache/camel/component/http4/HttpProducer.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 9.5367431640625e-07
+          },
+          {
+            "instance_id": "CAMEL-9774",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-cxf/src/test/java/org/apache/camel/component/cxf/converter/CachedCxfPayloadTest.java": "exists_before_fix",
+              "components/camel-cxf/src/main/java/org/apache/camel/component/cxf/converter/CachedCxfPayload.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-cxf/src/test/java/org/apache/camel/component/cxf/converter/CachedCxfPayloadTest.java": 2,
+              "components/camel-cxf/src/main/java/org/apache/camel/component/cxf/converter/CachedCxfPayload.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "CAMEL-9777",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-zipfile/src/main/java/org/apache/camel/dataformat/zipfile/ZipIterator.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-zipfile/src/main/java/org/apache/camel/dataformat/zipfile/ZipIterator.java": 8
+            },
+            "best_rank": 8,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.125,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "CAMEL-9784",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-aws/src/main/java/org/apache/camel/component/aws/s3/S3Consumer.java": "exists_before_fix",
+              "components/camel-aws/src/main/java/org/apache/camel/component/aws/s3/S3Configuration.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-aws/src/main/java/org/apache/camel/component/aws/s3/S3Consumer.java": 1,
+              "components/camel-aws/src/main/java/org/apache/camel/component/aws/s3/S3Configuration.java": 17
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5588235294117647,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "CAMEL-9805",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-elsql/src/main/java/org/apache/camel/component/elsql/ElsqlProducer.java": "exists_before_fix",
+              "components/camel-sql/src/main/java/org/apache/camel/component/sql/SqlProducer.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "CAMEL-9807",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-cxf/src/test/java/org/apache/camel/component/cxf/converter/CxfPayloadConverterTest.java": "exists_before_fix",
+              "components/camel-cxf/src/main/java/org/apache/camel/component/cxf/converter/CxfPayloadConverter.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-cxf/src/test/java/org/apache/camel/component/cxf/converter/CxfPayloadConverterTest.java": 9,
+              "components/camel-cxf/src/main/java/org/apache/camel/component/cxf/converter/CxfPayloadConverter.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.2777777777777778,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "CAMEL-9812",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-kafka/src/main/java/org/apache/camel/component/kafka/KafkaConsumer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-kafka/src/main/java/org/apache/camel/component/kafka/KafkaConsumer.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 1.6689300537109375e-06
+          },
+          {
+            "instance_id": "CAMEL-9820",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-ftp/src/main/java/org/apache/camel/component/file/remote/strategy/SftpChangedExclusiveReadLockStrategy.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-ftp/src/main/java/org/apache/camel/component/file/remote/strategy/SftpChangedExclusiveReadLockStrategy.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "CAMEL-9828",
+            "repo": "CAMEL",
+            "classifications": {
+              "camel-core/src/main/java/org/apache/camel/model/rest/RestDefinition.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "camel-core/src/main/java/org/apache/camel/model/rest/RestDefinition.java": 29
+            },
+            "best_rank": 29,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.034482758620689655,
+            "difficulty": "medium",
+            "latency_s": 1.6689300537109375e-06
+          },
+          {
+            "instance_id": "CAMEL-9841",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-mail/src/test/java/org/apache/camel/dataformat/mime/multipart/MimeMultipartDataFormatTest.java": "exists_before_fix",
+              "components/camel-mail/src/main/java/org/apache/camel/dataformat/mime/multipart/MimeMultipartDataFormat.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-mail/src/test/java/org/apache/camel/dataformat/mime/multipart/MimeMultipartDataFormatTest.java": 1,
+              "components/camel-mail/src/main/java/org/apache/camel/dataformat/mime/multipart/MimeMultipartDataFormat.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "no_localizable_gt": 2,
+          "easy": 18,
+          "medium": 1
+        },
+        "total": 21
+      },
+      "summary": {
+        "n": 21,
+        "macro_hit_at": {
+          "1": 0.5714285714285714,
+          "5": 0.7619047619047619,
+          "10": 0.8571428571428571,
+          "100": 0.9047619047619048,
+          "200": 0.9047619047619048
+        },
+        "macro_recall_at": {
+          "1": 0.4206349206349206,
+          "5": 0.611111111111111,
+          "10": 0.7301587301587301,
+          "100": 0.9047619047619048,
+          "200": 0.9047619047619048
+        },
+        "mrr": 0.6710864805692393,
+        "map": 0.5788033855130349,
+        "mean_latency_s": 1.1920928955078125e-06
+      }
+    },
+    "relevance_filtered": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "CAMEL-969",
+            "repo": "CAMEL",
+            "classifications": {
+              "camel-core/src/main/java/org/apache/camel/CamelContext.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "CAMEL-970",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-spring/src/main/java/org/apache/camel/spring/CamelJMXAgentType.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-spring/src/main/java/org/apache/camel/spring/CamelJMXAgentType.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "CAMEL-9700",
+            "repo": "CAMEL",
+            "classifications": {
+              "camel-core/src/main/java/org/apache/camel/component/seda/SedaProducer.java": "exists_before_fix",
+              "camel-core/src/test/java/org/apache/camel/component/seda/SedaDiscardIfNoConsumerTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "camel-core/src/main/java/org/apache/camel/component/seda/SedaProducer.java": 23,
+              "camel-core/src/test/java/org/apache/camel/component/seda/SedaDiscardIfNoConsumerTest.java": 7
+            },
+            "best_rank": 7,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.11490683229813664,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CAMEL-9710",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-dozer/src/main/java/org/apache/camel/component/dozer/CustomMapper.java": "exists_before_fix",
+              "components/camel-dozer/src/test/java/org/apache/camel/component/dozer/CustomMapperParametersTest.java": "exists_before_fix",
+              "components/camel-dozer/src/test/java/org/apache/camel/component/dozer/CustomMapperTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-dozer/src/main/java/org/apache/camel/component/dozer/CustomMapper.java": 3,
+              "components/camel-dozer/src/test/java/org/apache/camel/component/dozer/CustomMapperParametersTest.java": 6,
+              "components/camel-dozer/src/test/java/org/apache/camel/component/dozer/CustomMapperTest.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.6666666666666666,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5555555555555555,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CAMEL-9713",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-jetty-common/src/main/java/org/apache/camel/component/jetty/JettyHttpComponent.java": "exists_before_fix",
+              "components/camel-jetty-common/src/main/java/org/apache/camel/component/jetty/JettyHttpEndpoint.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-jetty-common/src/main/java/org/apache/camel/component/jetty/JettyHttpComponent.java": 52,
+              "components/camel-jetty-common/src/main/java/org/apache/camel/component/jetty/JettyHttpEndpoint.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.1858974358974359,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CAMEL-9714",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-boon/src/test/java/org/apache/camel/component/boon/BoonDataFormatTest.java": "exists_before_fix",
+              "components/camel-boon/src/main/java/org/apache/camel/component/boon/BoonDataFormat.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-boon/src/test/java/org/apache/camel/component/boon/BoonDataFormatTest.java": 10,
+              "components/camel-boon/src/main/java/org/apache/camel/component/boon/BoonDataFormat.java": 17
+            },
+            "best_rank": 10,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.10882352941176471,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "CAMEL-973",
+            "repo": "CAMEL",
+            "classifications": {
+              "camel-core/src/main/java/org/apache/camel/converter/stream/StreamCacheConverter.java": "exists_before_fix",
+              "camel-core/src/test/java/org/apache/camel/processor/interceptor/StreamCachingInterceptorTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "camel-core/src/main/java/org/apache/camel/converter/stream/StreamCacheConverter.java": 7,
+              "camel-core/src/test/java/org/apache/camel/processor/interceptor/StreamCachingInterceptorTest.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.39285714285714285,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CAMEL-9732",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-swagger-java/src/main/java/org/apache/camel/swagger/RestSwaggerReader.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-swagger-java/src/main/java/org/apache/camel/swagger/RestSwaggerReader.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CAMEL-9738",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-mina2/src/main/java/org/apache/camel/component/mina2/Mina2Consumer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-mina2/src/main/java/org/apache/camel/component/mina2/Mina2Consumer.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CAMEL-9739",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-mina2/src/main/java/org/apache/camel/component/mina2/Mina2Consumer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-mina2/src/main/java/org/apache/camel/component/mina2/Mina2Consumer.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 2.6226043701171875e-06
+          },
+          {
+            "instance_id": "CAMEL-974",
+            "repo": "CAMEL",
+            "classifications": {
+              "camel-core/src/main/java/org/apache/camel/component/dataset/DataSetConsumer.java": "exists_before_fix",
+              "camel-core/src/main/java/org/apache/camel/component/mock/MockEndpoint.java": "exists_before_fix",
+              "camel-core/src/test/java/org/apache/camel/component/dataset/DataSetSedaTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "camel-core/src/main/java/org/apache/camel/component/dataset/DataSetConsumer.java": 30,
+              "camel-core/src/main/java/org/apache/camel/component/mock/MockEndpoint.java": 44,
+              "camel-core/src/test/java/org/apache/camel/component/dataset/DataSetSedaTest.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.3333333333333333,
+              "10": 0.3333333333333333,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.2116161616161616,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CAMEL-9768",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-http4/src/main/java/org/apache/camel/component/http4/HttpProducer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-http4/src/main/java/org/apache/camel/component/http4/HttpProducer.java": 5
+            },
+            "best_rank": 5,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.2,
+            "difficulty": "easy",
+            "latency_s": 2.1457672119140625e-06
+          },
+          {
+            "instance_id": "CAMEL-9774",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-cxf/src/test/java/org/apache/camel/component/cxf/converter/CachedCxfPayloadTest.java": "exists_before_fix",
+              "components/camel-cxf/src/main/java/org/apache/camel/component/cxf/converter/CachedCxfPayload.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-cxf/src/test/java/org/apache/camel/component/cxf/converter/CachedCxfPayloadTest.java": 2,
+              "components/camel-cxf/src/main/java/org/apache/camel/component/cxf/converter/CachedCxfPayload.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "CAMEL-9777",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-zipfile/src/main/java/org/apache/camel/dataformat/zipfile/ZipIterator.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-zipfile/src/main/java/org/apache/camel/dataformat/zipfile/ZipIterator.java": 8
+            },
+            "best_rank": 8,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.125,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CAMEL-9784",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-aws/src/main/java/org/apache/camel/component/aws/s3/S3Consumer.java": "exists_before_fix",
+              "components/camel-aws/src/main/java/org/apache/camel/component/aws/s3/S3Configuration.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-aws/src/main/java/org/apache/camel/component/aws/s3/S3Consumer.java": 2,
+              "components/camel-aws/src/main/java/org/apache/camel/component/aws/s3/S3Configuration.java": 18
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3055555555555556,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CAMEL-9805",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-elsql/src/main/java/org/apache/camel/component/elsql/ElsqlProducer.java": "exists_before_fix",
+              "components/camel-sql/src/main/java/org/apache/camel/component/sql/SqlProducer.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "CAMEL-9807",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-cxf/src/test/java/org/apache/camel/component/cxf/converter/CxfPayloadConverterTest.java": "exists_before_fix",
+              "components/camel-cxf/src/main/java/org/apache/camel/component/cxf/converter/CxfPayloadConverter.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-cxf/src/test/java/org/apache/camel/component/cxf/converter/CxfPayloadConverterTest.java": 11,
+              "components/camel-cxf/src/main/java/org/apache/camel/component/cxf/converter/CxfPayloadConverter.java": 5
+            },
+            "best_rank": 5,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.19090909090909092,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CAMEL-9812",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-kafka/src/main/java/org/apache/camel/component/kafka/KafkaConsumer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-kafka/src/main/java/org/apache/camel/component/kafka/KafkaConsumer.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CAMEL-9820",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-ftp/src/main/java/org/apache/camel/component/file/remote/strategy/SftpChangedExclusiveReadLockStrategy.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-ftp/src/main/java/org/apache/camel/component/file/remote/strategy/SftpChangedExclusiveReadLockStrategy.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "CAMEL-9828",
+            "repo": "CAMEL",
+            "classifications": {
+              "camel-core/src/main/java/org/apache/camel/model/rest/RestDefinition.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "camel-core/src/main/java/org/apache/camel/model/rest/RestDefinition.java": 30
+            },
+            "best_rank": 30,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.03333333333333333,
+            "difficulty": "medium",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CAMEL-9841",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-mail/src/test/java/org/apache/camel/dataformat/mime/multipart/MimeMultipartDataFormatTest.java": "exists_before_fix",
+              "components/camel-mail/src/main/java/org/apache/camel/dataformat/mime/multipart/MimeMultipartDataFormat.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-mail/src/test/java/org/apache/camel/dataformat/mime/multipart/MimeMultipartDataFormatTest.java": 1,
+              "components/camel-mail/src/main/java/org/apache/camel/dataformat/mime/multipart/MimeMultipartDataFormat.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "no_localizable_gt": 2,
+          "easy": 18,
+          "medium": 1
+        },
+        "total": 21
+      },
+      "summary": {
+        "n": 21,
+        "macro_hit_at": {
+          "1": 0.23809523809523808,
+          "5": 0.7142857142857143,
+          "10": 0.8571428571428571,
+          "100": 0.9047619047619048,
+          "200": 0.9047619047619048
+        },
+        "macro_recall_at": {
+          "1": 0.19047619047619047,
+          "5": 0.5714285714285714,
+          "10": 0.7063492063492063,
+          "100": 0.9047619047619048,
+          "200": 0.9047619047619048
+        },
+        "mrr": 0.45878684807256237,
+        "map": 0.42497403035400844,
+        "mean_latency_s": 5.270305432771382e-07
+      }
+    },
+    "reformulated": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "CAMEL-969",
+            "repo": "CAMEL",
+            "classifications": {
+              "camel-core/src/main/java/org/apache/camel/CamelContext.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "camel-core/src/main/java/org/apache/camel/CamelContext.java": 213
+            },
+            "best_rank": 213,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.004694835680751174,
+            "difficulty": "outside_top200",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "CAMEL-970",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-spring/src/main/java/org/apache/camel/spring/CamelJMXAgentType.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-spring/src/main/java/org/apache/camel/spring/CamelJMXAgentType.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 0.0
+          },
+          {
+            "instance_id": "CAMEL-9700",
+            "repo": "CAMEL",
+            "classifications": {
+              "camel-core/src/main/java/org/apache/camel/component/seda/SedaProducer.java": "exists_before_fix",
+              "camel-core/src/test/java/org/apache/camel/component/seda/SedaDiscardIfNoConsumerTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "camel-core/src/main/java/org/apache/camel/component/seda/SedaProducer.java": 13,
+              "camel-core/src/test/java/org/apache/camel/component/seda/SedaDiscardIfNoConsumerTest.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5769230769230769,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CAMEL-9710",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-dozer/src/main/java/org/apache/camel/component/dozer/CustomMapper.java": "exists_before_fix",
+              "components/camel-dozer/src/test/java/org/apache/camel/component/dozer/CustomMapperParametersTest.java": "exists_before_fix",
+              "components/camel-dozer/src/test/java/org/apache/camel/component/dozer/CustomMapperTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-dozer/src/main/java/org/apache/camel/component/dozer/CustomMapper.java": 2,
+              "components/camel-dozer/src/test/java/org/apache/camel/component/dozer/CustomMapperParametersTest.java": 5,
+              "components/camel-dozer/src/test/java/org/apache/camel/component/dozer/CustomMapperTest.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.8666666666666667,
+            "difficulty": "easy",
+            "latency_s": 1.9073486328125e-06
+          },
+          {
+            "instance_id": "CAMEL-9713",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-jetty-common/src/main/java/org/apache/camel/component/jetty/JettyHttpComponent.java": "exists_before_fix",
+              "components/camel-jetty-common/src/main/java/org/apache/camel/component/jetty/JettyHttpEndpoint.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-jetty-common/src/main/java/org/apache/camel/component/jetty/JettyHttpComponent.java": 57,
+              "components/camel-jetty-common/src/main/java/org/apache/camel/component/jetty/JettyHttpEndpoint.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5175438596491229,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CAMEL-9714",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-boon/src/test/java/org/apache/camel/component/boon/BoonDataFormatTest.java": "exists_before_fix",
+              "components/camel-boon/src/main/java/org/apache/camel/component/boon/BoonDataFormat.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-boon/src/test/java/org/apache/camel/component/boon/BoonDataFormatTest.java": 9,
+              "components/camel-boon/src/main/java/org/apache/camel/component/boon/BoonDataFormat.java": 15
+            },
+            "best_rank": 9,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.12222222222222222,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CAMEL-973",
+            "repo": "CAMEL",
+            "classifications": {
+              "camel-core/src/main/java/org/apache/camel/converter/stream/StreamCacheConverter.java": "exists_before_fix",
+              "camel-core/src/test/java/org/apache/camel/processor/interceptor/StreamCachingInterceptorTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "camel-core/src/main/java/org/apache/camel/converter/stream/StreamCacheConverter.java": 7,
+              "camel-core/src/test/java/org/apache/camel/processor/interceptor/StreamCachingInterceptorTest.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.39285714285714285,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CAMEL-9732",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-swagger-java/src/main/java/org/apache/camel/swagger/RestSwaggerReader.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-swagger-java/src/main/java/org/apache/camel/swagger/RestSwaggerReader.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CAMEL-9738",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-mina2/src/main/java/org/apache/camel/component/mina2/Mina2Consumer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-mina2/src/main/java/org/apache/camel/component/mina2/Mina2Consumer.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CAMEL-9739",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-mina2/src/main/java/org/apache/camel/component/mina2/Mina2Consumer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-mina2/src/main/java/org/apache/camel/component/mina2/Mina2Consumer.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CAMEL-974",
+            "repo": "CAMEL",
+            "classifications": {
+              "camel-core/src/main/java/org/apache/camel/component/dataset/DataSetConsumer.java": "exists_before_fix",
+              "camel-core/src/main/java/org/apache/camel/component/mock/MockEndpoint.java": "exists_before_fix",
+              "camel-core/src/test/java/org/apache/camel/component/dataset/DataSetSedaTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "camel-core/src/main/java/org/apache/camel/component/dataset/DataSetConsumer.java": 29,
+              "camel-core/src/main/java/org/apache/camel/component/mock/MockEndpoint.java": 44,
+              "camel-core/src/test/java/org/apache/camel/component/dataset/DataSetSedaTest.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 0.3333333333333333,
+              "10": 0.3333333333333333,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.37904911180773243,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CAMEL-9768",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-http4/src/main/java/org/apache/camel/component/http4/HttpProducer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-http4/src/main/java/org/apache/camel/component/http4/HttpProducer.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CAMEL-9774",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-cxf/src/test/java/org/apache/camel/component/cxf/converter/CachedCxfPayloadTest.java": "exists_before_fix",
+              "components/camel-cxf/src/main/java/org/apache/camel/component/cxf/converter/CachedCxfPayload.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-cxf/src/test/java/org/apache/camel/component/cxf/converter/CachedCxfPayloadTest.java": 2,
+              "components/camel-cxf/src/main/java/org/apache/camel/component/cxf/converter/CachedCxfPayload.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CAMEL-9777",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-zipfile/src/main/java/org/apache/camel/dataformat/zipfile/ZipIterator.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-zipfile/src/main/java/org/apache/camel/dataformat/zipfile/ZipIterator.java": 9
+            },
+            "best_rank": 9,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.1111111111111111,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "CAMEL-9784",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-aws/src/main/java/org/apache/camel/component/aws/s3/S3Consumer.java": "exists_before_fix",
+              "components/camel-aws/src/main/java/org/apache/camel/component/aws/s3/S3Configuration.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-aws/src/main/java/org/apache/camel/component/aws/s3/S3Consumer.java": 1,
+              "components/camel-aws/src/main/java/org/apache/camel/component/aws/s3/S3Configuration.java": 14
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5714285714285714,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CAMEL-9805",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-elsql/src/main/java/org/apache/camel/component/elsql/ElsqlProducer.java": "exists_before_fix",
+              "components/camel-sql/src/main/java/org/apache/camel/component/sql/SqlProducer.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CAMEL-9807",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-cxf/src/test/java/org/apache/camel/component/cxf/converter/CxfPayloadConverterTest.java": "exists_before_fix",
+              "components/camel-cxf/src/main/java/org/apache/camel/component/cxf/converter/CxfPayloadConverter.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-cxf/src/test/java/org/apache/camel/component/cxf/converter/CxfPayloadConverterTest.java": 9,
+              "components/camel-cxf/src/main/java/org/apache/camel/component/cxf/converter/CxfPayloadConverter.java": 4
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.2361111111111111,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CAMEL-9812",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-kafka/src/main/java/org/apache/camel/component/kafka/KafkaConsumer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-kafka/src/main/java/org/apache/camel/component/kafka/KafkaConsumer.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CAMEL-9820",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-ftp/src/main/java/org/apache/camel/component/file/remote/strategy/SftpChangedExclusiveReadLockStrategy.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-ftp/src/main/java/org/apache/camel/component/file/remote/strategy/SftpChangedExclusiveReadLockStrategy.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "CAMEL-9828",
+            "repo": "CAMEL",
+            "classifications": {
+              "camel-core/src/main/java/org/apache/camel/model/rest/RestDefinition.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "camel-core/src/main/java/org/apache/camel/model/rest/RestDefinition.java": 27
+            },
+            "best_rank": 27,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.037037037037037035,
+            "difficulty": "medium",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CAMEL-9841",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-mail/src/test/java/org/apache/camel/dataformat/mime/multipart/MimeMultipartDataFormatTest.java": "exists_before_fix",
+              "components/camel-mail/src/main/java/org/apache/camel/dataformat/mime/multipart/MimeMultipartDataFormat.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-mail/src/test/java/org/apache/camel/dataformat/mime/multipart/MimeMultipartDataFormatTest.java": 1,
+              "components/camel-mail/src/main/java/org/apache/camel/dataformat/mime/multipart/MimeMultipartDataFormat.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "outside_top200": 1,
+          "easy": 18,
+          "no_localizable_gt": 1,
+          "medium": 1
+        },
+        "total": 21
+      },
+      "summary": {
+        "n": 21,
+        "macro_hit_at": {
+          "1": 0.6190476190476191,
+          "5": 0.7619047619047619,
+          "10": 0.8571428571428571,
+          "100": 0.9047619047619048,
+          "200": 0.9047619047619048
+        },
+        "macro_recall_at": {
+          "1": 0.43650793650793646,
+          "5": 0.611111111111111,
+          "10": 0.7301587301587301,
+          "100": 0.9047619047619048,
+          "200": 0.9047619047619048
+        },
+        "mrr": 0.6911406711876195,
+        "map": 0.5864592736425974,
+        "mean_latency_s": 3.5762786865234375e-07
+      }
+    }
+  }
+}

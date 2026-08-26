@@ -1,0 +1,1949 @@
+{
+  "manifest_id": "iqloc-multi-n7091-s42-f8a5d2c401a4",
+  "shard_index": 185,
+  "num_shards": 350,
+  "candidate_pool_size": 200,
+  "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+  "reformulation_mode": "semantic",
+  "relevance_mode": "llm",
+  "keep_fraction": 0.5,
+  "instance_ids": [
+    "HIVE-2095",
+    "HIVE-2178",
+    "HIVE-2182",
+    "HIVE-2184",
+    "HIVE-2198",
+    "HIVE-2253",
+    "HIVE-2260",
+    "HIVE-2264",
+    "HIVE-2290",
+    "HIVE-2298",
+    "HIVE-2309",
+    "HIVE-2315",
+    "HIVE-2332",
+    "HIVE-2334",
+    "HIVE-2369",
+    "HIVE-2372",
+    "HIVE-2382",
+    "HIVE-2383",
+    "HIVE-2390",
+    "HIVE-2398"
+  ],
+  "configs": {
+    "retriever": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "HIVE-2095",
+            "repo": "HIVE",
+            "classifications": {
+              "ql/src/java/org/apache/hadoop/hive/ql/optimizer/MapJoinProcessor.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/Task.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/optimizer/physical/CommonJoinResolver.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/plan/ConditionalResolverCommonJoin.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/optimizer/physical/LocalMapJoinProcFactory.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "ql/src/java/org/apache/hadoop/hive/ql/optimizer/MapJoinProcessor.java": 3,
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/Task.java": 67,
+              "ql/src/java/org/apache/hadoop/hive/ql/optimizer/physical/CommonJoinResolver.java": 14,
+              "ql/src/java/org/apache/hadoop/hive/ql/plan/ConditionalResolverCommonJoin.java": 1,
+              "ql/src/java/org/apache/hadoop/hive/ql/optimizer/physical/LocalMapJoinProcFactory.java": 23
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.2,
+              "5": 0.4,
+              "10": 0.4,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.42589845802045667,
+            "difficulty": "easy",
+            "latency_s": 3.0994415283203125e-06
+          },
+          {
+            "instance_id": "HIVE-2178",
+            "repo": "HIVE",
+            "classifications": {
+              "serde/src/java/org/apache/hadoop/hive/serde2/thrift/TBinarySortableProtocol.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/DDLTask.java": "exists_before_fix",
+              "jdbc/src/java/org/apache/hadoop/hive/jdbc/HiveConnection.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/metadata/Partition.java": "exists_before_fix",
+              "serde/src/java/org/apache/hadoop/hive/serde2/dynamic_type/SimpleCharStream.java": "exists_before_fix",
+              "jdbc/src/java/org/apache/hadoop/hive/jdbc/HiveDataSource.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "serde/src/java/org/apache/hadoop/hive/serde2/thrift/TBinarySortableProtocol.java": 77,
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/DDLTask.java": 35,
+              "ql/src/java/org/apache/hadoop/hive/ql/metadata/Partition.java": 126,
+              "jdbc/src/java/org/apache/hadoop/hive/jdbc/HiveDataSource.java": 31
+            },
+            "best_rank": 31,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.5,
+              "200": 0.6666666666666666
+            },
+            "average_precision": 0.026684665394342815,
+            "difficulty": "medium",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "HIVE-2182",
+            "repo": "HIVE",
+            "classifications": {
+              "ql/src/java/org/apache/hadoop/hive/ql/udf/generic/GenericUDFBridge.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "ql/src/java/org/apache/hadoop/hive/ql/udf/generic/GenericUDFBridge.java": 11
+            },
+            "best_rank": 11,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.09090909090909091,
+            "difficulty": "medium",
+            "latency_s": 2.384185791015625e-06
+          },
+          {
+            "instance_id": "HIVE-2184",
+            "repo": "HIVE",
+            "classifications": {
+              "metastore/src/java/org/apache/hadoop/hive/metastore/HiveMetaStoreClient.java": "exists_before_fix",
+              "metastore/src/java/org/apache/hadoop/hive/metastore/HiveMetaStore.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/metadata/Hive.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "metastore/src/java/org/apache/hadoop/hive/metastore/HiveMetaStoreClient.java": 5,
+              "ql/src/java/org/apache/hadoop/hive/ql/metadata/Hive.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 0.6666666666666666,
+              "10": 0.6666666666666666,
+              "100": 0.6666666666666666,
+              "200": 0.6666666666666666
+            },
+            "average_precision": 0.4666666666666666,
+            "difficulty": "easy",
+            "latency_s": 9.5367431640625e-07
+          },
+          {
+            "instance_id": "HIVE-2198",
+            "repo": "HIVE",
+            "classifications": {
+              "jdbc/src/java/org/apache/hadoop/hive/jdbc/HiveConnection.java": "exists_before_fix",
+              "service/src/test/org/apache/hadoop/hive/service/TestHiveServer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "jdbc/src/java/org/apache/hadoop/hive/jdbc/HiveConnection.java": 10,
+              "service/src/test/org/apache/hadoop/hive/service/TestHiveServer.java": 11
+            },
+            "best_rank": 10,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.14090909090909093,
+            "difficulty": "easy",
+            "latency_s": 1.9073486328125e-06
+          },
+          {
+            "instance_id": "HIVE-2253",
+            "repo": "HIVE",
+            "classifications": {
+              "ql/src/java/org/apache/hadoop/hive/ql/parse/SemanticAnalyzer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "ql/src/java/org/apache/hadoop/hive/ql/parse/SemanticAnalyzer.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 1.6689300537109375e-06
+          },
+          {
+            "instance_id": "HIVE-2260",
+            "repo": "HIVE",
+            "classifications": {
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/ExecDriver.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/ExecDriver.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 1.430511474609375e-06
+          },
+          {
+            "instance_id": "HIVE-2264",
+            "repo": "HIVE",
+            "classifications": {
+              "ql/src/java/org/apache/hadoop/hive/ql/Driver.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/ExecDriver.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/Task.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/MapRedTask.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/MapredLocalTask.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/ExecDriver.java": 52,
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/Task.java": 67
+            },
+            "best_rank": 52,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.4,
+              "200": 0.4
+            },
+            "average_precision": 0.00981630309988519,
+            "difficulty": "medium",
+            "latency_s": 1.9073486328125e-06
+          },
+          {
+            "instance_id": "HIVE-2290",
+            "repo": "HIVE",
+            "classifications": {
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/DDLTask.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/DDLTask.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 1.6689300537109375e-06
+          },
+          {
+            "instance_id": "HIVE-2298",
+            "repo": "HIVE",
+            "classifications": {
+              "ql/src/java/org/apache/hadoop/hive/ql/udf/UDAFPercentile.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "ql/src/java/org/apache/hadoop/hive/ql/udf/UDAFPercentile.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "HIVE-2309",
+            "repo": "HIVE",
+            "classifications": {
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/Utilities.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/Utilities.java": 53
+            },
+            "best_rank": 53,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.018867924528301886,
+            "difficulty": "medium",
+            "latency_s": 1.6689300537109375e-06
+          },
+          {
+            "instance_id": "HIVE-2315",
+            "repo": "HIVE",
+            "classifications": {
+              "jdbc/src/test/org/apache/hadoop/hive/jdbc/TestJdbcDriver.java": "exists_before_fix",
+              "jdbc/src/java/org/apache/hadoop/hive/jdbc/HiveDatabaseMetaData.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "jdbc/src/test/org/apache/hadoop/hive/jdbc/TestJdbcDriver.java": 1,
+              "jdbc/src/java/org/apache/hadoop/hive/jdbc/HiveDatabaseMetaData.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "HIVE-2332",
+            "repo": "HIVE",
+            "classifications": {
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/ReduceSinkOperator.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/plan/PlanUtils.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/ReduceSinkOperator.java": 3,
+              "ql/src/java/org/apache/hadoop/hive/ql/plan/PlanUtils.java": 10
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.26666666666666666,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "HIVE-2334",
+            "repo": "HIVE",
+            "classifications": {
+              "cli/src/java/org/apache/hadoop/hive/cli/CliDriver.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "cli/src/java/org/apache/hadoop/hive/cli/CliDriver.java": 15
+            },
+            "best_rank": 15,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.06666666666666667,
+            "difficulty": "medium",
+            "latency_s": 2.86102294921875e-06
+          },
+          {
+            "instance_id": "HIVE-2369",
+            "repo": "HIVE",
+            "classifications": {
+              "jdbc/src/java/org/apache/hadoop/hive/jdbc/HiveConnection.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "jdbc/src/java/org/apache/hadoop/hive/jdbc/HiveConnection.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 1.430511474609375e-06
+          },
+          {
+            "instance_id": "HIVE-2372",
+            "repo": "HIVE",
+            "classifications": {
+              "ql/src/test/org/apache/hadoop/hive/ql/exec/TestOperators.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/ScriptOperator.java": "exists_before_fix",
+              "common/src/java/org/apache/hadoop/hive/conf/HiveConf.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "ql/src/test/org/apache/hadoop/hive/ql/exec/TestOperators.java": 97,
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/ScriptOperator.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.3333333333333333,
+              "10": 0.3333333333333333,
+              "100": 0.6666666666666666,
+              "200": 0.6666666666666666
+            },
+            "average_precision": 0.17353951890034366,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "HIVE-2382",
+            "repo": "HIVE",
+            "classifications": {
+              "ql/src/java/org/apache/hadoop/hive/ql/parse/SemanticAnalyzer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "ql/src/java/org/apache/hadoop/hive/ql/parse/SemanticAnalyzer.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 1.6689300537109375e-06
+          },
+          {
+            "instance_id": "HIVE-2383",
+            "repo": "HIVE",
+            "classifications": {
+              "ql/src/java/org/apache/hadoop/hive/ql/ppd/ExprWalkerInfo.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/ppd/OpProcFactory.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/ppd/ExprWalkerProcFactory.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "ql/src/java/org/apache/hadoop/hive/ql/ppd/ExprWalkerInfo.java": 5,
+              "ql/src/java/org/apache/hadoop/hive/ql/ppd/OpProcFactory.java": 1,
+              "ql/src/java/org/apache/hadoop/hive/ql/ppd/ExprWalkerProcFactory.java": 4
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.7000000000000001,
+            "difficulty": "easy",
+            "latency_s": 2.86102294921875e-06
+          },
+          {
+            "instance_id": "HIVE-2390",
+            "repo": "HIVE",
+            "classifications": {
+              "serde/src/java/org/apache/hadoop/hive/serde2/lazybinary/LazyBinaryUtils.java": "exists_before_fix",
+              "serde/src/java/org/apache/hadoop/hive/serde2/lazybinary/objectinspector/LazyBinaryObjectInspectorFactory.java": "exists_before_fix",
+              "serde/src/java/org/apache/hadoop/hive/serde2/lazybinary/LazyBinaryFactory.java": "exists_before_fix",
+              "serde/src/java/org/apache/hadoop/hive/serde2/lazybinary/LazyBinarySerDe.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "serde/src/java/org/apache/hadoop/hive/serde2/lazybinary/LazyBinaryUtils.java": 20,
+              "serde/src/java/org/apache/hadoop/hive/serde2/lazybinary/LazyBinaryFactory.java": 57,
+              "serde/src/java/org/apache/hadoop/hive/serde2/lazybinary/LazyBinarySerDe.java": 13
+            },
+            "best_rank": 13,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.75,
+              "200": 0.75
+            },
+            "average_precision": 0.05738866396761134,
+            "difficulty": "medium",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "HIVE-2398",
+            "repo": "HIVE",
+            "classifications": {
+              "service/src/java/org/apache/hadoop/hive/service/HiveServer.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/processors/SetProcessor.java": "exists_before_fix",
+              "jdbc/src/test/org/apache/hadoop/hive/jdbc/TestJdbcDriver.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/processors/CommandProcessorResponse.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "service/src/java/org/apache/hadoop/hive/service/HiveServer.java": 1,
+              "ql/src/java/org/apache/hadoop/hive/ql/processors/SetProcessor.java": 5,
+              "jdbc/src/test/org/apache/hadoop/hive/jdbc/TestJdbcDriver.java": 16
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.25,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.75,
+              "200": 0.75
+            },
+            "average_precision": 0.396875,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "easy": 14,
+          "medium": 6
+        },
+        "total": 20
+      },
+      "summary": {
+        "n": 20,
+        "macro_hit_at": {
+          "1": 0.5,
+          "5": 0.65,
+          "10": 0.7,
+          "100": 1.0,
+          "200": 1.0
+        },
+        "macro_recall_at": {
+          "1": 0.3308333333333333,
+          "5": 0.5199999999999999,
+          "10": 0.5700000000000001,
+          "100": 0.8866666666666667,
+          "200": 0.8949999999999999
+        },
+        "mrr": 0.5869094463053683,
+        "map": 0.46704443578645616,
+        "mean_latency_s": 1.4901161193847656e-06
+      }
+    },
+    "relevance_filtered": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "HIVE-2095",
+            "repo": "HIVE",
+            "classifications": {
+              "ql/src/java/org/apache/hadoop/hive/ql/optimizer/MapJoinProcessor.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/Task.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/optimizer/physical/CommonJoinResolver.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/plan/ConditionalResolverCommonJoin.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/optimizer/physical/LocalMapJoinProcFactory.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "ql/src/java/org/apache/hadoop/hive/ql/optimizer/MapJoinProcessor.java": 5,
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/Task.java": 69,
+              "ql/src/java/org/apache/hadoop/hive/ql/optimizer/physical/CommonJoinResolver.java": 16,
+              "ql/src/java/org/apache/hadoop/hive/ql/plan/ConditionalResolverCommonJoin.java": 3,
+              "ql/src/java/org/apache/hadoop/hive/ql/optimizer/physical/LocalMapJoinProcFactory.java": 25
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.4,
+              "10": 0.4,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.2306594202898551,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "HIVE-2178",
+            "repo": "HIVE",
+            "classifications": {
+              "serde/src/java/org/apache/hadoop/hive/serde2/thrift/TBinarySortableProtocol.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/DDLTask.java": "exists_before_fix",
+              "jdbc/src/java/org/apache/hadoop/hive/jdbc/HiveConnection.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/metadata/Partition.java": "exists_before_fix",
+              "serde/src/java/org/apache/hadoop/hive/serde2/dynamic_type/SimpleCharStream.java": "exists_before_fix",
+              "jdbc/src/java/org/apache/hadoop/hive/jdbc/HiveDataSource.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "serde/src/java/org/apache/hadoop/hive/serde2/thrift/TBinarySortableProtocol.java": 78,
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/DDLTask.java": 36,
+              "ql/src/java/org/apache/hadoop/hive/ql/metadata/Partition.java": 127,
+              "jdbc/src/java/org/apache/hadoop/hive/jdbc/HiveDataSource.java": 32
+            },
+            "best_rank": 32,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.5,
+              "200": 0.6666666666666666
+            },
+            "average_precision": 0.02612719283487,
+            "difficulty": "medium",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HIVE-2182",
+            "repo": "HIVE",
+            "classifications": {
+              "ql/src/java/org/apache/hadoop/hive/ql/udf/generic/GenericUDFBridge.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "ql/src/java/org/apache/hadoop/hive/ql/udf/generic/GenericUDFBridge.java": 12
+            },
+            "best_rank": 12,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.08333333333333333,
+            "difficulty": "medium",
+            "latency_s": 0.0
+          },
+          {
+            "instance_id": "HIVE-2184",
+            "repo": "HIVE",
+            "classifications": {
+              "metastore/src/java/org/apache/hadoop/hive/metastore/HiveMetaStoreClient.java": "exists_before_fix",
+              "metastore/src/java/org/apache/hadoop/hive/metastore/HiveMetaStore.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/metadata/Hive.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "metastore/src/java/org/apache/hadoop/hive/metastore/HiveMetaStoreClient.java": 14,
+              "ql/src/java/org/apache/hadoop/hive/ql/metadata/Hive.java": 10
+            },
+            "best_rank": 10,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.3333333333333333,
+              "100": 0.6666666666666666,
+              "200": 0.6666666666666666
+            },
+            "average_precision": 0.08095238095238096,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "HIVE-2198",
+            "repo": "HIVE",
+            "classifications": {
+              "jdbc/src/java/org/apache/hadoop/hive/jdbc/HiveConnection.java": "exists_before_fix",
+              "service/src/test/org/apache/hadoop/hive/service/TestHiveServer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "jdbc/src/java/org/apache/hadoop/hive/jdbc/HiveConnection.java": 10,
+              "service/src/test/org/apache/hadoop/hive/service/TestHiveServer.java": 11
+            },
+            "best_rank": 10,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.14090909090909093,
+            "difficulty": "easy",
+            "latency_s": 1.6689300537109375e-06
+          },
+          {
+            "instance_id": "HIVE-2253",
+            "repo": "HIVE",
+            "classifications": {
+              "ql/src/java/org/apache/hadoop/hive/ql/parse/SemanticAnalyzer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "ql/src/java/org/apache/hadoop/hive/ql/parse/SemanticAnalyzer.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HIVE-2260",
+            "repo": "HIVE",
+            "classifications": {
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/ExecDriver.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/ExecDriver.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "HIVE-2264",
+            "repo": "HIVE",
+            "classifications": {
+              "ql/src/java/org/apache/hadoop/hive/ql/Driver.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/ExecDriver.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/Task.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/MapRedTask.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/MapredLocalTask.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/ExecDriver.java": 52,
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/Task.java": 67
+            },
+            "best_rank": 52,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.4,
+              "200": 0.4
+            },
+            "average_precision": 0.00981630309988519,
+            "difficulty": "medium",
+            "latency_s": 1.430511474609375e-06
+          },
+          {
+            "instance_id": "HIVE-2290",
+            "repo": "HIVE",
+            "classifications": {
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/DDLTask.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/DDLTask.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 1.430511474609375e-06
+          },
+          {
+            "instance_id": "HIVE-2298",
+            "repo": "HIVE",
+            "classifications": {
+              "ql/src/java/org/apache/hadoop/hive/ql/udf/UDAFPercentile.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "ql/src/java/org/apache/hadoop/hive/ql/udf/UDAFPercentile.java": 4
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.25,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HIVE-2309",
+            "repo": "HIVE",
+            "classifications": {
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/Utilities.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/Utilities.java": 57
+            },
+            "best_rank": 57,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.017543859649122806,
+            "difficulty": "medium",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HIVE-2315",
+            "repo": "HIVE",
+            "classifications": {
+              "jdbc/src/test/org/apache/hadoop/hive/jdbc/TestJdbcDriver.java": "exists_before_fix",
+              "jdbc/src/java/org/apache/hadoop/hive/jdbc/HiveDatabaseMetaData.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "jdbc/src/test/org/apache/hadoop/hive/jdbc/TestJdbcDriver.java": 2,
+              "jdbc/src/java/org/apache/hadoop/hive/jdbc/HiveDatabaseMetaData.java": 3
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5833333333333333,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HIVE-2332",
+            "repo": "HIVE",
+            "classifications": {
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/ReduceSinkOperator.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/plan/PlanUtils.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/ReduceSinkOperator.java": 4,
+              "ql/src/java/org/apache/hadoop/hive/ql/plan/PlanUtils.java": 11
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.2159090909090909,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HIVE-2334",
+            "repo": "HIVE",
+            "classifications": {
+              "cli/src/java/org/apache/hadoop/hive/cli/CliDriver.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "cli/src/java/org/apache/hadoop/hive/cli/CliDriver.java": 15
+            },
+            "best_rank": 15,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.06666666666666667,
+            "difficulty": "medium",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HIVE-2369",
+            "repo": "HIVE",
+            "classifications": {
+              "jdbc/src/java/org/apache/hadoop/hive/jdbc/HiveConnection.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "jdbc/src/java/org/apache/hadoop/hive/jdbc/HiveConnection.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3333333333333333,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "HIVE-2372",
+            "repo": "HIVE",
+            "classifications": {
+              "ql/src/test/org/apache/hadoop/hive/ql/exec/TestOperators.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/ScriptOperator.java": "exists_before_fix",
+              "common/src/java/org/apache/hadoop/hive/conf/HiveConf.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "ql/src/test/org/apache/hadoop/hive/ql/exec/TestOperators.java": 99,
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/ScriptOperator.java": 10
+            },
+            "best_rank": 10,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.3333333333333333,
+              "100": 0.6666666666666666,
+              "200": 0.6666666666666666
+            },
+            "average_precision": 0.04006734006734007,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HIVE-2382",
+            "repo": "HIVE",
+            "classifications": {
+              "ql/src/java/org/apache/hadoop/hive/ql/parse/SemanticAnalyzer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "ql/src/java/org/apache/hadoop/hive/ql/parse/SemanticAnalyzer.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HIVE-2383",
+            "repo": "HIVE",
+            "classifications": {
+              "ql/src/java/org/apache/hadoop/hive/ql/ppd/ExprWalkerInfo.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/ppd/OpProcFactory.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/ppd/ExprWalkerProcFactory.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "ql/src/java/org/apache/hadoop/hive/ql/ppd/ExprWalkerInfo.java": 5,
+              "ql/src/java/org/apache/hadoop/hive/ql/ppd/OpProcFactory.java": 1,
+              "ql/src/java/org/apache/hadoop/hive/ql/ppd/ExprWalkerProcFactory.java": 4
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.7000000000000001,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HIVE-2390",
+            "repo": "HIVE",
+            "classifications": {
+              "serde/src/java/org/apache/hadoop/hive/serde2/lazybinary/LazyBinaryUtils.java": "exists_before_fix",
+              "serde/src/java/org/apache/hadoop/hive/serde2/lazybinary/objectinspector/LazyBinaryObjectInspectorFactory.java": "exists_before_fix",
+              "serde/src/java/org/apache/hadoop/hive/serde2/lazybinary/LazyBinaryFactory.java": "exists_before_fix",
+              "serde/src/java/org/apache/hadoop/hive/serde2/lazybinary/LazyBinarySerDe.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "serde/src/java/org/apache/hadoop/hive/serde2/lazybinary/LazyBinaryUtils.java": 20,
+              "serde/src/java/org/apache/hadoop/hive/serde2/lazybinary/LazyBinaryFactory.java": 57,
+              "serde/src/java/org/apache/hadoop/hive/serde2/lazybinary/LazyBinarySerDe.java": 13
+            },
+            "best_rank": 13,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.75,
+              "200": 0.75
+            },
+            "average_precision": 0.05738866396761134,
+            "difficulty": "medium",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HIVE-2398",
+            "repo": "HIVE",
+            "classifications": {
+              "service/src/java/org/apache/hadoop/hive/service/HiveServer.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/processors/SetProcessor.java": "exists_before_fix",
+              "jdbc/src/test/org/apache/hadoop/hive/jdbc/TestJdbcDriver.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/processors/CommandProcessorResponse.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "service/src/java/org/apache/hadoop/hive/service/HiveServer.java": 3,
+              "ql/src/java/org/apache/hadoop/hive/ql/processors/SetProcessor.java": 7,
+              "jdbc/src/test/org/apache/hadoop/hive/jdbc/TestJdbcDriver.java": 18
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.25,
+              "10": 0.5,
+              "100": 0.75,
+              "200": 0.75
+            },
+            "average_precision": 0.19642857142857142,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "easy": 14,
+          "medium": 6
+        },
+        "total": 20
+      },
+      "summary": {
+        "n": 20,
+        "macro_hit_at": {
+          "1": 0.15,
+          "5": 0.55,
+          "10": 0.7,
+          "100": 1.0,
+          "200": 1.0
+        },
+        "macro_recall_at": {
+          "1": 0.11666666666666667,
+          "5": 0.4575,
+          "10": 0.5283333333333333,
+          "100": 0.8866666666666667,
+          "200": 0.8949999999999999
+        },
+        "mrr": 0.32974738529014835,
+        "map": 0.3016234290387242,
+        "mean_latency_s": 5.006790161132813e-07
+      }
+    },
+    "reformulated": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "HIVE-2095",
+            "repo": "HIVE",
+            "classifications": {
+              "ql/src/java/org/apache/hadoop/hive/ql/optimizer/MapJoinProcessor.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/Task.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/optimizer/physical/CommonJoinResolver.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/plan/ConditionalResolverCommonJoin.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/optimizer/physical/LocalMapJoinProcFactory.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "ql/src/java/org/apache/hadoop/hive/ql/optimizer/MapJoinProcessor.java": 3,
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/Task.java": 64,
+              "ql/src/java/org/apache/hadoop/hive/ql/optimizer/physical/CommonJoinResolver.java": 14,
+              "ql/src/java/org/apache/hadoop/hive/ql/plan/ConditionalResolverCommonJoin.java": 1,
+              "ql/src/java/org/apache/hadoop/hive/ql/optimizer/physical/LocalMapJoinProcFactory.java": 24
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.2,
+              "5": 0.4,
+              "10": 0.4,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.4251488095238095,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HIVE-2178",
+            "repo": "HIVE",
+            "classifications": {
+              "serde/src/java/org/apache/hadoop/hive/serde2/thrift/TBinarySortableProtocol.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/DDLTask.java": "exists_before_fix",
+              "jdbc/src/java/org/apache/hadoop/hive/jdbc/HiveConnection.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/metadata/Partition.java": "exists_before_fix",
+              "serde/src/java/org/apache/hadoop/hive/serde2/dynamic_type/SimpleCharStream.java": "exists_before_fix",
+              "jdbc/src/java/org/apache/hadoop/hive/jdbc/HiveDataSource.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "serde/src/java/org/apache/hadoop/hive/serde2/thrift/TBinarySortableProtocol.java": 97,
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/DDLTask.java": 19,
+              "ql/src/java/org/apache/hadoop/hive/ql/metadata/Partition.java": 66,
+              "jdbc/src/java/org/apache/hadoop/hive/jdbc/HiveDataSource.java": 39
+            },
+            "best_rank": 19,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.6666666666666666,
+              "200": 0.6666666666666666
+            },
+            "average_precision": 0.0317675481810045,
+            "difficulty": "medium",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HIVE-2182",
+            "repo": "HIVE",
+            "classifications": {
+              "ql/src/java/org/apache/hadoop/hive/ql/udf/generic/GenericUDFBridge.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "ql/src/java/org/apache/hadoop/hive/ql/udf/generic/GenericUDFBridge.java": 11
+            },
+            "best_rank": 11,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.09090909090909091,
+            "difficulty": "medium",
+            "latency_s": 0.0
+          },
+          {
+            "instance_id": "HIVE-2184",
+            "repo": "HIVE",
+            "classifications": {
+              "metastore/src/java/org/apache/hadoop/hive/metastore/HiveMetaStoreClient.java": "exists_before_fix",
+              "metastore/src/java/org/apache/hadoop/hive/metastore/HiveMetaStore.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/metadata/Hive.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "metastore/src/java/org/apache/hadoop/hive/metastore/HiveMetaStoreClient.java": 4,
+              "metastore/src/java/org/apache/hadoop/hive/metastore/HiveMetaStore.java": 203,
+              "ql/src/java/org/apache/hadoop/hive/ql/metadata/Hive.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 0.6666666666666666,
+              "10": 0.6666666666666666,
+              "100": 0.6666666666666666,
+              "200": 0.6666666666666666
+            },
+            "average_precision": 0.5049261083743842,
+            "difficulty": "easy",
+            "latency_s": 0.0
+          },
+          {
+            "instance_id": "HIVE-2198",
+            "repo": "HIVE",
+            "classifications": {
+              "jdbc/src/java/org/apache/hadoop/hive/jdbc/HiveConnection.java": "exists_before_fix",
+              "service/src/test/org/apache/hadoop/hive/service/TestHiveServer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "jdbc/src/java/org/apache/hadoop/hive/jdbc/HiveConnection.java": 10,
+              "service/src/test/org/apache/hadoop/hive/service/TestHiveServer.java": 11
+            },
+            "best_rank": 10,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.14090909090909093,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HIVE-2253",
+            "repo": "HIVE",
+            "classifications": {
+              "ql/src/java/org/apache/hadoop/hive/ql/parse/SemanticAnalyzer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "ql/src/java/org/apache/hadoop/hive/ql/parse/SemanticAnalyzer.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 9.5367431640625e-07
+          },
+          {
+            "instance_id": "HIVE-2260",
+            "repo": "HIVE",
+            "classifications": {
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/ExecDriver.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/ExecDriver.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HIVE-2264",
+            "repo": "HIVE",
+            "classifications": {
+              "ql/src/java/org/apache/hadoop/hive/ql/Driver.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/ExecDriver.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/Task.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/MapRedTask.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/MapredLocalTask.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/ExecDriver.java": 75,
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/Task.java": 77
+            },
+            "best_rank": 75,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.4,
+              "200": 0.4
+            },
+            "average_precision": 0.007861471861471863,
+            "difficulty": "medium",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "HIVE-2290",
+            "repo": "HIVE",
+            "classifications": {
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/DDLTask.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/DDLTask.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HIVE-2298",
+            "repo": "HIVE",
+            "classifications": {
+              "ql/src/java/org/apache/hadoop/hive/ql/udf/UDAFPercentile.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "ql/src/java/org/apache/hadoop/hive/ql/udf/UDAFPercentile.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HIVE-2309",
+            "repo": "HIVE",
+            "classifications": {
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/Utilities.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/Utilities.java": 42
+            },
+            "best_rank": 42,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.023809523809523808,
+            "difficulty": "medium",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "HIVE-2315",
+            "repo": "HIVE",
+            "classifications": {
+              "jdbc/src/test/org/apache/hadoop/hive/jdbc/TestJdbcDriver.java": "exists_before_fix",
+              "jdbc/src/java/org/apache/hadoop/hive/jdbc/HiveDatabaseMetaData.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "jdbc/src/test/org/apache/hadoop/hive/jdbc/TestJdbcDriver.java": 1,
+              "jdbc/src/java/org/apache/hadoop/hive/jdbc/HiveDatabaseMetaData.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HIVE-2332",
+            "repo": "HIVE",
+            "classifications": {
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/ReduceSinkOperator.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/plan/PlanUtils.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/ReduceSinkOperator.java": 3,
+              "ql/src/java/org/apache/hadoop/hive/ql/plan/PlanUtils.java": 10
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.26666666666666666,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HIVE-2334",
+            "repo": "HIVE",
+            "classifications": {
+              "cli/src/java/org/apache/hadoop/hive/cli/CliDriver.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "cli/src/java/org/apache/hadoop/hive/cli/CliDriver.java": 24
+            },
+            "best_rank": 24,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.041666666666666664,
+            "difficulty": "medium",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HIVE-2369",
+            "repo": "HIVE",
+            "classifications": {
+              "jdbc/src/java/org/apache/hadoop/hive/jdbc/HiveConnection.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "jdbc/src/java/org/apache/hadoop/hive/jdbc/HiveConnection.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HIVE-2372",
+            "repo": "HIVE",
+            "classifications": {
+              "ql/src/test/org/apache/hadoop/hive/ql/exec/TestOperators.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/ScriptOperator.java": "exists_before_fix",
+              "common/src/java/org/apache/hadoop/hive/conf/HiveConf.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "ql/src/test/org/apache/hadoop/hive/ql/exec/TestOperators.java": 98,
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/ScriptOperator.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.3333333333333333,
+              "10": 0.3333333333333333,
+              "100": 0.6666666666666666,
+              "200": 0.6666666666666666
+            },
+            "average_precision": 0.17346938775510204,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HIVE-2382",
+            "repo": "HIVE",
+            "classifications": {
+              "ql/src/java/org/apache/hadoop/hive/ql/parse/SemanticAnalyzer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "ql/src/java/org/apache/hadoop/hive/ql/parse/SemanticAnalyzer.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HIVE-2383",
+            "repo": "HIVE",
+            "classifications": {
+              "ql/src/java/org/apache/hadoop/hive/ql/ppd/ExprWalkerInfo.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/ppd/OpProcFactory.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/ppd/ExprWalkerProcFactory.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "ql/src/java/org/apache/hadoop/hive/ql/ppd/ExprWalkerInfo.java": 5,
+              "ql/src/java/org/apache/hadoop/hive/ql/ppd/OpProcFactory.java": 1,
+              "ql/src/java/org/apache/hadoop/hive/ql/ppd/ExprWalkerProcFactory.java": 4
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.7000000000000001,
+            "difficulty": "easy",
+            "latency_s": 1.430511474609375e-06
+          },
+          {
+            "instance_id": "HIVE-2390",
+            "repo": "HIVE",
+            "classifications": {
+              "serde/src/java/org/apache/hadoop/hive/serde2/lazybinary/LazyBinaryUtils.java": "exists_before_fix",
+              "serde/src/java/org/apache/hadoop/hive/serde2/lazybinary/objectinspector/LazyBinaryObjectInspectorFactory.java": "exists_before_fix",
+              "serde/src/java/org/apache/hadoop/hive/serde2/lazybinary/LazyBinaryFactory.java": "exists_before_fix",
+              "serde/src/java/org/apache/hadoop/hive/serde2/lazybinary/LazyBinarySerDe.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "serde/src/java/org/apache/hadoop/hive/serde2/lazybinary/LazyBinaryUtils.java": 20,
+              "serde/src/java/org/apache/hadoop/hive/serde2/lazybinary/LazyBinaryFactory.java": 60,
+              "serde/src/java/org/apache/hadoop/hive/serde2/lazybinary/LazyBinarySerDe.java": 12
+            },
+            "best_rank": 12,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.75,
+              "200": 0.75
+            },
+            "average_precision": 0.058333333333333334,
+            "difficulty": "medium",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "HIVE-2398",
+            "repo": "HIVE",
+            "classifications": {
+              "service/src/java/org/apache/hadoop/hive/service/HiveServer.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/processors/SetProcessor.java": "exists_before_fix",
+              "jdbc/src/test/org/apache/hadoop/hive/jdbc/TestJdbcDriver.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/processors/CommandProcessorResponse.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "service/src/java/org/apache/hadoop/hive/service/HiveServer.java": 1,
+              "ql/src/java/org/apache/hadoop/hive/ql/processors/SetProcessor.java": 14,
+              "jdbc/src/test/org/apache/hadoop/hive/jdbc/TestJdbcDriver.java": 22
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.25,
+              "5": 0.25,
+              "10": 0.25,
+              "100": 0.75,
+              "200": 0.75
+            },
+            "average_precision": 0.31980519480519476,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "easy": 14,
+          "medium": 6
+        },
+        "total": 20
+      },
+      "summary": {
+        "n": 20,
+        "macro_hit_at": {
+          "1": 0.55,
+          "5": 0.65,
+          "10": 0.7,
+          "100": 1.0,
+          "200": 1.0
+        },
+        "macro_recall_at": {
+          "1": 0.3808333333333333,
+          "5": 0.5075,
+          "10": 0.5575,
+          "100": 0.8949999999999999,
+          "200": 0.8949999999999999
+        },
+        "mrr": 0.6119508430166325,
+        "map": 0.48926364463976685,
+        "mean_latency_s": 3.814697265625e-07
+      }
+    }
+  }
+}

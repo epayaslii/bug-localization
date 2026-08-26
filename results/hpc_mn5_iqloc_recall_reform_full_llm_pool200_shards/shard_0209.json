@@ -1,0 +1,2126 @@
+{
+  "manifest_id": "iqloc-multi-n7091-s42-f8a5d2c401a4",
+  "shard_index": 209,
+  "num_shards": 350,
+  "candidate_pool_size": 200,
+  "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+  "reformulation_mode": "semantic",
+  "relevance_mode": "llm",
+  "keep_fraction": 0.5,
+  "instance_ids": [
+    "MATH-409",
+    "MATH-410",
+    "MATH-421",
+    "MATH-484",
+    "MATH-770",
+    "MATH-775",
+    "MATH-776",
+    "MATH-778",
+    "MATH-779",
+    "MATH-781",
+    "MATH-782",
+    "MATH-790",
+    "MATH-798",
+    "MATH-802",
+    "MATH-805",
+    "MATH-812",
+    "MATH-813",
+    "MATH-821",
+    "MATH-828",
+    "MATH-835"
+  ],
+  "configs": {
+    "retriever": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "MATH-409",
+            "repo": "MATH",
+            "classifications": {
+              "src/main/java/org/apache/commons/math/stat/regression/OLSMultipleLinearRegression.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math/stat/regression/AbstractMultipleLinearRegression.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/stat/regression/OLSMultipleLinearRegressionTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/stat/regression/MultipleLinearRegressionAbstractTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/math/stat/regression/OLSMultipleLinearRegression.java": 6,
+              "src/main/java/org/apache/commons/math/stat/regression/AbstractMultipleLinearRegression.java": 8,
+              "src/test/java/org/apache/commons/math/stat/regression/OLSMultipleLinearRegressionTest.java": 5,
+              "src/test/java/org/apache/commons/math/stat/regression/MultipleLinearRegressionAbstractTest.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.25,
+              "5": 0.5,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.6,
+            "difficulty": "easy",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "MATH-410",
+            "repo": "MATH",
+            "classifications": {
+              "src/main/java/org/apache/commons/math/FunctionEvaluationException.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/math/FunctionEvaluationException.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "MATH-421",
+            "repo": "MATH",
+            "classifications": {
+              "src/test/java/org/apache/commons/math/ode/events/EventStateTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math/ode/events/EventState.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math/ode/events/CombinedEventsManager.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/apache/commons/math/ode/events/EventStateTest.java": 12,
+              "src/main/java/org/apache/commons/math/ode/events/EventState.java": 8,
+              "src/main/java/org/apache/commons/math/ode/events/CombinedEventsManager.java": 9
+            },
+            "best_rank": 8,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.6666666666666666,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.19907407407407407,
+            "difficulty": "easy",
+            "latency_s": 1.9073486328125e-06
+          },
+          {
+            "instance_id": "MATH-484",
+            "repo": "MATH",
+            "classifications": {
+              "src/main/java/org/apache/commons/math/ode/AbstractIntegrator.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/ThreeEighthesIntegratorTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/GillStepInterpolatorTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/EulerIntegratorTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/sampling/DummyStepInterpolatorTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math/ode/nonstiff/GraggBulirschStoerStepInterpolator.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/DormandPrince54StepInterpolatorTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/HighamHall54IntegratorTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/GraggBulirschStoerIntegratorTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math/ode/sampling/AbstractStepInterpolator.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math/ode/events/EventState.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/HighamHall54StepInterpolatorTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/sampling/NordsieckStepInterpolatorTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math/ode/nonstiff/GraggBulirschStoerIntegrator.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math/ode/nonstiff/AdamsMoultonIntegrator.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/TestProblemHandler.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/MidpointStepInterpolatorTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/GraggBulirschStoerStepInterpolatorTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/DormandPrince54IntegratorTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math/ode/nonstiff/RungeKuttaIntegrator.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/DormandPrince853StepInterpolatorTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math/ode/ODEIntegrator.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/ClassicalRungeKuttaStepInterpolatorTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math/ode/nonstiff/DormandPrince853StepInterpolator.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/DormandPrince853IntegratorTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/AdamsBashforthIntegratorTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math/ode/nonstiff/AdamsBashforthIntegrator.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math/ode/events/CombinedEventsManager.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/TestProblemAbstract.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/MidpointIntegratorTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/ClassicalRungeKuttaIntegratorTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/TestProblem4.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/ThreeEighthesStepInterpolatorTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/GillIntegratorTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/math/ode/AbstractIntegrator.java": 8,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/ThreeEighthesIntegratorTest.java": 29,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/GillStepInterpolatorTest.java": 66,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/EulerIntegratorTest.java": 28,
+              "src/test/java/org/apache/commons/math/ode/sampling/DummyStepInterpolatorTest.java": 79,
+              "src/main/java/org/apache/commons/math/ode/nonstiff/GraggBulirschStoerStepInterpolator.java": 36,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/DormandPrince54StepInterpolatorTest.java": 49,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/HighamHall54IntegratorTest.java": 4,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/GraggBulirschStoerIntegratorTest.java": 7,
+              "src/main/java/org/apache/commons/math/ode/sampling/AbstractStepInterpolator.java": 46,
+              "src/main/java/org/apache/commons/math/ode/events/EventState.java": 12,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/HighamHall54StepInterpolatorTest.java": 51,
+              "src/test/java/org/apache/commons/math/ode/sampling/NordsieckStepInterpolatorTest.java": 59,
+              "src/main/java/org/apache/commons/math/ode/nonstiff/GraggBulirschStoerIntegrator.java": 31,
+              "src/main/java/org/apache/commons/math/ode/nonstiff/AdamsMoultonIntegrator.java": 9,
+              "src/test/java/org/apache/commons/math/ode/TestProblemHandler.java": 13,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/MidpointStepInterpolatorTest.java": 69,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/GraggBulirschStoerStepInterpolatorTest.java": 42,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/DormandPrince54IntegratorTest.java": 6,
+              "src/main/java/org/apache/commons/math/ode/nonstiff/RungeKuttaIntegrator.java": 23,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/DormandPrince853StepInterpolatorTest.java": 39,
+              "src/main/java/org/apache/commons/math/ode/ODEIntegrator.java": 10,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/ClassicalRungeKuttaStepInterpolatorTest.java": 68,
+              "src/main/java/org/apache/commons/math/ode/nonstiff/DormandPrince853StepInterpolator.java": 40,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/DormandPrince853IntegratorTest.java": 3,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/AdamsBashforthIntegratorTest.java": 48,
+              "src/main/java/org/apache/commons/math/ode/nonstiff/AdamsBashforthIntegrator.java": 11,
+              "src/main/java/org/apache/commons/math/ode/events/CombinedEventsManager.java": 15,
+              "src/test/java/org/apache/commons/math/ode/TestProblemAbstract.java": 22,
+              "src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java": 20,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/MidpointIntegratorTest.java": 35,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/ClassicalRungeKuttaIntegratorTest.java": 21,
+              "src/test/java/org/apache/commons/math/ode/TestProblem4.java": 18,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/ThreeEighthesStepInterpolatorTest.java": 62,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/GillIntegratorTest.java": 30
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.05714285714285714,
+              "10": 0.2,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5977620346498839,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "MATH-770",
+            "repo": "MATH",
+            "classifications": {
+              "src/test/java/org/apache/commons/math3/linear/SymmLQTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math3/linear/JacobiPreconditioner.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/apache/commons/math3/linear/SymmLQTest.java": 1,
+              "src/main/java/org/apache/commons/math3/linear/JacobiPreconditioner.java": 28
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5357142857142857,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "MATH-775",
+            "repo": "MATH",
+            "classifications": {
+              "src/main/java/org/apache/commons/math3/genetics/ListPopulation.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math3/genetics/ElitisticListPopulation.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math3/genetics/Population.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math3/genetics/ListPopulationTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math3/genetics/TournamentSelection.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/math3/genetics/ListPopulation.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.2,
+              "5": 0.2,
+              "10": 0.2,
+              "100": 0.2,
+              "200": 0.2
+            },
+            "average_precision": 0.2,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "MATH-776",
+            "repo": "MATH",
+            "classifications": {
+              "src/main/java/org/apache/commons/math3/genetics/ElitisticListPopulation.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math3/genetics/ElitisticListPopulationTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/math3/genetics/ElitisticListPopulation.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "MATH-778",
+            "repo": "MATH",
+            "classifications": {
+              "src/test/java/org/apache/commons/math3/dfp/DfpTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math3/dfp/Dfp.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/apache/commons/math3/dfp/DfpTest.java": 2,
+              "src/main/java/org/apache/commons/math3/dfp/Dfp.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 9.5367431640625e-07
+          },
+          {
+            "instance_id": "MATH-779",
+            "repo": "MATH",
+            "classifications": {
+              "src/main/java/org/apache/commons/math3/genetics/ListPopulation.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math3/genetics/ListPopulationTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/math3/genetics/ListPopulation.java": 1,
+              "src/test/java/org/apache/commons/math3/genetics/ListPopulationTest.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 1.430511474609375e-06
+          },
+          {
+            "instance_id": "MATH-781",
+            "repo": "MATH",
+            "classifications": {
+              "src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math3/optimization/linear/SimplexSolverTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/apache/commons/math3/optimization/linear/SimplexSolverTest.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 2.6226043701171875e-06
+          },
+          {
+            "instance_id": "MATH-782",
+            "repo": "MATH",
+            "classifications": {
+              "src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math3/optimization/univariate/BrentOptimizerTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java": 2,
+              "src/test/java/org/apache/commons/math3/optimization/univariate/BrentOptimizerTest.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 1.430511474609375e-06
+          },
+          {
+            "instance_id": "MATH-790",
+            "repo": "MATH",
+            "classifications": {
+              "src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math3/stat/inference/MannWhitneyUTestTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java": 1,
+              "src/test/java/org/apache/commons/math3/stat/inference/MannWhitneyUTestTest.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 1.6689300537109375e-06
+          },
+          {
+            "instance_id": "MATH-798",
+            "repo": "MATH",
+            "classifications": {
+              "src/test/java/org/apache/commons/math3/optimization/fitting/PolynomialFitterTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math3/optimization/fitting/PolynomialFitter.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math3/optimization/fitting/CurveFitterTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/math3/optimization/fitting/PolynomialFitter.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 0.3333333333333333,
+              "10": 0.3333333333333333,
+              "100": 0.3333333333333333,
+              "200": 0.3333333333333333
+            },
+            "average_precision": 0.3333333333333333,
+            "difficulty": "easy",
+            "latency_s": 2.1457672119140625e-06
+          },
+          {
+            "instance_id": "MATH-802",
+            "repo": "MATH",
+            "classifications": {
+              "src/main/java/org/apache/commons/math3/linear/RealVector.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/math3/linear/RealVector.java": 6
+            },
+            "best_rank": 6,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.16666666666666666,
+            "difficulty": "easy",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "MATH-805",
+            "repo": "MATH",
+            "classifications": {
+              "src/main/java/org/apache/commons/math3/stat/descriptive/rank/Percentile.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/math3/stat/descriptive/rank/Percentile.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "MATH-812",
+            "repo": "MATH",
+            "classifications": {
+              "src/main/java/org/apache/commons/math3/linear/RealVector.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math3/linear/OpenMapRealVector.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math3/linear/ArrayRealVector.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/math3/linear/RealVector.java": 2,
+              "src/main/java/org/apache/commons/math3/linear/OpenMapRealVector.java": 6,
+              "src/main/java/org/apache/commons/math3/linear/ArrayRealVector.java": 4
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.6666666666666666,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 2.6226043701171875e-06
+          },
+          {
+            "instance_id": "MATH-813",
+            "repo": "MATH",
+            "classifications": {
+              "src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math3/optimization/linear/SimplexSolverTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java": 3,
+              "src/test/java/org/apache/commons/math3/optimization/linear/SimplexSolverTest.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.8333333333333333,
+            "difficulty": "easy",
+            "latency_s": 1.6689300537109375e-06
+          },
+          {
+            "instance_id": "MATH-821",
+            "repo": "MATH",
+            "classifications": {
+              "src/test/java/org/apache/commons/math3/linear/SparseRealVectorTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/apache/commons/math3/linear/SparseRealVectorTest.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "MATH-828",
+            "repo": "MATH",
+            "classifications": {
+              "src/main/java/org/apache/commons/math3/optimization/linear/SimplexSolver.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math3/optimization/linear/SimplexSolverTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/apache/commons/math3/optimization/linear/SimplexSolverTest.java": 1,
+              "src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java": 5
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 0.6666666666666666,
+              "10": 0.6666666666666666,
+              "100": 0.6666666666666666,
+              "200": 0.6666666666666666
+            },
+            "average_precision": 0.4666666666666666,
+            "difficulty": "easy",
+            "latency_s": 1.6689300537109375e-06
+          },
+          {
+            "instance_id": "MATH-835",
+            "repo": "MATH",
+            "classifications": {
+              "src/test/java/org/apache/commons/math3/fraction/FractionTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math3/fraction/Fraction.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/apache/commons/math3/fraction/FractionTest.java": 1,
+              "src/main/java/org/apache/commons/math3/fraction/Fraction.java": 4
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.75,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "easy": 20
+        },
+        "total": 20
+      },
+      "summary": {
+        "n": 20,
+        "macro_hit_at": {
+          "1": 0.7,
+          "5": 0.9,
+          "10": 1.0,
+          "100": 1.0,
+          "200": 1.0
+        },
+        "macro_recall_at": {
+          "1": 0.3308333333333333,
+          "5": 0.6461904761904761,
+          "10": 0.7783333333333333,
+          "100": 0.86,
+          "200": 0.86
+        },
+        "mrr": 0.80625,
+        "map": 0.6091275197219123,
+        "mean_latency_s": 1.2755393981933593e-06
+      }
+    },
+    "relevance_filtered": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "MATH-409",
+            "repo": "MATH",
+            "classifications": {
+              "src/main/java/org/apache/commons/math/stat/regression/OLSMultipleLinearRegression.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math/stat/regression/AbstractMultipleLinearRegression.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/stat/regression/OLSMultipleLinearRegressionTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/stat/regression/MultipleLinearRegressionAbstractTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/math/stat/regression/OLSMultipleLinearRegression.java": 7,
+              "src/main/java/org/apache/commons/math/stat/regression/AbstractMultipleLinearRegression.java": 9,
+              "src/test/java/org/apache/commons/math/stat/regression/OLSMultipleLinearRegressionTest.java": 6,
+              "src/test/java/org/apache/commons/math/stat/regression/MultipleLinearRegressionAbstractTest.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.25,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.42658730158730157,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "MATH-410",
+            "repo": "MATH",
+            "classifications": {
+              "src/main/java/org/apache/commons/math/FunctionEvaluationException.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/math/FunctionEvaluationException.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3333333333333333,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "MATH-421",
+            "repo": "MATH",
+            "classifications": {
+              "src/test/java/org/apache/commons/math/ode/events/EventStateTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math/ode/events/EventState.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math/ode/events/CombinedEventsManager.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/apache/commons/math/ode/events/EventStateTest.java": 15,
+              "src/main/java/org/apache/commons/math/ode/events/EventState.java": 11,
+              "src/main/java/org/apache/commons/math/ode/events/CombinedEventsManager.java": 12
+            },
+            "best_rank": 11,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.15252525252525254,
+            "difficulty": "medium",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "MATH-484",
+            "repo": "MATH",
+            "classifications": {
+              "src/main/java/org/apache/commons/math/ode/AbstractIntegrator.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/ThreeEighthesIntegratorTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/GillStepInterpolatorTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/EulerIntegratorTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/sampling/DummyStepInterpolatorTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math/ode/nonstiff/GraggBulirschStoerStepInterpolator.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/DormandPrince54StepInterpolatorTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/HighamHall54IntegratorTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/GraggBulirschStoerIntegratorTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math/ode/sampling/AbstractStepInterpolator.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math/ode/events/EventState.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/HighamHall54StepInterpolatorTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/sampling/NordsieckStepInterpolatorTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math/ode/nonstiff/GraggBulirschStoerIntegrator.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math/ode/nonstiff/AdamsMoultonIntegrator.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/TestProblemHandler.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/MidpointStepInterpolatorTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/GraggBulirschStoerStepInterpolatorTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/DormandPrince54IntegratorTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math/ode/nonstiff/RungeKuttaIntegrator.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/DormandPrince853StepInterpolatorTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math/ode/ODEIntegrator.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/ClassicalRungeKuttaStepInterpolatorTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math/ode/nonstiff/DormandPrince853StepInterpolator.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/DormandPrince853IntegratorTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/AdamsBashforthIntegratorTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math/ode/nonstiff/AdamsBashforthIntegrator.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math/ode/events/CombinedEventsManager.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/TestProblemAbstract.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/MidpointIntegratorTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/ClassicalRungeKuttaIntegratorTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/TestProblem4.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/ThreeEighthesStepInterpolatorTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/GillIntegratorTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/math/ode/AbstractIntegrator.java": 13,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/ThreeEighthesIntegratorTest.java": 34,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/GillStepInterpolatorTest.java": 71,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/EulerIntegratorTest.java": 33,
+              "src/test/java/org/apache/commons/math/ode/sampling/DummyStepInterpolatorTest.java": 84,
+              "src/main/java/org/apache/commons/math/ode/nonstiff/GraggBulirschStoerStepInterpolator.java": 41,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/DormandPrince54StepInterpolatorTest.java": 54,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/HighamHall54IntegratorTest.java": 9,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/GraggBulirschStoerIntegratorTest.java": 12,
+              "src/main/java/org/apache/commons/math/ode/sampling/AbstractStepInterpolator.java": 51,
+              "src/main/java/org/apache/commons/math/ode/events/EventState.java": 17,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/HighamHall54StepInterpolatorTest.java": 56,
+              "src/test/java/org/apache/commons/math/ode/sampling/NordsieckStepInterpolatorTest.java": 64,
+              "src/main/java/org/apache/commons/math/ode/nonstiff/GraggBulirschStoerIntegrator.java": 36,
+              "src/main/java/org/apache/commons/math/ode/nonstiff/AdamsMoultonIntegrator.java": 14,
+              "src/test/java/org/apache/commons/math/ode/TestProblemHandler.java": 18,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/MidpointStepInterpolatorTest.java": 74,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/GraggBulirschStoerStepInterpolatorTest.java": 47,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/DormandPrince54IntegratorTest.java": 11,
+              "src/main/java/org/apache/commons/math/ode/nonstiff/RungeKuttaIntegrator.java": 28,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/DormandPrince853StepInterpolatorTest.java": 44,
+              "src/main/java/org/apache/commons/math/ode/ODEIntegrator.java": 15,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/ClassicalRungeKuttaStepInterpolatorTest.java": 73,
+              "src/main/java/org/apache/commons/math/ode/nonstiff/DormandPrince853StepInterpolator.java": 45,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/DormandPrince853IntegratorTest.java": 8,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/AdamsBashforthIntegratorTest.java": 53,
+              "src/main/java/org/apache/commons/math/ode/nonstiff/AdamsBashforthIntegrator.java": 16,
+              "src/main/java/org/apache/commons/math/ode/events/CombinedEventsManager.java": 20,
+              "src/test/java/org/apache/commons/math/ode/TestProblemAbstract.java": 27,
+              "src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java": 25,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/MidpointIntegratorTest.java": 40,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/ClassicalRungeKuttaIntegratorTest.java": 26,
+              "src/test/java/org/apache/commons/math/ode/TestProblem4.java": 23,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/ThreeEighthesStepInterpolatorTest.java": 67,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/GillIntegratorTest.java": 35
+            },
+            "best_rank": 8,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.05714285714285714,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.4752503007557423,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "MATH-770",
+            "repo": "MATH",
+            "classifications": {
+              "src/test/java/org/apache/commons/math3/linear/SymmLQTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math3/linear/JacobiPreconditioner.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/apache/commons/math3/linear/SymmLQTest.java": 7,
+              "src/main/java/org/apache/commons/math3/linear/JacobiPreconditioner.java": 34
+            },
+            "best_rank": 7,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.10084033613445378,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "MATH-775",
+            "repo": "MATH",
+            "classifications": {
+              "src/main/java/org/apache/commons/math3/genetics/ListPopulation.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math3/genetics/ElitisticListPopulation.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math3/genetics/Population.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math3/genetics/ListPopulationTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math3/genetics/TournamentSelection.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/math3/genetics/ListPopulation.java": 5
+            },
+            "best_rank": 5,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.2,
+              "10": 0.2,
+              "100": 0.2,
+              "200": 0.2
+            },
+            "average_precision": 0.04,
+            "difficulty": "easy",
+            "latency_s": 0.0
+          },
+          {
+            "instance_id": "MATH-776",
+            "repo": "MATH",
+            "classifications": {
+              "src/main/java/org/apache/commons/math3/genetics/ElitisticListPopulation.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math3/genetics/ElitisticListPopulationTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/math3/genetics/ElitisticListPopulation.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.16666666666666666,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "MATH-778",
+            "repo": "MATH",
+            "classifications": {
+              "src/test/java/org/apache/commons/math3/dfp/DfpTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math3/dfp/Dfp.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/apache/commons/math3/dfp/DfpTest.java": 2,
+              "src/main/java/org/apache/commons/math3/dfp/Dfp.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "MATH-779",
+            "repo": "MATH",
+            "classifications": {
+              "src/main/java/org/apache/commons/math3/genetics/ListPopulation.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math3/genetics/ListPopulationTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/math3/genetics/ListPopulation.java": 1,
+              "src/test/java/org/apache/commons/math3/genetics/ListPopulationTest.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "MATH-781",
+            "repo": "MATH",
+            "classifications": {
+              "src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math3/optimization/linear/SimplexSolverTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/apache/commons/math3/optimization/linear/SimplexSolverTest.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "MATH-782",
+            "repo": "MATH",
+            "classifications": {
+              "src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math3/optimization/univariate/BrentOptimizerTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java": 2,
+              "src/test/java/org/apache/commons/math3/optimization/univariate/BrentOptimizerTest.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "MATH-790",
+            "repo": "MATH",
+            "classifications": {
+              "src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math3/stat/inference/MannWhitneyUTestTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java": 1,
+              "src/test/java/org/apache/commons/math3/stat/inference/MannWhitneyUTestTest.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "MATH-798",
+            "repo": "MATH",
+            "classifications": {
+              "src/test/java/org/apache/commons/math3/optimization/fitting/PolynomialFitterTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math3/optimization/fitting/PolynomialFitter.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math3/optimization/fitting/CurveFitterTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/math3/optimization/fitting/PolynomialFitter.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 0.3333333333333333,
+              "10": 0.3333333333333333,
+              "100": 0.3333333333333333,
+              "200": 0.3333333333333333
+            },
+            "average_precision": 0.3333333333333333,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "MATH-802",
+            "repo": "MATH",
+            "classifications": {
+              "src/main/java/org/apache/commons/math3/linear/RealVector.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/math3/linear/RealVector.java": 6
+            },
+            "best_rank": 6,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.16666666666666666,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "MATH-805",
+            "repo": "MATH",
+            "classifications": {
+              "src/main/java/org/apache/commons/math3/stat/descriptive/rank/Percentile.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/math3/stat/descriptive/rank/Percentile.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "MATH-812",
+            "repo": "MATH",
+            "classifications": {
+              "src/main/java/org/apache/commons/math3/linear/RealVector.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math3/linear/OpenMapRealVector.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math3/linear/ArrayRealVector.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/math3/linear/RealVector.java": 2,
+              "src/main/java/org/apache/commons/math3/linear/OpenMapRealVector.java": 6,
+              "src/main/java/org/apache/commons/math3/linear/ArrayRealVector.java": 4
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.6666666666666666,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "MATH-813",
+            "repo": "MATH",
+            "classifications": {
+              "src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math3/optimization/linear/SimplexSolverTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java": 3,
+              "src/test/java/org/apache/commons/math3/optimization/linear/SimplexSolverTest.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.8333333333333333,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "MATH-821",
+            "repo": "MATH",
+            "classifications": {
+              "src/test/java/org/apache/commons/math3/linear/SparseRealVectorTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/apache/commons/math3/linear/SparseRealVectorTest.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "MATH-828",
+            "repo": "MATH",
+            "classifications": {
+              "src/main/java/org/apache/commons/math3/optimization/linear/SimplexSolver.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math3/optimization/linear/SimplexSolverTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/apache/commons/math3/optimization/linear/SimplexSolverTest.java": 1,
+              "src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java": 5
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 0.6666666666666666,
+              "10": 0.6666666666666666,
+              "100": 0.6666666666666666,
+              "200": 0.6666666666666666
+            },
+            "average_precision": 0.4666666666666666,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "MATH-835",
+            "repo": "MATH",
+            "classifications": {
+              "src/test/java/org/apache/commons/math3/fraction/FractionTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math3/fraction/Fraction.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/apache/commons/math3/fraction/FractionTest.java": 1,
+              "src/main/java/org/apache/commons/math3/fraction/Fraction.java": 4
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.75,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "easy": 19,
+          "medium": 1
+        },
+        "total": 20
+      },
+      "summary": {
+        "n": 20,
+        "macro_hit_at": {
+          "1": 0.5,
+          "5": 0.8,
+          "10": 0.95,
+          "100": 1.0,
+          "200": 1.0
+        },
+        "macro_recall_at": {
+          "1": 0.25833333333333336,
+          "5": 0.6058333333333332,
+          "10": 0.7378571428571428,
+          "100": 0.86,
+          "200": 0.86
+        },
+        "mrr": 0.6446049783549783,
+        "map": 0.5372601595501376,
+        "mean_latency_s": 2.6226043701171877e-07
+      }
+    },
+    "reformulated": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "MATH-409",
+            "repo": "MATH",
+            "classifications": {
+              "src/main/java/org/apache/commons/math/stat/regression/OLSMultipleLinearRegression.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math/stat/regression/AbstractMultipleLinearRegression.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/stat/regression/OLSMultipleLinearRegressionTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/stat/regression/MultipleLinearRegressionAbstractTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/math/stat/regression/OLSMultipleLinearRegression.java": 8,
+              "src/main/java/org/apache/commons/math/stat/regression/AbstractMultipleLinearRegression.java": 6,
+              "src/test/java/org/apache/commons/math/stat/regression/OLSMultipleLinearRegressionTest.java": 5,
+              "src/test/java/org/apache/commons/math/stat/regression/MultipleLinearRegressionAbstractTest.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.475,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "MATH-410",
+            "repo": "MATH",
+            "classifications": {
+              "src/main/java/org/apache/commons/math/FunctionEvaluationException.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/math/FunctionEvaluationException.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "MATH-421",
+            "repo": "MATH",
+            "classifications": {
+              "src/test/java/org/apache/commons/math/ode/events/EventStateTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math/ode/events/EventState.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math/ode/events/CombinedEventsManager.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/apache/commons/math/ode/events/EventStateTest.java": 14,
+              "src/main/java/org/apache/commons/math/ode/events/EventState.java": 8,
+              "src/main/java/org/apache/commons/math/ode/events/CombinedEventsManager.java": 9
+            },
+            "best_rank": 8,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.6666666666666666,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.18716931216931218,
+            "difficulty": "easy",
+            "latency_s": 0.0
+          },
+          {
+            "instance_id": "MATH-484",
+            "repo": "MATH",
+            "classifications": {
+              "src/main/java/org/apache/commons/math/ode/AbstractIntegrator.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/ThreeEighthesIntegratorTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/GillStepInterpolatorTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/EulerIntegratorTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/sampling/DummyStepInterpolatorTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math/ode/nonstiff/GraggBulirschStoerStepInterpolator.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/DormandPrince54StepInterpolatorTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/HighamHall54IntegratorTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/GraggBulirschStoerIntegratorTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math/ode/sampling/AbstractStepInterpolator.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math/ode/events/EventState.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/HighamHall54StepInterpolatorTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/sampling/NordsieckStepInterpolatorTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math/ode/nonstiff/GraggBulirschStoerIntegrator.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math/ode/nonstiff/AdamsMoultonIntegrator.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/TestProblemHandler.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/MidpointStepInterpolatorTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/GraggBulirschStoerStepInterpolatorTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/DormandPrince54IntegratorTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math/ode/nonstiff/RungeKuttaIntegrator.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/DormandPrince853StepInterpolatorTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math/ode/ODEIntegrator.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/ClassicalRungeKuttaStepInterpolatorTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math/ode/nonstiff/DormandPrince853StepInterpolator.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/DormandPrince853IntegratorTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/AdamsBashforthIntegratorTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math/ode/nonstiff/AdamsBashforthIntegrator.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math/ode/events/CombinedEventsManager.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/TestProblemAbstract.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/MidpointIntegratorTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/ClassicalRungeKuttaIntegratorTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/TestProblem4.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/ThreeEighthesStepInterpolatorTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math/ode/nonstiff/GillIntegratorTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/math/ode/AbstractIntegrator.java": 7,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/ThreeEighthesIntegratorTest.java": 29,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/GillStepInterpolatorTest.java": 65,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/EulerIntegratorTest.java": 28,
+              "src/test/java/org/apache/commons/math/ode/sampling/DummyStepInterpolatorTest.java": 84,
+              "src/main/java/org/apache/commons/math/ode/nonstiff/GraggBulirschStoerStepInterpolator.java": 36,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/DormandPrince54StepInterpolatorTest.java": 48,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/HighamHall54IntegratorTest.java": 2,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/GraggBulirschStoerIntegratorTest.java": 8,
+              "src/main/java/org/apache/commons/math/ode/sampling/AbstractStepInterpolator.java": 49,
+              "src/main/java/org/apache/commons/math/ode/events/EventState.java": 10,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/HighamHall54StepInterpolatorTest.java": 53,
+              "src/test/java/org/apache/commons/math/ode/sampling/NordsieckStepInterpolatorTest.java": 59,
+              "src/main/java/org/apache/commons/math/ode/nonstiff/GraggBulirschStoerIntegrator.java": 31,
+              "src/main/java/org/apache/commons/math/ode/nonstiff/AdamsMoultonIntegrator.java": 9,
+              "src/test/java/org/apache/commons/math/ode/TestProblemHandler.java": 13,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/MidpointStepInterpolatorTest.java": 69,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/GraggBulirschStoerStepInterpolatorTest.java": 42,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/DormandPrince54IntegratorTest.java": 6,
+              "src/main/java/org/apache/commons/math/ode/nonstiff/RungeKuttaIntegrator.java": 23,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/DormandPrince853StepInterpolatorTest.java": 39,
+              "src/main/java/org/apache/commons/math/ode/ODEIntegrator.java": 12,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/ClassicalRungeKuttaStepInterpolatorTest.java": 66,
+              "src/main/java/org/apache/commons/math/ode/nonstiff/DormandPrince853StepInterpolator.java": 40,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/DormandPrince853IntegratorTest.java": 3,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/AdamsBashforthIntegratorTest.java": 46,
+              "src/main/java/org/apache/commons/math/ode/nonstiff/AdamsBashforthIntegrator.java": 11,
+              "src/main/java/org/apache/commons/math/ode/events/CombinedEventsManager.java": 15,
+              "src/test/java/org/apache/commons/math/ode/TestProblemAbstract.java": 22,
+              "src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java": 20,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/MidpointIntegratorTest.java": 34,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/ClassicalRungeKuttaIntegratorTest.java": 21,
+              "src/test/java/org/apache/commons/math/ode/TestProblem4.java": 19,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/ThreeEighthesStepInterpolatorTest.java": 61,
+              "src/test/java/org/apache/commons/math/ode/nonstiff/GillIntegratorTest.java": 30
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.05714285714285714,
+              "10": 0.2,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.6062884785443331,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "MATH-770",
+            "repo": "MATH",
+            "classifications": {
+              "src/test/java/org/apache/commons/math3/linear/SymmLQTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math3/linear/JacobiPreconditioner.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/apache/commons/math3/linear/SymmLQTest.java": 1,
+              "src/main/java/org/apache/commons/math3/linear/JacobiPreconditioner.java": 29
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5344827586206896,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "MATH-775",
+            "repo": "MATH",
+            "classifications": {
+              "src/main/java/org/apache/commons/math3/genetics/ListPopulation.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math3/genetics/ElitisticListPopulation.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math3/genetics/Population.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math3/genetics/ListPopulationTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math3/genetics/TournamentSelection.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/math3/genetics/ListPopulation.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.2,
+              "5": 0.2,
+              "10": 0.2,
+              "100": 0.2,
+              "200": 0.2
+            },
+            "average_precision": 0.2,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "MATH-776",
+            "repo": "MATH",
+            "classifications": {
+              "src/main/java/org/apache/commons/math3/genetics/ElitisticListPopulation.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math3/genetics/ElitisticListPopulationTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/math3/genetics/ElitisticListPopulation.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "MATH-778",
+            "repo": "MATH",
+            "classifications": {
+              "src/test/java/org/apache/commons/math3/dfp/DfpTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math3/dfp/Dfp.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/apache/commons/math3/dfp/DfpTest.java": 2,
+              "src/main/java/org/apache/commons/math3/dfp/Dfp.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 0.0
+          },
+          {
+            "instance_id": "MATH-779",
+            "repo": "MATH",
+            "classifications": {
+              "src/main/java/org/apache/commons/math3/genetics/ListPopulation.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math3/genetics/ListPopulationTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/math3/genetics/ListPopulation.java": 1,
+              "src/test/java/org/apache/commons/math3/genetics/ListPopulationTest.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "MATH-781",
+            "repo": "MATH",
+            "classifications": {
+              "src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math3/optimization/linear/SimplexSolverTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/apache/commons/math3/optimization/linear/SimplexSolverTest.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 0.0
+          },
+          {
+            "instance_id": "MATH-782",
+            "repo": "MATH",
+            "classifications": {
+              "src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math3/optimization/univariate/BrentOptimizerTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java": 2,
+              "src/test/java/org/apache/commons/math3/optimization/univariate/BrentOptimizerTest.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "MATH-790",
+            "repo": "MATH",
+            "classifications": {
+              "src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math3/stat/inference/MannWhitneyUTestTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java": 2,
+              "src/test/java/org/apache/commons/math3/stat/inference/MannWhitneyUTestTest.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "MATH-798",
+            "repo": "MATH",
+            "classifications": {
+              "src/test/java/org/apache/commons/math3/optimization/fitting/PolynomialFitterTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math3/optimization/fitting/PolynomialFitter.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math3/optimization/fitting/CurveFitterTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/math3/optimization/fitting/PolynomialFitter.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 0.3333333333333333,
+              "10": 0.3333333333333333,
+              "100": 0.3333333333333333,
+              "200": 0.3333333333333333
+            },
+            "average_precision": 0.3333333333333333,
+            "difficulty": "easy",
+            "latency_s": 0.0
+          },
+          {
+            "instance_id": "MATH-802",
+            "repo": "MATH",
+            "classifications": {
+              "src/main/java/org/apache/commons/math3/linear/RealVector.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/math3/linear/RealVector.java": 6
+            },
+            "best_rank": 6,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.16666666666666666,
+            "difficulty": "easy",
+            "latency_s": 0.0
+          },
+          {
+            "instance_id": "MATH-805",
+            "repo": "MATH",
+            "classifications": {
+              "src/main/java/org/apache/commons/math3/stat/descriptive/rank/Percentile.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/math3/stat/descriptive/rank/Percentile.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3333333333333333,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "MATH-812",
+            "repo": "MATH",
+            "classifications": {
+              "src/main/java/org/apache/commons/math3/linear/RealVector.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math3/linear/OpenMapRealVector.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math3/linear/ArrayRealVector.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/math3/linear/RealVector.java": 2,
+              "src/main/java/org/apache/commons/math3/linear/OpenMapRealVector.java": 7,
+              "src/main/java/org/apache/commons/math3/linear/ArrayRealVector.java": 3
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.6666666666666666,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5317460317460317,
+            "difficulty": "easy",
+            "latency_s": 0.0
+          },
+          {
+            "instance_id": "MATH-813",
+            "repo": "MATH",
+            "classifications": {
+              "src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math3/optimization/linear/SimplexSolverTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java": 3,
+              "src/test/java/org/apache/commons/math3/optimization/linear/SimplexSolverTest.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.8333333333333333,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "MATH-821",
+            "repo": "MATH",
+            "classifications": {
+              "src/test/java/org/apache/commons/math3/linear/SparseRealVectorTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/apache/commons/math3/linear/SparseRealVectorTest.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "MATH-828",
+            "repo": "MATH",
+            "classifications": {
+              "src/main/java/org/apache/commons/math3/optimization/linear/SimplexSolver.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/math3/optimization/linear/SimplexSolverTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/apache/commons/math3/optimization/linear/SimplexSolverTest.java": 1,
+              "src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java": 5
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 0.6666666666666666,
+              "10": 0.6666666666666666,
+              "100": 0.6666666666666666,
+              "200": 0.6666666666666666
+            },
+            "average_precision": 0.4666666666666666,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "MATH-835",
+            "repo": "MATH",
+            "classifications": {
+              "src/test/java/org/apache/commons/math3/fraction/FractionTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/math3/fraction/Fraction.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/apache/commons/math3/fraction/FractionTest.java": 1,
+              "src/main/java/org/apache/commons/math3/fraction/Fraction.java": 4
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.75,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "easy": 20
+        },
+        "total": 20
+      },
+      "summary": {
+        "n": 20,
+        "macro_hit_at": {
+          "1": 0.7,
+          "5": 0.9,
+          "10": 1.0,
+          "100": 1.0,
+          "200": 1.0
+        },
+        "macro_recall_at": {
+          "1": 0.3683333333333333,
+          "5": 0.6461904761904761,
+          "10": 0.7783333333333333,
+          "100": 0.86,
+          "200": 0.86
+        },
+        "mrr": 0.80625,
+        "map": 0.620900995720685,
+        "mean_latency_s": 2.1457672119140626e-07
+      }
+    }
+  }
+}
