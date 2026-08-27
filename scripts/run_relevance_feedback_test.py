@@ -132,7 +132,16 @@ def _relevance_feedback_file(localizer, prompt_gen, bug, candidates, contents):
     return relevant, judged, terms
 
 
-def _relevance_feedback_chunked(localizer, prompt_gen, bug, candidates, contents, max_chunks_per_file):
+def _relevance_feedback_chunked(localizer, prompt_gen, bug, candidates, contents, max_chunks_per_file, batch_size=None):
+    """batch_size=None preserves the original one-call-for-everything behavior (default,
+    unchanged for every config that already works fine with it). When set, splits chunks
+    into groups of batch_size and makes one invoke_structured call per group, merging the
+    judgments -- added 2026-08-27 because qwen3-coder:30b's reasoning chain-of-thought
+    burns enough of the output-token budget that a single call covering a full 100-200
+    candidate pool (up to ~1000 chunks) reliably gets truncated mid-JSON, regardless of how
+    large max_tokens is set (confirmed: still truncated even at max_tokens=32768). Smaller
+    batches bound each individual call's expected output size independent of the model's
+    per-call reasoning verbosity."""
     chunks = []  # list of (file, chunk_index, chunk_text)
     for path in candidates:
         file_chunks = _chunk_file_content(contents.get(path), path=path)
@@ -142,9 +151,12 @@ def _relevance_feedback_chunked(localizer, prompt_gen, bug, candidates, contents
     if not chunks:
         return [], {}, [], []
 
-    prompt = prompt_gen.generate_chunk_relevance_feedback_prompt(bug, chunks)
-    response = localizer.invoke_structured(prompt, ChunkRelevanceFeedbackResponse)
-    judged_chunks = {(j.file, j.chunk_index): j.relevant for j in response.judgments}
+    judged_chunks = {}
+    batches = [chunks] if not batch_size else [chunks[i:i + batch_size] for i in range(0, len(chunks), batch_size)]
+    for batch in batches:
+        prompt = prompt_gen.generate_chunk_relevance_feedback_prompt(bug, batch)
+        response = localizer.invoke_structured(prompt, ChunkRelevanceFeedbackResponse)
+        judged_chunks.update({(j.file, j.chunk_index): j.relevant for j in response.judgments})
 
     chunk_by_key = {(path, idx): chunk_text for path, idx, chunk_text in chunks}
     relevant_files = []
@@ -269,7 +281,7 @@ def _semantic_reformulation_terms(bug, relevant_chunk_texts, keyword_model, top_
     return union_terms
 
 
-def _run_one(localizer, prompt_gen, bug, candidate_pool_size, retriever, embedding_model, rrf_weights, granularity, max_chunks_per_file, bm25_repr, reformulation_mode, keyword_model, top_n_keywords, relevance_mode, relevance_embedding_model, keep_fraction, rrf_k=60):
+def _run_one(localizer, prompt_gen, bug, candidate_pool_size, retriever, embedding_model, rrf_weights, granularity, max_chunks_per_file, bm25_repr, reformulation_mode, keyword_model, top_n_keywords, relevance_mode, relevance_embedding_model, keep_fraction, rrf_k=60, relevance_batch_size=None):
     candidates = _initial_ranking(bug, retriever, candidate_pool_size, embedding_model, rrf_weights, bm25_repr, rrf_k=rrf_k)
     if not candidates:
         return {
@@ -287,7 +299,7 @@ def _run_one(localizer, prompt_gen, bug, candidate_pool_size, retriever, embeddi
         relevant, judged, terms = _relevance_feedback_file(localizer, prompt_gen, bug, candidates, contents)
         relevant_chunk_texts = [contents[c] for c in relevant if contents.get(c)]
     else:
-        relevant, judged, terms, relevant_chunk_texts = _relevance_feedback_chunked(localizer, prompt_gen, bug, candidates, contents, max_chunks_per_file)
+        relevant, judged, terms, relevant_chunk_texts = _relevance_feedback_chunked(localizer, prompt_gen, bug, candidates, contents, max_chunks_per_file, batch_size=relevance_batch_size)
 
     if reformulation_mode == "semantic":
         terms = _semantic_reformulation_terms(bug, relevant_chunk_texts, keyword_model, top_n_keywords)
@@ -403,6 +415,13 @@ def main():
                             '(top-N by cosine similarity), not an absolute similarity threshold -- a fixed '
                             'threshold would mean different things for different bug reports. Deliberately '
                             'generous (0.5) to favor recall over precision.')
+    parser.add_argument('--relevance-batch-size', type=int, default=None,
+                       help='With --relevance-mode llm, chunk granularity: split the candidate pool\'s chunks '
+                            'into groups of this size, one invoke_structured call per group, instead of one '
+                            'call covering every chunk. Default None preserves the original single-call '
+                            'behavior. Added for reasoning models (e.g. qwen3-coder:30b) whose chain-of-thought '
+                            'reliably truncates a single call covering a full 100-200 candidate pool regardless '
+                            'of max-tokens -- smaller batches bound each call\'s expected output size.')
     parser.add_argument('--method', choices=['openrouter', 'ollama'], default='ollama',
                        help='Backend for the relevance-feedback LLM call. ollama runs fully offline (see '
                             'docs/ollama_deployment.md) -- default, per project decision 2026-08-18. Unused '
@@ -469,7 +488,7 @@ def main():
             args.embedding_model, rrf_weights, args.granularity, args.max_chunks_per_file,
             args.bm25_repr, args.reformulation_mode, args.keyword_model, args.top_n_keywords,
             args.relevance_mode, args.relevance_embedding_model, args.keep_fraction,
-            rrf_k=args.rrf_k,
+            rrf_k=args.rrf_k, relevance_batch_size=args.relevance_batch_size,
         )
         per_bug[bug.instance_id] = result
         logger.info(

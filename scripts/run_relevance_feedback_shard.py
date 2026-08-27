@@ -96,6 +96,9 @@ def main():
     parser.add_argument('--ollama-host', default=None)
     parser.add_argument('--num-ctx', type=int, default=16384)
     parser.add_argument('--max-tokens', type=int, default=8192)
+    parser.add_argument('--relevance-batch-size', type=int, default=None,
+                       help='See run_relevance_feedback_test.py -- splits chunk-relevance judgment into '
+                            'batches of this size per LLM call instead of one call for the whole pool.')
     parser.add_argument('--num-shards', type=int, required=True)
     parser.add_argument('--shard-index', type=int, required=True, help='0-based')
     parser.add_argument('--output-dir', required=True)
@@ -159,7 +162,7 @@ def main():
             args.embedding_model, rrf_weights, args.granularity, args.max_chunks_per_file,
             args.bm25_repr, args.reformulation_mode, args.keyword_model, args.top_n_keywords,
             args.relevance_mode, args.relevance_embedding_model, args.keep_fraction,
-            rrf_k=rrf_k,
+            rrf_k=rrf_k, relevance_batch_size=args.relevance_batch_size,
         )
         per_bug[bug.instance_id] = result
         logger.info(

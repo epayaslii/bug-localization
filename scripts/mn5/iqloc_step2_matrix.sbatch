@@ -72,7 +72,15 @@ if [ "$RELEVANCE_MODE" = "llm" ]; then
     fi
     sleep 2
   done
-  RELEVANCE_ARGS="--relevance-mode llm --method ollama --model ${MODEL} --num-ctx 32768 --max-tokens 16384"
+  # 2026-08-27: pool=200 + qwen3-coder's reasoning chain-of-thought overflowed 16384 max-tokens
+  # (confirmed truncation, "Unterminated string" JSON parse failures, ~16/23 instances silently
+  # scored 0/200 relevant) -- doubled both num-ctx and max-tokens as a real fix, not a guess.
+  # 2026-08-27 second fix attempt: neither a smaller pool nor a doubled token budget alone
+  # stopped qwen3-coder's truncation (confirmed via direct testing) -- batching the chunk-
+  # relevance judgment into groups of 25 (instead of one call for the whole 100-200 pool)
+  # bounds each individual call's expected output size regardless of per-call reasoning
+  # verbosity, which neither of those two levers could guarantee on their own.
+  RELEVANCE_ARGS="--relevance-mode llm --method ollama --model ${MODEL} --num-ctx 65536 --max-tokens 32768 --relevance-batch-size 25"
 else
   RELEVANCE_ARGS="--relevance-mode embedding-cosine --relevance-embedding-model Qwen/Qwen3-Embedding-0.6B --keep-fraction 0.5"
 fi
