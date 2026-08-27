@@ -1,0 +1,778 @@
+{
+  "manifest_id": "iqloc-multi-n30-s42-df69b06700bd",
+  "shard_index": 0,
+  "num_shards": 1,
+  "model": "text-embedding-3-small",
+  "mode": "full_corpus_dense_only",
+  "instance_ids": [
+    "BATCH-1656",
+    "BATCH-2352",
+    "CAMEL-10273",
+    "CAMEL-10291",
+    "CSV-140",
+    "DATAGRAPH-865",
+    "DATAJPA-420",
+    "DATAMONGO-411",
+    "DATAMONGO-462",
+    "HBASE-16649",
+    "HBASE-5876",
+    "HIVE-14098",
+    "HIVE-2260",
+    "LANG-1207",
+    "LANG-393",
+    "ROO-2012",
+    "ROO-2316",
+    "SPR-6180",
+    "SWF-782",
+    "WFCORE-1266",
+    "WFCORE-858",
+    "WFLY-4016",
+    "WFLY-5667"
+  ],
+  "configs": {
+    "dense_embedding": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "BATCH-1656",
+            "repo": "BATCH",
+            "classifications": {
+              "spring-batch-core/src/test/java/org/springframework/batch/core/step/item/FaultTolerantStepFactoryBeanRollbackTests.java": "exists_before_fix",
+              "spring-batch-core-tests/src/test/java/org/springframework/batch/core/test/step/FaultTolerantStepFactoryBeanRollbackIntegrationTests.java": "exists_before_fix",
+              "spring-batch-core/src/main/java/org/springframework/batch/core/step/item/FaultTolerantChunkProcessor.java": "exists_before_fix",
+              "spring-batch-core/src/main/java/org/springframework/batch/core/step/item/FaultTolerantStepFactoryBean.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-batch-core/src/test/java/org/springframework/batch/core/step/item/FaultTolerantStepFactoryBeanRollbackTests.java": 3,
+              "spring-batch-core-tests/src/test/java/org/springframework/batch/core/test/step/FaultTolerantStepFactoryBeanRollbackIntegrationTests.java": 18,
+              "spring-batch-core/src/main/java/org/springframework/batch/core/step/item/FaultTolerantChunkProcessor.java": 16,
+              "spring-batch-core/src/main/java/org/springframework/batch/core/step/item/FaultTolerantStepFactoryBean.java": 59
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.25,
+              "10": 0.25,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.17319915254237286,
+            "difficulty": "easy",
+            "latency_s": 4.0531158447265625e-06
+          },
+          {
+            "instance_id": "BATCH-2352",
+            "repo": "BATCH",
+            "classifications": {
+              "spring-batch-infrastructure/src/main/java/org/springframework/batch/item/xml/StaxEventItemReader.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-batch-infrastructure/src/main/java/org/springframework/batch/item/xml/StaxEventItemReader.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 4.0531158447265625e-06
+          },
+          {
+            "instance_id": "CAMEL-10273",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-jetty-common/src/main/java/org/apache/camel/component/jetty/JettyHttpComponent.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-jetty-common/src/main/java/org/apache/camel/component/jetty/JettyHttpComponent.java": 105
+            },
+            "best_rank": 105,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 1.0
+            },
+            "average_precision": 0.009523809523809525,
+            "difficulty": "hard",
+            "latency_s": 0.0
+          },
+          {
+            "instance_id": "CAMEL-10291",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-rabbitmq/src/test/java/org/apache/camel/component/rabbitmq/RabbitMQProducerTest.java": "exists_before_fix",
+              "components/camel-rabbitmq/src/main/java/org/apache/camel/component/rabbitmq/RabbitMQMessageConverter.java": "exists_before_fix",
+              "components/camel-rabbitmq/src/test/java/org/apache/camel/component/rabbitmq/RabbitMQConsumerIntTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-rabbitmq/src/test/java/org/apache/camel/component/rabbitmq/RabbitMQProducerTest.java": 2,
+              "components/camel-rabbitmq/src/main/java/org/apache/camel/component/rabbitmq/RabbitMQMessageConverter.java": 1,
+              "components/camel-rabbitmq/src/test/java/org/apache/camel/component/rabbitmq/RabbitMQConsumerIntTest.java": 10
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 0.6666666666666666,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.7666666666666666,
+            "difficulty": "easy",
+            "latency_s": 0.0
+          },
+          {
+            "instance_id": "CSV-140",
+            "repo": "CSV",
+            "classifications": {
+              "src/main/java/org/apache/commons/csv/CSVPrinter.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/csv/CSVPrinter.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3333333333333333,
+            "difficulty": "easy",
+            "latency_s": 4.291534423828125e-06
+          },
+          {
+            "instance_id": "DATAGRAPH-865",
+            "repo": "DATAGRAPH",
+            "classifications": {
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/mapping/Neo4jPersistentProperty.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/mapping/Neo4jPersistentProperty.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 9.5367431640625e-07
+          },
+          {
+            "instance_id": "DATAJPA-420",
+            "repo": "DATAJPA",
+            "classifications": {
+              "src/test/java/org/springframework/data/jpa/repository/query/QueryUtilsUnitTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/jpa/repository/query/QueryUtils.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/jpa/repository/query/QueryUtilsUnitTests.java": 5,
+              "src/main/java/org/springframework/data/jpa/repository/query/QueryUtils.java": 22
+            },
+            "best_rank": 5,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.14545454545454545,
+            "difficulty": "easy",
+            "latency_s": 0.0
+          },
+          {
+            "instance_id": "DATAMONGO-411",
+            "repo": "DATAMONGO",
+            "classifications": {
+              "spring-data-mongodb/src/main/java/org/springframework/data/mongodb/core/index/MongoPersistentEntityIndexCreator.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-data-mongodb/src/main/java/org/springframework/data/mongodb/core/index/MongoPersistentEntityIndexCreator.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 4.0531158447265625e-06
+          },
+          {
+            "instance_id": "DATAMONGO-462",
+            "repo": "DATAMONGO",
+            "classifications": {
+              "spring-data-mongodb/src/test/java/org/springframework/data/mongodb/core/convert/MappingMongoConverterUnitTests.java": "exists_before_fix",
+              "spring-data-mongodb/src/main/java/org/springframework/data/mongodb/core/convert/CustomConversions.java": "exists_before_fix",
+              "spring-data-mongodb/src/main/java/org/springframework/data/mongodb/core/convert/MongoConverters.java": "exists_before_fix",
+              "spring-data-mongodb/src/test/java/org/springframework/data/mongodb/core/convert/CustomConversionsUnitTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-data-mongodb/src/test/java/org/springframework/data/mongodb/core/convert/MappingMongoConverterUnitTests.java": 3,
+              "spring-data-mongodb/src/main/java/org/springframework/data/mongodb/core/convert/CustomConversions.java": 45,
+              "spring-data-mongodb/src/main/java/org/springframework/data/mongodb/core/convert/MongoConverters.java": 39,
+              "spring-data-mongodb/src/test/java/org/springframework/data/mongodb/core/convert/CustomConversionsUnitTests.java": 103
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.25,
+              "10": 0.25,
+              "100": 0.75,
+              "200": 1.0
+            },
+            "average_precision": 0.12252925068459049,
+            "difficulty": "easy",
+            "latency_s": 0.0
+          },
+          {
+            "instance_id": "HBASE-16649",
+            "repo": "HBASE",
+            "classifications": {
+              "hbase-server/src/main/java/org/apache/hadoop/hbase/master/procedure/TruncateTableProcedure.java": "exists_before_fix",
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/master/procedure/TestTruncateTableProcedure.java": "exists_before_fix",
+              "hbase-server/src/main/java/org/apache/hadoop/hbase/master/CatalogJanitor.java": "exists_before_fix",
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/master/TestCatalogJanitor.java": "exists_before_fix",
+              "hbase-server/src/main/java/org/apache/hadoop/hbase/master/procedure/DeleteTableProcedure.java": "exists_before_fix",
+              "hbase-server/src/main/java/org/apache/hadoop/hbase/master/ServerManager.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "hbase-server/src/main/java/org/apache/hadoop/hbase/master/procedure/TruncateTableProcedure.java": 6,
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/master/procedure/TestTruncateTableProcedure.java": 1,
+              "hbase-server/src/main/java/org/apache/hadoop/hbase/master/CatalogJanitor.java": 384,
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/master/TestCatalogJanitor.java": 15,
+              "hbase-server/src/main/java/org/apache/hadoop/hbase/master/procedure/DeleteTableProcedure.java": 102,
+              "hbase-server/src/main/java/org/apache/hadoop/hbase/master/ServerManager.java": 198
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.16666666666666666,
+              "5": 0.16666666666666666,
+              "10": 0.3333333333333333,
+              "100": 0.5,
+              "200": 0.8333333333333334
+            },
+            "average_precision": 0.2689044241433947,
+            "difficulty": "easy",
+            "latency_s": 0.0
+          },
+          {
+            "instance_id": "HBASE-5876",
+            "repo": "HBASE",
+            "classifications": {
+              "src/test/java/org/apache/hadoop/hbase/mapreduce/MapreduceTestingShim.java": "exists_before_fix",
+              "src/test/java/org/apache/hadoop/hbase/HBaseTestingUtility.java": "exists_before_fix",
+              "src/test/java/org/apache/hadoop/hbase/mapreduce/TestImportExport.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/apache/hadoop/hbase/mapreduce/MapreduceTestingShim.java": 214,
+              "src/test/java/org/apache/hadoop/hbase/HBaseTestingUtility.java": 69,
+              "src/test/java/org/apache/hadoop/hbase/mapreduce/TestImportExport.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 0.3333333333333333,
+              "10": 0.3333333333333333,
+              "100": 0.6666666666666666,
+              "200": 0.6666666666666666
+            },
+            "average_precision": 0.3476680662783873,
+            "difficulty": "easy",
+            "latency_s": 0.0
+          },
+          {
+            "instance_id": "HIVE-14098",
+            "repo": "HIVE",
+            "classifications": {
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/mr/MapredLocalTask.java": "exists_before_fix",
+              "ql/src/test/org/apache/hadoop/hive/ql/exec/TestUtilities.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/spark/HiveSparkClientFactory.java": "exists_before_fix",
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/Utilities.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/mr/MapredLocalTask.java": 1,
+              "ql/src/test/org/apache/hadoop/hive/ql/exec/TestUtilities.java": 540,
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/spark/HiveSparkClientFactory.java": 4,
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/Utilities.java": 134
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.25,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.75
+            },
+            "average_precision": 0.382448866777225,
+            "difficulty": "easy",
+            "latency_s": 0.0
+          },
+          {
+            "instance_id": "HIVE-2260",
+            "repo": "HIVE",
+            "classifications": {
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/ExecDriver.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "ql/src/java/org/apache/hadoop/hive/ql/exec/ExecDriver.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 0.0
+          },
+          {
+            "instance_id": "LANG-1207",
+            "repo": "LANG",
+            "classifications": {
+              "src/main/java/org/apache/commons/lang3/StringUtils.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/lang3/StringUtilsEqualsIndexOfTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/lang3/StringUtils.java": 1,
+              "src/test/java/org/apache/commons/lang3/StringUtilsEqualsIndexOfTest.java": 3
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.8333333333333333,
+            "difficulty": "easy",
+            "latency_s": 0.0
+          },
+          {
+            "instance_id": "LANG-393",
+            "repo": "LANG",
+            "classifications": {
+              "src/test/org/apache/commons/lang/builder/EqualsBuilderTest.java": "exists_before_fix",
+              "src/java/org/apache/commons/lang/builder/EqualsBuilder.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/org/apache/commons/lang/builder/EqualsBuilderTest.java": 6,
+              "src/java/org/apache/commons/lang/builder/EqualsBuilder.java": 7
+            },
+            "best_rank": 6,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.22619047619047616,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "ROO-2012",
+            "repo": "ROO",
+            "classifications": {
+              "classpath/src/main/java/org/springframework/roo/classpath/converters/JavaTypeConverter.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "classpath/src/main/java/org/springframework/roo/classpath/converters/JavaTypeConverter.java": 88
+            },
+            "best_rank": 88,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.011363636363636364,
+            "difficulty": "medium",
+            "latency_s": 0.0
+          },
+          {
+            "instance_id": "ROO-2316",
+            "repo": "ROO",
+            "classifications": {
+              "addon-gwt/src/main/java/org/springframework/roo/addon/gwt/GwtMetadata.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "addon-gwt/src/main/java/org/springframework/roo/addon/gwt/GwtMetadata.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 0.0
+          },
+          {
+            "instance_id": "SPR-6180",
+            "repo": "SPR",
+            "classifications": {
+              "org.springframework.web/src/main/java/org/springframework/http/client/CommonsClientHttpResponse.java": "exists_before_fix",
+              "org.springframework.web/src/test/java/org/springframework/web/client/RestTemplateIntegrationTests.java": "exists_before_fix",
+              "org.springframework.web/src/main/java/org/springframework/http/client/CommonsClientHttpRequest.java": "exists_before_fix",
+              "org.springframework.web/src/main/java/org/springframework/http/client/CommonsClientHttpRequestFactory.java": "exists_before_fix",
+              "org.springframework.web/src/test/java/org/springframework/http/client/AbstractHttpRequestFactoryTestCase.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "org.springframework.web/src/main/java/org/springframework/http/client/CommonsClientHttpResponse.java": 5,
+              "org.springframework.web/src/test/java/org/springframework/web/client/RestTemplateIntegrationTests.java": 363,
+              "org.springframework.web/src/main/java/org/springframework/http/client/CommonsClientHttpRequest.java": 6,
+              "org.springframework.web/src/main/java/org/springframework/http/client/CommonsClientHttpRequestFactory.java": 1,
+              "org.springframework.web/src/test/java/org/springframework/http/client/AbstractHttpRequestFactoryTestCase.java": 9
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.2,
+              "5": 0.4,
+              "10": 0.8,
+              "100": 0.8,
+              "200": 0.8
+            },
+            "average_precision": 0.47164370982552806,
+            "difficulty": "easy",
+            "latency_s": 9.5367431640625e-07
+          },
+          {
+            "instance_id": "SWF-782",
+            "repo": "SWF",
+            "classifications": {
+              "spring-js/src/main/java/org/springframework/js/resource/ResourceServlet.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-js/src/main/java/org/springframework/js/resource/ResourceServlet.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "WFCORE-1266",
+            "repo": "WFCORE",
+            "classifications": {
+              "server/src/main/java/org/jboss/as/server/deployment/service/SecuredServiceRegistry.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/CurrentServiceContainer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "server/src/main/java/org/jboss/as/server/deployment/service/SecuredServiceRegistry.java": 47,
+              "server/src/main/java/org/jboss/as/server/CurrentServiceContainer.java": 4
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.14627659574468085,
+            "difficulty": "easy",
+            "latency_s": 4.0531158447265625e-06
+          },
+          {
+            "instance_id": "WFCORE-858",
+            "repo": "WFCORE",
+            "classifications": {
+              "cli/src/main/java/org/jboss/as/cli/impl/CommandContextImpl.java": "exists_before_fix",
+              "cli/src/main/java/org/jboss/as/cli/handlers/LsHandler.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "cli/src/main/java/org/jboss/as/cli/impl/CommandContextImpl.java": 41,
+              "cli/src/main/java/org/jboss/as/cli/handlers/LsHandler.java": 39
+            },
+            "best_rank": 39,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.03721075672295185,
+            "difficulty": "medium",
+            "latency_s": 5.0067901611328125e-06
+          },
+          {
+            "instance_id": "WFLY-4016",
+            "repo": "WFLY",
+            "classifications": {
+              "ejb3/src/main/java/org/jboss/as/ejb3/remote/DescriptorBasedEJBClientContextService.java": "exists_before_fix",
+              "ejb3/src/main/java/org/jboss/as/ejb3/remote/LocalEjbReceiver.java": "exists_before_fix",
+              "ejb3/src/main/java/org/jboss/as/ejb3/subsystem/EJB3SubsystemAdd.java": "exists_before_fix",
+              "ejb3/src/main/java/org/jboss/as/ejb3/deployment/processors/EjbClientContextSetupProcessor.java": "exists_before_fix",
+              "ejb3/src/main/java/org/jboss/as/ejb3/remote/TCCLEJBClientContextSelectorService.java": "exists_before_fix",
+              "ejb3/src/main/java/org/jboss/as/ejb3/deployment/processors/EJBClientDescriptorMetaDataProcessor.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "ejb3/src/main/java/org/jboss/as/ejb3/remote/DescriptorBasedEJBClientContextService.java": 9,
+              "ejb3/src/main/java/org/jboss/as/ejb3/remote/LocalEjbReceiver.java": 68,
+              "ejb3/src/main/java/org/jboss/as/ejb3/subsystem/EJB3SubsystemAdd.java": 124,
+              "ejb3/src/main/java/org/jboss/as/ejb3/deployment/processors/EjbClientContextSetupProcessor.java": 31,
+              "ejb3/src/main/java/org/jboss/as/ejb3/remote/TCCLEJBClientContextSelectorService.java": 40,
+              "ejb3/src/main/java/org/jboss/as/ejb3/deployment/processors/EJBClientDescriptorMetaDataProcessor.java": 15
+            },
+            "best_rank": 9,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.16666666666666666,
+              "100": 0.8333333333333334,
+              "200": 1.0
+            },
+            "average_precision": 0.09385585775528849,
+            "difficulty": "easy",
+            "latency_s": 0.0
+          },
+          {
+            "instance_id": "WFLY-5667",
+            "repo": "WFLY",
+            "classifications": {
+              "legacy/messaging/src/test/java/org/jboss/as/messaging/test/MigrateTestCase.java": "exists_before_fix",
+              "legacy/messaging/src/main/java/org/jboss/as/messaging/logging/MessagingLogger.java": "exists_before_fix",
+              "legacy/messaging/src/main/java/org/jboss/as/messaging/MigrateOperation.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "legacy/messaging/src/test/java/org/jboss/as/messaging/test/MigrateTestCase.java": 4,
+              "legacy/messaging/src/main/java/org/jboss/as/messaging/logging/MessagingLogger.java": 1,
+              "legacy/messaging/src/main/java/org/jboss/as/messaging/MigrateOperation.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.9166666666666666,
+            "difficulty": "easy",
+            "latency_s": 9.5367431640625e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "easy": 20,
+          "hard": 1,
+          "medium": 2
+        },
+        "total": 23
+      },
+      "summary": {
+        "n": 23,
+        "macro_hit_at": {
+          "1": 0.4782608695652174,
+          "5": 0.782608695652174,
+          "10": 0.8695652173913043,
+          "100": 0.9565217391304348,
+          "200": 1.0
+        },
+        "macro_recall_at": {
+          "1": 0.26594202898550723,
+          "5": 0.5463768115942029,
+          "10": 0.636231884057971,
+          "100": 0.8717391304347827,
+          "200": 0.9586956521739131
+        },
+        "mrr": 0.5988828804046196,
+        "map": 0.4472290933916038,
+        "mean_latency_s": 1.316485197647758e-06
+      }
+    }
+  }
+}
