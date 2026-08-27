@@ -456,7 +456,7 @@ def main():
         if args.method == 'ollama':
             localizer = OllamaLocalizer(model=model, host=args.ollama_host, num_ctx=args.num_ctx, max_tokens=args.max_tokens)
         else:
-            localizer = OpenRouterLocalizer(model=model)
+            localizer = OpenRouterLocalizer(model=model, max_tokens=args.max_tokens)
     else:
         localizer = None
     prompt_gen = PromptGenerator()
