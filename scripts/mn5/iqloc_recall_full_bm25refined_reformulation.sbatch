@@ -3,7 +3,7 @@
 #SBATCH --account=ehpc680
 #SBATCH --partition=acc
 #SBATCH --qos=acc_ehpc
-#SBATCH --time=02:00:00
+#SBATCH --time=04:00:00
 #SBATCH --cpus-per-task=20
 #SBATCH --gres=gpu:1
 #SBATCH --array=0-349
