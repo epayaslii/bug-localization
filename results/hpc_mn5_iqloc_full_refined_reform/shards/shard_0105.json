@@ -1,0 +1,2003 @@
+{
+  "manifest_id": "iqloc-multi-n7091-s42-f8a5d2c401a4",
+  "shard_index": 105,
+  "num_shards": 350,
+  "candidate_pool_size": 100,
+  "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+  "reformulation_mode": "semantic",
+  "relevance_mode": "llm",
+  "keep_fraction": 0.5,
+  "instance_ids": [
+    "DATACMNS-939",
+    "DATACMNS-943",
+    "DATACMNS-951",
+    "DATACMNS-963",
+    "DATACMNS-98",
+    "DATAGRAPH-860",
+    "DATAGRAPH-861",
+    "DATAGRAPH-865",
+    "DATAGRAPH-893",
+    "DATAGRAPH-895",
+    "DATAGRAPH-896",
+    "DATAGRAPH-920",
+    "DATAJPA-1000",
+    "DATAJPA-1023",
+    "DATAJPA-1024",
+    "DATAJPA-110",
+    "DATAJPA-111",
+    "DATAJPA-120",
+    "DATAJPA-137",
+    "DATAJPA-138"
+  ],
+  "configs": {
+    "retriever": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "DATACMNS-939",
+            "repo": "DATACMNS",
+            "classifications": {
+              "src/main/java/org/springframework/data/repository/core/support/DefaultRepositoryInformation.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/repository/core/support/DefaultRepositoryInformation.java": 9
+            },
+            "best_rank": 9,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.1111111111111111,
+            "difficulty": "easy",
+            "latency_s": 3.5762786865234375e-06
+          },
+          {
+            "instance_id": "DATACMNS-943",
+            "repo": "DATACMNS",
+            "classifications": {
+              "src/main/java/org/springframework/data/repository/core/support/DefaultRepositoryInformation.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/repository/core/support/DefaultRepositoryInformationUnitTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/repository/core/support/DefaultRepositoryInformation.java": 23,
+              "src/test/java/org/springframework/data/repository/core/support/DefaultRepositoryInformationUnitTests.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5434782608695652,
+            "difficulty": "easy",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "DATACMNS-951",
+            "repo": "DATACMNS",
+            "classifications": {
+              "src/main/java/org/springframework/data/convert/Jsr310Converters.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/convert/Jsr310ConvertersUnitTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/convert/Jsr310Converters.java": 1,
+              "src/test/java/org/springframework/data/convert/Jsr310ConvertersUnitTests.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.86102294921875e-06
+          },
+          {
+            "instance_id": "DATACMNS-963",
+            "repo": "DATACMNS",
+            "classifications": {
+              "src/test/java/org/springframework/data/repository/query/ReturnedTypeUnitTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/repository/query/ReturnedType.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/repository/query/ReturnedTypeUnitTests.java": 5,
+              "src/main/java/org/springframework/data/repository/query/ReturnedType.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.7,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "DATACMNS-98",
+            "repo": "DATACMNS",
+            "classifications": {
+              "spring-data-commons-core/src/main/java/org/springframework/data/repository/core/RepositoryMetadata.java": "exists_before_fix",
+              "spring-data-commons-core/src/test/java/org/springframework/data/repository/util/ClassUtilsUnitTests.java": "exists_before_fix",
+              "spring-data-commons-core/src/main/java/org/springframework/data/repository/core/support/AnnotationRepositoryMetadata.java": "exists_before_fix",
+              "spring-data-commons-core/src/main/java/org/springframework/data/repository/core/support/DefaultRepositoryMetadata.java": "exists_before_fix",
+              "spring-data-commons-core/src/main/java/org/springframework/data/repository/util/ClassUtils.java": "exists_before_fix",
+              "spring-data-commons-core/src/main/java/org/springframework/data/util/TypeDiscoverer.java": "exists_before_fix",
+              "spring-data-commons-core/src/main/java/org/springframework/data/util/TypeInformation.java": "exists_before_fix",
+              "spring-data-commons-core/src/test/java/org/springframework/data/repository/core/support/DefaultRepositoryMetadataUnitTests.java": "exists_before_fix",
+              "spring-data-commons-core/src/main/java/org/springframework/data/repository/query/QueryMethod.java": "exists_before_fix",
+              "spring-data-commons-core/src/main/java/org/springframework/data/repository/core/support/DefaultRepositoryInformation.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-data-commons-core/src/test/java/org/springframework/data/repository/util/ClassUtilsUnitTests.java": 4,
+              "spring-data-commons-core/src/main/java/org/springframework/data/repository/core/support/AnnotationRepositoryMetadata.java": 8,
+              "spring-data-commons-core/src/main/java/org/springframework/data/repository/core/support/DefaultRepositoryMetadata.java": 6,
+              "spring-data-commons-core/src/main/java/org/springframework/data/repository/util/ClassUtils.java": 3,
+              "spring-data-commons-core/src/main/java/org/springframework/data/util/TypeDiscoverer.java": 26,
+              "spring-data-commons-core/src/test/java/org/springframework/data/repository/core/support/DefaultRepositoryMetadataUnitTests.java": 10,
+              "spring-data-commons-core/src/main/java/org/springframework/data/repository/query/QueryMethod.java": 1,
+              "spring-data-commons-core/src/main/java/org/springframework/data/repository/core/support/DefaultRepositoryInformation.java": 13
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.1,
+              "5": 0.3,
+              "10": 0.6,
+              "100": 0.8,
+              "200": 0.8
+            },
+            "average_precision": 0.5154487179487178,
+            "difficulty": "easy",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "DATAGRAPH-860",
+            "repo": "DATAGRAPH",
+            "classifications": {
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/queries/QueryIntegrationTest.java": "exists_before_fix",
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/examples/movies/domain/queryresult/EntityWrappingQueryResult.java": "exists_before_fix",
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/examples/movies/repo/UserRepository.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/queries/QueryIntegrationTest.java": 1,
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/examples/movies/domain/queryresult/EntityWrappingQueryResult.java": 17,
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/examples/movies/repo/UserRepository.java": 29
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 0.3333333333333333,
+              "10": 0.3333333333333333,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.4070317782285328,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "DATAGRAPH-861",
+            "repo": "DATAGRAPH",
+            "classifications": {
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/queries/QueryIntegrationTest.java": "exists_before_fix",
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/examples/movies/repo/UserRepository.java": "exists_before_fix",
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/examples/movies/domain/queryresult/UserQueryResult.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/queries/QueryIntegrationTest.java": 1,
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/examples/movies/repo/UserRepository.java": 17,
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/examples/movies/domain/queryresult/UserQueryResult.java": 3
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 0.6666666666666666,
+              "10": 0.6666666666666666,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.6143790849673202,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "DATAGRAPH-865",
+            "repo": "DATAGRAPH",
+            "classifications": {
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/mapping/Neo4jPersistentProperty.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/mapping/Neo4jPersistentProperty.java": 7
+            },
+            "best_rank": 7,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.14285714285714285,
+            "difficulty": "easy",
+            "latency_s": 9.5367431640625e-07
+          },
+          {
+            "instance_id": "DATAGRAPH-893",
+            "repo": "DATAGRAPH",
+            "classifications": {
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/queries/PagedQueryIT.java": "exists_before_fix",
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/query/GraphRepositoryQuery.java": "exists_before_fix",
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/examples/movies/domain/Cinema.java": "exists_before_fix",
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/examples/movies/repo/CinemaRepository.java": "exists_before_fix",
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/web/domain/Cinema.java": "exists_before_fix",
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/query/QueryResultGraphRepositoryQuery.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/queries/PagedQueryIT.java": 13,
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/query/GraphRepositoryQuery.java": 1,
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/examples/movies/repo/CinemaRepository.java": 22,
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/query/QueryResultGraphRepositoryQuery.java": 3
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.16666666666666666,
+              "5": 0.3333333333333333,
+              "10": 0.3333333333333333,
+              "100": 0.6666666666666666,
+              "200": 0.6666666666666666
+            },
+            "average_precision": 0.3465423465423465,
+            "difficulty": "easy",
+            "latency_s": 9.5367431640625e-07
+          },
+          {
+            "instance_id": "DATAGRAPH-895",
+            "repo": "DATAGRAPH",
+            "classifications": {
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/query/QueryResultGraphRepositoryQuery.java": "exists_before_fix",
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/query/GraphRepositoryQuery.java": "exists_before_fix",
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/examples/movies/repo/CinemaRepository.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/query/QueryResultGraphRepositoryQuery.java": 11,
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/query/GraphRepositoryQuery.java": 1,
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/examples/movies/repo/CinemaRepository.java": 15
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 0.3333333333333333,
+              "10": 0.3333333333333333,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.46060606060606063,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "DATAGRAPH-896",
+            "repo": "DATAGRAPH",
+            "classifications": {
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/support/Neo4jRepositoryFactoryBean.java": "exists_before_fix",
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/query/QueryResultGraphRepositoryQuery.java": "exists_before_fix",
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/queries/PagedQueryIT.java": "exists_before_fix",
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/query/GraphRepositoryQuery.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/support/Neo4jRepositoryFactoryBean.java": 5,
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/query/QueryResultGraphRepositoryQuery.java": 56,
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/queries/PagedQueryIT.java": 89
+            },
+            "best_rank": 5,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.25,
+              "10": 0.25,
+              "100": 0.75,
+              "200": 0.75
+            },
+            "average_precision": 0.06735553772070627,
+            "difficulty": "easy",
+            "latency_s": 1.9073486328125e-06
+          },
+          {
+            "instance_id": "DATAGRAPH-920",
+            "repo": "DATAGRAPH",
+            "classifications": {
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/support/Neo4jRepositoryFactoryBean.java": "exists_before_fix",
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/config/Neo4jRepositoryConfigurationExtension.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/support/Neo4jRepositoryFactoryBean.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.16666666666666666,
+            "difficulty": "easy",
+            "latency_s": 1.6689300537109375e-06
+          },
+          {
+            "instance_id": "DATAJPA-1000",
+            "repo": "DATAJPA",
+            "classifications": {
+              "src/test/java/org/springframework/data/jpa/repository/query/QueryUtilsUnitTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/jpa/repository/query/QueryUtils.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/jpa/repository/query/QueryUtilsUnitTests.java": 2,
+              "src/main/java/org/springframework/data/jpa/repository/query/QueryUtils.java": 3
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5833333333333333,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "DATAJPA-1023",
+            "repo": "DATAJPA",
+            "classifications": {
+              "src/test/java/org/springframework/data/jpa/repository/UserRepositoryFinderTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/jpa/repository/query/JpaQueryExecution.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/jpa/repository/UserRepositoryFinderTests.java": 10,
+              "src/main/java/org/springframework/data/jpa/repository/query/JpaQueryExecution.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.26666666666666666,
+            "difficulty": "easy",
+            "latency_s": 1.6689300537109375e-06
+          },
+          {
+            "instance_id": "DATAJPA-1024",
+            "repo": "DATAJPA",
+            "classifications": {
+              "src/main/java/org/springframework/data/jpa/repository/query/AbstractJpaQuery.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/jpa/repository/query/TupleConverterUnitTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/jpa/repository/query/AbstractJpaQuery.java": 43,
+              "src/test/java/org/springframework/data/jpa/repository/query/TupleConverterUnitTests.java": 36
+            },
+            "best_rank": 36,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.03714470284237726,
+            "difficulty": "medium",
+            "latency_s": 9.5367431640625e-07
+          },
+          {
+            "instance_id": "DATAJPA-110",
+            "repo": "DATAJPA",
+            "classifications": {
+              "src/test/java/org/springframework/data/jpa/repository/query/QueryUtilsUnitTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/jpa/repository/query/QueryUtils.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/jpa/repository/query/QueryUtilsUnitTests.java": 4,
+              "src/main/java/org/springframework/data/jpa/repository/query/QueryUtils.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "DATAJPA-111",
+            "repo": "DATAJPA",
+            "classifications": {
+              "src/test/java/org/springframework/data/jpa/repository/UserRepositoryTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/jpa/repository/support/SimpleJpaRepository.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/jpa/repository/UserRepositoryTests.java": 2,
+              "src/main/java/org/springframework/data/jpa/repository/support/SimpleJpaRepository.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "DATAJPA-120",
+            "repo": "DATAJPA",
+            "classifications": {
+              "src/main/java/org/springframework/data/jpa/domain/AbstractAuditable.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/jpa/domain/AbstractAuditable.java": 4
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.25,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "DATAJPA-137",
+            "repo": "DATAJPA",
+            "classifications": {
+              "src/main/java/org/springframework/data/jpa/repository/JpaRepository.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/jpa/repository/UserRepositoryTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/jpa/repository/support/SimpleJpaRepository.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/jpa/repository/JpaRepository.java": 4,
+              "src/test/java/org/springframework/data/jpa/repository/UserRepositoryTests.java": 2,
+              "src/main/java/org/springframework/data/jpa/repository/support/SimpleJpaRepository.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.9166666666666666,
+            "difficulty": "easy",
+            "latency_s": 9.5367431640625e-07
+          },
+          {
+            "instance_id": "DATAJPA-138",
+            "repo": "DATAJPA",
+            "classifications": {
+              "src/main/java/org/springframework/data/jpa/support/MergingPersistenceUnitManager.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/jpa/support/MergingPersistenceUnitManagerUnitTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/jpa/support/MergingPersistenceUnitManager.java": 1,
+              "src/test/java/org/springframework/data/jpa/support/MergingPersistenceUnitManagerUnitTests.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "easy": 19,
+          "medium": 1
+        },
+        "total": 20
+      },
+      "summary": {
+        "n": 20,
+        "macro_hit_at": {
+          "1": 0.55,
+          "5": 0.85,
+          "10": 0.95,
+          "100": 1.0,
+          "200": 1.0
+        },
+        "macro_recall_at": {
+          "1": 0.205,
+          "5": 0.5858333333333332,
+          "10": 0.7258333333333333,
+          "100": 0.9358333333333334,
+          "200": 0.9358333333333334
+        },
+        "mrr": 0.6699206349206349,
+        "map": 0.4814644038513607,
+        "mean_latency_s": 1.227855682373047e-06
+      }
+    },
+    "relevance_filtered": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "DATACMNS-939",
+            "repo": "DATACMNS",
+            "classifications": {
+              "src/main/java/org/springframework/data/repository/core/support/DefaultRepositoryInformation.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/repository/core/support/DefaultRepositoryInformation.java": 9
+            },
+            "best_rank": 9,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.1111111111111111,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "DATACMNS-943",
+            "repo": "DATACMNS",
+            "classifications": {
+              "src/main/java/org/springframework/data/repository/core/support/DefaultRepositoryInformation.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/repository/core/support/DefaultRepositoryInformationUnitTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/repository/core/support/DefaultRepositoryInformation.java": 25,
+              "src/test/java/org/springframework/data/repository/core/support/DefaultRepositoryInformationUnitTests.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.20666666666666667,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "DATACMNS-951",
+            "repo": "DATACMNS",
+            "classifications": {
+              "src/main/java/org/springframework/data/convert/Jsr310Converters.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/convert/Jsr310ConvertersUnitTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/convert/Jsr310Converters.java": 1,
+              "src/test/java/org/springframework/data/convert/Jsr310ConvertersUnitTests.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATACMNS-963",
+            "repo": "DATACMNS",
+            "classifications": {
+              "src/test/java/org/springframework/data/repository/query/ReturnedTypeUnitTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/repository/query/ReturnedType.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/repository/query/ReturnedTypeUnitTests.java": 12,
+              "src/main/java/org/springframework/data/repository/query/ReturnedType.java": 8
+            },
+            "best_rank": 8,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.14583333333333331,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "DATACMNS-98",
+            "repo": "DATACMNS",
+            "classifications": {
+              "spring-data-commons-core/src/main/java/org/springframework/data/repository/core/RepositoryMetadata.java": "exists_before_fix",
+              "spring-data-commons-core/src/test/java/org/springframework/data/repository/util/ClassUtilsUnitTests.java": "exists_before_fix",
+              "spring-data-commons-core/src/main/java/org/springframework/data/repository/core/support/AnnotationRepositoryMetadata.java": "exists_before_fix",
+              "spring-data-commons-core/src/main/java/org/springframework/data/repository/core/support/DefaultRepositoryMetadata.java": "exists_before_fix",
+              "spring-data-commons-core/src/main/java/org/springframework/data/repository/util/ClassUtils.java": "exists_before_fix",
+              "spring-data-commons-core/src/main/java/org/springframework/data/util/TypeDiscoverer.java": "exists_before_fix",
+              "spring-data-commons-core/src/main/java/org/springframework/data/util/TypeInformation.java": "exists_before_fix",
+              "spring-data-commons-core/src/test/java/org/springframework/data/repository/core/support/DefaultRepositoryMetadataUnitTests.java": "exists_before_fix",
+              "spring-data-commons-core/src/main/java/org/springframework/data/repository/query/QueryMethod.java": "exists_before_fix",
+              "spring-data-commons-core/src/main/java/org/springframework/data/repository/core/support/DefaultRepositoryInformation.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-data-commons-core/src/test/java/org/springframework/data/repository/util/ClassUtilsUnitTests.java": 5,
+              "spring-data-commons-core/src/main/java/org/springframework/data/repository/core/support/AnnotationRepositoryMetadata.java": 9,
+              "spring-data-commons-core/src/main/java/org/springframework/data/repository/core/support/DefaultRepositoryMetadata.java": 7,
+              "spring-data-commons-core/src/main/java/org/springframework/data/repository/util/ClassUtils.java": 4,
+              "spring-data-commons-core/src/main/java/org/springframework/data/util/TypeDiscoverer.java": 26,
+              "spring-data-commons-core/src/test/java/org/springframework/data/repository/core/support/DefaultRepositoryMetadataUnitTests.java": 11,
+              "spring-data-commons-core/src/main/java/org/springframework/data/repository/query/QueryMethod.java": 2,
+              "spring-data-commons-core/src/main/java/org/springframework/data/repository/core/support/DefaultRepositoryInformation.java": 13
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.3,
+              "10": 0.5,
+              "100": 0.8,
+              "200": 0.8
+            },
+            "average_precision": 0.4118592518592519,
+            "difficulty": "easy",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "DATAGRAPH-860",
+            "repo": "DATAGRAPH",
+            "classifications": {
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/queries/QueryIntegrationTest.java": "exists_before_fix",
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/examples/movies/domain/queryresult/EntityWrappingQueryResult.java": "exists_before_fix",
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/examples/movies/repo/UserRepository.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/queries/QueryIntegrationTest.java": 3,
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/examples/movies/domain/queryresult/EntityWrappingQueryResult.java": 19,
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/examples/movies/repo/UserRepository.java": 31
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.3333333333333333,
+              "10": 0.3333333333333333,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.17845689492548575,
+            "difficulty": "easy",
+            "latency_s": 1.430511474609375e-06
+          },
+          {
+            "instance_id": "DATAGRAPH-861",
+            "repo": "DATAGRAPH",
+            "classifications": {
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/queries/QueryIntegrationTest.java": "exists_before_fix",
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/examples/movies/repo/UserRepository.java": "exists_before_fix",
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/examples/movies/domain/queryresult/UserQueryResult.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/queries/QueryIntegrationTest.java": 11,
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/examples/movies/repo/UserRepository.java": 3,
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/examples/movies/domain/queryresult/UserQueryResult.java": 13
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.3333333333333333,
+              "10": 0.3333333333333333,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.24864024864024867,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "DATAGRAPH-865",
+            "repo": "DATAGRAPH",
+            "classifications": {
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/mapping/Neo4jPersistentProperty.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/mapping/Neo4jPersistentProperty.java": 11
+            },
+            "best_rank": 11,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.09090909090909091,
+            "difficulty": "medium",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "DATAGRAPH-893",
+            "repo": "DATAGRAPH",
+            "classifications": {
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/queries/PagedQueryIT.java": "exists_before_fix",
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/query/GraphRepositoryQuery.java": "exists_before_fix",
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/examples/movies/domain/Cinema.java": "exists_before_fix",
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/examples/movies/repo/CinemaRepository.java": "exists_before_fix",
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/web/domain/Cinema.java": "exists_before_fix",
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/query/QueryResultGraphRepositoryQuery.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/queries/PagedQueryIT.java": 17,
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/query/GraphRepositoryQuery.java": 5,
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/examples/movies/repo/CinemaRepository.java": 26,
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/query/QueryResultGraphRepositoryQuery.java": 7
+            },
+            "best_rank": 5,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.16666666666666666,
+              "10": 0.3333333333333333,
+              "100": 0.6666666666666666,
+              "200": 0.6666666666666666
+            },
+            "average_precision": 0.13600517129928894,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "DATAGRAPH-895",
+            "repo": "DATAGRAPH",
+            "classifications": {
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/query/QueryResultGraphRepositoryQuery.java": "exists_before_fix",
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/query/GraphRepositoryQuery.java": "exists_before_fix",
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/examples/movies/repo/CinemaRepository.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/query/QueryResultGraphRepositoryQuery.java": 19,
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/query/GraphRepositoryQuery.java": 9,
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/examples/movies/repo/CinemaRepository.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.3333333333333333,
+              "10": 0.6666666666666666,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.23781676413255362,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "DATAGRAPH-896",
+            "repo": "DATAGRAPH",
+            "classifications": {
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/support/Neo4jRepositoryFactoryBean.java": "exists_before_fix",
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/query/QueryResultGraphRepositoryQuery.java": "exists_before_fix",
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/queries/PagedQueryIT.java": "exists_before_fix",
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/query/GraphRepositoryQuery.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/support/Neo4jRepositoryFactoryBean.java": 10,
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/query/QueryResultGraphRepositoryQuery.java": 2,
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/queries/PagedQueryIT.java": 89
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.25,
+              "10": 0.5,
+              "100": 0.75,
+              "200": 0.75
+            },
+            "average_precision": 0.1834269662921348,
+            "difficulty": "easy",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "DATAGRAPH-920",
+            "repo": "DATAGRAPH",
+            "classifications": {
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/support/Neo4jRepositoryFactoryBean.java": "exists_before_fix",
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/config/Neo4jRepositoryConfigurationExtension.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/support/Neo4jRepositoryFactoryBean.java": 7
+            },
+            "best_rank": 7,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.07142857142857142,
+            "difficulty": "easy",
+            "latency_s": 1.430511474609375e-06
+          },
+          {
+            "instance_id": "DATAJPA-1000",
+            "repo": "DATAJPA",
+            "classifications": {
+              "src/test/java/org/springframework/data/jpa/repository/query/QueryUtilsUnitTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/jpa/repository/query/QueryUtils.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/jpa/repository/query/QueryUtilsUnitTests.java": 9,
+              "src/main/java/org/springframework/data/jpa/repository/query/QueryUtils.java": 10
+            },
+            "best_rank": 9,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.15555555555555556,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "DATAJPA-1023",
+            "repo": "DATAJPA",
+            "classifications": {
+              "src/test/java/org/springframework/data/jpa/repository/UserRepositoryFinderTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/jpa/repository/query/JpaQueryExecution.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/jpa/repository/UserRepositoryFinderTests.java": 21,
+              "src/main/java/org/springframework/data/jpa/repository/query/JpaQueryExecution.java": 14
+            },
+            "best_rank": 14,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.08333333333333333,
+            "difficulty": "medium",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATAJPA-1024",
+            "repo": "DATAJPA",
+            "classifications": {
+              "src/main/java/org/springframework/data/jpa/repository/query/AbstractJpaQuery.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/jpa/repository/query/TupleConverterUnitTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/jpa/repository/query/AbstractJpaQuery.java": 5,
+              "src/test/java/org/springframework/data/jpa/repository/query/TupleConverterUnitTests.java": 39
+            },
+            "best_rank": 5,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.12564102564102564,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATAJPA-110",
+            "repo": "DATAJPA",
+            "classifications": {
+              "src/test/java/org/springframework/data/jpa/repository/query/QueryUtilsUnitTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/jpa/repository/query/QueryUtils.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/jpa/repository/query/QueryUtilsUnitTests.java": 13,
+              "src/main/java/org/springframework/data/jpa/repository/query/QueryUtils.java": 11
+            },
+            "best_rank": 11,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.12237762237762238,
+            "difficulty": "medium",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATAJPA-111",
+            "repo": "DATAJPA",
+            "classifications": {
+              "src/test/java/org/springframework/data/jpa/repository/UserRepositoryTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/jpa/repository/support/SimpleJpaRepository.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/jpa/repository/UserRepositoryTests.java": 10,
+              "src/main/java/org/springframework/data/jpa/repository/support/SimpleJpaRepository.java": 9
+            },
+            "best_rank": 9,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.15555555555555556,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATAJPA-120",
+            "repo": "DATAJPA",
+            "classifications": {
+              "src/main/java/org/springframework/data/jpa/domain/AbstractAuditable.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/jpa/domain/AbstractAuditable.java": 4
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.25,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATAJPA-137",
+            "repo": "DATAJPA",
+            "classifications": {
+              "src/main/java/org/springframework/data/jpa/repository/JpaRepository.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/jpa/repository/UserRepositoryTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/jpa/repository/support/SimpleJpaRepository.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/jpa/repository/JpaRepository.java": 4,
+              "src/test/java/org/springframework/data/jpa/repository/UserRepositoryTests.java": 2,
+              "src/main/java/org/springframework/data/jpa/repository/support/SimpleJpaRepository.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.9166666666666666,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATAJPA-138",
+            "repo": "DATAJPA",
+            "classifications": {
+              "src/main/java/org/springframework/data/jpa/support/MergingPersistenceUnitManager.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/jpa/support/MergingPersistenceUnitManagerUnitTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/jpa/support/MergingPersistenceUnitManager.java": 1,
+              "src/test/java/org/springframework/data/jpa/support/MergingPersistenceUnitManagerUnitTests.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "easy": 17,
+          "medium": 3
+        },
+        "total": 20
+      },
+      "summary": {
+        "n": 20,
+        "macro_hit_at": {
+          "1": 0.15,
+          "5": 0.6,
+          "10": 0.85,
+          "100": 1.0,
+          "200": 1.0
+        },
+        "macro_recall_at": {
+          "1": 0.06666666666666667,
+          "5": 0.3358333333333333,
+          "10": 0.5833333333333334,
+          "100": 0.9358333333333334,
+          "200": 0.9358333333333334
+        },
+        "mrr": 0.3418885281385281,
+        "map": 0.2915641914863748,
+        "mean_latency_s": 5.7220458984375e-07
+      }
+    },
+    "reformulated": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "DATACMNS-939",
+            "repo": "DATACMNS",
+            "classifications": {
+              "src/main/java/org/springframework/data/repository/core/support/DefaultRepositoryInformation.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/repository/core/support/DefaultRepositoryInformation.java": 9
+            },
+            "best_rank": 9,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.1111111111111111,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATACMNS-943",
+            "repo": "DATACMNS",
+            "classifications": {
+              "src/main/java/org/springframework/data/repository/core/support/DefaultRepositoryInformation.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/repository/core/support/DefaultRepositoryInformationUnitTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/repository/core/support/DefaultRepositoryInformation.java": 22,
+              "src/test/java/org/springframework/data/repository/core/support/DefaultRepositoryInformationUnitTests.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5454545454545454,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATACMNS-951",
+            "repo": "DATACMNS",
+            "classifications": {
+              "src/main/java/org/springframework/data/convert/Jsr310Converters.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/convert/Jsr310ConvertersUnitTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/convert/Jsr310Converters.java": 1,
+              "src/test/java/org/springframework/data/convert/Jsr310ConvertersUnitTests.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 9.5367431640625e-07
+          },
+          {
+            "instance_id": "DATACMNS-963",
+            "repo": "DATACMNS",
+            "classifications": {
+              "src/test/java/org/springframework/data/repository/query/ReturnedTypeUnitTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/repository/query/ReturnedType.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/repository/query/ReturnedTypeUnitTests.java": 4,
+              "src/main/java/org/springframework/data/repository/query/ReturnedType.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.75,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATACMNS-98",
+            "repo": "DATACMNS",
+            "classifications": {
+              "spring-data-commons-core/src/main/java/org/springframework/data/repository/core/RepositoryMetadata.java": "exists_before_fix",
+              "spring-data-commons-core/src/test/java/org/springframework/data/repository/util/ClassUtilsUnitTests.java": "exists_before_fix",
+              "spring-data-commons-core/src/main/java/org/springframework/data/repository/core/support/AnnotationRepositoryMetadata.java": "exists_before_fix",
+              "spring-data-commons-core/src/main/java/org/springframework/data/repository/core/support/DefaultRepositoryMetadata.java": "exists_before_fix",
+              "spring-data-commons-core/src/main/java/org/springframework/data/repository/util/ClassUtils.java": "exists_before_fix",
+              "spring-data-commons-core/src/main/java/org/springframework/data/util/TypeDiscoverer.java": "exists_before_fix",
+              "spring-data-commons-core/src/main/java/org/springframework/data/util/TypeInformation.java": "exists_before_fix",
+              "spring-data-commons-core/src/test/java/org/springframework/data/repository/core/support/DefaultRepositoryMetadataUnitTests.java": "exists_before_fix",
+              "spring-data-commons-core/src/main/java/org/springframework/data/repository/query/QueryMethod.java": "exists_before_fix",
+              "spring-data-commons-core/src/main/java/org/springframework/data/repository/core/support/DefaultRepositoryInformation.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-data-commons-core/src/test/java/org/springframework/data/repository/util/ClassUtilsUnitTests.java": 4,
+              "spring-data-commons-core/src/main/java/org/springframework/data/repository/core/support/AnnotationRepositoryMetadata.java": 7,
+              "spring-data-commons-core/src/main/java/org/springframework/data/repository/core/support/DefaultRepositoryMetadata.java": 6,
+              "spring-data-commons-core/src/main/java/org/springframework/data/repository/util/ClassUtils.java": 1,
+              "spring-data-commons-core/src/main/java/org/springframework/data/util/TypeDiscoverer.java": 28,
+              "spring-data-commons-core/src/test/java/org/springframework/data/repository/core/support/DefaultRepositoryMetadataUnitTests.java": 9,
+              "spring-data-commons-core/src/main/java/org/springframework/data/repository/query/QueryMethod.java": 2,
+              "spring-data-commons-core/src/main/java/org/springframework/data/repository/core/support/DefaultRepositoryInformation.java": 12
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.1,
+              "5": 0.3,
+              "10": 0.6,
+              "100": 0.8,
+              "200": 0.8
+            },
+            "average_precision": 0.5666666666666667,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "DATAGRAPH-860",
+            "repo": "DATAGRAPH",
+            "classifications": {
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/queries/QueryIntegrationTest.java": "exists_before_fix",
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/examples/movies/domain/queryresult/EntityWrappingQueryResult.java": "exists_before_fix",
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/examples/movies/repo/UserRepository.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/queries/QueryIntegrationTest.java": 1,
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/examples/movies/domain/queryresult/EntityWrappingQueryResult.java": 23,
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/examples/movies/repo/UserRepository.java": 45
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 0.3333333333333333,
+              "10": 0.3333333333333333,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.38454106280193234,
+            "difficulty": "easy",
+            "latency_s": 9.5367431640625e-07
+          },
+          {
+            "instance_id": "DATAGRAPH-861",
+            "repo": "DATAGRAPH",
+            "classifications": {
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/queries/QueryIntegrationTest.java": "exists_before_fix",
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/examples/movies/repo/UserRepository.java": "exists_before_fix",
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/examples/movies/domain/queryresult/UserQueryResult.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/queries/QueryIntegrationTest.java": 1,
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/examples/movies/repo/UserRepository.java": 17,
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/examples/movies/domain/queryresult/UserQueryResult.java": 3
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 0.6666666666666666,
+              "10": 0.6666666666666666,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.6143790849673202,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATAGRAPH-865",
+            "repo": "DATAGRAPH",
+            "classifications": {
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/mapping/Neo4jPersistentProperty.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/mapping/Neo4jPersistentProperty.java": 4
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.25,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATAGRAPH-893",
+            "repo": "DATAGRAPH",
+            "classifications": {
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/queries/PagedQueryIT.java": "exists_before_fix",
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/query/GraphRepositoryQuery.java": "exists_before_fix",
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/examples/movies/domain/Cinema.java": "exists_before_fix",
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/examples/movies/repo/CinemaRepository.java": "exists_before_fix",
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/web/domain/Cinema.java": "exists_before_fix",
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/query/QueryResultGraphRepositoryQuery.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/queries/PagedQueryIT.java": 15,
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/query/GraphRepositoryQuery.java": 1,
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/examples/movies/domain/Cinema.java": 211,
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/examples/movies/repo/CinemaRepository.java": 12,
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/web/domain/Cinema.java": 238,
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/query/QueryResultGraphRepositoryQuery.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.16666666666666666,
+              "5": 0.3333333333333333,
+              "10": 0.3333333333333333,
+              "100": 0.6666666666666666,
+              "200": 0.6666666666666666
+            },
+            "average_precision": 0.4275955721941225,
+            "difficulty": "easy",
+            "latency_s": 1.430511474609375e-06
+          },
+          {
+            "instance_id": "DATAGRAPH-895",
+            "repo": "DATAGRAPH",
+            "classifications": {
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/query/QueryResultGraphRepositoryQuery.java": "exists_before_fix",
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/query/GraphRepositoryQuery.java": "exists_before_fix",
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/examples/movies/repo/CinemaRepository.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/query/QueryResultGraphRepositoryQuery.java": 15,
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/query/GraphRepositoryQuery.java": 3,
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/examples/movies/repo/CinemaRepository.java": 16
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.3333333333333333,
+              "10": 0.3333333333333333,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.21805555555555556,
+            "difficulty": "easy",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "DATAGRAPH-896",
+            "repo": "DATAGRAPH",
+            "classifications": {
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/support/Neo4jRepositoryFactoryBean.java": "exists_before_fix",
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/query/QueryResultGraphRepositoryQuery.java": "exists_before_fix",
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/queries/PagedQueryIT.java": "exists_before_fix",
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/query/GraphRepositoryQuery.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/support/Neo4jRepositoryFactoryBean.java": 4,
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/query/QueryResultGraphRepositoryQuery.java": 59,
+              "spring-data-neo4j/src/test/java/org/springframework/data/neo4j/queries/PagedQueryIT.java": 77,
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/query/GraphRepositoryQuery.java": 213
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.25,
+              "10": 0.25,
+              "100": 0.75,
+              "200": 0.75
+            },
+            "average_precision": 0.08540967169219736,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "DATAGRAPH-920",
+            "repo": "DATAGRAPH",
+            "classifications": {
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/support/Neo4jRepositoryFactoryBean.java": "exists_before_fix",
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/config/Neo4jRepositoryConfigurationExtension.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/support/Neo4jRepositoryFactoryBean.java": 4,
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/repository/config/Neo4jRepositoryConfigurationExtension.java": 199
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 1.0
+            },
+            "average_precision": 0.1300251256281407,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATAJPA-1000",
+            "repo": "DATAJPA",
+            "classifications": {
+              "src/test/java/org/springframework/data/jpa/repository/query/QueryUtilsUnitTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/jpa/repository/query/QueryUtils.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/jpa/repository/query/QueryUtilsUnitTests.java": 1,
+              "src/main/java/org/springframework/data/jpa/repository/query/QueryUtils.java": 3
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.8333333333333333,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATAJPA-1023",
+            "repo": "DATAJPA",
+            "classifications": {
+              "src/test/java/org/springframework/data/jpa/repository/UserRepositoryFinderTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/jpa/repository/query/JpaQueryExecution.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/jpa/repository/UserRepositoryFinderTests.java": 33,
+              "src/main/java/org/springframework/data/jpa/repository/query/JpaQueryExecution.java": 4
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.1553030303030303,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "DATAJPA-1024",
+            "repo": "DATAJPA",
+            "classifications": {
+              "src/main/java/org/springframework/data/jpa/repository/query/AbstractJpaQuery.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/jpa/repository/query/TupleConverterUnitTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/jpa/repository/query/AbstractJpaQuery.java": 45,
+              "src/test/java/org/springframework/data/jpa/repository/query/TupleConverterUnitTests.java": 27
+            },
+            "best_rank": 27,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.040740740740740744,
+            "difficulty": "medium",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATAJPA-110",
+            "repo": "DATAJPA",
+            "classifications": {
+              "src/test/java/org/springframework/data/jpa/repository/query/QueryUtilsUnitTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/jpa/repository/query/QueryUtils.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/jpa/repository/query/QueryUtilsUnitTests.java": 2,
+              "src/main/java/org/springframework/data/jpa/repository/query/QueryUtils.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATAJPA-111",
+            "repo": "DATAJPA",
+            "classifications": {
+              "src/test/java/org/springframework/data/jpa/repository/UserRepositoryTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/jpa/repository/support/SimpleJpaRepository.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/jpa/repository/UserRepositoryTests.java": 3,
+              "src/main/java/org/springframework/data/jpa/repository/support/SimpleJpaRepository.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.8333333333333333,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATAJPA-120",
+            "repo": "DATAJPA",
+            "classifications": {
+              "src/main/java/org/springframework/data/jpa/domain/AbstractAuditable.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/jpa/domain/AbstractAuditable.java": 5
+            },
+            "best_rank": 5,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.2,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATAJPA-137",
+            "repo": "DATAJPA",
+            "classifications": {
+              "src/main/java/org/springframework/data/jpa/repository/JpaRepository.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/jpa/repository/UserRepositoryTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/jpa/repository/support/SimpleJpaRepository.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/jpa/repository/JpaRepository.java": 3,
+              "src/test/java/org/springframework/data/jpa/repository/UserRepositoryTests.java": 2,
+              "src/main/java/org/springframework/data/jpa/repository/support/SimpleJpaRepository.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATAJPA-138",
+            "repo": "DATAJPA",
+            "classifications": {
+              "src/main/java/org/springframework/data/jpa/support/MergingPersistenceUnitManager.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/jpa/support/MergingPersistenceUnitManagerUnitTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/jpa/support/MergingPersistenceUnitManager.java": 1,
+              "src/test/java/org/springframework/data/jpa/support/MergingPersistenceUnitManagerUnitTests.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "easy": 19,
+          "medium": 1
+        },
+        "total": 20
+      },
+      "summary": {
+        "n": 20,
+        "macro_hit_at": {
+          "1": 0.6,
+          "5": 0.9,
+          "10": 0.95,
+          "100": 1.0,
+          "200": 1.0
+        },
+        "macro_recall_at": {
+          "1": 0.23833333333333334,
+          "5": 0.6358333333333333,
+          "10": 0.7008333333333333,
+          "100": 0.9358333333333334,
+          "200": 0.9608333333333334
+        },
+        "mrr": 0.684074074074074,
+        "map": 0.5072974416891014,
+        "mean_latency_s": 4.5299530029296873e-07
+      }
+    }
+  }
+}

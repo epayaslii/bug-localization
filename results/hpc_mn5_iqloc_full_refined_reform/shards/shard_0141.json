@@ -1,0 +1,1940 @@
+{
+  "manifest_id": "iqloc-multi-n7091-s42-f8a5d2c401a4",
+  "shard_index": 141,
+  "num_shards": 350,
+  "candidate_pool_size": 100,
+  "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+  "reformulation_mode": "semantic",
+  "relevance_mode": "llm",
+  "keep_fraction": 0.5,
+  "instance_ids": [
+    "HBASE-10831",
+    "HBASE-11039",
+    "HBASE-11052",
+    "HBASE-11374",
+    "HBASE-1142",
+    "HBASE-1148",
+    "HBASE-11542",
+    "HBASE-1162",
+    "HBASE-11625",
+    "HBASE-1169",
+    "HBASE-1175",
+    "HBASE-1185",
+    "HBASE-1190",
+    "HBASE-12006",
+    "HBASE-1202",
+    "HBASE-12198",
+    "HBASE-12373",
+    "HBASE-1238",
+    "HBASE-12393",
+    "HBASE-12491"
+  ],
+  "configs": {
+    "retriever": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "HBASE-10831",
+            "repo": "HBASE",
+            "classifications": {
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/util/MultiThreadedReaderWithACL.java": "exists_before_fix",
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/util/MultiThreadedUpdaterWithACL.java": "exists_before_fix",
+              "hbase-it/src/test/java/org/apache/hadoop/hbase/IntegrationTestIngestWithACL.java": "exists_before_fix",
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/util/LoadTestTool.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/util/MultiThreadedReaderWithACL.java": 37,
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/util/MultiThreadedUpdaterWithACL.java": 42,
+              "hbase-it/src/test/java/org/apache/hadoop/hbase/IntegrationTestIngestWithACL.java": 1,
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/util/LoadTestTool.java": 6
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.25,
+              "5": 0.25,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3774131274131274,
+            "difficulty": "easy",
+            "latency_s": 1.430511474609375e-06
+          },
+          {
+            "instance_id": "HBASE-11039",
+            "repo": "HBASE",
+            "classifications": {
+              "hbase-server/src/main/java/org/apache/hadoop/hbase/mapreduce/Import.java": "exists_before_fix",
+              "hbase-client/src/main/java/org/apache/hadoop/hbase/security/access/AccessControlClient.java": "exists_before_fix",
+              "hbase-client/src/main/java/org/apache/hadoop/hbase/security/visibility/CellVisibility.java": "exists_before_fix",
+              "hbase-it/src/test/java/org/apache/hadoop/hbase/test/IntegrationTestBigLinkedList.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "hbase-client/src/main/java/org/apache/hadoop/hbase/security/visibility/CellVisibility.java": 20,
+              "hbase-it/src/test/java/org/apache/hadoop/hbase/test/IntegrationTestBigLinkedList.java": 62
+            },
+            "best_rank": 20,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.02056451612903226,
+            "difficulty": "medium",
+            "latency_s": 1.6689300537109375e-06
+          },
+          {
+            "instance_id": "HBASE-11052",
+            "repo": "HBASE",
+            "classifications": {
+              "src/main/java/org/apache/hadoop/hbase/thrift2/ThriftServer.java": "exists_before_fix",
+              "src/main/java/org/apache/hadoop/hbase/thrift/ThriftServerRunner.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/hadoop/hbase/thrift2/ThriftServer.java": 3,
+              "src/main/java/org/apache/hadoop/hbase/thrift/ThriftServerRunner.java": 4
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.41666666666666663,
+            "difficulty": "easy",
+            "latency_s": 4.291534423828125e-06
+          },
+          {
+            "instance_id": "HBASE-11374",
+            "repo": "HBASE",
+            "classifications": {
+              "hbase-client/src/main/java/org/apache/hadoop/hbase/client/AsyncProcess.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "hbase-client/src/main/java/org/apache/hadoop/hbase/client/AsyncProcess.java": 13
+            },
+            "best_rank": 13,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.07692307692307693,
+            "difficulty": "medium",
+            "latency_s": 1.430511474609375e-06
+          },
+          {
+            "instance_id": "HBASE-1142",
+            "repo": "HBASE",
+            "classifications": {
+              "src/java/org/apache/hadoop/hbase/thrift/ThriftServer.java": "exists_before_fix",
+              "src/java/org/apache/hadoop/hbase/thrift/ThriftUtilities.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/hadoop/hbase/thrift/ThriftServer.java": 6,
+              "src/java/org/apache/hadoop/hbase/thrift/ThriftUtilities.java": 18
+            },
+            "best_rank": 6,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.1388888888888889,
+            "difficulty": "easy",
+            "latency_s": 1.9073486328125e-06
+          },
+          {
+            "instance_id": "HBASE-1148",
+            "repo": "HBASE",
+            "classifications": {
+              "src/java/org/apache/hadoop/hbase/regionserver/HLog.java": "exists_before_fix",
+              "src/java/org/apache/hadoop/hbase/regionserver/HRegion.java": "exists_before_fix",
+              "src/test/org/apache/hadoop/hbase/regionserver/TestHLog.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/hadoop/hbase/regionserver/HLog.java": 1,
+              "src/java/org/apache/hadoop/hbase/regionserver/HRegion.java": 4,
+              "src/test/org/apache/hadoop/hbase/regionserver/TestHLog.java": 7
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 0.6666666666666666,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.6428571428571429,
+            "difficulty": "easy",
+            "latency_s": 2.86102294921875e-06
+          },
+          {
+            "instance_id": "HBASE-11542",
+            "repo": "HBASE",
+            "classifications": {
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/http/ssl/KeyStoreTestUtil.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/http/ssl/KeyStoreTestUtil.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 1.6689300537109375e-06
+          },
+          {
+            "instance_id": "HBASE-1162",
+            "repo": "HBASE",
+            "classifications": {
+              "src/java/org/apache/hadoop/hbase/master/RegionManager.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/hadoop/hbase/master/RegionManager.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.1457672119140625e-06
+          },
+          {
+            "instance_id": "HBASE-11625",
+            "repo": "HBASE",
+            "classifications": {
+              "src/main/java/org/apache/hadoop/hbase/io/hfile/ChecksumUtil.java": "exists_before_fix",
+              "src/main/java/org/apache/hadoop/hbase/io/hfile/HFileBlock.java": "exists_before_fix",
+              "src/test/java/org/apache/hadoop/hbase/io/hfile/TestChecksum.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/hadoop/hbase/io/hfile/ChecksumUtil.java": 13,
+              "src/main/java/org/apache/hadoop/hbase/io/hfile/HFileBlock.java": 2,
+              "src/test/java/org/apache/hadoop/hbase/io/hfile/TestChecksum.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 0.6666666666666666,
+              "10": 0.6666666666666666,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.7435897435897436,
+            "difficulty": "easy",
+            "latency_s": 9.5367431640625e-07
+          },
+          {
+            "instance_id": "HBASE-1169",
+            "repo": "HBASE",
+            "classifications": {
+              "src/java/org/apache/hadoop/hbase/master/MetaScanner.java": "exists_before_fix",
+              "src/java/org/apache/hadoop/hbase/master/RegionManager.java": "exists_before_fix",
+              "src/java/org/apache/hadoop/hbase/master/RootScanner.java": "exists_before_fix",
+              "src/java/org/apache/hadoop/hbase/master/ServerManager.java": "exists_before_fix",
+              "src/java/org/apache/hadoop/hbase/master/HMaster.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/hadoop/hbase/master/MetaScanner.java": 6,
+              "src/java/org/apache/hadoop/hbase/master/RegionManager.java": 11,
+              "src/java/org/apache/hadoop/hbase/master/RootScanner.java": 14,
+              "src/java/org/apache/hadoop/hbase/master/ServerManager.java": 2,
+              "src/java/org/apache/hadoop/hbase/master/HMaster.java": 4
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.4,
+              "10": 0.6,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.4441558441558442,
+            "difficulty": "easy",
+            "latency_s": 2.1457672119140625e-06
+          },
+          {
+            "instance_id": "HBASE-1175",
+            "repo": "HBASE",
+            "classifications": {
+              "src/java/org/apache/hadoop/hbase/HRegionInfo.java": "exists_before_fix",
+              "src/java/org/apache/hadoop/hbase/master/HMaster.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/hadoop/hbase/HRegionInfo.java": 5,
+              "src/java/org/apache/hadoop/hbase/master/HMaster.java": 16
+            },
+            "best_rank": 5,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.1625,
+            "difficulty": "easy",
+            "latency_s": 1.9073486328125e-06
+          },
+          {
+            "instance_id": "HBASE-1185",
+            "repo": "HBASE",
+            "classifications": {
+              "src/java/org/apache/hadoop/hbase/regionserver/HRegionServer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/hadoop/hbase/regionserver/HRegionServer.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 2.86102294921875e-06
+          },
+          {
+            "instance_id": "HBASE-1190",
+            "repo": "HBASE",
+            "classifications": {
+              "src/java/org/apache/hadoop/hbase/mapred/TableInputFormatBase.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/hadoop/hbase/mapred/TableInputFormatBase.java": 7
+            },
+            "best_rank": 7,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.14285714285714285,
+            "difficulty": "easy",
+            "latency_s": 2.86102294921875e-06
+          },
+          {
+            "instance_id": "HBASE-12006",
+            "repo": "HBASE",
+            "classifications": {
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/http/ssl/KeyStoreTestUtil.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/http/ssl/KeyStoreTestUtil.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.1457672119140625e-06
+          },
+          {
+            "instance_id": "HBASE-1202",
+            "repo": "HBASE",
+            "classifications": {
+              "src/java/org/apache/hadoop/hbase/io/Cell.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/hadoop/hbase/io/Cell.java": 42
+            },
+            "best_rank": 42,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.023809523809523808,
+            "difficulty": "medium",
+            "latency_s": 1.430511474609375e-06
+          },
+          {
+            "instance_id": "HBASE-12198",
+            "repo": "HBASE",
+            "classifications": {
+              "hbase-client/src/main/java/org/apache/hadoop/hbase/client/AsyncProcess.java": "exists_before_fix",
+              "hbase-client/src/main/java/org/apache/hadoop/hbase/client/HTableMultiplexer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "hbase-client/src/main/java/org/apache/hadoop/hbase/client/AsyncProcess.java": 11
+            },
+            "best_rank": 11,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.045454545454545456,
+            "difficulty": "medium",
+            "latency_s": 1.6689300537109375e-06
+          },
+          {
+            "instance_id": "HBASE-12373",
+            "repo": "HBASE",
+            "classifications": {
+              "hbase-server/src/main/java/org/apache/hadoop/hbase/security/visibility/VisibilityController.java": "exists_before_fix",
+              "hbase-client/src/main/java/org/apache/hadoop/hbase/security/visibility/VisibilityClient.java": "exists_before_fix",
+              "hbase-server/src/main/java/org/apache/hadoop/hbase/security/visibility/DefaultVisibilityLabelServiceImpl.java": "exists_before_fix",
+              "hbase-protocol/src/main/java/org/apache/hadoop/hbase/protobuf/generated/VisibilityLabelsProtos.java": "exists_before_fix",
+              "hbase-server/src/main/java/org/apache/hadoop/hbase/security/visibility/VisibilityLabelService.java": "exists_before_fix",
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/security/visibility/ExpAsStringVisibilityLabelServiceImpl.java": "exists_before_fix",
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/security/visibility/TestVisibilityLabelsWithDefaultVisLabelService.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "hbase-server/src/main/java/org/apache/hadoop/hbase/security/visibility/VisibilityController.java": 8,
+              "hbase-client/src/main/java/org/apache/hadoop/hbase/security/visibility/VisibilityClient.java": 3,
+              "hbase-server/src/main/java/org/apache/hadoop/hbase/security/visibility/DefaultVisibilityLabelServiceImpl.java": 26,
+              "hbase-protocol/src/main/java/org/apache/hadoop/hbase/protobuf/generated/VisibilityLabelsProtos.java": 4,
+              "hbase-server/src/main/java/org/apache/hadoop/hbase/security/visibility/VisibilityLabelService.java": 37,
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/security/visibility/ExpAsStringVisibilityLabelServiceImpl.java": 34,
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/security/visibility/TestVisibilityLabelsWithDefaultVisLabelService.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.42857142857142855,
+              "10": 0.5714285714285714,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.42494773377126316,
+            "difficulty": "easy",
+            "latency_s": 2.1457672119140625e-06
+          },
+          {
+            "instance_id": "HBASE-1238",
+            "repo": "HBASE",
+            "classifications": {
+              "src/java/org/apache/hadoop/hbase/regionserver/MemcacheFlusher.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/hadoop/hbase/regionserver/MemcacheFlusher.java": 8
+            },
+            "best_rank": 8,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.125,
+            "difficulty": "easy",
+            "latency_s": 2.1457672119140625e-06
+          },
+          {
+            "instance_id": "HBASE-12393",
+            "repo": "HBASE",
+            "classifications": {
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/regionserver/TestRSStatusServlet.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 1.9073486328125e-06
+          },
+          {
+            "instance_id": "HBASE-12491",
+            "repo": "HBASE",
+            "classifications": {
+              "hbase-server/src/main/java/org/apache/hadoop/hbase/mapreduce/TableMapReduceUtil.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "hbase-server/src/main/java/org/apache/hadoop/hbase/mapreduce/TableMapReduceUtil.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "easy": 15,
+          "medium": 4,
+          "no_localizable_gt": 1
+        },
+        "total": 20
+      },
+      "summary": {
+        "n": 20,
+        "macro_hit_at": {
+          "1": 0.35,
+          "5": 0.6,
+          "10": 0.75,
+          "100": 0.95,
+          "200": 0.95
+        },
+        "macro_recall_at": {
+          "1": 0.2458333333333333,
+          "5": 0.44559523809523804,
+          "10": 0.6169047619047618,
+          "100": 0.9,
+          "200": 0.9
+        },
+        "mrr": 0.4854749417249418,
+        "map": 0.4142813976257999,
+        "mean_latency_s": 2.0202837492290294e-06
+      }
+    },
+    "relevance_filtered": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "HBASE-10831",
+            "repo": "HBASE",
+            "classifications": {
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/util/MultiThreadedReaderWithACL.java": "exists_before_fix",
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/util/MultiThreadedUpdaterWithACL.java": "exists_before_fix",
+              "hbase-it/src/test/java/org/apache/hadoop/hbase/IntegrationTestIngestWithACL.java": "exists_before_fix",
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/util/LoadTestTool.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/util/MultiThreadedReaderWithACL.java": 42,
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/util/MultiThreadedUpdaterWithACL.java": 47,
+              "hbase-it/src/test/java/org/apache/hadoop/hbase/IntegrationTestIngestWithACL.java": 6,
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/util/LoadTestTool.java": 11
+            },
+            "best_rank": 6,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.25,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.12625495072303583,
+            "difficulty": "easy",
+            "latency_s": 9.5367431640625e-07
+          },
+          {
+            "instance_id": "HBASE-11039",
+            "repo": "HBASE",
+            "classifications": {
+              "hbase-server/src/main/java/org/apache/hadoop/hbase/mapreduce/Import.java": "exists_before_fix",
+              "hbase-client/src/main/java/org/apache/hadoop/hbase/security/access/AccessControlClient.java": "exists_before_fix",
+              "hbase-client/src/main/java/org/apache/hadoop/hbase/security/visibility/CellVisibility.java": "exists_before_fix",
+              "hbase-it/src/test/java/org/apache/hadoop/hbase/test/IntegrationTestBigLinkedList.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "hbase-client/src/main/java/org/apache/hadoop/hbase/security/visibility/CellVisibility.java": 23,
+              "hbase-it/src/test/java/org/apache/hadoop/hbase/test/IntegrationTestBigLinkedList.java": 64
+            },
+            "best_rank": 23,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.018682065217391304,
+            "difficulty": "medium",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "HBASE-11052",
+            "repo": "HBASE",
+            "classifications": {
+              "src/main/java/org/apache/hadoop/hbase/thrift2/ThriftServer.java": "exists_before_fix",
+              "src/main/java/org/apache/hadoop/hbase/thrift/ThriftServerRunner.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/hadoop/hbase/thrift2/ThriftServer.java": 7,
+              "src/main/java/org/apache/hadoop/hbase/thrift/ThriftServerRunner.java": 8
+            },
+            "best_rank": 7,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.19642857142857142,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "HBASE-11374",
+            "repo": "HBASE",
+            "classifications": {
+              "hbase-client/src/main/java/org/apache/hadoop/hbase/client/AsyncProcess.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "hbase-client/src/main/java/org/apache/hadoop/hbase/client/AsyncProcess.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "HBASE-1142",
+            "repo": "HBASE",
+            "classifications": {
+              "src/java/org/apache/hadoop/hbase/thrift/ThriftServer.java": "exists_before_fix",
+              "src/java/org/apache/hadoop/hbase/thrift/ThriftUtilities.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/hadoop/hbase/thrift/ThriftServer.java": 10,
+              "src/java/org/apache/hadoop/hbase/thrift/ThriftUtilities.java": 22
+            },
+            "best_rank": 10,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.09545454545454546,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "HBASE-1148",
+            "repo": "HBASE",
+            "classifications": {
+              "src/java/org/apache/hadoop/hbase/regionserver/HLog.java": "exists_before_fix",
+              "src/java/org/apache/hadoop/hbase/regionserver/HRegion.java": "exists_before_fix",
+              "src/test/org/apache/hadoop/hbase/regionserver/TestHLog.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/hadoop/hbase/regionserver/HLog.java": 8,
+              "src/java/org/apache/hadoop/hbase/regionserver/HRegion.java": 11,
+              "src/test/org/apache/hadoop/hbase/regionserver/TestHLog.java": 14
+            },
+            "best_rank": 8,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.3333333333333333,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.1737012987012987,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HBASE-11542",
+            "repo": "HBASE",
+            "classifications": {
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/http/ssl/KeyStoreTestUtil.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/http/ssl/KeyStoreTestUtil.java": 6
+            },
+            "best_rank": 6,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.16666666666666666,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HBASE-1162",
+            "repo": "HBASE",
+            "classifications": {
+              "src/java/org/apache/hadoop/hbase/master/RegionManager.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/hadoop/hbase/master/RegionManager.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HBASE-11625",
+            "repo": "HBASE",
+            "classifications": {
+              "src/main/java/org/apache/hadoop/hbase/io/hfile/ChecksumUtil.java": "exists_before_fix",
+              "src/main/java/org/apache/hadoop/hbase/io/hfile/HFileBlock.java": "exists_before_fix",
+              "src/test/java/org/apache/hadoop/hbase/io/hfile/TestChecksum.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/hadoop/hbase/io/hfile/ChecksumUtil.java": 13,
+              "src/main/java/org/apache/hadoop/hbase/io/hfile/HFileBlock.java": 2,
+              "src/test/java/org/apache/hadoop/hbase/io/hfile/TestChecksum.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 0.6666666666666666,
+              "10": 0.6666666666666666,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.7435897435897436,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "HBASE-1169",
+            "repo": "HBASE",
+            "classifications": {
+              "src/java/org/apache/hadoop/hbase/master/MetaScanner.java": "exists_before_fix",
+              "src/java/org/apache/hadoop/hbase/master/RegionManager.java": "exists_before_fix",
+              "src/java/org/apache/hadoop/hbase/master/RootScanner.java": "exists_before_fix",
+              "src/java/org/apache/hadoop/hbase/master/ServerManager.java": "exists_before_fix",
+              "src/java/org/apache/hadoop/hbase/master/HMaster.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/hadoop/hbase/master/MetaScanner.java": 6,
+              "src/java/org/apache/hadoop/hbase/master/RegionManager.java": 11,
+              "src/java/org/apache/hadoop/hbase/master/RootScanner.java": 14,
+              "src/java/org/apache/hadoop/hbase/master/ServerManager.java": 2,
+              "src/java/org/apache/hadoop/hbase/master/HMaster.java": 4
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.4,
+              "10": 0.6,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.4441558441558442,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HBASE-1175",
+            "repo": "HBASE",
+            "classifications": {
+              "src/java/org/apache/hadoop/hbase/HRegionInfo.java": "exists_before_fix",
+              "src/java/org/apache/hadoop/hbase/master/HMaster.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/hadoop/hbase/HRegionInfo.java": 6,
+              "src/java/org/apache/hadoop/hbase/master/HMaster.java": 16
+            },
+            "best_rank": 6,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.14583333333333331,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "HBASE-1185",
+            "repo": "HBASE",
+            "classifications": {
+              "src/java/org/apache/hadoop/hbase/regionserver/HRegionServer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/hadoop/hbase/regionserver/HRegionServer.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "HBASE-1190",
+            "repo": "HBASE",
+            "classifications": {
+              "src/java/org/apache/hadoop/hbase/mapred/TableInputFormatBase.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/hadoop/hbase/mapred/TableInputFormatBase.java": 14
+            },
+            "best_rank": 14,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.07142857142857142,
+            "difficulty": "medium",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "HBASE-12006",
+            "repo": "HBASE",
+            "classifications": {
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/http/ssl/KeyStoreTestUtil.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/http/ssl/KeyStoreTestUtil.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3333333333333333,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "HBASE-1202",
+            "repo": "HBASE",
+            "classifications": {
+              "src/java/org/apache/hadoop/hbase/io/Cell.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/hadoop/hbase/io/Cell.java": 42
+            },
+            "best_rank": 42,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.023809523809523808,
+            "difficulty": "medium",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "HBASE-12198",
+            "repo": "HBASE",
+            "classifications": {
+              "hbase-client/src/main/java/org/apache/hadoop/hbase/client/AsyncProcess.java": "exists_before_fix",
+              "hbase-client/src/main/java/org/apache/hadoop/hbase/client/HTableMultiplexer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "hbase-client/src/main/java/org/apache/hadoop/hbase/client/AsyncProcess.java": 11
+            },
+            "best_rank": 11,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.045454545454545456,
+            "difficulty": "medium",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "HBASE-12373",
+            "repo": "HBASE",
+            "classifications": {
+              "hbase-server/src/main/java/org/apache/hadoop/hbase/security/visibility/VisibilityController.java": "exists_before_fix",
+              "hbase-client/src/main/java/org/apache/hadoop/hbase/security/visibility/VisibilityClient.java": "exists_before_fix",
+              "hbase-server/src/main/java/org/apache/hadoop/hbase/security/visibility/DefaultVisibilityLabelServiceImpl.java": "exists_before_fix",
+              "hbase-protocol/src/main/java/org/apache/hadoop/hbase/protobuf/generated/VisibilityLabelsProtos.java": "exists_before_fix",
+              "hbase-server/src/main/java/org/apache/hadoop/hbase/security/visibility/VisibilityLabelService.java": "exists_before_fix",
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/security/visibility/ExpAsStringVisibilityLabelServiceImpl.java": "exists_before_fix",
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/security/visibility/TestVisibilityLabelsWithDefaultVisLabelService.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "hbase-server/src/main/java/org/apache/hadoop/hbase/security/visibility/VisibilityController.java": 8,
+              "hbase-client/src/main/java/org/apache/hadoop/hbase/security/visibility/VisibilityClient.java": 3,
+              "hbase-server/src/main/java/org/apache/hadoop/hbase/security/visibility/DefaultVisibilityLabelServiceImpl.java": 26,
+              "hbase-protocol/src/main/java/org/apache/hadoop/hbase/protobuf/generated/VisibilityLabelsProtos.java": 4,
+              "hbase-server/src/main/java/org/apache/hadoop/hbase/security/visibility/VisibilityLabelService.java": 37,
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/security/visibility/ExpAsStringVisibilityLabelServiceImpl.java": 34,
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/security/visibility/TestVisibilityLabelsWithDefaultVisLabelService.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.42857142857142855,
+              "10": 0.5714285714285714,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.42494773377126316,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HBASE-1238",
+            "repo": "HBASE",
+            "classifications": {
+              "src/java/org/apache/hadoop/hbase/regionserver/MemcacheFlusher.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/hadoop/hbase/regionserver/MemcacheFlusher.java": 11
+            },
+            "best_rank": 11,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.09090909090909091,
+            "difficulty": "medium",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HBASE-12393",
+            "repo": "HBASE",
+            "classifications": {
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/regionserver/TestRSStatusServlet.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HBASE-12491",
+            "repo": "HBASE",
+            "classifications": {
+              "hbase-server/src/main/java/org/apache/hadoop/hbase/mapreduce/TableMapReduceUtil.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "hbase-server/src/main/java/org/apache/hadoop/hbase/mapreduce/TableMapReduceUtil.java": 4
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.25,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "easy": 14,
+          "medium": 5,
+          "no_localizable_gt": 1
+        },
+        "total": 20
+      },
+      "summary": {
+        "n": 20,
+        "macro_hit_at": {
+          "1": 0.2,
+          "5": 0.4,
+          "10": 0.7,
+          "100": 0.95,
+          "200": 0.95
+        },
+        "macro_recall_at": {
+          "1": 0.16666666666666669,
+          "5": 0.32476190476190475,
+          "10": 0.5210714285714286,
+          "100": 0.9,
+          "200": 0.9
+        },
+        "mrr": 0.3385862507058159,
+        "map": 0.3175324908988379,
+        "mean_latency_s": 4.642888119346217e-07
+      }
+    },
+    "reformulated": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "HBASE-10831",
+            "repo": "HBASE",
+            "classifications": {
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/util/MultiThreadedReaderWithACL.java": "exists_before_fix",
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/util/MultiThreadedUpdaterWithACL.java": "exists_before_fix",
+              "hbase-it/src/test/java/org/apache/hadoop/hbase/IntegrationTestIngestWithACL.java": "exists_before_fix",
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/util/LoadTestTool.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/util/MultiThreadedReaderWithACL.java": 42,
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/util/MultiThreadedUpdaterWithACL.java": 43,
+              "hbase-it/src/test/java/org/apache/hadoop/hbase/IntegrationTestIngestWithACL.java": 1,
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/util/LoadTestTool.java": 8
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.25,
+              "5": 0.25,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3536129568106312,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HBASE-11039",
+            "repo": "HBASE",
+            "classifications": {
+              "hbase-server/src/main/java/org/apache/hadoop/hbase/mapreduce/Import.java": "exists_before_fix",
+              "hbase-client/src/main/java/org/apache/hadoop/hbase/security/access/AccessControlClient.java": "exists_before_fix",
+              "hbase-client/src/main/java/org/apache/hadoop/hbase/security/visibility/CellVisibility.java": "exists_before_fix",
+              "hbase-it/src/test/java/org/apache/hadoop/hbase/test/IntegrationTestBigLinkedList.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "hbase-client/src/main/java/org/apache/hadoop/hbase/security/visibility/CellVisibility.java": 25,
+              "hbase-it/src/test/java/org/apache/hadoop/hbase/test/IntegrationTestBigLinkedList.java": 53
+            },
+            "best_rank": 25,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.019433962264150943,
+            "difficulty": "medium",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HBASE-11052",
+            "repo": "HBASE",
+            "classifications": {
+              "src/main/java/org/apache/hadoop/hbase/thrift2/ThriftServer.java": "exists_before_fix",
+              "src/main/java/org/apache/hadoop/hbase/thrift/ThriftServerRunner.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/hadoop/hbase/thrift2/ThriftServer.java": 2,
+              "src/main/java/org/apache/hadoop/hbase/thrift/ThriftServerRunner.java": 4
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HBASE-11374",
+            "repo": "HBASE",
+            "classifications": {
+              "hbase-client/src/main/java/org/apache/hadoop/hbase/client/AsyncProcess.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "hbase-client/src/main/java/org/apache/hadoop/hbase/client/AsyncProcess.java": 10
+            },
+            "best_rank": 10,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.1,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HBASE-1142",
+            "repo": "HBASE",
+            "classifications": {
+              "src/java/org/apache/hadoop/hbase/thrift/ThriftServer.java": "exists_before_fix",
+              "src/java/org/apache/hadoop/hbase/thrift/ThriftUtilities.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/hadoop/hbase/thrift/ThriftServer.java": 5,
+              "src/java/org/apache/hadoop/hbase/thrift/ThriftUtilities.java": 16
+            },
+            "best_rank": 5,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.1625,
+            "difficulty": "easy",
+            "latency_s": 0.0
+          },
+          {
+            "instance_id": "HBASE-1148",
+            "repo": "HBASE",
+            "classifications": {
+              "src/java/org/apache/hadoop/hbase/regionserver/HLog.java": "exists_before_fix",
+              "src/java/org/apache/hadoop/hbase/regionserver/HRegion.java": "exists_before_fix",
+              "src/test/org/apache/hadoop/hbase/regionserver/TestHLog.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/hadoop/hbase/regionserver/HLog.java": 1,
+              "src/java/org/apache/hadoop/hbase/regionserver/HRegion.java": 4,
+              "src/test/org/apache/hadoop/hbase/regionserver/TestHLog.java": 18
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 0.6666666666666666,
+              "10": 0.6666666666666666,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5555555555555556,
+            "difficulty": "easy",
+            "latency_s": 0.0
+          },
+          {
+            "instance_id": "HBASE-11542",
+            "repo": "HBASE",
+            "classifications": {
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/http/ssl/KeyStoreTestUtil.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/http/ssl/KeyStoreTestUtil.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3333333333333333,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HBASE-1162",
+            "repo": "HBASE",
+            "classifications": {
+              "src/java/org/apache/hadoop/hbase/master/RegionManager.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/hadoop/hbase/master/RegionManager.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HBASE-11625",
+            "repo": "HBASE",
+            "classifications": {
+              "src/main/java/org/apache/hadoop/hbase/io/hfile/ChecksumUtil.java": "exists_before_fix",
+              "src/main/java/org/apache/hadoop/hbase/io/hfile/HFileBlock.java": "exists_before_fix",
+              "src/test/java/org/apache/hadoop/hbase/io/hfile/TestChecksum.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/hadoop/hbase/io/hfile/ChecksumUtil.java": 11,
+              "src/main/java/org/apache/hadoop/hbase/io/hfile/HFileBlock.java": 2,
+              "src/test/java/org/apache/hadoop/hbase/io/hfile/TestChecksum.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 0.6666666666666666,
+              "10": 0.6666666666666666,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.7575757575757575,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HBASE-1169",
+            "repo": "HBASE",
+            "classifications": {
+              "src/java/org/apache/hadoop/hbase/master/MetaScanner.java": "exists_before_fix",
+              "src/java/org/apache/hadoop/hbase/master/RegionManager.java": "exists_before_fix",
+              "src/java/org/apache/hadoop/hbase/master/RootScanner.java": "exists_before_fix",
+              "src/java/org/apache/hadoop/hbase/master/ServerManager.java": "exists_before_fix",
+              "src/java/org/apache/hadoop/hbase/master/HMaster.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/hadoop/hbase/master/MetaScanner.java": 6,
+              "src/java/org/apache/hadoop/hbase/master/RegionManager.java": 10,
+              "src/java/org/apache/hadoop/hbase/master/RootScanner.java": 16,
+              "src/java/org/apache/hadoop/hbase/master/ServerManager.java": 3,
+              "src/java/org/apache/hadoop/hbase/master/HMaster.java": 4
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.4,
+              "10": 0.8,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.4091666666666667,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HBASE-1175",
+            "repo": "HBASE",
+            "classifications": {
+              "src/java/org/apache/hadoop/hbase/HRegionInfo.java": "exists_before_fix",
+              "src/java/org/apache/hadoop/hbase/master/HMaster.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/hadoop/hbase/HRegionInfo.java": 7,
+              "src/java/org/apache/hadoop/hbase/master/HMaster.java": 13
+            },
+            "best_rank": 7,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.14835164835164835,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HBASE-1185",
+            "repo": "HBASE",
+            "classifications": {
+              "src/java/org/apache/hadoop/hbase/regionserver/HRegionServer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/hadoop/hbase/regionserver/HRegionServer.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3333333333333333,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HBASE-1190",
+            "repo": "HBASE",
+            "classifications": {
+              "src/java/org/apache/hadoop/hbase/mapred/TableInputFormatBase.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/hadoop/hbase/mapred/TableInputFormatBase.java": 17
+            },
+            "best_rank": 17,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.058823529411764705,
+            "difficulty": "medium",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HBASE-12006",
+            "repo": "HBASE",
+            "classifications": {
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/http/ssl/KeyStoreTestUtil.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/http/ssl/KeyStoreTestUtil.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HBASE-1202",
+            "repo": "HBASE",
+            "classifications": {
+              "src/java/org/apache/hadoop/hbase/io/Cell.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/hadoop/hbase/io/Cell.java": 45
+            },
+            "best_rank": 45,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.022222222222222223,
+            "difficulty": "medium",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HBASE-12198",
+            "repo": "HBASE",
+            "classifications": {
+              "hbase-client/src/main/java/org/apache/hadoop/hbase/client/AsyncProcess.java": "exists_before_fix",
+              "hbase-client/src/main/java/org/apache/hadoop/hbase/client/HTableMultiplexer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "hbase-client/src/main/java/org/apache/hadoop/hbase/client/AsyncProcess.java": 34,
+              "hbase-client/src/main/java/org/apache/hadoop/hbase/client/HTableMultiplexer.java": 102
+            },
+            "best_rank": 34,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.5,
+              "200": 1.0
+            },
+            "average_precision": 0.024509803921568627,
+            "difficulty": "medium",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HBASE-12373",
+            "repo": "HBASE",
+            "classifications": {
+              "hbase-server/src/main/java/org/apache/hadoop/hbase/security/visibility/VisibilityController.java": "exists_before_fix",
+              "hbase-client/src/main/java/org/apache/hadoop/hbase/security/visibility/VisibilityClient.java": "exists_before_fix",
+              "hbase-server/src/main/java/org/apache/hadoop/hbase/security/visibility/DefaultVisibilityLabelServiceImpl.java": "exists_before_fix",
+              "hbase-protocol/src/main/java/org/apache/hadoop/hbase/protobuf/generated/VisibilityLabelsProtos.java": "exists_before_fix",
+              "hbase-server/src/main/java/org/apache/hadoop/hbase/security/visibility/VisibilityLabelService.java": "exists_before_fix",
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/security/visibility/ExpAsStringVisibilityLabelServiceImpl.java": "exists_before_fix",
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/security/visibility/TestVisibilityLabelsWithDefaultVisLabelService.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "hbase-server/src/main/java/org/apache/hadoop/hbase/security/visibility/VisibilityController.java": 9,
+              "hbase-client/src/main/java/org/apache/hadoop/hbase/security/visibility/VisibilityClient.java": 3,
+              "hbase-server/src/main/java/org/apache/hadoop/hbase/security/visibility/DefaultVisibilityLabelServiceImpl.java": 32,
+              "hbase-protocol/src/main/java/org/apache/hadoop/hbase/protobuf/generated/VisibilityLabelsProtos.java": 2,
+              "hbase-server/src/main/java/org/apache/hadoop/hbase/security/visibility/VisibilityLabelService.java": 31,
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/security/visibility/ExpAsStringVisibilityLabelServiceImpl.java": 40,
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/security/visibility/TestVisibilityLabelsWithDefaultVisLabelService.java": 8
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.2857142857142857,
+              "10": 0.5714285714285714,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3585573476702509,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HBASE-1238",
+            "repo": "HBASE",
+            "classifications": {
+              "src/java/org/apache/hadoop/hbase/regionserver/MemcacheFlusher.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/hadoop/hbase/regionserver/MemcacheFlusher.java": 6
+            },
+            "best_rank": 6,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.16666666666666666,
+            "difficulty": "easy",
+            "latency_s": 0.0
+          },
+          {
+            "instance_id": "HBASE-12393",
+            "repo": "HBASE",
+            "classifications": {
+              "hbase-server/src/test/java/org/apache/hadoop/hbase/regionserver/TestRSStatusServlet.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "HBASE-12491",
+            "repo": "HBASE",
+            "classifications": {
+              "hbase-server/src/main/java/org/apache/hadoop/hbase/mapreduce/TableMapReduceUtil.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "hbase-server/src/main/java/org/apache/hadoop/hbase/mapreduce/TableMapReduceUtil.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3333333333333333,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "easy": 15,
+          "medium": 4,
+          "no_localizable_gt": 1
+        },
+        "total": 20
+      },
+      "summary": {
+        "n": 20,
+        "macro_hit_at": {
+          "1": 0.25,
+          "5": 0.6,
+          "10": 0.75,
+          "100": 0.95,
+          "200": 0.95
+        },
+        "macro_recall_at": {
+          "1": 0.14583333333333331,
+          "5": 0.4384523809523809,
+          "10": 0.6102380952380952,
+          "100": 0.9,
+          "200": 0.925
+        },
+        "mrr": 0.40466573295985064,
+        "map": 0.33184880585584414,
+        "mean_latency_s": 2.0077354029605262e-07
+      }
+    }
+  }
+}

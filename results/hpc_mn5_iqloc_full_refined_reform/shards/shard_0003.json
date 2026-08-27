@@ -1,0 +1,2066 @@
+{
+  "manifest_id": "iqloc-multi-n7091-s42-f8a5d2c401a4",
+  "shard_index": 3,
+  "num_shards": 350,
+  "candidate_pool_size": 100,
+  "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+  "reformulation_mode": "semantic",
+  "relevance_mode": "llm",
+  "keep_fraction": 0.5,
+  "instance_ids": [
+    "AMQP-2573",
+    "AMQP-2593",
+    "AMQP-260",
+    "AMQP-2602",
+    "AMQP-2609",
+    "AMQP-262",
+    "AMQP-2638",
+    "AMQP-2640",
+    "AMQP-2652",
+    "AMQP-2653",
+    "AMQP-2667",
+    "AMQP-2673",
+    "AMQP-268",
+    "AMQP-2715",
+    "AMQP-272",
+    "AMQP-2721",
+    "AMQP-2724",
+    "AMQP-274",
+    "AMQP-2741",
+    "AMQP-281",
+    "AMQP-282"
+  ],
+  "configs": {
+    "retriever": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "AMQP-2573",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/PublisherCallbackChannelImpl.java": "exists_before_fix",
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/CachingConnectionFactory.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/CachingConnectionFactory.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 1.9073486328125e-06
+          },
+          {
+            "instance_id": "AMQP-2593",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/AbstractMessageListenerContainer.java": "exists_before_fix",
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/listener/SimpleMessageListenerContainerIntegrationTests.java": "exists_before_fix",
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/BlockingQueueConsumer.java": "exists_before_fix",
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/listener/SimpleMessageListenerContainerTests.java": "exists_before_fix",
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/listener/ContainerShutDownTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/AbstractMessageListenerContainer.java": 17,
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/listener/SimpleMessageListenerContainerIntegrationTests.java": 16,
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/BlockingQueueConsumer.java": 10,
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/listener/SimpleMessageListenerContainerTests.java": 7
+            },
+            "best_rank": 7,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.4,
+              "100": 0.8,
+              "200": 0.8
+            },
+            "average_precision": 0.15313025210084033,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "AMQP-260",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/SimpleMessageListenerContainer.java": "exists_before_fix",
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/ConnectionFactoryUtils.java": "exists_before_fix",
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/AbstractMessageListenerContainer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/SimpleMessageListenerContainer.java": 4,
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/ConnectionFactoryUtils.java": 12,
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/AbstractMessageListenerContainer.java": 15
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.3333333333333333,
+              "10": 0.3333333333333333,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.20555555555555557,
+            "difficulty": "easy",
+            "latency_s": 9.5367431640625e-07
+          },
+          {
+            "instance_id": "AMQP-2602",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-amqp/src/test/java/org/springframework/amqp/support/SimpleAmqpHeaderMapperTests.java": "exists_before_fix",
+              "spring-amqp/src/main/java/org/springframework/amqp/support/SimpleAmqpHeaderMapper.java": "exists_before_fix",
+              "spring-amqp/src/test/java/org/springframework/amqp/core/MessagePropertiesTests.java": "exists_before_fix",
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/support/DefaultMessagePropertiesConverter.java": "exists_before_fix",
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/core/RabbitAdminIntegrationTests.java": "exists_before_fix",
+              "spring-amqp/src/main/java/org/springframework/amqp/core/MessageProperties.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-amqp/src/test/java/org/springframework/amqp/core/MessagePropertiesTests.java": 4,
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/support/DefaultMessagePropertiesConverter.java": 3,
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/core/RabbitAdminIntegrationTests.java": 2,
+              "spring-amqp/src/main/java/org/springframework/amqp/core/MessageProperties.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.16666666666666666,
+              "5": 0.6666666666666666,
+              "10": 0.6666666666666666,
+              "100": 0.6666666666666666,
+              "200": 0.6666666666666666
+            },
+            "average_precision": 0.6666666666666666,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-06
+          },
+          {
+            "instance_id": "AMQP-2609",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-amqp/src/main/java/org/springframework/amqp/support/converter/SimpleMessageConverter.java": "exists_before_fix",
+              "spring-amqp/src/test/java/org/springframework/amqp/support/converter/SerializerMessageConverterTests.java": "exists_before_fix",
+              "spring-amqp/src/main/java/org/springframework/amqp/support/converter/SerializerMessageConverter.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-amqp/src/main/java/org/springframework/amqp/support/converter/SimpleMessageConverter.java": 1,
+              "spring-amqp/src/test/java/org/springframework/amqp/support/converter/SerializerMessageConverterTests.java": 7,
+              "spring-amqp/src/main/java/org/springframework/amqp/support/converter/SerializerMessageConverter.java": 4
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 0.6666666666666666,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.6428571428571429,
+            "difficulty": "easy",
+            "latency_s": 2.6226043701171875e-06
+          },
+          {
+            "instance_id": "AMQP-262",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/support/PublisherCallbackChannelImpl.java": "exists_before_fix",
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/core/RabbitTemplatePublisherCallbacksIntegrationTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/support/PublisherCallbackChannelImpl.java": 4,
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/core/RabbitTemplatePublisherCallbacksIntegrationTests.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 3.337860107421875e-06
+          },
+          {
+            "instance_id": "AMQP-2638",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/adapter/AbstractAdaptableMessageListener.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/adapter/AbstractAdaptableMessageListener.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 3.0994415283203125e-06
+          },
+          {
+            "instance_id": "AMQP-2640",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/CachingConnectionFactory.java": "exists_before_fix",
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/core/RabbitTemplatePublisherCallbacksIntegrationTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/CachingConnectionFactory.java": 3,
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/core/RabbitTemplatePublisherCallbacksIntegrationTests.java": 6
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3333333333333333,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-06
+          },
+          {
+            "instance_id": "AMQP-2652",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/adapter/MessagingMessageListenerAdapter.java": "exists_before_fix",
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/api/RabbitListenerErrorHandler.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/adapter/MessagingMessageListenerAdapter.java": 1,
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/api/RabbitListenerErrorHandler.java": 8
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.625,
+            "difficulty": "easy",
+            "latency_s": 1.9073486328125e-06
+          },
+          {
+            "instance_id": "AMQP-2653",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/DirectReplyToMessageListenerContainer.java": "exists_before_fix",
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/annotation/EnableRabbitBatchIntegrationTests.java": "exists_before_fix",
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/AsyncRabbitTemplateTests.java": "exists_before_fix",
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/DirectMessageListenerContainer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/DirectReplyToMessageListenerContainer.java": 2,
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/annotation/EnableRabbitBatchIntegrationTests.java": 48,
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/AsyncRabbitTemplateTests.java": 4,
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/DirectMessageListenerContainer.java": 11
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3390151515151515,
+            "difficulty": "easy",
+            "latency_s": 3.337860107421875e-06
+          },
+          {
+            "instance_id": "AMQP-2667",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/support/DefaultMessagePropertiesConverter.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/support/DefaultMessagePropertiesConverter.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3333333333333333,
+            "difficulty": "easy",
+            "latency_s": 3.5762786865234375e-06
+          },
+          {
+            "instance_id": "AMQP-2673",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/RabbitFuture.java": "exists_before_fix",
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/AsyncRabbitTemplateTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/AsyncRabbitTemplateTests.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.25,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-06
+          },
+          {
+            "instance_id": "AMQP-268",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/log4j/TestListener.java": "exists_before_fix",
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/log4j/AmqpAppender.java": "exists_before_fix",
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/log4j/AmqpAppenderIntegrationTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/log4j/AmqpAppender.java": 11,
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/log4j/AmqpAppenderIntegrationTests.java": 10
+            },
+            "best_rank": 10,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.3333333333333333,
+              "100": 0.6666666666666666,
+              "200": 0.6666666666666666
+            },
+            "average_precision": 0.09393939393939395,
+            "difficulty": "easy",
+            "latency_s": 2.1457672119140625e-06
+          },
+          {
+            "instance_id": "AMQP-2715",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/CachingConnectionFactory.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/CachingConnectionFactory.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 6.67572021484375e-06
+          },
+          {
+            "instance_id": "AMQP-272",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/config/StatefulRetryOperationsInterceptorFactoryBean.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/config/StatefulRetryOperationsInterceptorFactoryBean.java": 7
+            },
+            "best_rank": 7,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.14285714285714285,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "AMQP-2721",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/adapter/MessagingMessageListenerAdapter.java": "exists_before_fix",
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/adapter/BatchMessagingMessageListenerAdapter.java": "exists_before_fix",
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/adapter/AbstractAdaptableMessageListener.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/adapter/MessagingMessageListenerAdapter.java": 26,
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/adapter/BatchMessagingMessageListenerAdapter.java": 20,
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/adapter/AbstractAdaptableMessageListener.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 0.3333333333333333,
+              "10": 0.3333333333333333,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.4051282051282052,
+            "difficulty": "easy",
+            "latency_s": 1.430511474609375e-06
+          },
+          {
+            "instance_id": "AMQP-2724",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/RabbitFuture.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/RabbitFuture.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "AMQP-274",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/RabbitResourceHolder.java": "exists_before_fix",
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/listener/LocallyTransactedTests.java": "exists_before_fix",
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/ConnectionFactoryUtils.java": "exists_before_fix",
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/AbstractMessageListenerContainer.java": "exists_before_fix",
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/listener/ExternalTxManagerTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/RabbitResourceHolder.java": 17,
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/listener/LocallyTransactedTests.java": 2,
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/ConnectionFactoryUtils.java": 5,
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/AbstractMessageListenerContainer.java": 1,
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/listener/ExternalTxManagerTests.java": 3
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.2,
+              "5": 0.8,
+              "10": 0.8,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.8188235294117646,
+            "difficulty": "easy",
+            "latency_s": 1.9073486328125e-06
+          },
+          {
+            "instance_id": "AMQP-2741",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/SimpleMessageListenerContainer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/SimpleMessageListenerContainer.java": 4
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.25,
+            "difficulty": "easy",
+            "latency_s": 2.1457672119140625e-06
+          },
+          {
+            "instance_id": "AMQP-281",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/log4j/AmqpAppender.java": "exists_before_fix",
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/log4j/AmqpAppenderIntegrationTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/log4j/AmqpAppender.java": 1,
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/log4j/AmqpAppenderIntegrationTests.java": 5
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.7,
+            "difficulty": "easy",
+            "latency_s": 9.5367431640625e-07
+          },
+          {
+            "instance_id": "AMQP-282",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/log4j/TestListener.java": "exists_before_fix",
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/log4j/AmqpAppender.java": "exists_before_fix",
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/log4j/AmqpAppenderIntegrationTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/log4j/TestListener.java": 56,
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/log4j/AmqpAppender.java": 3,
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/log4j/AmqpAppenderIntegrationTests.java": 9
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.3333333333333333,
+              "10": 0.6666666666666666,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.20304232804232805,
+            "difficulty": "easy",
+            "latency_s": 9.5367431640625e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "easy": 21
+        },
+        "total": 21
+      },
+      "summary": {
+        "n": 21,
+        "macro_hit_at": {
+          "1": 0.42857142857142855,
+          "5": 0.8571428571428571,
+          "10": 1.0,
+          "100": 1.0,
+          "200": 1.0
+        },
+        "macro_recall_at": {
+          "1": 0.21587301587301586,
+          "5": 0.6015873015873017,
+          "10": 0.7634920634920636,
+          "100": 0.9111111111111111,
+          "200": 0.9111111111111111
+        },
+        "mrr": 0.6136054421768706,
+        "map": 0.4601277159400408,
+        "mean_latency_s": 2.3387727283296133e-06
+      }
+    },
+    "relevance_filtered": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "AMQP-2573",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/PublisherCallbackChannelImpl.java": "exists_before_fix",
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/CachingConnectionFactory.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/CachingConnectionFactory.java": 13
+            },
+            "best_rank": 13,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.038461538461538464,
+            "difficulty": "medium",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "AMQP-2593",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/AbstractMessageListenerContainer.java": "exists_before_fix",
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/listener/SimpleMessageListenerContainerIntegrationTests.java": "exists_before_fix",
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/BlockingQueueConsumer.java": "exists_before_fix",
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/listener/SimpleMessageListenerContainerTests.java": "exists_before_fix",
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/listener/ContainerShutDownTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/AbstractMessageListenerContainer.java": 20,
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/listener/SimpleMessageListenerContainerIntegrationTests.java": 19,
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/BlockingQueueConsumer.java": 13,
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/listener/SimpleMessageListenerContainerTests.java": 10
+            },
+            "best_rank": 10,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.2,
+              "100": 0.8,
+              "200": 0.8
+            },
+            "average_precision": 0.12234817813765182,
+            "difficulty": "easy",
+            "latency_s": 1.430511474609375e-06
+          },
+          {
+            "instance_id": "AMQP-260",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/SimpleMessageListenerContainer.java": "exists_before_fix",
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/ConnectionFactoryUtils.java": "exists_before_fix",
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/AbstractMessageListenerContainer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/SimpleMessageListenerContainer.java": 16,
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/ConnectionFactoryUtils.java": 24,
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/AbstractMessageListenerContainer.java": 27
+            },
+            "best_rank": 16,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.08564814814814814,
+            "difficulty": "medium",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "AMQP-2602",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-amqp/src/test/java/org/springframework/amqp/support/SimpleAmqpHeaderMapperTests.java": "exists_before_fix",
+              "spring-amqp/src/main/java/org/springframework/amqp/support/SimpleAmqpHeaderMapper.java": "exists_before_fix",
+              "spring-amqp/src/test/java/org/springframework/amqp/core/MessagePropertiesTests.java": "exists_before_fix",
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/support/DefaultMessagePropertiesConverter.java": "exists_before_fix",
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/core/RabbitAdminIntegrationTests.java": "exists_before_fix",
+              "spring-amqp/src/main/java/org/springframework/amqp/core/MessageProperties.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-amqp/src/test/java/org/springframework/amqp/core/MessagePropertiesTests.java": 11,
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/support/DefaultMessagePropertiesConverter.java": 10,
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/core/RabbitAdminIntegrationTests.java": 9,
+              "spring-amqp/src/main/java/org/springframework/amqp/core/MessageProperties.java": 8
+            },
+            "best_rank": 8,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.5,
+              "100": 0.6666666666666666,
+              "200": 0.6666666666666666
+            },
+            "average_precision": 0.16847643097643097,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "AMQP-2609",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-amqp/src/main/java/org/springframework/amqp/support/converter/SimpleMessageConverter.java": "exists_before_fix",
+              "spring-amqp/src/test/java/org/springframework/amqp/support/converter/SerializerMessageConverterTests.java": "exists_before_fix",
+              "spring-amqp/src/main/java/org/springframework/amqp/support/converter/SerializerMessageConverter.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-amqp/src/main/java/org/springframework/amqp/support/converter/SimpleMessageConverter.java": 3,
+              "spring-amqp/src/test/java/org/springframework/amqp/support/converter/SerializerMessageConverterTests.java": 9,
+              "spring-amqp/src/main/java/org/springframework/amqp/support/converter/SerializerMessageConverter.java": 6
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.3333333333333333,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3333333333333333,
+            "difficulty": "easy",
+            "latency_s": 1.6689300537109375e-06
+          },
+          {
+            "instance_id": "AMQP-262",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/support/PublisherCallbackChannelImpl.java": "exists_before_fix",
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/core/RabbitTemplatePublisherCallbacksIntegrationTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/support/PublisherCallbackChannelImpl.java": 10,
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/core/RabbitTemplatePublisherCallbacksIntegrationTests.java": 8
+            },
+            "best_rank": 8,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.1625,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "AMQP-2638",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/adapter/AbstractAdaptableMessageListener.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/adapter/AbstractAdaptableMessageListener.java": 6
+            },
+            "best_rank": 6,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.16666666666666666,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "AMQP-2640",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/CachingConnectionFactory.java": "exists_before_fix",
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/core/RabbitTemplatePublisherCallbacksIntegrationTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/CachingConnectionFactory.java": 2,
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/core/RabbitTemplatePublisherCallbacksIntegrationTests.java": 21
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.2976190476190476,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "AMQP-2652",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/adapter/MessagingMessageListenerAdapter.java": "exists_before_fix",
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/api/RabbitListenerErrorHandler.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/adapter/MessagingMessageListenerAdapter.java": 3,
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/api/RabbitListenerErrorHandler.java": 10
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.26666666666666666,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "AMQP-2653",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/DirectReplyToMessageListenerContainer.java": "exists_before_fix",
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/annotation/EnableRabbitBatchIntegrationTests.java": "exists_before_fix",
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/AsyncRabbitTemplateTests.java": "exists_before_fix",
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/DirectMessageListenerContainer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/DirectReplyToMessageListenerContainer.java": 10,
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/annotation/EnableRabbitBatchIntegrationTests.java": 53,
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/AsyncRabbitTemplateTests.java": 12,
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/DirectMessageListenerContainer.java": 19
+            },
+            "best_rank": 10,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.25,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.12500827540549486,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "AMQP-2667",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/support/DefaultMessagePropertiesConverter.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/support/DefaultMessagePropertiesConverter.java": 4
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.25,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "AMQP-2673",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/RabbitFuture.java": "exists_before_fix",
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/AsyncRabbitTemplateTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/AsyncRabbitTemplateTests.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.16666666666666666,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "AMQP-268",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/log4j/TestListener.java": "exists_before_fix",
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/log4j/AmqpAppender.java": "exists_before_fix",
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/log4j/AmqpAppenderIntegrationTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/log4j/AmqpAppender.java": 17,
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/log4j/AmqpAppenderIntegrationTests.java": 16
+            },
+            "best_rank": 16,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.6666666666666666,
+              "200": 0.6666666666666666
+            },
+            "average_precision": 0.06004901960784314,
+            "difficulty": "medium",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "AMQP-2715",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/CachingConnectionFactory.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/CachingConnectionFactory.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "AMQP-272",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/config/StatefulRetryOperationsInterceptorFactoryBean.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/config/StatefulRetryOperationsInterceptorFactoryBean.java": 8
+            },
+            "best_rank": 8,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.125,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "AMQP-2721",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/adapter/MessagingMessageListenerAdapter.java": "exists_before_fix",
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/adapter/BatchMessagingMessageListenerAdapter.java": "exists_before_fix",
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/adapter/AbstractAdaptableMessageListener.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/adapter/MessagingMessageListenerAdapter.java": 28,
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/adapter/BatchMessagingMessageListenerAdapter.java": 22,
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/adapter/AbstractAdaptableMessageListener.java": 5
+            },
+            "best_rank": 5,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.3333333333333333,
+              "10": 0.3333333333333333,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.13268398268398268,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "AMQP-2724",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/RabbitFuture.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/RabbitFuture.java": 15
+            },
+            "best_rank": 15,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.06666666666666667,
+            "difficulty": "medium",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "AMQP-274",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/RabbitResourceHolder.java": "exists_before_fix",
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/listener/LocallyTransactedTests.java": "exists_before_fix",
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/ConnectionFactoryUtils.java": "exists_before_fix",
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/AbstractMessageListenerContainer.java": "exists_before_fix",
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/listener/ExternalTxManagerTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/RabbitResourceHolder.java": 21,
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/listener/LocallyTransactedTests.java": 6,
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/ConnectionFactoryUtils.java": 9,
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/AbstractMessageListenerContainer.java": 5,
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/listener/ExternalTxManagerTests.java": 7
+            },
+            "best_rank": 5,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.2,
+              "10": 0.8,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3288888888888889,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "AMQP-2741",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/SimpleMessageListenerContainer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/SimpleMessageListenerContainer.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "AMQP-281",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/log4j/AmqpAppender.java": "exists_before_fix",
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/log4j/AmqpAppenderIntegrationTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/log4j/AmqpAppender.java": 15,
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/log4j/AmqpAppenderIntegrationTests.java": 18
+            },
+            "best_rank": 15,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.08888888888888888,
+            "difficulty": "medium",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "AMQP-282",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/log4j/TestListener.java": "exists_before_fix",
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/log4j/AmqpAppender.java": "exists_before_fix",
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/log4j/AmqpAppenderIntegrationTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/log4j/TestListener.java": 57,
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/log4j/AmqpAppender.java": 4,
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/log4j/AmqpAppenderIntegrationTests.java": 10
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.3333333333333333,
+              "10": 0.6666666666666666,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.1675438596491228,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "medium": 5,
+          "easy": 16
+        },
+        "total": 21
+      },
+      "summary": {
+        "n": 21,
+        "macro_hit_at": {
+          "1": 0.09523809523809523,
+          "5": 0.47619047619047616,
+          "10": 0.7619047619047619,
+          "100": 1.0,
+          "200": 1.0
+        },
+        "macro_recall_at": {
+          "1": 0.09523809523809523,
+          "5": 0.2714285714285714,
+          "10": 0.5595238095238095,
+          "100": 0.9111111111111111,
+          "200": 0.9111111111111111
+        },
+        "mrr": 0.2608058608058608,
+        "map": 0.24538648849843037,
+        "mean_latency_s": 5.563100179036459e-07
+      }
+    },
+    "reformulated": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "AMQP-2573",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/PublisherCallbackChannelImpl.java": "exists_before_fix",
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/CachingConnectionFactory.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/CachingConnectionFactory.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.16666666666666666,
+            "difficulty": "easy",
+            "latency_s": 1.6689300537109375e-06
+          },
+          {
+            "instance_id": "AMQP-2593",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/AbstractMessageListenerContainer.java": "exists_before_fix",
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/listener/SimpleMessageListenerContainerIntegrationTests.java": "exists_before_fix",
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/BlockingQueueConsumer.java": "exists_before_fix",
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/listener/SimpleMessageListenerContainerTests.java": "exists_before_fix",
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/listener/ContainerShutDownTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/AbstractMessageListenerContainer.java": 17,
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/listener/SimpleMessageListenerContainerIntegrationTests.java": 7,
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/BlockingQueueConsumer.java": 12,
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/listener/SimpleMessageListenerContainerTests.java": 9
+            },
+            "best_rank": 7,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.4,
+              "100": 0.8,
+              "200": 0.8
+            },
+            "average_precision": 0.1700746965452848,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "AMQP-260",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/SimpleMessageListenerContainer.java": "exists_before_fix",
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/ConnectionFactoryUtils.java": "exists_before_fix",
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/AbstractMessageListenerContainer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/SimpleMessageListenerContainer.java": 4,
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/ConnectionFactoryUtils.java": 11,
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/AbstractMessageListenerContainer.java": 15
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.3333333333333333,
+              "10": 0.3333333333333333,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.2106060606060606,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "AMQP-2602",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-amqp/src/test/java/org/springframework/amqp/support/SimpleAmqpHeaderMapperTests.java": "exists_before_fix",
+              "spring-amqp/src/main/java/org/springframework/amqp/support/SimpleAmqpHeaderMapper.java": "exists_before_fix",
+              "spring-amqp/src/test/java/org/springframework/amqp/core/MessagePropertiesTests.java": "exists_before_fix",
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/support/DefaultMessagePropertiesConverter.java": "exists_before_fix",
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/core/RabbitAdminIntegrationTests.java": "exists_before_fix",
+              "spring-amqp/src/main/java/org/springframework/amqp/core/MessageProperties.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-amqp/src/test/java/org/springframework/amqp/support/SimpleAmqpHeaderMapperTests.java": 105,
+              "spring-amqp/src/main/java/org/springframework/amqp/support/SimpleAmqpHeaderMapper.java": 104,
+              "spring-amqp/src/test/java/org/springframework/amqp/core/MessagePropertiesTests.java": 4,
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/support/DefaultMessagePropertiesConverter.java": 3,
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/core/RabbitAdminIntegrationTests.java": 1,
+              "spring-amqp/src/main/java/org/springframework/amqp/core/MessageProperties.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.16666666666666666,
+              "5": 0.6666666666666666,
+              "10": 0.6666666666666666,
+              "100": 0.6666666666666666,
+              "200": 1.0
+            },
+            "average_precision": 0.6842032967032967,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "AMQP-2609",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-amqp/src/main/java/org/springframework/amqp/support/converter/SimpleMessageConverter.java": "exists_before_fix",
+              "spring-amqp/src/test/java/org/springframework/amqp/support/converter/SerializerMessageConverterTests.java": "exists_before_fix",
+              "spring-amqp/src/main/java/org/springframework/amqp/support/converter/SerializerMessageConverter.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-amqp/src/main/java/org/springframework/amqp/support/converter/SimpleMessageConverter.java": 7,
+              "spring-amqp/src/test/java/org/springframework/amqp/support/converter/SerializerMessageConverterTests.java": 8,
+              "spring-amqp/src/main/java/org/springframework/amqp/support/converter/SerializerMessageConverter.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 0.3333333333333333,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5535714285714285,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "AMQP-262",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/support/PublisherCallbackChannelImpl.java": "exists_before_fix",
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/core/RabbitTemplatePublisherCallbacksIntegrationTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/support/PublisherCallbackChannelImpl.java": 3,
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/core/RabbitTemplatePublisherCallbacksIntegrationTests.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5833333333333333,
+            "difficulty": "easy",
+            "latency_s": 1.430511474609375e-06
+          },
+          {
+            "instance_id": "AMQP-2638",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/adapter/AbstractAdaptableMessageListener.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/adapter/AbstractAdaptableMessageListener.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "AMQP-2640",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/CachingConnectionFactory.java": "exists_before_fix",
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/core/RabbitTemplatePublisherCallbacksIntegrationTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/CachingConnectionFactory.java": 4,
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/core/RabbitTemplatePublisherCallbacksIntegrationTests.java": 6
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.29166666666666663,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "AMQP-2652",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/adapter/MessagingMessageListenerAdapter.java": "exists_before_fix",
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/api/RabbitListenerErrorHandler.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/adapter/MessagingMessageListenerAdapter.java": 1,
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/api/RabbitListenerErrorHandler.java": 11
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5909090909090909,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "AMQP-2653",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/DirectReplyToMessageListenerContainer.java": "exists_before_fix",
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/annotation/EnableRabbitBatchIntegrationTests.java": "exists_before_fix",
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/AsyncRabbitTemplateTests.java": "exists_before_fix",
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/DirectMessageListenerContainer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/DirectReplyToMessageListenerContainer.java": 3,
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/annotation/EnableRabbitBatchIntegrationTests.java": 50,
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/AsyncRabbitTemplateTests.java": 4,
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/DirectMessageListenerContainer.java": 13
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.28602564102564104,
+            "difficulty": "easy",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "AMQP-2667",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/support/DefaultMessagePropertiesConverter.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/support/DefaultMessagePropertiesConverter.java": 4
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.25,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "AMQP-2673",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/RabbitFuture.java": "exists_before_fix",
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/AsyncRabbitTemplateTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/AsyncRabbitTemplateTests.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.25,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "AMQP-268",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/log4j/TestListener.java": "exists_before_fix",
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/log4j/AmqpAppender.java": "exists_before_fix",
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/log4j/AmqpAppenderIntegrationTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/log4j/AmqpAppender.java": 4,
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/log4j/AmqpAppenderIntegrationTests.java": 10
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.3333333333333333,
+              "10": 0.6666666666666666,
+              "100": 0.6666666666666666,
+              "200": 0.6666666666666666
+            },
+            "average_precision": 0.15,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "AMQP-2715",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/CachingConnectionFactory.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/CachingConnectionFactory.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 1.6689300537109375e-06
+          },
+          {
+            "instance_id": "AMQP-272",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/config/StatefulRetryOperationsInterceptorFactoryBean.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/config/StatefulRetryOperationsInterceptorFactoryBean.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3333333333333333,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "AMQP-2721",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/adapter/MessagingMessageListenerAdapter.java": "exists_before_fix",
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/adapter/BatchMessagingMessageListenerAdapter.java": "exists_before_fix",
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/adapter/AbstractAdaptableMessageListener.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/adapter/MessagingMessageListenerAdapter.java": 30,
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/adapter/BatchMessagingMessageListenerAdapter.java": 22,
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/adapter/AbstractAdaptableMessageListener.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 0.3333333333333333,
+              "10": 0.3333333333333333,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.396969696969697,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "AMQP-2724",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/RabbitFuture.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/RabbitFuture.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "AMQP-274",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/RabbitResourceHolder.java": "exists_before_fix",
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/listener/LocallyTransactedTests.java": "exists_before_fix",
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/ConnectionFactoryUtils.java": "exists_before_fix",
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/AbstractMessageListenerContainer.java": "exists_before_fix",
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/listener/ExternalTxManagerTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/RabbitResourceHolder.java": 14,
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/listener/LocallyTransactedTests.java": 3,
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/connection/ConnectionFactoryUtils.java": 4,
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/AbstractMessageListenerContainer.java": 1,
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/listener/ExternalTxManagerTests.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.2,
+              "5": 0.8,
+              "10": 0.8,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.8714285714285713,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "AMQP-2741",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/SimpleMessageListenerContainer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/listener/SimpleMessageListenerContainer.java": 4
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.25,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "AMQP-281",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/log4j/AmqpAppender.java": "exists_before_fix",
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/log4j/AmqpAppenderIntegrationTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/log4j/AmqpAppender.java": 1,
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/log4j/AmqpAppenderIntegrationTests.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "AMQP-282",
+            "repo": "AMQP",
+            "classifications": {
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/log4j/TestListener.java": "exists_before_fix",
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/log4j/AmqpAppender.java": "exists_before_fix",
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/log4j/AmqpAppenderIntegrationTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/log4j/TestListener.java": 44,
+              "spring-rabbit/src/main/java/org/springframework/amqp/rabbit/log4j/AmqpAppender.java": 4,
+              "spring-rabbit/src/test/java/org/springframework/amqp/rabbit/log4j/AmqpAppenderIntegrationTests.java": 22
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.3333333333333333,
+              "10": 0.3333333333333333,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.13636363636363638,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "easy": 21
+        },
+        "total": 21
+      },
+      "summary": {
+        "n": 21,
+        "macro_hit_at": {
+          "1": 0.38095238095238093,
+          "5": 0.9523809523809523,
+          "10": 1.0,
+          "100": 1.0,
+          "200": 1.0
+        },
+        "macro_recall_at": {
+          "1": 0.19206349206349205,
+          "5": 0.6492063492063492,
+          "10": 0.7396825396825397,
+          "100": 0.9111111111111111,
+          "200": 0.926984126984127
+        },
+        "mrr": 0.5782312925170068,
+        "map": 0.46072152948203376,
+        "mean_latency_s": 5.790165492466517e-07
+      }
+    }
+  }
+}
