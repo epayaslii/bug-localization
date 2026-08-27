@@ -1,0 +1,1881 @@
+{
+  "manifest_id": "iqloc-multi-n7091-s42-f8a5d2c401a4",
+  "shard_index": 241,
+  "num_shards": 350,
+  "candidate_pool_size": 100,
+  "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+  "reformulation_mode": "semantic",
+  "relevance_mode": "llm",
+  "keep_fraction": 0.5,
+  "instance_ids": [
+    "SEC-1500",
+    "SEC-1501",
+    "SEC-1507",
+    "SEC-15165",
+    "SEC-15172",
+    "SEC-15184",
+    "SEC-1519",
+    "SEC-1520",
+    "SEC-1521",
+    "SEC-15324",
+    "SEC-1543",
+    "SEC-1545",
+    "SEC-1549",
+    "SEC-1553",
+    "SEC-1561",
+    "SEC-1577",
+    "SEC-1578",
+    "SEC-1583",
+    "SEC-1587",
+    "SEC-1590"
+  ],
+  "configs": {
+    "retriever": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "SEC-1500",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/test/java/org/springframework/security/web/access/channel/RetryWithHttpEntryPointTests.java": "exists_before_fix",
+              "web/src/main/java/org/springframework/security/web/access/channel/AbstractRetryEntryPoint.java": "exists_before_fix",
+              "web/src/main/java/org/springframework/security/web/util/UrlUtils.java": "exists_before_fix",
+              "web/src/test/java/org/springframework/security/web/access/channel/RetryWithHttpsEntryPointTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "web/src/test/java/org/springframework/security/web/access/channel/RetryWithHttpEntryPointTests.java": 13,
+              "web/src/main/java/org/springframework/security/web/util/UrlUtils.java": 22,
+              "web/src/test/java/org/springframework/security/web/access/channel/RetryWithHttpsEntryPointTests.java": 10
+            },
+            "best_rank": 10,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.25,
+              "100": 0.75,
+              "200": 0.75
+            },
+            "average_precision": 0.09755244755244755,
+            "difficulty": "easy",
+            "latency_s": 9.5367431640625e-07
+          },
+          {
+            "instance_id": "SEC-1501",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/main/java/org/springframework/security/web/authentication/switchuser/SwitchUserFilter.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "SEC-1507",
+            "repo": "SEC",
+            "classifications": {
+              "core/src/main/java/org/springframework/security/access/hierarchicalroles/RoleHierarchyImpl.java": "exists_before_fix",
+              "core/src/test/java/org/springframework/security/access/hierarchicalroles/RoleHierarchyImplTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "core/src/main/java/org/springframework/security/access/hierarchicalroles/RoleHierarchyImpl.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.16666666666666666,
+            "difficulty": "easy",
+            "latency_s": 2.6226043701171875e-06
+          },
+          {
+            "instance_id": "SEC-15165",
+            "repo": "SEC",
+            "classifications": {
+              "oauth2/oauth2-resource-server/src/main/java/org/springframework/security/oauth2/server/resource/introspection/SpringOpaqueTokenIntrospector.java": "exists_before_fix",
+              "oauth2/oauth2-resource-server/src/test/java/org/springframework/security/oauth2/server/resource/introspection/SpringOpaqueTokenIntrospectorTests.java": "exists_before_fix",
+              "oauth2/oauth2-resource-server/src/main/java/org/springframework/security/oauth2/server/resource/introspection/SpringReactiveOpaqueTokenIntrospector.java": "exists_before_fix",
+              "oauth2/oauth2-resource-server/src/test/java/org/springframework/security/oauth2/server/resource/introspection/SpringReactiveOpaqueTokenIntrospectorTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.1457672119140625e-06
+          },
+          {
+            "instance_id": "SEC-15172",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/main/java/org/springframework/security/web/util/matcher/IpAddressMatcher.java": "exists_before_fix",
+              "web/src/test/java/org/springframework/security/web/util/matcher/IpAddressMatcherTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "web/src/main/java/org/springframework/security/web/util/matcher/IpAddressMatcher.java": 2,
+              "web/src/test/java/org/springframework/security/web/util/matcher/IpAddressMatcherTests.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "SEC-15184",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/test/java/org/springframework/security/web/csrf/XorCsrfTokenRequestAttributeHandlerTests.java": "exists_before_fix",
+              "web/src/main/java/org/springframework/security/web/server/csrf/XorServerCsrfTokenRequestAttributeHandler.java": "exists_before_fix",
+              "web/src/test/java/org/springframework/security/web/server/csrf/XorServerCsrfTokenRequestAttributeHandlerTests.java": "exists_before_fix",
+              "messaging/src/test/java/org/springframework/security/messaging/web/csrf/XorCsrfChannelInterceptorTests.java": "exists_before_fix",
+              "messaging/src/main/java/org/springframework/security/messaging/web/csrf/XorCsrfTokenUtils.java": "exists_before_fix",
+              "web/src/main/java/org/springframework/security/web/csrf/XorCsrfTokenRequestAttributeHandler.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "web/src/test/java/org/springframework/security/web/csrf/XorCsrfTokenRequestAttributeHandlerTests.java": 2,
+              "web/src/test/java/org/springframework/security/web/server/csrf/XorServerCsrfTokenRequestAttributeHandlerTests.java": 1,
+              "messaging/src/test/java/org/springframework/security/messaging/web/csrf/XorCsrfChannelInterceptorTests.java": 9
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.16666666666666666,
+              "5": 0.3333333333333333,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.3888888888888889,
+            "difficulty": "easy",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "SEC-1519",
+            "repo": "SEC",
+            "classifications": {
+              "acl/src/main/java/org/springframework/security/acls/domain/EhCacheBasedAclCache.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "acl/src/main/java/org/springframework/security/acls/domain/EhCacheBasedAclCache.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "SEC-1520",
+            "repo": "SEC",
+            "classifications": {
+              "core/src/main/java/org/springframework/security/ldap/SpringSecurityLdapTemplate.java": "exists_before_fix",
+              "core/src/main/java/org/springframework/security/ldap/LdapUtils.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "core/src/main/java/org/springframework/security/ldap/SpringSecurityLdapTemplate.java": 1,
+              "core/src/main/java/org/springframework/security/ldap/LdapUtils.java": 6
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.6666666666666666,
+            "difficulty": "easy",
+            "latency_s": 1.9073486328125e-06
+          },
+          {
+            "instance_id": "SEC-1521",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/main/java/org/springframework/security/web/context/SecurityContextPersistenceFilter.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 1.6689300537109375e-06
+          },
+          {
+            "instance_id": "SEC-15324",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/main/java/org/springframework/security/web/util/matcher/IpAddressMatcher.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "SEC-1543",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/main/java/org/springframework/security/web/util/IpAddressMatcher.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "web/src/main/java/org/springframework/security/web/util/IpAddressMatcher.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "SEC-1545",
+            "repo": "SEC",
+            "classifications": {
+              "ldap/src/main/java/org/springframework/security/ldap/authentication/LdapAuthenticationProvider.java": "exists_before_fix",
+              "web/src/main/java/org/springframework/security/web/authentication/session/ConcurrentSessionControlStrategy.java": "exists_before_fix",
+              "web/src/main/java/org/springframework/security/web/authentication/preauth/x509/SubjectDnX509PrincipalExtractor.java": "exists_before_fix",
+              "core/src/test/java/org/springframework/security/core/SpringSecurityMessageSourceTests.java": "exists_before_fix",
+              "acl/src/main/java/org/springframework/security/acls/afterinvocation/AclEntryAfterInvocationProvider.java": "exists_before_fix",
+              "ldap/src/main/java/org/springframework/security/ldap/authentication/BindAuthenticator.java": "exists_before_fix",
+              "core/src/main/java/org/springframework/security/authentication/AccountStatusUserDetailsChecker.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "web/src/main/java/org/springframework/security/web/authentication/session/ConcurrentSessionControlStrategy.java": 59,
+              "web/src/main/java/org/springframework/security/web/authentication/preauth/x509/SubjectDnX509PrincipalExtractor.java": 64,
+              "core/src/test/java/org/springframework/security/core/SpringSecurityMessageSourceTests.java": 3,
+              "acl/src/main/java/org/springframework/security/acls/afterinvocation/AclEntryAfterInvocationProvider.java": 40,
+              "core/src/main/java/org/springframework/security/authentication/AccountStatusUserDetailsChecker.java": 58
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.14285714285714285,
+              "10": 0.14285714285714285,
+              "100": 0.7142857142857143,
+              "200": 0.7142857142857143
+            },
+            "average_precision": 0.08299701163340847,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-06
+          },
+          {
+            "instance_id": "SEC-1549",
+            "repo": "SEC",
+            "classifications": {
+              "acl/src/main/java/org/springframework/security/acls/AclPermissionCacheOptimizer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "acl/src/main/java/org/springframework/security/acls/AclPermissionCacheOptimizer.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "SEC-1553",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/main/java/org/springframework/security/web/authentication/WebAuthenticationDetails.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "SEC-1561",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/main/java/org/springframework/security/web/context/HttpSessionSecurityContextRepository.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "web/src/main/java/org/springframework/security/web/context/HttpSessionSecurityContextRepository.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 1.430511474609375e-06
+          },
+          {
+            "instance_id": "SEC-1577",
+            "repo": "SEC",
+            "classifications": {
+              "core/src/main/java/org/springframework/security/access/hierarchicalroles/RoleHierarchyImpl.java": "exists_before_fix",
+              "core/src/test/java/org/springframework/security/access/hierarchicalroles/RoleHierarchyImplTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "core/src/main/java/org/springframework/security/access/hierarchicalroles/RoleHierarchyImpl.java": 4
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.125,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "SEC-1578",
+            "repo": "SEC",
+            "classifications": {
+              "core/src/main/java/org/springframework/security/core/context/InheritableThreadLocalSecurityContextHolderStrategy.java": "exists_before_fix",
+              "core/src/main/java/org/springframework/security/core/context/ThreadLocalSecurityContextHolderStrategy.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 1.430511474609375e-06
+          },
+          {
+            "instance_id": "SEC-1583",
+            "repo": "SEC",
+            "classifications": {
+              "core/src/test/java/org/springframework/security/access/expression/SecurityExpressionRootTests.java": "exists_before_fix",
+              "core/src/main/java/org/springframework/security/access/expression/SecurityExpressionRoot.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "core/src/test/java/org/springframework/security/access/expression/SecurityExpressionRootTests.java": 7,
+              "core/src/main/java/org/springframework/security/access/expression/SecurityExpressionRoot.java": 6
+            },
+            "best_rank": 6,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.22619047619047616,
+            "difficulty": "easy",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "SEC-1587",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/test/java/org/springframework/security/web/context/HttpSessionSecurityContextRepositoryTests.java": "exists_before_fix",
+              "web/src/main/java/org/springframework/security/web/context/HttpSessionSecurityContextRepository.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "web/src/test/java/org/springframework/security/web/context/HttpSessionSecurityContextRepositoryTests.java": 1,
+              "web/src/main/java/org/springframework/security/web/context/HttpSessionSecurityContextRepository.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 1.6689300537109375e-06
+          },
+          {
+            "instance_id": "SEC-1590",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/main/java/org/springframework/security/web/authentication/WebAuthenticationDetails.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "easy": 13,
+          "no_localizable_gt": 7
+        },
+        "total": 20
+      },
+      "summary": {
+        "n": 20,
+        "macro_hit_at": {
+          "1": 0.35,
+          "5": 0.55,
+          "10": 0.65,
+          "100": 0.65,
+          "200": 0.65
+        },
+        "macro_recall_at": {
+          "1": 0.2333333333333333,
+          "5": 0.39880952380952384,
+          "10": 0.4946428571428571,
+          "100": 0.5482142857142858,
+          "200": 0.5482142857142858
+        },
+        "mrr": 0.4341666666666667,
+        "map": 0.36269810787992773,
+        "mean_latency_s": 1.3571519118088943e-06
+      }
+    },
+    "relevance_filtered": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "SEC-1500",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/test/java/org/springframework/security/web/access/channel/RetryWithHttpEntryPointTests.java": "exists_before_fix",
+              "web/src/main/java/org/springframework/security/web/access/channel/AbstractRetryEntryPoint.java": "exists_before_fix",
+              "web/src/main/java/org/springframework/security/web/util/UrlUtils.java": "exists_before_fix",
+              "web/src/test/java/org/springframework/security/web/access/channel/RetryWithHttpsEntryPointTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "web/src/test/java/org/springframework/security/web/access/channel/RetryWithHttpEntryPointTests.java": 13,
+              "web/src/main/java/org/springframework/security/web/util/UrlUtils.java": 22,
+              "web/src/test/java/org/springframework/security/web/access/channel/RetryWithHttpsEntryPointTests.java": 10
+            },
+            "best_rank": 10,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.25,
+              "100": 0.75,
+              "200": 0.75
+            },
+            "average_precision": 0.09755244755244755,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "SEC-1501",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/main/java/org/springframework/security/web/authentication/switchuser/SwitchUserFilter.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-1507",
+            "repo": "SEC",
+            "classifications": {
+              "core/src/main/java/org/springframework/security/access/hierarchicalroles/RoleHierarchyImpl.java": "exists_before_fix",
+              "core/src/test/java/org/springframework/security/access/hierarchicalroles/RoleHierarchyImplTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "core/src/main/java/org/springframework/security/access/hierarchicalroles/RoleHierarchyImpl.java": 4
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.125,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-15165",
+            "repo": "SEC",
+            "classifications": {
+              "oauth2/oauth2-resource-server/src/main/java/org/springframework/security/oauth2/server/resource/introspection/SpringOpaqueTokenIntrospector.java": "exists_before_fix",
+              "oauth2/oauth2-resource-server/src/test/java/org/springframework/security/oauth2/server/resource/introspection/SpringOpaqueTokenIntrospectorTests.java": "exists_before_fix",
+              "oauth2/oauth2-resource-server/src/main/java/org/springframework/security/oauth2/server/resource/introspection/SpringReactiveOpaqueTokenIntrospector.java": "exists_before_fix",
+              "oauth2/oauth2-resource-server/src/test/java/org/springframework/security/oauth2/server/resource/introspection/SpringReactiveOpaqueTokenIntrospectorTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-15172",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/main/java/org/springframework/security/web/util/matcher/IpAddressMatcher.java": "exists_before_fix",
+              "web/src/test/java/org/springframework/security/web/util/matcher/IpAddressMatcherTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "web/src/main/java/org/springframework/security/web/util/matcher/IpAddressMatcher.java": 3,
+              "web/src/test/java/org/springframework/security/web/util/matcher/IpAddressMatcherTests.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5833333333333333,
+            "difficulty": "easy",
+            "latency_s": 0.0
+          },
+          {
+            "instance_id": "SEC-15184",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/test/java/org/springframework/security/web/csrf/XorCsrfTokenRequestAttributeHandlerTests.java": "exists_before_fix",
+              "web/src/main/java/org/springframework/security/web/server/csrf/XorServerCsrfTokenRequestAttributeHandler.java": "exists_before_fix",
+              "web/src/test/java/org/springframework/security/web/server/csrf/XorServerCsrfTokenRequestAttributeHandlerTests.java": "exists_before_fix",
+              "messaging/src/test/java/org/springframework/security/messaging/web/csrf/XorCsrfChannelInterceptorTests.java": "exists_before_fix",
+              "messaging/src/main/java/org/springframework/security/messaging/web/csrf/XorCsrfTokenUtils.java": "exists_before_fix",
+              "web/src/main/java/org/springframework/security/web/csrf/XorCsrfTokenRequestAttributeHandler.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "web/src/test/java/org/springframework/security/web/csrf/XorCsrfTokenRequestAttributeHandlerTests.java": 4,
+              "web/src/test/java/org/springframework/security/web/server/csrf/XorServerCsrfTokenRequestAttributeHandlerTests.java": 3,
+              "messaging/src/test/java/org/springframework/security/messaging/web/csrf/XorCsrfChannelInterceptorTests.java": 11
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.3333333333333333,
+              "10": 0.3333333333333333,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.18434343434343434,
+            "difficulty": "easy",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "SEC-1519",
+            "repo": "SEC",
+            "classifications": {
+              "acl/src/main/java/org/springframework/security/acls/domain/EhCacheBasedAclCache.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "acl/src/main/java/org/springframework/security/acls/domain/EhCacheBasedAclCache.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3333333333333333,
+            "difficulty": "easy",
+            "latency_s": 0.0
+          },
+          {
+            "instance_id": "SEC-1520",
+            "repo": "SEC",
+            "classifications": {
+              "core/src/main/java/org/springframework/security/ldap/SpringSecurityLdapTemplate.java": "exists_before_fix",
+              "core/src/main/java/org/springframework/security/ldap/LdapUtils.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "core/src/main/java/org/springframework/security/ldap/SpringSecurityLdapTemplate.java": 1,
+              "core/src/main/java/org/springframework/security/ldap/LdapUtils.java": 6
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.6666666666666666,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-1521",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/main/java/org/springframework/security/web/context/SecurityContextPersistenceFilter.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-15324",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/main/java/org/springframework/security/web/util/matcher/IpAddressMatcher.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "SEC-1543",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/main/java/org/springframework/security/web/util/IpAddressMatcher.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "web/src/main/java/org/springframework/security/web/util/IpAddressMatcher.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-1545",
+            "repo": "SEC",
+            "classifications": {
+              "ldap/src/main/java/org/springframework/security/ldap/authentication/LdapAuthenticationProvider.java": "exists_before_fix",
+              "web/src/main/java/org/springframework/security/web/authentication/session/ConcurrentSessionControlStrategy.java": "exists_before_fix",
+              "web/src/main/java/org/springframework/security/web/authentication/preauth/x509/SubjectDnX509PrincipalExtractor.java": "exists_before_fix",
+              "core/src/test/java/org/springframework/security/core/SpringSecurityMessageSourceTests.java": "exists_before_fix",
+              "acl/src/main/java/org/springframework/security/acls/afterinvocation/AclEntryAfterInvocationProvider.java": "exists_before_fix",
+              "ldap/src/main/java/org/springframework/security/ldap/authentication/BindAuthenticator.java": "exists_before_fix",
+              "core/src/main/java/org/springframework/security/authentication/AccountStatusUserDetailsChecker.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "web/src/main/java/org/springframework/security/web/authentication/session/ConcurrentSessionControlStrategy.java": 60,
+              "web/src/main/java/org/springframework/security/web/authentication/preauth/x509/SubjectDnX509PrincipalExtractor.java": 65,
+              "core/src/test/java/org/springframework/security/core/SpringSecurityMessageSourceTests.java": 4,
+              "acl/src/main/java/org/springframework/security/acls/afterinvocation/AclEntryAfterInvocationProvider.java": 41,
+              "core/src/main/java/org/springframework/security/authentication/AccountStatusUserDetailsChecker.java": 59
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.14285714285714285,
+              "10": 0.14285714285714285,
+              "100": 0.7142857142857143,
+              "200": 0.7142857142857143
+            },
+            "average_precision": 0.07045966986024861,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-1549",
+            "repo": "SEC",
+            "classifications": {
+              "acl/src/main/java/org/springframework/security/acls/AclPermissionCacheOptimizer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "acl/src/main/java/org/springframework/security/acls/AclPermissionCacheOptimizer.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-1553",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/main/java/org/springframework/security/web/authentication/WebAuthenticationDetails.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-1561",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/main/java/org/springframework/security/web/context/HttpSessionSecurityContextRepository.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "web/src/main/java/org/springframework/security/web/context/HttpSessionSecurityContextRepository.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-1577",
+            "repo": "SEC",
+            "classifications": {
+              "core/src/main/java/org/springframework/security/access/hierarchicalroles/RoleHierarchyImpl.java": "exists_before_fix",
+              "core/src/test/java/org/springframework/security/access/hierarchicalroles/RoleHierarchyImplTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "core/src/main/java/org/springframework/security/access/hierarchicalroles/RoleHierarchyImpl.java": 4
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.125,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-1578",
+            "repo": "SEC",
+            "classifications": {
+              "core/src/main/java/org/springframework/security/core/context/InheritableThreadLocalSecurityContextHolderStrategy.java": "exists_before_fix",
+              "core/src/main/java/org/springframework/security/core/context/ThreadLocalSecurityContextHolderStrategy.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 1.430511474609375e-06
+          },
+          {
+            "instance_id": "SEC-1583",
+            "repo": "SEC",
+            "classifications": {
+              "core/src/test/java/org/springframework/security/access/expression/SecurityExpressionRootTests.java": "exists_before_fix",
+              "core/src/main/java/org/springframework/security/access/expression/SecurityExpressionRoot.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "core/src/test/java/org/springframework/security/access/expression/SecurityExpressionRootTests.java": 7,
+              "core/src/main/java/org/springframework/security/access/expression/SecurityExpressionRoot.java": 6
+            },
+            "best_rank": 6,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.22619047619047616,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-1587",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/test/java/org/springframework/security/web/context/HttpSessionSecurityContextRepositoryTests.java": "exists_before_fix",
+              "web/src/main/java/org/springframework/security/web/context/HttpSessionSecurityContextRepository.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "web/src/test/java/org/springframework/security/web/context/HttpSessionSecurityContextRepositoryTests.java": 1,
+              "web/src/main/java/org/springframework/security/web/context/HttpSessionSecurityContextRepository.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 1.430511474609375e-06
+          },
+          {
+            "instance_id": "SEC-1590",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/main/java/org/springframework/security/web/authentication/WebAuthenticationDetails.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "easy": 13,
+          "no_localizable_gt": 7
+        },
+        "total": 20
+      },
+      "summary": {
+        "n": 20,
+        "macro_hit_at": {
+          "1": 0.2,
+          "5": 0.55,
+          "10": 0.65,
+          "100": 0.65,
+          "200": 0.65
+        },
+        "macro_recall_at": {
+          "1": 0.15,
+          "5": 0.39880952380952384,
+          "10": 0.4863095238095239,
+          "100": 0.5482142857142858,
+          "200": 0.5482142857142858
+        },
+        "mrr": 0.33416666666666667,
+        "map": 0.295593968063997,
+        "mean_latency_s": 3.8513770470252405e-07
+      }
+    },
+    "reformulated": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "SEC-1500",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/test/java/org/springframework/security/web/access/channel/RetryWithHttpEntryPointTests.java": "exists_before_fix",
+              "web/src/main/java/org/springframework/security/web/access/channel/AbstractRetryEntryPoint.java": "exists_before_fix",
+              "web/src/main/java/org/springframework/security/web/util/UrlUtils.java": "exists_before_fix",
+              "web/src/test/java/org/springframework/security/web/access/channel/RetryWithHttpsEntryPointTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "web/src/test/java/org/springframework/security/web/access/channel/RetryWithHttpEntryPointTests.java": 12,
+              "web/src/main/java/org/springframework/security/web/util/UrlUtils.java": 22,
+              "web/src/test/java/org/springframework/security/web/access/channel/RetryWithHttpsEntryPointTests.java": 9
+            },
+            "best_rank": 9,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.25,
+              "100": 0.75,
+              "200": 0.75
+            },
+            "average_precision": 0.10353535353535354,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-1501",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/main/java/org/springframework/security/web/authentication/switchuser/SwitchUserFilter.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-1507",
+            "repo": "SEC",
+            "classifications": {
+              "core/src/main/java/org/springframework/security/access/hierarchicalroles/RoleHierarchyImpl.java": "exists_before_fix",
+              "core/src/test/java/org/springframework/security/access/hierarchicalroles/RoleHierarchyImplTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "core/src/main/java/org/springframework/security/access/hierarchicalroles/RoleHierarchyImpl.java": 4
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.125,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-15165",
+            "repo": "SEC",
+            "classifications": {
+              "oauth2/oauth2-resource-server/src/main/java/org/springframework/security/oauth2/server/resource/introspection/SpringOpaqueTokenIntrospector.java": "exists_before_fix",
+              "oauth2/oauth2-resource-server/src/test/java/org/springframework/security/oauth2/server/resource/introspection/SpringOpaqueTokenIntrospectorTests.java": "exists_before_fix",
+              "oauth2/oauth2-resource-server/src/main/java/org/springframework/security/oauth2/server/resource/introspection/SpringReactiveOpaqueTokenIntrospector.java": "exists_before_fix",
+              "oauth2/oauth2-resource-server/src/test/java/org/springframework/security/oauth2/server/resource/introspection/SpringReactiveOpaqueTokenIntrospectorTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 0.0
+          },
+          {
+            "instance_id": "SEC-15172",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/main/java/org/springframework/security/web/util/matcher/IpAddressMatcher.java": "exists_before_fix",
+              "web/src/test/java/org/springframework/security/web/util/matcher/IpAddressMatcherTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "web/src/main/java/org/springframework/security/web/util/matcher/IpAddressMatcher.java": 2,
+              "web/src/test/java/org/springframework/security/web/util/matcher/IpAddressMatcherTests.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-15184",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/test/java/org/springframework/security/web/csrf/XorCsrfTokenRequestAttributeHandlerTests.java": "exists_before_fix",
+              "web/src/main/java/org/springframework/security/web/server/csrf/XorServerCsrfTokenRequestAttributeHandler.java": "exists_before_fix",
+              "web/src/test/java/org/springframework/security/web/server/csrf/XorServerCsrfTokenRequestAttributeHandlerTests.java": "exists_before_fix",
+              "messaging/src/test/java/org/springframework/security/messaging/web/csrf/XorCsrfChannelInterceptorTests.java": "exists_before_fix",
+              "messaging/src/main/java/org/springframework/security/messaging/web/csrf/XorCsrfTokenUtils.java": "exists_before_fix",
+              "web/src/main/java/org/springframework/security/web/csrf/XorCsrfTokenRequestAttributeHandler.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "web/src/test/java/org/springframework/security/web/csrf/XorCsrfTokenRequestAttributeHandlerTests.java": 2,
+              "web/src/main/java/org/springframework/security/web/server/csrf/XorServerCsrfTokenRequestAttributeHandler.java": 104,
+              "web/src/test/java/org/springframework/security/web/server/csrf/XorServerCsrfTokenRequestAttributeHandlerTests.java": 1,
+              "messaging/src/test/java/org/springframework/security/messaging/web/csrf/XorCsrfChannelInterceptorTests.java": 10,
+              "web/src/main/java/org/springframework/security/web/csrf/XorCsrfTokenRequestAttributeHandler.java": 103
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.16666666666666666,
+              "5": 0.3333333333333333,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.8333333333333334
+            },
+            "average_precision": 0.3978186457555389,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-1519",
+            "repo": "SEC",
+            "classifications": {
+              "acl/src/main/java/org/springframework/security/acls/domain/EhCacheBasedAclCache.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "acl/src/main/java/org/springframework/security/acls/domain/EhCacheBasedAclCache.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-1520",
+            "repo": "SEC",
+            "classifications": {
+              "core/src/main/java/org/springframework/security/ldap/SpringSecurityLdapTemplate.java": "exists_before_fix",
+              "core/src/main/java/org/springframework/security/ldap/LdapUtils.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "core/src/main/java/org/springframework/security/ldap/SpringSecurityLdapTemplate.java": 1,
+              "core/src/main/java/org/springframework/security/ldap/LdapUtils.java": 4
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.75,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-1521",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/main/java/org/springframework/security/web/context/SecurityContextPersistenceFilter.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-15324",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/main/java/org/springframework/security/web/util/matcher/IpAddressMatcher.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-1543",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/main/java/org/springframework/security/web/util/IpAddressMatcher.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "web/src/main/java/org/springframework/security/web/util/IpAddressMatcher.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 1.430511474609375e-06
+          },
+          {
+            "instance_id": "SEC-1545",
+            "repo": "SEC",
+            "classifications": {
+              "ldap/src/main/java/org/springframework/security/ldap/authentication/LdapAuthenticationProvider.java": "exists_before_fix",
+              "web/src/main/java/org/springframework/security/web/authentication/session/ConcurrentSessionControlStrategy.java": "exists_before_fix",
+              "web/src/main/java/org/springframework/security/web/authentication/preauth/x509/SubjectDnX509PrincipalExtractor.java": "exists_before_fix",
+              "core/src/test/java/org/springframework/security/core/SpringSecurityMessageSourceTests.java": "exists_before_fix",
+              "acl/src/main/java/org/springframework/security/acls/afterinvocation/AclEntryAfterInvocationProvider.java": "exists_before_fix",
+              "ldap/src/main/java/org/springframework/security/ldap/authentication/BindAuthenticator.java": "exists_before_fix",
+              "core/src/main/java/org/springframework/security/authentication/AccountStatusUserDetailsChecker.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "web/src/main/java/org/springframework/security/web/authentication/session/ConcurrentSessionControlStrategy.java": 79,
+              "web/src/main/java/org/springframework/security/web/authentication/preauth/x509/SubjectDnX509PrincipalExtractor.java": 73,
+              "core/src/test/java/org/springframework/security/core/SpringSecurityMessageSourceTests.java": 2,
+              "acl/src/main/java/org/springframework/security/acls/afterinvocation/AclEntryAfterInvocationProvider.java": 44,
+              "core/src/main/java/org/springframework/security/authentication/AccountStatusUserDetailsChecker.java": 58
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.14285714285714285,
+              "10": 0.14285714285714285,
+              "100": 0.7142857142857143,
+              "200": 0.7142857142857143
+            },
+            "average_precision": 0.10218062045343305,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "SEC-1549",
+            "repo": "SEC",
+            "classifications": {
+              "acl/src/main/java/org/springframework/security/acls/AclPermissionCacheOptimizer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "acl/src/main/java/org/springframework/security/acls/AclPermissionCacheOptimizer.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "SEC-1553",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/main/java/org/springframework/security/web/authentication/WebAuthenticationDetails.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "web/src/main/java/org/springframework/security/web/authentication/WebAuthenticationDetails.java": 112
+            },
+            "best_rank": 112,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 1.0
+            },
+            "average_precision": 0.008928571428571428,
+            "difficulty": "hard",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-1561",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/main/java/org/springframework/security/web/context/HttpSessionSecurityContextRepository.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "web/src/main/java/org/springframework/security/web/context/HttpSessionSecurityContextRepository.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 0.0
+          },
+          {
+            "instance_id": "SEC-1577",
+            "repo": "SEC",
+            "classifications": {
+              "core/src/main/java/org/springframework/security/access/hierarchicalroles/RoleHierarchyImpl.java": "exists_before_fix",
+              "core/src/test/java/org/springframework/security/access/hierarchicalroles/RoleHierarchyImplTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "core/src/main/java/org/springframework/security/access/hierarchicalroles/RoleHierarchyImpl.java": 4
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.125,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "SEC-1578",
+            "repo": "SEC",
+            "classifications": {
+              "core/src/main/java/org/springframework/security/core/context/InheritableThreadLocalSecurityContextHolderStrategy.java": "exists_before_fix",
+              "core/src/main/java/org/springframework/security/core/context/ThreadLocalSecurityContextHolderStrategy.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "core/src/main/java/org/springframework/security/core/context/InheritableThreadLocalSecurityContextHolderStrategy.java": 102,
+              "core/src/main/java/org/springframework/security/core/context/ThreadLocalSecurityContextHolderStrategy.java": 103
+            },
+            "best_rank": 102,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 1.0
+            },
+            "average_precision": 0.014610698648391394,
+            "difficulty": "hard",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-1583",
+            "repo": "SEC",
+            "classifications": {
+              "core/src/test/java/org/springframework/security/access/expression/SecurityExpressionRootTests.java": "exists_before_fix",
+              "core/src/main/java/org/springframework/security/access/expression/SecurityExpressionRoot.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "core/src/test/java/org/springframework/security/access/expression/SecurityExpressionRootTests.java": 10,
+              "core/src/main/java/org/springframework/security/access/expression/SecurityExpressionRoot.java": 4
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.225,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-1587",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/test/java/org/springframework/security/web/context/HttpSessionSecurityContextRepositoryTests.java": "exists_before_fix",
+              "web/src/main/java/org/springframework/security/web/context/HttpSessionSecurityContextRepository.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "web/src/test/java/org/springframework/security/web/context/HttpSessionSecurityContextRepositoryTests.java": 2,
+              "web/src/main/java/org/springframework/security/web/context/HttpSessionSecurityContextRepository.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-1590",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/main/java/org/springframework/security/web/authentication/WebAuthenticationDetails.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "easy": 13,
+          "no_localizable_gt": 5,
+          "hard": 2
+        },
+        "total": 20
+      },
+      "summary": {
+        "n": 20,
+        "macro_hit_at": {
+          "1": 0.35,
+          "5": 0.6,
+          "10": 0.65,
+          "100": 0.65,
+          "200": 0.75
+        },
+        "macro_recall_at": {
+          "1": 0.2333333333333333,
+          "5": 0.4488095238095238,
+          "10": 0.4946428571428571,
+          "100": 0.5482142857142858,
+          "200": 0.6648809523809524
+        },
+        "mrr": 0.4439921802054155,
+        "map": 0.36760369449106445,
+        "mean_latency_s": 3.4968058268229164e-07
+      }
+    }
+  }
+}

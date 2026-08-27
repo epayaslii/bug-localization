@@ -135,6 +135,26 @@ def rank_files_hybrid_with_history_rerank(
     return ranked, timing
 
 
+def rank_files_dense_only(
+    bug,
+    top_k: int | None = 100,
+    candidate_pool_size: int | None = None,
+    embedding_model: str = "microsoft/unixcoder-base",
+    rrf_k: int | None = None,
+    weights: list[float] | None = None,
+    bm25_rank_fn=None,
+) -> tuple[list[str], dict]:
+    """Pure full-corpus dense retrieval -- no BM25 candidate pool, no RRF fusion at all.
+    Matches scripts/run_dense_retrieval_shard.py's probe (confirmed n=23 MRR 0.622 on IQLoc,
+    beating plain hybrid-rrf's own retrieval-only number) but exposed with the same call
+    signature as rank_files_hybrid/rank_files_hybrid_with_history_rerank (accepting and
+    ignoring candidate_pool_size/rrf_k/weights/bm25_rank_fn) so it can be dropped into
+    _HYBRID_FNS in run_relevance_feedback_test.py -- this lets relevance-filtering and
+    reformulation be tested ON TOP OF dense-alone retrieval, not just on top of hybrid-RRF.
+    """
+    return rank_files_embedding_chunked(bug, top_k=top_k, model_name=embedding_model)
+
+
 def rank_files_hybrid_extended(
     bug,
     top_k: int | None = 100,

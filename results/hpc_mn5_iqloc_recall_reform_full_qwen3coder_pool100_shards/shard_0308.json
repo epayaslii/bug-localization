@@ -1,0 +1,2029 @@
+{
+  "manifest_id": "iqloc-multi-n7091-s42-f8a5d2c401a4",
+  "shard_index": 308,
+  "num_shards": 350,
+  "candidate_pool_size": 100,
+  "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+  "reformulation_mode": "semantic",
+  "relevance_mode": "llm",
+  "keep_fraction": 0.5,
+  "instance_ids": [
+    "WFCORE-942",
+    "WFCORE-948",
+    "WFCORE-949",
+    "WFCORE-95",
+    "WFCORE-959",
+    "WFCORE-961",
+    "WFCORE-967",
+    "WFCORE-968",
+    "WFCORE-980",
+    "WFCORE-981",
+    "WFCORE-989",
+    "WFCORE-992",
+    "WFCORE-993",
+    "WFCORE-997",
+    "WFLY-1271",
+    "WFLY-12763992",
+    "WFLY-12765111",
+    "WFLY-12765559",
+    "WFLY-12766036",
+    "WFLY-12766395"
+  ],
+  "configs": {
+    "retriever": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "WFCORE-942",
+            "repo": "WFCORE",
+            "classifications": {
+              "cli/src/main/java/org/jboss/as/cli/operation/impl/DefaultOperationCandidatesProvider.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.86102294921875e-06
+          },
+          {
+            "instance_id": "WFCORE-948",
+            "repo": "WFCORE",
+            "classifications": {
+              "testsuite/domain/src/test/java/org/jboss/as/test/integration/domain/suites/WildcardOperationsTestCase.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/ProxyStepHandler.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/operations/global/GlobalOperationHandlers.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "controller/src/main/java/org/jboss/as/controller/operations/global/GlobalOperationHandlers.java": 6
+            },
+            "best_rank": 6,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.3333333333333333,
+              "100": 0.3333333333333333,
+              "200": 0.3333333333333333
+            },
+            "average_precision": 0.05555555555555555,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "WFCORE-949",
+            "repo": "WFCORE",
+            "classifications": {
+              "subsystem-test/framework/src/main/java/org/jboss/as/subsystem/test/AdditionalInitialization.java": "exists_before_fix",
+              "testsuite/manualmode/src/test/java/org/wildfly/core/test/standalone/mgmt/HTTPSManagementInterfaceTestCase.java": "exists_before_fix",
+              "jmx/src/main/java/org/jboss/as/jmx/RemotingConnectorResource.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/operations/HttpManagementRemoveHandler.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/host/controller/resources/NativeManagementResourceDefinition.java": "exists_before_fix",
+              "testsuite/domain/src/test/java/org/jboss/as/test/integration/domain/HTTPSManagementInterfaceTestCase.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/operations/NativeRemotingManagementRemoveHandler.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/operations/NativeManagementRemoveHandler.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/host/controller/resources/HttpManagementResourceDefinition.java": "exists_before_fix",
+              "testsuite/manualmode/src/test/java/org/wildfly/core/test/standalone/mgmt/HTTPSConnectionWithCLITestCase.java": "exists_before_fix",
+              "remoting/subsystem/src/main/java/org/jboss/as/remoting/management/ManagementRemotingServices.java": "exists_before_fix",
+              "remoting/subsystem/src/main/java/org/jboss/as/remoting/logging/RemotingLogger.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/mgmt/NativeManagementResourceDefinition.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/host/controller/operations/HttpManagementRemoveHandler.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/mgmt/HttpManagementResourceDefinition.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "testsuite/manualmode/src/test/java/org/wildfly/core/test/standalone/mgmt/HTTPSManagementInterfaceTestCase.java": 2,
+              "server/src/main/java/org/jboss/as/server/operations/HttpManagementRemoveHandler.java": 13,
+              "testsuite/domain/src/test/java/org/jboss/as/test/integration/domain/HTTPSManagementInterfaceTestCase.java": 1,
+              "host-controller/src/main/java/org/jboss/as/host/controller/resources/HttpManagementResourceDefinition.java": 23,
+              "host-controller/src/main/java/org/jboss/as/host/controller/operations/HttpManagementRemoveHandler.java": 22,
+              "server/src/main/java/org/jboss/as/server/mgmt/HttpManagementResourceDefinition.java": 20
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.06666666666666667,
+              "5": 0.13333333333333333,
+              "10": 0.13333333333333333,
+              "100": 0.4,
+              "200": 0.4
+            },
+            "average_precision": 0.1945941015506233,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "WFCORE-95",
+            "repo": "WFCORE",
+            "classifications": {
+              "controller/src/test/java/org/jboss/as/controller/PrimitiveListAttributeDefinitionUnitTestCase.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/SimpleListAttributeDefinition.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/PrimitiveListAttributeDefinition.java": "exists_before_fix",
+              "controller/src/test/java/org/jboss/as/controller/SimpleListAttributeDefinitionUnitTestCase.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "controller/src/test/java/org/jboss/as/controller/PrimitiveListAttributeDefinitionUnitTestCase.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.25,
+              "5": 0.25,
+              "10": 0.25,
+              "100": 0.25,
+              "200": 0.25
+            },
+            "average_precision": 0.25,
+            "difficulty": "easy",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "WFCORE-959",
+            "repo": "WFCORE",
+            "classifications": {
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/OperatingSystemResourceDefinition.java": "exists_before_fix",
+              "logging/src/main/java/org/jboss/as/logging/deployments/resources/LoggerResourceDefinition.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/registry/ManagementResourceRegistration.java": "exists_before_fix",
+              "controller/src/test/java/org/jboss/as/controller/test/ReadResourceWithRuntimeResourceTestCase.java": "exists_before_fix",
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/BufferPoolRootResourceDefinition.java": "exists_before_fix",
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/MemoryResourceDefinition.java": "exists_before_fix",
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/MemoryPoolResourceDefinition.java": "exists_before_fix",
+              "logging/src/main/java/org/jboss/as/logging/deployments/resources/HandlerResourceDefinition.java": "exists_before_fix",
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/ClassLoadingResourceDefinition.java": "exists_before_fix",
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/MemoryPoolRootResourceDefinition.java": "exists_before_fix",
+              "logging/src/main/java/org/jboss/as/logging/LogFileResourceDefinition.java": "exists_before_fix",
+              "domain-management/src/main/java/org/jboss/as/domain/management/controller/ActiveOperationResourceDefinition.java": "exists_before_fix",
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/RuntimeResourceDefinition.java": "exists_before_fix",
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/BufferPoolResourceDefinition.java": "exists_before_fix",
+              "controller/src/test/java/org/jboss/as/controller/test/DisappearingResourceTestCase.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/registry/DelegatingManagementResourceRegistration.java": "exists_before_fix",
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/CompilationResourceDefinition.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/registry/ConcreteResourceRegistration.java": "exists_before_fix",
+              "logging/src/main/java/org/jboss/as/logging/deployments/resources/LoggingDeploymentResources.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/extension/ExtensionRegistry.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/extension/ExtensionSubsystemResourceDefinition.java": "exists_before_fix",
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/GarbageCollectorResourceDefinition.java": "exists_before_fix",
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/PlatformMBeanResourceDefinition.java": "exists_before_fix",
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/MemoryManagerRootResourceDefinition.java": "exists_before_fix",
+              "domain-management/src/main/java/org/jboss/as/domain/management/controller/ManagementControllerResourceDefinition.java": "exists_before_fix",
+              "domain-management/src/main/java/org/jboss/as/domain/management/access/AccessConstraintAppliesToResourceDefinition.java": "exists_before_fix",
+              "logging/src/main/java/org/jboss/as/logging/LoggingExtension.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/registry/NodeSubregistry.java": "exists_before_fix",
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/ThreadResourceDefinition.java": "exists_before_fix",
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/MemoryManagerResourceDefinition.java": "exists_before_fix",
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/GarbageCollectorRootResourceDefinition.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "WFCORE-961",
+            "repo": "WFCORE",
+            "classifications": {
+              "controller/src/main/java/org/jboss/as/controller/capability/registry/CapabilityId.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/capability/registry/CapabilityRegistration.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/CapabilityRegistry.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 9.5367431640625e-07
+          },
+          {
+            "instance_id": "WFCORE-967",
+            "repo": "WFCORE",
+            "classifications": {
+              "controller/src/main/java/org/jboss/as/controller/operations/global/AbstractCollectionHandler.java": "exists_before_fix",
+              "controller/src/test/java/org/jboss/as/controller/operation/global/CollectionOperationsTestCase.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "controller/src/test/java/org/jboss/as/controller/operation/global/CollectionOperationsTestCase.java": 8
+            },
+            "best_rank": 8,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.0625,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "WFCORE-968",
+            "repo": "WFCORE",
+            "classifications": {
+              "controller/src/main/java/org/jboss/as/controller/operations/global/WriteAttributeHandler.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 9.5367431640625e-07
+          },
+          {
+            "instance_id": "WFCORE-980",
+            "repo": "WFCORE",
+            "classifications": {
+              "controller/src/test/java/org/jboss/as/controller/CapabilityRegistryTestCase.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/CapabilityRegistry.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "WFCORE-981",
+            "repo": "WFCORE",
+            "classifications": {
+              "host-controller/src/main/java/org/jboss/as/host/controller/RemoteDomainConnectionService.java": "exists_before_fix",
+              "core-model-test/framework/src/main/java/org/jboss/as/core/model/test/LegacyKernelServicesImpl.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/host/controller/RemoteDomainConnection.java": "exists_before_fix",
+              "testsuite/domain/src/test/java/org/jboss/as/test/integration/domain/suites/IgnoredResourcesTestCase.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/host/controller/IgnoredNonAffectedServerGroupsUtil.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/host/controller/operations/LocalHostControllerInfoImpl.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/host/controller/operations/RemoteDomainControllerAddHandler.java": "exists_before_fix",
+              "host-controller/src/test/java/org/jboss/as/domain/controller/operations/AbstractOperationTestCase.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/domain/controller/LocalHostControllerInfo.java": "exists_before_fix",
+              "host-controller/src/test/java/org/jboss/as/domain/controller/operations/ServerGroupAffectedResourceServerConfigOperationsTestCase.java": "exists_before_fix",
+              "testsuite/domain/src/test/java/org/jboss/as/test/integration/domain/suites/DomainTestSuite.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "host-controller/src/main/java/org/jboss/as/host/controller/IgnoredNonAffectedServerGroupsUtil.java": 10,
+              "host-controller/src/main/java/org/jboss/as/host/controller/operations/LocalHostControllerInfoImpl.java": 7,
+              "host-controller/src/test/java/org/jboss/as/domain/controller/operations/ServerGroupAffectedResourceServerConfigOperationsTestCase.java": 14
+            },
+            "best_rank": 7,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.18181818181818182,
+              "100": 0.2727272727272727,
+              "200": 0.2727272727272727
+            },
+            "average_precision": 0.05064935064935065,
+            "difficulty": "easy",
+            "latency_s": 9.5367431640625e-07
+          },
+          {
+            "instance_id": "WFCORE-989",
+            "repo": "WFCORE",
+            "classifications": {
+              "host-controller/src/main/java/org/jboss/as/host/controller/ServerInventoryImpl.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/host/controller/mgmt/ServerToHostProtocolHandler.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "host-controller/src/main/java/org/jboss/as/host/controller/ServerInventoryImpl.java": 2,
+              "host-controller/src/main/java/org/jboss/as/host/controller/mgmt/ServerToHostProtocolHandler.java": 5
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.45,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "WFCORE-992",
+            "repo": "WFCORE",
+            "classifications": {
+              "host-controller/src/main/java/org/jboss/as/host/controller/ManagedServerProxy.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "WFCORE-993",
+            "repo": "WFCORE",
+            "classifications": {
+              "cli/src/main/java/org/jboss/as/cli/handlers/ReloadHandler.java": "exists_before_fix",
+              "embedded/src/main/java/org/wildfly/core/embedded/EmbeddedHostControllerFactory.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "WFCORE-997",
+            "repo": "WFCORE",
+            "classifications": {
+              "domain-management/src/main/java/org/jboss/as/domain/management/connections/ldap/ThreadLocalSSLSocketFactory.java": "exists_before_fix",
+              "domain-management/src/main/java/org/jboss/as/domain/management/security/WrapperSSLContext.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "domain-management/src/main/java/org/jboss/as/domain/management/connections/ldap/ThreadLocalSSLSocketFactory.java": 37
+            },
+            "best_rank": 37,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.013513513513513514,
+            "difficulty": "medium",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "WFLY-1271",
+            "repo": "WFLY",
+            "classifications": {
+              "clustering/infinispan/src/main/java/org/jboss/as/clustering/infinispan/subsystem/RemoteStoreResourceDefinition.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.86102294921875e-06
+          },
+          {
+            "instance_id": "WFLY-12763992",
+            "repo": "WFLY",
+            "classifications": {
+              "clustering/server/src/main/java/org/wildfly/clustering/server/dispatcher/ChannelCommandDispatcherFactory.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "clustering/server/src/main/java/org/wildfly/clustering/server/dispatcher/ChannelCommandDispatcherFactory.java": 7
+            },
+            "best_rank": 7,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.14285714285714285,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "WFLY-12765111",
+            "repo": "WFLY",
+            "classifications": {
+              "microprofile/opentracing-extension/src/main/java/org/wildfly/extension/microprofile/opentracing/TracingDependencyProcessor.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "microprofile/opentracing-extension/src/main/java/org/wildfly/extension/microprofile/opentracing/TracingDependencyProcessor.java": 4
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.25,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "WFLY-12765559",
+            "repo": "WFLY",
+            "classifications": {
+              "microprofile/opentracing-smallrye/src/main/java/org/wildfly/microprofile/opentracing/smallrye/TracingCDIExtension.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "microprofile/opentracing-smallrye/src/main/java/org/wildfly/microprofile/opentracing/smallrye/TracingCDIExtension.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 9.5367431640625e-07
+          },
+          {
+            "instance_id": "WFLY-12766036",
+            "repo": "WFLY",
+            "classifications": {
+              "clustering/jgroups/extension/src/main/java/org/jboss/as/clustering/jgroups/subsystem/XMLElement.java": "exists_before_fix",
+              "clustering/jgroups/extension/src/main/java/org/jboss/as/clustering/jgroups/subsystem/JGroupsSubsystemXMLReader.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "clustering/jgroups/extension/src/main/java/org/jboss/as/clustering/jgroups/subsystem/XMLElement.java": 16,
+              "clustering/jgroups/extension/src/main/java/org/jboss/as/clustering/jgroups/subsystem/JGroupsSubsystemXMLReader.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5625,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "WFLY-12766395",
+            "repo": "WFLY",
+            "classifications": {
+              "testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/microprofile/opentracing/OnOffOpenTracingTestCase.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 4.76837158203125e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "no_localizable_gt": 9,
+          "easy": 10,
+          "medium": 1
+        },
+        "total": 20
+      },
+      "summary": {
+        "n": 20,
+        "macro_hit_at": {
+          "1": 0.2,
+          "5": 0.3,
+          "10": 0.5,
+          "100": 0.55,
+          "200": 0.55
+        },
+        "macro_recall_at": {
+          "1": 0.09083333333333334,
+          "5": 0.19416666666666665,
+          "10": 0.2949242424242424,
+          "100": 0.3628030303030303,
+          "200": 0.3628030303030303
+        },
+        "mrr": 0.267720398970399,
+        "map": 0.1516084832063093,
+        "mean_latency_s": 7.369301535866477e-07
+      }
+    },
+    "relevance_filtered": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "WFCORE-942",
+            "repo": "WFCORE",
+            "classifications": {
+              "cli/src/main/java/org/jboss/as/cli/operation/impl/DefaultOperationCandidatesProvider.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "WFCORE-948",
+            "repo": "WFCORE",
+            "classifications": {
+              "testsuite/domain/src/test/java/org/jboss/as/test/integration/domain/suites/WildcardOperationsTestCase.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/ProxyStepHandler.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/operations/global/GlobalOperationHandlers.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "controller/src/main/java/org/jboss/as/controller/operations/global/GlobalOperationHandlers.java": 6
+            },
+            "best_rank": 6,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.3333333333333333,
+              "100": 0.3333333333333333,
+              "200": 0.3333333333333333
+            },
+            "average_precision": 0.05555555555555555,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-949",
+            "repo": "WFCORE",
+            "classifications": {
+              "subsystem-test/framework/src/main/java/org/jboss/as/subsystem/test/AdditionalInitialization.java": "exists_before_fix",
+              "testsuite/manualmode/src/test/java/org/wildfly/core/test/standalone/mgmt/HTTPSManagementInterfaceTestCase.java": "exists_before_fix",
+              "jmx/src/main/java/org/jboss/as/jmx/RemotingConnectorResource.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/operations/HttpManagementRemoveHandler.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/host/controller/resources/NativeManagementResourceDefinition.java": "exists_before_fix",
+              "testsuite/domain/src/test/java/org/jboss/as/test/integration/domain/HTTPSManagementInterfaceTestCase.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/operations/NativeRemotingManagementRemoveHandler.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/operations/NativeManagementRemoveHandler.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/host/controller/resources/HttpManagementResourceDefinition.java": "exists_before_fix",
+              "testsuite/manualmode/src/test/java/org/wildfly/core/test/standalone/mgmt/HTTPSConnectionWithCLITestCase.java": "exists_before_fix",
+              "remoting/subsystem/src/main/java/org/jboss/as/remoting/management/ManagementRemotingServices.java": "exists_before_fix",
+              "remoting/subsystem/src/main/java/org/jboss/as/remoting/logging/RemotingLogger.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/mgmt/NativeManagementResourceDefinition.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/host/controller/operations/HttpManagementRemoveHandler.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/mgmt/HttpManagementResourceDefinition.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "testsuite/manualmode/src/test/java/org/wildfly/core/test/standalone/mgmt/HTTPSManagementInterfaceTestCase.java": 2,
+              "server/src/main/java/org/jboss/as/server/operations/HttpManagementRemoveHandler.java": 13,
+              "testsuite/domain/src/test/java/org/jboss/as/test/integration/domain/HTTPSManagementInterfaceTestCase.java": 1,
+              "host-controller/src/main/java/org/jboss/as/host/controller/resources/HttpManagementResourceDefinition.java": 23,
+              "host-controller/src/main/java/org/jboss/as/host/controller/operations/HttpManagementRemoveHandler.java": 22,
+              "server/src/main/java/org/jboss/as/server/mgmt/HttpManagementResourceDefinition.java": 20
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.06666666666666667,
+              "5": 0.13333333333333333,
+              "10": 0.13333333333333333,
+              "100": 0.4,
+              "200": 0.4
+            },
+            "average_precision": 0.1945941015506233,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-95",
+            "repo": "WFCORE",
+            "classifications": {
+              "controller/src/test/java/org/jboss/as/controller/PrimitiveListAttributeDefinitionUnitTestCase.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/SimpleListAttributeDefinition.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/PrimitiveListAttributeDefinition.java": "exists_before_fix",
+              "controller/src/test/java/org/jboss/as/controller/SimpleListAttributeDefinitionUnitTestCase.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "controller/src/test/java/org/jboss/as/controller/PrimitiveListAttributeDefinitionUnitTestCase.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.25,
+              "5": 0.25,
+              "10": 0.25,
+              "100": 0.25,
+              "200": 0.25
+            },
+            "average_precision": 0.25,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-959",
+            "repo": "WFCORE",
+            "classifications": {
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/OperatingSystemResourceDefinition.java": "exists_before_fix",
+              "logging/src/main/java/org/jboss/as/logging/deployments/resources/LoggerResourceDefinition.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/registry/ManagementResourceRegistration.java": "exists_before_fix",
+              "controller/src/test/java/org/jboss/as/controller/test/ReadResourceWithRuntimeResourceTestCase.java": "exists_before_fix",
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/BufferPoolRootResourceDefinition.java": "exists_before_fix",
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/MemoryResourceDefinition.java": "exists_before_fix",
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/MemoryPoolResourceDefinition.java": "exists_before_fix",
+              "logging/src/main/java/org/jboss/as/logging/deployments/resources/HandlerResourceDefinition.java": "exists_before_fix",
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/ClassLoadingResourceDefinition.java": "exists_before_fix",
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/MemoryPoolRootResourceDefinition.java": "exists_before_fix",
+              "logging/src/main/java/org/jboss/as/logging/LogFileResourceDefinition.java": "exists_before_fix",
+              "domain-management/src/main/java/org/jboss/as/domain/management/controller/ActiveOperationResourceDefinition.java": "exists_before_fix",
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/RuntimeResourceDefinition.java": "exists_before_fix",
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/BufferPoolResourceDefinition.java": "exists_before_fix",
+              "controller/src/test/java/org/jboss/as/controller/test/DisappearingResourceTestCase.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/registry/DelegatingManagementResourceRegistration.java": "exists_before_fix",
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/CompilationResourceDefinition.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/registry/ConcreteResourceRegistration.java": "exists_before_fix",
+              "logging/src/main/java/org/jboss/as/logging/deployments/resources/LoggingDeploymentResources.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/extension/ExtensionRegistry.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/extension/ExtensionSubsystemResourceDefinition.java": "exists_before_fix",
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/GarbageCollectorResourceDefinition.java": "exists_before_fix",
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/PlatformMBeanResourceDefinition.java": "exists_before_fix",
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/MemoryManagerRootResourceDefinition.java": "exists_before_fix",
+              "domain-management/src/main/java/org/jboss/as/domain/management/controller/ManagementControllerResourceDefinition.java": "exists_before_fix",
+              "domain-management/src/main/java/org/jboss/as/domain/management/access/AccessConstraintAppliesToResourceDefinition.java": "exists_before_fix",
+              "logging/src/main/java/org/jboss/as/logging/LoggingExtension.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/registry/NodeSubregistry.java": "exists_before_fix",
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/ThreadResourceDefinition.java": "exists_before_fix",
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/MemoryManagerResourceDefinition.java": "exists_before_fix",
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/GarbageCollectorRootResourceDefinition.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "WFCORE-961",
+            "repo": "WFCORE",
+            "classifications": {
+              "controller/src/main/java/org/jboss/as/controller/capability/registry/CapabilityId.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/capability/registry/CapabilityRegistration.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/CapabilityRegistry.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-967",
+            "repo": "WFCORE",
+            "classifications": {
+              "controller/src/main/java/org/jboss/as/controller/operations/global/AbstractCollectionHandler.java": "exists_before_fix",
+              "controller/src/test/java/org/jboss/as/controller/operation/global/CollectionOperationsTestCase.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "controller/src/test/java/org/jboss/as/controller/operation/global/CollectionOperationsTestCase.java": 9
+            },
+            "best_rank": 9,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.05555555555555555,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-968",
+            "repo": "WFCORE",
+            "classifications": {
+              "controller/src/main/java/org/jboss/as/controller/operations/global/WriteAttributeHandler.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-980",
+            "repo": "WFCORE",
+            "classifications": {
+              "controller/src/test/java/org/jboss/as/controller/CapabilityRegistryTestCase.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/CapabilityRegistry.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-981",
+            "repo": "WFCORE",
+            "classifications": {
+              "host-controller/src/main/java/org/jboss/as/host/controller/RemoteDomainConnectionService.java": "exists_before_fix",
+              "core-model-test/framework/src/main/java/org/jboss/as/core/model/test/LegacyKernelServicesImpl.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/host/controller/RemoteDomainConnection.java": "exists_before_fix",
+              "testsuite/domain/src/test/java/org/jboss/as/test/integration/domain/suites/IgnoredResourcesTestCase.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/host/controller/IgnoredNonAffectedServerGroupsUtil.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/host/controller/operations/LocalHostControllerInfoImpl.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/host/controller/operations/RemoteDomainControllerAddHandler.java": "exists_before_fix",
+              "host-controller/src/test/java/org/jboss/as/domain/controller/operations/AbstractOperationTestCase.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/domain/controller/LocalHostControllerInfo.java": "exists_before_fix",
+              "host-controller/src/test/java/org/jboss/as/domain/controller/operations/ServerGroupAffectedResourceServerConfigOperationsTestCase.java": "exists_before_fix",
+              "testsuite/domain/src/test/java/org/jboss/as/test/integration/domain/suites/DomainTestSuite.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "host-controller/src/main/java/org/jboss/as/host/controller/IgnoredNonAffectedServerGroupsUtil.java": 10,
+              "host-controller/src/main/java/org/jboss/as/host/controller/operations/LocalHostControllerInfoImpl.java": 7,
+              "host-controller/src/test/java/org/jboss/as/domain/controller/operations/ServerGroupAffectedResourceServerConfigOperationsTestCase.java": 14
+            },
+            "best_rank": 7,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.18181818181818182,
+              "100": 0.2727272727272727,
+              "200": 0.2727272727272727
+            },
+            "average_precision": 0.05064935064935065,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "WFCORE-989",
+            "repo": "WFCORE",
+            "classifications": {
+              "host-controller/src/main/java/org/jboss/as/host/controller/ServerInventoryImpl.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/host/controller/mgmt/ServerToHostProtocolHandler.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "host-controller/src/main/java/org/jboss/as/host/controller/ServerInventoryImpl.java": 2,
+              "host-controller/src/main/java/org/jboss/as/host/controller/mgmt/ServerToHostProtocolHandler.java": 5
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.45,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-992",
+            "repo": "WFCORE",
+            "classifications": {
+              "host-controller/src/main/java/org/jboss/as/host/controller/ManagedServerProxy.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-993",
+            "repo": "WFCORE",
+            "classifications": {
+              "cli/src/main/java/org/jboss/as/cli/handlers/ReloadHandler.java": "exists_before_fix",
+              "embedded/src/main/java/org/wildfly/core/embedded/EmbeddedHostControllerFactory.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-997",
+            "repo": "WFCORE",
+            "classifications": {
+              "domain-management/src/main/java/org/jboss/as/domain/management/connections/ldap/ThreadLocalSSLSocketFactory.java": "exists_before_fix",
+              "domain-management/src/main/java/org/jboss/as/domain/management/security/WrapperSSLContext.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "domain-management/src/main/java/org/jboss/as/domain/management/connections/ldap/ThreadLocalSSLSocketFactory.java": 39
+            },
+            "best_rank": 39,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.01282051282051282,
+            "difficulty": "medium",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-1271",
+            "repo": "WFLY",
+            "classifications": {
+              "clustering/infinispan/src/main/java/org/jboss/as/clustering/infinispan/subsystem/RemoteStoreResourceDefinition.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-12763992",
+            "repo": "WFLY",
+            "classifications": {
+              "clustering/server/src/main/java/org/wildfly/clustering/server/dispatcher/ChannelCommandDispatcherFactory.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "clustering/server/src/main/java/org/wildfly/clustering/server/dispatcher/ChannelCommandDispatcherFactory.java": 7
+            },
+            "best_rank": 7,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.14285714285714285,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-12765111",
+            "repo": "WFLY",
+            "classifications": {
+              "microprofile/opentracing-extension/src/main/java/org/wildfly/extension/microprofile/opentracing/TracingDependencyProcessor.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "microprofile/opentracing-extension/src/main/java/org/wildfly/extension/microprofile/opentracing/TracingDependencyProcessor.java": 4
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.25,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-12765559",
+            "repo": "WFLY",
+            "classifications": {
+              "microprofile/opentracing-smallrye/src/main/java/org/wildfly/microprofile/opentracing/smallrye/TracingCDIExtension.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "microprofile/opentracing-smallrye/src/main/java/org/wildfly/microprofile/opentracing/smallrye/TracingCDIExtension.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-12766036",
+            "repo": "WFLY",
+            "classifications": {
+              "clustering/jgroups/extension/src/main/java/org/jboss/as/clustering/jgroups/subsystem/XMLElement.java": "exists_before_fix",
+              "clustering/jgroups/extension/src/main/java/org/jboss/as/clustering/jgroups/subsystem/JGroupsSubsystemXMLReader.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "clustering/jgroups/extension/src/main/java/org/jboss/as/clustering/jgroups/subsystem/XMLElement.java": 16,
+              "clustering/jgroups/extension/src/main/java/org/jboss/as/clustering/jgroups/subsystem/JGroupsSubsystemXMLReader.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5625,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-12766395",
+            "repo": "WFLY",
+            "classifications": {
+              "testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/microprofile/opentracing/OnOffOpenTracingTestCase.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "no_localizable_gt": 9,
+          "easy": 10,
+          "medium": 1
+        },
+        "total": 20
+      },
+      "summary": {
+        "n": 20,
+        "macro_hit_at": {
+          "1": 0.2,
+          "5": 0.3,
+          "10": 0.5,
+          "100": 0.55,
+          "200": 0.55
+        },
+        "macro_recall_at": {
+          "1": 0.09083333333333334,
+          "5": 0.19416666666666665,
+          "10": 0.2949242424242424,
+          "100": 0.3628030303030303,
+          "200": 0.3628030303030303
+        },
+        "mrr": 0.26695665445665445,
+        "map": 0.15122661094943704,
+        "mean_latency_s": 2.600929953835227e-07
+      }
+    },
+    "reformulated": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "WFCORE-942",
+            "repo": "WFCORE",
+            "classifications": {
+              "cli/src/main/java/org/jboss/as/cli/operation/impl/DefaultOperationCandidatesProvider.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "cli/src/main/java/org/jboss/as/cli/operation/impl/DefaultOperationCandidatesProvider.java": 140
+            },
+            "best_rank": 140,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 1.0
+            },
+            "average_precision": 0.007142857142857143,
+            "difficulty": "hard",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "WFCORE-948",
+            "repo": "WFCORE",
+            "classifications": {
+              "testsuite/domain/src/test/java/org/jboss/as/test/integration/domain/suites/WildcardOperationsTestCase.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/ProxyStepHandler.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/operations/global/GlobalOperationHandlers.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "controller/src/main/java/org/jboss/as/controller/operations/global/GlobalOperationHandlers.java": 6
+            },
+            "best_rank": 6,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.3333333333333333,
+              "100": 0.3333333333333333,
+              "200": 0.3333333333333333
+            },
+            "average_precision": 0.05555555555555555,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-949",
+            "repo": "WFCORE",
+            "classifications": {
+              "subsystem-test/framework/src/main/java/org/jboss/as/subsystem/test/AdditionalInitialization.java": "exists_before_fix",
+              "testsuite/manualmode/src/test/java/org/wildfly/core/test/standalone/mgmt/HTTPSManagementInterfaceTestCase.java": "exists_before_fix",
+              "jmx/src/main/java/org/jboss/as/jmx/RemotingConnectorResource.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/operations/HttpManagementRemoveHandler.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/host/controller/resources/NativeManagementResourceDefinition.java": "exists_before_fix",
+              "testsuite/domain/src/test/java/org/jboss/as/test/integration/domain/HTTPSManagementInterfaceTestCase.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/operations/NativeRemotingManagementRemoveHandler.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/operations/NativeManagementRemoveHandler.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/host/controller/resources/HttpManagementResourceDefinition.java": "exists_before_fix",
+              "testsuite/manualmode/src/test/java/org/wildfly/core/test/standalone/mgmt/HTTPSConnectionWithCLITestCase.java": "exists_before_fix",
+              "remoting/subsystem/src/main/java/org/jboss/as/remoting/management/ManagementRemotingServices.java": "exists_before_fix",
+              "remoting/subsystem/src/main/java/org/jboss/as/remoting/logging/RemotingLogger.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/mgmt/NativeManagementResourceDefinition.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/host/controller/operations/HttpManagementRemoveHandler.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/mgmt/HttpManagementResourceDefinition.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "testsuite/manualmode/src/test/java/org/wildfly/core/test/standalone/mgmt/HTTPSManagementInterfaceTestCase.java": 4,
+              "jmx/src/main/java/org/jboss/as/jmx/RemotingConnectorResource.java": 133,
+              "server/src/main/java/org/jboss/as/server/operations/HttpManagementRemoveHandler.java": 15,
+              "host-controller/src/main/java/org/jboss/as/host/controller/resources/NativeManagementResourceDefinition.java": 101,
+              "testsuite/domain/src/test/java/org/jboss/as/test/integration/domain/HTTPSManagementInterfaceTestCase.java": 1,
+              "server/src/main/java/org/jboss/as/server/operations/NativeRemotingManagementRemoveHandler.java": 125,
+              "server/src/main/java/org/jboss/as/server/operations/NativeManagementRemoveHandler.java": 123,
+              "host-controller/src/main/java/org/jboss/as/host/controller/resources/HttpManagementResourceDefinition.java": 18,
+              "server/src/main/java/org/jboss/as/server/mgmt/NativeManagementResourceDefinition.java": 102,
+              "host-controller/src/main/java/org/jboss/as/host/controller/operations/HttpManagementRemoveHandler.java": 20,
+              "server/src/main/java/org/jboss/as/server/mgmt/HttpManagementResourceDefinition.java": 23
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.06666666666666667,
+              "5": 0.13333333333333333,
+              "10": 0.13333333333333333,
+              "100": 0.4,
+              "200": 0.7333333333333333
+            },
+            "average_precision": 0.18778050595375417,
+            "difficulty": "easy",
+            "latency_s": 0.0
+          },
+          {
+            "instance_id": "WFCORE-95",
+            "repo": "WFCORE",
+            "classifications": {
+              "controller/src/test/java/org/jboss/as/controller/PrimitiveListAttributeDefinitionUnitTestCase.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/SimpleListAttributeDefinition.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/PrimitiveListAttributeDefinition.java": "exists_before_fix",
+              "controller/src/test/java/org/jboss/as/controller/SimpleListAttributeDefinitionUnitTestCase.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "controller/src/test/java/org/jboss/as/controller/PrimitiveListAttributeDefinitionUnitTestCase.java": 1,
+              "controller/src/main/java/org/jboss/as/controller/SimpleListAttributeDefinition.java": 102,
+              "controller/src/main/java/org/jboss/as/controller/PrimitiveListAttributeDefinition.java": 101
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.25,
+              "5": 0.25,
+              "10": 0.25,
+              "100": 0.25,
+              "200": 0.75
+            },
+            "average_precision": 0.2623034362259755,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-959",
+            "repo": "WFCORE",
+            "classifications": {
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/OperatingSystemResourceDefinition.java": "exists_before_fix",
+              "logging/src/main/java/org/jboss/as/logging/deployments/resources/LoggerResourceDefinition.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/registry/ManagementResourceRegistration.java": "exists_before_fix",
+              "controller/src/test/java/org/jboss/as/controller/test/ReadResourceWithRuntimeResourceTestCase.java": "exists_before_fix",
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/BufferPoolRootResourceDefinition.java": "exists_before_fix",
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/MemoryResourceDefinition.java": "exists_before_fix",
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/MemoryPoolResourceDefinition.java": "exists_before_fix",
+              "logging/src/main/java/org/jboss/as/logging/deployments/resources/HandlerResourceDefinition.java": "exists_before_fix",
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/ClassLoadingResourceDefinition.java": "exists_before_fix",
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/MemoryPoolRootResourceDefinition.java": "exists_before_fix",
+              "logging/src/main/java/org/jboss/as/logging/LogFileResourceDefinition.java": "exists_before_fix",
+              "domain-management/src/main/java/org/jboss/as/domain/management/controller/ActiveOperationResourceDefinition.java": "exists_before_fix",
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/RuntimeResourceDefinition.java": "exists_before_fix",
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/BufferPoolResourceDefinition.java": "exists_before_fix",
+              "controller/src/test/java/org/jboss/as/controller/test/DisappearingResourceTestCase.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/registry/DelegatingManagementResourceRegistration.java": "exists_before_fix",
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/CompilationResourceDefinition.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/registry/ConcreteResourceRegistration.java": "exists_before_fix",
+              "logging/src/main/java/org/jboss/as/logging/deployments/resources/LoggingDeploymentResources.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/extension/ExtensionRegistry.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/extension/ExtensionSubsystemResourceDefinition.java": "exists_before_fix",
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/GarbageCollectorResourceDefinition.java": "exists_before_fix",
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/PlatformMBeanResourceDefinition.java": "exists_before_fix",
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/MemoryManagerRootResourceDefinition.java": "exists_before_fix",
+              "domain-management/src/main/java/org/jboss/as/domain/management/controller/ManagementControllerResourceDefinition.java": "exists_before_fix",
+              "domain-management/src/main/java/org/jboss/as/domain/management/access/AccessConstraintAppliesToResourceDefinition.java": "exists_before_fix",
+              "logging/src/main/java/org/jboss/as/logging/LoggingExtension.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/registry/NodeSubregistry.java": "exists_before_fix",
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/ThreadResourceDefinition.java": "exists_before_fix",
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/MemoryManagerResourceDefinition.java": "exists_before_fix",
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/GarbageCollectorRootResourceDefinition.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/OperatingSystemResourceDefinition.java": 125,
+              "controller/src/main/java/org/jboss/as/controller/registry/ManagementResourceRegistration.java": 107,
+              "controller/src/test/java/org/jboss/as/controller/test/ReadResourceWithRuntimeResourceTestCase.java": 145,
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/BufferPoolRootResourceDefinition.java": 115,
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/MemoryResourceDefinition.java": 124,
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/MemoryPoolResourceDefinition.java": 122,
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/ClassLoadingResourceDefinition.java": 116,
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/MemoryPoolRootResourceDefinition.java": 123,
+              "domain-management/src/main/java/org/jboss/as/domain/management/controller/ActiveOperationResourceDefinition.java": 111,
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/RuntimeResourceDefinition.java": 127,
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/BufferPoolResourceDefinition.java": 114,
+              "controller/src/main/java/org/jboss/as/controller/registry/DelegatingManagementResourceRegistration.java": 132,
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/CompilationResourceDefinition.java": 117,
+              "controller/src/main/java/org/jboss/as/controller/registry/ConcreteResourceRegistration.java": 138,
+              "controller/src/main/java/org/jboss/as/controller/extension/ExtensionRegistry.java": 129,
+              "controller/src/main/java/org/jboss/as/controller/extension/ExtensionSubsystemResourceDefinition.java": 109,
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/GarbageCollectorResourceDefinition.java": 118,
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/PlatformMBeanResourceDefinition.java": 126,
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/MemoryManagerRootResourceDefinition.java": 121,
+              "domain-management/src/main/java/org/jboss/as/domain/management/controller/ManagementControllerResourceDefinition.java": 112,
+              "domain-management/src/main/java/org/jboss/as/domain/management/access/AccessConstraintAppliesToResourceDefinition.java": 110,
+              "logging/src/main/java/org/jboss/as/logging/LoggingExtension.java": 169,
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/ThreadResourceDefinition.java": 128,
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/MemoryManagerResourceDefinition.java": 120,
+              "platform-mbean/src/main/java/org/jboss/as/platform/mbean/GarbageCollectorRootResourceDefinition.java": 119
+            },
+            "best_rank": 107,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.8064516129032258
+            },
+            "average_precision": 0.0819250908236867,
+            "difficulty": "hard",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-961",
+            "repo": "WFCORE",
+            "classifications": {
+              "controller/src/main/java/org/jboss/as/controller/capability/registry/CapabilityId.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/capability/registry/CapabilityRegistration.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/CapabilityRegistry.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "controller/src/main/java/org/jboss/as/controller/capability/registry/CapabilityId.java": 162,
+              "controller/src/main/java/org/jboss/as/controller/capability/registry/CapabilityRegistration.java": 163,
+              "controller/src/main/java/org/jboss/as/controller/CapabilityRegistry.java": 161
+            },
+            "best_rank": 161,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 1.0
+            },
+            "average_precision": 0.012320589037343135,
+            "difficulty": "hard",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-967",
+            "repo": "WFCORE",
+            "classifications": {
+              "controller/src/main/java/org/jboss/as/controller/operations/global/AbstractCollectionHandler.java": "exists_before_fix",
+              "controller/src/test/java/org/jboss/as/controller/operation/global/CollectionOperationsTestCase.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "controller/src/main/java/org/jboss/as/controller/operations/global/AbstractCollectionHandler.java": 104,
+              "controller/src/test/java/org/jboss/as/controller/operation/global/CollectionOperationsTestCase.java": 5
+            },
+            "best_rank": 5,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 1.0
+            },
+            "average_precision": 0.10961538461538461,
+            "difficulty": "easy",
+            "latency_s": 0.0
+          },
+          {
+            "instance_id": "WFCORE-968",
+            "repo": "WFCORE",
+            "classifications": {
+              "controller/src/main/java/org/jboss/as/controller/operations/global/WriteAttributeHandler.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-980",
+            "repo": "WFCORE",
+            "classifications": {
+              "controller/src/test/java/org/jboss/as/controller/CapabilityRegistryTestCase.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/CapabilityRegistry.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-981",
+            "repo": "WFCORE",
+            "classifications": {
+              "host-controller/src/main/java/org/jboss/as/host/controller/RemoteDomainConnectionService.java": "exists_before_fix",
+              "core-model-test/framework/src/main/java/org/jboss/as/core/model/test/LegacyKernelServicesImpl.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/host/controller/RemoteDomainConnection.java": "exists_before_fix",
+              "testsuite/domain/src/test/java/org/jboss/as/test/integration/domain/suites/IgnoredResourcesTestCase.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/host/controller/IgnoredNonAffectedServerGroupsUtil.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/host/controller/operations/LocalHostControllerInfoImpl.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/host/controller/operations/RemoteDomainControllerAddHandler.java": "exists_before_fix",
+              "host-controller/src/test/java/org/jboss/as/domain/controller/operations/AbstractOperationTestCase.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/domain/controller/LocalHostControllerInfo.java": "exists_before_fix",
+              "host-controller/src/test/java/org/jboss/as/domain/controller/operations/ServerGroupAffectedResourceServerConfigOperationsTestCase.java": "exists_before_fix",
+              "testsuite/domain/src/test/java/org/jboss/as/test/integration/domain/suites/DomainTestSuite.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "host-controller/src/main/java/org/jboss/as/host/controller/RemoteDomainConnectionService.java": 101,
+              "host-controller/src/main/java/org/jboss/as/host/controller/IgnoredNonAffectedServerGroupsUtil.java": 6,
+              "host-controller/src/main/java/org/jboss/as/host/controller/operations/LocalHostControllerInfoImpl.java": 11,
+              "host-controller/src/main/java/org/jboss/as/host/controller/operations/RemoteDomainControllerAddHandler.java": 131,
+              "host-controller/src/test/java/org/jboss/as/domain/controller/operations/ServerGroupAffectedResourceServerConfigOperationsTestCase.java": 8
+            },
+            "best_rank": 6,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.18181818181818182,
+              "100": 0.2727272727272727,
+              "200": 0.45454545454545453
+            },
+            "average_precision": 0.06974234897466151,
+            "difficulty": "easy",
+            "latency_s": 0.0
+          },
+          {
+            "instance_id": "WFCORE-989",
+            "repo": "WFCORE",
+            "classifications": {
+              "host-controller/src/main/java/org/jboss/as/host/controller/ServerInventoryImpl.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/host/controller/mgmt/ServerToHostProtocolHandler.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "host-controller/src/main/java/org/jboss/as/host/controller/ServerInventoryImpl.java": 2,
+              "host-controller/src/main/java/org/jboss/as/host/controller/mgmt/ServerToHostProtocolHandler.java": 5
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.45,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "WFCORE-992",
+            "repo": "WFCORE",
+            "classifications": {
+              "host-controller/src/main/java/org/jboss/as/host/controller/ManagedServerProxy.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "host-controller/src/main/java/org/jboss/as/host/controller/ManagedServerProxy.java": 101
+            },
+            "best_rank": 101,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 1.0
+            },
+            "average_precision": 0.009900990099009901,
+            "difficulty": "hard",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "WFCORE-993",
+            "repo": "WFCORE",
+            "classifications": {
+              "cli/src/main/java/org/jboss/as/cli/handlers/ReloadHandler.java": "exists_before_fix",
+              "embedded/src/main/java/org/wildfly/core/embedded/EmbeddedHostControllerFactory.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-997",
+            "repo": "WFCORE",
+            "classifications": {
+              "domain-management/src/main/java/org/jboss/as/domain/management/connections/ldap/ThreadLocalSSLSocketFactory.java": "exists_before_fix",
+              "domain-management/src/main/java/org/jboss/as/domain/management/security/WrapperSSLContext.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "domain-management/src/main/java/org/jboss/as/domain/management/connections/ldap/ThreadLocalSSLSocketFactory.java": 39
+            },
+            "best_rank": 39,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.01282051282051282,
+            "difficulty": "medium",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-1271",
+            "repo": "WFLY",
+            "classifications": {
+              "clustering/infinispan/src/main/java/org/jboss/as/clustering/infinispan/subsystem/RemoteStoreResourceDefinition.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-12763992",
+            "repo": "WFLY",
+            "classifications": {
+              "clustering/server/src/main/java/org/wildfly/clustering/server/dispatcher/ChannelCommandDispatcherFactory.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "clustering/server/src/main/java/org/wildfly/clustering/server/dispatcher/ChannelCommandDispatcherFactory.java": 6
+            },
+            "best_rank": 6,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.16666666666666666,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-12765111",
+            "repo": "WFLY",
+            "classifications": {
+              "microprofile/opentracing-extension/src/main/java/org/wildfly/extension/microprofile/opentracing/TracingDependencyProcessor.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "microprofile/opentracing-extension/src/main/java/org/wildfly/extension/microprofile/opentracing/TracingDependencyProcessor.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3333333333333333,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-12765559",
+            "repo": "WFLY",
+            "classifications": {
+              "microprofile/opentracing-smallrye/src/main/java/org/wildfly/microprofile/opentracing/smallrye/TracingCDIExtension.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "microprofile/opentracing-smallrye/src/main/java/org/wildfly/microprofile/opentracing/smallrye/TracingCDIExtension.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-12766036",
+            "repo": "WFLY",
+            "classifications": {
+              "clustering/jgroups/extension/src/main/java/org/jboss/as/clustering/jgroups/subsystem/XMLElement.java": "exists_before_fix",
+              "clustering/jgroups/extension/src/main/java/org/jboss/as/clustering/jgroups/subsystem/JGroupsSubsystemXMLReader.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "clustering/jgroups/extension/src/main/java/org/jboss/as/clustering/jgroups/subsystem/XMLElement.java": 37,
+              "clustering/jgroups/extension/src/main/java/org/jboss/as/clustering/jgroups/subsystem/JGroupsSubsystemXMLReader.java": 4
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.15202702702702703,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-12766395",
+            "repo": "WFLY",
+            "classifications": {
+              "testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/microprofile/opentracing/OnOffOpenTracingTestCase.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "hard": 4,
+          "easy": 10,
+          "no_localizable_gt": 5,
+          "medium": 1
+        },
+        "total": 20
+      },
+      "summary": {
+        "n": 20,
+        "macro_hit_at": {
+          "1": 0.15,
+          "5": 0.35,
+          "10": 0.5,
+          "100": 0.55,
+          "200": 0.75
+        },
+        "macro_recall_at": {
+          "1": 0.06583333333333333,
+          "5": 0.21916666666666665,
+          "10": 0.2949242424242424,
+          "100": 0.3628030303030303,
+          "200": 0.6288831867057674
+        },
+        "mrr": 0.24207875903664866,
+        "map": 0.1455567149137884,
+        "mean_latency_s": 2.384185791015625e-07
+      }
+    }
+  }
+}

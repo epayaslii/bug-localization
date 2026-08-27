@@ -1,0 +1,137 @@
+{
+  "manifest_id": "iqloc-multi-n30-s42-df69b06700bd",
+  "shard_index": 5,
+  "num_shards": 8,
+  "model": "Qwen/Qwen3-Embedding-0.6B",
+  "mode": "full_corpus_dense_only",
+  "instance_ids": [
+    "ROO-2012",
+    "ROO-2316",
+    "SPR-6180"
+  ],
+  "configs": {
+    "dense_embedding": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "ROO-2012",
+            "repo": "ROO",
+            "classifications": {
+              "classpath/src/main/java/org/springframework/roo/classpath/converters/JavaTypeConverter.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "classpath/src/main/java/org/springframework/roo/classpath/converters/JavaTypeConverter.java": 109
+            },
+            "best_rank": 109,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 1.0
+            },
+            "average_precision": 0.009174311926605505,
+            "difficulty": "hard",
+            "latency_s": 9.5367431640625e-07
+          },
+          {
+            "instance_id": "ROO-2316",
+            "repo": "ROO",
+            "classifications": {
+              "addon-gwt/src/main/java/org/springframework/roo/addon/gwt/GwtMetadata.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "addon-gwt/src/main/java/org/springframework/roo/addon/gwt/GwtMetadata.java": 8
+            },
+            "best_rank": 8,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.125,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "SPR-6180",
+            "repo": "SPR",
+            "classifications": {
+              "org.springframework.web/src/main/java/org/springframework/http/client/CommonsClientHttpResponse.java": "exists_before_fix",
+              "org.springframework.web/src/test/java/org/springframework/web/client/RestTemplateIntegrationTests.java": "exists_before_fix",
+              "org.springframework.web/src/main/java/org/springframework/http/client/CommonsClientHttpRequest.java": "exists_before_fix",
+              "org.springframework.web/src/main/java/org/springframework/http/client/CommonsClientHttpRequestFactory.java": "exists_before_fix",
+              "org.springframework.web/src/test/java/org/springframework/http/client/AbstractHttpRequestFactoryTestCase.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "org.springframework.web/src/main/java/org/springframework/http/client/CommonsClientHttpResponse.java": 10,
+              "org.springframework.web/src/test/java/org/springframework/web/client/RestTemplateIntegrationTests.java": 26,
+              "org.springframework.web/src/main/java/org/springframework/http/client/CommonsClientHttpRequest.java": 1,
+              "org.springframework.web/src/main/java/org/springframework/http/client/CommonsClientHttpRequestFactory.java": 2,
+              "org.springframework.web/src/test/java/org/springframework/http/client/AbstractHttpRequestFactoryTestCase.java": 4
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.2,
+              "5": 0.6,
+              "10": 0.8,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.6684615384615384,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "hard": 1,
+          "easy": 2
+        },
+        "total": 3
+      },
+      "summary": {
+        "n": 3,
+        "macro_hit_at": {
+          "1": 0.3333333333333333,
+          "5": 0.3333333333333333,
+          "10": 0.6666666666666666,
+          "100": 0.6666666666666666,
+          "200": 1.0
+        },
+        "macro_recall_at": {
+          "1": 0.06666666666666667,
+          "5": 0.19999999999999998,
+          "10": 0.6,
+          "100": 0.6666666666666666,
+          "200": 1.0
+        },
+        "mrr": 0.37805810397553513,
+        "map": 0.2675452834627146,
+        "mean_latency_s": 6.357828776041666e-07
+      }
+    }
+  }
+}

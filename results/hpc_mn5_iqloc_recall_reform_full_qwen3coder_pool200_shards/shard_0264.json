@@ -1,0 +1,2104 @@
+{
+  "manifest_id": "iqloc-multi-n7091-s42-f8a5d2c401a4",
+  "shard_index": 264,
+  "num_shards": 350,
+  "candidate_pool_size": 200,
+  "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+  "reformulation_mode": "semantic",
+  "relevance_mode": "llm",
+  "keep_fraction": 0.5,
+  "instance_ids": [
+    "SECOAUTH-400",
+    "SECOAUTH-404",
+    "SGF-101",
+    "SGF-121",
+    "SGF-124",
+    "SGF-127",
+    "SGF-131",
+    "SGF-145",
+    "SGF-159",
+    "SGF-169",
+    "SGF-173",
+    "SGF-176",
+    "SGF-185",
+    "SGF-189",
+    "SGF-192",
+    "SGF-194",
+    "SGF-198",
+    "SGF-203",
+    "SGF-217",
+    "SGF-218"
+  ],
+  "configs": {
+    "retriever": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "SECOAUTH-400",
+            "repo": "SECOAUTH",
+            "classifications": {
+              "samples/oauth2/sparklr/src/test/java/org/springframework/security/oauth2/provider/TestImplicitProvider.java": "exists_before_fix",
+              "samples/oauth2/sparklr/src/test/java/org/springframework/security/oauth2/provider/ServerRunning.java": "exists_before_fix",
+              "spring-security-oauth2/src/main/java/org/springframework/security/oauth2/client/token/OAuth2AccessTokenSupport.java": "exists_before_fix",
+              "spring-security-oauth2/src/main/java/org/springframework/security/oauth2/provider/endpoint/AuthorizationEndpoint.java": "exists_before_fix",
+              "spring-security-oauth2/src/test/java/org/springframework/security/oauth2/provider/endpoint/TestAuthorizationEndpoint.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "samples/oauth2/sparklr/src/test/java/org/springframework/security/oauth2/provider/TestImplicitProvider.java": 7,
+              "samples/oauth2/sparklr/src/test/java/org/springframework/security/oauth2/provider/ServerRunning.java": 82,
+              "spring-security-oauth2/src/main/java/org/springframework/security/oauth2/client/token/OAuth2AccessTokenSupport.java": 86,
+              "spring-security-oauth2/src/main/java/org/springframework/security/oauth2/provider/endpoint/AuthorizationEndpoint.java": 4,
+              "spring-security-oauth2/src/test/java/org/springframework/security/oauth2/provider/endpoint/TestAuthorizationEndpoint.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.2,
+              "5": 0.4,
+              "10": 0.6,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.4070982902520055,
+            "difficulty": "easy",
+            "latency_s": 2.6226043701171875e-06
+          },
+          {
+            "instance_id": "SECOAUTH-404",
+            "repo": "SECOAUTH",
+            "classifications": {
+              "spring-security-oauth/src/main/java/org/springframework/security/oauth/consumer/filter/OAuthConsumerContextFilter.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-security-oauth/src/main/java/org/springframework/security/oauth/consumer/filter/OAuthConsumerContextFilter.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "SGF-101",
+            "repo": "SGF",
+            "classifications": {
+              "src/test/java/org/springframework/data/gemfire/repository/support/AbstractGemfireRepositoryFactoryIntegrationTests.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/repository/sample/Person.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/repository/sample/PersonRepository.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/repository/support/SimpleGemfireRepository.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/gemfire/repository/support/AbstractGemfireRepositoryFactoryIntegrationTests.java": 5,
+              "src/test/java/org/springframework/data/gemfire/repository/sample/Person.java": 61,
+              "src/test/java/org/springframework/data/gemfire/repository/sample/PersonRepository.java": 95,
+              "src/main/java/org/springframework/data/gemfire/repository/support/SimpleGemfireRepository.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.2478213977566868,
+            "difficulty": "easy",
+            "latency_s": 3.337860107421875e-06
+          },
+          {
+            "instance_id": "SGF-121",
+            "repo": "SGF",
+            "classifications": {
+              "src/test/java/org/springframework/data/gemfire/config/LocalRegionNamespaceTest.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/client/ClientRegionFactoryBean.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/config/ClientRegionParser.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/gemfire/config/LocalRegionNamespaceTest.java": 14,
+              "src/main/java/org/springframework/data/gemfire/client/ClientRegionFactoryBean.java": 8,
+              "src/main/java/org/springframework/data/gemfire/config/ClientRegionParser.java": 7
+            },
+            "best_rank": 7,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.6666666666666666,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.20238095238095236,
+            "difficulty": "easy",
+            "latency_s": 1.9073486328125e-06
+          },
+          {
+            "instance_id": "SGF-124",
+            "repo": "SGF",
+            "classifications": {
+              "src/main/java/org/springframework/data/gemfire/config/GatewayHubParser.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/wan/GatewayProxy.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/wan/GatewayHubFactoryBean.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/RegionFactoryBean.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/gemfire/config/GatewayHubParser.java": 4,
+              "src/main/java/org/springframework/data/gemfire/wan/GatewayProxy.java": 2,
+              "src/main/java/org/springframework/data/gemfire/wan/GatewayHubFactoryBean.java": 3,
+              "src/main/java/org/springframework/data/gemfire/RegionFactoryBean.java": 6
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.75,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.6458333333333333,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "SGF-127",
+            "repo": "SGF",
+            "classifications": {
+              "src/test/java/org/springframework/data/gemfire/mapping/MappingPdxSerializerUnitTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/mapping/MappingPdxSerializer.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/mapping/MappingPdxSerializerIntegrationTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/gemfire/mapping/MappingPdxSerializerUnitTests.java": 109,
+              "src/main/java/org/springframework/data/gemfire/mapping/MappingPdxSerializer.java": 118,
+              "src/test/java/org/springframework/data/gemfire/mapping/MappingPdxSerializerIntegrationTest.java": 57
+            },
+            "best_rank": 57,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.3333333333333333,
+              "200": 1.0
+            },
+            "average_precision": 0.020438737438631047,
+            "difficulty": "medium",
+            "latency_s": 2.86102294921875e-06
+          },
+          {
+            "instance_id": "SGF-131",
+            "repo": "SGF",
+            "classifications": {
+              "src/main/java/org/springframework/data/gemfire/repository/support/SimpleGemfireRepository.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/gemfire/repository/support/SimpleGemfireRepository.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "SGF-145",
+            "repo": "SGF",
+            "classifications": {
+              "src/main/java/org/springframework/data/gemfire/RegionFactoryBean.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/gemfire/RegionFactoryBean.java": 29
+            },
+            "best_rank": 29,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.034482758620689655,
+            "difficulty": "medium",
+            "latency_s": 2.1457672119140625e-06
+          },
+          {
+            "instance_id": "SGF-159",
+            "repo": "SGF",
+            "classifications": {
+              "src/main/java/org/springframework/data/gemfire/GemfireTransactionManager.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/gemfire/GemfireTransactionManager.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 1.9073486328125e-06
+          },
+          {
+            "instance_id": "SGF-169",
+            "repo": "SGF",
+            "classifications": {
+              "src/main/java/org/springframework/data/gemfire/wan/GatewayHubFactoryBean.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/gemfire/wan/GatewayHubFactoryBean.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3333333333333333,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "SGF-173",
+            "repo": "SGF",
+            "classifications": {
+              "src/main/java/org/springframework/data/gemfire/function/execution/GemfireOnMemberFunctionTemplate.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/function/execution/AbstractFunctionTemplate.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/function/execution/GemfireOnRegionOperations.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/function/execution/GemfireOnRegionFunctionTemplate.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/function/execution/AbstractFunctionExecution.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/function/execution/GemfireFunctionOperations.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/function/execution/FunctionIntegrationTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/gemfire/function/execution/GemfireOnMemberFunctionTemplate.java": 21,
+              "src/main/java/org/springframework/data/gemfire/function/execution/AbstractFunctionTemplate.java": 28,
+              "src/main/java/org/springframework/data/gemfire/function/execution/GemfireOnRegionOperations.java": 34,
+              "src/main/java/org/springframework/data/gemfire/function/execution/GemfireOnRegionFunctionTemplate.java": 3,
+              "src/main/java/org/springframework/data/gemfire/function/execution/AbstractFunctionExecution.java": 18,
+              "src/main/java/org/springframework/data/gemfire/function/execution/GemfireFunctionOperations.java": 6,
+              "src/test/java/org/springframework/data/gemfire/function/execution/FunctionIntegrationTests.java": 5
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.2857142857142857,
+              "10": 0.42857142857142855,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.30197412298252635,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-06
+          },
+          {
+            "instance_id": "SGF-176",
+            "repo": "SGF",
+            "classifications": {
+              "src/main/java/org/springframework/data/gemfire/config/ClientRegionParser.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/config/ClientRegionNamespaceTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/gemfire/config/ClientRegionParser.java": 20,
+              "src/test/java/org/springframework/data/gemfire/config/ClientRegionNamespaceTest.java": 9
+            },
+            "best_rank": 9,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.10555555555555556,
+            "difficulty": "easy",
+            "latency_s": 1.6689300537109375e-06
+          },
+          {
+            "instance_id": "SGF-185",
+            "repo": "SGF",
+            "classifications": {
+              "src/main/java/org/springframework/data/gemfire/function/config/ServerBasedExecutionBeanDefinitionBuilder.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/function/annotation/OnServers.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 1.430511474609375e-06
+          },
+          {
+            "instance_id": "SGF-189",
+            "repo": "SGF",
+            "classifications": {
+              "src/test/java/org/springframework/data/gemfire/config/LocalRegionNamespaceTest.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/LocalRegionFactoryBean.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/gemfire/config/LocalRegionNamespaceTest.java": 7,
+              "src/main/java/org/springframework/data/gemfire/LocalRegionFactoryBean.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.6428571428571428,
+            "difficulty": "easy",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "SGF-192",
+            "repo": "SGF",
+            "classifications": {
+              "src/test/java/org/springframework/data/gemfire/client/ClientCacheTest.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/listener/ContinuousQueryListenerContainer.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/config/ClientRegionParser.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/config/MultipleCacheTest.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/client/PoolFactoryBean.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/gemfire/client/ClientCacheTest.java": 56,
+              "src/main/java/org/springframework/data/gemfire/listener/ContinuousQueryListenerContainer.java": 35,
+              "src/main/java/org/springframework/data/gemfire/config/ClientRegionParser.java": 2,
+              "src/test/java/org/springframework/data/gemfire/config/MultipleCacheTest.java": 130,
+              "src/main/java/org/springframework/data/gemfire/client/PoolFactoryBean.java": 91
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.2,
+              "10": 0.2,
+              "100": 0.8,
+              "200": 1.0
+            },
+            "average_precision": 0.13862637362637362,
+            "difficulty": "easy",
+            "latency_s": 1.9073486328125e-06
+          },
+          {
+            "instance_id": "SGF-194",
+            "repo": "SGF",
+            "classifications": {
+              "src/main/java/org/springframework/data/gemfire/config/LookupRegionParser.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/test/StubGatewayReceiverFactory.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/config/AbstractRegionParser.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/config/SubRegionNamespaceTest.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/SubRegionFactoryBean.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/gemfire/config/LookupRegionParser.java": 22,
+              "src/test/java/org/springframework/data/gemfire/test/StubGatewayReceiverFactory.java": 179,
+              "src/main/java/org/springframework/data/gemfire/config/AbstractRegionParser.java": 14,
+              "src/test/java/org/springframework/data/gemfire/config/SubRegionNamespaceTest.java": 1,
+              "src/main/java/org/springframework/data/gemfire/SubRegionFactoryBean.java": 4
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.2,
+              "5": 0.4,
+              "10": 0.4,
+              "100": 0.8,
+              "200": 1.0
+            },
+            "average_precision": 0.3848073713995502,
+            "difficulty": "easy",
+            "latency_s": 1.430511474609375e-06
+          },
+          {
+            "instance_id": "SGF-198",
+            "repo": "SGF",
+            "classifications": {
+              "src/main/java/org/springframework/data/gemfire/wan/AsyncEventQueueFactoryBean.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/config/AsyncEventQueueParser.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/gemfire/wan/AsyncEventQueueFactoryBean.java": 1,
+              "src/main/java/org/springframework/data/gemfire/config/AsyncEventQueueParser.java": 6
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.6666666666666666,
+            "difficulty": "easy",
+            "latency_s": 1.6689300537109375e-06
+          },
+          {
+            "instance_id": "SGF-203",
+            "repo": "SGF",
+            "classifications": {
+              "src/main/java/org/springframework/data/gemfire/config/ParsingUtils.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/config/GemfireV7GatewayNamespaceTest.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/config/AsyncEventQueueParser.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/PartitionedRegionFactoryBean.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/config/AbstractRegionParser.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/LocalRegionFactoryBean.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/client/ClientRegionFactoryBean.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/config/ClientRegionParser.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/config/ClientRegionNamespaceTest.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/client/ClientRegionFactoryBeanTest.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/RegionFactoryBeanTest.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/DataPolicyConverterTest.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/RegionLookupFactoryBean.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/RegionFactoryBean.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/ReplicatedRegionFactoryBean.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/LocalRegionFactoryBeanTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/gemfire/config/ParsingUtils.java": 40,
+              "src/test/java/org/springframework/data/gemfire/config/GemfireV7GatewayNamespaceTest.java": 48,
+              "src/main/java/org/springframework/data/gemfire/PartitionedRegionFactoryBean.java": 13,
+              "src/main/java/org/springframework/data/gemfire/config/AbstractRegionParser.java": 106,
+              "src/main/java/org/springframework/data/gemfire/LocalRegionFactoryBean.java": 32,
+              "src/main/java/org/springframework/data/gemfire/client/ClientRegionFactoryBean.java": 33,
+              "src/main/java/org/springframework/data/gemfire/config/ClientRegionParser.java": 95,
+              "src/test/java/org/springframework/data/gemfire/config/ClientRegionNamespaceTest.java": 1,
+              "src/test/java/org/springframework/data/gemfire/client/ClientRegionFactoryBeanTest.java": 148,
+              "src/test/java/org/springframework/data/gemfire/RegionFactoryBeanTest.java": 2,
+              "src/test/java/org/springframework/data/gemfire/DataPolicyConverterTest.java": 47,
+              "src/main/java/org/springframework/data/gemfire/RegionLookupFactoryBean.java": 104,
+              "src/main/java/org/springframework/data/gemfire/RegionFactoryBean.java": 12,
+              "src/main/java/org/springframework/data/gemfire/ReplicatedRegionFactoryBean.java": 22,
+              "src/test/java/org/springframework/data/gemfire/LocalRegionFactoryBeanTest.java": 43
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0625,
+              "5": 0.125,
+              "10": 0.125,
+              "100": 0.75,
+              "200": 0.9375
+            },
+            "average_precision": 0.28253523808151665,
+            "difficulty": "easy",
+            "latency_s": 1.430511474609375e-06
+          },
+          {
+            "instance_id": "SGF-217",
+            "repo": "SGF",
+            "classifications": {
+              "src/main/java/org/springframework/data/gemfire/config/CacheServerParser.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/server/CacheServerFactoryBean.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/gemfire/config/CacheServerParser.java": 11,
+              "src/main/java/org/springframework/data/gemfire/server/CacheServerFactoryBean.java": 4
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.2159090909090909,
+            "difficulty": "easy",
+            "latency_s": 9.5367431640625e-07
+          },
+          {
+            "instance_id": "SGF-218",
+            "repo": "SGF",
+            "classifications": {
+              "src/test/java/org/springframework/data/gemfire/test/StubCacheServer.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/config/CacheServerNamespaceTest.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/config/CacheServerParser.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/server/CacheServerFactoryBean.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/gemfire/test/StubCacheServer.java": 38,
+              "src/test/java/org/springframework/data/gemfire/config/CacheServerNamespaceTest.java": 53,
+              "src/main/java/org/springframework/data/gemfire/config/CacheServerParser.java": 3,
+              "src/main/java/org/springframework/data/gemfire/server/CacheServerFactoryBean.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3302714333002317,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "easy": 17,
+          "medium": 2,
+          "no_localizable_gt": 1
+        },
+        "total": 20
+      },
+      "summary": {
+        "n": 20,
+        "macro_hit_at": {
+          "1": 0.3,
+          "5": 0.75,
+          "10": 0.85,
+          "100": 0.95,
+          "200": 0.95
+        },
+        "macro_recall_at": {
+          "1": 0.123125,
+          "5": 0.4330357142857143,
+          "10": 0.5710119047619048,
+          "100": 0.8841666666666667,
+          "200": 0.946875
+        },
+        "mrr": 0.5111330769452366,
+        "map": 0.3480295899247144,
+        "mean_latency_s": 1.568543283562911e-06
+      }
+    },
+    "relevance_filtered": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "SECOAUTH-400",
+            "repo": "SECOAUTH",
+            "classifications": {
+              "samples/oauth2/sparklr/src/test/java/org/springframework/security/oauth2/provider/TestImplicitProvider.java": "exists_before_fix",
+              "samples/oauth2/sparklr/src/test/java/org/springframework/security/oauth2/provider/ServerRunning.java": "exists_before_fix",
+              "spring-security-oauth2/src/main/java/org/springframework/security/oauth2/client/token/OAuth2AccessTokenSupport.java": "exists_before_fix",
+              "spring-security-oauth2/src/main/java/org/springframework/security/oauth2/provider/endpoint/AuthorizationEndpoint.java": "exists_before_fix",
+              "spring-security-oauth2/src/test/java/org/springframework/security/oauth2/provider/endpoint/TestAuthorizationEndpoint.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "samples/oauth2/sparklr/src/test/java/org/springframework/security/oauth2/provider/TestImplicitProvider.java": 7,
+              "samples/oauth2/sparklr/src/test/java/org/springframework/security/oauth2/provider/ServerRunning.java": 82,
+              "spring-security-oauth2/src/main/java/org/springframework/security/oauth2/client/token/OAuth2AccessTokenSupport.java": 86,
+              "spring-security-oauth2/src/main/java/org/springframework/security/oauth2/provider/endpoint/AuthorizationEndpoint.java": 4,
+              "spring-security-oauth2/src/test/java/org/springframework/security/oauth2/provider/endpoint/TestAuthorizationEndpoint.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.2,
+              "5": 0.4,
+              "10": 0.6,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.4070982902520055,
+            "difficulty": "easy",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "SECOAUTH-404",
+            "repo": "SECOAUTH",
+            "classifications": {
+              "spring-security-oauth/src/main/java/org/springframework/security/oauth/consumer/filter/OAuthConsumerContextFilter.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-security-oauth/src/main/java/org/springframework/security/oauth/consumer/filter/OAuthConsumerContextFilter.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 1.430511474609375e-06
+          },
+          {
+            "instance_id": "SGF-101",
+            "repo": "SGF",
+            "classifications": {
+              "src/test/java/org/springframework/data/gemfire/repository/support/AbstractGemfireRepositoryFactoryIntegrationTests.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/repository/sample/Person.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/repository/sample/PersonRepository.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/repository/support/SimpleGemfireRepository.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/gemfire/repository/support/AbstractGemfireRepositoryFactoryIntegrationTests.java": 6,
+              "src/test/java/org/springframework/data/gemfire/repository/sample/Person.java": 62,
+              "src/test/java/org/springframework/data/gemfire/repository/sample/PersonRepository.java": 96,
+              "src/main/java/org/springframework/data/gemfire/repository/support/SimpleGemfireRepository.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.25,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.1891801075268817,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SGF-121",
+            "repo": "SGF",
+            "classifications": {
+              "src/test/java/org/springframework/data/gemfire/config/LocalRegionNamespaceTest.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/client/ClientRegionFactoryBean.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/config/ClientRegionParser.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/gemfire/config/LocalRegionNamespaceTest.java": 16,
+              "src/main/java/org/springframework/data/gemfire/client/ClientRegionFactoryBean.java": 10,
+              "src/main/java/org/springframework/data/gemfire/config/ClientRegionParser.java": 9
+            },
+            "best_rank": 9,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.6666666666666666,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.16620370370370371,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SGF-124",
+            "repo": "SGF",
+            "classifications": {
+              "src/main/java/org/springframework/data/gemfire/config/GatewayHubParser.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/wan/GatewayProxy.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/wan/GatewayHubFactoryBean.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/RegionFactoryBean.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/gemfire/config/GatewayHubParser.java": 4,
+              "src/main/java/org/springframework/data/gemfire/wan/GatewayProxy.java": 2,
+              "src/main/java/org/springframework/data/gemfire/wan/GatewayHubFactoryBean.java": 3,
+              "src/main/java/org/springframework/data/gemfire/RegionFactoryBean.java": 6
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.75,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.6458333333333333,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SGF-127",
+            "repo": "SGF",
+            "classifications": {
+              "src/test/java/org/springframework/data/gemfire/mapping/MappingPdxSerializerUnitTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/mapping/MappingPdxSerializer.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/mapping/MappingPdxSerializerIntegrationTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/gemfire/mapping/MappingPdxSerializerUnitTests.java": 110,
+              "src/main/java/org/springframework/data/gemfire/mapping/MappingPdxSerializer.java": 119,
+              "src/test/java/org/springframework/data/gemfire/mapping/MappingPdxSerializerIntegrationTest.java": 58
+            },
+            "best_rank": 58,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.3333333333333333,
+              "200": 1.0
+            },
+            "average_precision": 0.020211093841925484,
+            "difficulty": "medium",
+            "latency_s": 0.0
+          },
+          {
+            "instance_id": "SGF-131",
+            "repo": "SGF",
+            "classifications": {
+              "src/main/java/org/springframework/data/gemfire/repository/support/SimpleGemfireRepository.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/gemfire/repository/support/SimpleGemfireRepository.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3333333333333333,
+            "difficulty": "easy",
+            "latency_s": 0.0
+          },
+          {
+            "instance_id": "SGF-145",
+            "repo": "SGF",
+            "classifications": {
+              "src/main/java/org/springframework/data/gemfire/RegionFactoryBean.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/gemfire/RegionFactoryBean.java": 29
+            },
+            "best_rank": 29,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.034482758620689655,
+            "difficulty": "medium",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "SGF-159",
+            "repo": "SGF",
+            "classifications": {
+              "src/main/java/org/springframework/data/gemfire/GemfireTransactionManager.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/gemfire/GemfireTransactionManager.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SGF-169",
+            "repo": "SGF",
+            "classifications": {
+              "src/main/java/org/springframework/data/gemfire/wan/GatewayHubFactoryBean.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/gemfire/wan/GatewayHubFactoryBean.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3333333333333333,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SGF-173",
+            "repo": "SGF",
+            "classifications": {
+              "src/main/java/org/springframework/data/gemfire/function/execution/GemfireOnMemberFunctionTemplate.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/function/execution/AbstractFunctionTemplate.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/function/execution/GemfireOnRegionOperations.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/function/execution/GemfireOnRegionFunctionTemplate.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/function/execution/AbstractFunctionExecution.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/function/execution/GemfireFunctionOperations.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/function/execution/FunctionIntegrationTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/gemfire/function/execution/GemfireOnMemberFunctionTemplate.java": 21,
+              "src/main/java/org/springframework/data/gemfire/function/execution/AbstractFunctionTemplate.java": 28,
+              "src/main/java/org/springframework/data/gemfire/function/execution/GemfireOnRegionOperations.java": 34,
+              "src/main/java/org/springframework/data/gemfire/function/execution/GemfireOnRegionFunctionTemplate.java": 3,
+              "src/main/java/org/springframework/data/gemfire/function/execution/AbstractFunctionExecution.java": 18,
+              "src/main/java/org/springframework/data/gemfire/function/execution/GemfireFunctionOperations.java": 6,
+              "src/test/java/org/springframework/data/gemfire/function/execution/FunctionIntegrationTests.java": 5
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.2857142857142857,
+              "10": 0.42857142857142855,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.30197412298252635,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "SGF-176",
+            "repo": "SGF",
+            "classifications": {
+              "src/main/java/org/springframework/data/gemfire/config/ClientRegionParser.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/config/ClientRegionNamespaceTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/gemfire/config/ClientRegionParser.java": 21,
+              "src/test/java/org/springframework/data/gemfire/config/ClientRegionNamespaceTest.java": 10
+            },
+            "best_rank": 10,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.09761904761904762,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "SGF-185",
+            "repo": "SGF",
+            "classifications": {
+              "src/main/java/org/springframework/data/gemfire/function/config/ServerBasedExecutionBeanDefinitionBuilder.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/function/annotation/OnServers.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SGF-189",
+            "repo": "SGF",
+            "classifications": {
+              "src/test/java/org/springframework/data/gemfire/config/LocalRegionNamespaceTest.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/LocalRegionFactoryBean.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/gemfire/config/LocalRegionNamespaceTest.java": 7,
+              "src/main/java/org/springframework/data/gemfire/LocalRegionFactoryBean.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.6428571428571428,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "SGF-192",
+            "repo": "SGF",
+            "classifications": {
+              "src/test/java/org/springframework/data/gemfire/client/ClientCacheTest.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/listener/ContinuousQueryListenerContainer.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/config/ClientRegionParser.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/config/MultipleCacheTest.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/client/PoolFactoryBean.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/gemfire/client/ClientCacheTest.java": 56,
+              "src/main/java/org/springframework/data/gemfire/listener/ContinuousQueryListenerContainer.java": 35,
+              "src/main/java/org/springframework/data/gemfire/config/ClientRegionParser.java": 2,
+              "src/test/java/org/springframework/data/gemfire/config/MultipleCacheTest.java": 130,
+              "src/main/java/org/springframework/data/gemfire/client/PoolFactoryBean.java": 91
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.2,
+              "10": 0.2,
+              "100": 0.8,
+              "200": 1.0
+            },
+            "average_precision": 0.13862637362637362,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "SGF-194",
+            "repo": "SGF",
+            "classifications": {
+              "src/main/java/org/springframework/data/gemfire/config/LookupRegionParser.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/test/StubGatewayReceiverFactory.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/config/AbstractRegionParser.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/config/SubRegionNamespaceTest.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/SubRegionFactoryBean.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/gemfire/config/LookupRegionParser.java": 23,
+              "src/test/java/org/springframework/data/gemfire/test/StubGatewayReceiverFactory.java": 179,
+              "src/main/java/org/springframework/data/gemfire/config/AbstractRegionParser.java": 15,
+              "src/test/java/org/springframework/data/gemfire/config/SubRegionNamespaceTest.java": 2,
+              "src/main/java/org/springframework/data/gemfire/SubRegionFactoryBean.java": 5
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.4,
+              "10": 0.4,
+              "100": 0.8,
+              "200": 1.0
+            },
+            "average_precision": 0.2603692008744231,
+            "difficulty": "easy",
+            "latency_s": 1.430511474609375e-06
+          },
+          {
+            "instance_id": "SGF-198",
+            "repo": "SGF",
+            "classifications": {
+              "src/main/java/org/springframework/data/gemfire/wan/AsyncEventQueueFactoryBean.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/config/AsyncEventQueueParser.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/gemfire/wan/AsyncEventQueueFactoryBean.java": 1,
+              "src/main/java/org/springframework/data/gemfire/config/AsyncEventQueueParser.java": 6
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.6666666666666666,
+            "difficulty": "easy",
+            "latency_s": 1.430511474609375e-06
+          },
+          {
+            "instance_id": "SGF-203",
+            "repo": "SGF",
+            "classifications": {
+              "src/main/java/org/springframework/data/gemfire/config/ParsingUtils.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/config/GemfireV7GatewayNamespaceTest.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/config/AsyncEventQueueParser.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/PartitionedRegionFactoryBean.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/config/AbstractRegionParser.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/LocalRegionFactoryBean.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/client/ClientRegionFactoryBean.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/config/ClientRegionParser.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/config/ClientRegionNamespaceTest.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/client/ClientRegionFactoryBeanTest.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/RegionFactoryBeanTest.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/DataPolicyConverterTest.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/RegionLookupFactoryBean.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/RegionFactoryBean.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/ReplicatedRegionFactoryBean.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/LocalRegionFactoryBeanTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/gemfire/config/ParsingUtils.java": 40,
+              "src/test/java/org/springframework/data/gemfire/config/GemfireV7GatewayNamespaceTest.java": 48,
+              "src/main/java/org/springframework/data/gemfire/PartitionedRegionFactoryBean.java": 13,
+              "src/main/java/org/springframework/data/gemfire/config/AbstractRegionParser.java": 106,
+              "src/main/java/org/springframework/data/gemfire/LocalRegionFactoryBean.java": 32,
+              "src/main/java/org/springframework/data/gemfire/client/ClientRegionFactoryBean.java": 33,
+              "src/main/java/org/springframework/data/gemfire/config/ClientRegionParser.java": 95,
+              "src/test/java/org/springframework/data/gemfire/config/ClientRegionNamespaceTest.java": 1,
+              "src/test/java/org/springframework/data/gemfire/client/ClientRegionFactoryBeanTest.java": 148,
+              "src/test/java/org/springframework/data/gemfire/RegionFactoryBeanTest.java": 2,
+              "src/test/java/org/springframework/data/gemfire/DataPolicyConverterTest.java": 47,
+              "src/main/java/org/springframework/data/gemfire/RegionLookupFactoryBean.java": 104,
+              "src/main/java/org/springframework/data/gemfire/RegionFactoryBean.java": 12,
+              "src/main/java/org/springframework/data/gemfire/ReplicatedRegionFactoryBean.java": 22,
+              "src/test/java/org/springframework/data/gemfire/LocalRegionFactoryBeanTest.java": 43
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0625,
+              "5": 0.125,
+              "10": 0.125,
+              "100": 0.75,
+              "200": 0.9375
+            },
+            "average_precision": 0.28253523808151665,
+            "difficulty": "easy",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "SGF-217",
+            "repo": "SGF",
+            "classifications": {
+              "src/main/java/org/springframework/data/gemfire/config/CacheServerParser.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/server/CacheServerFactoryBean.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/gemfire/config/CacheServerParser.java": 11,
+              "src/main/java/org/springframework/data/gemfire/server/CacheServerFactoryBean.java": 4
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.2159090909090909,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SGF-218",
+            "repo": "SGF",
+            "classifications": {
+              "src/test/java/org/springframework/data/gemfire/test/StubCacheServer.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/config/CacheServerNamespaceTest.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/config/CacheServerParser.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/server/CacheServerFactoryBean.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/gemfire/test/StubCacheServer.java": 39,
+              "src/test/java/org/springframework/data/gemfire/config/CacheServerNamespaceTest.java": 54,
+              "src/main/java/org/springframework/data/gemfire/config/CacheServerParser.java": 4,
+              "src/main/java/org/springframework/data/gemfire/server/CacheServerFactoryBean.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.24608262108262105,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "easy": 17,
+          "medium": 2,
+          "no_localizable_gt": 1
+        },
+        "total": 20
+      },
+      "summary": {
+        "n": 20,
+        "macro_hit_at": {
+          "1": 0.25,
+          "5": 0.75,
+          "10": 0.85,
+          "100": 0.95,
+          "200": 0.95
+        },
+        "macro_recall_at": {
+          "1": 0.113125,
+          "5": 0.42053571428571435,
+          "10": 0.5710119047619048,
+          "100": 0.8841666666666667,
+          "200": 0.946875
+        },
+        "mrr": 0.4589750957854406,
+        "map": 0.32411577293223076,
+        "mean_latency_s": 5.772239283511513e-07
+      }
+    },
+    "reformulated": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "SECOAUTH-400",
+            "repo": "SECOAUTH",
+            "classifications": {
+              "samples/oauth2/sparklr/src/test/java/org/springframework/security/oauth2/provider/TestImplicitProvider.java": "exists_before_fix",
+              "samples/oauth2/sparklr/src/test/java/org/springframework/security/oauth2/provider/ServerRunning.java": "exists_before_fix",
+              "spring-security-oauth2/src/main/java/org/springframework/security/oauth2/client/token/OAuth2AccessTokenSupport.java": "exists_before_fix",
+              "spring-security-oauth2/src/main/java/org/springframework/security/oauth2/provider/endpoint/AuthorizationEndpoint.java": "exists_before_fix",
+              "spring-security-oauth2/src/test/java/org/springframework/security/oauth2/provider/endpoint/TestAuthorizationEndpoint.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "samples/oauth2/sparklr/src/test/java/org/springframework/security/oauth2/provider/TestImplicitProvider.java": 6,
+              "samples/oauth2/sparklr/src/test/java/org/springframework/security/oauth2/provider/ServerRunning.java": 83,
+              "spring-security-oauth2/src/main/java/org/springframework/security/oauth2/client/token/OAuth2AccessTokenSupport.java": 89,
+              "spring-security-oauth2/src/main/java/org/springframework/security/oauth2/provider/endpoint/AuthorizationEndpoint.java": 4,
+              "spring-security-oauth2/src/test/java/org/springframework/security/oauth2/provider/endpoint/TestAuthorizationEndpoint.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.2,
+              "5": 0.4,
+              "10": 0.6,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.42087450927304726,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "SECOAUTH-404",
+            "repo": "SECOAUTH",
+            "classifications": {
+              "spring-security-oauth/src/main/java/org/springframework/security/oauth/consumer/filter/OAuthConsumerContextFilter.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-security-oauth/src/main/java/org/springframework/security/oauth/consumer/filter/OAuthConsumerContextFilter.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "SGF-101",
+            "repo": "SGF",
+            "classifications": {
+              "src/test/java/org/springframework/data/gemfire/repository/support/AbstractGemfireRepositoryFactoryIntegrationTests.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/repository/sample/Person.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/repository/sample/PersonRepository.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/repository/support/SimpleGemfireRepository.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/gemfire/repository/support/AbstractGemfireRepositoryFactoryIntegrationTests.java": 3,
+              "src/test/java/org/springframework/data/gemfire/repository/sample/Person.java": 52,
+              "src/test/java/org/springframework/data/gemfire/repository/sample/PersonRepository.java": 83,
+              "src/main/java/org/springframework/data/gemfire/repository/support/SimpleGemfireRepository.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.25,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.4431379363608279,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SGF-121",
+            "repo": "SGF",
+            "classifications": {
+              "src/test/java/org/springframework/data/gemfire/config/LocalRegionNamespaceTest.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/client/ClientRegionFactoryBean.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/config/ClientRegionParser.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/gemfire/config/LocalRegionNamespaceTest.java": 19,
+              "src/main/java/org/springframework/data/gemfire/client/ClientRegionFactoryBean.java": 10,
+              "src/main/java/org/springframework/data/gemfire/config/ClientRegionParser.java": 7
+            },
+            "best_rank": 7,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.6666666666666666,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.1669172932330827,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SGF-124",
+            "repo": "SGF",
+            "classifications": {
+              "src/main/java/org/springframework/data/gemfire/config/GatewayHubParser.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/wan/GatewayProxy.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/wan/GatewayHubFactoryBean.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/RegionFactoryBean.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/gemfire/config/GatewayHubParser.java": 7,
+              "src/main/java/org/springframework/data/gemfire/wan/GatewayProxy.java": 2,
+              "src/main/java/org/springframework/data/gemfire/wan/GatewayHubFactoryBean.java": 3,
+              "src/main/java/org/springframework/data/gemfire/RegionFactoryBean.java": 9
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5099206349206349,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SGF-127",
+            "repo": "SGF",
+            "classifications": {
+              "src/test/java/org/springframework/data/gemfire/mapping/MappingPdxSerializerUnitTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/mapping/MappingPdxSerializer.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/mapping/MappingPdxSerializerIntegrationTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/gemfire/mapping/MappingPdxSerializerUnitTests.java": 25,
+              "src/main/java/org/springframework/data/gemfire/mapping/MappingPdxSerializer.java": 48,
+              "src/test/java/org/springframework/data/gemfire/mapping/MappingPdxSerializerIntegrationTest.java": 69
+            },
+            "best_rank": 25,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.041714975845410625,
+            "difficulty": "medium",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "SGF-131",
+            "repo": "SGF",
+            "classifications": {
+              "src/main/java/org/springframework/data/gemfire/repository/support/SimpleGemfireRepository.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/gemfire/repository/support/SimpleGemfireRepository.java": 4
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.25,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SGF-145",
+            "repo": "SGF",
+            "classifications": {
+              "src/main/java/org/springframework/data/gemfire/RegionFactoryBean.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/gemfire/RegionFactoryBean.java": 28
+            },
+            "best_rank": 28,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.03571428571428571,
+            "difficulty": "medium",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "SGF-159",
+            "repo": "SGF",
+            "classifications": {
+              "src/main/java/org/springframework/data/gemfire/GemfireTransactionManager.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/gemfire/GemfireTransactionManager.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SGF-169",
+            "repo": "SGF",
+            "classifications": {
+              "src/main/java/org/springframework/data/gemfire/wan/GatewayHubFactoryBean.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/gemfire/wan/GatewayHubFactoryBean.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3333333333333333,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SGF-173",
+            "repo": "SGF",
+            "classifications": {
+              "src/main/java/org/springframework/data/gemfire/function/execution/GemfireOnMemberFunctionTemplate.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/function/execution/AbstractFunctionTemplate.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/function/execution/GemfireOnRegionOperations.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/function/execution/GemfireOnRegionFunctionTemplate.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/function/execution/AbstractFunctionExecution.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/function/execution/GemfireFunctionOperations.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/function/execution/FunctionIntegrationTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/gemfire/function/execution/GemfireOnMemberFunctionTemplate.java": 23,
+              "src/main/java/org/springframework/data/gemfire/function/execution/AbstractFunctionTemplate.java": 24,
+              "src/main/java/org/springframework/data/gemfire/function/execution/GemfireOnRegionOperations.java": 36,
+              "src/main/java/org/springframework/data/gemfire/function/execution/GemfireOnRegionFunctionTemplate.java": 6,
+              "src/main/java/org/springframework/data/gemfire/function/execution/AbstractFunctionExecution.java": 16,
+              "src/main/java/org/springframework/data/gemfire/function/execution/GemfireFunctionOperations.java": 5,
+              "src/test/java/org/springframework/data/gemfire/function/execution/FunctionIntegrationTests.java": 4
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.2857142857142857,
+              "10": 0.42857142857142855,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.2945479641131815,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "SGF-176",
+            "repo": "SGF",
+            "classifications": {
+              "src/main/java/org/springframework/data/gemfire/config/ClientRegionParser.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/config/ClientRegionNamespaceTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/gemfire/config/ClientRegionParser.java": 20,
+              "src/test/java/org/springframework/data/gemfire/config/ClientRegionNamespaceTest.java": 8
+            },
+            "best_rank": 8,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.1125,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SGF-185",
+            "repo": "SGF",
+            "classifications": {
+              "src/main/java/org/springframework/data/gemfire/function/config/ServerBasedExecutionBeanDefinitionBuilder.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/function/annotation/OnServers.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SGF-189",
+            "repo": "SGF",
+            "classifications": {
+              "src/test/java/org/springframework/data/gemfire/config/LocalRegionNamespaceTest.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/LocalRegionFactoryBean.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/gemfire/config/LocalRegionNamespaceTest.java": 12,
+              "src/main/java/org/springframework/data/gemfire/LocalRegionFactoryBean.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.25,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SGF-192",
+            "repo": "SGF",
+            "classifications": {
+              "src/test/java/org/springframework/data/gemfire/client/ClientCacheTest.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/listener/ContinuousQueryListenerContainer.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/config/ClientRegionParser.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/config/MultipleCacheTest.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/client/PoolFactoryBean.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/gemfire/client/ClientCacheTest.java": 46,
+              "src/main/java/org/springframework/data/gemfire/listener/ContinuousQueryListenerContainer.java": 50,
+              "src/main/java/org/springframework/data/gemfire/config/ClientRegionParser.java": 1,
+              "src/test/java/org/springframework/data/gemfire/config/MultipleCacheTest.java": 106,
+              "src/main/java/org/springframework/data/gemfire/client/PoolFactoryBean.java": 122
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.2,
+              "5": 0.2,
+              "10": 0.2,
+              "100": 0.6,
+              "200": 1.0
+            },
+            "average_precision": 0.2364395432967092,
+            "difficulty": "easy",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "SGF-194",
+            "repo": "SGF",
+            "classifications": {
+              "src/main/java/org/springframework/data/gemfire/config/LookupRegionParser.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/test/StubGatewayReceiverFactory.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/config/AbstractRegionParser.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/config/SubRegionNamespaceTest.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/SubRegionFactoryBean.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/gemfire/config/LookupRegionParser.java": 42,
+              "src/test/java/org/springframework/data/gemfire/test/StubGatewayReceiverFactory.java": 186,
+              "src/main/java/org/springframework/data/gemfire/config/AbstractRegionParser.java": 38,
+              "src/test/java/org/springframework/data/gemfire/config/SubRegionNamespaceTest.java": 1,
+              "src/main/java/org/springframework/data/gemfire/SubRegionFactoryBean.java": 4
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.2,
+              "5": 0.4,
+              "10": 0.4,
+              "100": 0.8,
+              "200": 1.0
+            },
+            "average_precision": 0.3402134368178511,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SGF-198",
+            "repo": "SGF",
+            "classifications": {
+              "src/main/java/org/springframework/data/gemfire/wan/AsyncEventQueueFactoryBean.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/config/AsyncEventQueueParser.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/gemfire/wan/AsyncEventQueueFactoryBean.java": 1,
+              "src/main/java/org/springframework/data/gemfire/config/AsyncEventQueueParser.java": 6
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.6666666666666666,
+            "difficulty": "easy",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "SGF-203",
+            "repo": "SGF",
+            "classifications": {
+              "src/main/java/org/springframework/data/gemfire/config/ParsingUtils.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/config/GemfireV7GatewayNamespaceTest.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/config/AsyncEventQueueParser.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/PartitionedRegionFactoryBean.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/config/AbstractRegionParser.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/LocalRegionFactoryBean.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/client/ClientRegionFactoryBean.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/config/ClientRegionParser.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/config/ClientRegionNamespaceTest.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/client/ClientRegionFactoryBeanTest.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/RegionFactoryBeanTest.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/DataPolicyConverterTest.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/RegionLookupFactoryBean.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/RegionFactoryBean.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/ReplicatedRegionFactoryBean.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/LocalRegionFactoryBeanTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/gemfire/config/ParsingUtils.java": 48,
+              "src/test/java/org/springframework/data/gemfire/config/GemfireV7GatewayNamespaceTest.java": 42,
+              "src/main/java/org/springframework/data/gemfire/PartitionedRegionFactoryBean.java": 5,
+              "src/main/java/org/springframework/data/gemfire/config/AbstractRegionParser.java": 99,
+              "src/main/java/org/springframework/data/gemfire/LocalRegionFactoryBean.java": 28,
+              "src/main/java/org/springframework/data/gemfire/client/ClientRegionFactoryBean.java": 31,
+              "src/main/java/org/springframework/data/gemfire/config/ClientRegionParser.java": 89,
+              "src/test/java/org/springframework/data/gemfire/config/ClientRegionNamespaceTest.java": 1,
+              "src/test/java/org/springframework/data/gemfire/client/ClientRegionFactoryBeanTest.java": 148,
+              "src/test/java/org/springframework/data/gemfire/RegionFactoryBeanTest.java": 2,
+              "src/test/java/org/springframework/data/gemfire/DataPolicyConverterTest.java": 35,
+              "src/main/java/org/springframework/data/gemfire/RegionLookupFactoryBean.java": 109,
+              "src/main/java/org/springframework/data/gemfire/RegionFactoryBean.java": 14,
+              "src/main/java/org/springframework/data/gemfire/ReplicatedRegionFactoryBean.java": 16,
+              "src/test/java/org/springframework/data/gemfire/LocalRegionFactoryBeanTest.java": 34
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0625,
+              "5": 0.1875,
+              "10": 0.1875,
+              "100": 0.8125,
+              "200": 0.9375
+            },
+            "average_precision": 0.31837135259224014,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SGF-217",
+            "repo": "SGF",
+            "classifications": {
+              "src/main/java/org/springframework/data/gemfire/config/CacheServerParser.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/server/CacheServerFactoryBean.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/gemfire/config/CacheServerParser.java": 12,
+              "src/main/java/org/springframework/data/gemfire/server/CacheServerFactoryBean.java": 4
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.20833333333333331,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SGF-218",
+            "repo": "SGF",
+            "classifications": {
+              "src/test/java/org/springframework/data/gemfire/test/StubCacheServer.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/gemfire/config/CacheServerNamespaceTest.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/config/CacheServerParser.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/gemfire/server/CacheServerFactoryBean.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/gemfire/test/StubCacheServer.java": 37,
+              "src/test/java/org/springframework/data/gemfire/config/CacheServerNamespaceTest.java": 53,
+              "src/main/java/org/springframework/data/gemfire/config/CacheServerParser.java": 3,
+              "src/main/java/org/springframework/data/gemfire/server/CacheServerFactoryBean.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3308048614652388,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "easy": 17,
+          "medium": 2,
+          "no_localizable_gt": 1
+        },
+        "total": 20
+      },
+      "summary": {
+        "n": 20,
+        "macro_hit_at": {
+          "1": 0.3,
+          "5": 0.75,
+          "10": 0.85,
+          "100": 0.95,
+          "200": 0.95
+        },
+        "macro_recall_at": {
+          "1": 0.07062500000000001,
+          "5": 0.42366071428571433,
+          "10": 0.5491369047619048,
+          "100": 0.9106249999999999,
+          "200": 0.946875
+        },
+        "mrr": 0.4880119047619047,
+        "map": 0.29797450634829203,
+        "mean_latency_s": 4.391921193976151e-07
+      }
+    }
+  }
+}

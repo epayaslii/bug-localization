@@ -1,0 +1,113 @@
+{
+  "manifest_id": "iqloc-multi-n30-s42-df69b06700bd",
+  "shard_index": 7,
+  "num_shards": 8,
+  "model": "Qwen/Qwen3-Embedding-0.6B",
+  "mode": "full_corpus_dense_only",
+  "instance_ids": [
+    "WFLY-4016",
+    "WFLY-5667"
+  ],
+  "configs": {
+    "dense_embedding": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "WFLY-4016",
+            "repo": "WFLY",
+            "classifications": {
+              "ejb3/src/main/java/org/jboss/as/ejb3/remote/DescriptorBasedEJBClientContextService.java": "exists_before_fix",
+              "ejb3/src/main/java/org/jboss/as/ejb3/remote/LocalEjbReceiver.java": "exists_before_fix",
+              "ejb3/src/main/java/org/jboss/as/ejb3/subsystem/EJB3SubsystemAdd.java": "exists_before_fix",
+              "ejb3/src/main/java/org/jboss/as/ejb3/deployment/processors/EjbClientContextSetupProcessor.java": "exists_before_fix",
+              "ejb3/src/main/java/org/jboss/as/ejb3/remote/TCCLEJBClientContextSelectorService.java": "exists_before_fix",
+              "ejb3/src/main/java/org/jboss/as/ejb3/deployment/processors/EJBClientDescriptorMetaDataProcessor.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "ejb3/src/main/java/org/jboss/as/ejb3/remote/DescriptorBasedEJBClientContextService.java": 36,
+              "ejb3/src/main/java/org/jboss/as/ejb3/remote/LocalEjbReceiver.java": 39,
+              "ejb3/src/main/java/org/jboss/as/ejb3/subsystem/EJB3SubsystemAdd.java": 1869,
+              "ejb3/src/main/java/org/jboss/as/ejb3/deployment/processors/EjbClientContextSetupProcessor.java": 27,
+              "ejb3/src/main/java/org/jboss/as/ejb3/remote/TCCLEJBClientContextSelectorService.java": 10,
+              "ejb3/src/main/java/org/jboss/as/ejb3/deployment/processors/EJBClientDescriptorMetaDataProcessor.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.16666666666666666,
+              "10": 0.3333333333333333,
+              "100": 0.8333333333333334,
+              "200": 0.8333333333333334
+            },
+            "average_precision": 0.1756062705500908,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "WFLY-5667",
+            "repo": "WFLY",
+            "classifications": {
+              "legacy/messaging/src/test/java/org/jboss/as/messaging/test/MigrateTestCase.java": "exists_before_fix",
+              "legacy/messaging/src/main/java/org/jboss/as/messaging/logging/MessagingLogger.java": "exists_before_fix",
+              "legacy/messaging/src/main/java/org/jboss/as/messaging/MigrateOperation.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "legacy/messaging/src/test/java/org/jboss/as/messaging/test/MigrateTestCase.java": 9,
+              "legacy/messaging/src/main/java/org/jboss/as/messaging/logging/MessagingLogger.java": 1,
+              "legacy/messaging/src/main/java/org/jboss/as/messaging/MigrateOperation.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 0.6666666666666666,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.7777777777777778,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "easy": 2
+        },
+        "total": 2
+      },
+      "summary": {
+        "n": 2,
+        "macro_hit_at": {
+          "1": 0.5,
+          "5": 1.0,
+          "10": 1.0,
+          "100": 1.0,
+          "200": 1.0
+        },
+        "macro_recall_at": {
+          "1": 0.16666666666666666,
+          "5": 0.41666666666666663,
+          "10": 0.6666666666666666,
+          "100": 0.9166666666666667,
+          "200": 0.9166666666666667
+        },
+        "mrr": 0.75,
+        "map": 0.4766920241639343,
+        "mean_latency_s": 5.960464477539062e-07
+      }
+    }
+  }
+}

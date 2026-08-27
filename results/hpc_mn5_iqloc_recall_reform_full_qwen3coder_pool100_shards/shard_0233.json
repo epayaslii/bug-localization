@@ -1,0 +1,2037 @@
+{
+  "manifest_id": "iqloc-multi-n7091-s42-f8a5d2c401a4",
+  "shard_index": 233,
+  "num_shards": 350,
+  "candidate_pool_size": 100,
+  "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+  "reformulation_mode": "semantic",
+  "relevance_mode": "llm",
+  "keep_fraction": 0.5,
+  "instance_ids": [
+    "SEC-10908",
+    "SEC-10909",
+    "SEC-10923",
+    "SEC-10950",
+    "SEC-11016",
+    "SEC-11042",
+    "SEC-11091",
+    "SEC-11158",
+    "SEC-11196",
+    "SEC-1121",
+    "SEC-11235",
+    "SEC-11262",
+    "SEC-11264",
+    "SEC-11283",
+    "SEC-11289",
+    "SEC-11290",
+    "SEC-1133",
+    "SEC-11379",
+    "SEC-1143",
+    "SEC-11449"
+  ],
+  "configs": {
+    "retriever": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "SEC-10908",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/main/java/org/springframework/security/web/access/AuthorizationManagerWebInvocationPrivilegeEvaluator.java": "exists_before_fix",
+              "web/src/test/java/org/springframework/security/web/access/AuthorizationManagerWebInvocationPrivilegeEvaluatorTests.java": "exists_before_fix",
+              "config/src/main/java/org/springframework/security/config/annotation/web/builders/WebSecurity.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 1.6689300537109375e-06
+          },
+          {
+            "instance_id": "SEC-10909",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/main/java/org/springframework/security/web/DefaultSecurityFilterChain.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "web/src/main/java/org/springframework/security/web/DefaultSecurityFilterChain.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 1.430511474609375e-06
+          },
+          {
+            "instance_id": "SEC-10923",
+            "repo": "SEC",
+            "classifications": {
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/provider/service/authentication/logout/OpenSamlLogoutResponseValidatorTests.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/provider/service/web/authentication/logout/OpenSamlLogoutResponseResolverTests.java": "exists_before_fix",
+              "config/src/test/java/org/springframework/security/config/annotation/web/configurers/saml2/Saml2LoginConfigurerTests.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/provider/service/authentication/logout/OpenSamlLogoutRequestValidatorTests.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/core/Saml2Utils.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/authentication/Saml2Utils.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/authentication/logout/Saml2Utils.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/provider/service/web/Saml2AuthenticationTokenConverterTests.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/web/authentication/logout/Saml2Utils.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/web/authentication/Saml2Utils.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/provider/service/authentication/logout/OpenSamlLogoutResponseValidatorTests.java": 7,
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/provider/service/web/authentication/logout/OpenSamlLogoutResponseResolverTests.java": 4,
+              "config/src/test/java/org/springframework/security/config/annotation/web/configurers/saml2/Saml2LoginConfigurerTests.java": 23,
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/provider/service/authentication/logout/OpenSamlLogoutRequestValidatorTests.java": 14,
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/core/Saml2Utils.java": 11,
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/authentication/Saml2Utils.java": 5,
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/authentication/logout/Saml2Utils.java": 8,
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/provider/service/web/Saml2AuthenticationTokenConverterTests.java": 2,
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/web/authentication/logout/Saml2Utils.java": 10,
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/web/authentication/Saml2Utils.java": 6
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.3,
+              "10": 0.7,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.6235864859777904,
+            "difficulty": "easy",
+            "latency_s": 9.5367431640625e-07
+          },
+          {
+            "instance_id": "SEC-10950",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/main/java/org/springframework/security/web/access/AuthorizationManagerWebInvocationPrivilegeEvaluator.java": "exists_before_fix",
+              "web/src/test/java/org/springframework/security/web/access/AuthorizationManagerWebInvocationPrivilegeEvaluatorTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-06
+          },
+          {
+            "instance_id": "SEC-11016",
+            "repo": "SEC",
+            "classifications": {
+              "buildSrc/src/test/java/io/spring/gradle/convention/sagan/SaganApiTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "SEC-11042",
+            "repo": "SEC",
+            "classifications": {
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/provider/service/authentication/TestOpenSamlObjects.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/opensaml4Test/java/org/springframework/security/saml2/provider/service/authentication/OpenSaml4AuthenticationProviderTests.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/opensaml4Main/java/org/springframework/security/saml2/provider/service/authentication/OpenSaml4AuthenticationProvider.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/opensaml3Test/java/org/springframework/security/saml2/provider/service/authentication/OpenSamlAuthenticationProviderTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "saml2/saml2-service-provider/src/opensaml4Test/java/org/springframework/security/saml2/provider/service/authentication/OpenSaml4AuthenticationProviderTests.java": 7,
+              "saml2/saml2-service-provider/src/opensaml4Main/java/org/springframework/security/saml2/provider/service/authentication/OpenSaml4AuthenticationProvider.java": 12,
+              "saml2/saml2-service-provider/src/opensaml3Test/java/org/springframework/security/saml2/provider/service/authentication/OpenSamlAuthenticationProviderTests.java": 5
+            },
+            "best_rank": 5,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.25,
+              "10": 0.5,
+              "100": 0.75,
+              "200": 0.75
+            },
+            "average_precision": 0.18392857142857144,
+            "difficulty": "easy",
+            "latency_s": 2.86102294921875e-06
+          },
+          {
+            "instance_id": "SEC-11091",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/main/java/org/springframework/security/web/util/matcher/AntPathRequestMatcher.java": "exists_before_fix",
+              "oauth2/oauth2-client/src/test/java/org/springframework/security/oauth2/client/http/OAuth2ErrorResponseErrorHandlerTests.java": "exists_before_fix",
+              "config/src/test/java/org/springframework/security/htmlunit/server/MockWebResponseBuilder.java": "exists_before_fix",
+              "oauth2/oauth2-client/src/main/java/org/springframework/security/oauth2/client/userinfo/DefaultReactiveOAuth2UserService.java": "exists_before_fix",
+              "oauth2/oauth2-client/src/test/java/org/springframework/security/oauth2/client/web/server/DefaultServerOAuth2AuthorizationRequestResolverTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-06
+          },
+          {
+            "instance_id": "SEC-11158",
+            "repo": "SEC",
+            "classifications": {
+              "buildSrc/src/main/java/org/springframework/gradle/github/milestones/GitHubMilestonePlugin.java": "exists_before_fix",
+              "buildSrc/src/main/java/org/springframework/gradle/github/milestones/GitHubMilestoneNextVersionDueTodayTask.java": "exists_before_fix",
+              "buildSrc/src/main/java/org/springframework/gradle/github/RepositoryRef.java": "exists_before_fix",
+              "buildSrc/src/main/java/org/springframework/gradle/github/milestones/GitHubMilestoneHasNoOpenIssuesTask.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "buildSrc/src/main/java/org/springframework/gradle/github/milestones/GitHubMilestoneNextVersionDueTodayTask.java": 5,
+              "buildSrc/src/main/java/org/springframework/gradle/github/milestones/GitHubMilestoneHasNoOpenIssuesTask.java": 11
+            },
+            "best_rank": 5,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.25,
+              "10": 0.25,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.09545454545454546,
+            "difficulty": "easy",
+            "latency_s": 3.0994415283203125e-06
+          },
+          {
+            "instance_id": "SEC-11196",
+            "repo": "SEC",
+            "classifications": {
+              "data/src/main/java/org/springframework/security/data/repository/query/SecurityEvaluationContextExtension.java": "exists_before_fix",
+              "data/src/test/java/org/springframework/security/data/repository/query/SecurityEvaluationContextExtensionTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "data/src/main/java/org/springframework/security/data/repository/query/SecurityEvaluationContextExtension.java": 2,
+              "data/src/test/java/org/springframework/security/data/repository/query/SecurityEvaluationContextExtensionTests.java": 20
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "SEC-1121",
+            "repo": "SEC",
+            "classifications": {
+              "core/src/main/java/org/springframework/security/util/InMemoryResource.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "core/src/main/java/org/springframework/security/util/InMemoryResource.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 1.9073486328125e-06
+          },
+          {
+            "instance_id": "SEC-11235",
+            "repo": "SEC",
+            "classifications": {
+              "config/src/test/java/org/springframework/security/config/http/Saml2LogoutBeanDefinitionParserTests.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/jackson2/Saml2LogoutRequestMixin.java": "exists_before_fix",
+              "config/src/test/java/org/springframework/security/config/annotation/web/configurers/saml2/Saml2LogoutConfigurerTests.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/authentication/logout/OpenSamlVerificationUtils.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/authentication/logout/Saml2LogoutRequest.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/web/authentication/logout/Saml2LogoutRequestFilter.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/web/authentication/logout/Saml2RelyingPartyInitiatedLogoutSuccessHandler.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/web/authentication/logout/Saml2LogoutResponseFilter.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/authentication/logout/Saml2LogoutResponse.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "config/src/test/java/org/springframework/security/config/http/Saml2LogoutBeanDefinitionParserTests.java": 2,
+              "config/src/test/java/org/springframework/security/config/annotation/web/configurers/saml2/Saml2LogoutConfigurerTests.java": 1,
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/authentication/logout/OpenSamlVerificationUtils.java": 10
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.1111111111111111,
+              "5": 0.2222222222222222,
+              "10": 0.3333333333333333,
+              "100": 0.3333333333333333,
+              "200": 0.3333333333333333
+            },
+            "average_precision": 0.25555555555555554,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "SEC-11262",
+            "repo": "SEC",
+            "classifications": {
+              "config/src/test/java/org/springframework/security/config/annotation/web/configurers/saml2/Saml2LoginConfigurerTests.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/core/Saml2Utils.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/authentication/Saml2Utils.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/authentication/logout/Saml2Utils.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/provider/service/web/Saml2AuthenticationTokenConverterTests.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/web/authentication/logout/Saml2Utils.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/web/authentication/Saml2Utils.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "config/src/test/java/org/springframework/security/config/annotation/web/configurers/saml2/Saml2LoginConfigurerTests.java": 34,
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/core/Saml2Utils.java": 16,
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/authentication/Saml2Utils.java": 30,
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/authentication/logout/Saml2Utils.java": 27,
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/provider/service/web/Saml2AuthenticationTokenConverterTests.java": 2,
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/web/authentication/logout/Saml2Utils.java": 24,
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/web/authentication/Saml2Utils.java": 25
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.14285714285714285,
+              "10": 0.14285714285714285,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.21443821973233737,
+            "difficulty": "easy",
+            "latency_s": 1.6689300537109375e-06
+          },
+          {
+            "instance_id": "SEC-11264",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/main/java/org/springframework/security/web/firewall/StrictHttpFirewall.java": "exists_before_fix",
+              "web/src/test/java/org/springframework/security/web/firewall/StrictHttpFirewallTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "web/src/main/java/org/springframework/security/web/firewall/StrictHttpFirewall.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 1.9073486328125e-06
+          },
+          {
+            "instance_id": "SEC-11283",
+            "repo": "SEC",
+            "classifications": {
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/metadata/OpenSamlMetadataResolver.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/provider/service/metadata/OpenSamlMetadataResolverTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/metadata/OpenSamlMetadataResolver.java": 1,
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/provider/service/metadata/OpenSamlMetadataResolverTests.java": 4
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.75,
+            "difficulty": "easy",
+            "latency_s": 2.1457672119140625e-06
+          },
+          {
+            "instance_id": "SEC-11289",
+            "repo": "SEC",
+            "classifications": {
+              "data/src/main/java/org/springframework/security/data/repository/query/SecurityEvaluationContextExtension.java": "exists_before_fix",
+              "data/src/test/java/org/springframework/security/data/repository/query/SecurityEvaluationContextExtensionTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "data/src/main/java/org/springframework/security/data/repository/query/SecurityEvaluationContextExtension.java": 12,
+              "data/src/test/java/org/springframework/security/data/repository/query/SecurityEvaluationContextExtensionTests.java": 14
+            },
+            "best_rank": 12,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.11309523809523808,
+            "difficulty": "medium",
+            "latency_s": 1.430511474609375e-06
+          },
+          {
+            "instance_id": "SEC-11290",
+            "repo": "SEC",
+            "classifications": {
+              "data/src/main/java/org/springframework/security/data/repository/query/SecurityEvaluationContextExtension.java": "exists_before_fix",
+              "data/src/test/java/org/springframework/security/data/repository/query/SecurityEvaluationContextExtensionTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "data/src/main/java/org/springframework/security/data/repository/query/SecurityEvaluationContextExtension.java": 12,
+              "data/src/test/java/org/springframework/security/data/repository/query/SecurityEvaluationContextExtensionTests.java": 14
+            },
+            "best_rank": 12,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.11309523809523808,
+            "difficulty": "medium",
+            "latency_s": 1.6689300537109375e-06
+          },
+          {
+            "instance_id": "SEC-1133",
+            "repo": "SEC",
+            "classifications": {
+              "config/src/main/java/org/springframework/security/config/http/AuthenticationConfigBuilder.java": "exists_before_fix",
+              "config/src/main/java/org/springframework/security/config/http/FormLoginBeanDefinitionParser.java": "exists_before_fix",
+              "config/src/main/java/org/springframework/security/config/http/HttpSecurityBeanDefinitionParser.java": "exists_before_fix",
+              "web/src/main/java/org/springframework/security/web/authentication/preauth/AbstractPreAuthenticatedProcessingFilter.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "config/src/main/java/org/springframework/security/config/http/AuthenticationConfigBuilder.java": 5,
+              "config/src/main/java/org/springframework/security/config/http/FormLoginBeanDefinitionParser.java": 4,
+              "config/src/main/java/org/springframework/security/config/http/HttpSecurityBeanDefinitionParser.java": 29
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.75,
+              "200": 0.75
+            },
+            "average_precision": 0.18836206896551724,
+            "difficulty": "easy",
+            "latency_s": 1.430511474609375e-06
+          },
+          {
+            "instance_id": "SEC-11379",
+            "repo": "SEC",
+            "classifications": {
+              "oauth2/oauth2-client/src/main/java/org/springframework/security/oauth2/client/oidc/web/server/logout/OidcClientInitiatedServerLogoutSuccessHandler.java": "exists_before_fix",
+              "oauth2/oauth2-client/src/test/java/org/springframework/security/oauth2/client/oidc/web/server/logout/OidcClientInitiatedServerLogoutSuccessHandlerTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "oauth2/oauth2-client/src/main/java/org/springframework/security/oauth2/client/oidc/web/server/logout/OidcClientInitiatedServerLogoutSuccessHandler.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "SEC-1143",
+            "repo": "SEC",
+            "classifications": {
+              "core/src/main/java/org/springframework/security/config/FormLoginBeanDefinitionParser.java": "exists_before_fix",
+              "core/src/main/java/org/springframework/security/util/FieldUtils.java": "exists_before_fix",
+              "core/src/test/java/org/springframework/security/config/HttpSecurityBeanDefinitionParserTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "core/src/main/java/org/springframework/security/config/FormLoginBeanDefinitionParser.java": 17,
+              "core/src/test/java/org/springframework/security/config/HttpSecurityBeanDefinitionParserTests.java": 19
+            },
+            "best_rank": 17,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.6666666666666666,
+              "200": 0.6666666666666666
+            },
+            "average_precision": 0.05469556243550052,
+            "difficulty": "medium",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "SEC-11449",
+            "repo": "SEC",
+            "classifications": {
+              "config/src/main/java/org/springframework/security/config/annotation/authentication/configuration/AuthenticationConfiguration.java": "exists_before_fix",
+              "config/src/test/java/org/springframework/security/config/annotation/web/configuration/HttpSecurityConfigurationTests.java": "exists_before_fix",
+              "config/src/test/java/org/springframework/security/config/annotation/authentication/configuration/AuthenticationConfigurationTests.java": "exists_before_fix",
+              "config/src/main/java/org/springframework/security/config/annotation/web/configuration/HttpSecurityConfiguration.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "config/src/main/java/org/springframework/security/config/annotation/authentication/configuration/AuthenticationConfiguration.java": 22,
+              "config/src/test/java/org/springframework/security/config/annotation/authentication/configuration/AuthenticationConfigurationTests.java": 17
+            },
+            "best_rank": 17,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.0374331550802139,
+            "difficulty": "medium",
+            "latency_s": 4.76837158203125e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "no_localizable_gt": 4,
+          "easy": 12,
+          "medium": 4
+        },
+        "total": 20
+      },
+      "summary": {
+        "n": 20,
+        "macro_hit_at": {
+          "1": 0.25,
+          "5": 0.6,
+          "10": 0.6,
+          "100": 0.8,
+          "200": 0.8
+        },
+        "macro_recall_at": {
+          "1": 0.13055555555555556,
+          "5": 0.3082539682539682,
+          "10": 0.34630952380952384,
+          "100": 0.6249999999999999,
+          "200": 0.6249999999999999
+        },
+        "mrr": 0.39671568627450976,
+        "map": 0.2714822320410254,
+        "mean_latency_s": 1.4454126358032227e-06
+      }
+    },
+    "relevance_filtered": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "SEC-10908",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/main/java/org/springframework/security/web/access/AuthorizationManagerWebInvocationPrivilegeEvaluator.java": "exists_before_fix",
+              "web/src/test/java/org/springframework/security/web/access/AuthorizationManagerWebInvocationPrivilegeEvaluatorTests.java": "exists_before_fix",
+              "config/src/main/java/org/springframework/security/config/annotation/web/builders/WebSecurity.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "SEC-10909",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/main/java/org/springframework/security/web/DefaultSecurityFilterChain.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "web/src/main/java/org/springframework/security/web/DefaultSecurityFilterChain.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-10923",
+            "repo": "SEC",
+            "classifications": {
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/provider/service/authentication/logout/OpenSamlLogoutResponseValidatorTests.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/provider/service/web/authentication/logout/OpenSamlLogoutResponseResolverTests.java": "exists_before_fix",
+              "config/src/test/java/org/springframework/security/config/annotation/web/configurers/saml2/Saml2LoginConfigurerTests.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/provider/service/authentication/logout/OpenSamlLogoutRequestValidatorTests.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/core/Saml2Utils.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/authentication/Saml2Utils.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/authentication/logout/Saml2Utils.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/provider/service/web/Saml2AuthenticationTokenConverterTests.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/web/authentication/logout/Saml2Utils.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/web/authentication/Saml2Utils.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/provider/service/authentication/logout/OpenSamlLogoutResponseValidatorTests.java": 7,
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/provider/service/web/authentication/logout/OpenSamlLogoutResponseResolverTests.java": 4,
+              "config/src/test/java/org/springframework/security/config/annotation/web/configurers/saml2/Saml2LoginConfigurerTests.java": 23,
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/provider/service/authentication/logout/OpenSamlLogoutRequestValidatorTests.java": 14,
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/core/Saml2Utils.java": 11,
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/authentication/Saml2Utils.java": 5,
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/authentication/logout/Saml2Utils.java": 8,
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/provider/service/web/Saml2AuthenticationTokenConverterTests.java": 2,
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/web/authentication/logout/Saml2Utils.java": 10,
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/web/authentication/Saml2Utils.java": 6
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.3,
+              "10": 0.7,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.6235864859777904,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-10950",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/main/java/org/springframework/security/web/access/AuthorizationManagerWebInvocationPrivilegeEvaluator.java": "exists_before_fix",
+              "web/src/test/java/org/springframework/security/web/access/AuthorizationManagerWebInvocationPrivilegeEvaluatorTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-11016",
+            "repo": "SEC",
+            "classifications": {
+              "buildSrc/src/test/java/io/spring/gradle/convention/sagan/SaganApiTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-11042",
+            "repo": "SEC",
+            "classifications": {
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/provider/service/authentication/TestOpenSamlObjects.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/opensaml4Test/java/org/springframework/security/saml2/provider/service/authentication/OpenSaml4AuthenticationProviderTests.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/opensaml4Main/java/org/springframework/security/saml2/provider/service/authentication/OpenSaml4AuthenticationProvider.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/opensaml3Test/java/org/springframework/security/saml2/provider/service/authentication/OpenSamlAuthenticationProviderTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "saml2/saml2-service-provider/src/opensaml4Test/java/org/springframework/security/saml2/provider/service/authentication/OpenSaml4AuthenticationProviderTests.java": 7,
+              "saml2/saml2-service-provider/src/opensaml4Main/java/org/springframework/security/saml2/provider/service/authentication/OpenSaml4AuthenticationProvider.java": 12,
+              "saml2/saml2-service-provider/src/opensaml3Test/java/org/springframework/security/saml2/provider/service/authentication/OpenSamlAuthenticationProviderTests.java": 5
+            },
+            "best_rank": 5,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.25,
+              "10": 0.5,
+              "100": 0.75,
+              "200": 0.75
+            },
+            "average_precision": 0.18392857142857144,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "SEC-11091",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/main/java/org/springframework/security/web/util/matcher/AntPathRequestMatcher.java": "exists_before_fix",
+              "oauth2/oauth2-client/src/test/java/org/springframework/security/oauth2/client/http/OAuth2ErrorResponseErrorHandlerTests.java": "exists_before_fix",
+              "config/src/test/java/org/springframework/security/htmlunit/server/MockWebResponseBuilder.java": "exists_before_fix",
+              "oauth2/oauth2-client/src/main/java/org/springframework/security/oauth2/client/userinfo/DefaultReactiveOAuth2UserService.java": "exists_before_fix",
+              "oauth2/oauth2-client/src/test/java/org/springframework/security/oauth2/client/web/server/DefaultServerOAuth2AuthorizationRequestResolverTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-11158",
+            "repo": "SEC",
+            "classifications": {
+              "buildSrc/src/main/java/org/springframework/gradle/github/milestones/GitHubMilestonePlugin.java": "exists_before_fix",
+              "buildSrc/src/main/java/org/springframework/gradle/github/milestones/GitHubMilestoneNextVersionDueTodayTask.java": "exists_before_fix",
+              "buildSrc/src/main/java/org/springframework/gradle/github/RepositoryRef.java": "exists_before_fix",
+              "buildSrc/src/main/java/org/springframework/gradle/github/milestones/GitHubMilestoneHasNoOpenIssuesTask.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "buildSrc/src/main/java/org/springframework/gradle/github/milestones/GitHubMilestoneNextVersionDueTodayTask.java": 5,
+              "buildSrc/src/main/java/org/springframework/gradle/github/milestones/GitHubMilestoneHasNoOpenIssuesTask.java": 11
+            },
+            "best_rank": 5,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.25,
+              "10": 0.25,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.09545454545454546,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-11196",
+            "repo": "SEC",
+            "classifications": {
+              "data/src/main/java/org/springframework/security/data/repository/query/SecurityEvaluationContextExtension.java": "exists_before_fix",
+              "data/src/test/java/org/springframework/security/data/repository/query/SecurityEvaluationContextExtensionTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "data/src/main/java/org/springframework/security/data/repository/query/SecurityEvaluationContextExtension.java": 2,
+              "data/src/test/java/org/springframework/security/data/repository/query/SecurityEvaluationContextExtensionTests.java": 20
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "SEC-1121",
+            "repo": "SEC",
+            "classifications": {
+              "core/src/main/java/org/springframework/security/util/InMemoryResource.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "core/src/main/java/org/springframework/security/util/InMemoryResource.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "SEC-11235",
+            "repo": "SEC",
+            "classifications": {
+              "config/src/test/java/org/springframework/security/config/http/Saml2LogoutBeanDefinitionParserTests.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/jackson2/Saml2LogoutRequestMixin.java": "exists_before_fix",
+              "config/src/test/java/org/springframework/security/config/annotation/web/configurers/saml2/Saml2LogoutConfigurerTests.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/authentication/logout/OpenSamlVerificationUtils.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/authentication/logout/Saml2LogoutRequest.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/web/authentication/logout/Saml2LogoutRequestFilter.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/web/authentication/logout/Saml2RelyingPartyInitiatedLogoutSuccessHandler.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/web/authentication/logout/Saml2LogoutResponseFilter.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/authentication/logout/Saml2LogoutResponse.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "config/src/test/java/org/springframework/security/config/http/Saml2LogoutBeanDefinitionParserTests.java": 2,
+              "config/src/test/java/org/springframework/security/config/annotation/web/configurers/saml2/Saml2LogoutConfigurerTests.java": 1,
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/authentication/logout/OpenSamlVerificationUtils.java": 10
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.1111111111111111,
+              "5": 0.2222222222222222,
+              "10": 0.3333333333333333,
+              "100": 0.3333333333333333,
+              "200": 0.3333333333333333
+            },
+            "average_precision": 0.25555555555555554,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "SEC-11262",
+            "repo": "SEC",
+            "classifications": {
+              "config/src/test/java/org/springframework/security/config/annotation/web/configurers/saml2/Saml2LoginConfigurerTests.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/core/Saml2Utils.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/authentication/Saml2Utils.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/authentication/logout/Saml2Utils.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/provider/service/web/Saml2AuthenticationTokenConverterTests.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/web/authentication/logout/Saml2Utils.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/web/authentication/Saml2Utils.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "config/src/test/java/org/springframework/security/config/annotation/web/configurers/saml2/Saml2LoginConfigurerTests.java": 37,
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/core/Saml2Utils.java": 19,
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/authentication/Saml2Utils.java": 33,
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/authentication/logout/Saml2Utils.java": 30,
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/provider/service/web/Saml2AuthenticationTokenConverterTests.java": 5,
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/web/authentication/logout/Saml2Utils.java": 27,
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/web/authentication/Saml2Utils.java": 28
+            },
+            "best_rank": 5,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.14285714285714285,
+              "10": 0.14285714285714285,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.1567007785052898,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "SEC-11264",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/main/java/org/springframework/security/web/firewall/StrictHttpFirewall.java": "exists_before_fix",
+              "web/src/test/java/org/springframework/security/web/firewall/StrictHttpFirewallTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "web/src/main/java/org/springframework/security/web/firewall/StrictHttpFirewall.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.16666666666666666,
+            "difficulty": "easy",
+            "latency_s": 0.0
+          },
+          {
+            "instance_id": "SEC-11283",
+            "repo": "SEC",
+            "classifications": {
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/metadata/OpenSamlMetadataResolver.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/provider/service/metadata/OpenSamlMetadataResolverTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/metadata/OpenSamlMetadataResolver.java": 1,
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/provider/service/metadata/OpenSamlMetadataResolverTests.java": 4
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.75,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "SEC-11289",
+            "repo": "SEC",
+            "classifications": {
+              "data/src/main/java/org/springframework/security/data/repository/query/SecurityEvaluationContextExtension.java": "exists_before_fix",
+              "data/src/test/java/org/springframework/security/data/repository/query/SecurityEvaluationContextExtensionTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "data/src/main/java/org/springframework/security/data/repository/query/SecurityEvaluationContextExtension.java": 12,
+              "data/src/test/java/org/springframework/security/data/repository/query/SecurityEvaluationContextExtensionTests.java": 14
+            },
+            "best_rank": 12,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.11309523809523808,
+            "difficulty": "medium",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-11290",
+            "repo": "SEC",
+            "classifications": {
+              "data/src/main/java/org/springframework/security/data/repository/query/SecurityEvaluationContextExtension.java": "exists_before_fix",
+              "data/src/test/java/org/springframework/security/data/repository/query/SecurityEvaluationContextExtensionTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "data/src/main/java/org/springframework/security/data/repository/query/SecurityEvaluationContextExtension.java": 12,
+              "data/src/test/java/org/springframework/security/data/repository/query/SecurityEvaluationContextExtensionTests.java": 14
+            },
+            "best_rank": 12,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.11309523809523808,
+            "difficulty": "medium",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-1133",
+            "repo": "SEC",
+            "classifications": {
+              "config/src/main/java/org/springframework/security/config/http/AuthenticationConfigBuilder.java": "exists_before_fix",
+              "config/src/main/java/org/springframework/security/config/http/FormLoginBeanDefinitionParser.java": "exists_before_fix",
+              "config/src/main/java/org/springframework/security/config/http/HttpSecurityBeanDefinitionParser.java": "exists_before_fix",
+              "web/src/main/java/org/springframework/security/web/authentication/preauth/AbstractPreAuthenticatedProcessingFilter.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "config/src/main/java/org/springframework/security/config/http/AuthenticationConfigBuilder.java": 5,
+              "config/src/main/java/org/springframework/security/config/http/FormLoginBeanDefinitionParser.java": 4,
+              "config/src/main/java/org/springframework/security/config/http/HttpSecurityBeanDefinitionParser.java": 29
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.75,
+              "200": 0.75
+            },
+            "average_precision": 0.18836206896551724,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-11379",
+            "repo": "SEC",
+            "classifications": {
+              "oauth2/oauth2-client/src/main/java/org/springframework/security/oauth2/client/oidc/web/server/logout/OidcClientInitiatedServerLogoutSuccessHandler.java": "exists_before_fix",
+              "oauth2/oauth2-client/src/test/java/org/springframework/security/oauth2/client/oidc/web/server/logout/OidcClientInitiatedServerLogoutSuccessHandlerTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "oauth2/oauth2-client/src/main/java/org/springframework/security/oauth2/client/oidc/web/server/logout/OidcClientInitiatedServerLogoutSuccessHandler.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.25,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-1143",
+            "repo": "SEC",
+            "classifications": {
+              "core/src/main/java/org/springframework/security/config/FormLoginBeanDefinitionParser.java": "exists_before_fix",
+              "core/src/main/java/org/springframework/security/util/FieldUtils.java": "exists_before_fix",
+              "core/src/test/java/org/springframework/security/config/HttpSecurityBeanDefinitionParserTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "core/src/main/java/org/springframework/security/config/FormLoginBeanDefinitionParser.java": 17,
+              "core/src/test/java/org/springframework/security/config/HttpSecurityBeanDefinitionParserTests.java": 19
+            },
+            "best_rank": 17,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.6666666666666666,
+              "200": 0.6666666666666666
+            },
+            "average_precision": 0.05469556243550052,
+            "difficulty": "medium",
+            "latency_s": 0.0
+          },
+          {
+            "instance_id": "SEC-11449",
+            "repo": "SEC",
+            "classifications": {
+              "config/src/main/java/org/springframework/security/config/annotation/authentication/configuration/AuthenticationConfiguration.java": "exists_before_fix",
+              "config/src/test/java/org/springframework/security/config/annotation/web/configuration/HttpSecurityConfigurationTests.java": "exists_before_fix",
+              "config/src/test/java/org/springframework/security/config/annotation/authentication/configuration/AuthenticationConfigurationTests.java": "exists_before_fix",
+              "config/src/main/java/org/springframework/security/config/annotation/web/configuration/HttpSecurityConfiguration.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "config/src/main/java/org/springframework/security/config/annotation/authentication/configuration/AuthenticationConfiguration.java": 22,
+              "config/src/test/java/org/springframework/security/config/annotation/authentication/configuration/AuthenticationConfigurationTests.java": 17
+            },
+            "best_rank": 17,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.0374331550802139,
+            "difficulty": "medium",
+            "latency_s": 2.384185791015625e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "no_localizable_gt": 4,
+          "easy": 12,
+          "medium": 4
+        },
+        "total": 20
+      },
+      "summary": {
+        "n": 20,
+        "macro_hit_at": {
+          "1": 0.1,
+          "5": 0.6,
+          "10": 0.6,
+          "100": 0.8,
+          "200": 0.8
+        },
+        "macro_recall_at": {
+          "1": 0.030555555555555558,
+          "5": 0.3082539682539682,
+          "10": 0.34630952380952384,
+          "100": 0.6249999999999999,
+          "200": 0.6249999999999999
+        },
+        "mrr": 0.29838235294117643,
+        "map": 0.21442869331300635,
+        "mean_latency_s": 2.980232238769531e-07
+      }
+    },
+    "reformulated": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "SEC-10908",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/main/java/org/springframework/security/web/access/AuthorizationManagerWebInvocationPrivilegeEvaluator.java": "exists_before_fix",
+              "web/src/test/java/org/springframework/security/web/access/AuthorizationManagerWebInvocationPrivilegeEvaluatorTests.java": "exists_before_fix",
+              "config/src/main/java/org/springframework/security/config/annotation/web/builders/WebSecurity.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "web/src/main/java/org/springframework/security/web/access/AuthorizationManagerWebInvocationPrivilegeEvaluator.java": 106,
+              "web/src/test/java/org/springframework/security/web/access/AuthorizationManagerWebInvocationPrivilegeEvaluatorTests.java": 107,
+              "config/src/main/java/org/springframework/security/config/annotation/web/builders/WebSecurity.java": 137
+            },
+            "best_rank": 106,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 1.0
+            },
+            "average_precision": 0.016674453756058593,
+            "difficulty": "hard",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "SEC-10909",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/main/java/org/springframework/security/web/DefaultSecurityFilterChain.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "web/src/main/java/org/springframework/security/web/DefaultSecurityFilterChain.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3333333333333333,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "SEC-10923",
+            "repo": "SEC",
+            "classifications": {
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/provider/service/authentication/logout/OpenSamlLogoutResponseValidatorTests.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/provider/service/web/authentication/logout/OpenSamlLogoutResponseResolverTests.java": "exists_before_fix",
+              "config/src/test/java/org/springframework/security/config/annotation/web/configurers/saml2/Saml2LoginConfigurerTests.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/provider/service/authentication/logout/OpenSamlLogoutRequestValidatorTests.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/core/Saml2Utils.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/authentication/Saml2Utils.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/authentication/logout/Saml2Utils.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/provider/service/web/Saml2AuthenticationTokenConverterTests.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/web/authentication/logout/Saml2Utils.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/web/authentication/Saml2Utils.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/provider/service/authentication/logout/OpenSamlLogoutResponseValidatorTests.java": 7,
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/provider/service/web/authentication/logout/OpenSamlLogoutResponseResolverTests.java": 4,
+              "config/src/test/java/org/springframework/security/config/annotation/web/configurers/saml2/Saml2LoginConfigurerTests.java": 22,
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/provider/service/authentication/logout/OpenSamlLogoutRequestValidatorTests.java": 14,
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/core/Saml2Utils.java": 13,
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/authentication/Saml2Utils.java": 5,
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/authentication/logout/Saml2Utils.java": 9,
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/provider/service/web/Saml2AuthenticationTokenConverterTests.java": 2,
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/web/authentication/logout/Saml2Utils.java": 10,
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/web/authentication/Saml2Utils.java": 6
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.3,
+              "10": 0.7,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.606040626040626,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "SEC-10950",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/main/java/org/springframework/security/web/access/AuthorizationManagerWebInvocationPrivilegeEvaluator.java": "exists_before_fix",
+              "web/src/test/java/org/springframework/security/web/access/AuthorizationManagerWebInvocationPrivilegeEvaluatorTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "web/src/main/java/org/springframework/security/web/access/AuthorizationManagerWebInvocationPrivilegeEvaluator.java": 101,
+              "web/src/test/java/org/springframework/security/web/access/AuthorizationManagerWebInvocationPrivilegeEvaluatorTests.java": 102
+            },
+            "best_rank": 101,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 1.0
+            },
+            "average_precision": 0.014754416618132402,
+            "difficulty": "hard",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "SEC-11016",
+            "repo": "SEC",
+            "classifications": {
+              "buildSrc/src/test/java/io/spring/gradle/convention/sagan/SaganApiTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-11042",
+            "repo": "SEC",
+            "classifications": {
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/provider/service/authentication/TestOpenSamlObjects.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/opensaml4Test/java/org/springframework/security/saml2/provider/service/authentication/OpenSaml4AuthenticationProviderTests.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/opensaml4Main/java/org/springframework/security/saml2/provider/service/authentication/OpenSaml4AuthenticationProvider.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/opensaml3Test/java/org/springframework/security/saml2/provider/service/authentication/OpenSamlAuthenticationProviderTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "saml2/saml2-service-provider/src/opensaml4Test/java/org/springframework/security/saml2/provider/service/authentication/OpenSaml4AuthenticationProviderTests.java": 7,
+              "saml2/saml2-service-provider/src/opensaml4Main/java/org/springframework/security/saml2/provider/service/authentication/OpenSaml4AuthenticationProvider.java": 11,
+              "saml2/saml2-service-provider/src/opensaml3Test/java/org/springframework/security/saml2/provider/service/authentication/OpenSamlAuthenticationProviderTests.java": 4
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.25,
+              "10": 0.5,
+              "100": 0.75,
+              "200": 0.75
+            },
+            "average_precision": 0.2021103896103896,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-11091",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/main/java/org/springframework/security/web/util/matcher/AntPathRequestMatcher.java": "exists_before_fix",
+              "oauth2/oauth2-client/src/test/java/org/springframework/security/oauth2/client/http/OAuth2ErrorResponseErrorHandlerTests.java": "exists_before_fix",
+              "config/src/test/java/org/springframework/security/htmlunit/server/MockWebResponseBuilder.java": "exists_before_fix",
+              "oauth2/oauth2-client/src/main/java/org/springframework/security/oauth2/client/userinfo/DefaultReactiveOAuth2UserService.java": "exists_before_fix",
+              "oauth2/oauth2-client/src/test/java/org/springframework/security/oauth2/client/web/server/DefaultServerOAuth2AuthorizationRequestResolverTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "web/src/main/java/org/springframework/security/web/util/matcher/AntPathRequestMatcher.java": 2290,
+              "oauth2/oauth2-client/src/test/java/org/springframework/security/oauth2/client/http/OAuth2ErrorResponseErrorHandlerTests.java": 1456,
+              "config/src/test/java/org/springframework/security/htmlunit/server/MockWebResponseBuilder.java": 628,
+              "oauth2/oauth2-client/src/main/java/org/springframework/security/oauth2/client/userinfo/DefaultReactiveOAuth2UserService.java": 1372,
+              "oauth2/oauth2-client/src/test/java/org/springframework/security/oauth2/client/web/server/DefaultServerOAuth2AuthorizationRequestResolverTests.java": 1500
+            },
+            "best_rank": 628,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.00199211899521266,
+            "difficulty": "outside_top200",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-11158",
+            "repo": "SEC",
+            "classifications": {
+              "buildSrc/src/main/java/org/springframework/gradle/github/milestones/GitHubMilestonePlugin.java": "exists_before_fix",
+              "buildSrc/src/main/java/org/springframework/gradle/github/milestones/GitHubMilestoneNextVersionDueTodayTask.java": "exists_before_fix",
+              "buildSrc/src/main/java/org/springframework/gradle/github/RepositoryRef.java": "exists_before_fix",
+              "buildSrc/src/main/java/org/springframework/gradle/github/milestones/GitHubMilestoneHasNoOpenIssuesTask.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "buildSrc/src/main/java/org/springframework/gradle/github/milestones/GitHubMilestoneNextVersionDueTodayTask.java": 5,
+              "buildSrc/src/main/java/org/springframework/gradle/github/milestones/GitHubMilestoneHasNoOpenIssuesTask.java": 12
+            },
+            "best_rank": 5,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.25,
+              "10": 0.25,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.09166666666666667,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-11196",
+            "repo": "SEC",
+            "classifications": {
+              "data/src/main/java/org/springframework/security/data/repository/query/SecurityEvaluationContextExtension.java": "exists_before_fix",
+              "data/src/test/java/org/springframework/security/data/repository/query/SecurityEvaluationContextExtensionTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "data/src/main/java/org/springframework/security/data/repository/query/SecurityEvaluationContextExtension.java": 4,
+              "data/src/test/java/org/springframework/security/data/repository/query/SecurityEvaluationContextExtensionTests.java": 20
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.175,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-1121",
+            "repo": "SEC",
+            "classifications": {
+              "core/src/main/java/org/springframework/security/util/InMemoryResource.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "core/src/main/java/org/springframework/security/util/InMemoryResource.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "SEC-11235",
+            "repo": "SEC",
+            "classifications": {
+              "config/src/test/java/org/springframework/security/config/http/Saml2LogoutBeanDefinitionParserTests.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/jackson2/Saml2LogoutRequestMixin.java": "exists_before_fix",
+              "config/src/test/java/org/springframework/security/config/annotation/web/configurers/saml2/Saml2LogoutConfigurerTests.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/authentication/logout/OpenSamlVerificationUtils.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/authentication/logout/Saml2LogoutRequest.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/web/authentication/logout/Saml2LogoutRequestFilter.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/web/authentication/logout/Saml2RelyingPartyInitiatedLogoutSuccessHandler.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/web/authentication/logout/Saml2LogoutResponseFilter.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/authentication/logout/Saml2LogoutResponse.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "config/src/test/java/org/springframework/security/config/http/Saml2LogoutBeanDefinitionParserTests.java": 2,
+              "config/src/test/java/org/springframework/security/config/annotation/web/configurers/saml2/Saml2LogoutConfigurerTests.java": 1,
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/authentication/logout/OpenSamlVerificationUtils.java": 10
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.1111111111111111,
+              "5": 0.2222222222222222,
+              "10": 0.3333333333333333,
+              "100": 0.3333333333333333,
+              "200": 0.3333333333333333
+            },
+            "average_precision": 0.25555555555555554,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-11262",
+            "repo": "SEC",
+            "classifications": {
+              "config/src/test/java/org/springframework/security/config/annotation/web/configurers/saml2/Saml2LoginConfigurerTests.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/core/Saml2Utils.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/authentication/Saml2Utils.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/authentication/logout/Saml2Utils.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/provider/service/web/Saml2AuthenticationTokenConverterTests.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/web/authentication/logout/Saml2Utils.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/web/authentication/Saml2Utils.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "config/src/test/java/org/springframework/security/config/annotation/web/configurers/saml2/Saml2LoginConfigurerTests.java": 32,
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/core/Saml2Utils.java": 16,
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/authentication/Saml2Utils.java": 30,
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/authentication/logout/Saml2Utils.java": 26,
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/provider/service/web/Saml2AuthenticationTokenConverterTests.java": 2,
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/web/authentication/logout/Saml2Utils.java": 23,
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/web/authentication/Saml2Utils.java": 25
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.14285714285714285,
+              "10": 0.14285714285714285,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.21807035355948398,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-11264",
+            "repo": "SEC",
+            "classifications": {
+              "web/src/main/java/org/springframework/security/web/firewall/StrictHttpFirewall.java": "exists_before_fix",
+              "web/src/test/java/org/springframework/security/web/firewall/StrictHttpFirewallTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "web/src/main/java/org/springframework/security/web/firewall/StrictHttpFirewall.java": 1,
+              "web/src/test/java/org/springframework/security/web/firewall/StrictHttpFirewallTests.java": 102
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 1.0
+            },
+            "average_precision": 0.5098039215686274,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-11283",
+            "repo": "SEC",
+            "classifications": {
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/metadata/OpenSamlMetadataResolver.java": "exists_before_fix",
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/provider/service/metadata/OpenSamlMetadataResolverTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "saml2/saml2-service-provider/src/main/java/org/springframework/security/saml2/provider/service/metadata/OpenSamlMetadataResolver.java": 1,
+              "saml2/saml2-service-provider/src/test/java/org/springframework/security/saml2/provider/service/metadata/OpenSamlMetadataResolverTests.java": 4
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.75,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "SEC-11289",
+            "repo": "SEC",
+            "classifications": {
+              "data/src/main/java/org/springframework/security/data/repository/query/SecurityEvaluationContextExtension.java": "exists_before_fix",
+              "data/src/test/java/org/springframework/security/data/repository/query/SecurityEvaluationContextExtensionTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "data/src/main/java/org/springframework/security/data/repository/query/SecurityEvaluationContextExtension.java": 11,
+              "data/src/test/java/org/springframework/security/data/repository/query/SecurityEvaluationContextExtensionTests.java": 10
+            },
+            "best_rank": 10,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.14090909090909093,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-11290",
+            "repo": "SEC",
+            "classifications": {
+              "data/src/main/java/org/springframework/security/data/repository/query/SecurityEvaluationContextExtension.java": "exists_before_fix",
+              "data/src/test/java/org/springframework/security/data/repository/query/SecurityEvaluationContextExtensionTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "data/src/main/java/org/springframework/security/data/repository/query/SecurityEvaluationContextExtension.java": 10,
+              "data/src/test/java/org/springframework/security/data/repository/query/SecurityEvaluationContextExtensionTests.java": 9
+            },
+            "best_rank": 9,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.15555555555555556,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-1133",
+            "repo": "SEC",
+            "classifications": {
+              "config/src/main/java/org/springframework/security/config/http/AuthenticationConfigBuilder.java": "exists_before_fix",
+              "config/src/main/java/org/springframework/security/config/http/FormLoginBeanDefinitionParser.java": "exists_before_fix",
+              "config/src/main/java/org/springframework/security/config/http/HttpSecurityBeanDefinitionParser.java": "exists_before_fix",
+              "web/src/main/java/org/springframework/security/web/authentication/preauth/AbstractPreAuthenticatedProcessingFilter.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "config/src/main/java/org/springframework/security/config/http/AuthenticationConfigBuilder.java": 5,
+              "config/src/main/java/org/springframework/security/config/http/FormLoginBeanDefinitionParser.java": 4,
+              "config/src/main/java/org/springframework/security/config/http/HttpSecurityBeanDefinitionParser.java": 32
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.75,
+              "200": 0.75
+            },
+            "average_precision": 0.1859375,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-11379",
+            "repo": "SEC",
+            "classifications": {
+              "oauth2/oauth2-client/src/main/java/org/springframework/security/oauth2/client/oidc/web/server/logout/OidcClientInitiatedServerLogoutSuccessHandler.java": "exists_before_fix",
+              "oauth2/oauth2-client/src/test/java/org/springframework/security/oauth2/client/oidc/web/server/logout/OidcClientInitiatedServerLogoutSuccessHandlerTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "oauth2/oauth2-client/src/main/java/org/springframework/security/oauth2/client/oidc/web/server/logout/OidcClientInitiatedServerLogoutSuccessHandler.java": 1,
+              "oauth2/oauth2-client/src/test/java/org/springframework/security/oauth2/client/oidc/web/server/logout/OidcClientInitiatedServerLogoutSuccessHandlerTests.java": 106
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 1.0
+            },
+            "average_precision": 0.5094339622641509,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-1143",
+            "repo": "SEC",
+            "classifications": {
+              "core/src/main/java/org/springframework/security/config/FormLoginBeanDefinitionParser.java": "exists_before_fix",
+              "core/src/main/java/org/springframework/security/util/FieldUtils.java": "exists_before_fix",
+              "core/src/test/java/org/springframework/security/config/HttpSecurityBeanDefinitionParserTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "core/src/main/java/org/springframework/security/config/FormLoginBeanDefinitionParser.java": 18,
+              "core/src/test/java/org/springframework/security/config/HttpSecurityBeanDefinitionParserTests.java": 21
+            },
+            "best_rank": 18,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.6666666666666666,
+              "200": 0.6666666666666666
+            },
+            "average_precision": 0.05026455026455026,
+            "difficulty": "medium",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "SEC-11449",
+            "repo": "SEC",
+            "classifications": {
+              "config/src/main/java/org/springframework/security/config/annotation/authentication/configuration/AuthenticationConfiguration.java": "exists_before_fix",
+              "config/src/test/java/org/springframework/security/config/annotation/web/configuration/HttpSecurityConfigurationTests.java": "exists_before_fix",
+              "config/src/test/java/org/springframework/security/config/annotation/authentication/configuration/AuthenticationConfigurationTests.java": "exists_before_fix",
+              "config/src/main/java/org/springframework/security/config/annotation/web/configuration/HttpSecurityConfiguration.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "config/src/main/java/org/springframework/security/config/annotation/authentication/configuration/AuthenticationConfiguration.java": 22,
+              "config/src/test/java/org/springframework/security/config/annotation/authentication/configuration/AuthenticationConfigurationTests.java": 18
+            },
+            "best_rank": 18,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.036616161616161616,
+            "difficulty": "medium",
+            "latency_s": 2.384185791015625e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "hard": 2,
+          "easy": 14,
+          "no_localizable_gt": 1,
+          "outside_top200": 1,
+          "medium": 2
+        },
+        "total": 20
+      },
+      "summary": {
+        "n": 20,
+        "macro_hit_at": {
+          "1": 0.25,
+          "5": 0.6,
+          "10": 0.7,
+          "100": 0.8,
+          "200": 0.9
+        },
+        "macro_recall_at": {
+          "1": 0.13055555555555556,
+          "5": 0.3082539682539682,
+          "10": 0.42130952380952386,
+          "100": 0.6249999999999999,
+          "200": 0.7749999999999999
+        },
+        "mrr": 0.38132414323033065,
+        "map": 0.26268593281567976,
+        "mean_latency_s": 3.2625700298108553e-07
+      }
+    }
+  }
+}

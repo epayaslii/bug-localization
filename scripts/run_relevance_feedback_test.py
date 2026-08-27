@@ -54,10 +54,10 @@ from dataset.utils import setup_logging, get_logger
 from evaluation.manifest import load_manifest
 from evaluation.screening import screen_manifest, summarize_screening
 from method.bm25_retriever import (
-    rank_files_bm25, rank_files_bm25_with_symbols, rank_files_bm25_with_skeleton,
+    rank_files_bm25, rank_files_bm25_with_symbols, rank_files_bm25_with_skeleton, rank_files_bm25_refined,
     extract_query_reformulation_terms, _extract_symbol_tokens,
 )
-from method.hybrid_retriever import rank_files_hybrid, rank_files_hybrid_with_history_rerank
+from method.hybrid_retriever import rank_files_hybrid, rank_files_hybrid_with_history_rerank, rank_files_dense_only
 from method.commit_history_retriever import rank_files_bm25_with_history_union
 from method.embedding_retriever import _chunk_file_content, embed_texts
 from method.keyword_extraction import embedrank_mmr_keywords, reformulate_query_iqloc_style
@@ -81,12 +81,14 @@ _BM25_REPR_FNS = {
     # pool (not just top_k by BM25 rank) flows into the embedding/reranking stage, which is
     # exactly what this representation does.
     "skeleton_plus_history": lambda bug, top_k: rank_files_bm25_with_history_union(bug, top_k=top_k),
+    "refined": lambda bug, top_k: rank_files_bm25_refined(bug, top_k=top_k, include_imports=True),
 }
 
 
 _HYBRID_FNS = {
     "hybrid-rrf": rank_files_hybrid,
     "hybrid-rrf-history": rank_files_hybrid_with_history_rerank,
+    "dense-only": rank_files_dense_only,
 }
 
 
@@ -333,7 +335,7 @@ def main():
                             'can never be recovered by filtering or reformulation, no matter how good the '
                             'judgment is. 100 is a middle ground; --granularity chunk prompt size scales with '
                             'this, so larger values cost more per call and risk more JSON-truncation failures.')
-    parser.add_argument('--retriever', choices=['bm25', 'hybrid-rrf', 'hybrid-rrf-history'], default='hybrid-rrf',
+    parser.add_argument('--retriever', choices=['bm25', 'hybrid-rrf', 'hybrid-rrf-history', 'dense-only'], default='hybrid-rrf',
                        help='Which retriever produces the initial candidate pool and gets re-run with the '
                             'reformulated query. hybrid-rrf-history fuses commit-history as a third RRF signal '
                             '(method/commit_history_retriever.py\'s rank_files_commit_history_scored) instead of '

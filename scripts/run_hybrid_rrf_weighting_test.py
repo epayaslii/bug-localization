@@ -27,7 +27,7 @@ from dataset.localizability import load_cache, save_cache
 from dataset.utils import setup_logging, get_logger
 from evaluation.manifest import load_manifest
 from evaluation.screening import screen_manifest, summarize_screening
-from method.bm25_retriever import rank_files_bm25, rank_files_bm25_with_symbols, rank_files_bm25_with_skeleton
+from method.bm25_retriever import rank_files_bm25, rank_files_bm25_with_symbols, rank_files_bm25_with_skeleton, rank_files_bm25_refined
 from method.embedding_retriever import rank_files_embedding_chunked
 from method.hybrid_retriever import reciprocal_rank_fusion
 
@@ -55,6 +55,7 @@ _BM25_REPR_FNS = {
     "symbols_with_imports": lambda bug, top_k: rank_files_bm25_with_symbols(bug, top_k=top_k, include_imports=True),
     "symbols_no_imports": lambda bug, top_k: rank_files_bm25_with_symbols(bug, top_k=top_k, include_imports=False),
     "skeleton": lambda bug, top_k: rank_files_bm25_with_skeleton(bug, top_k=top_k),
+    "refined": lambda bug, top_k: rank_files_bm25_refined(bug, top_k=top_k, include_imports=True),
 }
 
 

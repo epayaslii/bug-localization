@@ -1,0 +1,132 @@
+{
+  "manifest_id": "iqloc-multi-n30-s42-df69b06700bd",
+  "shard_index": 1,
+  "num_shards": 8,
+  "model": "Qwen/Qwen3-Embedding-0.6B",
+  "mode": "full_corpus_dense_only",
+  "instance_ids": [
+    "CAMEL-10291",
+    "CSV-140",
+    "DATAGRAPH-865"
+  ],
+  "configs": {
+    "dense_embedding": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "CAMEL-10291",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-rabbitmq/src/test/java/org/apache/camel/component/rabbitmq/RabbitMQProducerTest.java": "exists_before_fix",
+              "components/camel-rabbitmq/src/main/java/org/apache/camel/component/rabbitmq/RabbitMQMessageConverter.java": "exists_before_fix",
+              "components/camel-rabbitmq/src/test/java/org/apache/camel/component/rabbitmq/RabbitMQConsumerIntTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-rabbitmq/src/test/java/org/apache/camel/component/rabbitmq/RabbitMQProducerTest.java": 1,
+              "components/camel-rabbitmq/src/main/java/org/apache/camel/component/rabbitmq/RabbitMQMessageConverter.java": 2,
+              "components/camel-rabbitmq/src/test/java/org/apache/camel/component/rabbitmq/RabbitMQConsumerIntTest.java": 21
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 0.6666666666666666,
+              "10": 0.6666666666666666,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.7142857142857143,
+            "difficulty": "easy",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "CSV-140",
+            "repo": "CSV",
+            "classifications": {
+              "src/main/java/org/apache/commons/csv/CSVPrinter.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/csv/CSVPrinter.java": 4
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.25,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "DATAGRAPH-865",
+            "repo": "DATAGRAPH",
+            "classifications": {
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/mapping/Neo4jPersistentProperty.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-data-neo4j/src/main/java/org/springframework/data/neo4j/mapping/Neo4jPersistentProperty.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "easy": 3
+        },
+        "total": 3
+      },
+      "summary": {
+        "n": 3,
+        "macro_hit_at": {
+          "1": 0.6666666666666666,
+          "5": 1.0,
+          "10": 1.0,
+          "100": 1.0,
+          "200": 1.0
+        },
+        "macro_recall_at": {
+          "1": 0.4444444444444444,
+          "5": 0.8888888888888888,
+          "10": 0.8888888888888888,
+          "100": 1.0,
+          "200": 1.0
+        },
+        "mrr": 0.75,
+        "map": 0.6547619047619048,
+        "mean_latency_s": 7.152557373046875e-07
+      }
+    }
+  }
+}

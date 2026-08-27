@@ -1,0 +1,1891 @@
+{
+  "manifest_id": "iqloc-multi-n7091-s42-f8a5d2c401a4",
+  "shard_index": 305,
+  "num_shards": 350,
+  "candidate_pool_size": 100,
+  "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+  "reformulation_mode": "semantic",
+  "relevance_mode": "llm",
+  "keep_fraction": 0.5,
+  "instance_ids": [
+    "WFCORE-676",
+    "WFCORE-677",
+    "WFCORE-681",
+    "WFCORE-684",
+    "WFCORE-687",
+    "WFCORE-69",
+    "WFCORE-691",
+    "WFCORE-692",
+    "WFCORE-694",
+    "WFCORE-697",
+    "WFCORE-7",
+    "WFCORE-701",
+    "WFCORE-702",
+    "WFCORE-706",
+    "WFCORE-71",
+    "WFCORE-72",
+    "WFCORE-724",
+    "WFCORE-727",
+    "WFCORE-731",
+    "WFCORE-752"
+  ],
+  "configs": {
+    "retriever": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "WFCORE-676",
+            "repo": "WFCORE",
+            "classifications": {
+              "cli/src/main/java/org/jboss/as/cli/parsing/command/ArgumentValueState.java": "exists_before_fix",
+              "cli/src/test/java/org/jboss/as/cli/parsing/test/CommandTestCase.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 9.5367431640625e-07
+          },
+          {
+            "instance_id": "WFCORE-677",
+            "repo": "WFCORE",
+            "classifications": {
+              "embedded/src/main/java/org/wildfly/core/embedded/EmbeddedStandAloneServerFactory.java": "exists_before_fix",
+              "embedded/src/main/java/org/wildfly/core/embedded/EmbeddedServerFactory.java": "exists_before_fix",
+              "cli/src/main/java/org/jboss/as/cli/embedded/EmbedServerHandler.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "embedded/src/main/java/org/wildfly/core/embedded/EmbeddedStandAloneServerFactory.java": 4,
+              "embedded/src/main/java/org/wildfly/core/embedded/EmbeddedServerFactory.java": 1,
+              "cli/src/main/java/org/jboss/as/cli/embedded/EmbedServerHandler.java": 5
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.7000000000000001,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-681",
+            "repo": "WFCORE",
+            "classifications": {
+              "controller/src/main/java/org/jboss/as/controller/OperationContextImpl.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "controller/src/main/java/org/jboss/as/controller/OperationContextImpl.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3333333333333333,
+            "difficulty": "easy",
+            "latency_s": 2.6226043701171875e-06
+          },
+          {
+            "instance_id": "WFCORE-684",
+            "repo": "WFCORE",
+            "classifications": {
+              "server/src/main/java/org/jboss/as/server/deployment/annotation/CompositeIndexProcessor.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "server/src/main/java/org/jboss/as/server/deployment/annotation/CompositeIndexProcessor.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 1.9073486328125e-06
+          },
+          {
+            "instance_id": "WFCORE-687",
+            "repo": "WFCORE",
+            "classifications": {
+              "patching/src/test/java/org/jboss/as/patching/installation/LayerTestCase.java": "exists_before_fix",
+              "patching/src/test/java/org/jboss/as/patching/metadata/PatchXmlUnitTestCase.java": "exists_before_fix",
+              "patching/src/main/java/org/jboss/as/patching/metadata/PatchXml.java": "exists_before_fix",
+              "patching/src/main/java/org/jboss/as/patching/metadata/PatchBuilder.java": "exists_before_fix",
+              "patching/src/main/java/org/jboss/as/patching/logging/PatchLogger.java": "exists_before_fix",
+              "patching/src/main/java/org/jboss/as/patching/metadata/PatchXmlUtils.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "patching/src/test/java/org/jboss/as/patching/installation/LayerTestCase.java": 44,
+              "patching/src/main/java/org/jboss/as/patching/metadata/PatchXml.java": 52,
+              "patching/src/main/java/org/jboss/as/patching/metadata/PatchBuilder.java": 10,
+              "patching/src/main/java/org/jboss/as/patching/metadata/PatchXmlUtils.java": 19
+            },
+            "best_rank": 10,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.16666666666666666,
+              "100": 0.6666666666666666,
+              "200": 0.6666666666666666
+            },
+            "average_precision": 0.05839467549993866,
+            "difficulty": "easy",
+            "latency_s": 3.0994415283203125e-06
+          },
+          {
+            "instance_id": "WFCORE-69",
+            "repo": "WFCORE",
+            "classifications": {
+              "domain-management/src/main/java/org/jboss/as/domain/management/security/SecurityRealmParentRestartHandler.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "domain-management/src/main/java/org/jboss/as/domain/management/security/SecurityRealmParentRestartHandler.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 9.5367431640625e-07
+          },
+          {
+            "instance_id": "WFCORE-691",
+            "repo": "WFCORE",
+            "classifications": {
+              "controller/src/main/java/org/jboss/as/controller/AttributeParser.java": "exists_before_fix",
+              "controller/src/test/java/org/jboss/as/controller/persistence/PersistentResourceXMLParserTestCase.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/PropertiesAttributeDefinition.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/PersistentResourceXMLDescription.java": "exists_before_fix",
+              "remoting/subsystem/src/main/java/org/jboss/as/remoting/RemotingSubsystemXMLPersister.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "controller/src/main/java/org/jboss/as/controller/AttributeParser.java": 17,
+              "controller/src/test/java/org/jboss/as/controller/persistence/PersistentResourceXMLParserTestCase.java": 3,
+              "controller/src/main/java/org/jboss/as/controller/PropertiesAttributeDefinition.java": 1,
+              "controller/src/main/java/org/jboss/as/controller/PersistentResourceXMLDescription.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.2,
+              "5": 0.6,
+              "10": 0.6,
+              "100": 0.8,
+              "200": 0.8
+            },
+            "average_precision": 0.6470588235294118,
+            "difficulty": "easy",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "WFCORE-692",
+            "repo": "WFCORE",
+            "classifications": {
+              "controller/src/test/java/org/jboss/as/controller/test/AliasResourceTestCase.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/operations/global/GlobalOperationHandlers.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "controller/src/test/java/org/jboss/as/controller/test/AliasResourceTestCase.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.25,
+            "difficulty": "easy",
+            "latency_s": 9.5367431640625e-07
+          },
+          {
+            "instance_id": "WFCORE-694",
+            "repo": "WFCORE",
+            "classifications": {
+              "server/src/main/java/org/jboss/as/server/deployment/DeploymentRedeployHandler.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "server/src/main/java/org/jboss/as/server/deployment/DeploymentRedeployHandler.java": 7
+            },
+            "best_rank": 7,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.14285714285714285,
+            "difficulty": "easy",
+            "latency_s": 1.6689300537109375e-06
+          },
+          {
+            "instance_id": "WFCORE-697",
+            "repo": "WFCORE",
+            "classifications": {
+              "cli/src/main/java/org/jboss/as/cli/parsing/operation/OperationRequestState.java": "exists_before_fix",
+              "cli/src/test/java/org/jboss/as/cli/parsing/test/AddressOnlyParsingTestCase.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "cli/src/test/java/org/jboss/as/cli/parsing/test/AddressOnlyParsingTestCase.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "WFCORE-7",
+            "repo": "WFCORE",
+            "classifications": {
+              "controller/src/main/java/org/jboss/as/controller/MapAttributeDefinition.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/ListAttributeDefinition.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 1.430511474609375e-06
+          },
+          {
+            "instance_id": "WFCORE-701",
+            "repo": "WFCORE",
+            "classifications": {
+              "host-controller/src/main/java/org/jboss/as/host/controller/ManagedServer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "host-controller/src/main/java/org/jboss/as/host/controller/ManagedServer.java": 23
+            },
+            "best_rank": 23,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.043478260869565216,
+            "difficulty": "medium",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "WFCORE-702",
+            "repo": "WFCORE",
+            "classifications": {
+              "logging/src/test/java/org/jboss/as/logging/LoggingSubsystemTestCase.java": "exists_before_fix",
+              "logging/src/main/java/org/jboss/as/logging/LoggingSubsystemParser.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "logging/src/main/java/org/jboss/as/logging/LoggingSubsystemParser.java": 21
+            },
+            "best_rank": 21,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.023809523809523808,
+            "difficulty": "medium",
+            "latency_s": 2.384185791015625e-06
+          },
+          {
+            "instance_id": "WFCORE-706",
+            "repo": "WFCORE",
+            "classifications": {
+              "server/src/main/java/org/jboss/as/server/deployment/SubDeploymentProcessor.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 1.430511474609375e-06
+          },
+          {
+            "instance_id": "WFCORE-71",
+            "repo": "WFCORE",
+            "classifications": {
+              "server/src/main/java/org/jboss/as/server/mgmt/domain/HostControllerConnection.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/host/controller/mgmt/HostControllerRegistrationHandler.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/host/controller/mgmt/ServerToHostProtocolHandler.java": "exists_before_fix",
+              "protocol/src/main/java/org/jboss/as/protocol/mgmt/FutureManagementChannel.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "host-controller/src/main/java/org/jboss/as/host/controller/mgmt/ServerToHostProtocolHandler.java": 61
+            },
+            "best_rank": 61,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.25,
+              "200": 0.25
+            },
+            "average_precision": 0.004098360655737705,
+            "difficulty": "medium",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "WFCORE-72",
+            "repo": "WFCORE",
+            "classifications": {
+              "cli/src/main/java/org/jboss/as/cli/impl/CliLauncher.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "cli/src/main/java/org/jboss/as/cli/impl/CliLauncher.java": 15
+            },
+            "best_rank": 15,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.06666666666666667,
+            "difficulty": "medium",
+            "latency_s": 2.384185791015625e-06
+          },
+          {
+            "instance_id": "WFCORE-724",
+            "repo": "WFCORE",
+            "classifications": {
+              "cli/src/main/java/org/jboss/as/cli/impl/AttributeNamePathCompleter.java": "exists_before_fix",
+              "cli/src/test/java/org/jboss/as/cli/parsing/test/AttributeNamePathCompletionTestCase.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "cli/src/main/java/org/jboss/as/cli/impl/AttributeNamePathCompleter.java": 2,
+              "cli/src/test/java/org/jboss/as/cli/parsing/test/AttributeNamePathCompletionTestCase.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-727",
+            "repo": "WFCORE",
+            "classifications": {
+              "cli/src/main/java/org/jboss/as/cli/impl/CommandCandidatesProvider.java": "exists_before_fix",
+              "cli/src/main/java/org/jboss/as/cli/handlers/ReadAttributeHandler.java": "exists_before_fix",
+              "cli/src/main/java/org/jboss/as/cli/handlers/LsHandler.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "WFCORE-731",
+            "repo": "WFCORE",
+            "classifications": {
+              "subsystem-test/framework/src/main/java/org/jboss/as/subsystem/test/TransformerAttachmentGrabber.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "subsystem-test/framework/src/main/java/org/jboss/as/subsystem/test/TransformerAttachmentGrabber.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "WFCORE-752",
+            "repo": "WFCORE",
+            "classifications": {
+              "server/src/main/java/org/jboss/as/server/deploymentoverlay/DeploymentOverlayIndex.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "server/src/main/java/org/jboss/as/server/deploymentoverlay/DeploymentOverlayIndex.java": 4
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.25,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "no_localizable_gt": 4,
+          "easy": 12,
+          "medium": 4
+        },
+        "total": 20
+      },
+      "summary": {
+        "n": 20,
+        "macro_hit_at": {
+          "1": 0.3,
+          "5": 0.5,
+          "10": 0.6,
+          "100": 0.8,
+          "200": 0.8
+        },
+        "macro_recall_at": {
+          "1": 0.17666666666666667,
+          "5": 0.43,
+          "10": 0.4883333333333333,
+          "100": 0.6608333333333333,
+          "200": 0.6608333333333333
+        },
+        "mrr": 0.40001739469843534,
+        "map": 0.325984839361066,
+        "mean_latency_s": 1.341104507446289e-06
+      }
+    },
+    "relevance_filtered": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "WFCORE-676",
+            "repo": "WFCORE",
+            "classifications": {
+              "cli/src/main/java/org/jboss/as/cli/parsing/command/ArgumentValueState.java": "exists_before_fix",
+              "cli/src/test/java/org/jboss/as/cli/parsing/test/CommandTestCase.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "WFCORE-677",
+            "repo": "WFCORE",
+            "classifications": {
+              "embedded/src/main/java/org/wildfly/core/embedded/EmbeddedStandAloneServerFactory.java": "exists_before_fix",
+              "embedded/src/main/java/org/wildfly/core/embedded/EmbeddedServerFactory.java": "exists_before_fix",
+              "cli/src/main/java/org/jboss/as/cli/embedded/EmbedServerHandler.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "embedded/src/main/java/org/wildfly/core/embedded/EmbeddedStandAloneServerFactory.java": 4,
+              "embedded/src/main/java/org/wildfly/core/embedded/EmbeddedServerFactory.java": 1,
+              "cli/src/main/java/org/jboss/as/cli/embedded/EmbedServerHandler.java": 5
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.7000000000000001,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-681",
+            "repo": "WFCORE",
+            "classifications": {
+              "controller/src/main/java/org/jboss/as/controller/OperationContextImpl.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "controller/src/main/java/org/jboss/as/controller/OperationContextImpl.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3333333333333333,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-684",
+            "repo": "WFCORE",
+            "classifications": {
+              "server/src/main/java/org/jboss/as/server/deployment/annotation/CompositeIndexProcessor.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "server/src/main/java/org/jboss/as/server/deployment/annotation/CompositeIndexProcessor.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-687",
+            "repo": "WFCORE",
+            "classifications": {
+              "patching/src/test/java/org/jboss/as/patching/installation/LayerTestCase.java": "exists_before_fix",
+              "patching/src/test/java/org/jboss/as/patching/metadata/PatchXmlUnitTestCase.java": "exists_before_fix",
+              "patching/src/main/java/org/jboss/as/patching/metadata/PatchXml.java": "exists_before_fix",
+              "patching/src/main/java/org/jboss/as/patching/metadata/PatchBuilder.java": "exists_before_fix",
+              "patching/src/main/java/org/jboss/as/patching/logging/PatchLogger.java": "exists_before_fix",
+              "patching/src/main/java/org/jboss/as/patching/metadata/PatchXmlUtils.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "patching/src/test/java/org/jboss/as/patching/installation/LayerTestCase.java": 44,
+              "patching/src/main/java/org/jboss/as/patching/metadata/PatchXml.java": 52,
+              "patching/src/main/java/org/jboss/as/patching/metadata/PatchBuilder.java": 10,
+              "patching/src/main/java/org/jboss/as/patching/metadata/PatchXmlUtils.java": 19
+            },
+            "best_rank": 10,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.16666666666666666,
+              "100": 0.6666666666666666,
+              "200": 0.6666666666666666
+            },
+            "average_precision": 0.05839467549993866,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-69",
+            "repo": "WFCORE",
+            "classifications": {
+              "domain-management/src/main/java/org/jboss/as/domain/management/security/SecurityRealmParentRestartHandler.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "domain-management/src/main/java/org/jboss/as/domain/management/security/SecurityRealmParentRestartHandler.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3333333333333333,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-691",
+            "repo": "WFCORE",
+            "classifications": {
+              "controller/src/main/java/org/jboss/as/controller/AttributeParser.java": "exists_before_fix",
+              "controller/src/test/java/org/jboss/as/controller/persistence/PersistentResourceXMLParserTestCase.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/PropertiesAttributeDefinition.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/PersistentResourceXMLDescription.java": "exists_before_fix",
+              "remoting/subsystem/src/main/java/org/jboss/as/remoting/RemotingSubsystemXMLPersister.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "controller/src/main/java/org/jboss/as/controller/AttributeParser.java": 17,
+              "controller/src/test/java/org/jboss/as/controller/persistence/PersistentResourceXMLParserTestCase.java": 3,
+              "controller/src/main/java/org/jboss/as/controller/PropertiesAttributeDefinition.java": 1,
+              "controller/src/main/java/org/jboss/as/controller/PersistentResourceXMLDescription.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.2,
+              "5": 0.6,
+              "10": 0.6,
+              "100": 0.8,
+              "200": 0.8
+            },
+            "average_precision": 0.6470588235294118,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-692",
+            "repo": "WFCORE",
+            "classifications": {
+              "controller/src/test/java/org/jboss/as/controller/test/AliasResourceTestCase.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/operations/global/GlobalOperationHandlers.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "controller/src/test/java/org/jboss/as/controller/test/AliasResourceTestCase.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.16666666666666666,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-694",
+            "repo": "WFCORE",
+            "classifications": {
+              "server/src/main/java/org/jboss/as/server/deployment/DeploymentRedeployHandler.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "server/src/main/java/org/jboss/as/server/deployment/DeploymentRedeployHandler.java": 7
+            },
+            "best_rank": 7,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.14285714285714285,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-697",
+            "repo": "WFCORE",
+            "classifications": {
+              "cli/src/main/java/org/jboss/as/cli/parsing/operation/OperationRequestState.java": "exists_before_fix",
+              "cli/src/test/java/org/jboss/as/cli/parsing/test/AddressOnlyParsingTestCase.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "cli/src/test/java/org/jboss/as/cli/parsing/test/AddressOnlyParsingTestCase.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-7",
+            "repo": "WFCORE",
+            "classifications": {
+              "controller/src/main/java/org/jboss/as/controller/MapAttributeDefinition.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/ListAttributeDefinition.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-701",
+            "repo": "WFCORE",
+            "classifications": {
+              "host-controller/src/main/java/org/jboss/as/host/controller/ManagedServer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "host-controller/src/main/java/org/jboss/as/host/controller/ManagedServer.java": 23
+            },
+            "best_rank": 23,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.043478260869565216,
+            "difficulty": "medium",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-702",
+            "repo": "WFCORE",
+            "classifications": {
+              "logging/src/test/java/org/jboss/as/logging/LoggingSubsystemTestCase.java": "exists_before_fix",
+              "logging/src/main/java/org/jboss/as/logging/LoggingSubsystemParser.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "logging/src/main/java/org/jboss/as/logging/LoggingSubsystemParser.java": 21
+            },
+            "best_rank": 21,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.023809523809523808,
+            "difficulty": "medium",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "WFCORE-706",
+            "repo": "WFCORE",
+            "classifications": {
+              "server/src/main/java/org/jboss/as/server/deployment/SubDeploymentProcessor.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-71",
+            "repo": "WFCORE",
+            "classifications": {
+              "server/src/main/java/org/jboss/as/server/mgmt/domain/HostControllerConnection.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/host/controller/mgmt/HostControllerRegistrationHandler.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/host/controller/mgmt/ServerToHostProtocolHandler.java": "exists_before_fix",
+              "protocol/src/main/java/org/jboss/as/protocol/mgmt/FutureManagementChannel.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "host-controller/src/main/java/org/jboss/as/host/controller/mgmt/ServerToHostProtocolHandler.java": 61
+            },
+            "best_rank": 61,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.25,
+              "200": 0.25
+            },
+            "average_precision": 0.004098360655737705,
+            "difficulty": "medium",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-72",
+            "repo": "WFCORE",
+            "classifications": {
+              "cli/src/main/java/org/jboss/as/cli/impl/CliLauncher.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "cli/src/main/java/org/jboss/as/cli/impl/CliLauncher.java": 15
+            },
+            "best_rank": 15,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.06666666666666667,
+            "difficulty": "medium",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-724",
+            "repo": "WFCORE",
+            "classifications": {
+              "cli/src/main/java/org/jboss/as/cli/impl/AttributeNamePathCompleter.java": "exists_before_fix",
+              "cli/src/test/java/org/jboss/as/cli/parsing/test/AttributeNamePathCompletionTestCase.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "cli/src/main/java/org/jboss/as/cli/impl/AttributeNamePathCompleter.java": 2,
+              "cli/src/test/java/org/jboss/as/cli/parsing/test/AttributeNamePathCompletionTestCase.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-727",
+            "repo": "WFCORE",
+            "classifications": {
+              "cli/src/main/java/org/jboss/as/cli/impl/CommandCandidatesProvider.java": "exists_before_fix",
+              "cli/src/main/java/org/jboss/as/cli/handlers/ReadAttributeHandler.java": "exists_before_fix",
+              "cli/src/main/java/org/jboss/as/cli/handlers/LsHandler.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-731",
+            "repo": "WFCORE",
+            "classifications": {
+              "subsystem-test/framework/src/main/java/org/jboss/as/subsystem/test/TransformerAttachmentGrabber.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "subsystem-test/framework/src/main/java/org/jboss/as/subsystem/test/TransformerAttachmentGrabber.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-752",
+            "repo": "WFCORE",
+            "classifications": {
+              "server/src/main/java/org/jboss/as/server/deploymentoverlay/DeploymentOverlayIndex.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "server/src/main/java/org/jboss/as/server/deploymentoverlay/DeploymentOverlayIndex.java": 4
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.25,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "no_localizable_gt": 4,
+          "easy": 12,
+          "medium": 4
+        },
+        "total": 20
+      },
+      "summary": {
+        "n": 20,
+        "macro_hit_at": {
+          "1": 0.3,
+          "5": 0.5,
+          "10": 0.6,
+          "100": 0.8,
+          "200": 0.8
+        },
+        "macro_recall_at": {
+          "1": 0.17666666666666667,
+          "5": 0.43,
+          "10": 0.4883333333333333,
+          "100": 0.6608333333333333,
+          "200": 0.6608333333333333
+        },
+        "mrr": 0.3833507280317686,
+        "map": 0.31348483936106597,
+        "mean_latency_s": 2.5331974029541016e-07
+      }
+    },
+    "reformulated": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "WFCORE-676",
+            "repo": "WFCORE",
+            "classifications": {
+              "cli/src/main/java/org/jboss/as/cli/parsing/command/ArgumentValueState.java": "exists_before_fix",
+              "cli/src/test/java/org/jboss/as/cli/parsing/test/CommandTestCase.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-677",
+            "repo": "WFCORE",
+            "classifications": {
+              "embedded/src/main/java/org/wildfly/core/embedded/EmbeddedStandAloneServerFactory.java": "exists_before_fix",
+              "embedded/src/main/java/org/wildfly/core/embedded/EmbeddedServerFactory.java": "exists_before_fix",
+              "cli/src/main/java/org/jboss/as/cli/embedded/EmbedServerHandler.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "embedded/src/main/java/org/wildfly/core/embedded/EmbeddedStandAloneServerFactory.java": 4,
+              "embedded/src/main/java/org/wildfly/core/embedded/EmbeddedServerFactory.java": 1,
+              "cli/src/main/java/org/jboss/as/cli/embedded/EmbedServerHandler.java": 5
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.7000000000000001,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-681",
+            "repo": "WFCORE",
+            "classifications": {
+              "controller/src/main/java/org/jboss/as/controller/OperationContextImpl.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "controller/src/main/java/org/jboss/as/controller/OperationContextImpl.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-684",
+            "repo": "WFCORE",
+            "classifications": {
+              "server/src/main/java/org/jboss/as/server/deployment/annotation/CompositeIndexProcessor.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "server/src/main/java/org/jboss/as/server/deployment/annotation/CompositeIndexProcessor.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 0.0
+          },
+          {
+            "instance_id": "WFCORE-687",
+            "repo": "WFCORE",
+            "classifications": {
+              "patching/src/test/java/org/jboss/as/patching/installation/LayerTestCase.java": "exists_before_fix",
+              "patching/src/test/java/org/jboss/as/patching/metadata/PatchXmlUnitTestCase.java": "exists_before_fix",
+              "patching/src/main/java/org/jboss/as/patching/metadata/PatchXml.java": "exists_before_fix",
+              "patching/src/main/java/org/jboss/as/patching/metadata/PatchBuilder.java": "exists_before_fix",
+              "patching/src/main/java/org/jboss/as/patching/logging/PatchLogger.java": "exists_before_fix",
+              "patching/src/main/java/org/jboss/as/patching/metadata/PatchXmlUtils.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "patching/src/test/java/org/jboss/as/patching/installation/LayerTestCase.java": 52,
+              "patching/src/main/java/org/jboss/as/patching/metadata/PatchXml.java": 33,
+              "patching/src/main/java/org/jboss/as/patching/metadata/PatchBuilder.java": 9,
+              "patching/src/main/java/org/jboss/as/patching/logging/PatchLogger.java": 166,
+              "patching/src/main/java/org/jboss/as/patching/metadata/PatchXmlUtils.java": 13
+            },
+            "best_rank": 9,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.16666666666666666,
+              "100": 0.6666666666666666,
+              "200": 0.8333333333333334
+            },
+            "average_precision": 0.07715165245285727,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-69",
+            "repo": "WFCORE",
+            "classifications": {
+              "domain-management/src/main/java/org/jboss/as/domain/management/security/SecurityRealmParentRestartHandler.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "domain-management/src/main/java/org/jboss/as/domain/management/security/SecurityRealmParentRestartHandler.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-691",
+            "repo": "WFCORE",
+            "classifications": {
+              "controller/src/main/java/org/jboss/as/controller/AttributeParser.java": "exists_before_fix",
+              "controller/src/test/java/org/jboss/as/controller/persistence/PersistentResourceXMLParserTestCase.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/PropertiesAttributeDefinition.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/PersistentResourceXMLDescription.java": "exists_before_fix",
+              "remoting/subsystem/src/main/java/org/jboss/as/remoting/RemotingSubsystemXMLPersister.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "controller/src/main/java/org/jboss/as/controller/AttributeParser.java": 17,
+              "controller/src/test/java/org/jboss/as/controller/persistence/PersistentResourceXMLParserTestCase.java": 3,
+              "controller/src/main/java/org/jboss/as/controller/PropertiesAttributeDefinition.java": 1,
+              "controller/src/main/java/org/jboss/as/controller/PersistentResourceXMLDescription.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.2,
+              "5": 0.6,
+              "10": 0.6,
+              "100": 0.8,
+              "200": 0.8
+            },
+            "average_precision": 0.6470588235294118,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-692",
+            "repo": "WFCORE",
+            "classifications": {
+              "controller/src/test/java/org/jboss/as/controller/test/AliasResourceTestCase.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/operations/global/GlobalOperationHandlers.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "controller/src/test/java/org/jboss/as/controller/test/AliasResourceTestCase.java": 1,
+              "controller/src/main/java/org/jboss/as/controller/operations/global/GlobalOperationHandlers.java": 146
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 1.0
+            },
+            "average_precision": 0.5068493150684932,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-694",
+            "repo": "WFCORE",
+            "classifications": {
+              "server/src/main/java/org/jboss/as/server/deployment/DeploymentRedeployHandler.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "server/src/main/java/org/jboss/as/server/deployment/DeploymentRedeployHandler.java": 7
+            },
+            "best_rank": 7,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.14285714285714285,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-697",
+            "repo": "WFCORE",
+            "classifications": {
+              "cli/src/main/java/org/jboss/as/cli/parsing/operation/OperationRequestState.java": "exists_before_fix",
+              "cli/src/test/java/org/jboss/as/cli/parsing/test/AddressOnlyParsingTestCase.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "cli/src/test/java/org/jboss/as/cli/parsing/test/AddressOnlyParsingTestCase.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-7",
+            "repo": "WFCORE",
+            "classifications": {
+              "controller/src/main/java/org/jboss/as/controller/MapAttributeDefinition.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/ListAttributeDefinition.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "WFCORE-701",
+            "repo": "WFCORE",
+            "classifications": {
+              "host-controller/src/main/java/org/jboss/as/host/controller/ManagedServer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "host-controller/src/main/java/org/jboss/as/host/controller/ManagedServer.java": 31
+            },
+            "best_rank": 31,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.03225806451612903,
+            "difficulty": "medium",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-702",
+            "repo": "WFCORE",
+            "classifications": {
+              "logging/src/test/java/org/jboss/as/logging/LoggingSubsystemTestCase.java": "exists_before_fix",
+              "logging/src/main/java/org/jboss/as/logging/LoggingSubsystemParser.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "logging/src/test/java/org/jboss/as/logging/LoggingSubsystemTestCase.java": 105,
+              "logging/src/main/java/org/jboss/as/logging/LoggingSubsystemParser.java": 21
+            },
+            "best_rank": 21,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.5,
+              "200": 1.0
+            },
+            "average_precision": 0.03333333333333333,
+            "difficulty": "medium",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-706",
+            "repo": "WFCORE",
+            "classifications": {
+              "server/src/main/java/org/jboss/as/server/deployment/SubDeploymentProcessor.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "server/src/main/java/org/jboss/as/server/deployment/SubDeploymentProcessor.java": 101
+            },
+            "best_rank": 101,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 1.0
+            },
+            "average_precision": 0.009900990099009901,
+            "difficulty": "hard",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-71",
+            "repo": "WFCORE",
+            "classifications": {
+              "server/src/main/java/org/jboss/as/server/mgmt/domain/HostControllerConnection.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/host/controller/mgmt/HostControllerRegistrationHandler.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/host/controller/mgmt/ServerToHostProtocolHandler.java": "exists_before_fix",
+              "protocol/src/main/java/org/jboss/as/protocol/mgmt/FutureManagementChannel.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "server/src/main/java/org/jboss/as/server/mgmt/domain/HostControllerConnection.java": 138,
+              "host-controller/src/main/java/org/jboss/as/host/controller/mgmt/HostControllerRegistrationHandler.java": 122,
+              "host-controller/src/main/java/org/jboss/as/host/controller/mgmt/ServerToHostProtocolHandler.java": 54,
+              "protocol/src/main/java/org/jboss/as/protocol/mgmt/FutureManagementChannel.java": 131
+            },
+            "best_rank": 54,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.25,
+              "200": 1.0
+            },
+            "average_precision": 0.021699557936656195,
+            "difficulty": "medium",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-72",
+            "repo": "WFCORE",
+            "classifications": {
+              "cli/src/main/java/org/jboss/as/cli/impl/CliLauncher.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "cli/src/main/java/org/jboss/as/cli/impl/CliLauncher.java": 14
+            },
+            "best_rank": 14,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.07142857142857142,
+            "difficulty": "medium",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-724",
+            "repo": "WFCORE",
+            "classifications": {
+              "cli/src/main/java/org/jboss/as/cli/impl/AttributeNamePathCompleter.java": "exists_before_fix",
+              "cli/src/test/java/org/jboss/as/cli/parsing/test/AttributeNamePathCompletionTestCase.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "cli/src/main/java/org/jboss/as/cli/impl/AttributeNamePathCompleter.java": 2,
+              "cli/src/test/java/org/jboss/as/cli/parsing/test/AttributeNamePathCompletionTestCase.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-727",
+            "repo": "WFCORE",
+            "classifications": {
+              "cli/src/main/java/org/jboss/as/cli/impl/CommandCandidatesProvider.java": "exists_before_fix",
+              "cli/src/main/java/org/jboss/as/cli/handlers/ReadAttributeHandler.java": "exists_before_fix",
+              "cli/src/main/java/org/jboss/as/cli/handlers/LsHandler.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "cli/src/main/java/org/jboss/as/cli/handlers/ReadAttributeHandler.java": 103,
+              "cli/src/main/java/org/jboss/as/cli/handlers/LsHandler.java": 165
+            },
+            "best_rank": 103,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.6666666666666666
+            },
+            "average_precision": 0.007276649995096596,
+            "difficulty": "hard",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-731",
+            "repo": "WFCORE",
+            "classifications": {
+              "subsystem-test/framework/src/main/java/org/jboss/as/subsystem/test/TransformerAttachmentGrabber.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "subsystem-test/framework/src/main/java/org/jboss/as/subsystem/test/TransformerAttachmentGrabber.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFCORE-752",
+            "repo": "WFCORE",
+            "classifications": {
+              "server/src/main/java/org/jboss/as/server/deploymentoverlay/DeploymentOverlayIndex.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "server/src/main/java/org/jboss/as/server/deploymentoverlay/DeploymentOverlayIndex.java": 4
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.25,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "no_localizable_gt": 2,
+          "easy": 12,
+          "medium": 4,
+          "hard": 2
+        },
+        "total": 20
+      },
+      "summary": {
+        "n": 20,
+        "macro_hit_at": {
+          "1": 0.35,
+          "5": 0.5,
+          "10": 0.6,
+          "100": 0.8,
+          "200": 0.9
+        },
+        "macro_recall_at": {
+          "1": 0.20166666666666666,
+          "5": 0.43,
+          "10": 0.4883333333333333,
+          "100": 0.6608333333333333,
+          "200": 0.8399999999999999
+        },
+        "mrr": 0.43467010920068033,
+        "map": 0.3499907050608351,
+        "mean_latency_s": 2.2517310248480902e-07
+      }
+    }
+  }
+}

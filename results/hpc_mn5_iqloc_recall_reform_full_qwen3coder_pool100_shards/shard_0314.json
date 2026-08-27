@@ -1,0 +1,1876 @@
+{
+  "manifest_id": "iqloc-multi-n7091-s42-f8a5d2c401a4",
+  "shard_index": 314,
+  "num_shards": 350,
+  "candidate_pool_size": 100,
+  "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+  "reformulation_mode": "semantic",
+  "relevance_mode": "llm",
+  "keep_fraction": 0.5,
+  "instance_ids": [
+    "WFLY-1511",
+    "WFLY-1513",
+    "WFLY-1517",
+    "WFLY-15196667",
+    "WFLY-15244377",
+    "WFLY-1531",
+    "WFLY-1532",
+    "WFLY-15357339",
+    "WFLY-15370330",
+    "WFLY-15406846",
+    "WFLY-1543",
+    "WFLY-15442991",
+    "WFLY-1545",
+    "WFLY-1546",
+    "WFLY-1547",
+    "WFLY-1553",
+    "WFLY-15533922",
+    "WFLY-15613802",
+    "WFLY-15615401",
+    "WFLY-15618413"
+  ],
+  "configs": {
+    "retriever": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "WFLY-1511",
+            "repo": "WFLY",
+            "classifications": {
+              "host-controller/src/main/java/org/jboss/as/host/controller/RemoteDomainConnectionService.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/mgmt/domain/HostControllerConnection.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/host/controller/RemoteDomainConnection.java": "exists_before_fix",
+              "testsuite/domain/src/test/java/org/jboss/as/test/integration/respawn/TestControllerClient.java": "exists_before_fix",
+              "protocol/src/main/java/org/jboss/as/protocol/mgmt/FutureManagementChannel.java": "exists_before_fix",
+              "protocol/src/main/java/org/jboss/as/protocol/ProtocolConnectionManager.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "host-controller/src/main/java/org/jboss/as/host/controller/RemoteDomainConnection.java": 1,
+              "protocol/src/main/java/org/jboss/as/protocol/mgmt/FutureManagementChannel.java": 4,
+              "protocol/src/main/java/org/jboss/as/protocol/ProtocolConnectionManager.java": 19
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.16666666666666666,
+              "5": 0.3333333333333333,
+              "10": 0.3333333333333333,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.27631578947368424,
+            "difficulty": "easy",
+            "latency_s": 9.5367431640625e-07
+          },
+          {
+            "instance_id": "WFLY-1513",
+            "repo": "WFLY",
+            "classifications": {
+              "messaging/src/main/java/org/jboss/as/messaging/jms/JMSQueueRemove.java": "exists_before_fix",
+              "messaging/src/main/java/org/jboss/as/messaging/jms/JMSTopicRemove.java": "exists_before_fix",
+              "messaging/src/main/java/org/jboss/as/messaging/jms/ConnectionFactoryRemove.java": "exists_before_fix",
+              "testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/messaging/mgmt/JMSTopicManagementTestCase.java": "exists_before_fix",
+              "testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/messaging/mgmt/JMSQueueManagementTestCase.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/messaging/mgmt/JMSTopicManagementTestCase.java": 9,
+              "testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/messaging/mgmt/JMSQueueManagementTestCase.java": 6
+            },
+            "best_rank": 6,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.4,
+              "100": 0.4,
+              "200": 0.4
+            },
+            "average_precision": 0.07777777777777777,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "WFLY-1517",
+            "repo": "WFLY",
+            "classifications": {
+              "connector/src/main/java/org/jboss/as/connector/util/Injection.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "connector/src/main/java/org/jboss/as/connector/util/Injection.java": 5
+            },
+            "best_rank": 5,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.2,
+            "difficulty": "easy",
+            "latency_s": 3.0994415283203125e-06
+          },
+          {
+            "instance_id": "WFLY-15196667",
+            "repo": "WFLY",
+            "classifications": {
+              "clustering/jgroups/extension/src/main/java/org/jboss/as/clustering/jgroups/subsystem/ChannelResourceDefinition.java": "exists_before_fix",
+              "clustering/jgroups/extension/src/main/java/org/jboss/as/clustering/jgroups/subsystem/JGroupsSubsystemResourceDefinition.java": "exists_before_fix",
+              "clustering/infinispan/extension/src/main/java/org/jboss/as/clustering/infinispan/subsystem/InfinispanSubsystemXMLReader.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "WFLY-15244377",
+            "repo": "WFLY",
+            "classifications": {
+              "clustering/ee/spi/src/main/java/org/wildfly/clustering/ee/expiration/ExpirationMetaData.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "clustering/ee/spi/src/main/java/org/wildfly/clustering/ee/expiration/ExpirationMetaData.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3333333333333333,
+            "difficulty": "easy",
+            "latency_s": 1.6689300537109375e-06
+          },
+          {
+            "instance_id": "WFLY-1531",
+            "repo": "WFLY",
+            "classifications": {
+              "jpa/core/src/main/java/org/jboss/as/jpa/processor/PersistenceUnitServiceHandler.java": "exists_before_fix",
+              "jpa/core/src/main/java/org/jboss/as/jpa/processor/JPADependencyProcessor.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "WFLY-1532",
+            "repo": "WFLY",
+            "classifications": {
+              "testsuite/integration/manualmode/src/test/java/org/jboss/as/test/manualmode/ejb/shutdown/RemoteCallWhileShuttingDownTestCase.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "testsuite/integration/manualmode/src/test/java/org/jboss/as/test/manualmode/ejb/shutdown/RemoteCallWhileShuttingDownTestCase.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "WFLY-15357339",
+            "repo": "WFLY",
+            "classifications": {
+              "testsuite/integration/microprofile-tck/openapi/src/test/java/org/wildfly/extension/microprofile/openapi/tck/DeploymentProcessor.java": "exists_before_fix",
+              "microprofile/openapi-smallrye/src/main/java/org/wildfly/extension/microprofile/openapi/deployment/OpenAPIModelServiceConfigurator.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "testsuite/integration/microprofile-tck/openapi/src/test/java/org/wildfly/extension/microprofile/openapi/tck/DeploymentProcessor.java": 16,
+              "microprofile/openapi-smallrye/src/main/java/org/wildfly/extension/microprofile/openapi/deployment/OpenAPIModelServiceConfigurator.java": 7
+            },
+            "best_rank": 7,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.13392857142857142,
+            "difficulty": "easy",
+            "latency_s": 1.9073486328125e-06
+          },
+          {
+            "instance_id": "WFLY-15370330",
+            "repo": "WFLY",
+            "classifications": {
+              "clustering/ee/infinispan/src/main/java/org/wildfly/clustering/ee/infinispan/PrimaryOwnerLocator.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "WFLY-15406846",
+            "repo": "WFLY",
+            "classifications": {
+              "clustering/infinispan/extension/src/main/java/org/jboss/as/clustering/infinispan/subsystem/InfinispanSubsystemModel.java": "exists_before_fix",
+              "clustering/infinispan/extension/src/main/java/org/jboss/as/clustering/infinispan/subsystem/ClusteredCacheResourceDefinition.java": "exists_before_fix",
+              "clustering/infinispan/extension/src/main/java/org/jboss/as/clustering/infinispan/subsystem/ClusteredCacheResourceTransformer.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "WFLY-1543",
+            "repo": "WFLY",
+            "classifications": {
+              "undertow/src/main/java/org/wildfly/extension/undertow/deployment/UndertowDeploymentService.java": "exists_before_fix",
+              "osgi/integration/web/src/main/java/org/jboss/as/osgi/web/WebContextLifecycleInterceptor.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "osgi/integration/web/src/main/java/org/jboss/as/osgi/web/WebContextLifecycleInterceptor.java": 13
+            },
+            "best_rank": 13,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.038461538461538464,
+            "difficulty": "medium",
+            "latency_s": 1.9073486328125e-06
+          },
+          {
+            "instance_id": "WFLY-15442991",
+            "repo": "WFLY",
+            "classifications": {
+              "clustering/infinispan/extension/src/main/java/org/jboss/as/clustering/infinispan/client/ManagedRemoteCacheContainer.java": "exists_before_fix",
+              "testsuite/integration/clustering/src/test/java/org/jboss/as/test/clustering/cluster/jsf/AbstractJSFFailoverTestCase.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 1.6689300537109375e-06
+          },
+          {
+            "instance_id": "WFLY-1545",
+            "repo": "WFLY",
+            "classifications": {
+              "connector/src/main/java/org/jboss/as/connector/deployers/ra/processors/CachedConnectionManagerSetupProcessor.java": "exists_before_fix",
+              "undertow/src/main/java/org/wildfly/extension/undertow/deployment/UndertowDeploymentProcessor.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "WFLY-1546",
+            "repo": "WFLY",
+            "classifications": {
+              "undertow/src/main/java/org/wildfly/extension/undertow/deployment/UndertowDeploymentInfoService.java": "exists_before_fix",
+              "undertow/src/main/java/org/wildfly/extension/undertow/UndertowMessages.java": "exists_before_fix",
+              "undertow/src/main/java/org/wildfly/extension/undertow/deployment/UndertowDeploymentService.java": "exists_before_fix",
+              "undertow/src/main/java/org/wildfly/extension/undertow/deployment/UndertowDeploymentProcessor.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "undertow/src/main/java/org/wildfly/extension/undertow/UndertowMessages.java": 24,
+              "undertow/src/main/java/org/wildfly/extension/undertow/deployment/UndertowDeploymentProcessor.java": 10
+            },
+            "best_rank": 10,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.25,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.04583333333333334,
+            "difficulty": "easy",
+            "latency_s": 1.6689300537109375e-06
+          },
+          {
+            "instance_id": "WFLY-1547",
+            "repo": "WFLY",
+            "classifications": {
+              "cli/src/main/java/org/jboss/as/cli/handlers/UndeployHandler.java": "exists_before_fix",
+              "cli/src/main/java/org/jboss/as/cli/handlers/DeployHandler.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/deployment/module/TempFileProviderService.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/deployment/DeploymentMountProvider.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "server/src/main/java/org/jboss/as/server/deployment/module/TempFileProviderService.java": 17,
+              "server/src/main/java/org/jboss/as/server/deployment/DeploymentMountProvider.java": 10
+            },
+            "best_rank": 10,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.25,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.054411764705882354,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "WFLY-1553",
+            "repo": "WFLY",
+            "classifications": {
+              "clustering/infinispan/src/main/java/org/jboss/as/clustering/infinispan/subsystem/CacheContainerAdd.java": "exists_before_fix",
+              "clustering/infinispan/src/main/java/org/jboss/as/clustering/infinispan/subsystem/EmbeddedCacheManagerConfigurationService.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "clustering/infinispan/src/main/java/org/jboss/as/clustering/infinispan/subsystem/EmbeddedCacheManagerConfigurationService.java": 8
+            },
+            "best_rank": 8,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.0625,
+            "difficulty": "easy",
+            "latency_s": 2.6226043701171875e-06
+          },
+          {
+            "instance_id": "WFLY-15533922",
+            "repo": "WFLY",
+            "classifications": {
+              "clustering/infinispan/extension/src/main/java/org/jboss/as/clustering/infinispan/persistence/hotrod/HotRodStore.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "clustering/infinispan/extension/src/main/java/org/jboss/as/clustering/infinispan/persistence/hotrod/HotRodStore.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3333333333333333,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "WFLY-15613802",
+            "repo": "WFLY",
+            "classifications": {
+              "clustering/web/cache/src/main/java/org/wildfly/clustering/web/cache/session/attributes/fine/FineSessionAttributes.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "clustering/web/cache/src/main/java/org/wildfly/clustering/web/cache/session/attributes/fine/FineSessionAttributes.java": 10
+            },
+            "best_rank": 10,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.1,
+            "difficulty": "easy",
+            "latency_s": 1.430511474609375e-06
+          },
+          {
+            "instance_id": "WFLY-15615401",
+            "repo": "WFLY",
+            "classifications": {
+              "testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/ejb/sharedcontext/SharedClientContextTestCase.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "WFLY-15618413",
+            "repo": "WFLY",
+            "classifications": {
+              "clustering/infinispan/extension/src/main/java/org/jboss/as/clustering/infinispan/persistence/hotrod/HotRodStore.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "clustering/infinispan/extension/src/main/java/org/jboss/as/clustering/infinispan/persistence/hotrod/HotRodStore.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "easy": 12,
+          "no_localizable_gt": 7,
+          "medium": 1
+        },
+        "total": 20
+      },
+      "summary": {
+        "n": 20,
+        "macro_hit_at": {
+          "1": 0.15,
+          "5": 0.3,
+          "10": 0.6,
+          "100": 0.65,
+          "200": 0.65
+        },
+        "macro_recall_at": {
+          "1": 0.10833333333333335,
+          "5": 0.26666666666666666,
+          "10": 0.41166666666666674,
+          "100": 0.495,
+          "200": 0.495
+        },
+        "mrr": 0.23390567765567769,
+        "map": 0.18279477209237271,
+        "mean_latency_s": 1.3938316932091345e-06
+      }
+    },
+    "relevance_filtered": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "WFLY-1511",
+            "repo": "WFLY",
+            "classifications": {
+              "host-controller/src/main/java/org/jboss/as/host/controller/RemoteDomainConnectionService.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/mgmt/domain/HostControllerConnection.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/host/controller/RemoteDomainConnection.java": "exists_before_fix",
+              "testsuite/domain/src/test/java/org/jboss/as/test/integration/respawn/TestControllerClient.java": "exists_before_fix",
+              "protocol/src/main/java/org/jboss/as/protocol/mgmt/FutureManagementChannel.java": "exists_before_fix",
+              "protocol/src/main/java/org/jboss/as/protocol/ProtocolConnectionManager.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "host-controller/src/main/java/org/jboss/as/host/controller/RemoteDomainConnection.java": 1,
+              "protocol/src/main/java/org/jboss/as/protocol/mgmt/FutureManagementChannel.java": 4,
+              "protocol/src/main/java/org/jboss/as/protocol/ProtocolConnectionManager.java": 19
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.16666666666666666,
+              "5": 0.3333333333333333,
+              "10": 0.3333333333333333,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.27631578947368424,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "WFLY-1513",
+            "repo": "WFLY",
+            "classifications": {
+              "messaging/src/main/java/org/jboss/as/messaging/jms/JMSQueueRemove.java": "exists_before_fix",
+              "messaging/src/main/java/org/jboss/as/messaging/jms/JMSTopicRemove.java": "exists_before_fix",
+              "messaging/src/main/java/org/jboss/as/messaging/jms/ConnectionFactoryRemove.java": "exists_before_fix",
+              "testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/messaging/mgmt/JMSTopicManagementTestCase.java": "exists_before_fix",
+              "testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/messaging/mgmt/JMSQueueManagementTestCase.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/messaging/mgmt/JMSTopicManagementTestCase.java": 9,
+              "testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/messaging/mgmt/JMSQueueManagementTestCase.java": 6
+            },
+            "best_rank": 6,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.4,
+              "100": 0.4,
+              "200": 0.4
+            },
+            "average_precision": 0.07777777777777777,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-1517",
+            "repo": "WFLY",
+            "classifications": {
+              "connector/src/main/java/org/jboss/as/connector/util/Injection.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "connector/src/main/java/org/jboss/as/connector/util/Injection.java": 5
+            },
+            "best_rank": 5,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.2,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-15196667",
+            "repo": "WFLY",
+            "classifications": {
+              "clustering/jgroups/extension/src/main/java/org/jboss/as/clustering/jgroups/subsystem/ChannelResourceDefinition.java": "exists_before_fix",
+              "clustering/jgroups/extension/src/main/java/org/jboss/as/clustering/jgroups/subsystem/JGroupsSubsystemResourceDefinition.java": "exists_before_fix",
+              "clustering/infinispan/extension/src/main/java/org/jboss/as/clustering/infinispan/subsystem/InfinispanSubsystemXMLReader.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-15244377",
+            "repo": "WFLY",
+            "classifications": {
+              "clustering/ee/spi/src/main/java/org/wildfly/clustering/ee/expiration/ExpirationMetaData.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "clustering/ee/spi/src/main/java/org/wildfly/clustering/ee/expiration/ExpirationMetaData.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3333333333333333,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-1531",
+            "repo": "WFLY",
+            "classifications": {
+              "jpa/core/src/main/java/org/jboss/as/jpa/processor/PersistenceUnitServiceHandler.java": "exists_before_fix",
+              "jpa/core/src/main/java/org/jboss/as/jpa/processor/JPADependencyProcessor.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-1532",
+            "repo": "WFLY",
+            "classifications": {
+              "testsuite/integration/manualmode/src/test/java/org/jboss/as/test/manualmode/ejb/shutdown/RemoteCallWhileShuttingDownTestCase.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "testsuite/integration/manualmode/src/test/java/org/jboss/as/test/manualmode/ejb/shutdown/RemoteCallWhileShuttingDownTestCase.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-15357339",
+            "repo": "WFLY",
+            "classifications": {
+              "testsuite/integration/microprofile-tck/openapi/src/test/java/org/wildfly/extension/microprofile/openapi/tck/DeploymentProcessor.java": "exists_before_fix",
+              "microprofile/openapi-smallrye/src/main/java/org/wildfly/extension/microprofile/openapi/deployment/OpenAPIModelServiceConfigurator.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "testsuite/integration/microprofile-tck/openapi/src/test/java/org/wildfly/extension/microprofile/openapi/tck/DeploymentProcessor.java": 16,
+              "microprofile/openapi-smallrye/src/main/java/org/wildfly/extension/microprofile/openapi/deployment/OpenAPIModelServiceConfigurator.java": 7
+            },
+            "best_rank": 7,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.13392857142857142,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-15370330",
+            "repo": "WFLY",
+            "classifications": {
+              "clustering/ee/infinispan/src/main/java/org/wildfly/clustering/ee/infinispan/PrimaryOwnerLocator.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-15406846",
+            "repo": "WFLY",
+            "classifications": {
+              "clustering/infinispan/extension/src/main/java/org/jboss/as/clustering/infinispan/subsystem/InfinispanSubsystemModel.java": "exists_before_fix",
+              "clustering/infinispan/extension/src/main/java/org/jboss/as/clustering/infinispan/subsystem/ClusteredCacheResourceDefinition.java": "exists_before_fix",
+              "clustering/infinispan/extension/src/main/java/org/jboss/as/clustering/infinispan/subsystem/ClusteredCacheResourceTransformer.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-1543",
+            "repo": "WFLY",
+            "classifications": {
+              "undertow/src/main/java/org/wildfly/extension/undertow/deployment/UndertowDeploymentService.java": "exists_before_fix",
+              "osgi/integration/web/src/main/java/org/jboss/as/osgi/web/WebContextLifecycleInterceptor.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "osgi/integration/web/src/main/java/org/jboss/as/osgi/web/WebContextLifecycleInterceptor.java": 13
+            },
+            "best_rank": 13,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.038461538461538464,
+            "difficulty": "medium",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-15442991",
+            "repo": "WFLY",
+            "classifications": {
+              "clustering/infinispan/extension/src/main/java/org/jboss/as/clustering/infinispan/client/ManagedRemoteCacheContainer.java": "exists_before_fix",
+              "testsuite/integration/clustering/src/test/java/org/jboss/as/test/clustering/cluster/jsf/AbstractJSFFailoverTestCase.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-1545",
+            "repo": "WFLY",
+            "classifications": {
+              "connector/src/main/java/org/jboss/as/connector/deployers/ra/processors/CachedConnectionManagerSetupProcessor.java": "exists_before_fix",
+              "undertow/src/main/java/org/wildfly/extension/undertow/deployment/UndertowDeploymentProcessor.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-1546",
+            "repo": "WFLY",
+            "classifications": {
+              "undertow/src/main/java/org/wildfly/extension/undertow/deployment/UndertowDeploymentInfoService.java": "exists_before_fix",
+              "undertow/src/main/java/org/wildfly/extension/undertow/UndertowMessages.java": "exists_before_fix",
+              "undertow/src/main/java/org/wildfly/extension/undertow/deployment/UndertowDeploymentService.java": "exists_before_fix",
+              "undertow/src/main/java/org/wildfly/extension/undertow/deployment/UndertowDeploymentProcessor.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "undertow/src/main/java/org/wildfly/extension/undertow/UndertowMessages.java": 24,
+              "undertow/src/main/java/org/wildfly/extension/undertow/deployment/UndertowDeploymentProcessor.java": 10
+            },
+            "best_rank": 10,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.25,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.04583333333333334,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "WFLY-1547",
+            "repo": "WFLY",
+            "classifications": {
+              "cli/src/main/java/org/jboss/as/cli/handlers/UndeployHandler.java": "exists_before_fix",
+              "cli/src/main/java/org/jboss/as/cli/handlers/DeployHandler.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/deployment/module/TempFileProviderService.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/deployment/DeploymentMountProvider.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "server/src/main/java/org/jboss/as/server/deployment/module/TempFileProviderService.java": 17,
+              "server/src/main/java/org/jboss/as/server/deployment/DeploymentMountProvider.java": 10
+            },
+            "best_rank": 10,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.25,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.054411764705882354,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-1553",
+            "repo": "WFLY",
+            "classifications": {
+              "clustering/infinispan/src/main/java/org/jboss/as/clustering/infinispan/subsystem/CacheContainerAdd.java": "exists_before_fix",
+              "clustering/infinispan/src/main/java/org/jboss/as/clustering/infinispan/subsystem/EmbeddedCacheManagerConfigurationService.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "clustering/infinispan/src/main/java/org/jboss/as/clustering/infinispan/subsystem/EmbeddedCacheManagerConfigurationService.java": 8
+            },
+            "best_rank": 8,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.0625,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-15533922",
+            "repo": "WFLY",
+            "classifications": {
+              "clustering/infinispan/extension/src/main/java/org/jboss/as/clustering/infinispan/persistence/hotrod/HotRodStore.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "clustering/infinispan/extension/src/main/java/org/jboss/as/clustering/infinispan/persistence/hotrod/HotRodStore.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3333333333333333,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-15613802",
+            "repo": "WFLY",
+            "classifications": {
+              "clustering/web/cache/src/main/java/org/wildfly/clustering/web/cache/session/attributes/fine/FineSessionAttributes.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "clustering/web/cache/src/main/java/org/wildfly/clustering/web/cache/session/attributes/fine/FineSessionAttributes.java": 10
+            },
+            "best_rank": 10,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.1,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-15615401",
+            "repo": "WFLY",
+            "classifications": {
+              "testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/ejb/sharedcontext/SharedClientContextTestCase.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "WFLY-15618413",
+            "repo": "WFLY",
+            "classifications": {
+              "clustering/infinispan/extension/src/main/java/org/jboss/as/clustering/infinispan/persistence/hotrod/HotRodStore.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "clustering/infinispan/extension/src/main/java/org/jboss/as/clustering/infinispan/persistence/hotrod/HotRodStore.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "easy": 12,
+          "no_localizable_gt": 7,
+          "medium": 1
+        },
+        "total": 20
+      },
+      "summary": {
+        "n": 20,
+        "macro_hit_at": {
+          "1": 0.15,
+          "5": 0.3,
+          "10": 0.6,
+          "100": 0.65,
+          "200": 0.65
+        },
+        "macro_recall_at": {
+          "1": 0.10833333333333335,
+          "5": 0.26666666666666666,
+          "10": 0.41166666666666674,
+          "100": 0.495,
+          "200": 0.495
+        },
+        "mrr": 0.23390567765567769,
+        "map": 0.18279477209237271,
+        "mean_latency_s": 2.934382512019231e-07
+      }
+    },
+    "reformulated": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "WFLY-1511",
+            "repo": "WFLY",
+            "classifications": {
+              "host-controller/src/main/java/org/jboss/as/host/controller/RemoteDomainConnectionService.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/mgmt/domain/HostControllerConnection.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/host/controller/RemoteDomainConnection.java": "exists_before_fix",
+              "testsuite/domain/src/test/java/org/jboss/as/test/integration/respawn/TestControllerClient.java": "exists_before_fix",
+              "protocol/src/main/java/org/jboss/as/protocol/mgmt/FutureManagementChannel.java": "exists_before_fix",
+              "protocol/src/main/java/org/jboss/as/protocol/ProtocolConnectionManager.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "host-controller/src/main/java/org/jboss/as/host/controller/RemoteDomainConnectionService.java": 109,
+              "host-controller/src/main/java/org/jboss/as/host/controller/RemoteDomainConnection.java": 2,
+              "protocol/src/main/java/org/jboss/as/protocol/mgmt/FutureManagementChannel.java": 3,
+              "protocol/src/main/java/org/jboss/as/protocol/ProtocolConnectionManager.java": 15
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.3333333333333333,
+              "10": 0.3333333333333333,
+              "100": 0.5,
+              "200": 0.6666666666666666
+            },
+            "average_precision": 0.2338939857288481,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-1513",
+            "repo": "WFLY",
+            "classifications": {
+              "messaging/src/main/java/org/jboss/as/messaging/jms/JMSQueueRemove.java": "exists_before_fix",
+              "messaging/src/main/java/org/jboss/as/messaging/jms/JMSTopicRemove.java": "exists_before_fix",
+              "messaging/src/main/java/org/jboss/as/messaging/jms/ConnectionFactoryRemove.java": "exists_before_fix",
+              "testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/messaging/mgmt/JMSTopicManagementTestCase.java": "exists_before_fix",
+              "testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/messaging/mgmt/JMSQueueManagementTestCase.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/messaging/mgmt/JMSTopicManagementTestCase.java": 9,
+              "testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/messaging/mgmt/JMSQueueManagementTestCase.java": 6
+            },
+            "best_rank": 6,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.4,
+              "100": 0.4,
+              "200": 0.4
+            },
+            "average_precision": 0.07777777777777777,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-1517",
+            "repo": "WFLY",
+            "classifications": {
+              "connector/src/main/java/org/jboss/as/connector/util/Injection.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "connector/src/main/java/org/jboss/as/connector/util/Injection.java": 5
+            },
+            "best_rank": 5,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.2,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-15196667",
+            "repo": "WFLY",
+            "classifications": {
+              "clustering/jgroups/extension/src/main/java/org/jboss/as/clustering/jgroups/subsystem/ChannelResourceDefinition.java": "exists_before_fix",
+              "clustering/jgroups/extension/src/main/java/org/jboss/as/clustering/jgroups/subsystem/JGroupsSubsystemResourceDefinition.java": "exists_before_fix",
+              "clustering/infinispan/extension/src/main/java/org/jboss/as/clustering/infinispan/subsystem/InfinispanSubsystemXMLReader.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "clustering/infinispan/extension/src/main/java/org/jboss/as/clustering/infinispan/subsystem/InfinispanSubsystemXMLReader.java": 126
+            },
+            "best_rank": 126,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.3333333333333333
+            },
+            "average_precision": 0.0026455026455026454,
+            "difficulty": "hard",
+            "latency_s": 0.0
+          },
+          {
+            "instance_id": "WFLY-15244377",
+            "repo": "WFLY",
+            "classifications": {
+              "clustering/ee/spi/src/main/java/org/wildfly/clustering/ee/expiration/ExpirationMetaData.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "clustering/ee/spi/src/main/java/org/wildfly/clustering/ee/expiration/ExpirationMetaData.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3333333333333333,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-1531",
+            "repo": "WFLY",
+            "classifications": {
+              "jpa/core/src/main/java/org/jboss/as/jpa/processor/PersistenceUnitServiceHandler.java": "exists_before_fix",
+              "jpa/core/src/main/java/org/jboss/as/jpa/processor/JPADependencyProcessor.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-1532",
+            "repo": "WFLY",
+            "classifications": {
+              "testsuite/integration/manualmode/src/test/java/org/jboss/as/test/manualmode/ejb/shutdown/RemoteCallWhileShuttingDownTestCase.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "testsuite/integration/manualmode/src/test/java/org/jboss/as/test/manualmode/ejb/shutdown/RemoteCallWhileShuttingDownTestCase.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-15357339",
+            "repo": "WFLY",
+            "classifications": {
+              "testsuite/integration/microprofile-tck/openapi/src/test/java/org/wildfly/extension/microprofile/openapi/tck/DeploymentProcessor.java": "exists_before_fix",
+              "microprofile/openapi-smallrye/src/main/java/org/wildfly/extension/microprofile/openapi/deployment/OpenAPIModelServiceConfigurator.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "testsuite/integration/microprofile-tck/openapi/src/test/java/org/wildfly/extension/microprofile/openapi/tck/DeploymentProcessor.java": 12,
+              "microprofile/openapi-smallrye/src/main/java/org/wildfly/extension/microprofile/openapi/deployment/OpenAPIModelServiceConfigurator.java": 5
+            },
+            "best_rank": 5,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.18333333333333335,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-15370330",
+            "repo": "WFLY",
+            "classifications": {
+              "clustering/ee/infinispan/src/main/java/org/wildfly/clustering/ee/infinispan/PrimaryOwnerLocator.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "WFLY-15406846",
+            "repo": "WFLY",
+            "classifications": {
+              "clustering/infinispan/extension/src/main/java/org/jboss/as/clustering/infinispan/subsystem/InfinispanSubsystemModel.java": "exists_before_fix",
+              "clustering/infinispan/extension/src/main/java/org/jboss/as/clustering/infinispan/subsystem/ClusteredCacheResourceDefinition.java": "exists_before_fix",
+              "clustering/infinispan/extension/src/main/java/org/jboss/as/clustering/infinispan/subsystem/ClusteredCacheResourceTransformer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "clustering/infinispan/extension/src/main/java/org/jboss/as/clustering/infinispan/subsystem/InfinispanSubsystemModel.java": 898,
+              "clustering/infinispan/extension/src/main/java/org/jboss/as/clustering/infinispan/subsystem/ClusteredCacheResourceDefinition.java": 870,
+              "clustering/infinispan/extension/src/main/java/org/jboss/as/clustering/infinispan/subsystem/ClusteredCacheResourceTransformer.java": 871
+            },
+            "best_rank": 870,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0022621312590329345,
+            "difficulty": "outside_top200",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "WFLY-1543",
+            "repo": "WFLY",
+            "classifications": {
+              "undertow/src/main/java/org/wildfly/extension/undertow/deployment/UndertowDeploymentService.java": "exists_before_fix",
+              "osgi/integration/web/src/main/java/org/jboss/as/osgi/web/WebContextLifecycleInterceptor.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "osgi/integration/web/src/main/java/org/jboss/as/osgi/web/WebContextLifecycleInterceptor.java": 12
+            },
+            "best_rank": 12,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.041666666666666664,
+            "difficulty": "medium",
+            "latency_s": 9.5367431640625e-07
+          },
+          {
+            "instance_id": "WFLY-15442991",
+            "repo": "WFLY",
+            "classifications": {
+              "clustering/infinispan/extension/src/main/java/org/jboss/as/clustering/infinispan/client/ManagedRemoteCacheContainer.java": "exists_before_fix",
+              "testsuite/integration/clustering/src/test/java/org/jboss/as/test/clustering/cluster/jsf/AbstractJSFFailoverTestCase.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "clustering/infinispan/extension/src/main/java/org/jboss/as/clustering/infinispan/client/ManagedRemoteCacheContainer.java": 847,
+              "testsuite/integration/clustering/src/test/java/org/jboss/as/test/clustering/cluster/jsf/AbstractJSFFailoverTestCase.java": 8086
+            },
+            "best_rank": 847,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0007139893138139265,
+            "difficulty": "outside_top200",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "WFLY-1545",
+            "repo": "WFLY",
+            "classifications": {
+              "connector/src/main/java/org/jboss/as/connector/deployers/ra/processors/CachedConnectionManagerSetupProcessor.java": "exists_before_fix",
+              "undertow/src/main/java/org/wildfly/extension/undertow/deployment/UndertowDeploymentProcessor.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "WFLY-1546",
+            "repo": "WFLY",
+            "classifications": {
+              "undertow/src/main/java/org/wildfly/extension/undertow/deployment/UndertowDeploymentInfoService.java": "exists_before_fix",
+              "undertow/src/main/java/org/wildfly/extension/undertow/UndertowMessages.java": "exists_before_fix",
+              "undertow/src/main/java/org/wildfly/extension/undertow/deployment/UndertowDeploymentService.java": "exists_before_fix",
+              "undertow/src/main/java/org/wildfly/extension/undertow/deployment/UndertowDeploymentProcessor.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "undertow/src/main/java/org/wildfly/extension/undertow/deployment/UndertowDeploymentInfoService.java": 127,
+              "undertow/src/main/java/org/wildfly/extension/undertow/UndertowMessages.java": 20,
+              "undertow/src/main/java/org/wildfly/extension/undertow/deployment/UndertowDeploymentProcessor.java": 14
+            },
+            "best_rank": 14,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.5,
+              "200": 0.75
+            },
+            "average_precision": 0.04876265466816648,
+            "difficulty": "medium",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-1547",
+            "repo": "WFLY",
+            "classifications": {
+              "cli/src/main/java/org/jboss/as/cli/handlers/UndeployHandler.java": "exists_before_fix",
+              "cli/src/main/java/org/jboss/as/cli/handlers/DeployHandler.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/deployment/module/TempFileProviderService.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/deployment/DeploymentMountProvider.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "server/src/main/java/org/jboss/as/server/deployment/module/TempFileProviderService.java": 18,
+              "server/src/main/java/org/jboss/as/server/deployment/DeploymentMountProvider.java": 9
+            },
+            "best_rank": 9,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.25,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.05555555555555555,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "WFLY-1553",
+            "repo": "WFLY",
+            "classifications": {
+              "clustering/infinispan/src/main/java/org/jboss/as/clustering/infinispan/subsystem/CacheContainerAdd.java": "exists_before_fix",
+              "clustering/infinispan/src/main/java/org/jboss/as/clustering/infinispan/subsystem/EmbeddedCacheManagerConfigurationService.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "clustering/infinispan/src/main/java/org/jboss/as/clustering/infinispan/subsystem/EmbeddedCacheManagerConfigurationService.java": 12
+            },
+            "best_rank": 12,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.041666666666666664,
+            "difficulty": "medium",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "WFLY-15533922",
+            "repo": "WFLY",
+            "classifications": {
+              "clustering/infinispan/extension/src/main/java/org/jboss/as/clustering/infinispan/persistence/hotrod/HotRodStore.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "clustering/infinispan/extension/src/main/java/org/jboss/as/clustering/infinispan/persistence/hotrod/HotRodStore.java": 5
+            },
+            "best_rank": 5,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.2,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "WFLY-15613802",
+            "repo": "WFLY",
+            "classifications": {
+              "clustering/web/cache/src/main/java/org/wildfly/clustering/web/cache/session/attributes/fine/FineSessionAttributes.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "clustering/web/cache/src/main/java/org/wildfly/clustering/web/cache/session/attributes/fine/FineSessionAttributes.java": 10
+            },
+            "best_rank": 10,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.1,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "WFLY-15615401",
+            "repo": "WFLY",
+            "classifications": {
+              "testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/ejb/sharedcontext/SharedClientContextTestCase.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/ejb/sharedcontext/SharedClientContextTestCase.java": 101
+            },
+            "best_rank": 101,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 1.0
+            },
+            "average_precision": 0.009900990099009901,
+            "difficulty": "hard",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "WFLY-15618413",
+            "repo": "WFLY",
+            "classifications": {
+              "clustering/infinispan/extension/src/main/java/org/jboss/as/clustering/infinispan/persistence/hotrod/HotRodStore.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "clustering/infinispan/extension/src/main/java/org/jboss/as/clustering/infinispan/persistence/hotrod/HotRodStore.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "easy": 10,
+          "hard": 2,
+          "no_localizable_gt": 3,
+          "outside_top200": 2,
+          "medium": 3
+        },
+        "total": 20
+      },
+      "summary": {
+        "n": 20,
+        "macro_hit_at": {
+          "1": 0.1,
+          "5": 0.35,
+          "10": 0.5,
+          "100": 0.65,
+          "200": 0.75
+        },
+        "macro_recall_at": {
+          "1": 0.1,
+          "5": 0.29166666666666663,
+          "10": 0.37416666666666665,
+          "100": 0.495,
+          "200": 0.5825
+        },
+        "mrr": 0.2034686955036749,
+        "map": 0.17657562935238535,
+        "mean_latency_s": 3.926894244025735e-07
+      }
+    }
+  }
+}

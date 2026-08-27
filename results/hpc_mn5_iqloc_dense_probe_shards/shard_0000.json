@@ -1,0 +1,135 @@
+{
+  "manifest_id": "iqloc-multi-n30-s42-df69b06700bd",
+  "shard_index": 0,
+  "num_shards": 8,
+  "model": "Qwen/Qwen3-Embedding-0.6B",
+  "mode": "full_corpus_dense_only",
+  "instance_ids": [
+    "BATCH-1656",
+    "BATCH-2352",
+    "CAMEL-10273"
+  ],
+  "configs": {
+    "dense_embedding": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "BATCH-1656",
+            "repo": "BATCH",
+            "classifications": {
+              "spring-batch-core/src/test/java/org/springframework/batch/core/step/item/FaultTolerantStepFactoryBeanRollbackTests.java": "exists_before_fix",
+              "spring-batch-core-tests/src/test/java/org/springframework/batch/core/test/step/FaultTolerantStepFactoryBeanRollbackIntegrationTests.java": "exists_before_fix",
+              "spring-batch-core/src/main/java/org/springframework/batch/core/step/item/FaultTolerantChunkProcessor.java": "exists_before_fix",
+              "spring-batch-core/src/main/java/org/springframework/batch/core/step/item/FaultTolerantStepFactoryBean.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-batch-core/src/test/java/org/springframework/batch/core/step/item/FaultTolerantStepFactoryBeanRollbackTests.java": 2,
+              "spring-batch-core-tests/src/test/java/org/springframework/batch/core/test/step/FaultTolerantStepFactoryBeanRollbackIntegrationTests.java": 37,
+              "spring-batch-core/src/main/java/org/springframework/batch/core/step/item/FaultTolerantChunkProcessor.java": 12,
+              "spring-batch-core/src/main/java/org/springframework/batch/core/step/item/FaultTolerantStepFactoryBean.java": 46
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.25,
+              "10": 0.25,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.2086760673717195,
+            "difficulty": "easy",
+            "latency_s": 9.5367431640625e-07
+          },
+          {
+            "instance_id": "BATCH-2352",
+            "repo": "BATCH",
+            "classifications": {
+              "spring-batch-infrastructure/src/main/java/org/springframework/batch/item/xml/StaxEventItemReader.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-batch-infrastructure/src/main/java/org/springframework/batch/item/xml/StaxEventItemReader.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "CAMEL-10273",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-jetty-common/src/main/java/org/apache/camel/component/jetty/JettyHttpComponent.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-jetty-common/src/main/java/org/apache/camel/component/jetty/JettyHttpComponent.java": 133
+            },
+            "best_rank": 133,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 1.0
+            },
+            "average_precision": 0.007518796992481203,
+            "difficulty": "hard",
+            "latency_s": 2.384185791015625e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "easy": 2,
+          "hard": 1
+        },
+        "total": 3
+      },
+      "summary": {
+        "n": 3,
+        "macro_hit_at": {
+          "1": 0.3333333333333333,
+          "5": 0.6666666666666666,
+          "10": 0.6666666666666666,
+          "100": 0.6666666666666666,
+          "200": 1.0
+        },
+        "macro_recall_at": {
+          "1": 0.3333333333333333,
+          "5": 0.4166666666666667,
+          "10": 0.4166666666666667,
+          "100": 0.6666666666666666,
+          "200": 1.0
+        },
+        "mrr": 0.5025062656641605,
+        "map": 0.4053982881214002,
+        "mean_latency_s": 5.563100179036459e-07
+      }
+    }
+  }
+}

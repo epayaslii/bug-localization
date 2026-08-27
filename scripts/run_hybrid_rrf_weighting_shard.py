@@ -25,16 +25,27 @@ from dotenv import load_dotenv
 from dataset.swebench import SWEBench
 from dataset.beetlebox import BeetleBox
 from dataset.bench4bl import Bench4BL
+from dataset.iqloc import IQLocExtended
 from dataset.localizability import load_cache, save_cache
 from dataset.utils import setup_logging, get_logger
 from evaluation.manifest import load_manifest
 from evaluation.screening import screen_manifest, summarize_screening
-from method.bm25_retriever import rank_files_bm25_with_symbols
+from method.bm25_retriever import (
+    rank_files_bm25, rank_files_bm25_with_symbols, rank_files_bm25_with_skeleton, rank_files_bm25_refined,
+)
 from method.embedding_retriever import rank_files_embedding_chunked
 from method.hybrid_retriever import reciprocal_rank_fusion
 
 setup_logging(level=logging.INFO)
 logger = get_logger(__name__)
+
+_BM25_REPR_FNS = {
+    "path_only": lambda bug, top_k: rank_files_bm25(bug.bug_report, bug.code_files, top_k=top_k),
+    "symbols_with_imports": lambda bug, top_k: rank_files_bm25_with_symbols(bug, top_k=top_k, include_imports=True),
+    "symbols_no_imports": lambda bug, top_k: rank_files_bm25_with_symbols(bug, top_k=top_k, include_imports=False),
+    "skeleton": lambda bug, top_k: rank_files_bm25_with_skeleton(bug, top_k=top_k),
+    "refined": lambda bug, top_k: rank_files_bm25_refined(bug, top_k=top_k, include_imports=True),
+}
 
 WEIGHT_CONFIGS = [
     ("rrf_1_1", [1.0, 1.0]),
@@ -59,11 +70,12 @@ def _shard_slice(items, num_shards, shard_index):
     return items[start:start + size]
 
 
-def _compute_base_rankings(bugs, candidate_pool_size, model_name):
+def _compute_base_rankings(bugs, candidate_pool_size, model_name, bm25_repr="symbols_with_imports"):
+    bm25_rank_fn = _BM25_REPR_FNS[bm25_repr]
     rankings = {}
     for i, bug in enumerate(bugs):
         t0 = time.time()
-        bm25_candidates = rank_files_bm25_with_symbols(bug, top_k=candidate_pool_size)
+        bm25_candidates = bm25_rank_fn(bug, candidate_pool_size)
         t_bm25 = time.time() - t0
 
         if not bm25_candidates:
@@ -94,7 +106,11 @@ def main():
     load_dotenv()
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--manifest', required=True)
-    parser.add_argument('--dataset', choices=['swebench', 'beetlebox', 'bench4bl'], default=None)
+    parser.add_argument('--dataset', choices=['swebench', 'beetlebox', 'bench4bl', 'iqloc'], default=None)
+    parser.add_argument('--iqloc-strict', action='store_true',
+                       help="With --dataset iqloc: must match whatever the manifest was built "
+                            "with (--iqloc-strict on generate_evaluation_manifest.py), or the "
+                            "re-derived pool won't line up with the manifest's instance IDs.")
     parser.add_argument('--pool-size', type=int, default=None,
                        help='Override the manifest\'s stored pool_size when re-deriving the pool -- '
                             'needed if this environment\'s dataset mirror has a different total instance '
@@ -103,7 +119,10 @@ def main():
                             'total instance count to disable sampling and guarantee every manifest '
                             'instance is found.')
     parser.add_argument('--candidate-pool-size', type=int, default=200)
-    parser.add_argument('--rrf-k', type=int, default=60)
+    parser.add_argument('--rrf-k-values', default='60',
+                       help='Comma-separated RRF k constants to sweep, fused from the same '
+                            'shared base rankings (see run_hybrid_rrf_weighting_test.py).')
+    parser.add_argument('--bm25-repr', choices=list(_BM25_REPR_FNS), default='symbols_with_imports')
     parser.add_argument('--model', default='microsoft/unixcoder-base')
     parser.add_argument('--num-shards', type=int, required=True)
     parser.add_argument('--shard-index', type=int, required=True, help='0-based')
@@ -119,6 +138,8 @@ def main():
         instance = SWEBench()
     elif dataset_name == 'bench4bl':
         instance = Bench4BL()
+    elif dataset_name == 'iqloc':
+        instance = IQLocExtended(include_partial=not args.iqloc_strict)
     else:
         instance = BeetleBox()
 
@@ -151,22 +172,26 @@ def main():
         logger.info(f"Shard {args.shard_index} empty, wrote placeholder to {output_path}")
         return
 
-    logger.info("--- Computing base rankings (bm25 + chunked_embedding) ---")
-    base_rankings = _compute_base_rankings(bugs, args.candidate_pool_size, args.model)
+    k_values = [int(k) for k in args.rrf_k_values.split(',')]
+
+    logger.info(f"--- Computing base rankings (bm25[{args.bm25_repr}] + chunked_embedding) ---")
+    base_rankings = _compute_base_rankings(bugs, args.candidate_pool_size, args.model, bm25_repr=args.bm25_repr)
 
     fused_rankings = {}
     for bug in bugs:
         base = base_rankings[bug.instance_id]
         fused_rankings[bug.instance_id] = {
-            name: reciprocal_rank_fusion([base["bm25"], base["chunked_embedding"]], k=args.rrf_k, weights=weights)
+            f"{name}_k{k}": reciprocal_rank_fusion([base["bm25"], base["chunked_embedding"]], k=k, weights=weights)
             if base["bm25"] else []
             for name, weights in WEIGHT_CONFIGS
+            for k in k_values
         }
 
     token = os.getenv("GITHUB_TOKEN")
     cache = load_cache()
 
-    config_names = ["bm25", "chunked_embedding"] + [name for name, _ in WEIGHT_CONFIGS]
+    fused_config_names = [f"{name}_k{k}" for name, _ in WEIGHT_CONFIGS for k in k_values]
+    config_names = ["bm25", "chunked_embedding"] + fused_config_names
     results = {}
     for name in config_names:
         if name == "bm25":

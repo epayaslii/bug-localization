@@ -25,7 +25,7 @@ from dataset.localizability import load_cache, save_cache
 from dataset.utils import setup_logging, get_logger
 from evaluation.manifest import load_manifest
 from evaluation.screening import screen_manifest, summarize_screening
-from method.bm25_retriever import rank_files_bm25, rank_files_bm25_with_skeleton, rank_files_bm25_with_symbols
+from method.bm25_retriever import rank_files_bm25, rank_files_bm25_with_skeleton, rank_files_bm25_with_symbols, rank_files_bm25_refined
 
 setup_logging(level=logging.INFO)
 logger = get_logger(__name__)
@@ -35,6 +35,7 @@ REPRESENTATIONS = {
     "skeleton": lambda b: rank_files_bm25_with_skeleton(b, top_k=None),
     "symbols_with_imports": lambda b: rank_files_bm25_with_symbols(b, top_k=None, include_imports=True),
     "symbols_no_imports": lambda b: rank_files_bm25_with_symbols(b, top_k=None, include_imports=False),
+    "refined": lambda b: rank_files_bm25_refined(b, top_k=None, include_imports=True),
 }
 
 

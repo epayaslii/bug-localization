@@ -1,0 +1,2037 @@
+{
+  "manifest_id": "iqloc-multi-n7091-s42-f8a5d2c401a4",
+  "shard_index": 84,
+  "num_shards": 350,
+  "candidate_pool_size": 200,
+  "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+  "reformulation_mode": "semantic",
+  "relevance_mode": "llm",
+  "keep_fraction": 0.5,
+  "instance_ids": [
+    "CAMEL-9970",
+    "CAMEL-9973",
+    "CAMEL-9982",
+    "CAMEL-9984",
+    "CAMEL-9986",
+    "CODEC-101",
+    "CODEC-105",
+    "CODEC-111",
+    "CODEC-112",
+    "CODEC-113",
+    "CODEC-114",
+    "CODEC-115",
+    "CODEC-117",
+    "CODEC-121",
+    "CODEC-123",
+    "CODEC-130",
+    "CODEC-132",
+    "CODEC-152",
+    "CODEC-156",
+    "CODEC-184",
+    "CODEC-185"
+  ],
+  "configs": {
+    "retriever": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "CAMEL-9970",
+            "repo": "CAMEL",
+            "classifications": {
+              "camel-core/src/main/java/org/apache/camel/component/file/FileConsumer.java": "exists_before_fix",
+              "camel-core/src/main/java/org/apache/camel/component/file/GenericFileConsumer.java": "exists_before_fix",
+              "components/camel-ftp/src/main/java/org/apache/camel/component/file/remote/FtpConsumer.java": "exists_before_fix",
+              "components/camel-ftp/src/test/java/org/apache/camel/component/file/remote/RemoteFileIgnoreDoPollErrorTest.java": "exists_before_fix",
+              "components/camel-ftp/src/main/java/org/apache/camel/component/file/remote/SftpConsumer.java": "exists_before_fix",
+              "camel-core/src/test/java/org/apache/camel/component/file/strategy/FileChangedReadLockTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "camel-core/src/main/java/org/apache/camel/component/file/FileConsumer.java": 152,
+              "camel-core/src/main/java/org/apache/camel/component/file/GenericFileConsumer.java": 118,
+              "components/camel-ftp/src/main/java/org/apache/camel/component/file/remote/FtpConsumer.java": 89,
+              "components/camel-ftp/src/test/java/org/apache/camel/component/file/remote/RemoteFileIgnoreDoPollErrorTest.java": 139,
+              "components/camel-ftp/src/main/java/org/apache/camel/component/file/remote/SftpConsumer.java": 103,
+              "camel-core/src/test/java/org/apache/camel/component/file/strategy/FileChangedReadLockTest.java": 10
+            },
+            "best_rank": 10,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.16666666666666666,
+              "100": 0.3333333333333333,
+              "200": 1.0
+            },
+            "average_precision": 0.043490222670241226,
+            "difficulty": "easy",
+            "latency_s": 1.6689300537109375e-06
+          },
+          {
+            "instance_id": "CAMEL-9973",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-cdi/src/main/java/org/apache/camel/cdi/CdiCamelExtension.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-cdi/src/main/java/org/apache/camel/cdi/CdiCamelExtension.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 9.5367431640625e-07
+          },
+          {
+            "instance_id": "CAMEL-9982",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-bindy/src/main/java/org/apache/camel/dataformat/bindy/fixed/BindyFixedLengthDataFormat.java": "exists_before_fix",
+              "components/camel-bindy/src/test/java/org/apache/camel/dataformat/bindy/fixed/link/BindySimpleFixedLengthWithLinkTest.java": "exists_before_fix",
+              "components/camel-bindy/src/main/java/org/apache/camel/dataformat/bindy/csv/BindyCsvDataFormat.java": "exists_before_fix",
+              "components/camel-bindy/src/main/java/org/apache/camel/dataformat/bindy/BindyAbstractDataFormat.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-bindy/src/main/java/org/apache/camel/dataformat/bindy/fixed/BindyFixedLengthDataFormat.java": 15,
+              "components/camel-bindy/src/test/java/org/apache/camel/dataformat/bindy/fixed/link/BindySimpleFixedLengthWithLinkTest.java": 1,
+              "components/camel-bindy/src/main/java/org/apache/camel/dataformat/bindy/csv/BindyCsvDataFormat.java": 30
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.25,
+              "5": 0.25,
+              "10": 0.25,
+              "100": 0.75,
+              "200": 0.75
+            },
+            "average_precision": 0.30833333333333335,
+            "difficulty": "easy",
+            "latency_s": 1.6689300537109375e-06
+          },
+          {
+            "instance_id": "CAMEL-9984",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-rabbitmq/src/main/java/org/apache/camel/component/rabbitmq/RabbitConsumer.java": "exists_before_fix",
+              "components/camel-rabbitmq/src/test/java/org/apache/camel/component/rabbitmq/RabbitMQConsumerTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-rabbitmq/src/main/java/org/apache/camel/component/rabbitmq/RabbitConsumer.java": 4,
+              "components/camel-rabbitmq/src/test/java/org/apache/camel/component/rabbitmq/RabbitMQConsumerTest.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.75,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "CAMEL-9986",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-mail/src/test/java/org/apache/camel/dataformat/mime/multipart/MimeMultipartDataFormatTest.java": "exists_before_fix",
+              "components/camel-mail/src/main/java/org/apache/camel/dataformat/mime/multipart/MimeMultipartDataFormat.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-mail/src/test/java/org/apache/camel/dataformat/mime/multipart/MimeMultipartDataFormatTest.java": 1,
+              "components/camel-mail/src/main/java/org/apache/camel/dataformat/mime/multipart/MimeMultipartDataFormat.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 1.430511474609375e-06
+          },
+          {
+            "instance_id": "CODEC-101",
+            "repo": "CODEC",
+            "classifications": {
+              "src/test/org/apache/commons/codec/binary/Base64InputStreamTest.java": "exists_before_fix",
+              "src/java/org/apache/commons/codec/binary/Base64InputStream.java": "exists_before_fix",
+              "src/test/org/apache/commons/codec/binary/Base64TestData.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/org/apache/commons/codec/binary/Base64InputStreamTest.java": 1,
+              "src/java/org/apache/commons/codec/binary/Base64InputStream.java": 2,
+              "src/test/org/apache/commons/codec/binary/Base64TestData.java": 4
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.9166666666666666,
+            "difficulty": "easy",
+            "latency_s": 2.6226043701171875e-06
+          },
+          {
+            "instance_id": "CODEC-105",
+            "repo": "CODEC",
+            "classifications": {
+              "src/test/org/apache/commons/codec/binary/Base64InputStreamTest.java": "exists_before_fix",
+              "src/java/org/apache/commons/codec/binary/Base64InputStream.java": "exists_before_fix",
+              "src/java/org/apache/commons/codec/binary/Base64.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/org/apache/commons/codec/binary/Base64InputStreamTest.java": 1,
+              "src/java/org/apache/commons/codec/binary/Base64InputStream.java": 2,
+              "src/java/org/apache/commons/codec/binary/Base64.java": 3
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.6226043701171875e-06
+          },
+          {
+            "instance_id": "CODEC-111",
+            "repo": "CODEC",
+            "classifications": {
+              "src/java/org/apache/commons/codec/net/URLCodec.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/commons/codec/net/URLCodec.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.1457672119140625e-06
+          },
+          {
+            "instance_id": "CODEC-112",
+            "repo": "CODEC",
+            "classifications": {
+              "src/test/org/apache/commons/codec/binary/Base64Test.java": "exists_before_fix",
+              "src/java/org/apache/commons/codec/binary/Base64.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/org/apache/commons/codec/binary/Base64Test.java": 5,
+              "src/java/org/apache/commons/codec/binary/Base64.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.7,
+            "difficulty": "easy",
+            "latency_s": 1.6689300537109375e-06
+          },
+          {
+            "instance_id": "CODEC-113",
+            "repo": "CODEC",
+            "classifications": {
+              "src/java/org/apache/commons/codec/language/RefinedSoundex.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/commons/codec/language/RefinedSoundex.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 1.6689300537109375e-06
+          },
+          {
+            "instance_id": "CODEC-114",
+            "repo": "CODEC",
+            "classifications": {
+              "src/java/org/apache/commons/codec/language/Soundex.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/commons/codec/language/Soundex.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 1.9073486328125e-06
+          },
+          {
+            "instance_id": "CODEC-115",
+            "repo": "CODEC",
+            "classifications": {
+              "src/java/org/apache/commons/codec/language/DoubleMetaphone.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/commons/codec/language/DoubleMetaphone.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 1.9073486328125e-06
+          },
+          {
+            "instance_id": "CODEC-117",
+            "repo": "CODEC",
+            "classifications": {
+              "src/test/org/apache/commons/codec/language/CaverphoneTest.java": "exists_before_fix",
+              "src/java/org/apache/commons/codec/language/Caverphone.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/org/apache/commons/codec/language/CaverphoneTest.java": 4,
+              "src/java/org/apache/commons/codec/language/Caverphone.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.75,
+            "difficulty": "easy",
+            "latency_s": 1.6689300537109375e-06
+          },
+          {
+            "instance_id": "CODEC-121",
+            "repo": "CODEC",
+            "classifications": {
+              "src/test/org/apache/commons/codec/net/QuotedPrintableCodecTest.java": "exists_before_fix",
+              "src/java/org/apache/commons/codec/net/QuotedPrintableCodec.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/org/apache/commons/codec/net/QuotedPrintableCodecTest.java": 1,
+              "src/java/org/apache/commons/codec/net/QuotedPrintableCodec.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 1.430511474609375e-06
+          },
+          {
+            "instance_id": "CODEC-123",
+            "repo": "CODEC",
+            "classifications": {
+              "src/java/org/apache/commons/codec/language/ColognePhonetic.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/commons/codec/language/ColognePhonetic.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 1.430511474609375e-06
+          },
+          {
+            "instance_id": "CODEC-130",
+            "repo": "CODEC",
+            "classifications": {
+              "src/java/org/apache/commons/codec/binary/BaseNCodecInputStream.java": "exists_before_fix",
+              "src/test/org/apache/commons/codec/binary/Base32InputStreamTest.java": "exists_before_fix",
+              "src/test/org/apache/commons/codec/binary/Base64InputStreamTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/commons/codec/binary/BaseNCodecInputStream.java": 5,
+              "src/test/org/apache/commons/codec/binary/Base32InputStreamTest.java": 10,
+              "src/test/org/apache/commons/codec/binary/Base64InputStreamTest.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.6666666666666666,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3444444444444445,
+            "difficulty": "easy",
+            "latency_s": 2.86102294921875e-06
+          },
+          {
+            "instance_id": "CODEC-132",
+            "repo": "CODEC",
+            "classifications": {
+              "src/main/java/org/apache/commons/codec/language/bm/PhoneticEngine.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/codec/language/bm/BeiderMorseEncoder.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/codec/language/bm/PhoneticEngineTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/codec/language/bm/BeiderMorseEncoderTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/codec/language/bm/PhoneticEngine.java": 67,
+              "src/main/java/org/apache/commons/codec/language/bm/BeiderMorseEncoder.java": 1,
+              "src/test/java/org/apache/commons/codec/language/bm/PhoneticEngineTest.java": 50,
+              "src/test/java/org/apache/commons/codec/language/bm/BeiderMorseEncoderTest.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.25,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5299253731343284,
+            "difficulty": "easy",
+            "latency_s": 9.5367431640625e-07
+          },
+          {
+            "instance_id": "CODEC-152",
+            "repo": "CODEC",
+            "classifications": {
+              "src/main/java/org/apache/commons/codec/digest/DigestUtils.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/codec/digest/DigestUtils.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "CODEC-156",
+            "repo": "CODEC",
+            "classifications": {
+              "src/test/java/org/apache/commons/codec/digest/DigestUtilsTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/codec/digest/DigestUtils.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/apache/commons/codec/digest/DigestUtilsTest.java": 2,
+              "src/main/java/org/apache/commons/codec/digest/DigestUtils.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 9.5367431640625e-07
+          },
+          {
+            "instance_id": "CODEC-184",
+            "repo": "CODEC",
+            "classifications": {
+              "src/test/java/org/apache/commons/codec/language/DoubleMetaphoneTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/codec/language/DoubleMetaphone.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/codec/binary/StringUtils.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/apache/commons/codec/language/DoubleMetaphoneTest.java": 1,
+              "src/main/java/org/apache/commons/codec/language/DoubleMetaphone.java": 5,
+              "src/main/java/org/apache/commons/codec/binary/StringUtils.java": 58
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 0.6666666666666666,
+              "10": 0.6666666666666666,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.4839080459770115,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "CODEC-185",
+            "repo": "CODEC",
+            "classifications": {
+              "src/java/org/apache/commons/codec/binary/Base64.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/commons/codec/binary/Base64.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "easy": 21
+        },
+        "total": 21
+      },
+      "summary": {
+        "n": 21,
+        "macro_hit_at": {
+          "1": 0.8095238095238095,
+          "5": 0.9523809523809523,
+          "10": 1.0,
+          "100": 1.0,
+          "200": 1.0
+        },
+        "macro_recall_at": {
+          "1": 0.5,
+          "5": 0.861111111111111,
+          "10": 0.884920634920635,
+          "100": 0.9563492063492063,
+          "200": 0.9880952380952381
+        },
+        "mrr": 0.8777777777777778,
+        "map": 0.7536556231536203,
+        "mean_latency_s": 1.521337599981399e-06
+      }
+    },
+    "relevance_filtered": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "CAMEL-9970",
+            "repo": "CAMEL",
+            "classifications": {
+              "camel-core/src/main/java/org/apache/camel/component/file/FileConsumer.java": "exists_before_fix",
+              "camel-core/src/main/java/org/apache/camel/component/file/GenericFileConsumer.java": "exists_before_fix",
+              "components/camel-ftp/src/main/java/org/apache/camel/component/file/remote/FtpConsumer.java": "exists_before_fix",
+              "components/camel-ftp/src/test/java/org/apache/camel/component/file/remote/RemoteFileIgnoreDoPollErrorTest.java": "exists_before_fix",
+              "components/camel-ftp/src/main/java/org/apache/camel/component/file/remote/SftpConsumer.java": "exists_before_fix",
+              "camel-core/src/test/java/org/apache/camel/component/file/strategy/FileChangedReadLockTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "camel-core/src/main/java/org/apache/camel/component/file/FileConsumer.java": 153,
+              "camel-core/src/main/java/org/apache/camel/component/file/GenericFileConsumer.java": 119,
+              "components/camel-ftp/src/main/java/org/apache/camel/component/file/remote/FtpConsumer.java": 90,
+              "components/camel-ftp/src/test/java/org/apache/camel/component/file/remote/RemoteFileIgnoreDoPollErrorTest.java": 140,
+              "components/camel-ftp/src/main/java/org/apache/camel/component/file/remote/SftpConsumer.java": 104,
+              "camel-core/src/test/java/org/apache/camel/component/file/strategy/FileChangedReadLockTest.java": 11
+            },
+            "best_rank": 11,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.3333333333333333,
+              "200": 1.0
+            },
+            "average_precision": 0.04175348072406896,
+            "difficulty": "medium",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "CAMEL-9973",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-cdi/src/main/java/org/apache/camel/cdi/CdiCamelExtension.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-cdi/src/main/java/org/apache/camel/cdi/CdiCamelExtension.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CAMEL-9982",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-bindy/src/main/java/org/apache/camel/dataformat/bindy/fixed/BindyFixedLengthDataFormat.java": "exists_before_fix",
+              "components/camel-bindy/src/test/java/org/apache/camel/dataformat/bindy/fixed/link/BindySimpleFixedLengthWithLinkTest.java": "exists_before_fix",
+              "components/camel-bindy/src/main/java/org/apache/camel/dataformat/bindy/csv/BindyCsvDataFormat.java": "exists_before_fix",
+              "components/camel-bindy/src/main/java/org/apache/camel/dataformat/bindy/BindyAbstractDataFormat.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-bindy/src/main/java/org/apache/camel/dataformat/bindy/fixed/BindyFixedLengthDataFormat.java": 15,
+              "components/camel-bindy/src/test/java/org/apache/camel/dataformat/bindy/fixed/link/BindySimpleFixedLengthWithLinkTest.java": 1,
+              "components/camel-bindy/src/main/java/org/apache/camel/dataformat/bindy/csv/BindyCsvDataFormat.java": 30
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.25,
+              "5": 0.25,
+              "10": 0.25,
+              "100": 0.75,
+              "200": 0.75
+            },
+            "average_precision": 0.30833333333333335,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CAMEL-9984",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-rabbitmq/src/main/java/org/apache/camel/component/rabbitmq/RabbitConsumer.java": "exists_before_fix",
+              "components/camel-rabbitmq/src/test/java/org/apache/camel/component/rabbitmq/RabbitMQConsumerTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-rabbitmq/src/main/java/org/apache/camel/component/rabbitmq/RabbitConsumer.java": 4,
+              "components/camel-rabbitmq/src/test/java/org/apache/camel/component/rabbitmq/RabbitMQConsumerTest.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.75,
+            "difficulty": "easy",
+            "latency_s": 1.6689300537109375e-06
+          },
+          {
+            "instance_id": "CAMEL-9986",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-mail/src/test/java/org/apache/camel/dataformat/mime/multipart/MimeMultipartDataFormatTest.java": "exists_before_fix",
+              "components/camel-mail/src/main/java/org/apache/camel/dataformat/mime/multipart/MimeMultipartDataFormat.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-mail/src/test/java/org/apache/camel/dataformat/mime/multipart/MimeMultipartDataFormatTest.java": 1,
+              "components/camel-mail/src/main/java/org/apache/camel/dataformat/mime/multipart/MimeMultipartDataFormat.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "CODEC-101",
+            "repo": "CODEC",
+            "classifications": {
+              "src/test/org/apache/commons/codec/binary/Base64InputStreamTest.java": "exists_before_fix",
+              "src/java/org/apache/commons/codec/binary/Base64InputStream.java": "exists_before_fix",
+              "src/test/org/apache/commons/codec/binary/Base64TestData.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/org/apache/commons/codec/binary/Base64InputStreamTest.java": 1,
+              "src/java/org/apache/commons/codec/binary/Base64InputStream.java": 2,
+              "src/test/org/apache/commons/codec/binary/Base64TestData.java": 4
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.9166666666666666,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CODEC-105",
+            "repo": "CODEC",
+            "classifications": {
+              "src/test/org/apache/commons/codec/binary/Base64InputStreamTest.java": "exists_before_fix",
+              "src/java/org/apache/commons/codec/binary/Base64InputStream.java": "exists_before_fix",
+              "src/java/org/apache/commons/codec/binary/Base64.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/org/apache/commons/codec/binary/Base64InputStreamTest.java": 1,
+              "src/java/org/apache/commons/codec/binary/Base64InputStream.java": 2,
+              "src/java/org/apache/commons/codec/binary/Base64.java": 3
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CODEC-111",
+            "repo": "CODEC",
+            "classifications": {
+              "src/java/org/apache/commons/codec/net/URLCodec.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/commons/codec/net/URLCodec.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "CODEC-112",
+            "repo": "CODEC",
+            "classifications": {
+              "src/test/org/apache/commons/codec/binary/Base64Test.java": "exists_before_fix",
+              "src/java/org/apache/commons/codec/binary/Base64.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/org/apache/commons/codec/binary/Base64Test.java": 5,
+              "src/java/org/apache/commons/codec/binary/Base64.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.7,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "CODEC-113",
+            "repo": "CODEC",
+            "classifications": {
+              "src/java/org/apache/commons/codec/language/RefinedSoundex.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/commons/codec/language/RefinedSoundex.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "CODEC-114",
+            "repo": "CODEC",
+            "classifications": {
+              "src/java/org/apache/commons/codec/language/Soundex.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/commons/codec/language/Soundex.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "CODEC-115",
+            "repo": "CODEC",
+            "classifications": {
+              "src/java/org/apache/commons/codec/language/DoubleMetaphone.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/commons/codec/language/DoubleMetaphone.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CODEC-117",
+            "repo": "CODEC",
+            "classifications": {
+              "src/test/org/apache/commons/codec/language/CaverphoneTest.java": "exists_before_fix",
+              "src/java/org/apache/commons/codec/language/Caverphone.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/org/apache/commons/codec/language/CaverphoneTest.java": 4,
+              "src/java/org/apache/commons/codec/language/Caverphone.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.75,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CODEC-121",
+            "repo": "CODEC",
+            "classifications": {
+              "src/test/org/apache/commons/codec/net/QuotedPrintableCodecTest.java": "exists_before_fix",
+              "src/java/org/apache/commons/codec/net/QuotedPrintableCodec.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/org/apache/commons/codec/net/QuotedPrintableCodecTest.java": 1,
+              "src/java/org/apache/commons/codec/net/QuotedPrintableCodec.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CODEC-123",
+            "repo": "CODEC",
+            "classifications": {
+              "src/java/org/apache/commons/codec/language/ColognePhonetic.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/commons/codec/language/ColognePhonetic.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CODEC-130",
+            "repo": "CODEC",
+            "classifications": {
+              "src/java/org/apache/commons/codec/binary/BaseNCodecInputStream.java": "exists_before_fix",
+              "src/test/org/apache/commons/codec/binary/Base32InputStreamTest.java": "exists_before_fix",
+              "src/test/org/apache/commons/codec/binary/Base64InputStreamTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/commons/codec/binary/BaseNCodecInputStream.java": 5,
+              "src/test/org/apache/commons/codec/binary/Base32InputStreamTest.java": 10,
+              "src/test/org/apache/commons/codec/binary/Base64InputStreamTest.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.6666666666666666,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3444444444444445,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CODEC-132",
+            "repo": "CODEC",
+            "classifications": {
+              "src/main/java/org/apache/commons/codec/language/bm/PhoneticEngine.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/codec/language/bm/BeiderMorseEncoder.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/codec/language/bm/PhoneticEngineTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/codec/language/bm/BeiderMorseEncoderTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/codec/language/bm/PhoneticEngine.java": 67,
+              "src/main/java/org/apache/commons/codec/language/bm/BeiderMorseEncoder.java": 2,
+              "src/test/java/org/apache/commons/codec/language/bm/PhoneticEngineTest.java": 50,
+              "src/test/java/org/apache/commons/codec/language/bm/BeiderMorseEncoderTest.java": 3
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.321592039800995,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "CODEC-152",
+            "repo": "CODEC",
+            "classifications": {
+              "src/main/java/org/apache/commons/codec/digest/DigestUtils.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/codec/digest/DigestUtils.java": 14
+            },
+            "best_rank": 14,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.07142857142857142,
+            "difficulty": "medium",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CODEC-156",
+            "repo": "CODEC",
+            "classifications": {
+              "src/test/java/org/apache/commons/codec/digest/DigestUtilsTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/codec/digest/DigestUtils.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/apache/commons/codec/digest/DigestUtilsTest.java": 3,
+              "src/main/java/org/apache/commons/codec/digest/DigestUtils.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5833333333333333,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CODEC-184",
+            "repo": "CODEC",
+            "classifications": {
+              "src/test/java/org/apache/commons/codec/language/DoubleMetaphoneTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/codec/language/DoubleMetaphone.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/codec/binary/StringUtils.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/apache/commons/codec/language/DoubleMetaphoneTest.java": 1,
+              "src/main/java/org/apache/commons/codec/language/DoubleMetaphone.java": 5,
+              "src/main/java/org/apache/commons/codec/binary/StringUtils.java": 58
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 0.6666666666666666,
+              "10": 0.6666666666666666,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.4839080459770115,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "CODEC-185",
+            "repo": "CODEC",
+            "classifications": {
+              "src/java/org/apache/commons/codec/binary/Base64.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/commons/codec/binary/Base64.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "medium": 2,
+          "easy": 19
+        },
+        "total": 21
+      },
+      "summary": {
+        "n": 21,
+        "macro_hit_at": {
+          "1": 0.7142857142857143,
+          "5": 0.9047619047619048,
+          "10": 0.9047619047619048,
+          "100": 1.0,
+          "200": 1.0
+        },
+        "macro_recall_at": {
+          "1": 0.4642857142857143,
+          "5": 0.8134920634920635,
+          "10": 0.8293650793650794,
+          "100": 0.9563492063492063,
+          "200": 0.9880952380952381
+        },
+        "mrr": 0.8093176664605236,
+        "map": 0.7034028531289727,
+        "mean_latency_s": 4.087175641741071e-07
+      }
+    },
+    "reformulated": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "CAMEL-9970",
+            "repo": "CAMEL",
+            "classifications": {
+              "camel-core/src/main/java/org/apache/camel/component/file/FileConsumer.java": "exists_before_fix",
+              "camel-core/src/main/java/org/apache/camel/component/file/GenericFileConsumer.java": "exists_before_fix",
+              "components/camel-ftp/src/main/java/org/apache/camel/component/file/remote/FtpConsumer.java": "exists_before_fix",
+              "components/camel-ftp/src/test/java/org/apache/camel/component/file/remote/RemoteFileIgnoreDoPollErrorTest.java": "exists_before_fix",
+              "components/camel-ftp/src/main/java/org/apache/camel/component/file/remote/SftpConsumer.java": "exists_before_fix",
+              "camel-core/src/test/java/org/apache/camel/component/file/strategy/FileChangedReadLockTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "camel-core/src/main/java/org/apache/camel/component/file/FileConsumer.java": 128,
+              "camel-core/src/main/java/org/apache/camel/component/file/GenericFileConsumer.java": 83,
+              "components/camel-ftp/src/main/java/org/apache/camel/component/file/remote/FtpConsumer.java": 108,
+              "components/camel-ftp/src/test/java/org/apache/camel/component/file/remote/RemoteFileIgnoreDoPollErrorTest.java": 135,
+              "components/camel-ftp/src/main/java/org/apache/camel/component/file/remote/SftpConsumer.java": 127,
+              "camel-core/src/test/java/org/apache/camel/component/file/strategy/FileChangedReadLockTest.java": 8
+            },
+            "best_rank": 8,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.16666666666666666,
+              "100": 0.3333333333333333,
+              "200": 1.0
+            },
+            "average_precision": 0.048646195126086145,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "CAMEL-9973",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-cdi/src/main/java/org/apache/camel/cdi/CdiCamelExtension.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-cdi/src/main/java/org/apache/camel/cdi/CdiCamelExtension.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CAMEL-9982",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-bindy/src/main/java/org/apache/camel/dataformat/bindy/fixed/BindyFixedLengthDataFormat.java": "exists_before_fix",
+              "components/camel-bindy/src/test/java/org/apache/camel/dataformat/bindy/fixed/link/BindySimpleFixedLengthWithLinkTest.java": "exists_before_fix",
+              "components/camel-bindy/src/main/java/org/apache/camel/dataformat/bindy/csv/BindyCsvDataFormat.java": "exists_before_fix",
+              "components/camel-bindy/src/main/java/org/apache/camel/dataformat/bindy/BindyAbstractDataFormat.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-bindy/src/main/java/org/apache/camel/dataformat/bindy/fixed/BindyFixedLengthDataFormat.java": 18,
+              "components/camel-bindy/src/test/java/org/apache/camel/dataformat/bindy/fixed/link/BindySimpleFixedLengthWithLinkTest.java": 1,
+              "components/camel-bindy/src/main/java/org/apache/camel/dataformat/bindy/csv/BindyCsvDataFormat.java": 34
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.25,
+              "5": 0.25,
+              "10": 0.25,
+              "100": 0.75,
+              "200": 0.75
+            },
+            "average_precision": 0.29983660130718953,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CAMEL-9984",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-rabbitmq/src/main/java/org/apache/camel/component/rabbitmq/RabbitConsumer.java": "exists_before_fix",
+              "components/camel-rabbitmq/src/test/java/org/apache/camel/component/rabbitmq/RabbitMQConsumerTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-rabbitmq/src/main/java/org/apache/camel/component/rabbitmq/RabbitConsumer.java": 4,
+              "components/camel-rabbitmq/src/test/java/org/apache/camel/component/rabbitmq/RabbitMQConsumerTest.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.75,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CAMEL-9986",
+            "repo": "CAMEL",
+            "classifications": {
+              "components/camel-mail/src/test/java/org/apache/camel/dataformat/mime/multipart/MimeMultipartDataFormatTest.java": "exists_before_fix",
+              "components/camel-mail/src/main/java/org/apache/camel/dataformat/mime/multipart/MimeMultipartDataFormat.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "components/camel-mail/src/test/java/org/apache/camel/dataformat/mime/multipart/MimeMultipartDataFormatTest.java": 1,
+              "components/camel-mail/src/main/java/org/apache/camel/dataformat/mime/multipart/MimeMultipartDataFormat.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "CODEC-101",
+            "repo": "CODEC",
+            "classifications": {
+              "src/test/org/apache/commons/codec/binary/Base64InputStreamTest.java": "exists_before_fix",
+              "src/java/org/apache/commons/codec/binary/Base64InputStream.java": "exists_before_fix",
+              "src/test/org/apache/commons/codec/binary/Base64TestData.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/org/apache/commons/codec/binary/Base64InputStreamTest.java": 1,
+              "src/java/org/apache/commons/codec/binary/Base64InputStream.java": 2,
+              "src/test/org/apache/commons/codec/binary/Base64TestData.java": 4
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.9166666666666666,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CODEC-105",
+            "repo": "CODEC",
+            "classifications": {
+              "src/test/org/apache/commons/codec/binary/Base64InputStreamTest.java": "exists_before_fix",
+              "src/java/org/apache/commons/codec/binary/Base64InputStream.java": "exists_before_fix",
+              "src/java/org/apache/commons/codec/binary/Base64.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/org/apache/commons/codec/binary/Base64InputStreamTest.java": 1,
+              "src/java/org/apache/commons/codec/binary/Base64InputStream.java": 2,
+              "src/java/org/apache/commons/codec/binary/Base64.java": 3
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CODEC-111",
+            "repo": "CODEC",
+            "classifications": {
+              "src/java/org/apache/commons/codec/net/URLCodec.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/commons/codec/net/URLCodec.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CODEC-112",
+            "repo": "CODEC",
+            "classifications": {
+              "src/test/org/apache/commons/codec/binary/Base64Test.java": "exists_before_fix",
+              "src/java/org/apache/commons/codec/binary/Base64.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/org/apache/commons/codec/binary/Base64Test.java": 5,
+              "src/java/org/apache/commons/codec/binary/Base64.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.7,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CODEC-113",
+            "repo": "CODEC",
+            "classifications": {
+              "src/java/org/apache/commons/codec/language/RefinedSoundex.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/commons/codec/language/RefinedSoundex.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CODEC-114",
+            "repo": "CODEC",
+            "classifications": {
+              "src/java/org/apache/commons/codec/language/Soundex.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/commons/codec/language/Soundex.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CODEC-115",
+            "repo": "CODEC",
+            "classifications": {
+              "src/java/org/apache/commons/codec/language/DoubleMetaphone.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/commons/codec/language/DoubleMetaphone.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "CODEC-117",
+            "repo": "CODEC",
+            "classifications": {
+              "src/test/org/apache/commons/codec/language/CaverphoneTest.java": "exists_before_fix",
+              "src/java/org/apache/commons/codec/language/Caverphone.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/org/apache/commons/codec/language/CaverphoneTest.java": 3,
+              "src/java/org/apache/commons/codec/language/Caverphone.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.8333333333333333,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CODEC-121",
+            "repo": "CODEC",
+            "classifications": {
+              "src/test/org/apache/commons/codec/net/QuotedPrintableCodecTest.java": "exists_before_fix",
+              "src/java/org/apache/commons/codec/net/QuotedPrintableCodec.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/org/apache/commons/codec/net/QuotedPrintableCodecTest.java": 1,
+              "src/java/org/apache/commons/codec/net/QuotedPrintableCodec.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CODEC-123",
+            "repo": "CODEC",
+            "classifications": {
+              "src/java/org/apache/commons/codec/language/ColognePhonetic.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/commons/codec/language/ColognePhonetic.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CODEC-130",
+            "repo": "CODEC",
+            "classifications": {
+              "src/java/org/apache/commons/codec/binary/BaseNCodecInputStream.java": "exists_before_fix",
+              "src/test/org/apache/commons/codec/binary/Base32InputStreamTest.java": "exists_before_fix",
+              "src/test/org/apache/commons/codec/binary/Base64InputStreamTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/commons/codec/binary/BaseNCodecInputStream.java": 5,
+              "src/test/org/apache/commons/codec/binary/Base32InputStreamTest.java": 11,
+              "src/test/org/apache/commons/codec/binary/Base64InputStreamTest.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.6666666666666666,
+              "10": 0.6666666666666666,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.33535353535353535,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CODEC-132",
+            "repo": "CODEC",
+            "classifications": {
+              "src/main/java/org/apache/commons/codec/language/bm/PhoneticEngine.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/codec/language/bm/BeiderMorseEncoder.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/codec/language/bm/PhoneticEngineTest.java": "exists_before_fix",
+              "src/test/java/org/apache/commons/codec/language/bm/BeiderMorseEncoderTest.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/codec/language/bm/PhoneticEngine.java": 101,
+              "src/main/java/org/apache/commons/codec/language/bm/BeiderMorseEncoder.java": 1,
+              "src/test/java/org/apache/commons/codec/language/bm/PhoneticEngineTest.java": 82,
+              "src/test/java/org/apache/commons/codec/language/bm/BeiderMorseEncoderTest.java": 3
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.25,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.75,
+              "200": 1.0
+            },
+            "average_precision": 0.4357139982290912,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CODEC-152",
+            "repo": "CODEC",
+            "classifications": {
+              "src/main/java/org/apache/commons/codec/digest/DigestUtils.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/apache/commons/codec/digest/DigestUtils.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3333333333333333,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "CODEC-156",
+            "repo": "CODEC",
+            "classifications": {
+              "src/test/java/org/apache/commons/codec/digest/DigestUtilsTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/codec/digest/DigestUtils.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/apache/commons/codec/digest/DigestUtilsTest.java": 4,
+              "src/main/java/org/apache/commons/codec/digest/DigestUtils.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "CODEC-184",
+            "repo": "CODEC",
+            "classifications": {
+              "src/test/java/org/apache/commons/codec/language/DoubleMetaphoneTest.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/codec/language/DoubleMetaphone.java": "exists_before_fix",
+              "src/main/java/org/apache/commons/codec/binary/StringUtils.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/apache/commons/codec/language/DoubleMetaphoneTest.java": 1,
+              "src/main/java/org/apache/commons/codec/language/DoubleMetaphone.java": 6,
+              "src/main/java/org/apache/commons/codec/binary/StringUtils.java": 72
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 0.3333333333333333,
+              "10": 0.6666666666666666,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.4583333333333333,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "CODEC-185",
+            "repo": "CODEC",
+            "classifications": {
+              "src/java/org/apache/commons/codec/binary/Base64.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/java/org/apache/commons/codec/binary/Base64.java": 4
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.25,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "easy": 21
+        },
+        "total": 21
+      },
+      "summary": {
+        "n": 21,
+        "macro_hit_at": {
+          "1": 0.7619047619047619,
+          "5": 0.9523809523809523,
+          "10": 1.0,
+          "100": 1.0,
+          "200": 1.0
+        },
+        "macro_recall_at": {
+          "1": 0.4761904761904763,
+          "5": 0.8452380952380951,
+          "10": 0.8690476190476192,
+          "100": 0.9444444444444444,
+          "200": 0.9880952380952381
+        },
+        "mrr": 0.8353174603174603,
+        "map": 0.7076769998420273,
+        "mean_latency_s": 2.951849074590774e-07
+      }
+    }
+  }
+}

@@ -1,0 +1,136 @@
+{
+  "manifest_id": "iqloc-multi-n30-s42-df69b06700bd",
+  "shard_index": 2,
+  "num_shards": 8,
+  "model": "Qwen/Qwen3-Embedding-0.6B",
+  "mode": "full_corpus_dense_only",
+  "instance_ids": [
+    "DATAJPA-420",
+    "DATAMONGO-411",
+    "DATAMONGO-462"
+  ],
+  "configs": {
+    "dense_embedding": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "DATAJPA-420",
+            "repo": "DATAJPA",
+            "classifications": {
+              "src/test/java/org/springframework/data/jpa/repository/query/QueryUtilsUnitTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/jpa/repository/query/QueryUtils.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/jpa/repository/query/QueryUtilsUnitTests.java": 3,
+              "src/main/java/org/springframework/data/jpa/repository/query/QueryUtils.java": 21
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.21428571428571427,
+            "difficulty": "easy",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "DATAMONGO-411",
+            "repo": "DATAMONGO",
+            "classifications": {
+              "spring-data-mongodb/src/main/java/org/springframework/data/mongodb/core/index/MongoPersistentEntityIndexCreator.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-data-mongodb/src/main/java/org/springframework/data/mongodb/core/index/MongoPersistentEntityIndexCreator.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATAMONGO-462",
+            "repo": "DATAMONGO",
+            "classifications": {
+              "spring-data-mongodb/src/test/java/org/springframework/data/mongodb/core/convert/MappingMongoConverterUnitTests.java": "exists_before_fix",
+              "spring-data-mongodb/src/main/java/org/springframework/data/mongodb/core/convert/CustomConversions.java": "exists_before_fix",
+              "spring-data-mongodb/src/main/java/org/springframework/data/mongodb/core/convert/MongoConverters.java": "exists_before_fix",
+              "spring-data-mongodb/src/test/java/org/springframework/data/mongodb/core/convert/CustomConversionsUnitTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "spring-data-mongodb/src/test/java/org/springframework/data/mongodb/core/convert/MappingMongoConverterUnitTests.java": 3,
+              "spring-data-mongodb/src/main/java/org/springframework/data/mongodb/core/convert/CustomConversions.java": 45,
+              "spring-data-mongodb/src/main/java/org/springframework/data/mongodb/core/convert/MongoConverters.java": 7,
+              "spring-data-mongodb/src/test/java/org/springframework/data/mongodb/core/convert/CustomConversionsUnitTests.java": 68
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.25,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.1861344537815126,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "easy": 3
+        },
+        "total": 3
+      },
+      "summary": {
+        "n": 3,
+        "macro_hit_at": {
+          "1": 0.0,
+          "5": 1.0,
+          "10": 1.0,
+          "100": 1.0,
+          "200": 1.0
+        },
+        "macro_recall_at": {
+          "1": 0.0,
+          "5": 0.5833333333333334,
+          "10": 0.6666666666666666,
+          "100": 1.0,
+          "200": 1.0
+        },
+        "mrr": 0.38888888888888884,
+        "map": 0.30014005602240895,
+        "mean_latency_s": 5.563100179036459e-07
+      }
+    }
+  }
+}

@@ -1,0 +1,2000 @@
+{
+  "manifest_id": "iqloc-multi-n7091-s42-f8a5d2c401a4",
+  "shard_index": 128,
+  "num_shards": 350,
+  "candidate_pool_size": 200,
+  "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+  "reformulation_mode": "semantic",
+  "relevance_mode": "llm",
+  "keep_fraction": 0.5,
+  "instance_ids": [
+    "DATAREDIS-2279",
+    "DATAREDIS-2307",
+    "DATAREDIS-2330",
+    "DATAREDIS-2331",
+    "DATAREDIS-2335",
+    "DATAREDIS-2341",
+    "DATAREDIS-2349",
+    "DATAREDIS-2355",
+    "DATAREDIS-2356",
+    "DATAREDIS-2361",
+    "DATAREDIS-2365",
+    "DATAREDIS-2392",
+    "DATAREDIS-2396",
+    "DATAREDIS-2402",
+    "DATAREDIS-2414",
+    "DATAREDIS-2418",
+    "DATAREDIS-2457",
+    "DATAREDIS-246",
+    "DATAREDIS-2473",
+    "DATAREDIS-2565"
+  ],
+  "configs": {
+    "retriever": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "DATAREDIS-2279",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/test/java/org/springframework/data/redis/core/DefaultGeoOperationsIntegrationTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/core/AbstractOperations.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/redis/core/DefaultGeoOperationsIntegrationTests.java": 8,
+              "src/main/java/org/springframework/data/redis/core/AbstractOperations.java": 45
+            },
+            "best_rank": 8,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.08472222222222223,
+            "difficulty": "easy",
+            "latency_s": 2.6226043701171875e-06
+          },
+          {
+            "instance_id": "DATAREDIS-2307",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/test/java/org/springframework/data/redis/core/convert/MappingRedisConverterUnitTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/core/convert/MappingRedisConverter.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/redis/core/convert/MappingRedisConverterUnitTests.java": 1,
+              "src/main/java/org/springframework/data/redis/core/convert/MappingRedisConverter.java": 4
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.75,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "DATAREDIS-2330",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceConnectionFactory.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceConnectionFactory.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 1.430511474609375e-06
+          },
+          {
+            "instance_id": "DATAREDIS-2331",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/test/java/org/springframework/data/redis/connection/lettuce/LettuceConnectionFactoryTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceSubscription.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/redis/connection/lettuce/LettuceConnectionIntegrationTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceConnection.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/jedis/JedisConnection.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/util/AbstractSubscription.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/redis/connection/lettuce/LettuceConnectionFactoryTests.java": 4,
+              "src/test/java/org/springframework/data/redis/connection/lettuce/LettuceConnectionIntegrationTests.java": 19,
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceConnection.java": 10,
+              "src/main/java/org/springframework/data/redis/connection/jedis/JedisConnection.java": 26,
+              "src/main/java/org/springframework/data/redis/connection/util/AbstractSubscription.java": 59
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.16666666666666666,
+              "10": 0.3333333333333333,
+              "100": 0.8333333333333334,
+              "200": 0.8333333333333334
+            },
+            "average_precision": 0.1410811089000206,
+            "difficulty": "easy",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "DATAREDIS-2335",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/main/java/org/springframework/data/redis/listener/RedisMessageListenerContainer.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/redis/listener/RedisMessageListenerContainerUnitTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/redis/listener/RedisMessageListenerContainer.java": 1,
+              "src/test/java/org/springframework/data/redis/listener/RedisMessageListenerContainerUnitTests.java": 28
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5357142857142857,
+            "difficulty": "easy",
+            "latency_s": 1.6689300537109375e-06
+          },
+          {
+            "instance_id": "DATAREDIS-2341",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/test/java/org/springframework/data/redis/connection/jedis/JedisClusterConnectionTests.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/redis/connection/ClusterConnectionTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceClusterKeyCommands.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/redis/connection/lettuce/LettuceClusterConnectionTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/jedis/JedisClusterKeyCommands.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/redis/connection/jedis/JedisClusterConnectionTests.java": 6,
+              "src/test/java/org/springframework/data/redis/connection/ClusterConnectionTests.java": 87,
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceClusterKeyCommands.java": 1,
+              "src/test/java/org/springframework/data/redis/connection/lettuce/LettuceClusterConnectionTests.java": 7,
+              "src/main/java/org/springframework/data/redis/connection/jedis/JedisClusterKeyCommands.java": 4
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.2,
+              "5": 0.4,
+              "10": 0.8,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5257799671592774,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "DATAREDIS-2349",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/test/java/org/springframework/data/redis/core/convert/MappingRedisConverterUnitTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/core/convert/MappingRedisConverter.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/redis/core/convert/MappingRedisConverterUnitTests.java": 6,
+              "src/main/java/org/springframework/data/redis/core/convert/MappingRedisConverter.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3333333333333333,
+            "difficulty": "easy",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "DATAREDIS-2355",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceSubscription.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/redis/core/RedisTemplateIntegrationTests.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/redis/connection/jedis/JedisSubscriptionUnitTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/jedis/JedisSubscription.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/util/AbstractSubscription.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceSubscription.java": 26,
+              "src/test/java/org/springframework/data/redis/core/RedisTemplateIntegrationTests.java": 59,
+              "src/test/java/org/springframework/data/redis/connection/jedis/JedisSubscriptionUnitTests.java": 6,
+              "src/main/java/org/springframework/data/redis/connection/jedis/JedisSubscription.java": 19,
+              "src/main/java/org/springframework/data/redis/connection/util/AbstractSubscription.java": 20
+            },
+            "best_rank": 6,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.2,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.13210434822388434,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-06
+          },
+          {
+            "instance_id": "DATAREDIS-2356",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/main/java/org/springframework/data/redis/connection/jedis/JedisConnection.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/AbstractRedisConnection.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/redis/connection/jedis/JedisConnectionIntegrationTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceConnection.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/redis/connection/jedis/JedisConnection.java": 1,
+              "src/main/java/org/springframework/data/redis/connection/AbstractRedisConnection.java": 21,
+              "src/test/java/org/springframework/data/redis/connection/jedis/JedisConnectionIntegrationTests.java": 12,
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceConnection.java": 15
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.25,
+              "5": 0.25,
+              "10": 0.25,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3892857142857143,
+            "difficulty": "easy",
+            "latency_s": 3.337860107421875e-06
+          },
+          {
+            "instance_id": "DATAREDIS-2361",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/test/java/org/springframework/data/redis/serializer/GenericJackson2JsonRedisSerializerUnitTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/serializer/GenericJackson2JsonRedisSerializer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/redis/serializer/GenericJackson2JsonRedisSerializerUnitTests.java": 1,
+              "src/main/java/org/springframework/data/redis/serializer/GenericJackson2JsonRedisSerializer.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.6226043701171875e-06
+          },
+          {
+            "instance_id": "DATAREDIS-2365",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/test/java/org/springframework/data/redis/mapping/Jackson2HashMapperUnitTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/hash/Jackson2HashMapper.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/redis/mapping/Jackson2HashMapperUnitTests.java": 2,
+              "src/main/java/org/springframework/data/redis/hash/Jackson2HashMapper.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-06
+          },
+          {
+            "instance_id": "DATAREDIS-2392",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/main/java/org/springframework/data/redis/connection/jedis/JedisClusterHashCommands.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/RedisHashCommands.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/redis/connection/jedis/JedisClusterHashCommands.java": 10
+            },
+            "best_rank": 10,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.05,
+            "difficulty": "easy",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "DATAREDIS-2396",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/test/java/org/springframework/data/redis/serializer/GenericJackson2JsonRedisSerializerUnitTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/serializer/GenericJackson2JsonRedisSerializer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/redis/serializer/GenericJackson2JsonRedisSerializerUnitTests.java": 1,
+              "src/main/java/org/springframework/data/redis/serializer/GenericJackson2JsonRedisSerializer.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 1.430511474609375e-06
+          },
+          {
+            "instance_id": "DATAREDIS-2402",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceReactiveStringCommands.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/redis/core/DefaultReactiveValueOperationsIntegrationTests.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/redis/connection/lettuce/LettuceReactiveStringCommandsIntegrationTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceReactiveStringCommands.java": 3,
+              "src/test/java/org/springframework/data/redis/core/DefaultReactiveValueOperationsIntegrationTests.java": 28,
+              "src/test/java/org/springframework/data/redis/connection/lettuce/LettuceReactiveStringCommandsIntegrationTests.java": 20
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.3333333333333333,
+              "10": 0.3333333333333333,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.18015873015873016,
+            "difficulty": "easy",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "DATAREDIS-2414",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/test/java/org/springframework/data/redis/core/ScanCursorUnitTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/core/ScanCursor.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/redis/core/ScanCursor.java": 6
+            },
+            "best_rank": 6,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.08333333333333333,
+            "difficulty": "easy",
+            "latency_s": 2.6226043701171875e-06
+          },
+          {
+            "instance_id": "DATAREDIS-2418",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/test/java/org/springframework/data/redis/connection/RedisSentinelConfigurationUnitTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/RedisClusterConfiguration.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/redis/connection/RedisClusterConfigurationUnitTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/RedisSentinelConfiguration.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/RedisNode.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/redis/connection/RedisClusterConfiguration.java": 2,
+              "src/main/java/org/springframework/data/redis/connection/RedisNode.java": 7
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.2,
+              "10": 0.4,
+              "100": 0.4,
+              "200": 0.4
+            },
+            "average_precision": 0.15714285714285714,
+            "difficulty": "easy",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "DATAREDIS-2457",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/main/java/org/springframework/data/redis/core/mapping/RedisMappingContext.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/redis/core/mapping/ConfigAwareKeySpaceResolverUnitTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/core/mapping/BasicRedisPersistentEntity.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/redis/core/mapping/RedisMappingContext.java": 1,
+              "src/test/java/org/springframework/data/redis/core/mapping/ConfigAwareKeySpaceResolverUnitTests.java": 2,
+              "src/main/java/org/springframework/data/redis/core/mapping/BasicRedisPersistentEntity.java": 25
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 0.6666666666666666,
+              "10": 0.6666666666666666,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.7066666666666667,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "DATAREDIS-246",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/main/java/org/springframework/data/redis/cache/RedisCacheManager.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/redis/cache/RedisCacheManager.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-06
+          },
+          {
+            "instance_id": "DATAREDIS-2473",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/test/java/org/springframework/data/redis/connection/lettuce/LettuceConnectionIntegrationTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceConnection.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceConnection.java": 14
+            },
+            "best_rank": 14,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.03571428571428571,
+            "difficulty": "medium",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "DATAREDIS-2565",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/main/java/org/springframework/data/redis/support/collections/CollectionUtils.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/redis/mapping/Jackson2HashMapperIntegrationTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/hash/Jackson2HashMapper.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/redis/hash/Jackson2HashMapper.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 0.3333333333333333,
+              "10": 0.3333333333333333,
+              "100": 0.3333333333333333,
+              "200": 0.3333333333333333
+            },
+            "average_precision": 0.3333333333333333,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "easy": 19,
+          "medium": 1
+        },
+        "total": 20
+      },
+      "summary": {
+        "n": 20,
+        "macro_hit_at": {
+          "1": 0.5,
+          "5": 0.75,
+          "10": 0.95,
+          "100": 1.0,
+          "200": 1.0
+        },
+        "macro_recall_at": {
+          "1": 0.2308333333333333,
+          "5": 0.46749999999999997,
+          "10": 0.6158333333333335,
+          "100": 0.8533333333333333,
+          "200": 0.8533333333333333
+        },
+        "mrr": 0.6273214285714286,
+        "map": 0.4469185093093973,
+        "mean_latency_s": 1.5854835510253907e-06
+      }
+    },
+    "relevance_filtered": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "DATAREDIS-2279",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/test/java/org/springframework/data/redis/core/DefaultGeoOperationsIntegrationTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/core/AbstractOperations.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/redis/core/DefaultGeoOperationsIntegrationTests.java": 8,
+              "src/main/java/org/springframework/data/redis/core/AbstractOperations.java": 45
+            },
+            "best_rank": 8,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.08472222222222223,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "DATAREDIS-2307",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/test/java/org/springframework/data/redis/core/convert/MappingRedisConverterUnitTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/core/convert/MappingRedisConverter.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/redis/core/convert/MappingRedisConverterUnitTests.java": 1,
+              "src/main/java/org/springframework/data/redis/core/convert/MappingRedisConverter.java": 4
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.75,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATAREDIS-2330",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceConnectionFactory.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceConnectionFactory.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATAREDIS-2331",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/test/java/org/springframework/data/redis/connection/lettuce/LettuceConnectionFactoryTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceSubscription.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/redis/connection/lettuce/LettuceConnectionIntegrationTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceConnection.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/jedis/JedisConnection.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/util/AbstractSubscription.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/redis/connection/lettuce/LettuceConnectionFactoryTests.java": 4,
+              "src/test/java/org/springframework/data/redis/connection/lettuce/LettuceConnectionIntegrationTests.java": 19,
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceConnection.java": 10,
+              "src/main/java/org/springframework/data/redis/connection/jedis/JedisConnection.java": 26,
+              "src/main/java/org/springframework/data/redis/connection/util/AbstractSubscription.java": 59
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.16666666666666666,
+              "10": 0.3333333333333333,
+              "100": 0.8333333333333334,
+              "200": 0.8333333333333334
+            },
+            "average_precision": 0.1410811089000206,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "DATAREDIS-2335",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/main/java/org/springframework/data/redis/listener/RedisMessageListenerContainer.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/redis/listener/RedisMessageListenerContainerUnitTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/redis/listener/RedisMessageListenerContainer.java": 1,
+              "src/test/java/org/springframework/data/redis/listener/RedisMessageListenerContainerUnitTests.java": 28
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5357142857142857,
+            "difficulty": "easy",
+            "latency_s": 0.0
+          },
+          {
+            "instance_id": "DATAREDIS-2341",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/test/java/org/springframework/data/redis/connection/jedis/JedisClusterConnectionTests.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/redis/connection/ClusterConnectionTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceClusterKeyCommands.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/redis/connection/lettuce/LettuceClusterConnectionTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/jedis/JedisClusterKeyCommands.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/redis/connection/jedis/JedisClusterConnectionTests.java": 6,
+              "src/test/java/org/springframework/data/redis/connection/ClusterConnectionTests.java": 87,
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceClusterKeyCommands.java": 1,
+              "src/test/java/org/springframework/data/redis/connection/lettuce/LettuceClusterConnectionTests.java": 7,
+              "src/main/java/org/springframework/data/redis/connection/jedis/JedisClusterKeyCommands.java": 4
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.2,
+              "5": 0.4,
+              "10": 0.8,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5257799671592774,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATAREDIS-2349",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/test/java/org/springframework/data/redis/core/convert/MappingRedisConverterUnitTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/core/convert/MappingRedisConverter.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/redis/core/convert/MappingRedisConverterUnitTests.java": 6,
+              "src/main/java/org/springframework/data/redis/core/convert/MappingRedisConverter.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3333333333333333,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATAREDIS-2355",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceSubscription.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/redis/core/RedisTemplateIntegrationTests.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/redis/connection/jedis/JedisSubscriptionUnitTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/jedis/JedisSubscription.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/util/AbstractSubscription.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceSubscription.java": 26,
+              "src/test/java/org/springframework/data/redis/core/RedisTemplateIntegrationTests.java": 59,
+              "src/test/java/org/springframework/data/redis/connection/jedis/JedisSubscriptionUnitTests.java": 6,
+              "src/main/java/org/springframework/data/redis/connection/jedis/JedisSubscription.java": 19,
+              "src/main/java/org/springframework/data/redis/connection/util/AbstractSubscription.java": 20
+            },
+            "best_rank": 6,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.2,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.13210434822388434,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATAREDIS-2356",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/main/java/org/springframework/data/redis/connection/jedis/JedisConnection.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/AbstractRedisConnection.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/redis/connection/jedis/JedisConnectionIntegrationTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceConnection.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/redis/connection/jedis/JedisConnection.java": 1,
+              "src/main/java/org/springframework/data/redis/connection/AbstractRedisConnection.java": 21,
+              "src/test/java/org/springframework/data/redis/connection/jedis/JedisConnectionIntegrationTests.java": 12,
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceConnection.java": 15
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.25,
+              "5": 0.25,
+              "10": 0.25,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3892857142857143,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATAREDIS-2361",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/test/java/org/springframework/data/redis/serializer/GenericJackson2JsonRedisSerializerUnitTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/serializer/GenericJackson2JsonRedisSerializer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/redis/serializer/GenericJackson2JsonRedisSerializerUnitTests.java": 1,
+              "src/main/java/org/springframework/data/redis/serializer/GenericJackson2JsonRedisSerializer.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATAREDIS-2365",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/test/java/org/springframework/data/redis/mapping/Jackson2HashMapperUnitTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/hash/Jackson2HashMapper.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/redis/mapping/Jackson2HashMapperUnitTests.java": 2,
+              "src/main/java/org/springframework/data/redis/hash/Jackson2HashMapper.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATAREDIS-2392",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/main/java/org/springframework/data/redis/connection/jedis/JedisClusterHashCommands.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/RedisHashCommands.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/redis/connection/jedis/JedisClusterHashCommands.java": 10
+            },
+            "best_rank": 10,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.05,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "DATAREDIS-2396",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/test/java/org/springframework/data/redis/serializer/GenericJackson2JsonRedisSerializerUnitTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/serializer/GenericJackson2JsonRedisSerializer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/redis/serializer/GenericJackson2JsonRedisSerializerUnitTests.java": 1,
+              "src/main/java/org/springframework/data/redis/serializer/GenericJackson2JsonRedisSerializer.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATAREDIS-2402",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceReactiveStringCommands.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/redis/core/DefaultReactiveValueOperationsIntegrationTests.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/redis/connection/lettuce/LettuceReactiveStringCommandsIntegrationTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceReactiveStringCommands.java": 3,
+              "src/test/java/org/springframework/data/redis/core/DefaultReactiveValueOperationsIntegrationTests.java": 28,
+              "src/test/java/org/springframework/data/redis/connection/lettuce/LettuceReactiveStringCommandsIntegrationTests.java": 20
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.3333333333333333,
+              "10": 0.3333333333333333,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.18015873015873016,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "DATAREDIS-2414",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/test/java/org/springframework/data/redis/core/ScanCursorUnitTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/core/ScanCursor.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/redis/core/ScanCursor.java": 6
+            },
+            "best_rank": 6,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.08333333333333333,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATAREDIS-2418",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/test/java/org/springframework/data/redis/connection/RedisSentinelConfigurationUnitTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/RedisClusterConfiguration.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/redis/connection/RedisClusterConfigurationUnitTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/RedisSentinelConfiguration.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/RedisNode.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/redis/connection/RedisClusterConfiguration.java": 10,
+              "src/main/java/org/springframework/data/redis/connection/RedisNode.java": 15
+            },
+            "best_rank": 10,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.2,
+              "100": 0.4,
+              "200": 0.4
+            },
+            "average_precision": 0.04666666666666667,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATAREDIS-2457",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/main/java/org/springframework/data/redis/core/mapping/RedisMappingContext.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/redis/core/mapping/ConfigAwareKeySpaceResolverUnitTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/core/mapping/BasicRedisPersistentEntity.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/redis/core/mapping/RedisMappingContext.java": 6,
+              "src/test/java/org/springframework/data/redis/core/mapping/ConfigAwareKeySpaceResolverUnitTests.java": 7,
+              "src/main/java/org/springframework/data/redis/core/mapping/BasicRedisPersistentEntity.java": 30
+            },
+            "best_rank": 6,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.6666666666666666,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.1841269841269841,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATAREDIS-246",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/main/java/org/springframework/data/redis/cache/RedisCacheManager.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/redis/cache/RedisCacheManager.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATAREDIS-2473",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/test/java/org/springframework/data/redis/connection/lettuce/LettuceConnectionIntegrationTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceConnection.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceConnection.java": 14
+            },
+            "best_rank": 14,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.03571428571428571,
+            "difficulty": "medium",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATAREDIS-2565",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/main/java/org/springframework/data/redis/support/collections/CollectionUtils.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/redis/mapping/Jackson2HashMapperIntegrationTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/hash/Jackson2HashMapper.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/redis/hash/Jackson2HashMapper.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 0.3333333333333333,
+              "10": 0.3333333333333333,
+              "100": 0.3333333333333333,
+              "200": 0.3333333333333333
+            },
+            "average_precision": 0.3333333333333333,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "easy": 19,
+          "medium": 1
+        },
+        "total": 20
+      },
+      "summary": {
+        "n": 20,
+        "macro_hit_at": {
+          "1": 0.4,
+          "5": 0.65,
+          "10": 0.95,
+          "100": 1.0,
+          "200": 1.0
+        },
+        "macro_recall_at": {
+          "1": 0.16416666666666668,
+          "5": 0.42416666666666664,
+          "10": 0.6058333333333333,
+          "100": 0.8533333333333333,
+          "200": 0.8533333333333333
+        },
+        "mrr": 0.5406547619047618,
+        "map": 0.3902677156586036,
+        "mean_latency_s": 2.86102294921875e-07
+      }
+    },
+    "reformulated": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "DATAREDIS-2279",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/test/java/org/springframework/data/redis/core/DefaultGeoOperationsIntegrationTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/core/AbstractOperations.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/redis/core/DefaultGeoOperationsIntegrationTests.java": 7,
+              "src/main/java/org/springframework/data/redis/core/AbstractOperations.java": 49
+            },
+            "best_rank": 7,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.09183673469387754,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATAREDIS-2307",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/test/java/org/springframework/data/redis/core/convert/MappingRedisConverterUnitTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/core/convert/MappingRedisConverter.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/redis/core/convert/MappingRedisConverterUnitTests.java": 1,
+              "src/main/java/org/springframework/data/redis/core/convert/MappingRedisConverter.java": 5
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.7,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "DATAREDIS-2330",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceConnectionFactory.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceConnectionFactory.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3333333333333333,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATAREDIS-2331",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/test/java/org/springframework/data/redis/connection/lettuce/LettuceConnectionFactoryTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceSubscription.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/redis/connection/lettuce/LettuceConnectionIntegrationTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceConnection.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/jedis/JedisConnection.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/util/AbstractSubscription.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/redis/connection/lettuce/LettuceConnectionFactoryTests.java": 4,
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceSubscription.java": 211,
+              "src/test/java/org/springframework/data/redis/connection/lettuce/LettuceConnectionIntegrationTests.java": 19,
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceConnection.java": 10,
+              "src/main/java/org/springframework/data/redis/connection/jedis/JedisConnection.java": 29,
+              "src/main/java/org/springframework/data/redis/connection/util/AbstractSubscription.java": 60
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.16666666666666666,
+              "10": 0.3333333333333333,
+              "100": 0.8333333333333334,
+              "200": 0.8333333333333334
+            },
+            "average_precision": 0.14293252060259054,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATAREDIS-2335",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/main/java/org/springframework/data/redis/listener/RedisMessageListenerContainer.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/redis/listener/RedisMessageListenerContainerUnitTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/redis/listener/RedisMessageListenerContainer.java": 1,
+              "src/test/java/org/springframework/data/redis/listener/RedisMessageListenerContainerUnitTests.java": 46
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5217391304347826,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATAREDIS-2341",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/test/java/org/springframework/data/redis/connection/jedis/JedisClusterConnectionTests.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/redis/connection/ClusterConnectionTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceClusterKeyCommands.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/redis/connection/lettuce/LettuceClusterConnectionTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/jedis/JedisClusterKeyCommands.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/redis/connection/jedis/JedisClusterConnectionTests.java": 5,
+              "src/test/java/org/springframework/data/redis/connection/ClusterConnectionTests.java": 89,
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceClusterKeyCommands.java": 1,
+              "src/test/java/org/springframework/data/redis/connection/lettuce/LettuceClusterConnectionTests.java": 7,
+              "src/main/java/org/springframework/data/redis/connection/jedis/JedisClusterKeyCommands.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.2,
+              "5": 0.6,
+              "10": 0.8,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.6455216693418941,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "DATAREDIS-2349",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/test/java/org/springframework/data/redis/core/convert/MappingRedisConverterUnitTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/core/convert/MappingRedisConverter.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/redis/core/convert/MappingRedisConverterUnitTests.java": 6,
+              "src/main/java/org/springframework/data/redis/core/convert/MappingRedisConverter.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3333333333333333,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATAREDIS-2355",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceSubscription.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/redis/core/RedisTemplateIntegrationTests.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/redis/connection/jedis/JedisSubscriptionUnitTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/jedis/JedisSubscription.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/util/AbstractSubscription.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceSubscription.java": 25,
+              "src/test/java/org/springframework/data/redis/core/RedisTemplateIntegrationTests.java": 61,
+              "src/test/java/org/springframework/data/redis/connection/jedis/JedisSubscriptionUnitTests.java": 5,
+              "src/main/java/org/springframework/data/redis/connection/jedis/JedisSubscription.java": 20,
+              "src/main/java/org/springframework/data/redis/connection/util/AbstractSubscription.java": 18
+            },
+            "best_rank": 5,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.2,
+              "10": 0.2,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.14061566484517304,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATAREDIS-2356",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/main/java/org/springframework/data/redis/connection/jedis/JedisConnection.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/AbstractRedisConnection.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/redis/connection/jedis/JedisConnectionIntegrationTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceConnection.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/redis/connection/jedis/JedisConnection.java": 1,
+              "src/main/java/org/springframework/data/redis/connection/AbstractRedisConnection.java": 20,
+              "src/test/java/org/springframework/data/redis/connection/jedis/JedisConnectionIntegrationTests.java": 11,
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceConnection.java": 14
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.25,
+              "5": 0.25,
+              "10": 0.25,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.399025974025974,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "DATAREDIS-2361",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/test/java/org/springframework/data/redis/serializer/GenericJackson2JsonRedisSerializerUnitTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/serializer/GenericJackson2JsonRedisSerializer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/redis/serializer/GenericJackson2JsonRedisSerializerUnitTests.java": 1,
+              "src/main/java/org/springframework/data/redis/serializer/GenericJackson2JsonRedisSerializer.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATAREDIS-2365",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/test/java/org/springframework/data/redis/mapping/Jackson2HashMapperUnitTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/hash/Jackson2HashMapper.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/redis/mapping/Jackson2HashMapperUnitTests.java": 2,
+              "src/main/java/org/springframework/data/redis/hash/Jackson2HashMapper.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATAREDIS-2392",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/main/java/org/springframework/data/redis/connection/jedis/JedisClusterHashCommands.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/RedisHashCommands.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/redis/connection/jedis/JedisClusterHashCommands.java": 11
+            },
+            "best_rank": 11,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.045454545454545456,
+            "difficulty": "medium",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATAREDIS-2396",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/test/java/org/springframework/data/redis/serializer/GenericJackson2JsonRedisSerializerUnitTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/serializer/GenericJackson2JsonRedisSerializer.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/redis/serializer/GenericJackson2JsonRedisSerializerUnitTests.java": 1,
+              "src/main/java/org/springframework/data/redis/serializer/GenericJackson2JsonRedisSerializer.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "DATAREDIS-2402",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceReactiveStringCommands.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/redis/core/DefaultReactiveValueOperationsIntegrationTests.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/redis/connection/lettuce/LettuceReactiveStringCommandsIntegrationTests.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceReactiveStringCommands.java": 4,
+              "src/test/java/org/springframework/data/redis/core/DefaultReactiveValueOperationsIntegrationTests.java": 31,
+              "src/test/java/org/springframework/data/redis/connection/lettuce/LettuceReactiveStringCommandsIntegrationTests.java": 22
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.3333333333333333,
+              "10": 0.3333333333333333,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.14589442815249268,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATAREDIS-2414",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/test/java/org/springframework/data/redis/core/ScanCursorUnitTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/core/ScanCursor.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/test/java/org/springframework/data/redis/core/ScanCursorUnitTests.java": 203,
+              "src/main/java/org/springframework/data/redis/core/ScanCursor.java": 6
+            },
+            "best_rank": 6,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.08825944170771756,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATAREDIS-2418",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/test/java/org/springframework/data/redis/connection/RedisSentinelConfigurationUnitTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/RedisClusterConfiguration.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/redis/connection/RedisClusterConfigurationUnitTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/RedisSentinelConfiguration.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/RedisNode.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/redis/connection/RedisClusterConfiguration.java": 1,
+              "src/test/java/org/springframework/data/redis/connection/RedisClusterConfigurationUnitTests.java": 206,
+              "src/main/java/org/springframework/data/redis/connection/RedisSentinelConfiguration.java": 209,
+              "src/main/java/org/springframework/data/redis/connection/RedisNode.java": 7
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.2,
+              "5": 0.2,
+              "10": 0.4,
+              "100": 0.4,
+              "200": 0.4
+            },
+            "average_precision": 0.2638832296982527,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATAREDIS-2457",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/main/java/org/springframework/data/redis/core/mapping/RedisMappingContext.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/redis/core/mapping/ConfigAwareKeySpaceResolverUnitTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/core/mapping/BasicRedisPersistentEntity.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/redis/core/mapping/RedisMappingContext.java": 2,
+              "src/test/java/org/springframework/data/redis/core/mapping/ConfigAwareKeySpaceResolverUnitTests.java": 1,
+              "src/main/java/org/springframework/data/redis/core/mapping/BasicRedisPersistentEntity.java": 30
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.3333333333333333,
+              "5": 0.6666666666666666,
+              "10": 0.6666666666666666,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.7000000000000001,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "DATAREDIS-246",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/main/java/org/springframework/data/redis/cache/RedisCacheManager.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/redis/cache/RedisCacheManager.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 0.0
+          },
+          {
+            "instance_id": "DATAREDIS-2473",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/test/java/org/springframework/data/redis/connection/lettuce/LettuceConnectionIntegrationTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceConnection.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/redis/connection/lettuce/LettuceConnection.java": 13
+            },
+            "best_rank": 13,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.038461538461538464,
+            "difficulty": "medium",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "DATAREDIS-2565",
+            "repo": "DATAREDIS",
+            "classifications": {
+              "src/main/java/org/springframework/data/redis/support/collections/CollectionUtils.java": "exists_before_fix",
+              "src/test/java/org/springframework/data/redis/mapping/Jackson2HashMapperIntegrationTests.java": "exists_before_fix",
+              "src/main/java/org/springframework/data/redis/hash/Jackson2HashMapper.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "src/main/java/org/springframework/data/redis/hash/Jackson2HashMapper.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.3333333333333333,
+              "10": 0.3333333333333333,
+              "100": 0.3333333333333333,
+              "200": 0.3333333333333333
+            },
+            "average_precision": 0.16666666666666666,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "easy": 18,
+          "medium": 2
+        },
+        "total": 20
+      },
+      "summary": {
+        "n": 20,
+        "macro_hit_at": {
+          "1": 0.5,
+          "5": 0.8,
+          "10": 0.9,
+          "100": 1.0,
+          "200": 1.0
+        },
+        "macro_recall_at": {
+          "1": 0.2241666666666667,
+          "5": 0.4875,
+          "10": 0.5908333333333334,
+          "100": 0.8533333333333333,
+          "200": 0.8533333333333333
+        },
+        "mrr": 0.6172011322011322,
+        "map": 0.4378479105376085,
+        "mean_latency_s": 3.0994415283203126e-07
+      }
+    }
+  }
+}

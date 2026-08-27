@@ -70,7 +70,7 @@ def main():
                             "re-derived pool won't line up with the manifest's instance IDs.")
     parser.add_argument('--pool-size', type=int, default=None)
     parser.add_argument('--candidate-pool-size', type=int, default=100)
-    parser.add_argument('--retriever', choices=['bm25', 'hybrid-rrf', 'hybrid-rrf-history'], default='hybrid-rrf')
+    parser.add_argument('--retriever', choices=['bm25', 'hybrid-rrf', 'hybrid-rrf-history', 'dense-only'], default='hybrid-rrf')
     parser.add_argument('--embedding-model', default='Qwen/Qwen3-Embedding-0.6B')
     parser.add_argument('--rrf-weights', default='1,5')
     parser.add_argument('--rrf-k', type=int, default=60,

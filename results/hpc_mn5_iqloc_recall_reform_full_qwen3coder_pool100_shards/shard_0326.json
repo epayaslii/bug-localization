@@ -1,0 +1,2034 @@
+{
+  "manifest_id": "iqloc-multi-n7091-s42-f8a5d2c401a4",
+  "shard_index": 326,
+  "num_shards": 350,
+  "candidate_pool_size": 100,
+  "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+  "reformulation_mode": "semantic",
+  "relevance_mode": "llm",
+  "keep_fraction": 0.5,
+  "instance_ids": [
+    "WFLY-3000",
+    "WFLY-3002",
+    "WFLY-3004",
+    "WFLY-3007",
+    "WFLY-3008",
+    "WFLY-3011",
+    "WFLY-3012",
+    "WFLY-3016",
+    "WFLY-3017",
+    "WFLY-3020",
+    "WFLY-3046",
+    "WFLY-3047",
+    "WFLY-3048",
+    "WFLY-3067",
+    "WFLY-3069",
+    "WFLY-3073",
+    "WFLY-3076",
+    "WFLY-3078",
+    "WFLY-3092",
+    "WFLY-3095"
+  ],
+  "configs": {
+    "retriever": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "WFLY-3000",
+            "repo": "WFLY",
+            "classifications": {
+              "domain-http/interface/src/main/java/org/jboss/as/domain/http/server/Common.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "WFLY-3002",
+            "repo": "WFLY",
+            "classifications": {
+              "undertow/src/main/java/org/wildfly/extension/undertow/deployment/ServletResourceManager.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "undertow/src/main/java/org/wildfly/extension/undertow/deployment/ServletResourceManager.java": 4
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.25,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "WFLY-3004",
+            "repo": "WFLY",
+            "classifications": {
+              "cli/src/main/java/org/jboss/as/cli/handlers/BaseOperationCommand.java": "exists_before_fix",
+              "cli/src/main/java/org/jboss/as/cli/handlers/GenericTypeOperationHandler.java": "exists_before_fix",
+              "cli/src/main/java/org/jboss/as/cli/impl/ArgumentWithValue.java": "exists_before_fix",
+              "cli/src/main/java/org/jboss/as/cli/parsing/StateParser.java": "exists_before_fix",
+              "cli/src/main/java/org/jboss/as/cli/handlers/ConnectHandler.java": "exists_before_fix",
+              "cli/src/test/java/org/jboss/as/cli/parsing/test/VariablesTestCase.java": "exists_before_fix",
+              "cli/src/main/java/org/jboss/as/cli/impl/FileSystemPathArgument.java": "exists_before_fix",
+              "cli/src/main/java/org/jboss/as/cli/handlers/ResourceCompositeOperationHandler.java": "exists_before_fix",
+              "cli/src/test/java/org/jboss/as/cli/parsing/test/PropertyReplacementTestCase.java": "exists_before_fix",
+              "cli/src/main/java/org/jboss/as/cli/handlers/jca/XADataSourceAddCompositeHandler.java": "exists_before_fix",
+              "cli/src/main/java/org/jboss/as/cli/handlers/SetVariableHandler.java": "exists_before_fix",
+              "cli/src/main/java/org/jboss/as/cli/parsing/LineBreakHandler.java": "exists_before_fix",
+              "cli/src/main/java/org/jboss/as/cli/parsing/ExpressionBaseState.java": "exists_before_fix",
+              "testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/management/cli/FileWithPropertiesTestCase.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "cli/src/main/java/org/jboss/as/cli/handlers/ConnectHandler.java": 11,
+              "cli/src/main/java/org/jboss/as/cli/impl/FileSystemPathArgument.java": 63
+            },
+            "best_rank": 11,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.14285714285714285,
+              "200": 0.14285714285714285
+            },
+            "average_precision": 0.008761080189651618,
+            "difficulty": "medium",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "WFLY-3007",
+            "repo": "WFLY",
+            "classifications": {
+              "testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/ejb/remote/common/EJBManagementUtil.java": "exists_before_fix",
+              "mail/src/main/java/org/jboss/as/mail/extension/SessionProviderFactory.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/services/net/SpecifiedInterfaceResolveHandler.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/host/controller/HostControllerEnvironment.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/interfaces/InetAddressUtil.java": "exists_before_fix",
+              "testsuite/integration/manualmode/src/test/java/org/jboss/as/test/manualmode/ws/ReloadWSDLPublisherTestCase.java": "exists_before_fix",
+              "messaging/src/main/java/org/jboss/as/messaging/HornetQService.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/audit/SyslogAuditLogHandler.java": "exists_before_fix",
+              "testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/management/api/SocketsAndInterfacesTestCase.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/services/net/NetworkInterfaceRuntimeHandler.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/DomainServerCommunicationServices.java": "exists_before_fix",
+              "network/src/main/java/org/jboss/as/network/NetworkUtils.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/ServerEnvironment.java": "exists_before_fix",
+              "core-model-test/tests/src/test/java/org/jboss/as/core/model/test/standalone/root/StandaloneRootResourceTestCase.java": "exists_before_fix",
+              "domain-management/src/test/java/org/jboss/as/domain/management/security/auditlog/AbstractAuditLogHandlerTestCase.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/services/net/BindingMetricHandlers.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "network/src/main/java/org/jboss/as/network/NetworkUtils.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0625,
+              "10": 0.0625,
+              "100": 0.0625,
+              "200": 0.0625
+            },
+            "average_precision": 0.020833333333333332,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "WFLY-3008",
+            "repo": "WFLY",
+            "classifications": {
+              "controller/src/main/java/org/jboss/as/controller/ExpressionResolverImpl.java": "exists_before_fix",
+              "controller/src/test/java/org/jboss/as/controller/interfaces/ParsedInterfaceCriteriaTestCase.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/parsing/CommonXml.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/interfaces/ParsedInterfaceCriteria.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 9.5367431640625e-07
+          },
+          {
+            "instance_id": "WFLY-3011",
+            "repo": "WFLY",
+            "classifications": {
+              "domain-management/src/test/java/org/jboss/as/domain/management/security/auditlog/AbstractAuditLogHandlerTestCase.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/AbstractOperationContext.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "domain-management/src/test/java/org/jboss/as/domain/management/security/auditlog/AbstractAuditLogHandlerTestCase.java": 22,
+              "controller/src/main/java/org/jboss/as/controller/AbstractOperationContext.java": 14
+            },
+            "best_rank": 14,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.08116883116883117,
+            "difficulty": "medium",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "WFLY-3012",
+            "repo": "WFLY",
+            "classifications": {
+              "patching/src/main/java/org/jboss/as/patching/runner/FileUpdateTask.java": "exists_before_fix",
+              "patching/src/main/java/org/jboss/as/patching/runner/AbstractFileTask.java": "exists_before_fix",
+              "patching/src/test/java/org/jboss/as/patching/runner/AbstractTaskTestCase.java": "exists_before_fix",
+              "patching/src/test/java/org/jboss/as/patching/runner/FileTaskTestCase.java": "exists_before_fix",
+              "patching/src/test/java/org/jboss/as/patching/tests/BasicHistoryUnitTestCase.java": "exists_before_fix",
+              "patching/src/main/java/org/jboss/as/patching/runner/FileRemoveTask.java": "exists_before_fix",
+              "patching/src/main/java/org/jboss/as/patching/runner/AbstractPatchingTask.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "patching/src/test/java/org/jboss/as/patching/runner/FileTaskTestCase.java": 14,
+              "patching/src/test/java/org/jboss/as/patching/tests/BasicHistoryUnitTestCase.java": 4
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.14285714285714285,
+              "10": 0.14285714285714285,
+              "100": 0.2857142857142857,
+              "200": 0.2857142857142857
+            },
+            "average_precision": 0.05612244897959184,
+            "difficulty": "easy",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "WFLY-3016",
+            "repo": "WFLY",
+            "classifications": {
+              "jdr/jboss-as-jdr/src/main/java/org/jboss/as/jdr/CommandLineMain.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "jdr/jboss-as-jdr/src/main/java/org/jboss/as/jdr/CommandLineMain.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 1.430511474609375e-06
+          },
+          {
+            "instance_id": "WFLY-3017",
+            "repo": "WFLY",
+            "classifications": {
+              "transactions/src/main/java/org/jboss/as/txn/subsystem/LogStoreTransactionDeleteHandler.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/OperationContextImpl.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "controller/src/main/java/org/jboss/as/controller/OperationContextImpl.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "WFLY-3020",
+            "repo": "WFLY",
+            "classifications": {
+              "transactions/src/main/java/org/jboss/as/txn/subsystem/LogStoreProbeHandler.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 1.1920928955078125e-06
+          },
+          {
+            "instance_id": "WFLY-3046",
+            "repo": "WFLY",
+            "classifications": {
+              "transactions/src/main/java/org/jboss/as/txn/subsystem/TransactionSubsystemRootResourceDefinition.java": "exists_before_fix",
+              "transactions/src/main/java/org/jboss/as/txn/subsystem/TransactionSubsystemXMLPersister.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 9.5367431640625e-07
+          },
+          {
+            "instance_id": "WFLY-3047",
+            "repo": "WFLY",
+            "classifications": {
+              "host-controller/src/main/java/org/jboss/as/domain/controller/operations/coordination/DomainSlaveHandler.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/domain/controller/operations/coordination/OperationSlaveStepHandler.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "host-controller/src/main/java/org/jboss/as/domain/controller/operations/coordination/OperationSlaveStepHandler.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "WFLY-3048",
+            "repo": "WFLY",
+            "classifications": {
+              "domain-management/src/main/java/org/jboss/as/domain/management/security/LocalAuthenticationResourceDefinition.java": "exists_before_fix",
+              "domain-management/src/main/java/org/jboss/as/domain/management/security/LocalCallbackHandlerService.java": "exists_before_fix",
+              "domain-management/src/main/java/org/jboss/as/domain/management/parsing/ManagementXml.java": "exists_before_fix",
+              "domain-management/src/main/java/org/jboss/as/domain/management/security/SecurityRealmService.java": "exists_before_fix",
+              "domain-management/src/main/java/org/jboss/as/domain/management/ModelDescriptionConstants.java": "exists_before_fix",
+              "domain-management/src/main/java/org/jboss/as/domain/management/security/SecurityRealmAddHandler.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/parsing/Attribute.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "domain-management/src/main/java/org/jboss/as/domain/management/parsing/ManagementXml.java": 5,
+              "domain-management/src/main/java/org/jboss/as/domain/management/security/SecurityRealmAddHandler.java": 22
+            },
+            "best_rank": 5,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.14285714285714285,
+              "10": 0.14285714285714285,
+              "100": 0.2857142857142857,
+              "200": 0.2857142857142857
+            },
+            "average_precision": 0.04155844155844156,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "WFLY-3067",
+            "repo": "WFLY",
+            "classifications": {
+              "webservices/server-integration/src/main/java/org/jboss/as/webservices/deployers/WSIntegrationProcessorJAXWS_HANDLER.java": "exists_before_fix",
+              "webservices/server-integration/src/main/java/org/jboss/as/webservices/util/ASHelper.java": "exists_before_fix",
+              "webservices/server-integration/src/main/java/org/jboss/as/webservices/deployers/AbstractIntegrationProcessorJAXWS.java": "exists_before_fix",
+              "webservices/server-integration/src/main/java/org/jboss/as/webservices/deployers/WSIntegrationProcessorJAXWS_EJB.java": "exists_before_fix",
+              "webservices/server-integration/src/main/java/org/jboss/as/webservices/deployers/WSIntegrationProcessorJAXWS_POJO.java": "exists_before_fix",
+              "webservices/server-integration/src/main/java/org/jboss/as/webservices/dmr/WSDeploymentActivator.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/deployment/Phase.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "webservices/server-integration/src/main/java/org/jboss/as/webservices/util/ASHelper.java": 1,
+              "webservices/server-integration/src/main/java/org/jboss/as/webservices/deployers/WSIntegrationProcessorJAXWS_POJO.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.14285714285714285,
+              "5": 0.2857142857142857,
+              "10": 0.2857142857142857,
+              "100": 0.2857142857142857,
+              "200": 0.2857142857142857
+            },
+            "average_precision": 0.2857142857142857,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "WFLY-3069",
+            "repo": "WFLY",
+            "classifications": {
+              "host-controller/src/main/java/org/jboss/as/domain/controller/operations/ApplyRemoteMasterDomainModelHandler.java": "exists_before_fix",
+              "host-controller/src/test/java/org/jboss/as/domain/controller/operations/AbstractOperationTestCase.java": "exists_before_fix",
+              "host-controller/src/test/java/org/jboss/as/domain/controller/operations/ApplyRemoteMasterDomainModelHandlerTestCase.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "host-controller/src/main/java/org/jboss/as/domain/controller/operations/ApplyRemoteMasterDomainModelHandler.java": 47,
+              "host-controller/src/test/java/org/jboss/as/domain/controller/operations/ApplyRemoteMasterDomainModelHandlerTestCase.java": 26
+            },
+            "best_rank": 26,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.6666666666666666,
+              "200": 0.6666666666666666
+            },
+            "average_precision": 0.02700490998363339,
+            "difficulty": "medium",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "WFLY-3073",
+            "repo": "WFLY",
+            "classifications": {
+              "jmx/src/main/java/org/jboss/as/jmx/PluggableMBeanServerImpl.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "jmx/src/main/java/org/jboss/as/jmx/PluggableMBeanServerImpl.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "WFLY-3076",
+            "repo": "WFLY",
+            "classifications": {
+              "jmx/src/main/java/org/jboss/as/jmx/model/ModelControllerMBeanHelper.java": "exists_before_fix",
+              "jmx/src/main/java/org/jboss/as/jmx/JMXSubsystemAdd.java": "exists_before_fix",
+              "jmx/src/test/java/org/jboss/as/jmx/auditlog/JmxAuditLogHandlerTestCase.java": "exists_before_fix",
+              "jmx/src/main/java/org/jboss/as/jmx/MBeanServerService.java": "exists_before_fix",
+              "jmx/src/main/java/org/jboss/as/jmx/model/ModelControllerMBeanServerPlugin.java": "exists_before_fix",
+              "jmx/src/test/java/org/jboss/as/jmx/ModelControllerMBeanTestCase.java": "exists_before_fix",
+              "jmx/src/test/java/org/jboss/as/jmx/rbac/JmxFacadeRbacEnabledTestCase.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "jmx/src/main/java/org/jboss/as/jmx/model/ModelControllerMBeanHelper.java": 2,
+              "jmx/src/main/java/org/jboss/as/jmx/model/ModelControllerMBeanServerPlugin.java": 1,
+              "jmx/src/test/java/org/jboss/as/jmx/ModelControllerMBeanTestCase.java": 5
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.14285714285714285,
+              "5": 0.42857142857142855,
+              "10": 0.42857142857142855,
+              "100": 0.42857142857142855,
+              "200": 0.42857142857142855
+            },
+            "average_precision": 0.37142857142857144,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "WFLY-3078",
+            "repo": "WFLY",
+            "classifications": {
+              "host-controller/src/main/java/org/jboss/as/host/controller/parsing/HostXml.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "host-controller/src/main/java/org/jboss/as/host/controller/parsing/HostXml.java": 20
+            },
+            "best_rank": 20,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.05,
+            "difficulty": "medium",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "WFLY-3092",
+            "repo": "WFLY",
+            "classifications": {
+              "host-controller/src/main/java/org/jboss/as/domain/controller/plan/RollingServerGroupUpdateTask.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/domain/controller/plan/ServerUpdateTask.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/domain/controller/plan/RolloutPlanController.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/domain/controller/plan/AbstractServerGroupRolloutTask.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/domain/controller/plan/ServerRestartTask.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/domain/controller/plan/RunningServerUpdateTask.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/domain/controller/plan/ConcurrentServerGroupUpdateTask.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "host-controller/src/main/java/org/jboss/as/domain/controller/plan/RolloutPlanController.java": 1,
+              "host-controller/src/main/java/org/jboss/as/domain/controller/plan/AbstractServerGroupRolloutTask.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.14285714285714285,
+              "5": 0.2857142857142857,
+              "10": 0.2857142857142857,
+              "100": 0.2857142857142857,
+              "200": 0.2857142857142857
+            },
+            "average_precision": 0.2857142857142857,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          },
+          {
+            "instance_id": "WFLY-3095",
+            "repo": "WFLY",
+            "classifications": {
+              "weld/src/main/java/org/jboss/as/weld/deployment/processors/WeldDependencyProcessor.java": "exists_before_fix",
+              "weld/src/main/java/org/jboss/as/weld/injection/WeldInjectionContext.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "weld/src/main/java/org/jboss/as/weld/deployment/processors/WeldDependencyProcessor.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 7.152557373046875e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "no_localizable_gt": 4,
+          "easy": 12,
+          "medium": 4
+        },
+        "total": 20
+      },
+      "summary": {
+        "n": 20,
+        "macro_hit_at": {
+          "1": 0.35,
+          "5": 0.6,
+          "10": 0.6,
+          "100": 0.8,
+          "200": 0.8
+        },
+        "macro_recall_at": {
+          "1": 0.1464285714285714,
+          "5": 0.2924107142857143,
+          "10": 0.2924107142857143,
+          "100": 0.44717261904761907,
+          "200": 0.44717261904761907
+        },
+        "mrr": 0.43920662670662675,
+        "map": 0.22391530940353127,
+        "mean_latency_s": 7.450580596923828e-07
+      }
+    },
+    "relevance_filtered": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "WFLY-3000",
+            "repo": "WFLY",
+            "classifications": {
+              "domain-http/interface/src/main/java/org/jboss/as/domain/http/server/Common.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-3002",
+            "repo": "WFLY",
+            "classifications": {
+              "undertow/src/main/java/org/wildfly/extension/undertow/deployment/ServletResourceManager.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "undertow/src/main/java/org/wildfly/extension/undertow/deployment/ServletResourceManager.java": 4
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.25,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-3004",
+            "repo": "WFLY",
+            "classifications": {
+              "cli/src/main/java/org/jboss/as/cli/handlers/BaseOperationCommand.java": "exists_before_fix",
+              "cli/src/main/java/org/jboss/as/cli/handlers/GenericTypeOperationHandler.java": "exists_before_fix",
+              "cli/src/main/java/org/jboss/as/cli/impl/ArgumentWithValue.java": "exists_before_fix",
+              "cli/src/main/java/org/jboss/as/cli/parsing/StateParser.java": "exists_before_fix",
+              "cli/src/main/java/org/jboss/as/cli/handlers/ConnectHandler.java": "exists_before_fix",
+              "cli/src/test/java/org/jboss/as/cli/parsing/test/VariablesTestCase.java": "exists_before_fix",
+              "cli/src/main/java/org/jboss/as/cli/impl/FileSystemPathArgument.java": "exists_before_fix",
+              "cli/src/main/java/org/jboss/as/cli/handlers/ResourceCompositeOperationHandler.java": "exists_before_fix",
+              "cli/src/test/java/org/jboss/as/cli/parsing/test/PropertyReplacementTestCase.java": "exists_before_fix",
+              "cli/src/main/java/org/jboss/as/cli/handlers/jca/XADataSourceAddCompositeHandler.java": "exists_before_fix",
+              "cli/src/main/java/org/jboss/as/cli/handlers/SetVariableHandler.java": "exists_before_fix",
+              "cli/src/main/java/org/jboss/as/cli/parsing/LineBreakHandler.java": "exists_before_fix",
+              "cli/src/main/java/org/jboss/as/cli/parsing/ExpressionBaseState.java": "exists_before_fix",
+              "testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/management/cli/FileWithPropertiesTestCase.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "cli/src/main/java/org/jboss/as/cli/handlers/ConnectHandler.java": 12,
+              "cli/src/main/java/org/jboss/as/cli/impl/FileSystemPathArgument.java": 64
+            },
+            "best_rank": 12,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.14285714285714285,
+              "200": 0.14285714285714285
+            },
+            "average_precision": 0.00818452380952381,
+            "difficulty": "medium",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "WFLY-3007",
+            "repo": "WFLY",
+            "classifications": {
+              "testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/ejb/remote/common/EJBManagementUtil.java": "exists_before_fix",
+              "mail/src/main/java/org/jboss/as/mail/extension/SessionProviderFactory.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/services/net/SpecifiedInterfaceResolveHandler.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/host/controller/HostControllerEnvironment.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/interfaces/InetAddressUtil.java": "exists_before_fix",
+              "testsuite/integration/manualmode/src/test/java/org/jboss/as/test/manualmode/ws/ReloadWSDLPublisherTestCase.java": "exists_before_fix",
+              "messaging/src/main/java/org/jboss/as/messaging/HornetQService.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/audit/SyslogAuditLogHandler.java": "exists_before_fix",
+              "testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/management/api/SocketsAndInterfacesTestCase.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/services/net/NetworkInterfaceRuntimeHandler.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/DomainServerCommunicationServices.java": "exists_before_fix",
+              "network/src/main/java/org/jboss/as/network/NetworkUtils.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/ServerEnvironment.java": "exists_before_fix",
+              "core-model-test/tests/src/test/java/org/jboss/as/core/model/test/standalone/root/StandaloneRootResourceTestCase.java": "exists_before_fix",
+              "domain-management/src/test/java/org/jboss/as/domain/management/security/auditlog/AbstractAuditLogHandlerTestCase.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/services/net/BindingMetricHandlers.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "network/src/main/java/org/jboss/as/network/NetworkUtils.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0625,
+              "10": 0.0625,
+              "100": 0.0625,
+              "200": 0.0625
+            },
+            "average_precision": 0.020833333333333332,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-3008",
+            "repo": "WFLY",
+            "classifications": {
+              "controller/src/main/java/org/jboss/as/controller/ExpressionResolverImpl.java": "exists_before_fix",
+              "controller/src/test/java/org/jboss/as/controller/interfaces/ParsedInterfaceCriteriaTestCase.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/parsing/CommonXml.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/interfaces/ParsedInterfaceCriteria.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-3011",
+            "repo": "WFLY",
+            "classifications": {
+              "domain-management/src/test/java/org/jboss/as/domain/management/security/auditlog/AbstractAuditLogHandlerTestCase.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/AbstractOperationContext.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "domain-management/src/test/java/org/jboss/as/domain/management/security/auditlog/AbstractAuditLogHandlerTestCase.java": 22,
+              "controller/src/main/java/org/jboss/as/controller/AbstractOperationContext.java": 14
+            },
+            "best_rank": 14,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.08116883116883117,
+            "difficulty": "medium",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "WFLY-3012",
+            "repo": "WFLY",
+            "classifications": {
+              "patching/src/main/java/org/jboss/as/patching/runner/FileUpdateTask.java": "exists_before_fix",
+              "patching/src/main/java/org/jboss/as/patching/runner/AbstractFileTask.java": "exists_before_fix",
+              "patching/src/test/java/org/jboss/as/patching/runner/AbstractTaskTestCase.java": "exists_before_fix",
+              "patching/src/test/java/org/jboss/as/patching/runner/FileTaskTestCase.java": "exists_before_fix",
+              "patching/src/test/java/org/jboss/as/patching/tests/BasicHistoryUnitTestCase.java": "exists_before_fix",
+              "patching/src/main/java/org/jboss/as/patching/runner/FileRemoveTask.java": "exists_before_fix",
+              "patching/src/main/java/org/jboss/as/patching/runner/AbstractPatchingTask.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "patching/src/test/java/org/jboss/as/patching/runner/FileTaskTestCase.java": 16,
+              "patching/src/test/java/org/jboss/as/patching/tests/BasicHistoryUnitTestCase.java": 6
+            },
+            "best_rank": 6,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.14285714285714285,
+              "100": 0.2857142857142857,
+              "200": 0.2857142857142857
+            },
+            "average_precision": 0.041666666666666664,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-3016",
+            "repo": "WFLY",
+            "classifications": {
+              "jdr/jboss-as-jdr/src/main/java/org/jboss/as/jdr/CommandLineMain.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "jdr/jboss-as-jdr/src/main/java/org/jboss/as/jdr/CommandLineMain.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.3333333333333333,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-3017",
+            "repo": "WFLY",
+            "classifications": {
+              "transactions/src/main/java/org/jboss/as/txn/subsystem/LogStoreTransactionDeleteHandler.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/OperationContextImpl.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "controller/src/main/java/org/jboss/as/controller/OperationContextImpl.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-3020",
+            "repo": "WFLY",
+            "classifications": {
+              "transactions/src/main/java/org/jboss/as/txn/subsystem/LogStoreProbeHandler.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-3046",
+            "repo": "WFLY",
+            "classifications": {
+              "transactions/src/main/java/org/jboss/as/txn/subsystem/TransactionSubsystemRootResourceDefinition.java": "exists_before_fix",
+              "transactions/src/main/java/org/jboss/as/txn/subsystem/TransactionSubsystemXMLPersister.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-3047",
+            "repo": "WFLY",
+            "classifications": {
+              "host-controller/src/main/java/org/jboss/as/domain/controller/operations/coordination/DomainSlaveHandler.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/domain/controller/operations/coordination/OperationSlaveStepHandler.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "host-controller/src/main/java/org/jboss/as/domain/controller/operations/coordination/OperationSlaveStepHandler.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-3048",
+            "repo": "WFLY",
+            "classifications": {
+              "domain-management/src/main/java/org/jboss/as/domain/management/security/LocalAuthenticationResourceDefinition.java": "exists_before_fix",
+              "domain-management/src/main/java/org/jboss/as/domain/management/security/LocalCallbackHandlerService.java": "exists_before_fix",
+              "domain-management/src/main/java/org/jboss/as/domain/management/parsing/ManagementXml.java": "exists_before_fix",
+              "domain-management/src/main/java/org/jboss/as/domain/management/security/SecurityRealmService.java": "exists_before_fix",
+              "domain-management/src/main/java/org/jboss/as/domain/management/ModelDescriptionConstants.java": "exists_before_fix",
+              "domain-management/src/main/java/org/jboss/as/domain/management/security/SecurityRealmAddHandler.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/parsing/Attribute.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "domain-management/src/main/java/org/jboss/as/domain/management/parsing/ManagementXml.java": 5,
+              "domain-management/src/main/java/org/jboss/as/domain/management/security/SecurityRealmAddHandler.java": 22
+            },
+            "best_rank": 5,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.14285714285714285,
+              "10": 0.14285714285714285,
+              "100": 0.2857142857142857,
+              "200": 0.2857142857142857
+            },
+            "average_precision": 0.04155844155844156,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "WFLY-3067",
+            "repo": "WFLY",
+            "classifications": {
+              "webservices/server-integration/src/main/java/org/jboss/as/webservices/deployers/WSIntegrationProcessorJAXWS_HANDLER.java": "exists_before_fix",
+              "webservices/server-integration/src/main/java/org/jboss/as/webservices/util/ASHelper.java": "exists_before_fix",
+              "webservices/server-integration/src/main/java/org/jboss/as/webservices/deployers/AbstractIntegrationProcessorJAXWS.java": "exists_before_fix",
+              "webservices/server-integration/src/main/java/org/jboss/as/webservices/deployers/WSIntegrationProcessorJAXWS_EJB.java": "exists_before_fix",
+              "webservices/server-integration/src/main/java/org/jboss/as/webservices/deployers/WSIntegrationProcessorJAXWS_POJO.java": "exists_before_fix",
+              "webservices/server-integration/src/main/java/org/jboss/as/webservices/dmr/WSDeploymentActivator.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/deployment/Phase.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "webservices/server-integration/src/main/java/org/jboss/as/webservices/util/ASHelper.java": 1,
+              "webservices/server-integration/src/main/java/org/jboss/as/webservices/deployers/WSIntegrationProcessorJAXWS_POJO.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.14285714285714285,
+              "5": 0.2857142857142857,
+              "10": 0.2857142857142857,
+              "100": 0.2857142857142857,
+              "200": 0.2857142857142857
+            },
+            "average_precision": 0.2857142857142857,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "WFLY-3069",
+            "repo": "WFLY",
+            "classifications": {
+              "host-controller/src/main/java/org/jboss/as/domain/controller/operations/ApplyRemoteMasterDomainModelHandler.java": "exists_before_fix",
+              "host-controller/src/test/java/org/jboss/as/domain/controller/operations/AbstractOperationTestCase.java": "exists_before_fix",
+              "host-controller/src/test/java/org/jboss/as/domain/controller/operations/ApplyRemoteMasterDomainModelHandlerTestCase.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "host-controller/src/main/java/org/jboss/as/domain/controller/operations/ApplyRemoteMasterDomainModelHandler.java": 47,
+              "host-controller/src/test/java/org/jboss/as/domain/controller/operations/ApplyRemoteMasterDomainModelHandlerTestCase.java": 26
+            },
+            "best_rank": 26,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.6666666666666666,
+              "200": 0.6666666666666666
+            },
+            "average_precision": 0.02700490998363339,
+            "difficulty": "medium",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-3073",
+            "repo": "WFLY",
+            "classifications": {
+              "jmx/src/main/java/org/jboss/as/jmx/PluggableMBeanServerImpl.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "jmx/src/main/java/org/jboss/as/jmx/PluggableMBeanServerImpl.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 0.0
+          },
+          {
+            "instance_id": "WFLY-3076",
+            "repo": "WFLY",
+            "classifications": {
+              "jmx/src/main/java/org/jboss/as/jmx/model/ModelControllerMBeanHelper.java": "exists_before_fix",
+              "jmx/src/main/java/org/jboss/as/jmx/JMXSubsystemAdd.java": "exists_before_fix",
+              "jmx/src/test/java/org/jboss/as/jmx/auditlog/JmxAuditLogHandlerTestCase.java": "exists_before_fix",
+              "jmx/src/main/java/org/jboss/as/jmx/MBeanServerService.java": "exists_before_fix",
+              "jmx/src/main/java/org/jboss/as/jmx/model/ModelControllerMBeanServerPlugin.java": "exists_before_fix",
+              "jmx/src/test/java/org/jboss/as/jmx/ModelControllerMBeanTestCase.java": "exists_before_fix",
+              "jmx/src/test/java/org/jboss/as/jmx/rbac/JmxFacadeRbacEnabledTestCase.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "jmx/src/main/java/org/jboss/as/jmx/model/ModelControllerMBeanHelper.java": 2,
+              "jmx/src/main/java/org/jboss/as/jmx/model/ModelControllerMBeanServerPlugin.java": 1,
+              "jmx/src/test/java/org/jboss/as/jmx/ModelControllerMBeanTestCase.java": 5
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.14285714285714285,
+              "5": 0.42857142857142855,
+              "10": 0.42857142857142855,
+              "100": 0.42857142857142855,
+              "200": 0.42857142857142855
+            },
+            "average_precision": 0.37142857142857144,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-3078",
+            "repo": "WFLY",
+            "classifications": {
+              "host-controller/src/main/java/org/jboss/as/host/controller/parsing/HostXml.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "host-controller/src/main/java/org/jboss/as/host/controller/parsing/HostXml.java": 20
+            },
+            "best_rank": 20,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.05,
+            "difficulty": "medium",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-3092",
+            "repo": "WFLY",
+            "classifications": {
+              "host-controller/src/main/java/org/jboss/as/domain/controller/plan/RollingServerGroupUpdateTask.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/domain/controller/plan/ServerUpdateTask.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/domain/controller/plan/RolloutPlanController.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/domain/controller/plan/AbstractServerGroupRolloutTask.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/domain/controller/plan/ServerRestartTask.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/domain/controller/plan/RunningServerUpdateTask.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/domain/controller/plan/ConcurrentServerGroupUpdateTask.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "host-controller/src/main/java/org/jboss/as/domain/controller/plan/RolloutPlanController.java": 1,
+              "host-controller/src/main/java/org/jboss/as/domain/controller/plan/AbstractServerGroupRolloutTask.java": 2
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.14285714285714285,
+              "5": 0.2857142857142857,
+              "10": 0.2857142857142857,
+              "100": 0.2857142857142857,
+              "200": 0.2857142857142857
+            },
+            "average_precision": 0.2857142857142857,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-3095",
+            "repo": "WFLY",
+            "classifications": {
+              "weld/src/main/java/org/jboss/as/weld/deployment/processors/WeldDependencyProcessor.java": "exists_before_fix",
+              "weld/src/main/java/org/jboss/as/weld/injection/WeldInjectionContext.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "weld/src/main/java/org/jboss/as/weld/deployment/processors/WeldDependencyProcessor.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.25,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "no_localizable_gt": 4,
+          "easy": 12,
+          "medium": 4
+        },
+        "total": 20
+      },
+      "summary": {
+        "n": 20,
+        "macro_hit_at": {
+          "1": 0.3,
+          "5": 0.55,
+          "10": 0.6,
+          "100": 0.8,
+          "200": 0.8
+        },
+        "macro_recall_at": {
+          "1": 0.12142857142857141,
+          "5": 0.2852678571428572,
+          "10": 0.2924107142857143,
+          "100": 0.44717261904761907,
+          "200": 0.44717261904761907
+        },
+        "mrr": 0.40132783882783885,
+        "map": 0.20233035913554528,
+        "mean_latency_s": 2.8312206268310547e-07
+      }
+    },
+    "reformulated": {
+      "screening_report": {
+        "per_instance": [
+          {
+            "instance_id": "WFLY-3000",
+            "repo": "WFLY",
+            "classifications": {
+              "domain-http/interface/src/main/java/org/jboss/as/domain/http/server/Common.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "domain-http/interface/src/main/java/org/jboss/as/domain/http/server/Common.java": 101
+            },
+            "best_rank": 101,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 1.0
+            },
+            "average_precision": 0.009900990099009901,
+            "difficulty": "hard",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "WFLY-3002",
+            "repo": "WFLY",
+            "classifications": {
+              "undertow/src/main/java/org/wildfly/extension/undertow/deployment/ServletResourceManager.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "undertow/src/main/java/org/wildfly/extension/undertow/deployment/ServletResourceManager.java": 4
+            },
+            "best_rank": 4,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.25,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "WFLY-3004",
+            "repo": "WFLY",
+            "classifications": {
+              "cli/src/main/java/org/jboss/as/cli/handlers/BaseOperationCommand.java": "exists_before_fix",
+              "cli/src/main/java/org/jboss/as/cli/handlers/GenericTypeOperationHandler.java": "exists_before_fix",
+              "cli/src/main/java/org/jboss/as/cli/impl/ArgumentWithValue.java": "exists_before_fix",
+              "cli/src/main/java/org/jboss/as/cli/parsing/StateParser.java": "exists_before_fix",
+              "cli/src/main/java/org/jboss/as/cli/handlers/ConnectHandler.java": "exists_before_fix",
+              "cli/src/test/java/org/jboss/as/cli/parsing/test/VariablesTestCase.java": "exists_before_fix",
+              "cli/src/main/java/org/jboss/as/cli/impl/FileSystemPathArgument.java": "exists_before_fix",
+              "cli/src/main/java/org/jboss/as/cli/handlers/ResourceCompositeOperationHandler.java": "exists_before_fix",
+              "cli/src/test/java/org/jboss/as/cli/parsing/test/PropertyReplacementTestCase.java": "exists_before_fix",
+              "cli/src/main/java/org/jboss/as/cli/handlers/jca/XADataSourceAddCompositeHandler.java": "exists_before_fix",
+              "cli/src/main/java/org/jboss/as/cli/handlers/SetVariableHandler.java": "exists_before_fix",
+              "cli/src/main/java/org/jboss/as/cli/parsing/LineBreakHandler.java": "exists_before_fix",
+              "cli/src/main/java/org/jboss/as/cli/parsing/ExpressionBaseState.java": "exists_before_fix",
+              "testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/management/cli/FileWithPropertiesTestCase.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "cli/src/main/java/org/jboss/as/cli/handlers/BaseOperationCommand.java": 175,
+              "cli/src/main/java/org/jboss/as/cli/handlers/ConnectHandler.java": 16,
+              "cli/src/main/java/org/jboss/as/cli/impl/FileSystemPathArgument.java": 73
+            },
+            "best_rank": 16,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.14285714285714285,
+              "200": 0.21428571428571427
+            },
+            "average_precision": 0.007645722672630696,
+            "difficulty": "medium",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-3007",
+            "repo": "WFLY",
+            "classifications": {
+              "testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/ejb/remote/common/EJBManagementUtil.java": "exists_before_fix",
+              "mail/src/main/java/org/jboss/as/mail/extension/SessionProviderFactory.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/services/net/SpecifiedInterfaceResolveHandler.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/host/controller/HostControllerEnvironment.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/interfaces/InetAddressUtil.java": "exists_before_fix",
+              "testsuite/integration/manualmode/src/test/java/org/jboss/as/test/manualmode/ws/ReloadWSDLPublisherTestCase.java": "exists_before_fix",
+              "messaging/src/main/java/org/jboss/as/messaging/HornetQService.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/audit/SyslogAuditLogHandler.java": "exists_before_fix",
+              "testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/management/api/SocketsAndInterfacesTestCase.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/services/net/NetworkInterfaceRuntimeHandler.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/DomainServerCommunicationServices.java": "exists_before_fix",
+              "network/src/main/java/org/jboss/as/network/NetworkUtils.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/ServerEnvironment.java": "exists_before_fix",
+              "core-model-test/tests/src/test/java/org/jboss/as/core/model/test/standalone/root/StandaloneRootResourceTestCase.java": "exists_before_fix",
+              "domain-management/src/test/java/org/jboss/as/domain/management/security/auditlog/AbstractAuditLogHandlerTestCase.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/services/net/BindingMetricHandlers.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "host-controller/src/main/java/org/jboss/as/host/controller/HostControllerEnvironment.java": 137,
+              "network/src/main/java/org/jboss/as/network/NetworkUtils.java": 2
+            },
+            "best_rank": 2,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0625,
+              "10": 0.0625,
+              "100": 0.0625,
+              "200": 0.125
+            },
+            "average_precision": 0.032162408759124086,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-3008",
+            "repo": "WFLY",
+            "classifications": {
+              "controller/src/main/java/org/jboss/as/controller/ExpressionResolverImpl.java": "exists_before_fix",
+              "controller/src/test/java/org/jboss/as/controller/interfaces/ParsedInterfaceCriteriaTestCase.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/parsing/CommonXml.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/interfaces/ParsedInterfaceCriteria.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-3011",
+            "repo": "WFLY",
+            "classifications": {
+              "domain-management/src/test/java/org/jboss/as/domain/management/security/auditlog/AbstractAuditLogHandlerTestCase.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/AbstractOperationContext.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "domain-management/src/test/java/org/jboss/as/domain/management/security/auditlog/AbstractAuditLogHandlerTestCase.java": 27,
+              "controller/src/main/java/org/jboss/as/controller/AbstractOperationContext.java": 18
+            },
+            "best_rank": 18,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.06481481481481481,
+            "difficulty": "medium",
+            "latency_s": 0.0
+          },
+          {
+            "instance_id": "WFLY-3012",
+            "repo": "WFLY",
+            "classifications": {
+              "patching/src/main/java/org/jboss/as/patching/runner/FileUpdateTask.java": "exists_before_fix",
+              "patching/src/main/java/org/jboss/as/patching/runner/AbstractFileTask.java": "exists_before_fix",
+              "patching/src/test/java/org/jboss/as/patching/runner/AbstractTaskTestCase.java": "exists_before_fix",
+              "patching/src/test/java/org/jboss/as/patching/runner/FileTaskTestCase.java": "exists_before_fix",
+              "patching/src/test/java/org/jboss/as/patching/tests/BasicHistoryUnitTestCase.java": "exists_before_fix",
+              "patching/src/main/java/org/jboss/as/patching/runner/FileRemoveTask.java": "exists_before_fix",
+              "patching/src/main/java/org/jboss/as/patching/runner/AbstractPatchingTask.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "patching/src/test/java/org/jboss/as/patching/runner/FileTaskTestCase.java": 15,
+              "patching/src/test/java/org/jboss/as/patching/tests/BasicHistoryUnitTestCase.java": 3
+            },
+            "best_rank": 3,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.14285714285714285,
+              "10": 0.14285714285714285,
+              "100": 0.2857142857142857,
+              "200": 0.2857142857142857
+            },
+            "average_precision": 0.06666666666666667,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "WFLY-3016",
+            "repo": "WFLY",
+            "classifications": {
+              "jdr/jboss-as-jdr/src/main/java/org/jboss/as/jdr/CommandLineMain.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "jdr/jboss-as-jdr/src/main/java/org/jboss/as/jdr/CommandLineMain.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "WFLY-3017",
+            "repo": "WFLY",
+            "classifications": {
+              "transactions/src/main/java/org/jboss/as/txn/subsystem/LogStoreTransactionDeleteHandler.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/OperationContextImpl.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "controller/src/main/java/org/jboss/as/controller/OperationContextImpl.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 0.5
+            },
+            "average_precision": 0.5,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-3020",
+            "repo": "WFLY",
+            "classifications": {
+              "transactions/src/main/java/org/jboss/as/txn/subsystem/LogStoreProbeHandler.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "WFLY-3046",
+            "repo": "WFLY",
+            "classifications": {
+              "transactions/src/main/java/org/jboss/as/txn/subsystem/TransactionSubsystemRootResourceDefinition.java": "exists_before_fix",
+              "transactions/src/main/java/org/jboss/as/txn/subsystem/TransactionSubsystemXMLPersister.java": "exists_before_fix"
+            },
+            "gt_ranks": {},
+            "best_rank": null,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 0,
+              "200": 0
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.0,
+              "200": 0.0
+            },
+            "average_precision": 0.0,
+            "difficulty": "no_localizable_gt",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "WFLY-3047",
+            "repo": "WFLY",
+            "classifications": {
+              "host-controller/src/main/java/org/jboss/as/domain/controller/operations/coordination/DomainSlaveHandler.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/domain/controller/operations/coordination/OperationSlaveStepHandler.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "host-controller/src/main/java/org/jboss/as/domain/controller/operations/coordination/DomainSlaveHandler.java": 141,
+              "host-controller/src/main/java/org/jboss/as/domain/controller/operations/coordination/OperationSlaveStepHandler.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 1.0
+            },
+            "average_precision": 0.5070921985815603,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-3048",
+            "repo": "WFLY",
+            "classifications": {
+              "domain-management/src/main/java/org/jboss/as/domain/management/security/LocalAuthenticationResourceDefinition.java": "exists_before_fix",
+              "domain-management/src/main/java/org/jboss/as/domain/management/security/LocalCallbackHandlerService.java": "exists_before_fix",
+              "domain-management/src/main/java/org/jboss/as/domain/management/parsing/ManagementXml.java": "exists_before_fix",
+              "domain-management/src/main/java/org/jboss/as/domain/management/security/SecurityRealmService.java": "exists_before_fix",
+              "domain-management/src/main/java/org/jboss/as/domain/management/ModelDescriptionConstants.java": "exists_before_fix",
+              "domain-management/src/main/java/org/jboss/as/domain/management/security/SecurityRealmAddHandler.java": "exists_before_fix",
+              "controller/src/main/java/org/jboss/as/controller/parsing/Attribute.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "domain-management/src/main/java/org/jboss/as/domain/management/security/LocalAuthenticationResourceDefinition.java": 172,
+              "domain-management/src/main/java/org/jboss/as/domain/management/security/LocalCallbackHandlerService.java": 118,
+              "domain-management/src/main/java/org/jboss/as/domain/management/parsing/ManagementXml.java": 5,
+              "domain-management/src/main/java/org/jboss/as/domain/management/security/SecurityRealmService.java": 121,
+              "domain-management/src/main/java/org/jboss/as/domain/management/security/SecurityRealmAddHandler.java": 22,
+              "controller/src/main/java/org/jboss/as/controller/parsing/Attribute.java": 125
+            },
+            "best_rank": 5,
+            "hit_at": {
+              "1": 0,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.14285714285714285,
+              "10": 0.14285714285714285,
+              "100": 0.2857142857142857,
+              "200": 0.8571428571428571
+            },
+            "average_precision": 0.06061062741322174,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-3067",
+            "repo": "WFLY",
+            "classifications": {
+              "webservices/server-integration/src/main/java/org/jboss/as/webservices/deployers/WSIntegrationProcessorJAXWS_HANDLER.java": "exists_before_fix",
+              "webservices/server-integration/src/main/java/org/jboss/as/webservices/util/ASHelper.java": "exists_before_fix",
+              "webservices/server-integration/src/main/java/org/jboss/as/webservices/deployers/AbstractIntegrationProcessorJAXWS.java": "exists_before_fix",
+              "webservices/server-integration/src/main/java/org/jboss/as/webservices/deployers/WSIntegrationProcessorJAXWS_EJB.java": "exists_before_fix",
+              "webservices/server-integration/src/main/java/org/jboss/as/webservices/deployers/WSIntegrationProcessorJAXWS_POJO.java": "exists_before_fix",
+              "webservices/server-integration/src/main/java/org/jboss/as/webservices/dmr/WSDeploymentActivator.java": "exists_before_fix",
+              "server/src/main/java/org/jboss/as/server/deployment/Phase.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "webservices/server-integration/src/main/java/org/jboss/as/webservices/util/ASHelper.java": 1,
+              "webservices/server-integration/src/main/java/org/jboss/as/webservices/deployers/WSIntegrationProcessorJAXWS_POJO.java": 2,
+              "webservices/server-integration/src/main/java/org/jboss/as/webservices/dmr/WSDeploymentActivator.java": 108,
+              "server/src/main/java/org/jboss/as/server/deployment/Phase.java": 104
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.14285714285714285,
+              "5": 0.2857142857142857,
+              "10": 0.2857142857142857,
+              "100": 0.2857142857142857,
+              "200": 0.5714285714285714
+            },
+            "average_precision": 0.29512617012617015,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-3069",
+            "repo": "WFLY",
+            "classifications": {
+              "host-controller/src/main/java/org/jboss/as/domain/controller/operations/ApplyRemoteMasterDomainModelHandler.java": "exists_before_fix",
+              "host-controller/src/test/java/org/jboss/as/domain/controller/operations/AbstractOperationTestCase.java": "exists_before_fix",
+              "host-controller/src/test/java/org/jboss/as/domain/controller/operations/ApplyRemoteMasterDomainModelHandlerTestCase.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "host-controller/src/main/java/org/jboss/as/domain/controller/operations/ApplyRemoteMasterDomainModelHandler.java": 42,
+              "host-controller/src/test/java/org/jboss/as/domain/controller/operations/AbstractOperationTestCase.java": 275,
+              "host-controller/src/test/java/org/jboss/as/domain/controller/operations/ApplyRemoteMasterDomainModelHandlerTestCase.java": 30
+            },
+            "best_rank": 30,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 0,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 0.0,
+              "100": 0.6666666666666666,
+              "200": 0.6666666666666666
+            },
+            "average_precision": 0.030620490620490617,
+            "difficulty": "medium",
+            "latency_s": 4.76837158203125e-07
+          },
+          {
+            "instance_id": "WFLY-3073",
+            "repo": "WFLY",
+            "classifications": {
+              "jmx/src/main/java/org/jboss/as/jmx/PluggableMBeanServerImpl.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "jmx/src/main/java/org/jboss/as/jmx/PluggableMBeanServerImpl.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 1.0,
+              "5": 1.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 1.0,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-3076",
+            "repo": "WFLY",
+            "classifications": {
+              "jmx/src/main/java/org/jboss/as/jmx/model/ModelControllerMBeanHelper.java": "exists_before_fix",
+              "jmx/src/main/java/org/jboss/as/jmx/JMXSubsystemAdd.java": "exists_before_fix",
+              "jmx/src/test/java/org/jboss/as/jmx/auditlog/JmxAuditLogHandlerTestCase.java": "exists_before_fix",
+              "jmx/src/main/java/org/jboss/as/jmx/MBeanServerService.java": "exists_before_fix",
+              "jmx/src/main/java/org/jboss/as/jmx/model/ModelControllerMBeanServerPlugin.java": "exists_before_fix",
+              "jmx/src/test/java/org/jboss/as/jmx/ModelControllerMBeanTestCase.java": "exists_before_fix",
+              "jmx/src/test/java/org/jboss/as/jmx/rbac/JmxFacadeRbacEnabledTestCase.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "jmx/src/main/java/org/jboss/as/jmx/model/ModelControllerMBeanHelper.java": 2,
+              "jmx/src/main/java/org/jboss/as/jmx/JMXSubsystemAdd.java": 130,
+              "jmx/src/main/java/org/jboss/as/jmx/MBeanServerService.java": 135,
+              "jmx/src/main/java/org/jboss/as/jmx/model/ModelControllerMBeanServerPlugin.java": 1,
+              "jmx/src/test/java/org/jboss/as/jmx/ModelControllerMBeanTestCase.java": 5,
+              "jmx/src/test/java/org/jboss/as/jmx/rbac/JmxFacadeRbacEnabledTestCase.java": 116
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.14285714285714285,
+              "5": 0.42857142857142855,
+              "10": 0.42857142857142855,
+              "100": 0.42857142857142855,
+              "200": 0.8571428571428571
+            },
+            "average_precision": 0.3881983916466675,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-3078",
+            "repo": "WFLY",
+            "classifications": {
+              "host-controller/src/main/java/org/jboss/as/host/controller/parsing/HostXml.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "host-controller/src/main/java/org/jboss/as/host/controller/parsing/HostXml.java": 9
+            },
+            "best_rank": 9,
+            "hit_at": {
+              "1": 0,
+              "5": 0,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.0,
+              "5": 0.0,
+              "10": 1.0,
+              "100": 1.0,
+              "200": 1.0
+            },
+            "average_precision": 0.1111111111111111,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-3092",
+            "repo": "WFLY",
+            "classifications": {
+              "host-controller/src/main/java/org/jboss/as/domain/controller/plan/RollingServerGroupUpdateTask.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/domain/controller/plan/ServerUpdateTask.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/domain/controller/plan/RolloutPlanController.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/domain/controller/plan/AbstractServerGroupRolloutTask.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/domain/controller/plan/ServerRestartTask.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/domain/controller/plan/RunningServerUpdateTask.java": "exists_before_fix",
+              "host-controller/src/main/java/org/jboss/as/domain/controller/plan/ConcurrentServerGroupUpdateTask.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "host-controller/src/main/java/org/jboss/as/domain/controller/plan/RolloutPlanController.java": 2,
+              "host-controller/src/main/java/org/jboss/as/domain/controller/plan/AbstractServerGroupRolloutTask.java": 1
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.14285714285714285,
+              "5": 0.2857142857142857,
+              "10": 0.2857142857142857,
+              "100": 0.2857142857142857,
+              "200": 0.2857142857142857
+            },
+            "average_precision": 0.2857142857142857,
+            "difficulty": "easy",
+            "latency_s": 2.384185791015625e-07
+          },
+          {
+            "instance_id": "WFLY-3095",
+            "repo": "WFLY",
+            "classifications": {
+              "weld/src/main/java/org/jboss/as/weld/deployment/processors/WeldDependencyProcessor.java": "exists_before_fix",
+              "weld/src/main/java/org/jboss/as/weld/injection/WeldInjectionContext.java": "exists_before_fix"
+            },
+            "gt_ranks": {
+              "weld/src/main/java/org/jboss/as/weld/deployment/processors/WeldDependencyProcessor.java": 1,
+              "weld/src/main/java/org/jboss/as/weld/injection/WeldInjectionContext.java": 181
+            },
+            "best_rank": 1,
+            "hit_at": {
+              "1": 1,
+              "5": 1,
+              "10": 1,
+              "100": 1,
+              "200": 1
+            },
+            "recall_at": {
+              "1": 0.5,
+              "5": 0.5,
+              "10": 0.5,
+              "100": 0.5,
+              "200": 1.0
+            },
+            "average_precision": 0.505524861878453,
+            "difficulty": "easy",
+            "latency_s": 4.76837158203125e-07
+          }
+        ],
+        "difficulty_distribution": {
+          "hard": 1,
+          "easy": 13,
+          "medium": 3,
+          "no_localizable_gt": 3
+        },
+        "total": 20
+      },
+      "summary": {
+        "n": 20,
+        "macro_hit_at": {
+          "1": 0.4,
+          "5": 0.6,
+          "10": 0.65,
+          "100": 0.8,
+          "200": 0.85
+        },
+        "macro_recall_at": {
+          "1": 0.19642857142857142,
+          "5": 0.2924107142857143,
+          "10": 0.3424107142857143,
+          "100": 0.44717261904761907,
+          "200": 0.6181547619047619
+        },
+        "mrr": 0.47778671617161717,
+        "map": 0.2557594370052103,
+        "mean_latency_s": 3.085416906020221e-07
+      }
+    }
+  }
+}
