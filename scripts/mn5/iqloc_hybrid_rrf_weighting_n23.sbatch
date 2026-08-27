@@ -24,6 +24,7 @@
 # gap unrelated to today's changes), so every run against this manifest is actually n=23.
 
 BM25_REPR="${1:-symbols_with_imports}"
+POOL_SIZE="${2:-100}"
 
 module load intel
 module load mkl
@@ -46,8 +47,8 @@ export USE_TORCH=1
   --dataset iqloc \
   --manifest results/manifests/iqloc-multi-n30-s42-df69b06700bd.json \
   --pool-size 100 \
-  --candidate-pool-size 100 \
+  --candidate-pool-size "$POOL_SIZE" \
   --bm25-repr "$BM25_REPR" \
   --rrf-k-values 10,30,60,100 \
   --model "Qwen/Qwen3-Embedding-0.6B" \
-  --output "results/iqloc_rrf_weighting_n23_${BM25_REPR}.json"
+  --output "results/iqloc_rrf_weighting_n23_${BM25_REPR}_pool${POOL_SIZE}.json"

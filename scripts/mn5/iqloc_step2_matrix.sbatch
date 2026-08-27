@@ -25,17 +25,23 @@
 # the module load / server startup cost is small and this keeps one script covering all 4
 # jobs rather than forking cosine/llm into separate files.
 
-RETRIEVER="${1:?Usage: sbatch iqloc_step2_matrix.sbatch <retriever hybrid-rrf|hybrid-rrf-history> <relevance-mode cosine|llm> [reformulation-mode semantic|literal] [candidate-pool-size]}"
-RELEVANCE_MODE="${2:?Usage: sbatch iqloc_step2_matrix.sbatch <retriever> <relevance-mode cosine|llm> [reformulation-mode semantic|literal] [candidate-pool-size]}"
+RETRIEVER="${1:?Usage: sbatch iqloc_step2_matrix.sbatch <retriever hybrid-rrf|hybrid-rrf-history> <relevance-mode cosine|llm> [reformulation-mode semantic|literal] [candidate-pool-size] [bm25-repr] [rrf-k] [llm-model]}"
+RELEVANCE_MODE="${2:?Usage: sbatch iqloc_step2_matrix.sbatch <retriever> <relevance-mode cosine|llm> [reformulation-mode semantic|literal] [candidate-pool-size] [bm25-repr] [rrf-k] [llm-model]}"
 REFORMULATION_MODE="${3:-semantic}"
 CANDIDATE_POOL_SIZE="${4:-100}"
-MODEL="qwen2.5-coder:7b"
+BM25_REPR="${5:-refined}"
+RRF_K="${6:-100}"
+MODEL="${7:-qwen3-coder:30b}"
 MANIFEST="iqloc-multi-n30-s42-df69b06700bd"
 
+# Base bm25:embedding ratio is the refined-BM25 winner (1:5, see results/
+# iqloc_rrf_weighting_n23_refined.json); history is added at parity (1) on top, not
+# independently re-swept -- this step asks "does adding history help at all", not "what's
+# its optimal weight" (a separate sweep).
 if [ "$RETRIEVER" = "hybrid-rrf-history" ]; then
-  RRF_WEIGHTS="1,15,1"
+  RRF_WEIGHTS="1,5,1"
 else
-  RRF_WEIGHTS="1,15"
+  RRF_WEIGHTS="1,5"
 fi
 
 module load intel
@@ -66,7 +72,7 @@ if [ "$RELEVANCE_MODE" = "llm" ]; then
     fi
     sleep 2
   done
-  RELEVANCE_ARGS="--relevance-mode llm --method ollama --model ${MODEL} --num-ctx 16384 --max-tokens 8192"
+  RELEVANCE_ARGS="--relevance-mode llm --method ollama --model ${MODEL} --num-ctx 32768 --max-tokens 16384"
 else
   RELEVANCE_ARGS="--relevance-mode embedding-cosine --relevance-embedding-model Qwen/Qwen3-Embedding-0.6B --keep-fraction 0.5"
 fi
@@ -79,13 +85,13 @@ fi
   --retriever "$RETRIEVER" \
   --embedding-model "Qwen/Qwen3-Embedding-0.6B" \
   --rrf-weights "$RRF_WEIGHTS" \
-  --rrf-k 30 \
-  --bm25-repr symbols_with_imports \
+  --rrf-k "$RRF_K" \
+  --bm25-repr "$BM25_REPR" \
   --granularity chunk \
   --reformulation-mode "$REFORMULATION_MODE" \
   --keyword-model "Qwen/Qwen3-Embedding-0.6B" \
   $RELEVANCE_ARGS \
-  --output "results/iqloc_step2_${RETRIEVER}_${RELEVANCE_MODE}_${REFORMULATION_MODE}_pool${CANDIDATE_POOL_SIZE}_n23.json"
+  --output "results/iqloc_step2_${RETRIEVER}_${RELEVANCE_MODE}_${REFORMULATION_MODE}_pool${CANDIDATE_POOL_SIZE}_${BM25_REPR}_n23.json"
 PIPELINE_EXIT=$?
 
 if [ "$RELEVANCE_MODE" = "llm" ]; then
